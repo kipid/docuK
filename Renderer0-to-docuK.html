@@ -1,6 +1,9 @@
 <codeprint id="docuK-style">
 <!-- From kipid.tistory CDN -->
 <link rel="stylesheet" media="all" type="text/css" charset="UTF-8" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<style>
+.docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:decimal}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
 <!-- From kipid.tistory CDN -->
@@ -8,17 +11,6 @@
 </codeprint><!-- docuK-style -->
 
 <codeprint id="code-SEE-renderer-to-docuK">
-<div class="docuK noDIdHandle">
-<div class="sec"><h1>Try it yourself</h1>
-	<div class="p">
-		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield.
-	</div>
-	<div class="p">
-		한글이 왜 안나와?
-	</div>
-	<pre id="pre-to-be-rendered-to-docuK" contenteditable="true" class="prettyprint linenums scrollable"></pre>
-</div><!-- div.sec -->
-
 <codeprint id="to-be-rendered-to-docuK" style="display:none">
 # Working on SEE (Super Easy Edit)
 
@@ -96,6 +88,9 @@ Table will be automatically filled up.
 			// Math renderer.</li>
 		<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
 			// Code prettyfier.</li>
+	<div class="subsec"><h3>API documentation</h3></div>
+		<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
+		<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
 </ol>
 
 ##/ References and Related Articles
@@ -129,15 +124,30 @@ contents of subsubsection
 Raw HTML can be added like this. A paragraph starting with '&lt;' will be appended without any change.
 </div>
 
-Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&amp;lt;div class="p"&amp;gt;&amp;lt;/div&amp;gt;</code>.
+Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>.
 
 http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
 How Language Seems To Shape One's View Of The World
 , January 02, 2014, by ALAN YU.
 </codeprint>
 
-<button onclick="kipid.renderNext();" style="background:rgb(255,210,210); float:right; padding:0.2em 0.5em; font:inherit; margin:1em; ">Render the above text to docuK</button>
-<div class="cboth"></div>
+<div class="docuK noDIdHandle">
+<div class="sec"><h1>Try it yourself</h1>
+	<div class="p">
+		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield.
+	</div>
+	<div class="p">
+		한글 나옴?
+	</div>
+	
+	<pre id="pre-to-be-rendered-to-docuK" contenteditable="true" class="prettyprint linenums scrollable"></pre>
+	
+	<div class="center">
+		<button onclick="kipid.prettyPrint();" style="background:rgb(112, 209, 128); margin:0; padding:0 0.5em; font:inherit">Pretty-print the code above</button>
+		<button onclick="kipid.renderNext();" style="background:rgb(209, 112, 112); margin:0; padding:0 0.5em; font:inherit">Render it to docuK below</button>
+		<div class="cboth"></div>
+	</div>
+</div><!-- div.sec -->
 </div><!-- div.docuK -->
 
 <div id="rendered-docuK">
@@ -180,19 +190,23 @@ kipid.renderToDocuKHTML=function(toBeRendered){
 			switch(hN){
 				case 1: str+='<div class="docuK"><div class="sec"><h1>'+head+'</h1>';
 					docuOn=secOn=true; break;
-				case 2: str+='<div class="sec">';
+				case 2:
 					if (head==="TOC"){
+						str+='<div class="sec">';
 						head=TOC;
 						str+='<h2 class="notSec">'+head+'</h2><div class="p toc"></div></div>'; // self closing.
 					} else if (head==="PH"){
+						str+='<div class="sec hiden">';
 						head=PH;
 						str+='<h2 class="no-sec-N" id="sec-PH">'+head+'</h2>';
 						secOn=true;
 					} else if (head==="RRA"){
+						str+='<div class="sec">';
 						head=RRA;
 						str+='<h2 class="no-sec-N" id="sec-Refs">'+head+'</h2>';
 						secOn=true;
 					} else{
+						str+='<div class="sec">';
 						str+='<h2>'+head+'</h2>';
 						secOn=true;
 					}
@@ -227,22 +241,59 @@ kipid.renderToDocuKHTML=function(toBeRendered){
 	return str;
 };
 
-window.kipid=window.kipid||{};
-kipid.renderNext=function(){
-	var toBeRendered=$("#pre-to-be-rendered-to-docuK").text().trim();
+kipid.getContentsJoinedWithEnter=function(){
+	var $elem=$("#pre-to-be-rendered-to-docuK");
+	var contents=$elem.contents();
+	var contentsL=contents.length;
+	var i, contentI;
+	var lis, lisL, j;
+	var strArray=[];
+	
+	for (i=0;i<contentsL;i++){
+		contentI=contents.eq(i);
+		if (contentI.is("ol")){
+			lis=contentI.contents();
+			lisL=lis.length;
+			for (j=0;j<lisL;j++){
+				strArray.push(lis.eq(j).text().trim());
+			}
+		} else{
+			strArray.push(contentI.text().trim());
+		}
+	}
+	
+	return strArray.join("\n");
+};
+
+kipid.renderNext=function(){	
+	var toBeRendered=kipid.getContentsJoinedWithEnter();
 	$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
 	
-	kipid.docuK=$(".docuK");
-	var docuK=kipid.docuK;
-	var k=docuK.length;
+	var docuK=kipid.docuK=$(".docuK");
+	k=docuK.length;
 	for(var i=1;i<k;i++){
 		if (docuK.eq(i).parent().is("#rendered-docuK")){
 			kipid.docuKProcess(kipid, jQuery, i);
 		}
 	}
 };
-var toBeRendered=$("#to-be-rendered-to-docuK").html().trim();
-$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
+
+kipid.prettyPrint=function(){	
+	var toBeRendered=kipid.escapeHTML( kipid.getContentsJoinedWithEnter() );
+	$("#pre-to-be-rendered-to-docuK").html(toBeRendered);
+	$("#pre-to-be-rendered-to-docuK").removeClass("prettyprinted");
+	prettyPrint(function(){
+		kipid.logPrint("<br><br>Code is prettyPrinted.");
+	}, $("#pre-to-be-rendered-to-docuK").parent()[0]);
+};
+
+(function(){
+	var toBeRendered=$("#to-be-rendered-to-docuK").html().trim();
+	$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
+	// $("#pre-to-be-rendered-to-docuK").on("keydown",function(e){
+	// 	e.preventDefault();
+	// });
+})();
 </script>
 </codeprint><!-- code-SEE-renderer-to-docuK -->
 
@@ -272,4 +323,5 @@ MathJax.Hub.Config({
 <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
 <!-- From kipid.tistory CDN -->
 <script charset="UTF-8" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
+<!-- <script src="prettyCode/run_prettify.js"></script> -->
 </codeprint><!-- docuK-script -->
