@@ -112,7 +112,7 @@
 .docuK pre, .docuK code {text-indent:0; overflow-wrap:break-word; word-wrap:break-word; white-space:pre-wrap; word-break:break-all}
 .docuK pre {font-family:inherit; font-size:0.9em; display:block; margin:0; padding:0; max-height:none; overflow-y:scroll} .docuK pre.scrollable {max-height:600px}
 .docuK code {font-family:monospace; font-size:0.9em; display:inline; border:2px solid rgb(50,50,50); border-radius:0.2em; background:rgb(30,30,30)} .docuK.bright code {background:rgb(230,230,230)}
-.docuK pre.prettyprint, .docuK code.prettyprint {background-color:black} .docuK.bright pre.prettyprint, .docuK.bright code.prettyprint {background-color:rgb(50,50,50)}
+.docuK pre.prettyprint, .docuK code.prettyprint {background-color:black} .docuK.bright pre.prettyprint, .docuK.bright code.prettyprint {background-color:rgb(70,70,70)}
 
 /* pre Container, Scrollable Switch (Explaination) */
 .docuK .preC {position:relative; margin:0.5em 0}
@@ -120,11 +120,12 @@
 .docuK .preC .preSS {position:absolute; left:0; top:0; bottom:0; width:2.6em; cursor:pointer}
 
 /* Specify class=linenums on a pre to get line numbering */
-.docuK pre ol.linenums {margin:0; color:#AEAEAE; padding-left:3em}
+.docuK pre ol.linenums {margin:0; color:#AEBEAE; padding-left:3em}
 .docuK pre.prettyprint li {padding:0.2em 0}
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:none}
 /* Alternate shading for lines */
-.docuK li:nth-child(2n) {background:rgb(20,20,20)} .docuK.bright li:nth-child(2n) {background:rgb(70,70,70)}
+.docuK li {background:inherit} .docuK.bright li {background:inherit}
+.docuK li:nth-child(2n) {background:rgb(20,20,20)} .docuK.bright li:nth-child(2n) {background:rgb(90,90,90)}
 
 .docuK pre .str, .docuK code .str {color:#65B042}/* string - green */
 .docuK pre .kwd, .docuK code .kwd {color:#E28964}/* keyword - dark pink */
