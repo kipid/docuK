@@ -271,7 +271,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 		if (docuK.find(".prettyprint").exists()) {
 			var gcp=document.createElement('script');
 			gcp.defer="";
-			gcp.src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js";
+			gcp.src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/run_prettify.js";
 			(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(gcp);
 			kipid.logPrint("<br><br>Google code prettyfy.js is loaded since pre.prettyprint is in your document.");
 		}
