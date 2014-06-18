@@ -10,7 +10,10 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 	docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
 	kipid.logPrint("<br><br>docuK-"+docuKI+" scripts started!<br><span class='emph'>If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>");
 	var docuK=kipid.docuK.eq(docuKI);
-	if (docuK.is(".rendered")){ return; }
+	if (docuK.is(".rendered")){
+		kipid.logPrint("<br><br>docuK-"+docuKI+" is already rendered.");
+		return;
+	}
 	
 	var postId="-in-docuK"+docuKI;
 	var postIdRegEx=new RegExp(postId+"$");
