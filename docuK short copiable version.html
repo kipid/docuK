@@ -1,34 +1,22 @@
 <codeprint id="docuK-style">
-<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-min.css">
+<link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<script src="docuK-prepare-2.2.js"></script>
+<!-- From kipid.tistory CDN -->
+<!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css"> -->
+<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script> -->
+<!-- From NP.tistory CDN -->
+<!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-2.2.css"> -->
+<!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-prepare-2.2.js"></script> -->
 </codeprint><!-- docuK-style -->
+
+<meta name="description" content="HTML docuK format ver. 2.1 short copiable version" />
 
 <codeprint id="docuK-docu">
 <div class="docuK">
-<div class="change-docuK-style">
-	<form>
-		Mode:<input id="rDark" type="radio" name="mode" value="Dark" checked onclick="kipid.Cmode(this.value)"><label for="rDark">Dark</label></input>
-		<input id="rBright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="rBright">Bright</label></input>
-	</form>
-	<form style="padding:0 2px 0 6px">
-		Font: <input class="emph" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1em; width:70px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input>
-	</form>
-	<form>
-		Font-size:<button type="button" onclick="kipid.CfontSize(-1)">&ndash;</button><button type="button" onclick="kipid.CfontSize(1)">+</button> <span class="emph TFontSize"></span>
-	</form>
-	<form>
-		Line-height:<button type="button" onclick="kipid.ClineHeight(-1)">&ndash;</button><button type="button" onclick="kipid.ClineHeight(1)">+</button> <span class="emph TLineHeight"></span>
-	</form>
-	<form>
-		DocuK Log:<button type="button" onclick="kipid.ShowHide('docuK-log')">Show/Hide</button>
-	</form>
-	<div class="deviceInfo"></div>
-</div>
-<div class="sec" id="docuK-log"></div>
-<!-- docuK format lastly updated at 2014-06-12. -->
-<meta name="description" content="HTML docuK format ver. 2.1 short copiable version" />
-
-<div class="sec"><h1>HTML docuK format ver. 2.1 short copiable version</h1>
+<!-- docuK format lastly updated at 2014-06-18. -->
+<div class="sec"><h1>HTML docuK format ver. 2.1 short copiable version (2014-06-18)</h1>
 	<div class="p">
 		개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 <span class="emph">'document designed by kipid'</span>란 뜻.
 	</div>
@@ -184,8 +172,8 @@
 <codeprint id="docuK-script">
 <script>
 window.kipid=window.kipid||{};
-kipid.delayPad=3000;
 kipid.wait=2000;
+kipid.delayPad=2000;
 </script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -200,6 +188,9 @@ MathJax.Hub.Config({
 });
 </script>
 <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
-
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-min.js"></script>
+<script src="docuK-postProcess-2.2.js"></script>
+<!-- From kipid.tistory CDN -->
+<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script> -->
+<!-- From NP.tistory CDN -->
+<!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-postProcess-2.2.js"></script> -->
 </codeprint><!-- docuK-script -->
