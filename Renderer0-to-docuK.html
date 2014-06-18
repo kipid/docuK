@@ -1,0 +1,275 @@
+<codeprint id="docuK-style">
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" charset="UTF-8" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<script charset="UTF-8" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint id="code-SEE-renderer-to-docuK">
+<div class="docuK noDIdHandle">
+<div class="sec"><h1>Try it yourself</h1>
+	<div class="p">
+		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield.
+	</div>
+	<div class="p">
+		한글이 왜 안나와?
+	</div>
+	<pre id="pre-to-be-rendered-to-docuK" contenteditable="true" class="prettyprint linenums scrollable"></pre>
+</div><!-- div.sec -->
+
+<codeprint id="to-be-rendered-to-docuK" style="display:none">
+# Working on SEE (Super Easy Edit)
+
+The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional codes which are called once in the beginning, or using kipid.variable already asigned before, will not work in the afterward rendering.
+
+## Statement
+
+Each statement or paragraph is splitted by double (or more than double) enters, e.g. /\n\n+/.
+
+If '#', '&lt;', 'http://', or 'https://' comes first in a statement, the paragraph will be specially treated.
+
+Furthermore 'http://' or 'https://' even after a single enter (\n) will be treated specially also. (Not yet implemented.)
+
+
+## DocuK and sections
+
+'#' indicates docuK, and '##' | '###' | '####' to sec | subsec | subsubsec.
+
+End of docuK: '#/', and end of section | subsec | subsubsec: '##/' | '###/' | '####/' are <span class="emph">optional</span>. Renderer detects end of something automatically according the hierarchy.
+
+End of something can be used as comments.
+Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
+Or just <span class="emph">end of something which are not yet opened</span> is OK.
+
+The following is ignored, as you see it in the rendered docuK.
+
+###/ End of something can be used as comments.
+Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
+Or just <span class="emph">end of something which are not yet opened</span> is OK.
+
+
+## Predifined section: "PH", "RRA", "TOC"
+
+There are three predefined sections. "PH": Posting History, "TOC": Table of Contents, "RRA": References and Related Articles. Possibly I will add more predefined sections which can be used frequently.
+
+See the predefined sections implemented below, and you can easily figure it out how to use it.
+
+
+## PH
+
+###/ Posting History
+
+<ul>
+	<li>2014-06-18: First posting.</li>
+</ul>
+
+##/ Posting History
+
+
+## TOC
+
+TOC is a self-closing section, i.e. no other texts can be put inside.
+Next text will be out of TOC.
+
+##/ Table of Contents.
+Table will be automatically filled up.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+	<div class="subsec"><h3>Main</h3></div>
+		<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+			// Updated regularly</li>
+		<li id="ref-docuKShort"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
+			// Updated regularly</li>
+		<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+	<div class="subsec"><h3>Supported by</h3></div>
+		<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+			// JavaScript enhancer</li>
+		<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+			// Math renderer.</li>
+		<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+			// Code prettyfier.</li>
+</ol>
+
+##/ References and Related Articles
+
+
+## head (h2) of section
+
+section contents
+
+
+### head (h3) of subsection
+
+contents of subsection
+
+
+#### head (h4) of subsubsection
+
+contents of subsubsection
+
+
+####/ optional end of subsubsection
+
+###/ optional end of subsection
+
+##/ optional end of section
+
+
+## Raw HTML
+
+<div class="p">
+Raw HTML can be added like this. A paragraph starting with '&lt;' will be appended without any change.
+</div>
+
+Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&amp;lt;div class="p"&amp;gt;&amp;lt;/div&amp;gt;</code>.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+</codeprint>
+
+<button onclick="kipid.renderNext();" style="background:rgb(255,210,210); float:right; padding:0.2em 0.5em; font:inherit; margin:1em; ">Render the above text to docuK</button>
+<div class="cboth"></div>
+</div><!-- div.docuK -->
+
+<div id="rendered-docuK">
+<!-- style="max-height:20em; max-width:100%; overflow:auto" -->
+<div class="docuK"></div>
+</div>
+
+<script>
+kipid.renderToDocuKHTML=function(toBeRendered){
+	var ps=toBeRendered.split(/\n{2,}/); // split by double enter.
+	var p=ps.length;
+	
+	var TOC="Table of Contents";
+	var PH="Posting History";
+	var RRA="References and Related Articles";
+	
+	var untilEnter=/[^\n]+/g; // until enter.
+	var head, hN; // #*hN
+	
+	var docuOn=secOn=subsecOn=subsubsecOn=false;
+	var str='';
+	
+	function closeSec(hN){
+		if (hN===undefined){ hN=1; }
+		switch(hN){
+			case 1: if (docuOn){ str+='</div>'; docuOn=false; }
+			case 2: if (secOn){ str+='</div>'; secOn=false; }
+			case 3: if (subsecOn){ str+='</div>'; subsecOn=false; }
+			case 4: if (subsubsecOn){ str+='</div>'; subsubsecOn=false; }
+			default:
+		}
+	}
+	
+	for (var i=0;i<p;i++){
+		if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null){
+			untilEnter.lastIndex=hN=hN[0].length;
+			head=untilEnter.exec(ps[i]);
+			head=head[0].trim();
+			closeSec(hN);
+			switch(hN){
+				case 1: str+='<div class="docuK"><div class="sec"><h1>'+head+'</h1>';
+					docuOn=secOn=true; break;
+				case 2: str+='<div class="sec">';
+					if (head==="TOC"){
+						head=TOC;
+						str+='<h2 class="notSec">'+head+'</h2><div class="p toc"></div></div>'; // self closing.
+					} else if (head==="PH"){
+						head=PH;
+						str+='<h2 class="no-sec-N" id="sec-PH">'+head+'</h2>';
+						secOn=true;
+					} else if (head==="RRA"){
+						head=RRA;
+						str+='<h2 class="no-sec-N" id="sec-Refs">'+head+'</h2>';
+						secOn=true;
+					} else{
+						str+='<h2>'+head+'</h2>';
+						secOn=true;
+					}
+					break;
+				case 3: str+='<div class="subsec"><h3>'+head+'</h3>';
+					subsecOn=true; break;
+				case 4: str+='<div class="subsubsec"><h4>'+head+'</h4>';
+					subsubsecOn=true; break;
+				default: str+='<h'+hN+'>'+head+'</h'+hN+'>';
+			}
+			ps[i]=ps[i].substring(untilEnter.lastIndex).trim();
+		} else if ((hN=/^#+(?=\/)/.exec(ps[i]))!==null){
+			hN=hN[0].length;
+			closeSec(hN);
+			continue; // Text after '#/' is ignored. Use '#####/' for comment.
+		}
+		
+		if (ps[i].length!==0){
+			if (/^<\w/.test(ps[i])){
+				str+=ps[i];
+			} else{
+				str+='<div class="p';
+				if (/^-/.test(ps[i])){
+					str+=' cmt';
+				}
+				str+='">'+ps[i]+'</div>';
+			}
+		}
+	}
+	closeSec();
+	
+	return str;
+};
+
+window.kipid=window.kipid||{};
+kipid.renderNext=function(){
+	var toBeRendered=$("#pre-to-be-rendered-to-docuK").text().trim();
+	$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
+	
+	kipid.docuK=$(".docuK");
+	var docuK=kipid.docuK;
+	var k=docuK.length;
+	for(var i=1;i<k;i++){
+		if (docuK.eq(i).parent().is("#rendered-docuK")){
+			kipid.docuKProcess(kipid, jQuery, i);
+		}
+	}
+};
+var toBeRendered=$("#to-be-rendered-to-docuK").html().trim();
+$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
+</script>
+</codeprint><!-- code-SEE-renderer-to-docuK -->
+
+<div class="docuK">
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-SEE">Super Easy Edit (Opening Sources)</h2>
+	<pre id="pre-code-SEE-renderer-to-docuK" class="prettyprint linenums lang-html scrollable"></pre>
+</div>
+</div>
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=2000;
+kipid.delayPad=2000;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	skipStartupTypeset: true, // Skip startup typeset.
+	positionToHash: false, // No repositioning to #something anchor.
+	tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+		displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+		processEscapes: true, // Escape \$
+		processEnvironments: false, // Ignore \begin{something} ... \end{something}
+	}
+});
+</script>
+<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+<!-- From kipid.tistory CDN -->
+<script charset="UTF-8" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
+</codeprint><!-- docuK-script -->
