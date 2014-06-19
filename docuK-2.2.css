@@ -124,8 +124,8 @@
 .docuK pre.prettyprint li {padding:0.2em 0}
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:none}
 /* Alternate shading for lines */
-.docuK li {background:inherit} .docuK.bright li {background:inherit}
-.docuK li:nth-child(2n) {background:rgb(20,20,20)} .docuK.bright li:nth-child(2n) {background:rgb(90,90,90)}
+.docuK pre li {background:inherit} .docuK.bright pre li {background:inherit}
+.docuK pre li:nth-child(2n) {background:rgb(20,20,20)} .docuK.bright pre li:nth-child(2n) {background:rgb(90,90,90)}
 
 .docuK pre .str, .docuK code .str {color:#65B042}/* string - green */
 .docuK pre .kwd, .docuK code .kwd {color:#E28964}/* keyword - dark pink */
