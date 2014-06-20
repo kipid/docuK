@@ -18,9 +18,10 @@ Specific features are
 Quite similar to LaTeX or Wiki document, but extended a little bit.
 
 The details are described in
-[kipid's blog - HTML docuK format ver. 2.1](http://kipid.tistory.com/entry/HTML-docuK-format-ver-20),
-and
-[HTML docuK format 2.1, short copiable version](http://kipid.tistory.com/entry/docuK-short-copiable-version).
+
+* [kipid's blog - HTML docuK format ver. 2.1](http://kipid.tistory.com/entry/HTML-docuK-format-ver-20): Full detailed description about docuK.
+* [kipid's blog - HTML docuK format 2.1, short copiable version](http://kipid.tistory.com/entry/docuK-short-copiable-version): Short copiable version of docuK. You can copy and paste it, and revise the contents part only to produce a new document of your own.
+* [kipid's blog - Super Easy Edit (SEE) of docuK](http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK): Working on this. You can simply edit the docu in super easy manner, and you can post it anywhere by "copy and paste" way.
 
 The above documents are also made up by using docuK format.
 
