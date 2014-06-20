@@ -11,12 +11,12 @@
 <!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-prepare-2.2.js"></script> -->
 </codeprint><!-- docuK-style -->
 
-<meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, auto numbering of sections/figures/equations, auto citing references, auto refering figures and equations, auto refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and auto code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
-
 <codeprint id="docuK-docu">
 <div class="docuK">
-<!-- docuK format lastly updated at 2014-06-18. -->
-<div class="sec"><h1>HTML docuK format ver. 2.1 (2014-06-18)</h1>
+<!-- docuK format lastly updated at 2014-06-20. -->
+
+<meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
+<div class="sec"><h1>HTML docuK format ver. 2.1 (2014-06-20)</h1>
 	<div class="p">
 		개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 'document designed by kipid'란 뜻.
 	</div>
@@ -25,7 +25,7 @@
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-UH">Update History</h2>
 	<ul>
-		<li>2014-06-16: change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle 겁시다. (자동으로도 처리.)</li>
+		<li>2014-06-16: change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle (no duplicate id handling) 겁시다. (자동으로도 처리 됨.)</li>
 		<li>2014-06-12: bubble ref arrow is centered.</li>
 		<li>2014-06-11: MathJax delayed-loading 구현. 글 간단하게 정리.</li>
 		<li>2014-05-31: Log show/hide. delayed-loading in bubble ref.</li>
@@ -40,14 +40,16 @@
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-FE">앞으로 생각하고 있는 것들</h2>
 	<div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
 	<ul>
-		<li>갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.) 아이디 헨들.</li>
-		<li>나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
-		<li>사용자 캐쉬에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
+		<li>Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
+		<li>Working on: 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
+		<li>Working on: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.) 아이디 헨들.</li>
+		<li>Working on: 갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
+		<li>eqq | figure numbering (sec-subsec-subsubsec-number). 지금은 (sec-number).</li>
+		
 		<li>bubbleRef 속 bubbleRef 구현? Chaining으로?</li>
 		<li>docuK Log draggable하게?</li>
 		<li><code class="prettyprint">$('&lt;div/&gt;', {id: someID, className: 'foobar', html: content});</code> 형태가 더 빠르다는 이야기가 있네. <a href="http://stackoverflow.com/questions/3015335/jquery-html-vs-append">Stackoverflow.com - jquery html vs append</a> 그런데 그닥 체감을 못하겠어서... 정확한 정보인지도 모르겠고. 당장은 패스.</li>
 		<li><code class="prettyprint">&lt;refer class="id" defer&gt;&lt;/refer&gt;</code> 같은것도 생각해볼까?? id 안의 html이 다른 script들 처리가 된 후에 복사해오면 더 속도가 빨라지는 경우도 많아서.. (예로 MathJax 수식, Highlighted code 같은? 잡다한 기능/설정이 많으면 작성하는 사람을 복잡하게만 만들듯도 해서 당장은 패스. 별로 쓰지도 않을 설정같고...)</li>
-		<li>갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
 		<li>IE/파폭에서도 스크롤바 꾸미기?</li>
 		<li>DISQUS 댓글창은 자동으로 잘 늘어나네? 갤4에서도 확인해보고 티스토리 댓글 css도 수정? (안해도 될듯하고... 분석이나 해보자.)</li>
 	</ul>
@@ -413,7 +415,7 @@
 	</div>
 </div>
 
-<div class="sec"><h2 id="sec-disableQ">Disable Query class</h2>
+<div class="sec hiden"><h2 id="sec-disableQ">Disable Query class</h2>
 	<div class="p">Cross-Browsing check 하면서 특히나 스마트폰 (갤s) 에서 자꾸 스크롤탑이 먹히길래 만들어봄. 문제가 되는 놈들은 query를 만들어서 안에 있는 <code>&lt;!--, --&gt;</code>을 없애줌. <code>&lt;div class="disableQ0"&gt;&lt;/div&gt;</code> 같은걸로 감싸고 한꺼번에 처리.</div>
 	<div class="p">Elements with disableQ0 class remove <code>&lt;!-- --&gt;</code> inside them only when deviceWidth>321. This is for Galaxy S (or old smartphones) problem like unexpected scrollTop.</div>
 	<figure id="fig-"><div class="fig disableQ0">
@@ -708,7 +710,7 @@
 	</div>
 </div>
 
-<div class="sec"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
 	<ol class="refs">
 		<div class="subsec"><h3>Main</h3></div>
 		<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
@@ -767,13 +769,13 @@
 	<div class="toc p"></div>
 </div>
 
-<div class="sec"><h2>Sections</h2>
+<div class="sec hiden"><h2>Sections</h2>
 	<eqq>
 		\alpha \beta \gamma
 	</eqq>
 </div>
 
-<div class="sec"><h2 class="no-sec-N" id="sec-TryIt">Try it yourself</h2>
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-TryIt">Try it yourself</h2>
 	<div class="p">
 		LaTeX Math 문법을 아시는 분들은 바로 테스트 해 보시길. 잘 모르시더라도 CodeCogs toolbar를 활용하시면 대부분의 수식을 작성하실 수 있으실거예요.
 	</div>
@@ -863,7 +865,7 @@
 	</div>
 </div>
 
-<div class="sec"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
 	<ol class="refs">
 		<div class="subsec"><h3>Math Renderer</h3></div>
 		<li><a href="http://www.codecogs.com/latex/eqneditor.php" target="_blank">CodeCogs: Online LaTeX Equation Editor</a>;<br>
