@@ -126,6 +126,35 @@ Raw HTML can be added like this. A paragraph starting with '&lt;' will be append
 
 Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>.
 
+<div class="cmt">
+
+This is default comment box: <code class="prettyprint">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+
+You can put multiple paragraphs and nested htmls.
+
+<ul>
+	<li>Unordered list 1.</li>
+	<li>Unordered list 2.</li>
+</ul>
+<ol>
+	<li>Ordered list 1.</li>
+	<li>Ordered list 2.</li>
+</ol>
+
+This is it.
+
+</div>
+<div class="bcf">
+
+This is default 'be careful' box: <code class="prettyprint">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+
+</div>
+
+
+## Links | URLs to appropriate html
+
+Planning to implement this.
+
 http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
 How Language Seems To Shape One's View Of The World
 , January 02, 2014, by ALAN YU.
@@ -159,7 +188,7 @@ How Language Seems To Shape One's View Of The World
 
 <script>
 kipid.renderToDocuKHTML=function(toBeRendered){
-	var ps=toBeRendered.split(/\n{2,}/); // split by double enter.
+	var ps=toBeRendered.split(/\n\n+/); // split by double enter.
 	var p=ps.length;
 	
 	var TOC="Table of Contents";
@@ -183,7 +212,16 @@ kipid.renderToDocuKHTML=function(toBeRendered){
 		}
 	}
 	
+	// var logOn=false;
+	
 	for (var i=0;i<p;i++){
+		ps[i]=ps[i].trim();
+		
+		// if (ps[i]==="<div class=\"bcf\">"||logOn){
+		// 	console.log(ps[i]);
+		// 	logOn=true;
+		// }
+		
 		if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null){
 			untilEnter.lastIndex=hN=hN[0].length;
 			head=untilEnter.exec(ps[i]);
@@ -227,7 +265,7 @@ kipid.renderToDocuKHTML=function(toBeRendered){
 		}
 		
 		if (ps[i].length!==0){
-			if (/^<\w/.test(ps[i])){
+			if (/^<\/?\w/.test(ps[i])){
 				str+=ps[i];
 			} else{
 				str+='<div class="p';
@@ -269,7 +307,7 @@ kipid.getContentsJoinedWithEnter=function(){
 
 kipid.renderNext=function(){	
 	var toBeRendered=kipid.getContentsJoinedWithEnter();
-	$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
+	$("#rendered-docuK")[0].innerHTML=kipid.renderToDocuKHTML(toBeRendered);
 	
 	var docuK=kipid.docuK=$(".docuK");
 	k=docuK.length;
@@ -291,7 +329,7 @@ kipid.prettyPrint=function(){
 
 (function(){
 	var toBeRendered=$("#to-be-rendered-to-docuK").html().trim();
-	$("#rendered-docuK").html(kipid.renderToDocuKHTML(toBeRendered));
+	$("#rendered-docuK")[0].innerHTML=kipid.renderToDocuKHTML(toBeRendered);
 	$("#pre-to-be-rendered-to-docuK").on("keydown",function(event){
 		event.stopPropagation();
 	});
