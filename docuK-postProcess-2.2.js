@@ -41,7 +41,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 		+'</input><input id="button'+docuKI+'-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form> '
 		+'<form><input class="emph" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
 		+fontSizeAndLineHeight
-		+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Process\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
+		+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
 		+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
 		+'<div class="deviceInfo"></div></div>'
 	);
@@ -55,69 +55,83 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 	////////////////////////////////////////////////////
 	// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
 	////////////////////////////////////////////////////
-	var secs=docuK.find(">.sec"), subsecs, subsubsecs, secContents="";
-	var secIH2, subsecIH3, subsubsecIH4;
-	var secI=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
+	var secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
+	var secI, secIH2, subsecJH3, subsubsecKH4;
+	var secN=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
 	var eqqs, eqN="", eqC="", figs;
 	function fTocHtml(numbering){
-		var secN=(numbering==undefined||numbering)?"secN":"none";
-		return "<h"+hN+"><a class='jump' id='toc"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'><span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"+txt+"</a></h"+hN+">";
+		var secN=(numbering===undefined||numbering)?"secN":"none";
+		return "<h"+hN+">"
+		+"<a class='jump' id='toc"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
+			+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
+			+txt
+		+"</a></h"+hN+">";
 	}
 	function fSecHtml(numbering){
-		var secN=(numbering==undefined||numbering)?"secN":"none";
-		return "<a class='jump tJump' href='#toc"+docuKI+"-"+secId+"'>T</a><a class='jump' id='secId"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'><span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</a></span>"+txt;
+		var secN="none", endA0="", endA1="</a>";
+		if (numbering===undefined||numbering){
+			secN="secN"; endA0="</a>"; endA1="";
+		}
+		return "<a class='jump tJump' href='#toc"+docuKI+"-"+secId+"'>T</a>"
+		+"<a class='jump' id='secId"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
+			+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
+		+endA0+txt+endA1;
 	}
 	function fEqqHtml(){
-		return '<div class="eqCC"><div class="eqN"><span class="number">('+eqN+')</span></div><div class="eqC">'+eqC+'</div></div>';
+		return '<div class="eqCC">'
+			+'<div class="eqN"><span class="number">('+eqN+')</span></div>'
+			+'<div class="eqC">'+eqC+'</div>'
+		+'</div>';
 	}
-	for (var i=0;i<secs.length;i++) {
-		secIH2=secs.eq(i).find("h2:first-child");
-		if (secIH2.exists() && !secIH2.is(".notSec")) { // exclude .sec>h1 and .sec>h2.notSec in ToC
+	for (var i=0;i<secs.length;i++){
+		secI=secs.eq(i);
+		secIH2=secI.find("h2:first-child");
+		if (secIH2.exists() && !secIH2.is(".notSec")){ // exclude ".sec>h1" and ".sec>h2.notSec" in ToC
 			hN="2"; txt=secIH2.html();
-			if (secIH2.is(".no-sec-N")) {
+			if (secIH2.is(".no-sec-N")){
 				secPreTxt=secId=secITxt=(secIH2.is("[id]"))?secIH2.attr('id').replace(/^sec-/i,'').replace(postIdRegEx,''):"secPreTxt"+docuKI+"-"+i;
 				tocHtml+=fTocHtml(false);
 				secIH2.html(fSecHtml(false));
 			} else {
-				secI++;
-				secPreTxt=secId=secITxt=secI.toString();
+				secN++;
+				secPreTxt=secId=secITxt=secN.toString();
 				tocHtml+=fTocHtml();
 				secIH2.html(fSecHtml());
 			}
 			
-			if (!secs.eq(i).is(".noToggleUI")) {
-				secContents="sec"+docuKI+"-"+secITxt+"-contents";
-				secs.eq(i).append("<div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
-				secs.eq(i).find(">*:not(:first-child)").wrapAll("<div class=\"sec-contents\" id=\""+secContents+"\"></div>");
-				secs.eq(i).append("<div class=\"cBoth\"></div>");
+			if (!secI.is(".noToggleUI")){
+				secContentsId="sec"+docuKI+"-"+secITxt+"-contents";
+				secI.append("<div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
+				secI.find(">*:not(:first-child)").wrapAll("<div class=\"sec-contents\" id=\""+secContentsId+"\"></div>");
 				secIH2.after("<div class=\"ShowHide\" onclick=\"kipid.ShowHide(this)\">▼ Show/Hide</div>");
+				secI.append("<div class=\"cBoth\"></div>");
 			}
 			
-			subsecs=secs.eq(i).find(".subsec"); subsecI=0;
-			for (var j=0;j<subsecs.length;j++) {
-				subsecIH3=subsecs.eq(j).find("h3:first-child");
-				hN="3"; subsecI++; secId=secITxt+"-"+subsecI; secPreTxt=secITxt+"."+subsecI; txt=subsecIH3.html();
+			subsecs=secI.find(".subsec"); subsecI=0;
+			for (var j=0;j<subsecs.length;j++){
+				subsecJH3=subsecs.eq(j).find("h3:first-child");
+				hN="3"; subsecI++; secId=secITxt+"-"+subsecI; secPreTxt=secITxt+"."+subsecI; txt=subsecJH3.html();
 				tocHtml+=fTocHtml();
-				subsecIH3.html(fSecHtml());
+				subsecJH3.html(fSecHtml());
 				
 				subsubsecs=subsecs.eq(j).find(".subsubsec"); subsubsecI=0;
-				for (var k=0;k<subsubsecs.length;k++) {
-					subsubsecIH4=subsubsecs.eq(k).find("h4:first-child");
-					hN="4"; subsubsecI++; secId=secITxt+"-"+subsecI+"-"+subsubsecI; secPreTxt=secITxt+"."+subsecI+"."+subsubsecI; txt=subsubsecIH4.html();
+				for (var k=0;k<subsubsecs.length;k++){
+					subsubsecKH4=subsubsecs.eq(k).find("h4:first-child");
+					hN="4"; subsubsecI++; secId=secITxt+"-"+subsecI+"-"+subsubsecI; secPreTxt=secITxt+"."+subsecI+"."+subsubsecI; txt=subsubsecKH4.html();
 					tocHtml+=fTocHtml();
-					subsubsecIH4.html(fSecHtml());
+					subsubsecKH4.html(fSecHtml());
 				}
 			}
 		} else {
 			secITxt="x";
 		}
-		eqqs=secs.eq(i).find("eqq");
+		eqqs=secI.find("eqq");
 		for(j=0;j<eqqs.length;j++){
 			eqN=secITxt+"-"+(j+1).toString();
 			eqC=eqqs.eq(j).html().trim();
 			eqqs.eq(j).html(fEqqHtml());
 		}
-		figs=secs.eq(i).find("figure");
+		figs=secI.find("figure");
 		for(j=0;j<figs.length;j++){
 			figN=secITxt+"-"+(j+1).toString();
 			figs.eq(j).find(".caption").html(function(ith,orgTxt){return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
@@ -136,12 +150,24 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 	}
 	var refN="", preRefHtml="", refHtml="", citeN="";
 	function fCiteHtml(){
-		var str='<div class="inRef" onmouseover="kipid.ShowBR(\'bRef'+docuKI+'-'+citeN+'\')" onmouseout="kipid.timerHideBR(\'bRef'+docuKI+'-'+citeN+'\')">'+refN+'<div id="bRef'+docuKI+'-'+citeN+'" class="bubbleRef"><div class="content">'+preRefHtml+refHtml+'</div><div class="arrow"></div><div class="exit" onclick="kipid.HideBR(\'bRef'+docuKI+'-'+citeN+'\')"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"/><line x1="80%" y1="20%" x2="20%" y2="80%"/></g>✖</svg></div></div></div>';
+		var str='<div class="inRef" onmouseover="kipid.ShowBR(\'bRef'+docuKI+'-'+citeN+'\')" onmouseout="kipid.timerHideBR(\'bRef'+docuKI+'-'+citeN+'\')">'
+			+refN
+			+'<div id="bRef'+docuKI+'-'+citeN+'" class="bubbleRef">'
+				+'<div class="content">'+preRefHtml+refHtml+'</div>'
+				+'<div class="arrow"></div>'
+				+'<div class="exit" onclick="kipid.HideBR(\'bRef'+docuKI+'-'+citeN+'\')"><svg>'
+					+'<g style="stroke:white;stroke-width:23%">'
+						+'<line x1="20%" y1="20%" x2="80%" y2="80%"/>'
+						+'<line x1="80%" y1="20%" x2="20%" y2="80%"/>'
+					+'</g>'
+					+'✖'
+				+'</svg></div>'
+			+'</div></div>';
 		if (kipid.browserWidth<321){
-			str=str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>');
+			str=str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
 		}
 		return str;
-	} // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
+	}
 	var refs=docuK.find("ol.refs>li")
 	for(i=0;i<refs.length;i++){ // ref [i+1] with id
 		refs.eq(i).prepend("<span class='number none'>["+pad(i+1,2)+"]</span>");
@@ -150,9 +176,9 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 	refers.html('<span class="emph">( No refer. )</span>');
 	for(i=0;i<refers.length;i++){
 		referI=refers.eq(i);
-		if (referI.is("[class]")) {
+		if (referI.is("[class]")){
 			refered=docuK.find("#"+referI.attr("class")+postId);
-			if (refered.exists()) {
+			if (refered.exists()){
 				citeN=(i+1).toString()+"-"+referI.attr("class")+postId;
 				refHtml=refered.html().trim().replace(/\bid\s*=/gi,'psudoId=');
 				refN=refered.find(".number").html();
@@ -160,22 +186,6 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 			}
 		}
 	}
-	
-	kipid.bubbleRefs=(kipid.bubbleRefs==undefined)?docuK.find(".bubbleRef"):kipid.bubbleRefs.add(docuK.find(".bubbleRef")); // for function kipid.ShowBR
-	docuK.find(".inRef").on("mouseenter.delayedLoad", function(){
-		kipid.logPrint("<br>Do delayed-load in bubble ref.");
-		$(window).trigger("scroll.delayedLoad");
-		$(this).off("mouseenter.delayedLoad");
-	});
-	docuK.find(".inRef").each(function(){
-		var $elem=$(this);
-		var width=parseFloat($elem.width());
-		var $arrow=$elem.find(".arrow");
-		var borderWidth=parseFloat($arrow.css("borderWidth"));
-		var fontSize=parseFloat($arrow.css("fontSize"));
-		$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
-	});
-	secs.filter(".hiden").find(">.sec-contents").css({display:"none"});
 	kipid.logPrint("<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.");
 	
 	docuK.addClass("rendered");
@@ -233,10 +243,32 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 	kipid.TLineHeight=docuK.find(".TLineHeight");
 	kipid.deviceInfo=docuK.find(".deviceInfo");
 	
+	kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
+	
+	var inRefs=docuK.find(".inRef");
+	// Centering arrow.
+	inRefs.each(function(){
+		var $elem=$(this);
+		var width=parseFloat($elem.width());
+		var $arrow=$elem.find(".arrow");
+		var borderWidth=parseFloat($arrow.css("borderWidth"));
+		var fontSize=parseFloat($arrow.css("fontSize"));
+		$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
+	});
+	// Delayed-Load in bubble ref.
+	inRefs.on("mouseenter.delayedLoad", function(){
+		kipid.logPrint("<br>Do delayed-load in bubble ref.");
+		$(window).trigger("scroll.delayedLoad");
+		$(this).off("mouseenter.delayedLoad");
+	});
+	
 	////////////////////////////////////////////////////
 	// On ready.
 	////////////////////////////////////////////////////
 	$(document).ready(function(){
+		// Hiding hiden sections.
+		docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
+		
 		////////////////////////////////////////////////////
 		// Printing Styles
 		////////////////////////////////////////////////////
@@ -268,7 +300,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 		////////////////////////////////////////////////////
 		// google code prettify js script is added.
 		////////////////////////////////////////////////////
-		if (docuK.find(".prettyprint").exists()) {
+		if (docuK.find(".prettyprint").exists()){
 			var gcp=document.createElement('script');
 			gcp.defer="";
 			gcp.src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/run_prettify.js";
