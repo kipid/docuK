@@ -161,12 +161,13 @@ How Language Seems To Shape One's View Of The World
 </codeprint>
 
 <div class="docuK noDIdHandle">
-<div class="sec"><h1>Try it yourself</h1>
+<div class="sec"><h1># Super Easy Edit (SEE) of docuK</h1>
+	<div class="p">
+		쉽게 문서를 작성합시다.
+	</div>
+	<h2>Try it yourself</h2><br>
 	<div class="p">
 		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield.
-	</div>
-	<div class="p">
-		한글 나옴?
 	</div>
 	
 	<pre id="pre-to-be-rendered-to-docuK" contenteditable="true" class="prettyprint linenums scrollable"></pre>
@@ -188,7 +189,7 @@ How Language Seems To Shape One's View Of The World
 
 <script>
 kipid.renderToDocuKHTML=function(toBeRendered){
-	var ps=toBeRendered.split(/\n\n+/); // split by double enter.
+	var ps=toBeRendered.split(/\s*\n\n+\s*/); // split by double enter.
 	var p=ps.length;
 	
 	var TOC="Table of Contents";
@@ -212,15 +213,8 @@ kipid.renderToDocuKHTML=function(toBeRendered){
 		}
 	}
 	
-	// var logOn=false;
-	
 	for (var i=0;i<p;i++){
 		ps[i]=ps[i].trim();
-		
-		// if (ps[i]==="<div class=\"bcf\">"||logOn){
-		// 	console.log(ps[i]);
-		// 	logOn=true;
-		// }
 		
 		if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null){
 			untilEnter.lastIndex=hN=hN[0].length;
@@ -269,9 +263,9 @@ kipid.renderToDocuKHTML=function(toBeRendered){
 				str+=ps[i];
 			} else{
 				str+='<div class="p';
-				if (/^-/.test(ps[i])){
-					str+=' cmt';
-				}
+				// if (/^-/.test(ps[i])){
+				// 	str+=' cmt';
+				// }
 				str+='">'+ps[i]+'</div>';
 			}
 		}
@@ -305,9 +299,21 @@ kipid.getContentsJoinedWithEnter=function(){
 	return strArray.join("\n");
 };
 
-kipid.renderNext=function(){	
+kipid.renderNext=function(){
 	var toBeRendered=kipid.getContentsJoinedWithEnter();
-	$("#rendered-docuK")[0].innerHTML=kipid.renderToDocuKHTML(toBeRendered);
+	var renderedOne=kipid.renderToDocuKHTML(toBeRendered);
+	$("#rendered-docuK")[0].innerHTML=renderedOne;
+	
+	var endScript="</"+"script>";
+	var renderedTwo='<codeprint id="docuK-style"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">'+endScript+'<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div><link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css"><script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js">'+endScript+'</codeprint><codeprint id="docuK-docu">'
+		+renderedOne
+		+'</codeprint><codeprint id="docuK-script"><script>window.kipid=window.kipid||{}; kipid.wait=2000; kipid.delayPad=2000;'+endScript+'<script type="text/x-mathjax-config">MathJax.Hub.Config({skipStartupTypeset: true, positionToHash: false, tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']], displayMath: [[\'$$\',\'$$\'], [\'\\\\[\',\'\\\\]\']], processEscapes: true, processEnvironments: false}}); '+endScript+'<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer>'+endScript+'<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js">'+endScript+'</codeprint>';
+	
+	$("#pre-code-docuK-HTML").html( kipid.escapeHTML( renderedTwo ) );
+	$("#pre-code-docuK-HTML").removeClass("prettyprinted");
+	prettyPrint(function(){
+		kipid.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
+	}, $("#pre-code-docuK-HTML").parent()[0]);
 	
 	var docuK=kipid.docuK=$(".docuK");
 	k=docuK.length;
@@ -322,14 +328,17 @@ kipid.prettyPrint=function(){
 	var toBeRendered=kipid.escapeHTML( kipid.getContentsJoinedWithEnter() );
 	$("#pre-to-be-rendered-to-docuK").html(toBeRendered);
 	$("#pre-to-be-rendered-to-docuK").removeClass("prettyprinted");
+	
 	prettyPrint(function(){
-		kipid.logPrint("<br><br>Code is prettyPrinted.");
+		kipid.logPrint("<br><br>Code in '#pre-to-be-rendered-to-docuK' is prettyPrinted.");
 	}, $("#pre-to-be-rendered-to-docuK").parent()[0]);
 };
 
 (function(){
 	var toBeRendered=$("#to-be-rendered-to-docuK").html().trim();
-	$("#rendered-docuK")[0].innerHTML=kipid.renderToDocuKHTML(toBeRendered);
+	var renderedOne=kipid.renderToDocuKHTML(toBeRendered);
+	
+	$("#rendered-docuK")[0].innerHTML=renderedOne
 	$("#pre-to-be-rendered-to-docuK").on("keydown",function(event){
 		event.stopPropagation();
 	});
@@ -337,7 +346,7 @@ kipid.prettyPrint=function(){
 </script>
 </codeprint><!-- code-SEE-renderer-to-docuK -->
 
-<div class="docuK">
+<div class="docuK noDIdHandle">
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-SEE">Super Easy Edit (Opening Sources)</h2>
 	<pre id="pre-code-SEE-renderer-to-docuK" contenteditable="true" class="prettyprint linenums lang-html scrollable"></pre>
 </div>
