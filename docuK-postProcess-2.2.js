@@ -101,8 +101,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 			
 			if (!secI.is(".noToggleUI")){
 				secContentsId="sec"+docuKI+"-"+secITxt+"-contents";
-				secI.append("<div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
-				secI.find(">*:not(:first-child)").wrapAll("<div class=\"sec-contents\" id=\""+secContentsId+"\"></div>");
+				secI.append("<div class=\"cBoth\"></div><div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
+				secI.contents().slice(1).wrapAll("<div class=\"sec-contents\" id=\""+secContentsId+"\"></div>");
 				secIH2.after("<div class=\"ShowHide\" onclick=\"kipid.ShowHide(this)\">▼ Show/Hide</div>");
 				secI.append("<div class=\"cBoth\"></div>");
 			}
