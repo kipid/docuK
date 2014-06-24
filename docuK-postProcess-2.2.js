@@ -308,6 +308,82 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
 			kipid.logPrint("<br><br>Google code prettyfy.js is loaded since pre.prettyprint is in your document.");
 		}
 		
+		////////////////////////////////////////////////////
+		// ShortKeys (including default 'processShortcut(event)' of tistory.)
+		////////////////////////////////////////////////////
+		kipid.hLists=$(".docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4");
+		kipid.processShortKey=function(event){
+			if (isIE){
+				event=window.event;
+				event.target=event.srcElement;
+			}
+			if (event.altKey||event.ctrlKey||event.metaKey) return;
+			switch (event.target.nodeName) {
+				case "INPUT":
+				case "SELECT":
+				case "TEXTAREA":
+					return;
+			}
+			switch (event.keyCode){
+				case 70: //F = 70
+				case 68: //D = 68
+					var scrollTop=$(window).scrollTop();
+					var i=0, k=kipid.hLists.length;
+					var location;
+					var hI;
+					
+					if (event.keyCode===70){
+						scrollTop+=30;
+						for (i=0;i<k;i++){
+							hI=kipid.hLists.eq(i);
+							if (hI.is(":visible")&&scrollTop<hI.offset().top){ break; }
+						}
+						if (i===k){
+							// hI=kipid.hLists.eq(0);
+							alert("This is the last section.");
+							return;
+						}
+					} else{
+						scrollTop-=30;
+						for (i=k-1;i>=0;i--){
+							hI=kipid.hLists.eq(i);
+							if (hI.is(":visible")&&scrollTop>hI.offset().top){ break; }
+						}
+						if (i===-1){
+							// hI=kipid.hLists.eq(k-1);
+							alert("This is the first section.");
+							return;
+						}
+					}
+					location=hI.is("[id]")? "#"+hI.attr("id") : hI.offset().top;
+					
+					if (isNaN(location)){
+						window.location = location;
+					} else{
+						$(window).scrollTop(location);
+					}
+					break;
+				case 76: //L = 76
+					window.location = "/entry/Lists"
+					break;
+				default:
+					processShortcut(event);
+			}
+		}
+		document.onkeydown=kipid.processShortKey;
+		var shortkeyDesc=$("#shortkey>ul");
+		if (shortkeyDesc.exists()){
+			shortkeyDesc.prepend(
+				"<li>D: Previous Section</li>"
+				+"<li>F: Forward Section</li>"
+				+"<li>L: To the Lists</li>"
+			);
+		}
+		kipid.logPrint("<br><br>New ShortKeys (D, F, L) are set.")
+		
+		////////////////////////////////////////////////////
+		// Closing docuK Log.
+		////////////////////////////////////////////////////
 		kipid.logPrint("<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>");
 		setTimeout(function(){kipid.log.hide();}, 0);
 	});
