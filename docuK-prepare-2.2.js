@@ -153,7 +153,7 @@
 			kipid.fontSize=20;
 		}
 		kipid.docuK.css({"font-size":kipid.fontSize+"px"});
-		kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
+		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
 	};
@@ -165,15 +165,15 @@
 			kipid.lineHeight10=25;
 		}
 		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toString()});
-		kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
+		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
 	};
 	$(window).on("resize.deviceInfo", function(){
 		if(window.innerWidth!==kipid.browserWidth){
 			kipid.browserWidth=window.innerWidth;
-			kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
-			kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
+			// kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
+			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 			kipid.deviceInfo.html("Mode:"+kipid.mode+"; Font:"+kipid.fontFamily+"; font-size:"+kipid.fontSize+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)+"; width:"+kipid.browserWidth);
 		}
 	});
