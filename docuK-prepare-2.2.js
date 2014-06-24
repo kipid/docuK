@@ -174,11 +174,11 @@
 			kipid.browserWidth=window.innerWidth;
 			// kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
 			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
-			kipid.deviceInfo.html("Mode:"+kipid.mode+"; "
-				+"Font:"+kipid.fontFamily+"; "
-				+"font-size:"+kipid.fontSize+"; "
-				+"line-height:"+(kipid.lineHeight10/10).toFixed(1)+";<br>"
-				+"width: "+kipid.browserWidth
+			kipid.deviceInfo.html("Mode:"+kipid.mode
+				+"; Font:"+kipid.fontFamily
+				+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)
+				+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)
+				+";<br>width: "+kipid.browserWidth
 				+", height: "+window.innerHeight);
 		}
 	});
@@ -263,4 +263,197 @@
 		}
 	};
 	$(window).on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+	
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	// docuK Process
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
+		////////////////////////////////////////////////////
+		// Possible duplicate id is handled.
+		////////////////////////////////////////////////////
+		docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
+		kipid.logPrint("<br><br>docuK-"+docuKI+" scripts started!<br><span class='emph'>If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>");
+		var docuK=kipid.docuK.eq(docuKI);
+		if (docuK.is(".rendered")){
+			kipid.logPrint("<br><br>docuK-"+docuKI+" is already rendered.");
+			return;
+		}
+		
+		var postId="-in-docuK"+docuKI;
+		var postIdRegEx=new RegExp(postId+"$");
+		if (docuK.is(".noDIdHandle")){
+			postId="";
+		} else{
+			docuK.find("[id]").each(function(){
+				var $this=$(this);
+				$this[0].id+=postId;
+			});
+		}
+		
+		////////////////////////////////////////////////////
+		// Style change widget.
+		////////////////////////////////////////////////////
+		var fontSizeAndLineHeight=(docuKI===1)?
+			'<form><button type="button" onclick="kipid.CfontSize(-1)" style="font-size:1em">A</button>'
+			+'<button type="button" onclick="kipid.CfontSize(1)" style="font-size:1.4em">A</button></form> '
+			+'<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1.3em">=</button>'
+			+'<button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.3em">〓</button></form> '
+			:"";
+		docuK.prepend(
+			'<div class="change-docuK-style">'
+			+'<form><input id="button'+docuKI+'-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>'
+			+'</input><input id="button'+docuKI+'-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form> '
+			+'<form><input class="emph" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
+			+fontSizeAndLineHeight
+			+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
+			+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
+			+'<div class="deviceInfo"></div></div>'
+		);
+		
+		////////////////////////////////////////////////////
+		// Scrollable switching of 'pre.prettyprint'.
+		////////////////////////////////////////////////////
+		docuK.find("pre.prettyprint").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
+		kipid.logPrint("<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.");
+		
+		////////////////////////////////////////////////////
+		// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
+		////////////////////////////////////////////////////
+		var secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
+		var secI, secIH2, subsecJH3, subsubsecKH4;
+		var secN=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
+		var eqqs, eqN="", eqC="", figs;
+		function fTocHtml(numbering){
+			var secN=(numbering===undefined||numbering)?"secN":"none";
+			return "<h"+hN+">"
+			+"<a class='jump' id='toc"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
+				+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
+				+txt
+			+"</a></h"+hN+">";
+		}
+		function fSecHtml(numbering){
+			var secN="none", endA0="", endA1="</a>";
+			if (numbering===undefined||numbering){
+				secN="secN"; endA0="</a>"; endA1="";
+			}
+			return "<a class='jump tJump' href='#toc"+docuKI+"-"+secId+"'>T</a>"
+			+"<a class='jump' id='secId"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
+				+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
+			+endA0+txt+endA1;
+		}
+		function fEqqHtml(){
+			return '<div class="eqCC">'
+				+'<div class="eqN"><span class="number">('+eqN+')</span></div>'
+				+'<div class="eqC">'+eqC+'</div>'
+			+'</div>';
+		}
+		for (var i=0;i<secs.length;i++){
+			secI=secs.eq(i);
+			secIH2=secI.find("h2:first-child");
+			if (secIH2.exists() && !secIH2.is(".notSec")){ // exclude ".sec>h1" and ".sec>h2.notSec" in ToC
+				hN="2"; txt=secIH2.html();
+				if (secIH2.is(".no-sec-N")){
+					secPreTxt=secId=secITxt=(secIH2.is("[id]"))?secIH2.attr('id').replace(/^sec-/i,'').replace(postIdRegEx,''):"secPreTxt"+docuKI+"-"+i;
+					tocHtml+=fTocHtml(false);
+					secIH2.html(fSecHtml(false));
+				} else {
+					secN++;
+					secPreTxt=secId=secITxt=secN.toString();
+					tocHtml+=fTocHtml();
+					secIH2.html(fSecHtml());
+				}
+				
+				if (!secI.is(".noToggleUI")){
+					secContentsId="sec"+docuKI+"-"+secITxt+"-contents";
+					secI.append("<div class=\"cBoth\"></div><div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
+					secI.contents().slice(1).wrapAll("<div class=\"sec-contents\" id=\""+secContentsId+"\"></div>");
+					secIH2.after("<div class=\"ShowHide\" onclick=\"kipid.ShowHide(this)\">▼ Show/Hide</div>");
+					secI.append("<div class=\"cBoth\"></div>");
+				}
+				
+				subsecs=secI.find(".subsec"); subsecI=0;
+				for (var j=0;j<subsecs.length;j++){
+					subsecJH3=subsecs.eq(j).find("h3:first-child");
+					hN="3"; subsecI++; secId=secITxt+"-"+subsecI; secPreTxt=secITxt+"."+subsecI; txt=subsecJH3.html();
+					tocHtml+=fTocHtml();
+					subsecJH3.html(fSecHtml());
+					
+					subsubsecs=subsecs.eq(j).find(".subsubsec"); subsubsecI=0;
+					for (var k=0;k<subsubsecs.length;k++){
+						subsubsecKH4=subsubsecs.eq(k).find("h4:first-child");
+						hN="4"; subsubsecI++; secId=secITxt+"-"+subsecI+"-"+subsubsecI; secPreTxt=secITxt+"."+subsecI+"."+subsubsecI; txt=subsubsecKH4.html();
+						tocHtml+=fTocHtml();
+						subsubsecKH4.html(fSecHtml());
+					}
+				}
+			} else {
+				secITxt="x";
+			}
+			eqqs=secI.find("eqq");
+			for(j=0;j<eqqs.length;j++){
+				eqN=secITxt+"-"+(j+1).toString();
+				eqC=eqqs.eq(j).html().trim();
+				eqqs.eq(j).html(fEqqHtml());
+			}
+			figs=secI.find("figure");
+			for(j=0;j<figs.length;j++){
+				figN=secITxt+"-"+(j+1).toString();
+				figs.eq(j).find(".caption").html(function(ith,orgTxt){return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
+			}
+		}
+		secs.find(".toc").html(tocHtml);
+		kipid.logPrint("<br><br>Table of Contents is created.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.");
+
+		////////////////////////////////////////////////////
+		// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
+		// Make 'refer' tags bubble-refer equations (eqq tag) or figures (figure tag). Any tag with id can be bubble-refered with refer tag.
+		////////////////////////////////////////////////////
+		function pad(str, max){
+			str=str.toString();
+			return str.length<max?pad("0"+str,max):str;
+		}
+		var refN="", preRefHtml="", refHtml="", citeN="";
+		function fCiteHtml(){
+			var str='<div class="inRef" onmouseover="kipid.ShowBR(\'bRef'+docuKI+'-'+citeN+'\')" onmouseout="kipid.timerHideBR(\'bRef'+docuKI+'-'+citeN+'\')">'
+				+refN
+				+'<div id="bRef'+docuKI+'-'+citeN+'" class="bubbleRef">'
+					+'<div class="content">'+preRefHtml+refHtml+'</div>'
+					+'<div class="arrow"></div>'
+					+'<div class="exit" onclick="kipid.HideBR(\'bRef'+docuKI+'-'+citeN+'\')"><svg>'
+						+'<g style="stroke:white;stroke-width:23%">'
+							+'<line x1="20%" y1="20%" x2="80%" y2="80%"/>'
+							+'<line x1="80%" y1="20%" x2="20%" y2="80%"/>'
+						+'</g>'
+						+'✖'
+					+'</svg></div>'
+				+'</div></div>';
+			if (kipid.browserWidth<321){
+				str=str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
+			}
+			return str;
+		}
+		var refs=docuK.find("ol.refs>li")
+		for(i=0;i<refs.length;i++){ // ref [i+1] with id
+			refs.eq(i).prepend("<span class='number none'>["+pad(i+1,2)+"]</span>");
+		}
+		var refers=docuK.find("cite,refer"), referI, refered;
+		refers.html('<span class="emph">( No refer. )</span>');
+		for(i=0;i<refers.length;i++){
+			referI=refers.eq(i);
+			if (referI.is("[class]")){
+				refered=docuK.find("#"+referI.attr("class")+postId);
+				if (refered.exists()){
+					citeN=(i+1).toString()+"-"+referI.attr("class")+postId;
+					refHtml=refered.html().trim().replace(/\bid\s*=/gi,'psudoId=');
+					refN=refered.find(".number").html();
+					referI.html(fCiteHtml());
+				}
+			}
+		}
+		kipid.logPrint("<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.");
+		
+		docuK.addClass("rendered");
+	};
 })(window.kipid=window.kipid||{}, jQuery);
