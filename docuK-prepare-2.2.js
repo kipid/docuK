@@ -116,8 +116,8 @@
 	////////////////////////////////////////////////////
 	// Changing Styles of docuK
 	////////////////////////////////////////////////////
-	kipid.TFontSize=docuK.find(".TFontSize");
-	kipid.TLineHeight=docuK.find(".TLineHeight");
+	// kipid.TFontSize=docuK.find(".TFontSize");
+	// kipid.TLineHeight=docuK.find(".TLineHeight");
 	kipid.deviceInfo=docuK.find(".deviceInfo");
 	
 	kipid.fontSize=parseInt(docuK.css('font-size'));
@@ -174,7 +174,12 @@
 			kipid.browserWidth=window.innerWidth;
 			// kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
 			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
-			kipid.deviceInfo.html("Mode:"+kipid.mode+"; Font:"+kipid.fontFamily+"; font-size:"+kipid.fontSize+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)+"; width:"+kipid.browserWidth);
+			kipid.deviceInfo.html("Mode:"+kipid.mode+"; "
+				+"Font:"+kipid.fontFamily+"; "
+				+"font-size:"+kipid.fontSize+"; "
+				+"line-height:"+(kipid.lineHeight10/10).toFixed(1)+";<br>"
+				+"width: "+kipid.browserWidth
+				+", height: "+window.innerHeight);
 		}
 	});
 	
