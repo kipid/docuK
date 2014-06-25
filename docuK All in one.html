@@ -13,10 +13,10 @@
 
 <codeprint id="docuK-docu">
 <div class="docuK">
-<!-- docuK format lastly updated at 2014-06-20. -->
+<!-- docuK format lastly updated at 2014-06-25. -->
 
 <meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
-<div class="sec"><h1>HTML docuK format ver. 2.1 (2014-06-20)</h1>
+<div class="sec"><h1>HTML docuK format ver. 2.2 (2014-06-25)</h1>
 	<div class="p">
 		개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 'document designed by kipid'란 뜻.
 	</div>
@@ -25,6 +25,11 @@
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-UH">Update History</h2>
 	<ul>
+		<li>2014-06-25: Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
+		<li>2014-06-25: 단축키 설정: F,D,L, (T to the TOC는 안했음. 만들까??)</li>
+		<li>2014-06-25: MathJax CDN is changed from "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js" to "https://cdn.mathjax.org/mathjax/latest/MathJax.js".</li>
+		<li>2014-06-25: 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
+		<li>2014-06-25: duplicate id handling, and "noDIdHandle" class</li>
 		<li>2014-06-21: element가 아닌 text가 sec 바깥으로 빠져나오는거 해결.</li>
 		<li>2014-06-16: change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle (no duplicate id handling) 겁시다. (자동으로도 처리 됨.)</li>
 		<li>2014-06-12: bubble ref arrow is centered.</li>
@@ -41,12 +46,9 @@
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-FE">앞으로 생각하고 있는 것들</h2>
 	<div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
 	<ul>
-		<li>Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
-		<li>Working on: 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
-		<li>Working on: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.) 아이디 헨들.</li>
+		<li>Working on: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.)</li>
 		<li>Working on: 갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
 		
-		<li>단축키 설정: f, r (forward section, reverse|backward|go back section), t (to the TOC)</li>
 		<li>eqq | figure numbering (sec-subsec-subsubsec-number). 지금은 (sec-number).</li>
 		
 		<li>bubbleRef 속 bubbleRef 구현? Chaining으로?</li>
@@ -778,96 +780,6 @@
 	</eqq>
 </div>
 
-<div class="sec hiden"><h2 class="no-sec-N" id="sec-TryIt">Try it yourself</h2>
-	<div class="p">
-		LaTeX Math 문법을 아시는 분들은 바로 테스트 해 보시길. 잘 모르시더라도 CodeCogs toolbar를 활용하시면 대부분의 수식을 작성하실 수 있으실거예요.
-	</div>
-	
-	<codeprint id="code-osTestIt">
-	<div class="subsec"><h3>CodeCogs</h3>
-		<style>
-		/* The default text style used on every page */
-		#hover {padding:2px; position:absolute; display:none; z-index:50; background-color:#FFFFCC; border:1px solid #999999}
-
-		#EqnEditor {margin:0 auto; text-align:center}
-		#EqnEditor .top {margin:0 auto; padding:2px 0}
-		#EqnEditor .bottom {border-bottom:1px solid #9a9a9a}
-		#EqnEditor .toolbar_wrapper {margin:0.3em auto}
-		#EqnEditor .toolbar {position:relative; padding-top:2px}
-		#EqnEditor .toolbar_space {height:38px; margin:0 auto}
-		#EqnEditor .panel {display:inline-block; padding:1px 3px; overflow:hidden; vertical-align:middle}
-		#toolbar_example {clear:left}
-
-		#intro {position:absolute; left:30px; color:#FF6600; font-size:16px}
-
-		.panel select {border:1px solid #8FB6BD; font-size:0.9em}
-
-		/* ------- Button formating ------ */
-		.bluebutton, .lightbluebutton, .greybutton {
-			border-style: solid;
-			border-width:1px;
-			border-top-color: #D9DFEA;
-			border-left-color: #D9DFEA;
-			border-bottom-color: #0e1f5b;
-			border-right-color: #0e1f5b;
-			color: #FFFFFF;
-			font-size: 0.9em;
-			/*font-family: "lucida grande", tahoma, verdana, arial, sans-serif; */
-			text-align: center; 
-			cursor:pointer;
-			/*cursor:hand;*/
-			padding:0.1em 0.4em;
-			margin:0;
-		}
-
-		.lightbluebutton {background-color:#4068AE}
-		.bluebutton {background-color:#003794}
-		.greybutton {background-color:#888888}
-		</style>
-		<!-- <link rel="stylesheet" media="all" type="text/css" href="http://latex.codecogs.com/css/equation-embed.css"> -->
-		<script src="http://latex.codecogs.com/js/eq_config.js"></script>
-		<script src="http://latex.codecogs.com/js/eq_editor-lite-17.js"></script>
-		<div class="p center" style="background:rgb(255,255,230); color:black; border:1px gray solid; padding:0.5em 0 1em; margin-bottom:1em">
-			<div id="codecogs-toolbar"></div>
-			<textarea id="codecogs-latexInput" style="max-width:98%; font:inherit; width:35em; height:5em; margin-bottom:1em">\alpha\beta\gamma\omega</textarea><br>
-			Math image:<br>
-			<img id="codecogs-equation-output" src="http://latex.codecogs.com/gif.latex?%5Cdpi%7B150%7D%20%5Calpha%5Cbeta%5Cgamma%5Comega" style="margin-top:1em" />
-		</div>
-		<script>
-		EqEditor.embed('codecogs-toolbar',"kipid1at2hanmail3dot4net51029385");
-		EqEditor.add(new EqTextArea('codecogs-equation-output', 'codecogs-latexInput'),false);
-		</script>
-	</div>
-	
-	<div class="subsec"><h3>MathJax</h3>
-		<div class="p center">
-			<span>Type LaTeX Math:</span><br>
-			<textarea id="mathJax-LatexInput" onchange="kipid.UpdateMath(this.value)" onkeypress="kipid.UpdateMath(this.value)" style="max-width:98%; font:inherit; width:35em; height:5em; margin-bottom:1em">\alpha\beta\gamma\omega</textarea><br>
-			<span>Math rendered by MathJax:</span>
-			<div id="mathJax-LatexOutput">\[ \alpha\beta\gamma\omega \]</div>
-		</div>
-		<script>
-		(function (kipid, $, undefined) {
-			$(window).ready(function(){
-				kipid.mathElem=$("#mathJax-LatexOutput");
-				kipid.UpdateMath = function (TeX) {
-					kipid.mathElem.html("\\[ "+TeX+" \\]");
-					var elem=kipid.mathElem[0];
-					MathJax.Hub.Queue(["Typeset", MathJax.Hub, elem]);
-					// MathJax.Hub.Queue(["Process", MathJax.Hub, elem]);
-				};
-			});
-		})(window.kipid=window.kipid||{}, jQuery);
-		</script>
-	</div>
-	</codeprint>
-	
-	<div class="subsec"><h3>Opening Source</h3>
-		<div class="p">위에 구현해놓은 것들 html code 입니다. 고칠 부분이 보이면 알려주시고, 더 향상시켜서 (디자인/성능/기능 등) 다시 알려주시면 제가 좋아라 할듯.</div>
-		<pre id="pre-code-osTestIt" class="prettyprint linenums lang-html scrollable"></pre>
-	</div>
-</div>
-
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
 	<ol class="refs">
 		<div class="subsec"><h3>Math Renderer</h3></div>
@@ -930,7 +842,7 @@ MathJax.Hub.Config({
 	}
 });
 </script>
-<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
 <!-- <script src="docuK-postProcess-2.2.js"></script> -->
 <!-- From kipid.tistory CDN -->
 <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>

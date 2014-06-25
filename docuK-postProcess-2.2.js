@@ -4,7 +4,8 @@
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 (function(kipid, $, undefined){
-	var docuK=kipid.docuK=$(".docuK");
+	var docuK=$(".docuK");
+	kipid.docuK=docuK;
 	
 	////////////////////////////////////////////////////
 	// Showing disableQ0 only in width>321.
@@ -46,9 +47,13 @@
 		kipid.docuKProcess(kipid, jQuery, i);
 	}
 	
-	kipid.TFontSize=docuK.find(".TFontSize");
-	kipid.TLineHeight=docuK.find(".TLineHeight");
+	// kipid.TFontSize=docuK.find(".TFontSize");
+	// kipid.TLineHeight=docuK.find(".TLineHeight");
 	kipid.deviceInfo=docuK.find(".deviceInfo");
+	kipid.fontSize=parseInt(docuK.css('font-size'));
+	kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
+	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
+	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 	
 	kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
 	
@@ -77,8 +82,31 @@
 		docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 		
 		////////////////////////////////////////////////////
-		// Printing Styles
+		// Setting and Printing Styles
 		////////////////////////////////////////////////////
+		var cookieItem;
+		kipid.logPrint("<br>");
+		cookieItem=kipid.docCookies.getItem("kipidMode");
+		if (cookieItem!==null){
+			kipid.Cmode(cookieItem);
+			kipid.logPrint("<br>Mode "+cookieItem+" is set from cookie.");
+		}
+		cookieItem=kipid.docCookies.getItem("kipidFontFamily");
+		if (cookieItem!==null){
+			kipid.CfontFamily(cookieItem);
+			kipid.logPrint("<br>Font "+cookieItem+" is set from cookie.");
+		}
+		cookieItem=kipid.docCookies.getItem("kipidFontSize");
+		if (cookieItem!==null){
+			kipid.CfontSize(parseInt(cookieItem)-kipid.fontSize);
+			kipid.logPrint("<br>Font-size "+(parseInt(cookieItem)*1.8).toFixed(1)+" is set from cookie.");
+		}
+		cookieItem=kipid.docCookies.getItem("kipidLineHeight10");
+		if (cookieItem!==null){
+			kipid.ClineHeight(parseInt(cookieItem)-kipid.lineHeight10);
+			kipid.logPrint("<br>Line-height "+(parseInt(cookieItem)/10).toFixed(1)+" is set from cookie.");
+		}
+		
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
 		// kipid.deviceInfo.html("browser width: "+kipid.browserWidth);
@@ -118,7 +146,8 @@
 		////////////////////////////////////////////////////
 		// ShortKeys (including default 'processShortcut(event)' of tistory.)
 		////////////////////////////////////////////////////
-		kipid.hLists=$("#content .titleWrap>h2,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4");
+		kipid.hLists=$("#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4");
+		kipid.tocs=$(".docuK>.sec").has(".toc");
 		kipid.processShortKey=function(event){
 			if (event.altKey||event.ctrlKey||event.metaKey) return;
 			switch (event.target.nodeName) {
@@ -128,8 +157,7 @@
 				case 70: //F = 70
 				case 68: //D = 68
 					var scrollTop=$(window).scrollTop();
-					var i=0, k=kipid.hLists.length;
-					var location;
+					var i, k=kipid.hLists.length;
 					var hI;
 					
 					if (event.keyCode===70){
@@ -157,6 +185,20 @@
 					}
 					$(window).scrollTop(hI.offset().top);
 					break;
+				case 84: //T = 84
+					var scrollTop=$(window).scrollTop();
+					var i, k=kipid.tocs.length;
+					var tocI;
+					scrollTop-=10;
+					for (i=k-1;i>=0;i--){
+						tocI=kipid.tocs.eq(i);
+						if (tocI.is(":visible")&&scrollTop>tocI.offset().top){ break; }
+					}
+					if (i===-1){
+						tocI=kipid.tocs.eq(k-1);
+					}
+					$(window).scrollTop(tocI.offset().top);
+					break;
 				case 76: //L = 76
 					window.location = "/category/0"
 					break;
@@ -177,8 +219,9 @@
 		var shortkeyDesc=$("#shortkey>ul");
 		if (shortkeyDesc.exists()){
 			shortkeyDesc.prepend(
-				"<li>D: Previous Section</li>"
+				"<li>T: Table of Contents</li>"
 				+"<li>F: Forward Section</li>"
+				+"<li>D: Previous Section</li>"
 				+"<li>L: To the [Lists]</li>"
 			);
 		}

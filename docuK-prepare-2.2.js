@@ -6,7 +6,8 @@
 (function(kipid, $, undefined){
 	$.fn.exists=function(){ return this.length!==0; };
 	kipid.browserWidth=window.innerWidth;
-	var docuK=kipid.docuK=$(".docuK");
+	var docuK=$(".docuK");
+	kipid.docuK=docuK;
 	
 	////////////////////////////////////////////////////
 	// logPrint function.
@@ -17,6 +18,62 @@
 		kipid.log.scrollTop(kipid.log[0].scrollHeight);
 	};
 	kipid.logPrint("kipid.logPrint is working!");
+	
+	/*  :: cookies.js ::
+	|*|
+	|*|  A complete cookies reader/writer framework with full unicode support.
+	|*|
+	|*|  https://developer.mozilla.org/en-US/docs/DOM/document.cookie
+	|*|
+	|*|  This framework is released under the GNU Public License, version 3 or later.
+	|*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+	|*|
+	|*|  Syntaxes:
+	|*|
+	|*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+	|*|  * docCookies.getItem(name)
+	|*|  * docCookies.removeItem(name[, path], domain)
+	|*|  * docCookies.hasItem(name)
+	|*|  * docCookies.keys()
+	*/
+	kipid.expire=365*24*60*60; // max-age in seconds.
+	kipid.docCookies={
+	  getItem: function (sKey) {
+	    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+	  },
+	  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+	    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+	    var sExpires = "";
+	    if (vEnd) {
+	      switch (vEnd.constructor) {
+	        case Number:
+	          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+	          break;
+	        case String:
+	          sExpires = "; expires=" + vEnd;
+	          break;
+	        case Date:
+	          sExpires = "; expires=" + vEnd.toUTCString();
+	          break;
+	      }
+	    }
+	    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+	    return true;
+	  },
+	  removeItem: function (sKey, sPath, sDomain) {
+	    if (!sKey || !this.hasItem(sKey)) { return false; }
+	    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+	    return true;
+	  },
+	  hasItem: function (sKey) {
+	    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+	  },
+	  keys: /* optional method: you can safely remove it! */ function () {
+	    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+	    for (var nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+	    return aKeys;
+	  }
+	};
 	
 	////////////////////////////////////////////////////
 	// Functions for printing codes into 'pre.prettyprint'.
@@ -101,16 +158,16 @@
 	////////////////////////////////////////////////////
 	// bubbleRef's show/hide functions
 	////////////////////////////////////////////////////
-	kipid.ShowBR=function(divId){
+	kipid.ShowBR=function(elem){
 		clearTimeout(kipid.timerHideBRQueue);
 		kipid.bubbleRefs.hide();
-		$("#"+divId).show();
+		$(elem).find(".bubbleRef").show();
 	};
-	kipid.timerHideBR=function(divId){
-		kipid.timerHideBRQueue=setTimeout(function(){$("#"+divId).hide();}, 1000);
+	kipid.timerHideBR=function(elem){
+		kipid.timerHideBRQueue=setTimeout(function(){$(elem).find(".bubbleRef").hide();}, 1000);
 	};
-	kipid.HideBR=function(divId){
-		$("#"+divId).hide();
+	kipid.HideBR=function(elem){
+		$(elem).parent().hide();
 	};
 	
 	////////////////////////////////////////////////////
@@ -119,60 +176,69 @@
 	// kipid.TFontSize=docuK.find(".TFontSize");
 	// kipid.TLineHeight=docuK.find(".TLineHeight");
 	kipid.deviceInfo=docuK.find(".deviceInfo");
-	
 	kipid.fontSize=parseInt(docuK.css('font-size'));
 	kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
-	kipid.fontFamily=docuK.css('font-family').split(/\s*,\s*/)[0];
+	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 	
 	kipid.Cmode=function(modeI){
-		if (modeI==kipid.mode){
-			return;
-		} else if (modeI=="Dark"){
+		if (modeI=="Dark"){
 			kipid.docuK.removeClass("bright");
 		} else if (modeI=="Bright"){
 			kipid.docuK.addClass("bright");
 		} else{
-			return;
+			return false;
 		}
 		kipid.mode=modeI;
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
+		kipid.docCookies.setItem("kipidMode",kipid.mode,kipid.expire);
+		return true;
 	};
 	kipid.CfontFamily=function(font){
 		kipid.docuK.css({fontFamily:font});
 		kipid.fontFamily=font;
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
+		kipid.docCookies.setItem("kipidFontFamily",kipid.fontFamily,kipid.expire);
+		return true;
 	};
 	kipid.CfontSize=function(increment){
 		kipid.fontSize+=increment;
 		if (kipid.fontSize<7) {
 			kipid.fontSize=7;
+			return false;
 		} else if (kipid.fontSize>20) {
 			kipid.fontSize=20;
+			return false;
 		}
 		kipid.docuK.css({"font-size":kipid.fontSize+"px"});
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
+		kipid.docCookies.setItem("kipidFontSize",kipid.fontSize,kipid.expire);
+		return true;
 	};
 	kipid.ClineHeight=function(increment){
 		kipid.lineHeight10+=increment;
 		if (kipid.lineHeight10<10) {
 			kipid.lineHeight10=10;
+			return false;
 		} else if (kipid.lineHeight10>25) {
 			kipid.lineHeight10=25;
+			return false;
 		}
 		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toString()});
 		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
+		kipid.docCookies.setItem("kipidLineHeight10",kipid.lineHeight10,kipid.expire);
+		return true;
 	};
 	$(window).on("resize.deviceInfo", function(){
 		if(window.innerWidth!==kipid.browserWidth){
 			kipid.browserWidth=window.innerWidth;
-			// kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
+			kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
 			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 			kipid.deviceInfo.html("Mode:"+kipid.mode
 				+"; Font:"+kipid.fontFamily
@@ -404,7 +470,7 @@
 			}
 		}
 		secs.find(".toc").html(tocHtml);
-		kipid.logPrint("<br><br>Table of Contents is created.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.");
+		kipid.logPrint("<br><br>Table of Contents is filled out.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.");
 
 		////////////////////////////////////////////////////
 		// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
@@ -416,12 +482,12 @@
 		}
 		var refN="", preRefHtml="", refHtml="", citeN="";
 		function fCiteHtml(){
-			var str='<div class="inRef" onmouseover="kipid.ShowBR(\'bRef'+docuKI+'-'+citeN+'\')" onmouseout="kipid.timerHideBR(\'bRef'+docuKI+'-'+citeN+'\')">'
+			var str='<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">'
 				+refN
-				+'<div id="bRef'+docuKI+'-'+citeN+'" class="bubbleRef">'
+				+'<div class="bubbleRef">'
 					+'<div class="content">'+preRefHtml+refHtml+'</div>'
 					+'<div class="arrow"></div>'
-					+'<div class="exit" onclick="kipid.HideBR(\'bRef'+docuKI+'-'+citeN+'\')"><svg>'
+					+'<div class="exit" onclick="kipid.HideBR(this)"><svg>'
 						+'<g style="stroke:white;stroke-width:23%">'
 							+'<line x1="20%" y1="20%" x2="80%" y2="80%"/>'
 							+'<line x1="80%" y1="20%" x2="20%" y2="80%"/>'
