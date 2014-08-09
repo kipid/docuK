@@ -161,10 +161,10 @@
 	kipid.ShowBR=function(elem){
 		clearTimeout(kipid.timerHideBRQueue);
 		kipid.bubbleRefs.hide();
-		$(elem).find(".bubbleRef").show();
+		$(elem).find(">.bubbleRef").show();
 	};
 	kipid.timerHideBR=function(elem){
-		kipid.timerHideBRQueue=setTimeout(function(){$(elem).find(".bubbleRef").hide();}, 1000);
+		kipid.timerHideBRQueue=setTimeout(function(){$(elem).find(">.bubbleRef").hide();}, 1000);
 	};
 	kipid.HideBR=function(elem){
 		$(elem).parent().hide();
@@ -381,7 +381,7 @@
 		////////////////////////////////////////////////////
 		// Scrollable switching of 'pre.prettyprint'.
 		////////////////////////////////////////////////////
-		docuK.find("pre.prettyprint").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
+		docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
 		kipid.logPrint("<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.");
 		
 		////////////////////////////////////////////////////
