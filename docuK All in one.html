@@ -46,8 +46,16 @@
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-FE">앞으로 생각하고 있는 것들</h2>
 	<div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
 	<ul>
-		<li>Working on: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.)</li>
-		<li>Working on: 갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
+		<li>2014-08-07: AJAX test 하면서는 뭔가 이상하게 굴러가네. prepare.js가 먼저 실행되는게 아니고, 먼저 다운받은 js가 먼저 실행되나? postProcess.js에서 error남. MathJax가 아직 없다는 error도 뜨고, kipid.logPrint 같은게 아직 없다는 error도 뜨고.</li>
+		<li>2014-08-07: kipid.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯.</li>
+		<li>2014-08-07: Dual view 구현? 버튼 누르면, Fill browser 되고 (최상위 div를 만들어서(?) fixed, z-index:1000, 같은걸로 채우고) rendered 된 docuK를 복사해서 오른편에 붙이기?</li>
+		
+		<li>2014-08-07: This document is rendered by &lt;a href=""&gt;docuK&lt;/a&gt;. 같은 문구를 넣는게 좋을듯? 다른 사람들도 찾아서 쓸 수 있도록? Github 링크나 내 블로그 링크? 제일 위랑 아래에 삽입?</li>
+		
+		<li>Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
+		
+		<li>minor: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.)</li>
+		<li>minor: 갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
 		
 		<li>eqq | figure numbering (sec-subsec-subsubsec-number). 지금은 (sec-number).</li>
 		
