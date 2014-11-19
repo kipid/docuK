@@ -1,9 +1,10 @@
 @charset:"utf-8";
 /* document kipid */
 body {margin:0; padding:0}
-.docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:0.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-all}
+codeprint.SEE {display:none}
+.docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-all}
 .docuK ::selection, .docuK ::-moz-selection {background:#a00; color:white}
-.docuK div {box-sizing:border-box; -moz-box-sizing:border-box; max-width:100%}
+.docuK div, textarea {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
 .docuK data {display:none}
 
 .docuK ::-webkit-scrollbar {width:3px; height:3px}
@@ -11,23 +12,23 @@ body {margin:0; padding:0}
 .docuK ::-webkit-scrollbar-thumb {-webkit-border-radius:5px; border-radius:5px; background:rgb(0,120,120); -webkit-box-shadow:inset 0 0 3px rgb(0,0,0)}
 .docuK ::-webkit-scrollbar-corner {background:transparent}
 
-.docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:0.5em; margin:0.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
-.docuK .ShowHide {float:right; padding:0.3em 0; cursor:pointer}
-.docuK .Hide {float:right; padding:0 0 0.3em; clear:both; cursor:pointer}
-.docuK .sec-contents, .docuK>.sec.noToggleUI>h2+* {clear:both; margin-top:0.6em; padding-top:0}
+.docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
+.docuK .ShowHide {float:right; padding:.3em 0; cursor:pointer}
+.docuK .Hide {float:right; padding:0 0 .3em; clear:both; cursor:pointer}
+.docuK .sec-contents, .docuK>.sec.noToggleUI>h2+* {clear:both; margin-top:.6em; padding-top:0}
 /*.docuK>.sec.hiden>.sec-contents {display:none}*/
-.docuK .subsec, .docuK .subsubsec {margin:0.3em 0}
-.docuK .secN {margin-right:0.5em}
+.docuK .subsec, .docuK .subsubsec {margin:.3em 0}
+.docuK .secN {margin-right:.5em}
 .docuK h1, .docuK h2, .docuK h3, .docuK h4 {margin:0}
-.docuK h3 {margin-left:0.5em}
+.docuK h3 {margin-left:.5em}
 .docuK h4 {margin-left:1em}
-.docuK>.sec>.toc {font-size:0.8em} .docuK>.sec>.toc>h2 {margin-left:0; margin-top:0.5em} .docuK>.sec>.toc>h3 {margin-left:1em} .docuK>.sec>.toc>h4 {margin-left:2em}
-.docuK>.sec>.toc h2, .docuK>.sec>.toc h3, .docuK>.sec>.toc h4 {padding:0.2em 0}
-.docuK h1 {font-weight:bold; font-size:1.4em; padding:0.3em 0.3em 0.6em}
+.docuK>.sec>.toc {font-size:.8em} .docuK>.sec>.toc>h2 {margin-left:0; margin-top:.5em} .docuK>.sec>.toc>h3 {margin-left:1em} .docuK>.sec>.toc>h4 {margin-left:2em}
+.docuK>.sec>.toc h2, .docuK>.sec>.toc h3, .docuK>.sec>.toc h4 {padding:.2em 0}
+.docuK h1 {font-weight:bold; font-size:1.4em; padding:.3em .3em .6em}
 .docuK h2 {font-weight:bold; font-size:1.3em} .docuK .sec>h2 {display:inline}
 .docuK h3 {font-weight:bold; font-size:1.2em}
 .docuK h4 {font-weight:bold; font-size:1.2em}
-.docuK h2, .docuK h3, .docuK h4 {padding:0.4em 0.3em 0.6em}
+.docuK h2, .docuK h3, .docuK h4 {padding:.4em .3em .6em}
 
 .docuK a {text-decoration:none}
 .docuK a:link {color:rgb(200,200,255)}
@@ -50,11 +51,11 @@ body {margin:0; padding:0}
 .docuK.bright a.jump:hover {color:rgb(50,105,0)}
 .docuK.bright span.nolink {color:rgb(150,150,0)}
 
-.docuK a.tJump {display:inline-block; font-size:0.6em; margin:0 1em 0 -0.5em; vertical-align:middle; padding:0 0.26em; border:2px solid rgb(50,50,122); font-weight:bold}
+.docuK a.tJump {display:inline-block; font-size:.6em; margin:0 1em 0 -.5em; vertical-align:middle; padding:0 .26em; border:2px solid rgb(50,50,122); font-weight:bold}
 .docuK.bright a.tJump {text-decoration:none}
 
-.docuK .p {padding-bottom:1em; text-indent:0.5em}
-.docuK .ex {border:0.2em solid gray; padding:0 0.5em 0.5em; margin:0.5em auto}
+.docuK .p {padding-bottom:1em; text-indent:.5em}
+.docuK .ex {border:.2em solid gray; padding:0 .5em .5em; margin:.5em auto}
 .docuK cite, .docuK refer {font:inherit; font-size:1em; text-indent:0}
 .docuK div.borderByBackground {display:inline-block; padding:10px; background:white}
 .docuK .cBoth {clear:both}
@@ -71,10 +72,10 @@ body {margin:0; padding:0}
 .docuK .rC>.rSC {box-sizing:content-box; -moz-box-sizing:content-box; position:relative; height:3em; padding-bottom:60%}
 .docuK .rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
 .docuK .rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
-.docuK .pc {text-align:center; font-size:0.6em} /* position change */
+.docuK .pc {text-align:center; font-size:.6em} /* position change */
 
 .docuK eqq {display:block; background:black} .docuK.bright eqq {background:white}
-.docuK .eqCC {text-align:center; padding:1px; margin:0.5em 0; background:inherit}
+.docuK .eqCC {text-align:center; padding:1px; margin:.5em 0; background:inherit}
 .docuK .eqN {float:right; padding-top:1em}
 .docuK eqq.no-N .eqN {display:none}
 .docuK .eqC {display:inline-block; padding:1px; max-width:none; background:inherit}
@@ -84,47 +85,48 @@ body {margin:0; padding:0}
 .docuK img {box-sizing:border-box; -moz-box-sizing:border-box; max-width:100%; border:none; width:auto; height:auto; vertical-align:middle}
 .docuK .fig>.image {}
 .docuK .fig>.image img {display:block; margin:0 auto}
-.docuK .fig>.caption {display:inline-block; padding:0 0.5em; text-align:justify; margin:0 auto; text-indent:0}
-.docuK .fig>.caption:first-child {padding-bottom:0.6em}
-.docuK .fig>.caption:last-child {padding-top:0.5em}
+.docuK .fig>.caption {display:inline-block; padding:0 .5em; text-align:justify; margin:0 auto; text-indent:0}
+.docuK .fig>.caption:first-child {padding-bottom:.6em}
+.docuK .fig>.caption:last-child {padding-top:.5em}
 
 /* References and links */
 .docuK .inRef {display:inline-block; border:1px gray solid}
 .docuK .bubbleRef {display:none}
-.docuK .bubbleRef>.content {z-index:100; position:absolute; font-size:1em; margin-top:0.9em; left:0.3em; right:0.3em; padding:1em; background:rgb(30,30,30)} .docuK.bright .bubbleRef>.content {background:rgb(200,200,200)}
-.docuK .bubbleRef>.arrow {z-index:100; position:absolute; width:0; height:0; border-color:transparent transparent rgb(30,30,30); border-style:solid; border-width:0.8em; margin-top:-0.6em} .docuK.bright .bubbleRef>.arrow {border-bottom-color:rgb(200,200,200)}
-.docuK .bubbleRef>.exit {z-index:100; position:absolute; display:inline-block; left:0.3em; width:1.8em; height:1.8em; text-align:center; margin-top:-0.5em; border-radius:0.4em; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white}
+.docuK .bubbleRef>.content {z-index:100; position:absolute; font-size:1em; margin-top:.9em; left:.3em; right:.3em; padding:1em; background:rgb(30,30,30)} .docuK.bright .bubbleRef>.content {background:rgb(200,200,200)}
+.docuK .bubbleRef>.arrow {z-index:100; position:absolute; width:0; height:0; border-color:transparent transparent rgb(30,30,30); border-style:solid; border-width:.8em; margin-top:-.6em} .docuK.bright .bubbleRef>.arrow {border-bottom-color:rgb(200,200,200)}
+.docuK .bubbleRef>.exit {z-index:100; position:absolute; display:inline-block; left:.3em; width:1.8em; height:1.8em; text-align:center; margin-top:-.5em; border-radius:.4em; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white}
 .docuK .bubbleRef>.exit>svg {width:100%; height:100%; font-size:1.8em; line-height:1.0}
 
-.docuK ol, .docuK ul {margin:0.5em 0; padding-left:2em} .docuK dl {margin:0.5em 0}
+.docuK ol, .docuK ul {margin:.5em 0; padding-left:2em} .docuK dl {margin:.5em 0}
 .docuK ol {list-style-type:decimal} .docuK ul {list-style-type:disc}
-.docuK li, .docuK dd {padding:0.3em 0}
+.docuK li, .docuK dd {padding:.3em 0}
 .docuK ol.refs {counter-reset:item; list-style-type:none; padding-left:2.4em}
 .docuK ol.refs>li {padding-bottom:1em}
-.docuK ol.refs>li:before {content:'[' counter(item, decimal-leading-zero) ']'; counter-increment:item; margin-left:-2em; margin-right:0.5em}
+.docuK ol.refs>li:before {content:'[' counter(item, decimal-leading-zero) ']'; counter-increment:item; margin-left:-2em; margin-right:.5em}
+.docuK ol.refs>li>.refN {display:none}
 .docuK ol.refs>.subsec {margin:1.5em 0 0 -2.1em}
 
-.docuK .cmt, .docuK .bcf {padding:0.5em; margin:0.5em 0 1em; background:rgb(15,15,15); color:white} .docuK.bright .cmt, .docuK.bright .bcf {background:rgb(200,200,200); color:black}
-.docuK .cmt {border-left:0.5em solid rgb(70,0,70)}
-.docuK .bcf {border-left:0.5em solid rgb(0,70,70)}
+.docuK .cmt, .docuK .bcf {padding:.5em; margin:.5em 0 1em; background:rgb(15,15,15); color:white} .docuK.bright .cmt, .docuK.bright .bcf {background:rgb(200,200,200); color:black}
+.docuK .cmt {border-left:.5em solid rgb(70,0,70)}
+.docuK .bcf {border-left:.5em solid rgb(0,70,70)}
 .docuK .cmt>.p:last-child, .docuK .bcf>.p:last-child {padding-bottom:0}
 
 /* Pretty printing styles. Used with prettify.js. */
 /* Vim sunburst theme by David Leibovic */
 .docuK pre, .docuK code {text-indent:0; overflow-wrap:break-word; word-wrap:break-word; white-space:pre-wrap; word-break:break-all}
-.docuK pre {font-family:inherit; font-size:0.9em; display:block; margin:0.5em 0; padding:0; max-height:none; overflow-y:scroll} .docuK pre.scrollable {max-height:600px}
-.docuK code {font-family:monospace; font-size:0.9em; display:inline; border:2px solid rgb(50,50,50); border-radius:0.2em; background:rgb(30,30,30)} .docuK.bright code {background:rgb(230,230,230)}
+.docuK pre {font-family:inherit; font-size:.9em; display:block; margin:.6em 0 1em; padding:.5em; max-height:none; overflow-y:scroll} .docuK pre.scrollable {max-height:600px}
+.docuK code {font-family:monospace; font-size:.9em; display:inline; border:2px solid rgb(50,50,50); border-radius:.2em; background:rgb(30,30,30)} .docuK.bright code {background:rgb(230,230,230)}
 .docuK pre.prettyprint, .docuK code.prettyprint {background-color:black} .docuK.bright pre.prettyprint, .docuK.bright code.prettyprint {background-color:rgb(70,70,70)}
 
 /* pre Container, Scrollable Switch (Explaination) */
-.docuK .preC {position:relative; margin:0.5em 0}
-.docuK .preC pre {margin:0}
-.docuK .preC .preSSE {font-size:0.75em; border-left:3.5em rgb(80,0,0) solid}
+.docuK .preC {position:relative; margin:.5em 0}
+.docuK .preC pre {margin:0; padding:0}
+.docuK .preC .preSSE {font-size:.75em; border-left:3.5em rgb(80,0,0) solid}
 .docuK .preC .preSS {position:absolute; left:0; top:0; bottom:0; width:2.6em; cursor:pointer}
 
 /* Specify class=linenums on a pre to get line numbering */
 .docuK pre ol.linenums {margin:0; color:#AEBEAE; padding-left:3em}
-.docuK pre.prettyprint li {padding:0.2em 0}
+.docuK pre.prettyprint li {padding:.2em 0}
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:none}
 /* Alternate shading for lines */
 .docuK pre li {background:inherit} .docuK.bright pre li {background:inherit}

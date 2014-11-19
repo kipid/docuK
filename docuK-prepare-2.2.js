@@ -19,6 +19,281 @@
 	};
 	kipid.logPrint("kipid.logPrint is working!");
 	
+	////////////////////////////////////////////////////
+	// String to Array
+	////////////////////////////////////////////////////
+	kipid.strToArray=function(str){
+		var ret=[];
+		var delimiter=/([^\t\n]*)([\t\n])/g;
+		var lastQuote=/[^"](?:"")*"([\t\n])/g;
+		var exec;
+		var start=0;
+		var row=-1, col=-1, delim="\n";
+		var strElem="";
+		function increseRC(str){
+			if (str==='\t'){
+				col++; return true;
+			} else if (str==='\n'){
+				row++; col=0; ret.push([]); return true;
+			} return false;
+		}
+		while (start<str.length&&increseRC(delim)){
+			if ((str.substring(start, start+1))==='"'){
+				lastQuote.lastIndex=start+1;
+				if ((exec=lastQuote.exec(str))!==null){
+					strElem=str.substring(start+1, lastQuote.lastIndex-2);
+					delim=exec[1];
+					start=delimiter.lastIndex=lastQuote.lastIndex;
+				} else{
+					strElem=str.substring(start+1);
+					delim="";
+					start=str.length;
+				}
+				strElem=strElem.replace(/""/g,'"');
+			} else{
+				if ((exec=delimiter.exec(str))!==null){
+					strElem=exec[1];
+					delim=exec[2];
+					start=delimiter.lastIndex;
+				} else{
+					strElem=str.substring(start);
+					delim="";
+					start=str.length;
+				}
+			}
+			ret[row][col]=strElem;
+		}
+		return ret;
+	};
+	kipid.strToJSON=function(str){
+		var ret=kipid.strToArray(str);
+		for (var i=1;i<ret.length;i++){
+			for (var j=0;j<ret[i].length;j++){
+				if (ret[0][j]!==undefined){
+					ret[i][ret[0][j]]=ret[i][j];
+				}
+			}
+		}
+		return ret;
+	};
+	kipid.arrayToTableHTML=function(txtArray){
+		var tableStr="<table><tbody>";
+		for(var row=0;row<txtArray.length;row++){
+			// console.log(txtArray[row]);
+			tableStr+="<tr>";
+			for(var col=0;col<txtArray[row].length;col++){
+				tableStr+="<td>"+kipid.escapeHTML(txtArray[row][col]).replace(/\n/g,'<br>')+"</td>";
+			}
+			tableStr+="</tr>";
+		}
+		tableStr+="</tbody></table>";
+		return tableStr;
+	};
+	
+	////////////////////////////////////////////////////
+	// SEE (Super Easy Edit).
+	////////////////////////////////////////////////////
+	kipid.SEEToArray=function(SEE){
+		SEE=SEE.trim();
+		var dE=/\s*\n\n+\s*/g; // split by double enter.
+		var start=end=0;
+		var re, subStr;
+		var ps=[];
+		while((re=dE.exec(SEE))!==null){
+			end=dE.lastIndex;
+			subStr=SEE.substring(start,end).trim();
+			if (/^<pre\s*[^>]*>/i.test(subStr)){
+				while(!/<\/pre>$/i.test(subStr)){
+					re=dE.exec(SEE);
+					end=dE.lastIndex;
+					subStr=SEE.substring(start,end).trim();
+				}
+			} else if (/^```/.test(subStr)){
+				while(!/```\/$/.test(subStr)){
+					re=dE.exec(SEE);
+					end=dE.lastIndex;
+					subStr=SEE.substring(start,end).trim();
+				}
+			} else if (/^<script\s*[^>]*>/i.test(subStr)){
+				while(!/<\/script>$/i.test(subStr)){
+					re=dE.exec(SEE);
+					end=dE.lastIndex;
+					subStr=SEE.substring(start,end).trim();
+				}
+			}
+			ps.push(subStr);
+			start=end;
+		}
+		subStr=SEE.substring(start).trim();
+		ps.push(subStr);
+		return ps;
+	};
+
+	kipid.renderToDocuK=function(toBeRendered){
+		var ps=kipid.SEEToArray(toBeRendered);
+		var p=ps.length;
+		
+		var TOC="Table of Contents";
+		var PH="Posting History";
+		var RRA="References and Related Articles";
+		
+		var untilEnter=/[^\n]+/g; // until enter.
+		var head, hN; // #*hN
+		var emmet=classes=elemId="";
+		
+		var docuOn=secOn=subsecOn=subsubsecOn=false;
+		var str='';
+		
+		function closeSec(hN){
+			if (hN===undefined){ hN=1; }
+			switch(hN){
+				case 1: if (docuOn){ str+='</div>'; docuOn=false; }
+				case 2: if (secOn){ str+='</div>'; secOn=false; }
+				case 3: if (subsecOn){ str+='</div>'; subsecOn=false; }
+				case 4: if (subsubsecOn){ str+='</div>'; subsubsecOn=false; }
+				default:
+			}
+		}
+		function getEmmetFromHead(trimedHead){
+			var res;
+			var emmet="";
+			var rexHeadEmmet=/^\[([\w\s#._-]+)\]/;
+			res=rexHeadEmmet.exec(trimedHead);
+			if (res!=null){ emmet=res[1]; }
+			return emmet;
+		}
+		function getClassesFromEmmet(str){
+			var res;
+			var classes="";
+			var rexClasses=/\.([\w-]+)/g;
+			while((res=rexClasses.exec(str))!=null){
+				classes+=res[1]+" ";
+			}
+			return classes.trim();
+		}
+		function getIdFromEmmet(str){
+			var res;
+			var elemId="";
+			var rexId=/#([\w-]+)/;
+			res=rexId.exec(str);
+			if (res!=null){ elemId=res[1]; }
+			return elemId;
+		}
+		
+		for (var i=0;i<p;i++){
+			ps[i]=ps[i].trim();
+			
+			if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null){
+				untilEnter.lastIndex=hN=hN[0].length;
+				closeSec(hN);
+				head=untilEnter.exec(ps[i]);
+				head=head[0].trim();
+				emmet=getEmmetFromHead(head);
+				classes=elemId="";
+				if (emmet.length>0){
+					head=head.substring(emmet.length+2).trim();
+					classes=getClassesFromEmmet(emmet);
+					elemId=getIdFromEmmet(emmet);
+					if(classes.length>0){
+						classes=" "+classes;
+					}
+					if(elemId.length>0){
+						elemId=' id="'+elemId+'"';
+					}
+				}
+				switch(hN){
+					case 1: str+='<div class="docuK fromSEE"><div class="sec'+classes+'"><h1'+elemId+'>'+head+'</h1>';
+						docuOn=secOn=true; break;
+					case 2:
+						if (head==="TOC"){
+							str+='<div class="sec">';
+							head=TOC;
+							str+='<h2 class="notSec">'+head+'</h2><div class="p toc"></div></div>'; // self closing.
+						} else if (head==="PH"){
+							str+='<div class="sec hiden">';
+							head=PH;
+							str+='<h2 class="no-sec-N" id="sec-PH">'+head+'</h2>';
+							secOn=true;
+						} else if (head==="RRA"){
+							str+='<div class="sec">';
+							head=RRA;
+							str+='<h2 class="no-sec-N" id="sec-Refs">'+head+'</h2>';
+							secOn=true;
+						} else{
+							str+='<div class="sec'+classes+'">';
+							str+='<h2'+elemId+'>'+head+'</h2>';
+							secOn=true;
+						}
+						break;
+					case 3: str+='<div class="subsec'+classes+'"><h3'+elemId+'>'+head+'</h3>';
+						subsecOn=true; break;
+					case 4: str+='<div class="subsubsec'+classes+'"><h4'+elemId+'>'+head+'</h4>';
+						subsubsecOn=true; break;
+					default: str+='<h'+hN+elemId+'>'+head+'</h'+hN+'>';
+				}
+				ps[i]=ps[i].substring(untilEnter.lastIndex).trim();
+			} else if ((hN=/^#+(?=\/)/.exec(ps[i]))!==null){
+				hN=hN[0].length;
+				closeSec(hN);
+				continue; // Text after '#/' is ignored. Use '#####/' for comment.
+			}
+			
+			if (ps[i].length!==0){
+				if (/^<\/?\w/.test(ps[i])){
+					str+=ps[i];
+				} else if (/^```/.test(ps[i])){
+					ps[i]=ps[i].replace(/^```/,'').replace(/```\/$/,'').trim();
+					emmet=getEmmetFromHead(ps[i]);
+					classes=elemId="";
+					if (emmet.length>0){
+						ps[i]=ps[i].substring(emmet.length+2).trim();
+						classes=getClassesFromEmmet(emmet);
+						elemId=getIdFromEmmet(emmet);
+						if(classes.length>0){
+							classes=" "+classes;
+						}
+						if(elemId.length>0){
+							elemId=' id="'+elemId+'"';
+						}
+					}
+					str+='<pre class="prettyprint'+classes+'"'+elemId+'>'
+						+ps[i].replace(/<\/pre>/ig,'/pre replaced>')
+						+'</pre>'
+				} else{
+					str+='<div class="p';
+					// if (/^-/.test(ps[i])){
+					// 	str+=' cmt';
+					// }
+					str+='">'+ps[i]+'</div>';
+				}
+			}
+		}
+		closeSec();
+		
+		return str;
+	};
+	
+	kipid.getContentsJoinedWithEnter=function($elem){
+		var contents=$elem.contents();
+		var contentsL=contents.length;
+		var i, contentI;
+		var lis, lisL, j;
+		var strArray=[];
+		for (i=0;i<contentsL;i++){
+			contentI=contents.eq(i);
+			if (contentI.is("ol")){
+				lis=contentI.contents();
+				lisL=lis.length;
+				for (j=0;j<lisL;j++){
+					strArray.push(lis.eq(j).text().trim());
+				}
+			} else{
+				strArray.push(contentI.text().trim());
+			}
+		}
+		return strArray.join("\n");
+	};
+	
 	/*  :: cookies.js ::
 	|*|
 	|*|  A complete cookies reader/writer framework with full unicode support.
@@ -192,7 +467,7 @@
 		kipid.mode=modeI;
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
-		kipid.docCookies.setItem("kipidMode",kipid.mode,kipid.expire);
+		kipid.docCookies.setItem("kipid.mode", kipid.mode, kipid.expire, "/");
 		return true;
 	};
 	kipid.CfontFamily=function(font){
@@ -200,7 +475,7 @@
 		kipid.fontFamily=font;
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
-		kipid.docCookies.setItem("kipidFontFamily",kipid.fontFamily,kipid.expire);
+		kipid.docCookies.setItem("kipid.fontFamily", kipid.fontFamily, kipid.expire, "/");
 		return true;
 	};
 	kipid.CfontSize=function(increment){
@@ -216,7 +491,7 @@
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
-		kipid.docCookies.setItem("kipidFontSize",kipid.fontSize,kipid.expire);
+		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize, kipid.expire, "/");
 		return true;
 	};
 	kipid.ClineHeight=function(increment){
@@ -232,7 +507,7 @@
 		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
 		kipid.browserWidth=0;
 		$(window).trigger("resize.deviceInfo");
-		kipid.docCookies.setItem("kipidLineHeight10",kipid.lineHeight10,kipid.expire);
+		kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
 		return true;
 	};
 	$(window).on("resize.deviceInfo", function(){
@@ -282,7 +557,7 @@
 				done=true;
 			}
 			// MathJax Process
-			if ($elem.is(".MathJax_Preview")){
+			if (typeof MathJax!=='undefined'&&$elem.is(".MathJax_Preview")){
 				kipid.logPrint("<br><br>MathJax.Hub.Process("+$elem.next()[0]+") is called.");
 				MathJax.Hub.Queue(["Process", MathJax.Hub, $elem.next()[0]]);
 				done=true;
@@ -294,6 +569,7 @@
 	kipid.delayPad=kipid.delayPad||50;
 	kipid.delayedElems=[];
 	kipid.delayedLoadAll=function(){
+		// kipid.logPrint("<br>Doing delayed-load. "+kipid.delayedElems.length);
 		if (kipid.delayedElems.length===0){
 			kipid.logPrint("<br><br>All delayedElem are loaded.")
 			$(window).off("scroll.delayedLoad");
@@ -314,13 +590,11 @@
 		var now=Date.now();
 		var passed=now-kipid.previous;
 		if (passed>kipid.wait){
-			// kipid.logPrint("<br>Doing delayed-load.");
 			kipid.delayedLoadAll();
 			kipid.previous=now;
 		} else{
 			$(window).off("scroll.delayedLoad");
 			setTimeout(function(){
-				// kipid.logPrint(" Now doing delayed-load.");
 				kipid.delayedLoadAll();
 				kipid.previous=Date.now();
 				$(window).on("scroll.delayedLoad", kipidDelayedLoadByScroll);
@@ -361,21 +635,17 @@
 		////////////////////////////////////////////////////
 		// Style change widget.
 		////////////////////////////////////////////////////
-		var fontSizeAndLineHeight=(docuKI===1)?
-			'<form><button type="button" onclick="kipid.CfontSize(-1)" style="font-size:1em">A</button>'
-			+'<button type="button" onclick="kipid.CfontSize(1)" style="font-size:1.4em">A</button></form> '
-			+'<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1.3em">=</button>'
-			+'<button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.3em">〓</button></form> '
-			:"";
 		docuK.prepend(
 			'<div class="change-docuK-style">'
 			+'<form><input id="button'+docuKI+'-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>'
 			+'</input><input id="button'+docuKI+'-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form> '
 			+'<form><input class="emph" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
-			+fontSizeAndLineHeight
+			+((docuKI===1)?'<form><button type="button" onclick="kipid.CfontSize(-1)" style="font-size:1em">A</button>'+'<button type="button" onclick="kipid.CfontSize(1)" style="font-size:1.4em">A</button></form> '
+			+'<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1.3em">=</button>'+'<button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.3em">〓</button></form> ':'')
 			+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
 			+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
-			+'<div class="deviceInfo"></div></div>'
+			+'<div class="deviceInfo"></div>'
+			+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://github.com/kipid/docuK">github</a> and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div></div>'
 		);
 		
 		////////////////////////////////////////////////////
@@ -420,7 +690,7 @@
 			secIH2=secI.find("h2:first-child");
 			if (secIH2.exists() && !secIH2.is(".notSec")){ // exclude ".sec>h1" and ".sec>h2.notSec" in ToC
 				hN="2"; txt=secIH2.html();
-				if (secIH2.is(".no-sec-N")){
+				if (secIH2.is(".no-sec-N")||secI.is(".no-sec-N")){
 					secPreTxt=secId=secITxt=(secIH2.is("[id]"))?secIH2.attr('id').replace(/^sec-/i,'').replace(postIdRegEx,''):"secPreTxt"+docuKI+"-"+i;
 					tocHtml+=fTocHtml(false);
 					secIH2.html(fSecHtml(false));
@@ -502,7 +772,7 @@
 		}
 		var refs=docuK.find("ol.refs>li")
 		for(i=0;i<refs.length;i++){ // ref [i+1] with id
-			refs.eq(i).prepend("<span class='number none'>["+pad(i+1,2)+"]</span>");
+			refs.eq(i).prepend('<span class="refN">Ref. <span class="number">['+pad(i+1,2)+']</span> </span>');
 		}
 		var refers=docuK.find("cite,refer"), referI, refered;
 		refers.html('<span class="emph">( No refer. )</span>');

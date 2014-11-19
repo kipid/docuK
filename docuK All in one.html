@@ -1,11 +1,23 @@
 <codeprint id="docuK-style">
-<!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css"> -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+<link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
-<!-- <script src="docuK-prepare-2.2.js"></script> -->
+<style>
+.exit {z-index:100; position:absolute; display:inline-block; left:.3em; width:1.8em; height:1.8em; text-align:center; margin-top:-.5em; border-radius:.4em; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white}
+.exit>svg {width:100%; height:100%; font-size:1.8em; line-height:1.0}
+</style>
+<div class="docuK rendered"><!-- <div class="exit" onclick="kipid.HideBR(this)"><svg>
+		<g style="stroke:white;stroke-width:23%">
+			<line x1="20%" y1="20%" x2="80%" y2="80%"/>
+			<line x1="80%" y1="20%" x2="20%" y2="80%"/>
+		</g>
+		✖
+	</svg></div> --><div class="sec" id="docuK-log"></div></div>
+<script src="docuK-prepare-2.2.js"></script>
 <!-- From kipid.tistory CDN -->
-<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script>
+<!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css"> -->
+<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script> -->
 <!-- From NP.tistory CDN -->
 <!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-2.2.css"> -->
 <!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-prepare-2.2.js"></script> -->
@@ -23,8 +35,11 @@
 	<div class="p">This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, auto numbering of sections/figures/equations, auto citing references, auto refering figures and equations, auto refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and auto code printing. Quite similar to LaTeX or Wiki document, but extended a little bit.</div>
 </div>
 
-<div class="sec hiden"><h2 class="no-sec-N" id="sec-UH">Update History</h2>
+<div class="sec hiden no-sec-N"><h2 id="sec-UH">Update History</h2>
 	<ul>
+		<li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
+		<li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
+		<li>2014-08-09: pre.scrollable 일때만 scroll switch fetch. bubbleRef show/hide "&gt;.bubbleRef"로. (chaining은 ㅡㅡ;;;)</li>
 		<li>2014-06-25: Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
 		<li>2014-06-25: 단축키 설정: F,D,L, (T to the TOC는 안했음. 만들까??)</li>
 		<li>2014-06-25: MathJax CDN is changed from "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js" to "https://cdn.mathjax.org/mathjax/latest/MathJax.js".</li>
@@ -52,6 +67,7 @@
 		
 		<li>2014-08-07: This document is rendered by &lt;a href=""&gt;docuK&lt;/a&gt;. 같은 문구를 넣는게 좋을듯? 다른 사람들도 찾아서 쓸 수 있도록? Github 링크나 내 블로그 링크? 제일 위랑 아래에 삽입?</li>
 		
+		<li>bubbleRef 속 bubbleRef 구현? Chaining으로? (이거 지금도 그냥 될것도 같은데 뭔가 코드가 제대로 적용이 안되는듯??? 분석하려면 오래걸리겠다 ㅡ,.ㅡ;;; 중요한 기능은 아니니 당장은 패스할까나?)</li>
 		<li>Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
 		
 		<li>minor: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.)</li>
@@ -59,7 +75,6 @@
 		
 		<li>eqq | figure numbering (sec-subsec-subsubsec-number). 지금은 (sec-number).</li>
 		
-		<li>bubbleRef 속 bubbleRef 구현? Chaining으로?</li>
 		<li>docuK Log draggable하게?</li>
 		<li><code class="prettyprint">$('&lt;div/&gt;', {id: someID, className: 'foobar', html: content});</code> 형태가 더 빠르다는 이야기가 있네. <a href="http://stackoverflow.com/questions/3015335/jquery-html-vs-append">Stackoverflow.com - jquery html vs append</a> 그런데 그닥 체감을 못하겠어서... 정확한 정보인지도 모르겠고. 당장은 패스.</li>
 		<li><code class="prettyprint">&lt;refer class="id" defer&gt;&lt;/refer&gt;</code> 같은것도 생각해볼까?? id 안의 html이 다른 script들 처리가 된 후에 복사해오면 더 속도가 빨라지는 경우도 많아서.. (예로 MathJax 수식, Highlighted code 같은? 잡다한 기능/설정이 많으면 작성하는 사람을 복잡하게만 만들듯도 해서 당장은 패스. 별로 쓰지도 않을 설정같고...)</li>
@@ -323,7 +338,8 @@
 			\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
 		\end{align*}
 		</eqq>
-		<eqq>
+		<div class="p">Equation with class="no-N".</div>
+		<eqq class="no-N">
 		\begin{align*}
 			\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
 			&= e_{A}^{i} \partial_{i}
@@ -596,7 +612,7 @@
 		</div>
 		<div class="p">
 			small
-			<pre class="prettyprint linenums">
+			<pre class="prettyprint">
 				a
 				b
 				c
@@ -711,7 +727,7 @@
 
 <div class="sec hiden"><h2>Opening Sources</h2>
 	<div class="subsec"><h3>docuK CSS style</h3>
-		<pre id="pre-docuK-style" class="prettyprint linenums lang-html scrollable"></pre>
+		<pre id="pre-docuK-style" class="prettyprint linenums lang-html"></pre>
 	</div>
 	
 	<div class="subsec"><h3>docuK HTML document</h3>
@@ -719,7 +735,7 @@
 	</div>
 	
 	<div class="subsec"><h3>docuK SCRIPT (JavaScript including jQuery, MathJax, and Google code prettyfier)</h3>
-		<pre id="pre-docuK-script" class="prettyprint linenums lang-html scrollable"></pre>
+		<pre id="pre-docuK-script" class="prettyprint linenums lang-html"></pre>
 	</div>
 </div>
 
@@ -851,9 +867,9 @@ MathJax.Hub.Config({
 });
 </script>
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
-<!-- <script src="docuK-postProcess-2.2.js"></script> -->
+<script src="docuK-postProcess-2.2.js"></script>
 <!-- From kipid.tistory CDN -->
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
+<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script> -->
 <!-- From NP.tistory CDN -->
 <!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-postProcess-2.2.js"></script> -->
 </codeprint><!-- docuK-script -->

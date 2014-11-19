@@ -4,6 +4,26 @@
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 (function(kipid, $, undefined){
+	////////////////////////////////////////////////////
+	// Printing codes in <codeprint> with id into <pre>.
+	////////////////////////////////////////////////////
+	var codeprints=$("codeprint");
+	for (var i=0;i<codeprints.length;i++){
+		kipid.printCode(codeprints.eq(i).attr('id'));
+	}
+	
+	////////////////////////////////////////////////////
+	// SEE (Super Easy Edit)
+	////////////////////////////////////////////////////
+	var $SEE=$("codeprint.SEE");
+	for (var i=0;i<$SEE.length;i++){
+		var $SEEi=$SEE.eq(i);
+		var SEEiHTML=$SEEi.html().trim();
+		$SEEi.html("");
+		$SEEi.after(kipid.renderToDocuK( SEEiHTML ));
+	}
+	$("pre.prettyprint.scrollable").addClass("linenums");
+	
 	var docuK=$(".docuK");
 	kipid.docuK=docuK;
 	
@@ -18,14 +38,6 @@
 	}
 	
 	////////////////////////////////////////////////////
-	// Printing codes in <codeprint> with id into <pre>.
-	////////////////////////////////////////////////////
-	var codeprints=$("codeprint");
-	for (var i=0;i<codeprints.length;i++){
-		kipid.printCode(codeprints.eq(i).attr('id'));
-	}
-	
-	////////////////////////////////////////////////////
 	// <eq> and <eqq> tags to MathJax format
 	////////////////////////////////////////////////////
 	var eqs=$("eq");
@@ -36,7 +48,7 @@
 	for (var i=0;i<eqqs.length;i++){
 		eqqs.eq(i).html(function(ith,orgTxt){return "\\[ "+orgTxt.trim()+" \\]";});
 	}
-	kipid.logPrint("<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format enclosed by \\ ( and \\ ).");
+	kipid.logPrint("<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).");
 	
 	////////////////////////////////////////////////////
 	// docuK process.
@@ -86,22 +98,22 @@
 		////////////////////////////////////////////////////
 		var cookieItem;
 		kipid.logPrint("<br>");
-		cookieItem=kipid.docCookies.getItem("kipidMode");
+		cookieItem=kipid.docCookies.getItem("kipid.mode");
 		if (cookieItem!==null){
 			kipid.Cmode(cookieItem);
 			kipid.logPrint("<br>Mode "+cookieItem+" is set from cookie.");
 		}
-		cookieItem=kipid.docCookies.getItem("kipidFontFamily");
+		cookieItem=kipid.docCookies.getItem("kipid.fontFamily");
 		if (cookieItem!==null){
 			kipid.CfontFamily(cookieItem);
 			kipid.logPrint("<br>Font "+cookieItem+" is set from cookie.");
 		}
-		cookieItem=kipid.docCookies.getItem("kipidFontSize");
+		cookieItem=kipid.docCookies.getItem("kipid.fontSize");
 		if (cookieItem!==null){
 			kipid.CfontSize(parseInt(cookieItem)-kipid.fontSize);
 			kipid.logPrint("<br>Font-size "+(parseInt(cookieItem)*1.8).toFixed(1)+" is set from cookie.");
 		}
-		cookieItem=kipid.docCookies.getItem("kipidLineHeight10");
+		cookieItem=kipid.docCookies.getItem("kipid.lineHeight10");
 		if (cookieItem!==null){
 			kipid.ClineHeight(parseInt(cookieItem)-kipid.lineHeight10);
 			kipid.logPrint("<br>Line-height "+(parseInt(cookieItem)/10).toFixed(1)+" is set from cookie.");
@@ -119,28 +131,44 @@
 		////////////////////////////////////////////////////
 		kipid.delayedElems=docuK.find("[delayed-src], [delayed-bgimage]");
 		kipid.logPrint("<br><br>There are "+kipid.delayedElems.length+" delayed elements.");
+		$(window).on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 		$(window).trigger("scroll.delayedLoad");
-		$(window).off("scroll.delayedLoad");
+		// $(window).off("scroll.delayedLoad");
 		
 		////////////////////////////////////////////////////
-		// MathJax PreProcess.
-		////////////////////////////////////////////////////
-		MathJax.Hub.Queue(["PreProcess",MathJax.Hub]);
-		MathJax.Hub.Queue(function(){
-			kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
-			kipid.logPrint("<br><br>\".MathJax_Preview\" are added to kipid.delayedElems. Now its length is: "+kipid.delayedElems.length);
-			$(window).on("scroll.delayedLoad", kipid.delayedLoadByScroll);
-		});
-		
-		////////////////////////////////////////////////////
-		// google code prettify js script is added.
+		// google code prettify js script (from kipid.tistory CDN) is added.
 		////////////////////////////////////////////////////
 		if (docuK.find(".prettyprint").exists()){
 			var gcp=document.createElement('script');
 			gcp.defer="";
 			gcp.src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/run_prettify.js";
 			(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(gcp);
-			kipid.logPrint("<br><br>Google code prettyfy.js is loaded since pre.prettyprint is in your document.");
+			kipid.logPrint("<br><br>Google code prettyfy.js is loaded since '.prettyprint' is there in your document.");
+		}
+		
+		////////////////////////////////////////////////////
+		// MathJax js script (from cdn.mathjax.org) is added.
+		////////////////////////////////////////////////////
+		if (docuK.find("eq, eqq").exists()){
+			var mjx=document.createElement('script');
+			mjx.defer="";
+			mjx.src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+			(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
+			kipid.logPrint("<br><br>MathJax.js is loaded since 'eq, eqq' is there in your document.");
+			////////////////////////////////////////////////////
+			// MathJax PreProcess after the above MathJax.js is loaded.
+			////////////////////////////////////////////////////
+			kipid.mathJaxPreProcess=setInterval(function(){
+				if (typeof MathJax!=='undefined'){
+					clearInterval(kipid.mathJaxPreProcess);
+					MathJax.Hub.Queue(["PreProcess",MathJax.Hub]);
+					MathJax.Hub.Queue(function(){
+						kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
+						kipid.logPrint("<br><br>\".MathJax_Preview\" are added to kipid.delayedElems. Now its length is: "+kipid.delayedElems.length);
+						$(window).on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+					});
+				}
+			}, 2000);
 		}
 		
 		////////////////////////////////////////////////////
@@ -225,7 +253,7 @@
 				+"<li>L: To the [Lists]</li>"
 			);
 		}
-		kipid.logPrint("<br><br>New ShortKeys (D, F, L) are set.");
+		kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To the [Lists]) are set.");
 		
 		////////////////////////////////////////////////////
 		// Closing docuK Log.

@@ -1,17 +1,16 @@
 <codeprint id="docuK-style">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
-<!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css"> -->
-<!-- <script src="docuK-prepare-2.2.js"></script> -->
+<link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css">
+<script src="docuK-prepare-2.2.js"></script>
 <!-- From kipid.tistory CDN -->
-<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script>
+<!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css"> -->
+<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script> -->
 <style>
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:decimal}
 </style>
 </codeprint><!-- docuK-style -->
 
-<codeprint id="docuK-docu">
 <div class="docuK noDIdHandle">
 <div class="sec"><h1># Super Easy Edit (SEE) of docuK</h1>
 	<div class="p">
@@ -19,13 +18,10 @@
 	</div>
 	<h2>Try it yourself</h2><br>
 	<div class="p">
-		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield. You can use <code>Shift+Enter</code> for rendering. You can copy and paste the code in <a href="#sec-CPSEE">Copy and Paste</a> where the full stand-alone code is.
-	</div>
-	<div class="p">
-		For the full stand-alone code, put meta tags additionally <code class="prettyprint">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></code> for encoding ('utf-8' is recommended. The html file must be saved with the same encoding.) and <code class="prettyprint">&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/></code> for mobile view.
+		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield. You can use <code>Shift+Enter</code> for rendering.
 	</div>
 	
-	<pre id="pre-SEE" contenteditable="true" class="prettyprint scrollable lang-html"></pre>
+	<pre id="pre-SEE" contenteditable="true" class="prettyprint linenums scrollable"></pre>
 	
 	<div class="center">
 		<button id="button-prettyPrint" style="background:rgb(112, 209, 128); margin:0; padding:0 0.5em; font:inherit">Pretty-print the code above</button>
@@ -36,12 +32,11 @@
 </div><!-- div.sec -->
 </div><!-- div.docuK -->
 
-<div id="rendered-docuK"></div>
-
+<codeprint id="code-SEE-renderer-to-docuK">
 <codeprint id="SEE" class="SEE">
 # Working on SEE (Super Easy Edit)
 
-The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below (or <code>Shift+Enter</code>).
+The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below.
 
 
 ## TOC
@@ -87,10 +82,7 @@ See the predefined sections implemented below, and you can easily figure it out 
 
 ###/ Posting History
 
-Posting History is put here. This section is automatically hiden.
-
 <ul>
-	<li>Posting History is put here.</li>
 	<li>2014-06-18: First posting.</li>
 </ul>
 
@@ -168,7 +160,7 @@ contents of subsubsection
 
 Section can have class and id attributes. Using the id, you can refer it like <code class="prettyprint">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
 
-<div class="p">Class and Id are asigned with [emmet style] like <code>##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
+<div class="p">Class and Id is asigned with [emmet style] like <code>##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
 
 
 ##[.hiden#sec-HidenSec] Initially Hiden Section
@@ -236,9 +228,7 @@ The first two are converted to inline maths like $\alpha \beta = \int f(\gamma) 
 
 Codes can be pretty-printed.
 
-Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java">Codes to be pretty-printed.&lt;/pre></code>,
-
-<pre class="prettyprint scrollable lang-java">
+<pre class="prettyprint linenums scrollable lang-java">
 import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
 
 import org.vertx.java.core.http.HttpServerRequest;
@@ -272,43 +262,6 @@ public class HelloWorldServer extends Verticle {
 }
 </pre>
 
-<div class="p"></div>
-
-Using <code>```Codes to be pretty-printed.```/</code>, or <code>```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
-
-```[.scrollable.lang-java]
-import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
-
-import org.vertx.java.core.http.HttpServerRequest;
-
-
-public class HelloWorldServer extends Verticle {
-	///////////////////////////////////////////////
-	// Called when the verticle is deployed.
-	///////////////////////////////////////////////
-	@Override
-	public void start() {
-		/////////////////////////////////////////////
-		// Lambda exp with chaining.
-		/////////////////////////////////////////////
-		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -> {
-			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
-			
-			req.response().putHeader("Content-Type","text/html");
-			req.response().end("&lt;h1>Hello World&lt;/h1>");
-			req.response().close();
-		}).listen(1001);
-	}
-	
-	///////////////////////////////////////////////
-	// Called when the verticle is undeployed.
-	///////////////////////////////////////////////
-	@Override
-	public void stop(){
-		// do something.
-	}
-}```/
-
 
 ## More infos
 
@@ -317,48 +270,199 @@ In this live demo, there is some limitations. Delayed loading, browser-info, cod
 Only <code>kipid.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 </codeprint>
 
-<div class="docuK noDIdHandle">
-<div class="sec hiden"><h2 class="no-sec-N" id="sec-UH">Update History</h2>
-	<ul>
-		<li>2014-09-17: script tag 도 double enter 해결.</li>
-		<li>2014-08-12: SEE 처리하는 JavaScript <code>docuK-prepare.js</code> 및 <code>docuK-postProcess.js</code>로. 그리고 SEE 형태로만 posting 해도 잘 되도록 "codeprint.SEE" (<code class="prettyprint">&lt;codeprint class="SEE">&lt;/codeprint></code>) 안에 넣으면 처리되도록 함.</li>
-		<li>2014-08-12: code 넣는거 ``` 로 가능하게. 그리고 pre code print 할때 중간에 double enter가 들어가면 SEE에서 이상하게 처리했던거 해결.</li>
-		<li>2014-08-12: section hiden option 같은 것들 가능하게. [Emmet] 형태로 class, id 부여 가능.</li>
-		<li>2014-08-09: <code class="prettyprint">$("#text-edit-id").attr({contenteditable:false});</code> 같은걸로 rendering 되는 동안 편집 막기. <code>Shift+Enter</code>로 render trigger. Render가 되었는지 안되었는지 알려주려고 시간을 표시. (실패할 경우도 있을라나?)</li>
-	</ul>
+<codeprint id="code-docuK-HTML">
+<div id="rendered-docuK">
+<div class="docuK"></div>
 </div>
-
-<div class="sec hiden"><h2 class="no-sec-N" id="sec-ToDO">Planning to do</h2>
-	<ul>
-		<li>Links | URLs to appropriate html. 그냥 HTML tag <code class="prettyprint">&lt;a href=""&gt;&lt;/a&gt;</code> 쓰게 해도 될듯 하지만, 링크 다는건 자주 써먹을듯 하니... HTML tag로는 당연히 가능하게 하면서.</li>
-		<li>처음에 <code>&lt;tag&gt;</code>가 오는데 paragraph로 처리하고 싶을때는 <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>를 낑겨 넣어야 하는듯. (double enter로 split 명령을 내리기 때문에 enter 다음에 space를 넣으면 당장은 해결 되는데... 바꿔줘야 할듯.)</li>
-	</ul>
-</div>
-
-<div class="sec hiden"><h2 class="no-sec-N" id="sec-CPSEE">Copy and Paste this code.</h2>
-	<textarea id="pre-code-docuK-HTML" contenteditable="true" style="width:100%; height:30em; background:black; color:white; font:inherit; font-size:.8em; padding:.5em; margin:1em 0"></textarea>
-</div>
-</div><!-- docuK -->
+</codeprint>
 
 <script>
-kipid.printFullSEE=function(SEE){
-	var renderedTwo='<codeprint id="docuK-style">\n<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><'+'/script>\n<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>\n<!-- From kipid.tistory CDN -->\n<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">\n<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"><'+'/script>\n</codeprint><!-- docuK-style -->\n\n<codeprint class="SEE">\n'
-		+SEE.trim()
-		+'\n</codeprint><!-- SEE -->\n\n<codeprint id="docuK-script">\n<script>\nkipid.wait=2000;\nkipid.delayPad=2000;\n<'+'/script>\n<script type="text/x-mathjax-config">\nMathJax.Hub.Config({\n	skipStartupTypeset: true, // Skip startup typeset.\n	positionToHash: false, // No repositioning to #something anchor.\n	tex2jax: {\n		inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']], // Using $ for inline math.\n		displayMath: [[\'$$\',\'$$\'], [\'\\\\[\',\'\\\\]\']], // Using $$ for outline math.\n		processEscapes: true, // Escape \\$\n		processEnvironments: false, // Ignore \\begin{something} ... \\end{something}\n	}\n});\n<'+'/script>\n<!-- From kipid.tistory CDN -->\n<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"><'+'/script>\n</codeprint><!-- docuK-script -->';
-	
-	$("#pre-code-docuK-HTML").html( kipid.escapeHTML( renderedTwo ) );
+kipid.SEEToArray=function(SEE){
+	SEE=SEE.trim();
+	var dE=/\s*\n\n+\s*/g; // split by double enter.
+	var start=end=0;
+	var re, subStr;
+	var ps=[];
+	while((re=dE.exec(SEE))!==null){
+		end=dE.lastIndex;
+		subStr=SEE.substring(start,end).trim();
+		if (/^<pre\s*[^>]*>/i.test(subStr)){
+			while(!/<\/pre>$/i.test(subStr)){
+				re=dE.exec(SEE);
+				end=dE.lastIndex;
+				subStr=SEE.substring(start,end).trim();
+			}
+		}
+		ps.push(subStr);
+		start=end;
+	}
+	return ps;
 };
 
-kipid.renderIt=function(){
-	var toBeRendered=kipid.getContentsJoinedWithEnter($("#pre-SEE"));
-	var renderedOne=kipid.renderToDocuK(toBeRendered);
-	$("#rendered-docuK").html(renderedOne);
+kipid.renderToDocuK=function(toBeRendered){
+	var ps=kipid.SEEToArray(toBeRendered);
+	var p=ps.length;
 	
-	kipid.printFullSEE(toBeRendered);
-	// $("#pre-code-docuK-HTML").removeClass("prettyprinted");
-	// prettyPrint(function(){
-	// 	kipid.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
-	// }, $("#pre-code-docuK-HTML").parent()[0]);
+	var TOC="Table of Contents";
+	var PH="Posting History";
+	var RRA="References and Related Articles";
+	
+	var untilEnter=/[^\n]+/g; // until enter.
+	var head, hN; // #*hN
+	var emmet=classes=secId="";
+	
+	var docuOn=secOn=subsecOn=subsubsecOn=false;
+	var str='';
+	
+	function closeSec(hN){
+		if (hN===undefined){ hN=1; }
+		switch(hN){
+			case 1: if (docuOn){ str+='</div>'; docuOn=false; }
+			case 2: if (secOn){ str+='</div>'; secOn=false; }
+			case 3: if (subsecOn){ str+='</div>'; subsecOn=false; }
+			case 4: if (subsubsecOn){ str+='</div>'; subsubsecOn=false; }
+			default:
+		}
+	}
+	function getEmmetFromHead(trimedHead){
+		var res;
+		var emmet="";
+		var rexHeadEmmet=/^\[([\w#.-]+)\]/;
+		res=rexHeadEmmet.exec(trimedHead);
+		if (res!=null){ emmet=res[1]; }
+		return emmet;
+	}
+	function getClassesFromEmmet(str){
+		var res;
+		var classes="";
+		var rexClasses=/\.([\w-]+)/g;
+		while((res=rexClasses.exec(str))!=null){
+			classes+=res[1]+" ";
+		}
+		return classes.trim();
+	}
+	function getIdFromEmmet(str){
+		var res;
+		var secId="";
+		var rexId=/#([\w-]+)/;
+		res=rexId.exec(str);
+		if (res!=null){ secId=res[1]; }
+		return secId;
+	}
+	
+	for (var i=0;i<p;i++){
+		ps[i]=ps[i].trim();
+		
+		if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null){
+			untilEnter.lastIndex=hN=hN[0].length;
+			closeSec(hN);
+			head=untilEnter.exec(ps[i]);
+			head=head[0].trim();
+			emmet=getEmmetFromHead(head);
+			classes=secId="";
+			if (emmet.length>0){
+				head=head.substring(emmet.length+2).trim();
+				classes=getClassesFromEmmet(emmet);
+				secId=getIdFromEmmet(emmet);
+				if(classes.length>0){
+					classes=" "+classes;
+				}
+				if(secId.length>0){
+					secId=" id='"+secId+"'";
+				}
+			}
+			switch(hN){
+				case 1: str+='<div class="docuK fromSEE"><div class="sec'+classes+'"><h1'+secId+'>'+head+'</h1>';
+					docuOn=secOn=true; break;
+				case 2:
+					if (head==="TOC"){
+						str+='<div class="sec">';
+						head=TOC;
+						str+='<h2 class="notSec">'+head+'</h2><div class="p toc"></div></div>'; // self closing.
+					} else if (head==="PH"){
+						str+='<div class="sec hiden">';
+						head=PH;
+						str+='<h2 class="no-sec-N" id="sec-PH">'+head+'</h2>';
+						secOn=true;
+					} else if (head==="RRA"){
+						str+='<div class="sec">';
+						head=RRA;
+						str+='<h2 class="no-sec-N" id="sec-Refs">'+head+'</h2>';
+						secOn=true;
+					} else{
+						str+='<div class="sec'+classes+'">';
+						str+='<h2'+secId+'>'+head+'</h2>';
+						secOn=true;
+					}
+					break;
+				case 3: str+='<div class="subsec'+classes+'"><h3'+secId+'>'+head+'</h3>';
+					subsecOn=true; break;
+				case 4: str+='<div class="subsubsec'+classes+'"><h4'+secId+'>'+head+'</h4>';
+					subsubsecOn=true; break;
+				default: str+='<h'+hN+secId+'>'+head+'</h'+hN+'>';
+			}
+			ps[i]=ps[i].substring(untilEnter.lastIndex).trim();
+		} else if ((hN=/^#+(?=\/)/.exec(ps[i]))!==null){
+			hN=hN[0].length;
+			closeSec(hN);
+			continue; // Text after '#/' is ignored. Use '#####/' for comment.
+		}
+		
+		if (ps[i].length!==0){
+			if (/^<\/?\w/.test(ps[i])){
+				str+=ps[i];
+			} else{
+				str+='<div class="p';
+				// if (/^-/.test(ps[i])){
+				// 	str+=' cmt';
+				// }
+				str+='">'+ps[i]+'</div>';
+			}
+		}
+	}
+	closeSec();
+	
+	return str;
+};
+
+kipid.getContentsJoinedWithEnter=function(){
+	var $elem=$("#pre-SEE");
+	var contents=$elem.contents();
+	var contentsL=contents.length;
+	var i, contentI;
+	var lis, lisL, j;
+	var strArray=[];
+	
+	for (i=0;i<contentsL;i++){
+		contentI=contents.eq(i);
+		if (contentI.is("ol")){
+			lis=contentI.contents();
+			lisL=lis.length;
+			for (j=0;j<lisL;j++){
+				strArray.push(lis.eq(j).text().trim());
+			}
+		} else{
+			strArray.push(contentI.text().trim());
+		}
+	}
+	
+	return strArray.join("\n");
+};
+
+kipid.renderNext=function(){
+	var toBeRendered=kipid.getContentsJoinedWithEnter();
+	var renderedOne=kipid.renderToDocuK(toBeRendered);
+	$("#rendered-docuK")[0].innerHTML=renderedOne;
+	
+	var renderedTwo='<codeprint id="docuK-style"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><'+'/script><div class="docuK rendered"><div class="sec" id="docuK-log"></div></div><link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css"><script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"><'+'/script></codeprint><codeprint id="docuK-docu">'
+		+renderedOne
+		+'</codeprint><codeprint id="docuK-script"><script>window.kipid=window.kipid||{}; kipid.wait=2000; kipid.delayPad=2000;<'+'/script><script type="text/x-mathjax-config">MathJax.Hub.Config({skipStartupTypeset: true, positionToHash: false, tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']], displayMath: [[\'$$\',\'$$\'], [\'\\\\[\',\'\\\\]\']], processEscapes: true, processEnvironments: false}}); <'+'/script><script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer><'+'/script><script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"><'+'/script></codeprint>';
+	
+	$("#pre-code-docuK-HTML").html( kipid.escapeHTML( renderedTwo ) );
+	$("#pre-code-docuK-HTML").removeClass("prettyprinted");
+	prettyPrint(function(){
+		kipid.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
+	}, $("#pre-code-docuK-HTML").parent()[0]);
 	
 	var docuK=kipid.docuK=$(".docuK");
 	k=docuK.length;
@@ -372,7 +476,7 @@ kipid.renderIt=function(){
 };
 
 kipid.prettyPrint=function(){	
-	var toBeRendered=kipid.escapeHTML( kipid.getContentsJoinedWithEnter($("#pre-SEE")) );
+	var toBeRendered=kipid.escapeHTML( kipid.getContentsJoinedWithEnter() );
 	$("#pre-SEE").html(toBeRendered);
 	$("#pre-SEE").removeClass("prettyprinted");
 	
@@ -381,8 +485,12 @@ kipid.prettyPrint=function(){
 	}, $("#pre-SEE").parent()[0]);
 };
 
-kipid.printFullSEE( $("#SEE").html() );
-$(document).ready(function(){
+(function(){
+	var toBeRendered=$("#SEE").html().trim();
+	var renderedOne=kipid.renderToDocuK(toBeRendered);
+	
+	$("#rendered-docuK")[0].innerHTML=renderedOne;
+	
 	$("#button-prettyPrint").on("click", function anonyPrettyPrint(){
 		var $elem=$(this);
 		$elem.off("click");
@@ -398,7 +506,7 @@ $(document).ready(function(){
 		$elem.off("click");
 		$("#pre-SEE").attr({contenteditable:false});
 		$elem.css({background:"rgb(100,100,100)"});
-		kipid.renderIt();
+		kipid.renderNext();
 		kipid.prettyPrint();
 		$elem.css({background:"rgb(209, 112, 112)"});
 		$("#pre-SEE").attr({contenteditable:true});
@@ -415,9 +523,35 @@ $(document).ready(function(){
 			}
 		}
 	});
-});
+})();
 </script>
-</codeprint><!-- docuK-docu -->
+</codeprint><!-- code-SEE-renderer-to-docuK -->
+
+<div class="docuK noDIdHandle">
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-UH">Update History</h2>
+	<ul>
+		<li>2014-08-09: <code class="prettyprint">$("#text-edit-id").attr({contenteditable:false});</code> 같은걸로 rendering 되는 동안 편집 막기. <code>Shift+Enter</code>로 render trigger. Render가 되었는지 안되었는지 알려주려고 시간을 표시. (실패할 경우도 있을라나?)</li>
+	</ul>
+</div>
+
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-ToDO">Planning to do</h2>
+	<ul>
+		<li>JavaScript를 개별 파일로 빼야할듯. 그리고 SEE 형태로만 posting 해도 잘 되도록. docuK-prepare.js 에 다 때려넣고 div.docuK-SEE 에 넣으면 처리되도록 할까나?</li>
+		<li>Links | URLs to appropriate html. 그냥 HTML tag <code class="prettyprint">&lt;a href=""&gt;&lt;/a&gt;</code> 쓰게 해도 될듯 하지만, 링크 다는건 자주 써먹을듯 하니... HTML tag로는 당연히 가능하게 하면서.</li>
+		<li>code 넣는거 ``` 같은걸로 가능하게 해볼까? 그리고 pre code print 할때 중간에 double enter가 들어가면 SEE에서 이상하게 처리 됨. space 낑겨넣어서 억지로 해결할수는 있는데... SEE에서 처리를 해줘야 할듯.</li>
+		<li>section hiden option 같은 것들 가능하게.</li>
+		<li>처음에 <code>&lt;tag&gt;</code>가 오는데 paragraph로 처리하고 싶을때는 <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>를 낑겨 넣어야 하는듯. (double enter로 split 명령을 내리기 때문에 enter 다음에 space를 넣으면 당장은 해결 되는데... 바꿔줘야 할듯.)</li>
+	</ul>
+</div>
+
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-SEE">Super Easy Edit (Opening Sources)</h2>
+	<pre id="pre-code-SEE-renderer-to-docuK" contenteditable="true" class="prettyprint linenums lang-html scrollable"></pre>
+</div>
+
+<div class="sec hiden"><h2 class="no-sec-N" id="sec-SEE">docuK HTML part</h2>
+	<pre id="pre-code-docuK-HTML" contenteditable="true" class="prettyprint linenums lang-html scrollable"></pre>
+</div>
+</div>
 
 <codeprint id="docuK-script">
 <script>
@@ -436,7 +570,9 @@ MathJax.Hub.Config({
 	}
 });
 </script>
-<!-- <script src="docuK-postProcess-2.2.js"></script> -->
+<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+<script src="docuK-postProcess-2.2.js"></script>
 <!-- From kipid.tistory CDN -->
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
+<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script> -->
+<!-- <script src="prettyCode/run_prettify.js"></script> -->
 </codeprint><!-- docuK-script -->
