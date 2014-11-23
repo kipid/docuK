@@ -3,8 +3,8 @@
 // Public functions which can be used elsewhere, and functions called only once in the beginning.
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
-(function(kipid, $, undefined){
-	$.fn.exists=function(){ return this.length!==0; };
+(function(kipid, $, undefined) {
+	$.fn.exists=function() { return this.length!==0; };
 	kipid.browserWidth=window.innerWidth;
 	var docuK=$(".docuK");
 	kipid.docuK=docuK;
@@ -13,7 +13,7 @@
 	// logPrint function.
 	////////////////////////////////////////////////////
 	kipid.log=$("#docuK-log").eq(0);
-	kipid.logPrint=function(str){
+	kipid.logPrint=function(str) {
 		kipid.log.append(str);
 		kipid.log.scrollTop(kipid.log[0].scrollHeight);
 	};
@@ -22,7 +22,7 @@
 	////////////////////////////////////////////////////
 	// String to Array
 	////////////////////////////////////////////////////
-	kipid.strToArray=function(str){
+	kipid.strToArray=function(str) {
 		var ret=[];
 		var delimiter=/([^\t\n]*)([\t\n])/g;
 		var lastQuote=/[^"](?:"")*"([\t\n])/g;
@@ -30,32 +30,32 @@
 		var start=0;
 		var row=-1, col=-1, delim="\n";
 		var strElem="";
-		function increseRC(str){
-			if (str==='\t'){
+		function increseRC(str) {
+			if (str==='\t') {
 				col++; return true;
-			} else if (str==='\n'){
+			} else if (str==='\n') {
 				row++; col=0; ret.push([]); return true;
 			} return false;
 		}
-		while (start<str.length&&increseRC(delim)){
-			if ((str.substring(start, start+1))==='"'){
+		while (start<str.length&&increseRC(delim)) {
+			if ((str.substring(start, start+1))==='"') {
 				lastQuote.lastIndex=start+1;
-				if ((exec=lastQuote.exec(str))!==null){
+				if ((exec=lastQuote.exec(str))!==null) {
 					strElem=str.substring(start+1, lastQuote.lastIndex-2);
 					delim=exec[1];
 					start=delimiter.lastIndex=lastQuote.lastIndex;
-				} else{
+				} else {
 					strElem=str.substring(start+1);
 					delim="";
 					start=str.length;
 				}
 				strElem=strElem.replace(/""/g,'"');
-			} else{
-				if ((exec=delimiter.exec(str))!==null){
+			} else {
+				if ((exec=delimiter.exec(str))!==null) {
 					strElem=exec[1];
 					delim=exec[2];
 					start=delimiter.lastIndex;
-				} else{
+				} else {
 					strElem=str.substring(start);
 					delim="";
 					start=str.length;
@@ -65,23 +65,23 @@
 		}
 		return ret;
 	};
-	kipid.strToJSON=function(str){
+	kipid.strToJSON=function(str) {
 		var ret=kipid.strToArray(str);
-		for (var i=1;i<ret.length;i++){
-			for (var j=0;j<ret[i].length;j++){
-				if (ret[0][j]!==undefined){
+		for (var i=1;i<ret.length;i++) {
+			for (var j=0;j<ret[i].length;j++) {
+				if (ret[0][j]!==undefined) {
 					ret[i][ret[0][j]]=ret[i][j];
 				}
 			}
 		}
 		return ret;
 	};
-	kipid.arrayToTableHTML=function(txtArray){
+	kipid.arrayToTableHTML=function(txtArray) {
 		var tableStr="<table><tbody>";
-		for(var row=0;row<txtArray.length;row++){
+		for (var row=0;row<txtArray.length;row++) {
 			// console.log(txtArray[row]);
 			tableStr+="<tr>";
-			for(var col=0;col<txtArray[row].length;col++){
+			for (var col=0;col<txtArray[row].length;col++) {
 				tableStr+="<td>"+kipid.escapeHTML(txtArray[row][col]).replace(/\n/g,'<br>')+"</td>";
 			}
 			tableStr+="</tr>";
@@ -93,29 +93,29 @@
 	////////////////////////////////////////////////////
 	// SEE (Super Easy Edit).
 	////////////////////////////////////////////////////
-	kipid.SEEToArray=function(SEE){
+	kipid.SEEToArray=function(SEE) {
 		SEE=SEE.trim();
 		var dE=/\s*\n\n+\s*/g; // split by double enter.
 		var start=end=0;
 		var re, subStr;
 		var ps=[];
-		while((re=dE.exec(SEE))!==null){
+		while((re=dE.exec(SEE))!==null) {
 			end=dE.lastIndex;
 			subStr=SEE.substring(start,end).trim();
-			if (/^<pre\s*[^>]*>/i.test(subStr)){
-				while(!/<\/pre>$/i.test(subStr)){
+			if (/^<pre\s*[^>]*>/i.test(subStr)) {
+				while(!/<\/pre>$/i.test(subStr)) {
 					re=dE.exec(SEE);
 					end=dE.lastIndex;
 					subStr=SEE.substring(start,end).trim();
 				}
-			} else if (/^```/.test(subStr)){
-				while(!/```\/$/.test(subStr)){
+			} else if (/^```/.test(subStr)) {
+				while(!/```\/$/.test(subStr)) {
 					re=dE.exec(SEE);
 					end=dE.lastIndex;
 					subStr=SEE.substring(start,end).trim();
 				}
-			} else if (/^<script\s*[^>]*>/i.test(subStr)){
-				while(!/<\/script>$/i.test(subStr)){
+			} else if (/^<script\s*[^>]*>/i.test(subStr)) {
+				while(!/<\/script>$/i.test(subStr)) {
 					re=dE.exec(SEE);
 					end=dE.lastIndex;
 					subStr=SEE.substring(start,end).trim();
@@ -129,7 +129,7 @@
 		return ps;
 	};
 
-	kipid.renderToDocuK=function(toBeRendered){
+	kipid.renderToDocuK=function(toBeRendered) {
 		var ps=kipid.SEEToArray(toBeRendered);
 		var p=ps.length;
 		
@@ -144,82 +144,82 @@
 		var docuOn=secOn=subsecOn=subsubsecOn=false;
 		var str='';
 		
-		function closeSec(hN){
-			if (hN===undefined){ hN=1; }
-			switch(hN){
-				case 1: if (docuOn){ str+='</div>'; docuOn=false; }
-				case 2: if (secOn){ str+='</div>'; secOn=false; }
-				case 3: if (subsecOn){ str+='</div>'; subsecOn=false; }
-				case 4: if (subsubsecOn){ str+='</div>'; subsubsecOn=false; }
+		function closeSec(hN) {
+			if (hN===undefined) { hN=1; }
+			switch(hN) {
+				case 1: if (docuOn) { str+='</div>'; docuOn=false; }
+				case 2: if (secOn) { str+='</div>'; secOn=false; }
+				case 3: if (subsecOn) { str+='</div>'; subsecOn=false; }
+				case 4: if (subsubsecOn) { str+='</div>'; subsubsecOn=false; }
 				default:
 			}
 		}
-		function getEmmetFromHead(trimedHead){
+		function getEmmetFromHead(trimedHead) {
 			var res;
 			var emmet="";
 			var rexHeadEmmet=/^\[([\w\s#._-]+)\]/;
 			res=rexHeadEmmet.exec(trimedHead);
-			if (res!=null){ emmet=res[1]; }
+			if (res!=null) { emmet=res[1]; }
 			return emmet;
 		}
-		function getClassesFromEmmet(str){
+		function getClassesFromEmmet(str) {
 			var res;
 			var classes="";
 			var rexClasses=/\.([\w-]+)/g;
-			while((res=rexClasses.exec(str))!=null){
+			while((res=rexClasses.exec(str))!=null) {
 				classes+=res[1]+" ";
 			}
 			return classes.trim();
 		}
-		function getIdFromEmmet(str){
+		function getIdFromEmmet(str) {
 			var res;
 			var elemId="";
 			var rexId=/#([\w-]+)/;
 			res=rexId.exec(str);
-			if (res!=null){ elemId=res[1]; }
+			if (res!=null) { elemId=res[1]; }
 			return elemId;
 		}
 		
-		for (var i=0;i<p;i++){
+		for (var i=0;i<p;i++) {
 			ps[i]=ps[i].trim();
 			
-			if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null){
+			if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null) {
 				untilEnter.lastIndex=hN=hN[0].length;
 				closeSec(hN);
 				head=untilEnter.exec(ps[i]);
 				head=head[0].trim();
 				emmet=getEmmetFromHead(head);
 				classes=elemId="";
-				if (emmet.length>0){
+				if (emmet.length>0) {
 					head=head.substring(emmet.length+2).trim();
 					classes=getClassesFromEmmet(emmet);
 					elemId=getIdFromEmmet(emmet);
-					if(classes.length>0){
+					if(classes.length>0) {
 						classes=" "+classes;
 					}
-					if(elemId.length>0){
+					if(elemId.length>0) {
 						elemId=' id="'+elemId+'"';
 					}
 				}
-				switch(hN){
+				switch(hN) {
 					case 1: str+='<div class="docuK fromSEE"><div class="sec'+classes+'"><h1'+elemId+'>'+head+'</h1>';
 						docuOn=secOn=true; break;
 					case 2:
-						if (head==="TOC"){
+						if (head==="TOC") {
 							str+='<div class="sec">';
 							head=TOC;
 							str+='<h2 class="notSec">'+head+'</h2><div class="p toc"></div></div>'; // self closing.
-						} else if (head==="PH"){
+						} else if (head==="PH") {
 							str+='<div class="sec hiden">';
 							head=PH;
 							str+='<h2 class="no-sec-N" id="sec-PH">'+head+'</h2>';
 							secOn=true;
-						} else if (head==="RRA"){
+						} else if (head==="RRA") {
 							str+='<div class="sec">';
 							head=RRA;
 							str+='<h2 class="no-sec-N" id="sec-Refs">'+head+'</h2>';
 							secOn=true;
-						} else{
+						} else {
 							str+='<div class="sec'+classes+'">';
 							str+='<h2'+elemId+'>'+head+'</h2>';
 							secOn=true;
@@ -232,36 +232,36 @@
 					default: str+='<h'+hN+elemId+'>'+head+'</h'+hN+'>';
 				}
 				ps[i]=ps[i].substring(untilEnter.lastIndex).trim();
-			} else if ((hN=/^#+(?=\/)/.exec(ps[i]))!==null){
+			} else if ((hN=/^#+(?=\/)/.exec(ps[i]))!==null) {
 				hN=hN[0].length;
 				closeSec(hN);
 				continue; // Text after '#/' is ignored. Use '#####/' for comment.
 			}
 			
-			if (ps[i].length!==0){
-				if (/^<\/?\w/.test(ps[i])){
+			if (ps[i].length!==0) {
+				if (/^<\/?\w/.test(ps[i])) {
 					str+=ps[i];
-				} else if (/^```/.test(ps[i])){
+				} else if (/^```/.test(ps[i])) {
 					ps[i]=ps[i].replace(/^```/,'').replace(/```\/$/,'').trim();
 					emmet=getEmmetFromHead(ps[i]);
 					classes=elemId="";
-					if (emmet.length>0){
+					if (emmet.length>0) {
 						ps[i]=ps[i].substring(emmet.length+2).trim();
 						classes=getClassesFromEmmet(emmet);
 						elemId=getIdFromEmmet(emmet);
-						if(classes.length>0){
+						if(classes.length>0) {
 							classes=" "+classes;
 						}
-						if(elemId.length>0){
+						if(elemId.length>0) {
 							elemId=' id="'+elemId+'"';
 						}
 					}
 					str+='<pre class="prettyprint'+classes+'"'+elemId+'>'
 						+ps[i].replace(/<\/pre>/ig,'/pre replaced>')
 						+'</pre>'
-				} else{
+				} else {
 					str+='<div class="p';
-					// if (/^-/.test(ps[i])){
+					// if (/^-/.test(ps[i])) {
 					// 	str+=' cmt';
 					// }
 					str+='">'+ps[i]+'</div>';
@@ -273,21 +273,21 @@
 		return str;
 	};
 	
-	kipid.getContentsJoinedWithEnter=function($elem){
+	kipid.getContentsJoinedWithEnter=function($elem) {
 		var contents=$elem.contents();
 		var contentsL=contents.length;
 		var i, contentI;
 		var lis, lisL, j;
 		var strArray=[];
-		for (i=0;i<contentsL;i++){
+		for (i=0;i<contentsL;i++) {
 			contentI=contents.eq(i);
-			if (contentI.is("ol")){
+			if (contentI.is("ol")) {
 				lis=contentI.contents();
 				lisL=lis.length;
-				for (j=0;j<lisL;j++){
+				for (j=0;j<lisL;j++) {
 					strArray.push(lis.eq(j).text().trim());
 				}
-			} else{
+			} else {
 				strArray.push(contentI.text().trim());
 			}
 		}
@@ -353,22 +353,22 @@
 	////////////////////////////////////////////////////
 	// Functions for printing codes into 'pre.prettyprint'.
 	////////////////////////////////////////////////////
-	kipid.indentsRemove=function(str){
+	kipid.indentsRemove=function(str) {
 		var firstIndent=str.match(/^\n\t+/), indentRegExp;
-		if (firstIndent!==null){ // if match (first indent) is found
+		if (firstIndent!==null) { // if match (first indent) is found
 			indentRegExp=new RegExp("\\n\\t{1,"+(firstIndent[0].length-1)+"}",'g'); // /\n\t{1,n}/g: global greedy matching
-		} else{
+		} else {
 			indentRegExp=/^\n/; // just for minimum match
 		}
 		return str.replace(indentRegExp,'\n');
 	};
-	kipid.escapeHTML=function(str, query){
+	kipid.escapeHTML=function(str, query) {
 		return ((query==undefined)&&true||query)?str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):str;
 	};
-	kipid.printCode=function(codeId){
+	kipid.printCode=function(codeId) {
 		var $pre=$("#pre-"+codeId);
 		var $code=$("#"+codeId);
-		if ($pre.exists()){
+		if ($pre.exists()) {
 			$pre.html(kipid.escapeHTML(
 				// ('<codeprint id="'+codeId+'">'+
 				kipid.indentsRemove($code.html())
@@ -380,7 +380,7 @@
 	////////////////////////////////////////////////////
 	// Function for toggling height, i.e. switching scrollability with conserving view.
 	////////////////////////////////////////////////////
-	kipid.toggleHeight=function(obj){
+	kipid.toggleHeight=function(obj) {
 		var next=$(obj).next();
 		var toBeScrolledBy=0;
 		var windowScrollTop=$(window).scrollTop();
@@ -389,15 +389,15 @@
 		var nHeight=next.height();
 		// kipid.resultTest.append("before:\twindowScrollTop: "+windowScrollTop+";\tnOffsetTop: "+nOffsetTop+";\tnHeight: "+nHeight+"\n");
 		
-		if (next.is(".scrollable")){ // becomes expanded.
+		if (next.is(".scrollable")) { // becomes expanded.
 			toBeScrolledBy=next.scrollTop();
 			next.removeClass("scrollable");
 			window.scrollTo(0,windowScrollTop+toBeScrolledBy);
-		} else{ // becomes scrollable.
-			if (windowScrollTop<nOffsetTop){
+		} else { // becomes scrollable.
+			if (windowScrollTop<nOffsetTop) {
 				// case0: no scroll
 				next.addClass("scrollable");
-			} else{
+			} else {
 				// case1: scroll both
 				toBeScrolledBy=windowScrollTop-nOffsetTop;
 				var tailHeight=nHeight-toBeScrolledBy;
@@ -414,16 +414,16 @@
 	////////////////////////////////////////////////////
 	// section's show/hide functions
 	////////////////////////////////////////////////////
-	kipid.ShowHide=function(elem){
+	kipid.ShowHide=function(elem) {
 		$(elem).next().toggle();
-		if ($(elem).next().is(":visible")){
+		if ($(elem).next().is(":visible")) {
 			$(elem).html("▼ Hide");
-		} else{
+		} else {
 			$(elem).html("▼ Show");
 		}
-		setTimeout(function(){$(window).trigger("scroll.delayedLoad");}, 1000);
+		setTimeout(function() {$(window).trigger("scroll.delayedLoad");}, 1000);
 	};
-	kipid.Hide=function(elem){
+	kipid.Hide=function(elem) {
 		var $elem=$(elem).parent();
 		window.scrollBy(0,-$elem.outerHeight());
 		$elem.hide();
@@ -433,15 +433,15 @@
 	////////////////////////////////////////////////////
 	// bubbleRef's show/hide functions
 	////////////////////////////////////////////////////
-	kipid.ShowBR=function(elem){
+	kipid.ShowBR=function(elem) {
 		clearTimeout(kipid.timerHideBRQueue);
 		kipid.bubbleRefs.hide();
 		$(elem).find(">.bubbleRef").show();
 	};
-	kipid.timerHideBR=function(elem){
-		kipid.timerHideBRQueue=setTimeout(function(){$(elem).find(">.bubbleRef").hide();}, 1000);
+	kipid.timerHideBR=function(elem) {
+		kipid.timerHideBRQueue=setTimeout(function() {$(elem).find(">.bubbleRef").hide();}, 1000);
 	};
-	kipid.HideBR=function(elem){
+	kipid.HideBR=function(elem) {
 		$(elem).parent().hide();
 	};
 	
@@ -456,12 +456,12 @@
 	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 	
-	kipid.Cmode=function(modeI){
-		if (modeI=="Dark"){
+	kipid.Cmode=function(modeI) {
+		if (modeI=="Dark") {
 			kipid.docuK.removeClass("bright");
-		} else if (modeI=="Bright"){
+		} else if (modeI=="Bright") {
 			kipid.docuK.addClass("bright");
-		} else{
+		} else {
 			return false;
 		}
 		kipid.mode=modeI;
@@ -470,7 +470,7 @@
 		kipid.docCookies.setItem("kipid.mode", kipid.mode, kipid.expire, "/");
 		return true;
 	};
-	kipid.CfontFamily=function(font){
+	kipid.CfontFamily=function(font) {
 		kipid.docuK.css({fontFamily:font});
 		kipid.fontFamily=font;
 		kipid.browserWidth=0;
@@ -478,7 +478,7 @@
 		kipid.docCookies.setItem("kipid.fontFamily", kipid.fontFamily, kipid.expire, "/");
 		return true;
 	};
-	kipid.CfontSize=function(increment){
+	kipid.CfontSize=function(increment) {
 		kipid.fontSize+=increment;
 		if (kipid.fontSize<7) {
 			kipid.fontSize=7;
@@ -494,7 +494,7 @@
 		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize, kipid.expire, "/");
 		return true;
 	};
-	kipid.ClineHeight=function(increment){
+	kipid.ClineHeight=function(increment) {
 		kipid.lineHeight10+=increment;
 		if (kipid.lineHeight10<10) {
 			kipid.lineHeight10=10;
@@ -510,8 +510,8 @@
 		kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
 		return true;
 	};
-	$(window).on("resize.deviceInfo", function(){
-		if(window.innerWidth!==kipid.browserWidth){
+	$(window).on("resize.deviceInfo", function() {
+		if(window.innerWidth!==kipid.browserWidth) {
 			kipid.browserWidth=window.innerWidth;
 			kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
 			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
@@ -527,37 +527,37 @@
 	////////////////////////////////////////////////////
 	// Delayed Loading.
 	////////////////////////////////////////////////////
-	$.fn.inView=function(delayPad){
+	$.fn.inView=function(delayPad) {
 		delayPad=delayPad||0;
 		var $elem=$(this);
-		if ($elem.is(":visible")){
+		if ($elem.is(":visible")) {
 			var viewportHeight=window.innerHeight;
 			var scrollTop=$(window).scrollTop();
 			var elemTop=$elem.offset().top-delayPad;
 			var elemBottom=elemTop+$elem.height()+delayPad*2;
 			return (scrollTop+viewportHeight>elemTop) && (scrollTop<elemBottom);
-		} else{
+		} else {
 			return false;
 		}
 	};
-	$.fn.delayedLoad=function(delayPad){
+	$.fn.delayedLoad=function(delayPad) {
 		var $elem=$(this);
 		var done=false;
-		if ($elem.inView(delayPad)){
+		if ($elem.inView(delayPad)) {
 			// divs with background-image
-			if ($elem.attr("delayed-bgimage")){
+			if ($elem.attr("delayed-bgimage")) {
 				$elem.css("background-image", "url("+$elem.attr("delayed-bgimage")+")");
 				$elem.removeAttr("delayed-bgimage");
 				done=true;
 			} 
 			// iframes or images
-			if ($elem.attr("delayed-src")){
+			if ($elem.attr("delayed-src")) {
 				$elem.attr("src", $elem.attr("delayed-src"));
 				$elem.removeAttr("delayed-src");
 				done=true;
 			}
 			// MathJax Process
-			if (typeof MathJax!=='undefined'&&$elem.is(".MathJax_Preview")){
+			if (typeof MathJax!=='undefined'&&$elem.is(".MathJax_Preview")) {
 				kipid.logPrint("<br><br>MathJax.Hub.Process("+$elem.next()[0]+") is called.");
 				MathJax.Hub.Queue(["Process", MathJax.Hub, $elem.next()[0]]);
 				done=true;
@@ -568,14 +568,14 @@
 	
 	kipid.delayPad=kipid.delayPad||50;
 	kipid.delayedElems=[];
-	kipid.delayedLoadAll=function(){
+	kipid.delayedLoadAll=function() {
 		// kipid.logPrint("<br>Doing delayed-load. "+kipid.delayedElems.length);
-		if (kipid.delayedElems.length===0){
+		if (kipid.delayedElems.length===0) {
 			kipid.logPrint("<br><br>All delayedElem are loaded.")
 			$(window).off("scroll.delayedLoad");
-		} else{
-			kipid.delayedElems.each(function(){
-				if ($(this).delayedLoad(kipid.delayPad)){
+		} else {
+			kipid.delayedElems.each(function() {
+				if ($(this).delayedLoad(kipid.delayPad)) {
 					kipid.delayedElems=kipid.delayedElems.not(this);
 					kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
 				}
@@ -586,15 +586,15 @@
 	kipid.previous=Date.now();
 	kipid.wait=kipid.wait||500;
 	kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
-	kipid.delayedLoadByScroll=function kipidDelayedLoadByScroll(){
+	kipid.delayedLoadByScroll=function kipidDelayedLoadByScroll() {
 		var now=Date.now();
 		var passed=now-kipid.previous;
-		if (passed>kipid.wait){
+		if (passed>kipid.wait) {
 			kipid.delayedLoadAll();
 			kipid.previous=now;
-		} else{
+		} else {
 			$(window).off("scroll.delayedLoad");
-			setTimeout(function(){
+			setTimeout(function() {
 				kipid.delayedLoadAll();
 				kipid.previous=Date.now();
 				$(window).on("scroll.delayedLoad", kipidDelayedLoadByScroll);
@@ -609,24 +609,24 @@
 	// docuK Process
 	////////////////////////////////////////////////////
 	////////////////////////////////////////////////////
-	kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined){
+	kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		////////////////////////////////////////////////////
 		// Possible duplicate id is handled.
 		////////////////////////////////////////////////////
 		docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
 		kipid.logPrint("<br><br>docuK-"+docuKI+" scripts started!<br><span class='emph'>If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>");
 		var docuK=kipid.docuK.eq(docuKI);
-		if (docuK.is(".rendered")){
+		if (docuK.is(".rendered")) {
 			kipid.logPrint("<br><br>docuK-"+docuKI+" is already rendered.");
 			return;
 		}
 		
 		var postId="-in-docuK"+docuKI;
 		var postIdRegEx=new RegExp(postId+"$");
-		if (docuK.is(".noDIdHandle")){
+		if (docuK.is(".noDIdHandle")) {
 			postId="";
-		} else{
-			docuK.find("[id]").each(function(){
+		} else {
+			docuK.find("[id]").each(function() {
 				var $this=$(this);
 				$this[0].id+=postId;
 			});
@@ -661,7 +661,7 @@
 		var secI, secIH2, subsecJH3, subsubsecKH4;
 		var secN=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
 		var eqqs, eqN="", eqC="", figs;
-		function fTocHtml(numbering){
+		function fTocHtml(numbering) {
 			var secN=(numbering===undefined||numbering)?"secN":"none";
 			return "<h"+hN+">"
 			+"<a class='jump' id='toc"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
@@ -669,9 +669,9 @@
 				+txt
 			+"</a></h"+hN+">";
 		}
-		function fSecHtml(numbering){
+		function fSecHtml(numbering) {
 			var secN="none", endA0="", endA1="</a>";
-			if (numbering===undefined||numbering){
+			if (numbering===undefined||numbering) {
 				secN="secN"; endA0="</a>"; endA1="";
 			}
 			return "<a class='jump tJump' href='#toc"+docuKI+"-"+secId+"'>T</a>"
@@ -679,18 +679,18 @@
 				+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
 			+endA0+txt+endA1;
 		}
-		function fEqqHtml(){
+		function fEqqHtml() {
 			return '<div class="eqCC">'
 				+'<div class="eqN"><span class="number">('+eqN+')</span></div>'
 				+'<div class="eqC">'+eqC+'</div>'
 			+'</div>';
 		}
-		for (var i=0;i<secs.length;i++){
+		for (var i=0;i<secs.length;i++) {
 			secI=secs.eq(i);
 			secIH2=secI.find("h2:first-child");
-			if (secIH2.exists() && !secIH2.is(".notSec")){ // exclude ".sec>h1" and ".sec>h2.notSec" in ToC
+			if (secIH2.exists() && !secIH2.is(".notSec")) { // exclude ".sec>h1" and ".sec>h2.notSec" in ToC
 				hN="2"; txt=secIH2.html();
-				if (secIH2.is(".no-sec-N")||secI.is(".no-sec-N")){
+				if (secIH2.is(".no-sec-N")||secI.is(".no-sec-N")) {
 					secPreTxt=secId=secITxt=(secIH2.is("[id]"))?secIH2.attr('id').replace(/^sec-/i,'').replace(postIdRegEx,''):"secPreTxt"+docuKI+"-"+i;
 					tocHtml+=fTocHtml(false);
 					secIH2.html(fSecHtml(false));
@@ -701,7 +701,7 @@
 					secIH2.html(fSecHtml());
 				}
 				
-				if (!secI.is(".noToggleUI")){
+				if (!secI.is(".noToggleUI")) {
 					secContentsId="sec"+docuKI+"-"+secITxt+"-contents";
 					secI.append("<div class=\"cBoth\"></div><div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
 					secI.contents().slice(1).wrapAll("<div class=\"sec-contents\" id=\""+secContentsId+"\"></div>");
@@ -710,14 +710,14 @@
 				}
 				
 				subsecs=secI.find(".subsec"); subsecI=0;
-				for (var j=0;j<subsecs.length;j++){
+				for (var j=0;j<subsecs.length;j++) {
 					subsecJH3=subsecs.eq(j).find("h3:first-child");
 					hN="3"; subsecI++; secId=secITxt+"-"+subsecI; secPreTxt=secITxt+"."+subsecI; txt=subsecJH3.html();
 					tocHtml+=fTocHtml();
 					subsecJH3.html(fSecHtml());
 					
 					subsubsecs=subsecs.eq(j).find(".subsubsec"); subsubsecI=0;
-					for (var k=0;k<subsubsecs.length;k++){
+					for (var k=0;k<subsubsecs.length;k++) {
 						subsubsecKH4=subsubsecs.eq(k).find("h4:first-child");
 						hN="4"; subsubsecI++; secId=secITxt+"-"+subsecI+"-"+subsubsecI; secPreTxt=secITxt+"."+subsecI+"."+subsubsecI; txt=subsubsecKH4.html();
 						tocHtml+=fTocHtml();
@@ -728,15 +728,15 @@
 				secITxt="x";
 			}
 			eqqs=secI.find("eqq");
-			for(j=0;j<eqqs.length;j++){
+			for (j=0;j<eqqs.length;j++) {
 				eqN=secITxt+"-"+(j+1).toString();
 				eqC=eqqs.eq(j).html().trim();
 				eqqs.eq(j).html(fEqqHtml());
 			}
 			figs=secI.find("figure");
-			for(j=0;j<figs.length;j++){
+			for (j=0;j<figs.length;j++) {
 				figN=secITxt+"-"+(j+1).toString();
-				figs.eq(j).find(".caption").html(function(ith,orgTxt){return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
+				figs.eq(j).find(".caption").html(function(ith,orgTxt) {return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
 			}
 		}
 		secs.find(".toc").html(tocHtml);
@@ -746,12 +746,12 @@
 		// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
 		// Make 'refer' tags bubble-refer equations (eqq tag) or figures (figure tag). Any tag with id can be bubble-refered with refer tag.
 		////////////////////////////////////////////////////
-		function pad(str, max){
+		function pad(str, max) {
 			str=str.toString();
 			return str.length<max?pad("0"+str,max):str;
 		}
 		var refN="", preRefHtml="", refHtml="", citeN="";
-		function fCiteHtml(){
+		function fCiteHtml() {
 			var str='<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">'
 				+refN
 				+'<div class="bubbleRef">'
@@ -765,22 +765,53 @@
 						+'✖'
 					+'</svg></div>'
 				+'</div></div>';
-			if (kipid.browserWidth<321){
+			if (kipid.browserWidth<321) {
 				str=str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
 			}
 			return str;
 		}
-		var refs=docuK.find("ol.refs>li")
-		for(i=0;i<refs.length;i++){ // ref [i+1] with id
+		var olRefs=docuK.find("ol.refs");
+		olRefs=olRefs.eq(olRefs.length-1);
+		var refs=docuK.find("ol.refs>li");
+		var refsN=refs.length;
+		for (i=0;i<refsN;i++) { // ref [i+1] with id
 			refs.eq(i).prepend('<span class="refN">Ref. <span class="number">['+pad(i+1,2)+']</span> </span>');
 		}
-		var refers=docuK.find("cite,refer"), referI, refered;
+		var cites=docuK.find("cite"), citeI, refered;
+		for (i=0;i<cites.length;i++) {
+			citeI=cites.eq(i);
+			if (citeI.is("[class]")) {
+				if (citeI.html()!=="") {
+					refered=docuK.find("#"+citeI.attr("class")+postId);
+					if (refered.exists()) {
+						var refNHtml=refered.find(".refN").html();
+						refered.html('<span class="refN">'+refNHtml+'</span>'+citeI.html());
+					} else {
+						refsN+=1;
+						olRefs.append("<li id='"+citeI.attr("class")+postId+"'>"
+								+'<span class="refN">Ref. <span class="number">['+pad(refsN,2)+']</span> </span>'
+								+citeI.html()
+							+"</li>");
+					}
+				}
+				refered=docuK.find("#"+citeI.attr("class")+postId);
+				if (refered.exists()) {
+					citeN=(i+1).toString()+"-"+citeI.attr("class")+postId;
+					refHtml=refered.html().trim().replace(/\bid\s*=/gi,'psudoId=');
+					refN=refered.find(".number").html();
+					citeI.html(fCiteHtml());
+				} else {
+					citeI.html('<span class="emph">( No refer. )</span>');
+				}
+			}
+		}
+		var refers=docuK.find("refer"), referI;
 		refers.html('<span class="emph">( No refer. )</span>');
-		for(i=0;i<refers.length;i++){
+		for (i=0;i<refers.length;i++) {
 			referI=refers.eq(i);
-			if (referI.is("[class]")){
+			if (referI.is("[class]")) {
 				refered=docuK.find("#"+referI.attr("class")+postId);
-				if (refered.exists()){
+				if (refered.exists()) {
 					citeN=(i+1).toString()+"-"+referI.attr("class")+postId;
 					refHtml=refered.html().trim().replace(/\bid\s*=/gi,'psudoId=');
 					refN=refered.find(".number").html();

@@ -1,7 +1,7 @@
 <codeprint id="docuK-style">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
-<link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css">
+<!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <style>
 .exit {z-index:100; position:absolute; display:inline-block; left:.3em; width:1.8em; height:1.8em; text-align:center; margin-top:-.5em; border-radius:.4em; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white}
@@ -14,10 +14,10 @@
 		</g>
 		✖
 	</svg></div> --><div class="sec" id="docuK-log"></div></div>
-<script src="docuK-prepare-2.2.js"></script>
+<!-- <script src="docuK-prepare-2.2.js"></script> -->
 <!-- From kipid.tistory CDN -->
-<!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css"> -->
-<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script> -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script>
 <!-- From NP.tistory CDN -->
 <!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-2.2.css"> -->
 <!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-prepare-2.2.js"></script> -->
@@ -28,7 +28,7 @@
 <!-- docuK format lastly updated at 2014-06-25. -->
 
 <meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
-<div class="sec"><h1>HTML docuK format ver. 2.2 (2014-06-25)</h1>
+<div class="sec"><h1>HTML docuK format ver. 2.3 (2014-06-25)</h1>
 	<div class="p">
 		개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 'document designed by kipid'란 뜻.
 	</div>
@@ -36,7 +36,9 @@
 </div>
 
 <div class="sec hiden no-sec-N"><h2 id="sec-UH">Update History</h2>
+	<div class="subsec"><h3>Upto version 2.3</h3></div>
 	<ul>
+		<li>2014-11-23: Super Easy Citation all at once.</li>
 		<li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
 		<li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
 		<li>2014-08-09: pre.scrollable 일때만 scroll switch fetch. bubbleRef show/hide "&gt;.bubbleRef"로. (chaining은 ㅡㅡ;;;)</li>
@@ -103,6 +105,13 @@
 	<div class="p">
 		Refering sections: Sec. <refer class="sec-Cite"></refer>, Sec. <refer class="sec-Font"></refer>, <refer class="sec-Second"></refer>, Sec. <refer class="sec-Refs"></refer>, <refer class="sec-Refs-subex"></refer>, <refer class="sec-Math"></refer>, <refer class="sec-Figure"></refer>, <refer class="sec-Second-sub1"></refer>, <refer class="sec-Second-sub1-1"></refer>, <refer class="sec-Second-sub1-2"></refer>, <refer class="sec-ShowHide"></refer>, <refer class="sec-SH-1"></refer>, <refer class="sec-SH-2"></refer>, <refer class="sec-SH-2-1"></refer>, <refer class="sec-SH-2-3"></refer>.
 	</div>
+	
+	<div class="subsec"><h3>Putting and Citing the references all at once</h3>
+		<div class="p">
+			You can put the references into <code>ol.refs</code> in RRA. And cite it with id. But this is sometimes tedious. You can put and cite the references all at once like <cite class="ref-putAndCiteAllAtOnce">This will be added to the last of <code>ol.refs</code></cite><cite class="ref-easy-cite">Quite easy is to cite something, isn't it? This is what we call super easy edit.</cite>.
+		</div>
+	</div>
+	<!-- subsec: Putting and Citing the references all at once -->
 </div>
 
 <div class="sec hiden"><h2 id="sec-Font">Font-size:??em; Text-indent in div.p; Line-height; ol, ul, dl css</h2>
@@ -843,6 +852,8 @@
 		<li><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>;<br>
 			// LaTeX가 무엇인지 궁금하시다면 방문해 보시길.
 		</li>
+		
+		<div class="subsec"><h3>Automatically added by inner citation (like footnote)</h3></div>
 	</ol>
 </div>
 </div><!-- second docuK -->
@@ -866,10 +877,9 @@ MathJax.Hub.Config({
 	}
 });
 </script>
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
-<script src="docuK-postProcess-2.2.js"></script>
+<!-- <script src="docuK-postProcess-2.2.js"></script> -->
 <!-- From kipid.tistory CDN -->
-<!-- <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script> -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
 <!-- From NP.tistory CDN -->
 <!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-postProcess-2.2.js"></script> -->
 </codeprint><!-- docuK-script -->
