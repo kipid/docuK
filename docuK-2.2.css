@@ -2,7 +2,7 @@
 /* document kipid */
 body {margin:0; padding:0}
 codeprint.SEE {display:none}
-.docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-all}
+.docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
 .docuK ::selection, .docuK ::-moz-selection {background:#a00; color:white}
 .docuK div, textarea {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
 .docuK data {display:none}
