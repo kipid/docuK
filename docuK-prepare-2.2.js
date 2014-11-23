@@ -639,7 +639,7 @@
 			'<div class="change-docuK-style">'
 			+'<form><input id="button'+docuKI+'-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>'
 			+'</input><input id="button'+docuKI+'-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form> '
-			+'<form><input class="emph" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
+			+'<form><input class="bold" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
 			+((docuKI===1)?'<form><button type="button" onclick="kipid.CfontSize(-1)" style="font-size:1em">A</button>'+'<button type="button" onclick="kipid.CfontSize(1)" style="font-size:1.4em">A</button></form> '
 			+'<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1.3em">=</button>'+'<button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.3em">〓</button></form> ':'')
 			+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '

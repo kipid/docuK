@@ -176,6 +176,7 @@
 		////////////////////////////////////////////////////
 		kipid.hLists=$("#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4");
 		kipid.tocs=$(".docuK>.sec").has(".toc");
+		kipid.rras=$(".docuK>.sec").has("ol.refs");
 		kipid.processShortKey=function(event) {
 			if (event.altKey||event.ctrlKey||event.metaKey) return;
 			switch (event.target.nodeName) {
@@ -227,6 +228,20 @@
 					}
 					$(window).scrollTop(tocI.offset().top);
 					break;
+				case 82: //R = 82
+					var scrollTop=$(window).scrollTop();
+					var i, k=kipid.rras.length;
+					var rraI;
+					scrollTop-=10;
+					for (i=k-1;i>=0;i--) {
+						rraI=kipid.rras.eq(i);
+						if (rraI.is(":visible")&&scrollTop>rraI.offset().top) { break; }
+					}
+					if (i===-1) {
+						rraI=kipid.rras.eq(k-1);
+					}
+					$(window).scrollTop(rraI.offset().top);
+					break;
 				case 76: //L = 76
 					window.location = "/category/0"
 					break;
@@ -248,6 +263,7 @@
 		if (shortkeyDesc.exists()) {
 			shortkeyDesc.prepend(
 				"<li>T: Table of Contents</li>"
+				+"<li>R: References</li>"
 				+"<li>F: Forward Section</li>"
 				+"<li>D: Previous Section</li>"
 				+"<li>L: To the [Lists]</li>"
