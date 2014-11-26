@@ -158,7 +158,7 @@
 			////////////////////////////////////////////////////
 			// MathJax PreProcess after the above MathJax.js is loaded.
 			////////////////////////////////////////////////////
-			kipid.mathJaxPreProcess=setInterval(function() {
+			kipid.mathJaxPreProcessDo = function() {
 				if (typeof MathJax!=='undefined') {
 					clearInterval(kipid.mathJaxPreProcess);
 					MathJax.Hub.Queue(["PreProcess",MathJax.Hub]);
@@ -168,7 +168,8 @@
 						$(window).on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 					});
 				}
-			}, 2000);
+			};
+			kipid.mathJaxPreProcess=setInterval(kipid.mathJaxPreProcessDo, 2000);
 		}
 		
 		////////////////////////////////////////////////////
