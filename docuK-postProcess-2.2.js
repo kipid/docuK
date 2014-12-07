@@ -59,14 +59,6 @@
 		kipid.docuKProcess(kipid, jQuery, i);
 	}
 	
-	// kipid.TFontSize=docuK.find(".TFontSize");
-	// kipid.TLineHeight=docuK.find(".TLineHeight");
-	kipid.deviceInfo=docuK.find(".deviceInfo");
-	kipid.fontSize=parseInt(docuK.css('font-size'));
-	kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
-	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
-	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
-	
 	kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
 	
 	var inRefs=docuK.find(".inRef");
@@ -96,6 +88,15 @@
 		////////////////////////////////////////////////////
 		// Setting and Printing Styles
 		////////////////////////////////////////////////////
+		// kipid.TFontSize=docuK.find(".TFontSize");
+		// kipid.TLineHeight=docuK.find(".TLineHeight");
+		
+		kipid.deviceInfo=docuK.find(".deviceInfo");
+		kipid.fontSize=parseInt(docuK.css('font-size'));
+		kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
+		kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
+		kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
+		
 		var cookieItem;
 		kipid.logPrint("<br>");
 		cookieItem=kipid.docCookies.getItem("kipid.mode");
@@ -122,8 +123,7 @@
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
 		// kipid.deviceInfo.html("browser width: "+kipid.browserWidth);
-		kipid.browserWidth=0;
-		$(window).trigger("resize.deviceInfo");
+		kipid.printDeviceInfo();
 		kipid.logPrint("<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.");
 		
 		////////////////////////////////////////////////////

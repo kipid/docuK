@@ -120,6 +120,18 @@
 					end=dE.lastIndex;
 					subStr=SEE.substring(start,end).trim();
 				}
+			} else if (/^<data\s*[^>]*>/i.test(subStr)) {
+				while(!/<\/data>$/i.test(subStr)) {
+					re=dE.exec(SEE);
+					end=dE.lastIndex;
+					subStr=SEE.substring(start,end).trim();
+				}
+			} else if (/^<!--/i.test(subStr)) {
+				while(!/-->$/i.test(subStr)) {
+					re=dE.exec(SEE);
+					end=dE.lastIndex;
+					subStr=SEE.substring(start,end).trim();
+				}
 			}
 			ps.push(subStr);
 			start=end;
@@ -450,11 +462,21 @@
 	////////////////////////////////////////////////////
 	// kipid.TFontSize=docuK.find(".TFontSize");
 	// kipid.TLineHeight=docuK.find(".TLineHeight");
-	kipid.deviceInfo=docuK.find(".deviceInfo");
-	kipid.fontSize=parseInt(docuK.css('font-size'));
-	kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
-	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
-	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
+	
+	kipid.deviceInfo=null; // docuK.find(".deviceInfo");
+	kipid.fontSize=0; // parseInt(docuK.css('font-size'));
+	kipid.lineHeight10=0; // parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
+	kipid.fontFamily=""; // docuK.css('font-family').trim().split(/\s*,\s*/)[0];
+	kipid.mode=""; // (docuK.is(".bright"))?"Bright":"Dark";
+	
+	kipid.printDeviceInfo=function(){
+		kipid.deviceInfo.html("Mode:"+kipid.mode
+			+"; Font:"+kipid.fontFamily
+			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)
+			+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)
+			+";<br>width: "+kipid.browserWidth
+			+", height: "+window.innerHeight);
+	};
 	
 	kipid.Cmode=function(modeI) {
 		if (modeI=="Dark") {
@@ -465,16 +487,16 @@
 			return false;
 		}
 		kipid.mode=modeI;
-		kipid.browserWidth=0;
-		$(window).trigger("resize.deviceInfo");
+		// kipid.browserWidth=0;
+		// $(window).trigger("resize.deviceInfo");
+		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.mode", kipid.mode, kipid.expire, "/");
 		return true;
 	};
 	kipid.CfontFamily=function(font) {
 		kipid.docuK.css({fontFamily:font});
 		kipid.fontFamily=font;
-		kipid.browserWidth=0;
-		$(window).trigger("resize.deviceInfo");
+		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.fontFamily", kipid.fontFamily, kipid.expire, "/");
 		return true;
 	};
@@ -482,15 +504,12 @@
 		kipid.fontSize+=increment;
 		if (kipid.fontSize<7) {
 			kipid.fontSize=7;
-			return false;
 		} else if (kipid.fontSize>20) {
 			kipid.fontSize=20;
-			return false;
 		}
 		kipid.docuK.css({"font-size":kipid.fontSize+"px"});
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
-		kipid.browserWidth=0;
-		$(window).trigger("resize.deviceInfo");
+		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize, kipid.expire, "/");
 		return true;
 	};
@@ -505,8 +524,7 @@
 		}
 		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toString()});
 		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
-		kipid.browserWidth=0;
-		$(window).trigger("resize.deviceInfo");
+		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
 		return true;
 	};
@@ -515,12 +533,7 @@
 			kipid.browserWidth=window.innerWidth;
 			kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
 			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
-			kipid.deviceInfo.html("Mode:"+kipid.mode
-				+"; Font:"+kipid.fontFamily
-				+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)
-				+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)
-				+";<br>width: "+kipid.browserWidth
-				+", height: "+window.innerHeight);
+			kipid.printDeviceInfo();
 		}
 	});
 	
