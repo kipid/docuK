@@ -45,6 +45,45 @@ href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-min.css">
 
 EDIT it yourself, following the format.
 
+### SEE (Super Easy Edit of docuK)
+
+```html
+<codeprint class="SEE">
+# Main title
+
+Write document.
+
+
+## TOC
+
+###/ Table of Contents
+
+
+## section
+
+something1 <cite class="ref-ex"></cite>
+
+
+### subsection
+
+something2
+
+
+#### subsubsection
+
+something3
+
+
+## RRA
+
+<ol class="refs">
+	<li id="ref-ex"><a href="...">Reference 1</a></li>
+</ol>
+</codeprint>
+```
+
+### HTML form.
+
 ```html
 <codeprint id="docuK-docu">
 <div class="docuK">
