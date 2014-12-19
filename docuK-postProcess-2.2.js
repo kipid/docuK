@@ -250,7 +250,7 @@
 					if ($("#recentEntries").exists()) $(window).scrollTop($("#recentEntries").offset().top);
 					break;
 				case 88: //X
-					if ($("#recentComments").exists()) $(window).scrollTop($("#recentComments").offset().top);
+					if ($("#recentComment").exists()) $(window).scrollTop($("#recentComment").offset().top);
 					break;
 				case 67: //C
 					if ($("#recentTrackback").exists()) $(window).scrollTop($("#recentTrackback").offset().top);
