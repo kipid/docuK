@@ -159,13 +159,11 @@ codeprint.SEE {display:none}
 .docuK img[delayed-src] {border:15px solid rgb(10,60,10); min-width:100px; min-height:100px}
 
 @media all and (min-width:321px) {
-	.docuK {font-size:9px}
 	.docuK p {overflow:auto}
 	.docuK .eqCC {max-width:100%; overflow-x:auto}
 }
 @media all and (min-width:401px) {
-	.docuK {font-size:10px}
-	.docuK ::-webkit-scrollbar {width:11px; height:11px}
+	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
 @media all and (min-width:500px) {
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}

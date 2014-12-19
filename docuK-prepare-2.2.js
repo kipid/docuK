@@ -472,7 +472,7 @@
 	kipid.printDeviceInfo=function(){
 		kipid.deviceInfo.html("Mode:"+kipid.mode
 			+"; Font:"+kipid.fontFamily
-			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)
+			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)+"px("+kipid.fontSize+")"
 			+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)
 			+";<br>width: "+kipid.browserWidth
 			+", height: "+window.innerHeight);
