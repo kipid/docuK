@@ -250,8 +250,6 @@ MathJax.Hub.Config({
 	}
 });
 </script>
-<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
-
 <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-min.js"></script>
 </codeprint><!-- docuK-script -->
 ```
