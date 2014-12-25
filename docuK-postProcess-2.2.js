@@ -65,7 +65,7 @@
 	// Centering arrow.
 	inRefs.each(function() {
 		var $elem=$(this);
-		var width=parseFloat($elem.width());
+		var width=parseFloat($elem.width())-2;
 		var $arrow=$elem.find(".arrow");
 		var borderWidth=parseFloat($arrow.css("borderWidth"));
 		var fontSize=parseFloat($arrow.css("fontSize"));
