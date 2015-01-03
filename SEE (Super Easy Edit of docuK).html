@@ -44,10 +44,31 @@
 The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below (or <code>Shift+Enter</code>).
 
 
+
+## PH
+
+###/ Posting History
+
+Posting History is put here. This section is automatically hiden.
+
+<ul>
+	<li>Posting History is put here.</li>
+	<li>2015-01-03: Cite and Refer. 좀 더 정리.</li>
+	<li>2014-06-18: First posting.</li>
+</ul>
+
+##/ Posting History
+
+
+
 ## TOC
+
+TOC is a self-closing section, i.e. no other texts can be put inside.
+Next text will be out of TOC.
 
 ##/ Table of Contents.
 Table will be automatically filled up. Details will be explained in the following sections.
+
 
 
 ## Statement
@@ -59,11 +80,26 @@ If '#', '&lt;', 'http://', or 'https://' comes first in a statement, the paragra
 Furthermore 'http://' or 'https://' even after a single enter (\n) will be treated specially also. (Not yet implemented.)
 
 
-## DocuK and sections
+
+## DocuK and Section (h2)
 
 '#' indicates docuK, and '##' | '###' | '####' to sec | subsec | subsubsec.
 
+### Subsection (h3)
+
 End of docuK: '#/', and end of section | subsec | subsubsec: '##/' | '###/' | '####/' are <span class="emph">optional</span>. Renderer detects end of something automatically according the hierarchy.
+
+#### Subsubsection (h4)
+
+Contents of subsubsection
+
+####/ optional end of subsubsection
+
+###/ optional end of subsection
+
+
+
+### Comment
 
 End of something can be used as comments.
 Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
@@ -76,104 +112,38 @@ Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
 Or just <span class="emph">end of something which are not yet opened</span> is OK.
 
 
-## Predifined section: "PH", "RRA", "TOC"
+### Predifined section: "PH", "RRA", "TOC"
 
 There are three predefined sections. "PH": Posting History, "TOC": Table of Contents, "RRA": References and Related Articles. Possibly I will add more predefined sections which can be used frequently.
 
 See the predefined sections implemented below, and you can easily figure it out how to use it.
 
 
-## PH
 
-###/ Posting History
-
-Posting History is put here. This section is automatically hiden.
-
-<ul>
-	<li>Posting History is put here.</li>
-	<li>2014-06-18: First posting.</li>
-</ul>
-
-##/ Posting History
-
-
-## TOC
-
-TOC is a self-closing section, i.e. no other texts can be put inside.
-Next text will be out of TOC.
-
-##/ Table of Contents.
-Table will be automatically filled up.
-
-
-## RRA
-
-###/ References and Related Articles
-
-<ol class="refs">
-<div class="subsec"><h3>Main</h3></div>
-	<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
-		// Updated regularly</li>
-	<li id="ref-docuKShort"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
-		// Updated regularly</li>
-	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
-<div class="subsec"><h3>Supported by</h3></div>
-	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
-		// JavaScript enhancer</li>
-	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
-		// Math renderer.</li>
-	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
-		// Code prettyfier.</li>
-<div class="subsec"><h3>API documentation</h3></div>
-	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
-	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
-<div class="subsec"><h3>Other markdown/markup languages</h3></div>
-	<li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
-		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
-		// 그래도 문법은 차용해서 쓰기 좋음.</li>
-	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
-		// Wikipedia uses its own markdown language.</li>
-	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
-		// Stack Overflow uses its own markdown language.</li>
-	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
-		// This might be used in GitHub wiki.</li>
-</ol>
-
-##/ References and Related Articles
-
-
-## head (h2) of section
-
-section contents
-
-
-### head (h3) of subsection
-
-contents of subsection
-
-
-#### head (h4) of subsubsection
-
-contents of subsubsection
-
-
-####/ optional end of subsubsection
-
-###/ optional end of subsection
-
-##/ optional end of section
-
-
-##[.class0#sec-Test] Section with class and id
+###[.class0#sec-Test] Section with class and id
 
 Section can have class and id attributes. Using the id, you can refer it like <code class="prettyprint">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
 
 <div class="p">Class and Id are asigned with [emmet style] like <code>##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
 
+##/ optional end of section "DocuK and Section (h2)s"
+
+
 
 ##[.hiden#sec-HidenSec] Initially Hiden Section
 
 With hiden class, the section will be hiden initially.
+
+
+
+##[#sec-cite-refer] Citing references and Refering anything.
+
+You can cite references like <cite class="ref-docuK"></cite><cite class="ref-docuK-short"></cite><cite class="ref-docuK-github"></cite> with <code class="prettyprint">&lt;cite class="ref-docuK"&gt;&lt;/cite&gt;&lt;cite class="ref-docuK-short"&gt;&lt;/cite&gt;&lt;cite class="ref-docuK-github"&gt;&lt;/cite&gt;</code>.
+
+And you can refer anything like section <refer class="sec-cite-refer"></refer>, equation <refer class="eq-ex"></refer>, code <refer class="code-ex"></refer>.
+
+Any html element with id can be refered by using <code class="prettyprint">&lt;refer class="id-of-html-element"&gt;&lt;/refer&gt;</code>.
+
 
 
 ## Raw HTML
@@ -212,31 +182,32 @@ This is default 'be careful' box: <code class="prettyprint">&lt;div class="bcf"&
 </div>
 
 
+
 ## Links | URLs to appropriate html
 
-Planning to implement this.
+Just use <code class="prettyprint">&lt;a href=""&gt;&lt;/a&gt;</code> right now. Planning to implement this. (Should I implement this?? Not desperately needed, I think.)
 
-http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+###/ http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
 How Language Seems To Shape One's View Of The World
 , January 02, 2014, by ALAN YU.
 
 
-## Maths or Equations
 
-Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="prettyprint">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
+## Maths or Equations by LaTeX format
+
+Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="prettyprint">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code> <cite class="ref-eq"></cite>.
 
 The first two are converted to inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one is converted to outline math like
 
-<eqq>
+<eqq id="eq-ex">
 	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
 </eqq>
 
 
-## Codes
 
-Codes can be pretty-printed.
+## Codes to be pretty-printed
 
-Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java">Codes to be pretty-printed.&lt;/pre></code>,
+Codes can be pretty-printed by using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java">Codes to be pretty-printed.&lt;/pre></code>,
 
 <pre class="prettyprint scrollable lang-java">
 import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
@@ -274,7 +245,9 @@ public class HelloWorldServer extends Verticle {
 
 <div class="p"></div>
 
-Using <code>```Codes to be pretty-printed.```/</code>, or <code>```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+Or using <code>```Codes to be pretty-printed.```/</code>, or <code>```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+
+<div id="code-ex"><div class="number">Code Example</div>
 
 ```[.scrollable.lang-java]
 import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
@@ -309,12 +282,60 @@ public class HelloWorldServer extends Verticle {
 	}
 }```/
 
+</div>
+
+If you want to refer the code, enclose the code with <code class="prettyprint">&lt;div id="code-id"&gt;&lt;div class="number"&gt;Code Name&lt;/div&gt;</code> and <code class="prettyprint">&lt;/div&gt;</code>. And refer it with <code class="prettyprint">&lt;refer class="code-id"&gt;&lt;/refer&gt;</code>. Example: <refer class="code-ex"></refer>. Similar technique can be applied to any html element.
+
+
 
 ## More infos
 
 In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>kipid.variables</code> already asigned before, will not work in the afterward rendering.
 
 Only <code>kipid.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>Main</h3></div>
+	<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// Updated regularly</li>
+	<li id="ref-docuK-short"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
+		// Updated regularly</li>
+	<li id="ref-docuK-SEE"><a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">kipid's blog - Super Easy Edit (SEE) of docuK</a>;<br>
+		// Current document</li>
+	<li id="ref-eq"><a href="http://kipid.tistory.com/entry/equations-in-html">kipid's blog - 인터넷, Web, HTML, 블로그에서 수식 사용하기 (Equation or math in HTML, blog)</a></li>
+	<li id="ref-docuK-github"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+	
+<div class="subsec"><h3>Supported by</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// JavaScript enhancer</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// Math renderer.</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// Code prettyfier.</li>
+	
+<div class="subsec"><h3>API documentation</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
+	
+<div class="subsec"><h3>Other markdown/markup languages</h3></div>
+	<li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
+		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
+		// 그래도 문법은 차용해서 쓰기 좋음.</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// Wikipedia uses its own markdown language.</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// Stack Overflow uses its own markdown language.</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// This might be used in GitHub wiki.</li>
+</ol>
+
+##/ References and Related Articles
 </codeprint>
 
 <div class="docuK noDIdHandle">
