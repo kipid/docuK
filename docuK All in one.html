@@ -18,17 +18,12 @@
 <!-- From kipid.tistory CDN -->
 <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
 <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"></script>
-<!-- From NP.tistory CDN -->
-<!-- <link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-2.2.css"> -->
-<!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-prepare-2.2.js"></script> -->
 </codeprint><!-- docuK-style -->
 
+<meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
 <codeprint id="docuK-docu">
 <div class="docuK">
-<!-- docuK format lastly updated at 2014-06-25. -->
-
-<meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
-<div class="sec"><h1>HTML docuK format ver. 2.3 (2014-11-23)</h1>
+<div class="sec"><h1>HTML docuK format ver. 2.3 (2015-01-18)</h1>
 	<div class="p">
 		개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 'document designed by kipid'란 뜻.
 	</div>
@@ -38,6 +33,7 @@
 <div class="sec hiden no-sec-N"><h2 id="sec-UH">Update History</h2>
 	<div class="subsec"><h3>Upto version 2.3</h3></div>
 	<ul>
+		<li>2015-01-18: SNS widget. "2014-08-07: kipid.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
 		<li>2014-11-23: Super Easy Citation all at once.</li>
 		<li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
 		<li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
@@ -63,14 +59,10 @@
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-FE">앞으로 생각하고 있는 것들</h2>
 	<div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
 	<ul>
-		<li>2014-08-07: AJAX test 하면서는 뭔가 이상하게 굴러가네. prepare.js가 먼저 실행되는게 아니고, 먼저 다운받은 js가 먼저 실행되나? postProcess.js에서 error남. MathJax가 아직 없다는 error도 뜨고, kipid.logPrint 같은게 아직 없다는 error도 뜨고.</li>
-		<li>2014-08-07: kipid.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯.</li>
 		<li>2014-08-07: Dual view 구현? 버튼 누르면, Fill browser 되고 (최상위 div를 만들어서(?) fixed, z-index:1000, 같은걸로 채우고) rendered 된 docuK를 복사해서 오른편에 붙이기?</li>
 		
-		<li>2014-08-07: This document is rendered by &lt;a href=""&gt;docuK&lt;/a&gt;. 같은 문구를 넣는게 좋을듯? 다른 사람들도 찾아서 쓸 수 있도록? Github 링크나 내 블로그 링크? 제일 위랑 아래에 삽입?</li>
-		
-		<li>bubbleRef 속 bubbleRef 구현? Chaining으로? (이거 지금도 그냥 될것도 같은데 뭔가 코드가 제대로 적용이 안되는듯??? 분석하려면 오래걸리겠다 ㅡ,.ㅡ;;; 중요한 기능은 아니니 당장은 패스할까나?)</li>
 		<li>Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
+		<li>bubbleRef 속 bubbleRef 구현? Chaining으로? (이거 지금도 그냥 될것도 같은데 뭔가 코드가 제대로 적용이 안되는듯??? 분석하려면 오래걸리겠다 ㅡ,.ㅡ;;; 중요한 기능은 아니니 당장은 패스할까나?)</li>
 		
 		<li>minor: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.)</li>
 		<li>minor: 갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
@@ -862,8 +854,8 @@
 <codeprint id="docuK-script">
 <script>
 window.kipid=window.kipid||{};
-kipid.wait=2000;
-kipid.delayPad=2000;
+kipid.wait=500;
+kipid.delayPad=0;
 </script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -880,6 +872,4 @@ MathJax.Hub.Config({
 <!-- <script src="docuK-postProcess-2.2.js"></script> -->
 <!-- From kipid.tistory CDN -->
 <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
-<!-- From NP.tistory CDN -->
-<!-- <script src="http://cfs.tistory.com/custom/blog/169/1697364/skin/images/docuK-postProcess-2.2.js"></script> -->
 </codeprint><!-- docuK-script -->

@@ -12,6 +12,10 @@ codeprint.SEE {display:none}
 .docuK ::-webkit-scrollbar-thumb {-webkit-border-radius:5px; border-radius:5px; background:rgb(0,120,120); -webkit-box-shadow:inset 0 0 3px rgb(0,0,0)}
 .docuK ::-webkit-scrollbar-corner {background:transparent}
 
+.docuK .SNS-top {margin-top:-35px; margin-bottom:-5px}
+.docuK .SNS-bottom {margin:35px 0; text-align:center}
+.docuK .SNS-img {width:35px; height:35px; border:2px gray solid; border-left:0}
+.docuK .SNS-img:first-child {border-left:2px gray solid}
 .docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
 .docuK .ShowHide {float:right; padding:.3em 0; cursor:pointer}
 .docuK .Hide {float:right; padding:0 0 .3em; clear:both; cursor:pointer}
@@ -30,6 +34,7 @@ codeprint.SEE {display:none}
 .docuK h4 {font-weight:bold; font-size:1.2em}
 .docuK h2, .docuK h3, .docuK h4 {padding:.4em .3em .6em}
 
+.docuK .promoting-docuK {padding-left:70px}
 .docuK .promoting-docuK a {text-decoration:none}
 .docuK .promoting-docuK a:link {color:rgb(0,0,55)}
 .docuK .promoting-docuK a:visited {color:rgb(30,30,105)}

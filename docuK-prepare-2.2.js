@@ -538,6 +538,24 @@
 	});
 	
 	////////////////////////////////////////////////////
+	// Share a link through SNS
+	////////////////////////////////////////////////////
+	kipid.shareSNS=function(service) {
+		var title=encodeURIComponent( $("title").text() );
+		var url=encodeURIComponent(window.location.href);
+		var open="";
+		switch (service) {
+			case 'twitter':
+				open="https://twitter.com/intent/tweet"+"?via=kipacti"+"&text="+title+"&url="+url;
+				break;
+			case 'facebook':
+				open="https://www.facebook.com/sharer/sharer.php"+"?u="+url;
+				break;
+		}
+		window.open(open);
+	};
+	
+	////////////////////////////////////////////////////
 	// Delayed Loading.
 	////////////////////////////////////////////////////
 	$.fn.inView=function(delayPad) {
@@ -598,7 +616,6 @@
 	
 	kipid.previous=Date.now();
 	kipid.wait=kipid.wait||500;
-	kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
 	kipid.delayedLoadByScroll=function kipidDelayedLoadByScroll() {
 		var now=Date.now();
 		var passed=now-kipid.previous;
@@ -646,7 +663,7 @@
 		}
 		
 		////////////////////////////////////////////////////
-		// Style change widget.
+		// Style change widget, and SNS widget.
 		////////////////////////////////////////////////////
 		docuK.prepend(
 			'<div class="change-docuK-style">'
@@ -658,8 +675,11 @@
 			+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
 			+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
 			+'<div class="deviceInfo"></div>'
-			+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://github.com/kipid/docuK">github</a> and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div></div>'
+			+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://github.com/kipid/docuK">github</a> and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>'
+		+'</div>'
+			+'<div class="SNS-top"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"></div>'
 		);
+		docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"></div>');
 		
 		////////////////////////////////////////////////////
 		// Scrollable switching of 'pre.prettyprint'.

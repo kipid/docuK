@@ -272,6 +272,8 @@
 		}
 		kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To the [Lists]) are set.");
 		
+		kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
+		
 		////////////////////////////////////////////////////
 		// Closing docuK Log.
 		////////////////////////////////////////////////////
