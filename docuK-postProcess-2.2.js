@@ -244,13 +244,13 @@
 					$(window).scrollTop(rraI.offset().top);
 					break;
 				case 76: //L = 76
-					window.location = "/category/0"
+					window.location="/category/0";
 					break;
 				case 90: //Z
 					if ($("#recentEntries").exists()) $(window).scrollTop($("#recentEntries").offset().top);
 					break;
 				case 88: //X
-					if ($("#recentComments").exists()) $(window).scrollTop($("#recentComments").offset().top);
+					if ($("#recentComment").exists()) $(window).scrollTop($("#recentComment").offset().top);
 					break;
 				case 67: //C
 					if ($("#recentTrackback").exists()) $(window).scrollTop($("#recentTrackback").offset().top);
@@ -278,6 +278,6 @@
 		// Closing docuK Log.
 		////////////////////////////////////////////////////
 		kipid.logPrint("<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>");
-		setTimeout(function() {kipid.log.hide();}, 0);
+		setTimeout(function() {kipid.log.hide();}, 300);
 	});
 })(window.kipid, jQuery);
