@@ -710,7 +710,7 @@
 			return "<a class='jump tJump' href='#toc"+docuKI+"-"+secId+"'>T</a>"
 			+"<a class='jump' id='secId"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
 				+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
-			+endA0+txt+endA1;
+			+endA0+'<span class="head-txt">'+txt+'</span>'+endA1;
 		}
 		function fEqqHtml() {
 			return '<div class="eqCC">'
