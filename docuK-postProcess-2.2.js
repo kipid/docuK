@@ -175,7 +175,7 @@
 		////////////////////////////////////////////////////
 		// ShortKeys (including default 'processShortcut(event)' of tistory.)
 		////////////////////////////////////////////////////
-		kipid.hLists=$("#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4");
+		kipid.hLists=$("#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,#disqus_thread"); // Ordered automatically by jQuery.
 		kipid.tocs=$(".docuK>.sec").has(".toc");
 		kipid.rras=$(".docuK>.sec").has("ol.refs");
 		kipid.processShortKey=function(event) {
@@ -267,10 +267,10 @@
 				+"<li>R: References</li>"
 				+"<li>F: Forward Section</li>"
 				+"<li>D: Previous Section</li>"
-				+"<li>L: To the [Lists]</li>"
+				+"<li>L: To 전체목록/[Lists]</li>"
 			);
 		}
-		kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To the [Lists]) are set.");
+		kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.");
 		
 		kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
 		
