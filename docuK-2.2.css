@@ -2,8 +2,8 @@
 /* document kipid */
 body {margin:0; padding:0}
 codeprint.SEE {display:none}
+.docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
 .docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
-.docuK ::selection, .docuK ::-moz-selection {background:#a00; color:white}
 .docuK div, textarea {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
 .docuK data {display:none}
 
@@ -12,9 +12,10 @@ codeprint.SEE {display:none}
 .docuK ::-webkit-scrollbar-thumb {-webkit-border-radius:5px; border-radius:5px; background:rgb(0,120,120); -webkit-box-shadow:inset 0 0 3px rgb(0,0,0)}
 .docuK ::-webkit-scrollbar-corner {background:transparent}
 
+.docuK button {cursor:pointer}
 .docuK .SNS-top {margin-top:-35px; margin-bottom:-5px}
 .docuK .SNS-bottom {margin:35px 0; text-align:center}
-.docuK .SNS-img {width:35px; height:35px; border:2px gray solid; border-left:0}
+.docuK .SNS-img {width:35px; height:35px; border:2px gray solid; border-left:0; cursor:pointer}
 .docuK .SNS-img:first-child {border-left:2px gray solid}
 .docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
 .docuK .ShowHide {float:right; padding:.3em 0; cursor:pointer}
