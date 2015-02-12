@@ -375,7 +375,7 @@
 		return str.replace(indentRegExp,'\n');
 	};
 	kipid.escapeHTML=function(str, query) {
-		return ((query==undefined)&&true||query)?str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):str;
+		return ((query===undefined)||query)?str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):str;
 	};
 	kipid.printCode=function(codeId) {
 		var $pre=$("#pre-"+codeId);
@@ -602,7 +602,7 @@
 	kipid.delayedLoadAll=function() {
 		// kipid.logPrint("<br>Doing delayed-load. "+kipid.delayedElems.length);
 		if (kipid.delayedElems.length===0) {
-			kipid.logPrint("<br><br>All delayedElem are loaded.")
+			kipid.logPrint("<br><br>All delayedElem are loaded.");
 			$(window).off("scroll.delayedLoad");
 		} else {
 			kipid.delayedElems.each(function() {
