@@ -23,6 +23,10 @@
 	// String to Array
 	////////////////////////////////////////////////////
 	kipid.strToArray=function(str) {
+		// str=str.trim()+"\n";
+		if (str.charAt(str.length-1)!=="\n") {
+			str+="\n";
+		}
 		var ret=[];
 		var delimiter=/([^\t\n]*)([\t\n])/g;
 		var lastQuote=/[^"](?:"")*"([\t\n])/g;
@@ -375,17 +379,20 @@
 		return str.replace(indentRegExp,'\n');
 	};
 	kipid.escapeHTML=function(str, query) {
-		return ((query===undefined)||query)?str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):str;
+		return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 	};
 	kipid.printCode=function(codeId) {
 		var $pre=$("#pre-"+codeId);
 		var $code=$("#"+codeId);
 		if ($pre.exists()) {
-			$pre.html(kipid.escapeHTML(
-				// ('<codeprint id="'+codeId+'">'+
+			var html=// ('<codeprint id="'+codeId+'">'+
 				kipid.indentsRemove($code.html())
 				// +'</codeprint><!-- '+codeId+' -->')
-				.trim(), !$code.is(".noEscapeHTML")));
+				.trim();
+			if (!$code.is(".noEscapeHTML")) {
+				html=kipid.escapeHTML(html);
+			}
+			$pre.html(html);
 		}
 	};
 	
