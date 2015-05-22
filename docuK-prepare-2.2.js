@@ -310,7 +310,8 @@
 		return strArray.join("\n");
 	};
 	
-	/*  :: cookies.js ::
+	// removeItem 부분을 수정했음. 읽을 수 있는 쿠키만 지울 수 있게 해놨길래...
+	/*  :: cookies.js :: Slightly edited by kipid at 2014-09-03.
 	|*|
 	|*|  A complete cookies reader/writer framework with full unicode support.
 	|*|
@@ -330,7 +331,7 @@
 	kipid.expire=365*24*60*60; // max-age in seconds.
 	kipid.docCookies={
 	  getItem: function (sKey) {
-	    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+	    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 	  },
 	  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
 	    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
@@ -338,26 +339,26 @@
 	    if (vEnd) {
 	      switch (vEnd.constructor) {
 	        case Number:
-	          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+	          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age="+vEnd;
 	          break;
 	        case String:
-	          sExpires = "; expires=" + vEnd;
+	          sExpires = "; expires="+vEnd;
 	          break;
 	        case Date:
-	          sExpires = "; expires=" + vEnd.toUTCString();
+	          sExpires = "; expires="+vEnd.toUTCString();
 	          break;
 	      }
 	    }
-	    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+	    document.cookie = encodeURIComponent(sKey)+"="+encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain="+sDomain : "") + (sPath ? "; path="+sPath : "") + (bSecure ? "; secure" : "");
 	    return true;
 	  },
-	  removeItem: function (sKey, sPath, sDomain) {
-	    if (!sKey || !this.hasItem(sKey)) { return false; }
-	    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+	  removeItem: function (sKey, sPath, sDomain, bSecure) {
+	    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)/* || !this.hasItem(sKey)*/) { return false; }
+	    document.cookie = encodeURIComponent(sKey)+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain="+sDomain : "") + (sPath ? "; path="+sPath : "") + (bSecure ? "; secure" : "");
 	    return true;
 	  },
 	  hasItem: function (sKey) {
-	    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+	    return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&")+"\\s*\\=")).test(document.cookie);
 	  },
 	  keys: /* optional method: you can safely remove it! */ function () {
 	    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
@@ -479,7 +480,7 @@
 	kipid.printDeviceInfo=function(){
 		kipid.deviceInfo.html("Mode:"+kipid.mode
 			+"; Font:"+kipid.fontFamily
-			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)+"px("+kipid.fontSize+")"
+			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)+"px("+kipid.fontSize.toFixed(1)+")"
 			+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)
 			+";<br>width: "+kipid.browserWidth
 			+", height: "+window.innerHeight);
@@ -677,7 +678,7 @@
 			+'<form><input id="button'+docuKI+'-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>'
 			+'</input><input id="button'+docuKI+'-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form> '
 			+'<form><input class="bold" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
-			+((docuKI===1)?'<form><button type="button" onclick="kipid.CfontSize(-1)" style="font-size:1em">A</button>'+'<button type="button" onclick="kipid.CfontSize(1)" style="font-size:1.4em">A</button></form> '
+			+((docuKI===1)?'<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button>'+'<button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form> '
 			+'<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1.3em">=</button>'+'<button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.3em">〓</button></form> ':'')
 			+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
 			+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
