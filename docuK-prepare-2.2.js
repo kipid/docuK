@@ -508,32 +508,38 @@
 		return true;
 	};
 	kipid.CfontSize=function(increment) {
-		kipid.fontSize+=increment;
-		if (kipid.fontSize<7) {
-			kipid.fontSize=7;
-		} else if (kipid.fontSize>20) {
-			kipid.fontSize=20;
+		if (increment.constructor===Number&&!isNaN(increment)) {
+			kipid.fontSize+=increment;
+			if (kipid.fontSize<7) {
+				kipid.fontSize=7;
+			} else if (kipid.fontSize>20) {
+				kipid.fontSize=20;
+			}
+			kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
+			// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
+			kipid.printDeviceInfo();
+			kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize.toFixed(1), kipid.expire, "/");
+			return true;
 		}
-		kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
-		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
-		kipid.printDeviceInfo();
-		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize.toFixed(1), kipid.expire, "/");
-		return true;
+		return false;
 	};
 	kipid.ClineHeight=function(increment) {
-		kipid.lineHeight10+=increment;
-		if (kipid.lineHeight10<10) {
-			kipid.lineHeight10=10;
-			return false;
-		} else if (kipid.lineHeight10>25) {
-			kipid.lineHeight10=25;
-			return false;
+		if (increment.constructor===Number&&!isNaN(increment)) {
+			kipid.lineHeight10+=increment;
+			if (kipid.lineHeight10<10) {
+				kipid.lineHeight10=10;
+				return false;
+			} else if (kipid.lineHeight10>25) {
+				kipid.lineHeight10=25;
+				return false;
+			}
+			kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toString()});
+			// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
+			kipid.printDeviceInfo();
+			kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
+			return true;
 		}
-		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toString()});
-		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
-		kipid.printDeviceInfo();
-		kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
-		return true;
+		return false;
 	};
 	$(window).on("resize.deviceInfo", function() {
 		if(window.innerWidth!==kipid.browserWidth) {

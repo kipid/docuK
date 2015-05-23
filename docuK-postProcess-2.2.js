@@ -65,10 +65,10 @@
 	// Centering arrow.
 	inRefs.each(function() {
 		var $elem=$(this);
-		var width=Number($elem.width())-2;
+		var width=$elem.width()-2;
 		var $arrow=$elem.find(".arrow");
-		var borderWidth=Number($arrow.css("borderWidth"));
-		var fontSize=Number($arrow.css("fontSize"));
+		var borderWidth=parseFloat($arrow.css("borderWidth"));
+		var fontSize=parseFloat($arrow.css("fontSize"));
 		$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
 	});
 	// Delayed-Load in bubble ref.
@@ -92,8 +92,8 @@
 		// kipid.TLineHeight=docuK.find(".TLineHeight");
 		
 		kipid.deviceInfo=docuK.find(".deviceInfo");
-		kipid.fontSize=Number(docuK.css('font-size'));
-		kipid.lineHeight10=parseInt(Number(docuK.css('line-height'))/kipid.fontSize*10);
+		kipid.fontSize=parseFloat(docuK.css('font-size'));
+		kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
 		kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 		kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 		
