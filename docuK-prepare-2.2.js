@@ -321,7 +321,6 @@
 	|*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
 	|*|
 	|*|  Syntaxes:
-	|*|
 	|*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
 	|*|  * docCookies.getItem(name)
 	|*|  * docCookies.removeItem(name[, path], domain)
@@ -515,10 +514,10 @@
 		} else if (kipid.fontSize>20) {
 			kipid.fontSize=20;
 		}
-		kipid.docuK.css({"font-size":kipid.fontSize+"px"});
+		kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		kipid.printDeviceInfo();
-		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize, kipid.expire, "/");
+		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize.toFixed(1), kipid.expire, "/");
 		return true;
 	};
 	kipid.ClineHeight=function(increment) {
