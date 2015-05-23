@@ -65,10 +65,10 @@
 	// Centering arrow.
 	inRefs.each(function() {
 		var $elem=$(this);
-		var width=parseFloat($elem.width())-2;
+		var width=Number($elem.width())-2;
 		var $arrow=$elem.find(".arrow");
-		var borderWidth=parseFloat($arrow.css("borderWidth"));
-		var fontSize=parseFloat($arrow.css("fontSize"));
+		var borderWidth=Number($arrow.css("borderWidth"));
+		var fontSize=Number($arrow.css("fontSize"));
 		$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
 	});
 	// Delayed-Load in bubble ref.
@@ -92,8 +92,8 @@
 		// kipid.TLineHeight=docuK.find(".TLineHeight");
 		
 		kipid.deviceInfo=docuK.find(".deviceInfo");
-		kipid.fontSize=parseInt(docuK.css('font-size'));
-		kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
+		kipid.fontSize=Number(docuK.css('font-size'));
+		kipid.lineHeight10=parseInt(Number(docuK.css('line-height'))/kipid.fontSize*10);
 		kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 		kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 		
@@ -111,8 +111,8 @@
 		}
 		cookieItem=kipid.docCookies.getItem("kipid.fontSize");
 		if (cookieItem!==null) {
-			kipid.CfontSize(parseInt(cookieItem)-kipid.fontSize);
-			kipid.logPrint("<br>Font-size "+(parseInt(cookieItem)*1.8).toFixed(1)+" is set from cookie.");
+			kipid.CfontSize(Number(cookieItem)-kipid.fontSize);
+			kipid.logPrint("<br>Font-size "+(Number(cookieItem)*1.8).toFixed(1)+" is set from cookie.");
 		}
 		cookieItem=kipid.docCookies.getItem("kipid.lineHeight10");
 		if (cookieItem!==null) {
