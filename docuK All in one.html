@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
 <!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css"> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <style>
 .exit {z-index:100; position:absolute; display:inline-block; left:.3em; width:1.8em; height:1.8em; text-align:center; margin-top:-.5em; border-radius:.4em; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white}
 .exit>svg {width:100%; height:100%; font-size:1.8em; line-height:1.0}
@@ -59,6 +59,8 @@
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-FE">앞으로 생각하고 있는 것들</h2>
 	<div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
 	<ul>
+		<li>MathJax delayed rendering 은 나중에 추가되는데, $window.on 을 추가로 해야할듯? 다른 delayed elem 가 없으면 동작을 멈추네.</li>
+		
 		<li>2014-08-07: Dual view 구현? 버튼 누르면, Fill browser 되고 (최상위 div를 만들어서(?) fixed, z-index:1000, 같은걸로 채우고) rendered 된 docuK를 복사해서 오른편에 붙이기?</li>
 		
 		<li>Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
