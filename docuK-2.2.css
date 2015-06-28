@@ -169,9 +169,11 @@ codeprint.SEE {display:none}
 	.docuK .eqCC {max-width:100%; overflow-x:auto}
 }
 @media all and (min-width:401px) {
+	.docuK {font-size:9px}
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
 @media all and (min-width:500px) {
+	.docuK {font-size:10px}
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 }
