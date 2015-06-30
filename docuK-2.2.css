@@ -119,7 +119,7 @@ codeprint.SEE {display:none}
 .docuK ol.refs>li>.refN {display:none}
 .docuK ol.refs>.subsec {margin:1.5em 0 0 -2.1em}
 
-.docuK .cmt, .docuK .bcf {padding:.5em; margin:.5em 0 1em; background:rgb(15,15,15); color:white} .docuK.bright .cmt, .docuK.bright .bcf {background:rgb(200,200,200); color:black}
+.docuK .cmt, .docuK .bcf {padding:.5em; margin:0 0 1.3em; background:rgb(15,15,15); color:white} .docuK.bright .cmt, .docuK.bright .bcf {background:rgb(200,200,200); color:black}
 .docuK .cmt {border-left:.5em solid rgb(70,0,70)}
 .docuK .bcf {border-left:.5em solid rgb(0,70,70)}
 .docuK .cmt>.p:last-child, .docuK .bcf>.p:last-child {padding-bottom:0}
