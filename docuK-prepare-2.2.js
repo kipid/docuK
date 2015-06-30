@@ -22,9 +22,17 @@ kipid.logPrint=function(str) {
 kipid.logPrint("kipid.logPrint is working!");
 
 ////////////////////////////////////////////////////
-// String to Array
+// String to Array (copied from recoeve.net user-page.html)
 ////////////////////////////////////////////////////
-kipid.strToArray=function(str) {
+kipid.encloseStr=function(str) {
+	if (!str||str.constructor!==String) { return ""; }
+	if (str.charAt(0)==="\""||/[\n\t]/.test(str)) {
+		return '"'+str.replace(/"/g,'""')+'"';
+	} return str;
+};
+kipid.strToJSON=function(str, colMap, rowMap) {
+	if (!str||str.constructor!==String) { return []; }
+	if (colMap===undefined||colMap===null) { colMap=true; }
 	// str=str.trim()+"\n";
 	if (str.charAt(str.length-1)!=="\n") {
 		str+="\n";
@@ -69,18 +77,31 @@ kipid.strToArray=function(str) {
 		}
 		ret[row][col]=strElem;
 	}
-	return ret;
-};
-kipid.strToJSON=function(str) {
-	var ret=kipid.strToArray(str);
-	for (var i=1;i<ret.length;i++) {
-		for (var j=0;j<ret[i].length;j++) {
-			if (ret[0][j]!==undefined) {
-				ret[i][ret[0][j]]=ret[i][j];
+	if (colMap) {
+		var firstColSize=ret[0].length;
+		for (var i=0;i<ret.length;i++) {
+			var jMax=ret[i].length;
+			if (jMax>firstColSize) { jMax=firstColSize; }
+			for (var j=0;j<jMax;j++) {
+				var key=ret[0][j];
+				if (key!==undefined) {
+					ret[i][key]=ret[i][j];
+				}
+			}
+		}
+	}
+	if (rowMap) {
+		for (var i=0;i<ret.length;i++) {
+			var key=ret[i][0];
+			if (key!==undefined) {
+				ret[key]=ret[i];
 			}
 		}
 	}
 	return ret;
+};
+kipid.strToArray=function(str) {
+	return kipid.strToJSON(str,false,false);
 };
 kipid.arrayToTableHTML=function(txtArray) {
 	var tableStr="<table><tbody>";
