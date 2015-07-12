@@ -82,7 +82,7 @@ codeprint.SEE {display:none}
 
 /* r(S)C: Ratio (Sub)Container */
 .docuK .rC {}
-.docuK .rC>.rSC {box-sizing:content-box; -moz-box-sizing:content-box; position:relative; height:3em; padding-bottom:60%}
+.docuK .rC>.rSC {box-sizing:content-box; -moz-box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
 .docuK .rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
 .docuK .rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
 .docuK .pc {text-align:center; font-size:.6em} /* position change */
