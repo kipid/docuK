@@ -694,7 +694,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
 		+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
 		+'<div class="deviceInfo"></div>'
-		+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://github.com/kipid/docuK">github</a> and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>'
+		+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>'
 	+'</div>'
 		+'<div class="SNS-top"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"></div>'
 	);
