@@ -129,6 +129,7 @@ codeprint.SEE {display:none}
 .docuK pre, .docuK code {text-indent:0; overflow-wrap:break-word; word-wrap:break-word; white-space:pre-wrap; word-break:break-all}
 .docuK pre {font-family:inherit; font-size:.9em; display:block; margin:.6em 0 2em; padding:.5em; max-height:none; overflow-y:scroll} .docuK pre.scrollable {max-height:600px}
 .docuK code {font-family:monospace; font-size:.9em; padding:.2em; display:inline; border:2px solid rgb(200,150,150); border-radius:.2em; background:rgb(30,30,30)} .docuK.bright code {background:rgb(230,230,230)}
+.docuK pre code {font-size:1em; padding:0; border-width:0; background:inherit}
 .docuK pre.prettyprint, .docuK code.prettyprint {background-color:black} .docuK.bright pre.prettyprint, .docuK.bright code.prettyprint {background-color:rgb(70,70,70)}
 
 /* pre Container, Scrollable Switch (Explaination) */
