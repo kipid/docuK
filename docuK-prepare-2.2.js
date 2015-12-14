@@ -625,6 +625,7 @@ kipid.delayedLoadAll=function() {
 	// kipid.logPrint("<br>Doing delayed-load. "+kipid.delayedElems.length);
 	if (kipid.delayedElems.length===0) {
 		kipid.logPrint("<br><br>All delayedElem are loaded.");
+		clearTimeout(kipid.delayedLoadSetTimeout);
 		$window.off("scroll.delayedLoad");
 	} else {
 		kipid.delayedElems.each(function() {
@@ -643,7 +644,7 @@ kipid.delayedLoadByScroll=function delayedLoadByScroll() {
 		kipid.previous=now;
 	} else {
 		$window.off("scroll.delayedLoad");
-		setTimeout(function() {
+		kipid.delayedLoadSetTimeout=setTimeout(function() {
 			kipid.delayedLoadAll();
 			kipid.previous=Date.now();
 			$window.on("scroll.delayedLoad", delayedLoadByScroll);
