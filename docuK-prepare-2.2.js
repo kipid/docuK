@@ -553,7 +553,7 @@ kipid.ClineHeight=function(increment) {
 	return false;
 };
 $window.on("resize.deviceInfo", function() {
-	if(window.innerWidth!==kipid.browserWidth) {
+	if (window.innerWidth!==kipid.browserWidth) {
 		kipid.browserWidth=window.innerWidth;
 		kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
 		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
