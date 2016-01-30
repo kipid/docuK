@@ -600,6 +600,9 @@ $.fn.inView=function() {
 $.fn.delayedLoad=function() {
 	var done=false;
 	if (this.inView()) {
+		if (this.hasClass("to-be-executed")) {
+			this.trigger("click");
+		}
 		// divs with background-image
 		if (this.attr("delayed-bgimage")) {
 			this.css("background-image", "url("+this.attr("delayed-bgimage")+")");
@@ -615,41 +618,49 @@ $.fn.delayedLoad=function() {
 		// MathJax Process
 		if (typeof MathJax!=='undefined'&&this.is(".MathJax_Preview")) {
 			MathJax.Hub.Queue(["Process", MathJax.Hub, this.next()[0]]);
-			kipid.logPrint("<br><br>MathJax.Hub.Process("+this.next()[0]+") is called.");
 			done=true;
 		}
 	}
 	return done;
 };
 kipid.delayedLoadAll=function() {
-	// kipid.logPrint("<br>Doing delayed-load. "+kipid.delayedElems.length);
 	if (kipid.delayedElems.length===0) {
-		kipid.logPrint("<br><br>All delayedElem are loaded.");
 		clearTimeout(kipid.delayedLoadSetTimeout);
 		$window.off("scroll.delayedLoad");
 	} else {
 		kipid.delayedElems.each(function() {
 			if ($(this).delayedLoad()) {
 				kipid.delayedElems=kipid.delayedElems.not(this);
-				kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
 			}
 		});
 	}
 };
+kipid.delayedLoadAll=function() {
+	kipid.logPrint("<br>Doing delayed-load. : "+kipid.delayedElems.length);
+	kipid.delayedElems.each(function() {
+		if ($(this).delayedLoad()) {
+			kipid.delayedElems=kipid.delayedElems.not(this);
+			kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
+		}
+	});
+	if (kipid.delayedElems.length>0) {
+		$window.on("scroll.delayedLoad", delayedLoadByScroll);
+	} else {
+		kipid.logPrint("<br><br>All delayedElem are loaded.");
+	}
+	kipid.previous=Date.now();
+};
 kipid.delayedLoadByScroll=function delayedLoadByScroll() {
+	$window.off("scroll.delayedLoad");
 	var now=Date.now();
 	var passed=now-kipid.previous;
 	if (passed>kipid.wait) {
 		kipid.delayedLoadAll();
-		kipid.previous=now;
 	} else {
-		$window.off("scroll.delayedLoad");
-		kipid.delayedLoadSetTimeout=setTimeout(function() {
+		setTimeout(function() {
 			kipid.delayedLoadAll();
-			kipid.previous=Date.now();
-			$window.on("scroll.delayedLoad", delayedLoadByScroll);
 		}, kipid.wait*1.1-passed);
-		// kipid.logPrint("<br>wait "+(kipid.wait*1.1-passed).toFixed(0)+"ms.");
+		kipid.logPrint("<br>wait "+(kipid.wait*1.1-passed).toFixed(0)+"ms.");
 	}
 };
 $window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
