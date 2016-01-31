@@ -175,6 +175,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	var TOC="Table of Contents";
 	var PH="Posting History";
 	var RRA="References and Related Articles";
+	var RSR="Referneces and Suggested Readings";
 	
 	var untilEnter=/[^\n]+/g; // until enter.
 	var head, hN; // #*hN
@@ -204,7 +205,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	function getClassesFromEmmet(str) {
 		var res;
 		var classes="";
-		var rexClasses=/\.([\w-]+)/g;
+		var rexClasses=/\.([\w-:]+)/g;
 		while((res=rexClasses.exec(str))!=null) {
 			classes+=res[1]+" ";
 		}
@@ -213,7 +214,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	function getIdFromEmmet(str) {
 		var res;
 		var elemId="";
-		var rexId=/#([\w-]+)/;
+		var rexId=/#([\w-:]+)/;
 		res=rexId.exec(str);
 		if (res!=null) { elemId=res[1]; }
 		return elemId;
