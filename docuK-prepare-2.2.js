@@ -197,7 +197,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	function getEmmetFromHead(trimedHead) {
 		var res;
 		var emmet="";
-		var rexHeadEmmet=/^\[([\w\s#._-]+)\]/;
+		var rexHeadEmmet=/^\[([\w\s#._:-]+)\]/;
 		res=rexHeadEmmet.exec(trimedHead);
 		if (res!=null) { emmet=res[1]; }
 		return emmet;
@@ -205,7 +205,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	function getClassesFromEmmet(str) {
 		var res;
 		var classes="";
-		var rexClasses=/\.([\w-:]+)/g;
+		var rexClasses=/\.([\w:-]+)/g;
 		while((res=rexClasses.exec(str))!=null) {
 			classes+=res[1]+" ";
 		}
@@ -214,7 +214,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	function getIdFromEmmet(str) {
 		var res;
 		var elemId="";
-		var rexId=/#([\w-:]+)/;
+		var rexId=/#([\w:-]+)/;
 		res=rexId.exec(str);
 		if (res!=null) { elemId=res[1]; }
 		return elemId;
@@ -625,18 +625,6 @@ $.fn.delayedLoad=function() {
 	return done;
 };
 kipid.delayedLoadAll=function() {
-	if (kipid.delayedElems.length===0) {
-		clearTimeout(kipid.delayedLoadSetTimeout);
-		$window.off("scroll.delayedLoad");
-	} else {
-		kipid.delayedElems.each(function() {
-			if ($(this).delayedLoad()) {
-				kipid.delayedElems=kipid.delayedElems.not(this);
-			}
-		});
-	}
-};
-kipid.delayedLoadAll=function() {
 	kipid.logPrint("<br>Doing delayed-load. : "+kipid.delayedElems.length);
 	kipid.delayedElems.each(function() {
 		if ($(this).delayedLoad()) {
@@ -645,13 +633,13 @@ kipid.delayedLoadAll=function() {
 		}
 	});
 	if (kipid.delayedElems.length>0) {
-		$window.on("scroll.delayedLoad", delayedLoadByScroll);
+		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 	} else {
 		kipid.logPrint("<br><br>All delayedElem are loaded.");
 	}
 	kipid.previous=Date.now();
 };
-kipid.delayedLoadByScroll=function delayedLoadByScroll() {
+kipid.delayedLoadByScroll=function() {
 	$window.off("scroll.delayedLoad");
 	var now=Date.now();
 	var passed=now-kipid.previous;
