@@ -576,6 +576,9 @@ kipid.shareSNS=function(service) {
 		case 'facebook':
 			open="https://www.facebook.com/sharer/sharer.php"+"?u="+url;
 			break;
+		case 'recoeve':
+			open="http://recoeve.net/reco?"+"uri="+url+"&title="+title;
+			break;
 	}
 	window.open(open);
 };
@@ -697,9 +700,9 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		+'<div class="deviceInfo"></div>'
 		+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>'
 	+'</div>'
-		+'<div class="SNS-top"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"></div>'
+		+'<div class="SNS-top"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"></div>'
 	);
-	docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"></div>');
+	docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"></div>');
 	
 	////////////////////////////////////////////////////
 	// Scrollable switching of 'pre.prettyprint'.
