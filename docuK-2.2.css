@@ -67,7 +67,7 @@ codeprint.SEE {display:none}
 .docuK a.tJump {display:inline-block; font-size:.6em; margin:0 1em 0 -.5em; vertical-align:middle; padding:0 .26em; border:2px solid rgb(50,50,122); font-weight:bold}
 .docuK.bright a.tJump {text-decoration:none}
 
-.docuK .p {padding-top:.2em; padding-bottom:1em; text-indent:.5em}
+.docuK .p {padding:.2em .2em 1em .2em; text-indent:.5em}
 .docuK .ex {border:.2em solid gray; padding:0 .5em .5em; margin:.5em auto}
 .docuK cite, .docuK refer {font:inherit; font-size:1em; text-indent:0}
 .docuK div.borderByBackground {display:inline-block; padding:10px; background:white}
@@ -122,7 +122,7 @@ codeprint.SEE {display:none}
 .docuK .cmt, .docuK .bcf {padding:.5em; margin:0 0 1.3em; background:rgb(15,15,15); color:white} .docuK.bright .cmt, .docuK.bright .bcf {background:rgb(200,200,200); color:black}
 .docuK .cmt {border-left:.5em solid rgb(70,0,70)}
 .docuK .bcf {border-left:.5em solid rgb(0,70,70)}
-.docuK .cmt>.p:last-child, .docuK .bcf>.p:last-child {padding-bottom:0}
+.docuK .cmt>.p:last-child, .docuK .bcf>.p:last-child {padding-bottom:.2em}
 
 /* Pretty printing styles. Used with prettify.js. */
 /* Vim sunburst theme by David Leibovic */
