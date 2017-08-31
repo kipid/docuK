@@ -1,11 +1,11 @@
 <codeprint id="docuK-style">
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
-<!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css"> -->
-<!-- <script src="docuK-prepare-2.2.js" charset="utf-8"></script> -->
+<!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.3.css"> -->
+<!-- <script src="docuK-prepare-2.3.js" charset="utf-8"></script> -->
 <!-- From kipid.tistory CDN -->
-<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.3.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
 <style>
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:decimal}
 </style>
@@ -24,9 +24,9 @@
 	<div class="p">
 		For the full stand-alone code, put meta tags additionally <code class="prettyprint">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></code> for encoding ('utf-8' is recommended. The html file must be saved with the same encoding.) and <code class="prettyprint">&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/></code> for mobile view.
 	</div>
-	
+
 	<pre id="pre-SEE" contenteditable="true" class="prettyprint scrollable lang-html"></pre>
-	
+
 	<div class="center">
 		<button id="button-prettyPrint" style="background:rgb(112, 209, 128); margin:0; padding:0 0.5em; font:inherit">Pretty-print the code above</button>
 		<button id="button-render-it-to-docuK" style="background:rgb(209, 112, 112); margin:0; padding:0 0.5em; font:inherit">Render it to docuK below</button>
@@ -226,13 +226,13 @@ public class HelloWorldServer extends Verticle {
 		/////////////////////////////////////////////
 		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -> {
 			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
-			
+
 			req.response().putHeader("Content-Type","text/html");
 			req.response().end("&lt;h1>Hello World&lt;/h1>");
 			req.response().close();
 		}).listen(1001);
 	}
-	
+
 	///////////////////////////////////////////////
 	// Called when the verticle is undeployed.
 	///////////////////////////////////////////////
@@ -266,13 +266,13 @@ public class HelloWorldServer extends Verticle {
 		/////////////////////////////////////////////
 		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -> {
 			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
-			
+
 			req.response().putHeader("Content-Type","text/html");
 			req.response().end("&lt;h1>Hello World&lt;/h1>");
 			req.response().close();
 		}).listen(1001);
 	}
-	
+
 	///////////////////////////////////////////////
 	// Called when the verticle is undeployed.
 	///////////////////////////////////////////////
@@ -310,7 +310,7 @@ Only <code>kipid.docuKProcess()</code> will be called in this demo example. But 
 		// Current document</li>
 	<li id="ref-eq"><a href="http://kipid.tistory.com/entry/equations-in-html">kipid's blog - 인터넷, Web, HTML, 블로그에서 수식 사용하기 (Equation or math in HTML, blog)</a></li>
 	<li id="ref-docuK-github"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
-	
+
 <div class="subsec"><h3>Supported by</h3></div>
 	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
 		// JavaScript enhancer</li>
@@ -318,11 +318,11 @@ Only <code>kipid.docuKProcess()</code> will be called in this demo example. But 
 		// Math renderer.</li>
 	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
 		// Code prettyfier.</li>
-	
+
 <div class="subsec"><h3>API documentation</h3></div>
 	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
 	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
-	
+
 <div class="subsec"><h3>Other markdown/markup languages</h3></div>
 	<li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
 		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
@@ -363,10 +363,10 @@ Only <code>kipid.docuKProcess()</code> will be called in this demo example. But 
 
 <script>
 kipid.printFullSEE=function(SEE){
-	var renderedTwo='<codeprint id="docuK-style">\n<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><'+'/script>\n<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>\n<!-- From kipid.tistory CDN -->\n<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">\n<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js"><'+'/script>\n</codeprint><!-- docuK-style -->\n\n<codeprint class="SEE">\n'
+	var renderedTwo='<codeprint id="docuK-style">\n<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><'+'/script>\n<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>\n<!-- From kipid.tistory CDN -->\n<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.3.css">\n<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.3.js"><'+'/script>\n</codeprint><!-- docuK-style -->\n\n<codeprint class="SEE">\n'
 		+SEE.trim()
-		+'\n</codeprint><!-- SEE -->\n\n<codeprint id="docuK-script">\n<script>\nkipid.wait=2000;\nkipid.delayPad=2000;\n<'+'/script>\n<script type="text/x-mathjax-config">\nMathJax.Hub.Config({\n	skipStartupTypeset: true, // Skip startup typeset.\n	positionToHash: false, // No repositioning to #something anchor.\n	tex2jax: {\n		inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']], // Using $ for inline math.\n		displayMath: [[\'$$\',\'$$\'], [\'\\\\[\',\'\\\\]\']], // Using $$ for outline math.\n		processEscapes: true, // Escape \\$\n		processEnvironments: false, // Ignore \\begin{something} ... \\end{something}\n	}\n});\n<'+'/script>\n<!-- From kipid.tistory CDN -->\n<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"><'+'/script>\n</codeprint><!-- docuK-script -->';
-	
+		+'\n</codeprint><!-- SEE -->\n\n<codeprint id="docuK-script">\n<script>\nkipid.wait=2000;\nkipid.delayPad=2000;\n<'+'/script>\n<script type="text/x-mathjax-config">\nMathJax.Hub.Config({\n	skipStartupTypeset: true, // Skip startup typeset.\n	positionToHash: false, // No repositioning to #something anchor.\n	tex2jax: {\n		inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']], // Using $ for inline math.\n		displayMath: [[\'$$\',\'$$\'], [\'\\\\[\',\'\\\\]\']], // Using $$ for outline math.\n		processEscapes: true, // Escape \\$\n		processEnvironments: false, // Ignore \\begin{something} ... \\end{something}\n	}\n});\n<'+'/script>\n<!-- From kipid.tistory CDN -->\n<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.3.js"><'+'/script>\n</codeprint><!-- docuK-script -->';
+
 	$("#pre-code-docuK-HTML").html( kipid.escapeHTML( renderedTwo ) );
 };
 
@@ -374,13 +374,13 @@ kipid.renderIt=function(){
 	var toBeRendered=kipid.getContentsJoinedWithEnter($("#pre-SEE"));
 	var renderedOne=kipid.renderToDocuK(toBeRendered);
 	$("#rendered-docuK").html(renderedOne);
-	
+
 	kipid.printFullSEE(toBeRendered);
 	// $("#pre-code-docuK-HTML").removeClass("prettyprinted");
 	// prettyPrint(function(){
 	// 	kipid.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
 	// }, $("#pre-code-docuK-HTML").parent()[0]);
-	
+
 	var docuK=kipid.docuK=$(".docuK");
 	k=docuK.length;
 	for(var i=1;i<k;i++){
@@ -388,15 +388,15 @@ kipid.renderIt=function(){
 			kipid.docuKProcess(kipid, jQuery, i);
 		}
 	}
-	
+
 	$("#time-last-render").html("Lastly rendered at "+new Date().toLocaleString());
 };
 
-kipid.prettyPrint=function(){	
+kipid.prettyPrint=function(){
 	var toBeRendered=kipid.escapeHTML( kipid.getContentsJoinedWithEnter($("#pre-SEE")) );
 	$("#pre-SEE").html(toBeRendered);
 	$("#pre-SEE").removeClass("prettyprinted");
-	
+
 	prettyPrint(function(){
 		kipid.logPrint("<br><br>Code in '#pre-SEE' is prettyPrinted.");
 	}, $("#pre-SEE").parent()[0]);
@@ -425,7 +425,7 @@ $(document).ready(function(){
 		$("#pre-SEE").attr({contenteditable:true});
 		$elem.on("click", anonyRender);
 	});
-	
+
 	$("#pre-SEE").on("keydown",function(event){
 		event.stopPropagation();
 		if (event.shiftKey){
@@ -457,7 +457,7 @@ MathJax.Hub.Config({
 	}
 });
 </script>
-<!-- <script src="docuK-postProcess-2.2.js" charset="utf-8"></script> -->
+<!-- <script src="docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 <!-- From kipid.tistory CDN -->
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-script -->
