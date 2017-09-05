@@ -84,19 +84,19 @@ inRefs.on("mouseenter.delayedLoad", function() {
 $(document).ready(function() {
 	// Hiding hiden sections.
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
-	
+
 	////////////////////////////////////////////////////
 	// Setting and Printing Styles
 	////////////////////////////////////////////////////
 	// kipid.TFontSize=docuK.find(".TFontSize");
 	// kipid.TLineHeight=docuK.find(".TLineHeight");
-	
+
 	kipid.deviceInfo=docuK.find(".deviceInfo");
 	kipid.fontSize=parseFloat(docuK.css('font-size'));
 	kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
 	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
-	
+
 	var cookieItem;
 	kipid.logPrint("<br>");
 	cookieItem=kipid.docCookies.getItem("kipid.mode");
@@ -119,13 +119,13 @@ $(document).ready(function() {
 		kipid.ClineHeight(parseInt(cookieItem)-kipid.lineHeight10);
 		kipid.logPrint("<br>Line-height "+(parseInt(cookieItem)/10).toFixed(1)+" is set from cookie.");
 	}
-	
+
 	// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 	// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
 	// kipid.deviceInfo.html("browser width: "+kipid.browserWidth);
 	kipid.printDeviceInfo();
 	kipid.logPrint("<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.");
-	
+
 	////////////////////////////////////////////////////
 	// Initial Delayed Load.
 	////////////////////////////////////////////////////
@@ -134,27 +134,27 @@ $(document).ready(function() {
 	$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 	$window.trigger("scroll.delayedLoad");
 	// $window.off("scroll.delayedLoad");
-	
+
 	////////////////////////////////////////////////////
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	////////////////////////////////////////////////////
-	if (docuK.find(".prettyprint").exists()) {
+	if (docuK.find('.prettyprint').exists()) {
 		var gcp=document.createElement('script');
-		gcp.defer="";
-		gcp.src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/run_prettify.js";
+		gcp.defer='';
+		gcp.src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js';
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(gcp);
-		kipid.logPrint("<br><br>Google code prettyfy.js is loaded since '.prettyprint' is there in your document.");
+		kipid.logPrint('<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.');
 	}
-	
+
 	////////////////////////////////////////////////////
 	// MathJax js script (from cdn.mathjax.org) is added.
 	////////////////////////////////////////////////////
-	if (docuK.find("eq, eqq").exists()) {
+	if (docuK.find('eq, eqq').exists()) {
 		var mjx=document.createElement('script');
-		mjx.defer="";
-		mjx.src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+		mjx.defer='';
+		mjx.src='https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
-		kipid.logPrint("<br><br>MathJax.js is loaded since 'eq, eqq' is there in your document.");
+		kipid.logPrint('<br><br>MathJax.js is loaded since "eq, eqq" is there in your document.');
 		////////////////////////////////////////////////////
 		// MathJax PreProcess after the above MathJax.js is loaded.
 		////////////////////////////////////////////////////
@@ -171,7 +171,7 @@ $(document).ready(function() {
 		};
 		kipid.mathJaxPreProcess=setInterval(kipid.mathJaxPreProcessDo, 2000);
 	}
-	
+
 	////////////////////////////////////////////////////
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
 	////////////////////////////////////////////////////
@@ -189,7 +189,7 @@ $(document).ready(function() {
 				var scrollTop=$window.scrollTop();
 				var i, k=kipid.hLists.length;
 				var hI;
-				
+
 				if (event.keyCode===70) {
 					scrollTop+=10;
 					for (i=0;i<k;i++) {
@@ -271,9 +271,9 @@ $(document).ready(function() {
 		);
 	}
 	kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.");
-	
+
 	kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
-	
+
 	////////////////////////////////////////////////////
 	// Closing docuK Log.
 	////////////////////////////////////////////////////
