@@ -1,20 +1,11 @@
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-// docuK post-Process
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
 (function(kipid, $, undefined) {
-////////////////////////////////////////////////////
 // Printing codes in <codeprint> with id into <pre>.
-////////////////////////////////////////////////////
 var codeprints=$("codeprint");
 for (var i=0;i<codeprints.length;i++) {
 	kipid.printCode(codeprints.eq(i).attr('id'));
 }
 
-////////////////////////////////////////////////////
 // SEE (Super Easy Edit)
-////////////////////////////////////////////////////
 var $SEE=$("codeprint.SEE");
 for (var i=0;i<$SEE.length;i++) {
 	var $SEEi=$SEE.eq(i);
@@ -27,9 +18,7 @@ $("pre.prettyprint.scrollable").addClass("linenums");
 var docuK=$(".docuK");
 kipid.docuK=docuK;
 
-////////////////////////////////////////////////////
 // Showing disableQ0 only in width>321.
-////////////////////////////////////////////////////
 if (kipid.browserWidth>321) {
 	docuK.find(".disableQ0").html(function(ith,orgText) {
 		kipid.logPrint("<br><br>\".disableQ0\"s are enabled at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document.");
@@ -37,9 +26,7 @@ if (kipid.browserWidth>321) {
 	});
 }
 
-////////////////////////////////////////////////////
 // <eq> and <eqq> tags to MathJax format
-////////////////////////////////////////////////////
 var eqs=$("eq");
 for (var i=0;i<eqs.length;i++) {
 	eqs.eq(i).html(function(ith,orgTxt) {return "\\( "+orgTxt.trim()+" \\)";});
@@ -50,9 +37,7 @@ for (var i=0;i<eqqs.length;i++) {
 }
 kipid.logPrint("<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).");
 
-////////////////////////////////////////////////////
 // docuK process.
-////////////////////////////////////////////////////
 docuK.has("script").addClass("noDIdHandle");
 var k=docuK.length;
 for(var i=1;i<k;i++) {
@@ -78,16 +63,12 @@ inRefs.on("mouseenter.delayedLoad", function() {
 	$(this).off("mouseenter.delayedLoad");
 });
 
-////////////////////////////////////////////////////
 // On ready.
-////////////////////////////////////////////////////
 $(document).ready(function() {
 	// Hiding hiden sections.
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
-	////////////////////////////////////////////////////
 	// Setting and Printing Styles
-	////////////////////////////////////////////////////
 	// kipid.TFontSize=docuK.find(".TFontSize");
 	// kipid.TLineHeight=docuK.find(".TLineHeight");
 
@@ -126,18 +107,14 @@ $(document).ready(function() {
 	kipid.printDeviceInfo();
 	kipid.logPrint("<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.");
 
-	////////////////////////////////////////////////////
 	// Initial Delayed Load.
-	////////////////////////////////////////////////////
 	kipid.delayedElems=docuK.find("[delayed-src], [delayed-bgimage]");
 	kipid.logPrint("<br><br>There are "+kipid.delayedElems.length+" delayed elements.");
 	$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 	$window.trigger("scroll.delayedLoad");
 	// $window.off("scroll.delayedLoad");
 
-	////////////////////////////////////////////////////
 	// google code prettify js script (from kipid.tistory CDN) is added.
-	////////////////////////////////////////////////////
 	if (docuK.find('.prettyprint').exists()) {
 		var gcp=document.createElement('script');
 		gcp.defer='';
@@ -146,18 +123,14 @@ $(document).ready(function() {
 		kipid.logPrint('<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.');
 	}
 
-	////////////////////////////////////////////////////
 	// MathJax js script (from cdn.mathjax.org) is added.
-	////////////////////////////////////////////////////
 	if (docuK.find('eq, eqq').exists()) {
 		var mjx=document.createElement('script');
 		mjx.defer='';
 		mjx.src='https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
 		kipid.logPrint('<br><br>MathJax.js is loaded since "eq, eqq" is there in your document.');
-		////////////////////////////////////////////////////
 		// MathJax PreProcess after the above MathJax.js is loaded.
-		////////////////////////////////////////////////////
 		kipid.mathJaxPreProcessDo = function() {
 			if (typeof MathJax!=='undefined') {
 				clearInterval(kipid.mathJaxPreProcess);
@@ -172,9 +145,7 @@ $(document).ready(function() {
 		kipid.mathJaxPreProcess=setInterval(kipid.mathJaxPreProcessDo, 2000);
 	}
 
-	////////////////////////////////////////////////////
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	////////////////////////////////////////////////////
 	kipid.hLists=$("#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,#disqus_thread"); // Ordered automatically by jQuery.
 	kipid.tocs=$(".docuK>.sec").has(".toc");
 	kipid.rras=$(".docuK>.sec").has("ol.refs");
@@ -274,9 +245,7 @@ $(document).ready(function() {
 
 	kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
 
-	////////////////////////////////////////////////////
 	// Closing docuK Log.
-	////////////////////////////////////////////////////
 	kipid.logPrint("<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>");
 	setTimeout(function() {kipid.log.hide();}, 300);
 });

@@ -1,53 +1,42 @@
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-// Public functions which can be used elsewhere, and functions called only once in the beginning.
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
 (function(kipid, $, undefined) {
 $window=$(window);
 
 $.fn.exists=function() { return this.length!==0; };
 kipid.browserWidth=window.innerWidth;
-var docuK=$(".docuK");
+const docuK=$(".docuK");
 kipid.docuK=docuK;
 
-////////////////////////////////////////////////////
 // logPrint function.
-////////////////////////////////////////////////////
-kipid.log=$("#docuK-log").eq(0);
+kipid.log=$("#docuK-log");
 kipid.logPrint=function(str) {
 	kipid.log.append(str);
 	kipid.log.scrollTop(kipid.log[0].scrollHeight);
 };
 kipid.logPrint("kipid.logPrint is working!");
 
-////////////////////////////////////////////////////
-// String to Array (copied from recoeve.net user-page.html)
-////////////////////////////////////////////////////
+// String to Array
 kipid.encloseStr=function(str) {
-	if (!str||str.constructor!==String) { return ""; }
-	if (str.charAt(0)==="\""||/[\n\t]/.test(str)) {
-		return '"'+str.replace(/"/g,'""')+'"';
+	if (!str||str.constructor!==String) { return ''; }
+	if (str.charAt(0)==='"'||/[\n\t]/.test(str)) {
+		return `"${str.replace(/"/g,'""')}"`;
 	} return str;
 };
-kipid.strToJSON=function(str, colMap, rowMap) {
+kipid.strToJSON=function(str, colMap=true, rowMap=false) {
 	if (!str||str.constructor!==String) { return []; }
-	if (colMap===undefined||colMap===null) { colMap=true; }
-	// str=str.trim()+"\n";
 	if (str.charAt(str.length-1)!=="\n") {
 		str+="\n";
 	}
-	var ret=[];
-	var delimiter=/([^\t\n]*)([\t\n])/g;
-	var lastQuote=/[^"](?:"")*"([\t\n])/g;
-	var exec;
-	var start=0;
-	var row=-1, col=-1, delim="\n";
-	var strElem="";
-	function increseRC(str) {
-		if (str==='\t') {
+	const ret=[];
+	const delimiter=/([^\t\n]*)([\t\n])/g;
+	const lastQuote=/[^"](?:"")*"([\t\n])/g;
+	let exec;
+	let start=0;
+	let row=-1, col=-1, delim="\n";
+	let strElem="";
+	function increseRC(delim) {
+		if (delim==='\t') {
 			col++; return true;
-		} else if (str==='\n') {
+		} else if (delim==='\n') {
 			row++; col=0; ret.push([]); return true;
 		} return false;
 	}
@@ -78,12 +67,12 @@ kipid.strToJSON=function(str, colMap, rowMap) {
 		ret[row][col]=strElem;
 	}
 	if (colMap) {
-		var firstColSize=ret[0].length;
-		for (var i=0;i<ret.length;i++) {
-			var jMax=ret[i].length;
+		const firstColSize=ret[0].length;
+		for (let i=0;i<ret.length;i++) {
+			let jMax=ret[i].length;
 			if (jMax>firstColSize) { jMax=firstColSize; }
-			for (var j=0;j<jMax;j++) {
-				var key=ret[0][j];
+			for (let j=0;j<jMax;j++) {
+				let key=ret[0][j];
 				if (key!==undefined) {
 					ret[i][key]=ret[i][j];
 				}
@@ -91,8 +80,8 @@ kipid.strToJSON=function(str, colMap, rowMap) {
 		}
 	}
 	if (rowMap) {
-		for (var i=0;i<ret.length;i++) {
-			var key=ret[i][0];
+		for (let i=0;i<ret.length;i++) {
+			let key=ret[i][0];
 			if (key!==undefined) {
 				ret[key]=ret[i];
 			}
@@ -104,7 +93,7 @@ kipid.strToArray=function(str) {
 	return kipid.strToJSON(str,false,false);
 };
 kipid.arrayToTableHTML=function(txtArray) {
-	var tableStr="<table><tbody>";
+	var tableStr="<table>";
 	for (var row=0;row<txtArray.length;row++) {
 		// console.log(txtArray[row]);
 		tableStr+="<tr>";
@@ -113,13 +102,11 @@ kipid.arrayToTableHTML=function(txtArray) {
 		}
 		tableStr+="</tr>";
 	}
-	tableStr+="</tbody></table>";
+	tableStr+="</table>";
 	return tableStr;
 };
 
-////////////////////////////////////////////////////
 // SEE (Super Easy Edit).
-////////////////////////////////////////////////////
 kipid.SEEToArray=function(SEE) {
 	SEE=SEE.trim();
 	var dE=/\s*\n\n+\s*/g; // split by double enter.
@@ -171,19 +158,19 @@ kipid.SEEToArray=function(SEE) {
 kipid.renderToDocuK=function(toBeRendered) {
 	var ps=kipid.SEEToArray(toBeRendered);
 	var p=ps.length;
-	
+
 	var TOC="Table of Contents";
 	var PH="Posting History";
 	var RRA="References and Related Articles";
 	var RSR="Referneces and Suggested Readings";
-	
+
 	var untilEnter=/[^\n]+/g; // until enter.
 	var head, hN; // #*hN
 	var emmet=classes=elemId="";
-	
+
 	var docuOn=secOn=subsecOn=subsubsecOn=false;
 	var str='';
-	
+
 	function closeSec(hN) {
 		if (hN===undefined) { hN=1; }
 		switch(hN) {
@@ -195,12 +182,11 @@ kipid.renderToDocuK=function(toBeRendered) {
 		}
 	}
 	function getEmmetFromHead(trimedHead) {
-		var res;
-		var emmet="";
-		var rexHeadEmmet=/^\[([\w\s#._:-]+)\]/;
-		res=rexHeadEmmet.exec(trimedHead);
-		if (res!=null) { emmet=res[1]; }
-		return emmet;
+		const rexHeadEmmet=/^\[([\w\s#._:-]+)\]/;
+		const exec=rexHeadEmmet.exec(trimedHead);
+		if (exec!=null) {
+			return exec[1];
+		} return "";
 	}
 	function getClassesFromEmmet(str) {
 		var res;
@@ -219,10 +205,10 @@ kipid.renderToDocuK=function(toBeRendered) {
 		if (res!=null) { elemId=res[1]; }
 		return elemId;
 	}
-	
+
 	for (var i=0;i<p;i++) {
 		ps[i]=ps[i].trim();
-		
+
 		if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null) {
 			untilEnter.lastIndex=hN=hN[0].length;
 			closeSec(hN);
@@ -277,7 +263,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 			closeSec(hN);
 			continue; // Text after '#/' is ignored. Use '#####/' for comment.
 		}
-		
+
 		if (ps[i].length!==0) {
 			if (/^<\/?\w/.test(ps[i])) {
 				str+=ps[i];
@@ -309,7 +295,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 		}
 	}
 	closeSec();
-	
+
 	return str;
 };
 
@@ -334,9 +320,7 @@ kipid.getContentsJoinedWithEnter=function($elem) {
 	return strArray.join("\n");
 };
 
-////////////////////////////////////////////////////
 // cookies.js (copied from cookie-test.html)
-////////////////////////////////////////////////////
 kipid.expire=365*24*60*60; // max-age in seconds.
 kipid.docCookies={
 	hasItem:function(sKey) {
@@ -374,9 +358,7 @@ kipid.docCookies={
 	}
 };
 
-////////////////////////////////////////////////////
 // Functions for printing codes into 'pre.prettyprint'.
-////////////////////////////////////////////////////
 kipid.indentsRemove=function(str) {
 	var firstIndent=str.match(/^\n\t+/), indentRegExp;
 	if (firstIndent!==null) { // if match (first indent) is found
@@ -386,7 +368,7 @@ kipid.indentsRemove=function(str) {
 	}
 	return str.replace(indentRegExp,'\n');
 };
-kipid.escapeHTML=function(str, query) {
+kipid.escapeHTML=function(str) {
 	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 };
 kipid.printCode=function(codeId) {
@@ -404,18 +386,16 @@ kipid.printCode=function(codeId) {
 	}
 };
 
-////////////////////////////////////////////////////
 // Function for toggling height, i.e. switching scrollability with conserving view.
-////////////////////////////////////////////////////
 kipid.toggleHeight=function(obj) {
 	var next=$(obj).next();
 	var toBeScrolledBy=0;
 	var windowScrollTop=$window.scrollTop();
-		// (window.pageYOffset!==undefined)?window.pageYOffset:(document.documentElement || document.body.parentNode || document.body).scrollTop
+		// (window.pageYOffset!==undefined)?window.pageYOffset:(document.documentElement||document.body.parentNode||document.body).scrollTop
 	var nOffsetTop=next.offset().top;
 	var nHeight=next.height();
 	// kipid.resultTest.append("before:\twindowScrollTop: "+windowScrollTop+";\tnOffsetTop: "+nOffsetTop+";\tnHeight: "+nHeight+"\n");
-	
+
 	if (next.is(".scrollable")) { // becomes expanded.
 		toBeScrolledBy=next.scrollTop();
 		next.removeClass("scrollable");
@@ -438,9 +418,7 @@ kipid.toggleHeight=function(obj) {
 	// kipid.resultTest[0].scrollTop=kipid.resultTest[0].scrollHeight;
 };
 
-////////////////////////////////////////////////////
 // section's show/hide functions
-////////////////////////////////////////////////////
 kipid.ShowHide=function(elem) {
 	$(elem).next().toggle();
 	if ($(elem).next().is(":visible")) {
@@ -457,9 +435,7 @@ kipid.Hide=function(elem) {
 	$elem.parent().find(".ShowHide").html("▼ Show");
 };
 
-////////////////////////////////////////////////////
 // bubbleRef's show/hide functions
-////////////////////////////////////////////////////
 kipid.ShowBR=function(elem) {
 	clearTimeout(kipid.timerHideBRQueue);
 	kipid.bubbleRefs.hide();
@@ -472,9 +448,7 @@ kipid.HideBR=function(elem) {
 	$(elem).parent().hide();
 };
 
-////////////////////////////////////////////////////
 // Changing Styles of docuK
-////////////////////////////////////////////////////
 // kipid.TFontSize=docuK.find(".TFontSize");
 // kipid.TLineHeight=docuK.find(".TLineHeight");
 
@@ -562,9 +536,7 @@ $window.on("resize.deviceInfo", function() {
 	}
 });
 
-////////////////////////////////////////////////////
 // Share a link through SNS
-////////////////////////////////////////////////////
 kipid.shareSNS=function(service) {
 	var title=encodeURIComponent( $("title").text() );
 	var url=encodeURIComponent(window.location.href);
@@ -583,9 +555,7 @@ kipid.shareSNS=function(service) {
 	window.open(open);
 };
 
-////////////////////////////////////////////////////
 // Delayed Loading. (Copied from user-page.html)
-////////////////////////////////////////////////////
 kipid.delayPad=kipid.delayPad||1024;
 kipid.wait=kipid.wait||512;
 kipid.delayedElems=[];
@@ -612,7 +582,7 @@ $.fn.delayedLoad=function() {
 			this.css("background-image", "url("+this.attr("delayed-bgimage")+")");
 			this.removeAttr("delayed-bgimage");
 			done=true;
-		} 
+		}
 		// iframes or images
 		if (this.attr("delayed-src")) {
 			this.attr("src", this.attr("delayed-src"));
@@ -657,15 +627,9 @@ kipid.delayedLoadByScroll=function() {
 };
 $window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
 // docuK Process
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
 kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
-	////////////////////////////////////////////////////
 	// Possible duplicate id is handled.
-	////////////////////////////////////////////////////
 	docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
 	kipid.logPrint("<br><br>docuK-"+docuKI+" scripts started!<br><span class='emph'>If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>");
 	var docuK=kipid.docuK.eq(docuKI);
@@ -673,7 +637,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		kipid.logPrint("<br><br>docuK-"+docuKI+" is already rendered.");
 		return;
 	}
-	
+
 	var postId="-in-docuK"+docuKI;
 	var postIdRegEx=new RegExp(postId+"$");
 	if (docuK.is(".noDIdHandle")) {
@@ -684,10 +648,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			$this[0].id+=postId;
 		});
 	}
-	
-	////////////////////////////////////////////////////
+
 	// Style change widget, and SNS widget.
-	////////////////////////////////////////////////////
 	docuK.prepend(
 		'<div class="change-docuK-style">'
 		+'<form><input id="button'+docuKI+'-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>'
@@ -703,16 +665,12 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		+'<div class="SNS-top"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"></div>'
 	);
 	docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"></div>');
-	
-	////////////////////////////////////////////////////
+
 	// Scrollable switching of 'pre.prettyprint'.
-	////////////////////////////////////////////////////
 	docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
 	kipid.logPrint("<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.");
-	
-	////////////////////////////////////////////////////
+
 	// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
-	////////////////////////////////////////////////////
 	var secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
 	var secI, secIH2, subsecJH3, subsubsecKH4;
 	var secN=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
@@ -756,7 +714,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				tocHtml+=fTocHtml();
 				secIH2.html(fSecHtml());
 			}
-			
+
 			if (!secI.is(".noToggleUI")) {
 				secContentsId="sec"+docuKI+"-"+secITxt+"-contents";
 				secI.append("<div class=\"cBoth\"></div><div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
@@ -764,14 +722,14 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				secIH2.after("<div class=\"ShowHide\" onclick=\"kipid.ShowHide(this)\">▼ Show/Hide</div>");
 				secI.append("<div class=\"cBoth\"></div>");
 			}
-			
+
 			subsecs=secI.find(".subsec"); subsecI=0;
 			for (var j=0;j<subsecs.length;j++) {
 				subsecJH3=subsecs.eq(j).find("h3:first-child");
 				hN="3"; subsecI++; secId=secITxt+"-"+subsecI; secPreTxt=secITxt+"."+subsecI; txt=subsecJH3.html();
 				tocHtml+=fTocHtml();
 				subsecJH3.html(fSecHtml());
-				
+
 				subsubsecs=subsecs.eq(j).find(".subsubsec"); subsubsecI=0;
 				for (var k=0;k<subsubsecs.length;k++) {
 					subsubsecKH4=subsubsecs.eq(k).find("h4:first-child");
@@ -798,10 +756,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	secs.find(".toc").html(tocHtml);
 	kipid.logPrint("<br><br>Table of Contents is filled out.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.");
 
-	////////////////////////////////////////////////////
 	// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
 	// Make 'refer' tags bubble-refer equations (eqq tag) or figures (figure tag). Any tag with id can be bubble-refered with refer tag.
-	////////////////////////////////////////////////////
 	function pad(str, max) {
 		str=str.toString();
 		return str.length<max?pad("0"+str,max):str;
@@ -876,7 +832,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		}
 	}
 	kipid.logPrint("<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.");
-	
+
 	docuK.addClass("rendered");
 };
 })(window.kipid=window.kipid||{}, jQuery);
