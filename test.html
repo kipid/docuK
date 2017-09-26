@@ -1,0 +1,97 @@
+<script>
+// javascript 에서 JAVA class 같은게 필요한가???
+function Class(arg1=1, arg2=2, arg3=3) { // public class, private vars with default values.
+	const name = "name: private final/const var."; // private final var.
+	let some = 10; // private var.
+
+	this.var1 = "local public var1"; // public var.
+
+	this.getName = function() { // public method.
+		return name;
+	};
+	this.getSome = function() {
+		return some;
+	};
+	this.increaseSome = function() {
+		some++;
+	};
+	this.getArg1 = function() {
+		return arg1;
+	};
+	this.setArg1 = function(v) {
+		arg1 = v;
+	};
+	this.getArgs = function() {
+		return [arg1, arg2, arg3];
+	};
+	this.toString = function() {
+		return "This is Class."
+	};
+	this.accessSuperClassVar1 = function() {
+		return `I can access "${this.__proto__.superClassVar1}"`;
+	};
+
+	return "What happens if Class return a value.";
+};
+
+function superClass(arg1, arg2, arg3) {
+
+};
+
+// static var/method 같은게 javascript 에 필요한가???
+// 그냥 outside 에 있는거랑 다른 이점이 있나?
+const classPrototype = {
+	superClassVar1: "superClassVar1 is set." // static var? or super class var?
+	,superClassMethod: function() { // static method? or super class method?
+		return "This is superClassMethod.";
+	}
+	,accessSubClassVar: function() {
+		return this.var1;
+	}
+};
+Class.prototype = classPrototype;
+
+const result = Class("hello", "this", "that");
+console.log(result);
+const clazz = new Class("hello", "this", "that");
+console.log(clazz);
+// console.log(clazz.getArgs());
+// console.log(clazz.getName());
+// clazz.increaseSome();
+// console.log(clazz.getSome());
+// console.log(clazz.var1);
+// clazz.setArg1("arg1 is revised.");
+// console.log(clazz.getArg1());
+// console.log(clazz.getArgs());
+// console.log(clazz.superClassVar1);
+// clazz.superClassVar1 = "superClassVar1 is revised in clazz.";
+// console.log(clazz.superClassVar1);
+console.log(clazz.accessSuperClassVar1());
+console.log("Super can access?", clazz.accessSubClassVar());
+
+const clazz1 = new Class("do", "it", "again");
+console.log(clazz1.getArgs());
+console.log(clazz1.getName());
+clazz1.increaseSome();
+console.log(clazz1.getSome());
+console.log(clazz1.superClassVar1);
+clazz.__proto__.superClassVar1 = "superClassVar1 is revised in clazz.__proto__."
+console.log(clazz1.superClassVar1);
+console.log(classPrototype);
+
+function getArgs() {
+	return arguments;
+}
+const caller = {call:getArgs};
+console.log(getArgs("a", "b", "c", "Call from nothing."));
+console.log(window.getArgs("a", "b", "c", "Call from window."));
+console.log(caller.call("a", "b", "c", "Call from caller."));
+
+function optionalReturn(v) {
+	if (v===1) {
+		return true;
+	}
+}
+console.log(optionalReturn(1));
+console.log(optionalReturn(0));
+</script>

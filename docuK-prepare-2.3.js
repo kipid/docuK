@@ -72,19 +72,13 @@ kipid.strToJSON=function(str, colMap=true, rowMap=false) {
 			let jMax=ret[i].length;
 			if (jMax>firstColSize) { jMax=firstColSize; }
 			for (let j=0;j<jMax;j++) {
-				let key=ret[0][j];
-				if (key!==undefined) {
-					ret[i][key]=ret[i][j];
-				}
+				ret[i][ret[0][j]]=ret[i][j];
 			}
 		}
 	}
 	if (rowMap) {
 		for (let i=0;i<ret.length;i++) {
-			let key=ret[i][0];
-			if (key!==undefined) {
-				ret[key]=ret[i];
-			}
+			ret[ret[i][0]]=ret[i];
 		}
 	}
 	return ret;
@@ -93,12 +87,11 @@ kipid.strToArray=function(str) {
 	return kipid.strToJSON(str,false,false);
 };
 kipid.arrayToTableHTML=function(txtArray) {
-	var tableStr="<table>";
-	for (var row=0;row<txtArray.length;row++) {
-		// console.log(txtArray[row]);
+	let tableStr="<table>";
+	for (let row=0;row<txtArray.length;row++) {
 		tableStr+="<tr>";
-		for (var col=0;col<txtArray[row].length;col++) {
-			tableStr+="<td>"+kipid.escapeHTML(txtArray[row][col]).replace(/\n/g,'<br>')+"</td>";
+		for (let col=0;col<txtArray[row].length;col++) {
+			tableStr+=`<td>${kipid.escapeHTML(txtArray[row][col]).replace(/\n/g,'<br>')}</td>`;
 		}
 		tableStr+="</tr>";
 	}
@@ -109,39 +102,39 @@ kipid.arrayToTableHTML=function(txtArray) {
 // SEE (Super Easy Edit).
 kipid.SEEToArray=function(SEE) {
 	SEE=SEE.trim();
-	var dE=/\s*\n\n+\s*/g; // split by double enter.
-	var start=end=0;
-	var re, subStr;
-	var ps=[];
-	while((re=dE.exec(SEE))!==null) {
+	const dE=/\s*\n\n+\s*/g; // split by double enter.
+	let start=end=0;
+	let re, subStr;
+	const ps=[];
+	while ((re=dE.exec(SEE))!==null) {
 		end=dE.lastIndex;
 		subStr=SEE.substring(start,end).trim();
 		if (/^<pre\s*[^>]*>/i.test(subStr)) {
-			while(!/<\/pre>$/i.test(subStr)) {
+			while (!/<\/pre>$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
 		} else if (/^```/.test(subStr)) {
-			while(!/```\/$/.test(subStr)) {
+			while (!/```\/$/.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
 		} else if (/^<script\s*[^>]*>/i.test(subStr)) {
-			while(!/<\/script>$/i.test(subStr)) {
+			while (!/<\/script>$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
 		} else if (/^<data\s*[^>]*>/i.test(subStr)) {
-			while(!/<\/data>$/i.test(subStr)) {
+			while (!/<\/data>$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
 		} else if (/^<!--/i.test(subStr)) {
-			while(!/-->$/i.test(subStr)) {
+			while (!/-->$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
@@ -156,24 +149,23 @@ kipid.SEEToArray=function(SEE) {
 };
 
 kipid.renderToDocuK=function(toBeRendered) {
-	var ps=kipid.SEEToArray(toBeRendered);
-	var p=ps.length;
+	const ps=kipid.SEEToArray(toBeRendered);
+	const p=ps.length;
 
-	var TOC="Table of Contents";
-	var PH="Posting History";
-	var RRA="References and Related Articles";
-	var RSR="Referneces and Suggested Readings";
+	const TOC="Table of Contents";
+	const PH="Posting History";
+	const RRA="References and Related Articles";
+	const RSR="Referneces and Suggested Readings";
 
-	var untilEnter=/[^\n]+/g; // until enter.
-	var head, hN; // #*hN
-	var emmet=classes=elemId="";
+	const untilEnter=/[^\n]+/g; // until enter.
+	let head, hN; // #*hN
+	let emmet="", classes="", elemId="";
 
-	var docuOn=secOn=subsecOn=subsubsecOn=false;
-	var str='';
+	let docuOn=false, secOn=false, subsecOn=false, subsubsecOn=false;
+	let str='';
 
 	function closeSec(hN) {
-		if (hN===undefined) { hN=1; }
-		switch(hN) {
+		switch (hN) {
 			case 1: if (docuOn) { str+='</div>'; docuOn=false; }
 			case 2: if (secOn) { str+='</div>'; secOn=false; }
 			case 3: if (subsecOn) { str+='</div>'; subsecOn=false; }
@@ -182,135 +174,124 @@ kipid.renderToDocuK=function(toBeRendered) {
 		}
 	}
 	function getEmmetFromHead(trimedHead) {
-		const rexHeadEmmet=/^\[([\w\s#._:-]+)\]/;
-		const exec=rexHeadEmmet.exec(trimedHead);
-		if (exec!=null) {
+		const exec=/^\[([\w\s#._:-]+)\]/.exec(trimedHead);
+		if (exec) {
 			return exec[1];
-		} return "";
+		}
 	}
 	function getClassesFromEmmet(str) {
-		var res;
-		var classes="";
-		var rexClasses=/\.([\w:-]+)/g;
-		while((res=rexClasses.exec(str))!=null) {
+		const rexClasses=/\.([\w:-]+)/g;
+		let classes="";
+		let res;
+		while (res=rexClasses.exec(str)) {
 			classes+=res[1]+" ";
 		}
 		return classes.trim();
 	}
 	function getIdFromEmmet(str) {
-		var res;
-		var elemId="";
-		var rexId=/#([\w:-]+)/;
-		res=rexId.exec(str);
-		if (res!=null) { elemId=res[1]; }
-		return elemId;
+		let res=/#([\w:-]+)/.exec(str);
+		if (res) {
+			return res[1];
+		}
+		return "";
 	}
 
-	for (var i=0;i<p;i++) {
+	for (let i=0;i<p;i++) {
 		ps[i]=ps[i].trim();
 
-		if ((hN=/^#+(?![#\/])/.exec(ps[i]))!==null) {
+		if (hN=/^#+(?![#\/])/.exec(ps[i])) {
 			untilEnter.lastIndex=hN=hN[0].length;
 			closeSec(hN);
 			head=untilEnter.exec(ps[i]);
 			head=head[0].trim();
 			emmet=getEmmetFromHead(head);
 			classes=elemId="";
-			if (emmet.length>0) {
+			if (emmet) {
 				head=head.substring(emmet.length+2).trim();
 				classes=getClassesFromEmmet(emmet);
 				elemId=getIdFromEmmet(emmet);
-				if(classes.length>0) {
-					classes=" "+classes;
+				if (classes) {
+					classes=` ${classes}`;
 				}
-				if(elemId.length>0) {
-					elemId=' id="'+elemId+'"';
+				if (elemId) {
+					elemId=` id="${elemId}"`;
 				}
 			}
-			switch(hN) {
-				case 1: str+='<div class="docuK fromSEE"><div class="sec'+classes+'"><h1'+elemId+'>'+head+'</h1>';
+			switch (hN) {
+				case 1: str+=`<div class="docuK fromSEE"><div class="sec${classes}"><h1${elemId}>${head}</h1>`;
 					docuOn=secOn=true; break;
 				case 2:
 					if (head==="TOC") {
 						str+='<div class="sec">';
 						head=TOC;
-						str+='<h2 class="notSec">'+head+'</h2><div class="p toc"></div></div>'; // self closing.
+						str+=`<h2 class="notSec">${head}</h2><div class="p toc"></div></div>`; // self closing.
 					} else if (head==="PH") {
 						str+='<div class="sec hiden">';
 						head=PH;
-						str+='<h2 class="no-sec-N" id="sec-PH">'+head+'</h2>';
+						str+=`<h2 class="no-sec-N" id="sec-PH">${head}</h2>`;
 						secOn=true;
 					} else if (head==="RRA") {
 						str+='<div class="sec">';
 						head=RRA;
-						str+='<h2 class="no-sec-N" id="sec-Refs">'+head+'</h2>';
+						str+=`<h2 class="no-sec-N" id="sec-Refs">${head}</h2>`;
 						secOn=true;
 					} else {
-						str+='<div class="sec'+classes+'">';
-						str+='<h2'+elemId+'>'+head+'</h2>';
+						str+=`<div class="sec${classes}">`;
+						str+=`<h2${elemId}>${head}</h2>`;
 						secOn=true;
 					}
 					break;
-				case 3: str+='<div class="subsec'+classes+'"><h3'+elemId+'>'+head+'</h3>';
+				case 3: str+=`<div class="subsec${classes}"><h3${elemId}>${head}</h3>`;
 					subsecOn=true; break;
-				case 4: str+='<div class="subsubsec'+classes+'"><h4'+elemId+'>'+head+'</h4>';
+				case 4: str+=`<div class="subsubsec${classes}"><h4${elemId}>${head}</h4>`;
 					subsubsecOn=true; break;
-				default: str+='<h'+hN+elemId+'>'+head+'</h'+hN+'>';
+				default: str+=`<h${hN}${elemId}>${head}</h${hN}>`;
 			}
 			ps[i]=ps[i].substring(untilEnter.lastIndex).trim();
-		} else if ((hN=/^#+(?=\/)/.exec(ps[i]))!==null) {
+		} else if (hN=/^#+(?=\/)/.exec(ps[i])) {
 			hN=hN[0].length;
 			closeSec(hN);
 			continue; // Text after '#/' is ignored. Use '#####/' for comment.
 		}
 
-		if (ps[i].length!==0) {
+		if (ps[i].length) {
 			if (/^<\/?\w/.test(ps[i])) {
 				str+=ps[i];
 			} else if (/^```/.test(ps[i])) {
 				ps[i]=ps[i].replace(/^```/,'').replace(/```\/$/,'').trim();
 				emmet=getEmmetFromHead(ps[i]);
 				classes=elemId="";
-				if (emmet.length>0) {
+				if (emmet) {
 					ps[i]=ps[i].substring(emmet.length+2).trim();
 					classes=getClassesFromEmmet(emmet);
 					elemId=getIdFromEmmet(emmet);
-					if(classes.length>0) {
-						classes=" "+classes;
+					if (classes) {
+						classes=` ${classes}`;
 					}
-					if(elemId.length>0) {
-						elemId=' id="'+elemId+'"';
+					if (elemId) {
+						elemId=` id="${elemId}"`;
 					}
 				}
-				str+='<pre class="prettyprint'+classes+'"'+elemId+'>'
-					+ps[i].replace(/<\/pre>/ig,'/pre replaced>')
-					+'</pre>'
+				str+=`<pre class="prettyprint${classes}"${elemId}>${ps[i].replace(/<\/pre>/ig,'/pre replaced>')}</pre>`;
 			} else {
-				str+='<div class="p';
-				// if (/^-/.test(ps[i])) {
-				// 	str+=' cmt';
-				// }
-				str+='">'+ps[i]+'</div>';
+				str+=`<div class="p">${ps[i]}</div>`;
 			}
 		}
 	}
-	closeSec();
+	closeSec(1);
 
 	return str;
 };
 
 kipid.getContentsJoinedWithEnter=function($elem) {
-	var contents=$elem.contents();
-	var contentsL=contents.length;
-	var i, contentI;
-	var lis, lisL, j;
-	var strArray=[];
-	for (i=0;i<contentsL;i++) {
-		contentI=contents.eq(i);
+	const contents=$elem.contents();
+	const contentsL=contents.length;
+	const strArray=[];
+	for (let i=0;i<contentsL;i++) {
+		const contentI=contents.eq(i);
 		if (contentI.is("ol")) {
-			lis=contentI.contents();
-			lisL=lis.length;
-			for (j=0;j<lisL;j++) {
+			const lis=contentI.contents();
+			for (let j=0;j<lis.length;j++) {
 				strArray.push(lis.eq(j).text().trim());
 			}
 		} else {
@@ -372,10 +353,10 @@ kipid.escapeHTML=function(str) {
 	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 };
 kipid.printCode=function(codeId) {
-	var $pre=$("#pre-"+codeId);
-	var $code=$("#"+codeId);
+	const $pre=$("#pre-"+codeId);
+	const $code=$("#"+codeId);
 	if ($pre.exists()) {
-		var html=// ('<codeprint id="'+codeId+'">'+
+		let html=// ('<codeprint id="'+codeId+'">'+
 			kipid.indentsRemove($code.html())
 			// +'</codeprint><!-- '+codeId+' -->')
 			.trim();
