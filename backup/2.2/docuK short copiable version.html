@@ -1,11 +1,12 @@
 <codeprint id="docuK-style">
-<!-- <link rel="stylesheet" media="all" type="text/css" href="docuK-2.2.css"> -->
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
-<!-- <script src="docuK-prepare-2.2.js" charset="utf-8"></script> -->
 <!-- From kipid.tistory CDN -->
-<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-style -->
 
 <codeprint id="docuK-docu">
@@ -37,7 +38,7 @@
 	<div class="p">
 		citing the reference <cite class="ref-docuK"></cite><cite class="ref-1"></cite>
 	</div>
-	
+
 	<div class="subsec"><h3>subsection</h3>
 		<div class="subsubsec"><h4>subsubsection</h4>
 			<div class="p">
@@ -57,7 +58,7 @@
 			Refering equations <refer class="eq-"></refer>
 		</div>
 	</div>
-	
+
 	<div class="subsection"><h3>Comment/BeCareFul box</h3>
 		<div class="cmt">
 			This is cmt box.
@@ -66,7 +67,7 @@
 			<div class="p">This is cmt box.</div>
 			<div class="p">This is cmt box.</div>
 		</div>
-		
+
 		<div class="bcf">
 			This is bcf box.
 		</div>
@@ -75,7 +76,7 @@
 			<div class="p">This is bcf box.</div>
 		</div>
 	</div>
-	
+
 	<div class="subsec"><h3>Figures</h3>
 		<figure><div class="fig">
 			<div style="display:inline-block; padding:15px; background:gray">
@@ -83,7 +84,7 @@
 			</div>
 			<div class="caption">border formatting.</div>
 		</div></figure>
-		
+
 		<div class="p">Elements with disableQ0 class remove <code>&lt;!-- --&gt;</code> inside them only when deviceWidth>321. This is for Galaxy S (or old smartphones) problem like unexpected scrollTop.</div>
 		<figure id="fig-"><div class="fig disableQ0">
 			<!-- <div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
@@ -93,7 +94,7 @@
 		</div></figure>
 		<div class="p">Refering figures <refer class="fig-"></refer></div>
 	</div>
-	
+
 	<div class="subsec"><h3>Printing code</h3>
 		<div class="p">
 			<codeprint id="code-id">
@@ -127,11 +128,11 @@
 	<div class="subsec"><h3>docuK CSS style</h3>
 		<pre id="pre-docuK-style" class="prettyprint linenums lang-html scrollable"></pre>
 	</div>
-	
+
 	<div class="subsec"><h3>docuK HTML document</h3>
 		<pre id="pre-docuK-docu" class="prettyprint linenums lang-html scrollable"></pre>
 	</div>
-	
+
 	<div class="subsec"><h3>docuK SCRIPT (JavaScript including jQuery, MathJax, and Google code prettyfier)</h3>
 		<pre id="pre-docuK-script" class="prettyprint linenums lang-html scrollable"></pre>
 	</div>
@@ -144,7 +145,7 @@
 		<li id="ref-docuKShort"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
 			// Updated regularly by the current html file. If you see this in kipid's blog, this is the link you are seeing.</li>
 		<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
-		
+
 		<div class="subsec"><h3>Supported by</h3></div>
 		<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
 			// JavaScript enhancer</li>
@@ -152,7 +153,7 @@
 			// Math renderer.</li>
 		<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
 			// Code prettyfier.</li>
-		
+
 		<div class="subsec"><h3>subsection</h3></div>
 		<li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a></li>
 		<li id="ref-cite"><a href="http://kipid.tistory.com/entry/Citing-the-references-automatically-in-HTML-like-LaTeX">kipid's blog - Citing the references automatically in HTML (like LaTeX)</a>; ref는 id를 부여하고 (보통 구분을 확실히 하기 위해 "ref-"를 prefix로 붙임.) cite tag with class로 cite함. 이후 자동으로 parsing.</li>
@@ -168,9 +169,8 @@
 
 <codeprint id="docuK-script">
 <script>
-window.kipid=window.kipid||{};
-kipid.wait=2000;
-kipid.delayPad=2000;
+kipid.wait=512;
+kipid.delayPad=0;
 </script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -184,7 +184,6 @@ MathJax.Hub.Config({
 	}
 });
 </script>
-<!-- <script src="docuK-postProcess-2.2.js" charset="utf-8"></script> -->
 <!-- From kipid.tistory CDN -->
-<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-script -->
