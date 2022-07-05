@@ -17,7 +17,7 @@ codeprint.SEE {display:none}
 .docuK .SNS-bottom {margin:35px 0; text-align:center}
 .docuK .SNS-img {width:35px; height:35px; border:2px gray solid; border-left:0; cursor:pointer}
 .docuK .SNS-img:first-child {border-left:2px gray solid}
-.docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
+.docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black !important}
 .docuK .ShowHide {float:right; padding:.3em 0; cursor:pointer}
 .docuK .Hide {float:right; padding:0 0 .3em; clear:both; cursor:pointer}
 .docuK .sec-contents, .docuK>.sec.noToggleUI>h2+* {clear:both; margin-top:.6em; padding-top:0}
