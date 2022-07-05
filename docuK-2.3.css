@@ -94,6 +94,7 @@ codeprint.SEE {display:none}
 .docuK .eqC {display:inline-block; padding:1px; max-width:none; background:inherit}
 
 .docuK figure {display:block; margin:1em 0 2em; padding:0; text-indent:0}
+.docuK figure img:not([width]), .docuK figure iframe:not([width]) {width:auto}
 .docuK .fig {margin:1em 0; padding:1em; border:1px solid gray; text-align:center; text-indent:0; box-shadow:inset 0 0 20px white} .docuK.bright .fig {box-shadow:inset 0 0 20px black}
 .docuK img {box-sizing:border-box; -moz-box-sizing:border-box; max-width:100%; border:none; width:auto; height:auto; vertical-align:middle}
 .docuK .fig>.image {}
