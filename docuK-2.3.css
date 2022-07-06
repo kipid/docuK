@@ -17,7 +17,8 @@ codeprint.SEE {display:none}
 .docuK .SNS-bottom {margin:35px 0; text-align:center}
 .docuK .SNS-img {width:35px; height:35px; border:2px gray solid; border-left:0; cursor:pointer}
 .docuK .SNS-img:first-child {border-left:2px gray solid}
-.docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black !important}
+.docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
+.docuK>.sec .head-text {color:white} .docuK.bright>.sec .head-text {color:black}
 .docuK .ShowHide {float:right; padding:.3em 0; cursor:pointer}
 .docuK .Hide {float:right; padding:0 0 .3em; clear:both; cursor:pointer}
 .docuK .sec-contents, .docuK>.sec.noToggleUI>h2+* {clear:both; margin-top:.6em; padding-top:0}
@@ -34,6 +35,8 @@ codeprint.SEE {display:none}
 .docuK h3 {font-weight:bold; font-size:1.2em}
 .docuK h4 {font-weight:bold; font-size:1.2em}
 .docuK h2, .docuK h3, .docuK h4 {padding:.4em .3em .6em}
+.docuK h1, .docuK h2, .docuK h3, .docuK h4 {color:white}
+.docuK.bright h1, .docuK.bright h2, .docuK.bright h3, .docuK.bright h4 {color:black !important}
 
 .docuK .promoting-docuK {padding-left:70px}
 .docuK .promoting-docuK a {text-decoration:none}
