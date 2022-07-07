@@ -40,10 +40,10 @@ codeprint.SEE {display:none}
 
 .docuK .promoting-docuK {padding-left:70px}
 .docuK .promoting-docuK a {text-decoration:none}
-.docuK .promoting-docuK a:link {color:rgb(0,0,55)}
-.docuK .promoting-docuK a:visited {color:rgb(30,30,105)}
-.docuK .promoting-docuK a:active {color:rgb(0,120,120)}
-.docuK .promoting-docuK a:hover {color:rgb(0,55,0); text-decoration:underline}
+.docuK .promoting-docuK a:link {color:rgb(200,200,255)}
+.docuK .promoting-docuK a:visited {color:rgb(230,230,255)}
+.docuK .promoting-docuK a:active {color:rgb(100,250,250)}
+.docuK .promoting-docuK a:hover {color:rgb(200,255,200); text-decoration:underline}
 
 .docuK a {text-decoration:none}
 .docuK a:link {color:rgb(200,200,255)}
@@ -163,7 +163,7 @@ codeprint.SEE {display:none}
 .docuK pre .atv, .docuK code .atv {color:#F3FF64}/* html/xml attribute value - yellow */
 .docuK pre .dec, .docuK code .dec {color:#3387CC}/* decimal - blue */
 
-.docuK .change-docuK-style {font-size:12px; line-height:1.6; text-align:right; margin-top:1.5em; padding:.5em}
+.docuK .change-docuK-style {font-size:12px; line-height:1.6; text-align:right; margin-top:1.5em; padding:.5em; color:white; background:black}
 .docuK .change-docuK-style form {vertical-align:middle; text-indent:0; display:inline-block; border:2px gray solid; padding:2px; margin:0}
 .docuK .change-docuK-style form * {margin:0; padding:0; text-align:center; vertical-align:middle}
 .docuK .change-docuK-style form button {width:29px; height:25px; padding:0}
