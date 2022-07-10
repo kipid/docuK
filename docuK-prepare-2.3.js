@@ -317,7 +317,7 @@ kipid.docCookies={
 	}
 	, setItem:function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
 		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-		var sExpires="";
+		let sExpires="";
 		if (vEnd) { switch (vEnd.constructor) {
 			case Number:
 				sExpires=vEnd===Infinity?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+vEnd;
@@ -333,15 +333,15 @@ kipid.docCookies={
 		return true;
 	}
 	, keys:function() {
-		var aKeys=document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g,"").split(/\s*(?:\=[^;]*)?;\s*/);
-		for (var nIdx=0;nIdx<aKeys.length;nIdx++) { aKeys[nIdx]=decodeURIComponent(aKeys[nIdx]); }
+		let aKeys=document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g,"").split(/\s*(?:\=[^;]*)?;\s*/);
+		for (let nIdx=0;nIdx<aKeys.length;nIdx++) { aKeys[nIdx]=decodeURIComponent(aKeys[nIdx]); }
 		return aKeys;
 	}
 };
 
 // Functions for printing codes into 'pre.prettyprint'.
 kipid.indentsRemove=function(str) {
-	var firstIndent=str.match(/^\n\t+/), indentRegExp;
+	let firstIndent=str.match(/^\n\t+/), indentRegExp;
 	if (firstIndent!==null) { // if match (first indent) is found
 		indentRegExp=new RegExp("\\n\\t{1,"+(firstIndent[0].length-1)+"}",'g'); // /\n\t{1,n}/g: global greedy matching
 	} else {
@@ -369,12 +369,12 @@ kipid.printCode=function(codeId) {
 
 // Function for toggling height, i.e. switching scrollability with conserving view.
 kipid.toggleHeight=function(obj) {
-	var next=$(obj).next();
-	var toBeScrolledBy=0;
-	var windowScrollTop=$window.scrollTop();
+	let next=$(obj).next();
+	let toBeScrolledBy=0;
+	let windowScrollTop=$window.scrollTop();
 		// (window.pageYOffset!==undefined)?window.pageYOffset:(document.documentElement||document.body.parentNode||document.body).scrollTop
-	var nOffsetTop=next.offset().top;
-	var nHeight=next.height();
+	let nOffsetTop=next.offset().top;
+	let nHeight=next.height();
 	// kipid.resultTest.append("before:\twindowScrollTop: "+windowScrollTop+";\tnOffsetTop: "+nOffsetTop+";\tnHeight: "+nHeight+"\n");
 
 	if (next.is(".scrollable")) { // becomes expanded.
@@ -388,7 +388,7 @@ kipid.toggleHeight=function(obj) {
 		} else {
 			// case1: scroll both
 			toBeScrolledBy=windowScrollTop-nOffsetTop;
-			var tailHeight=nHeight-toBeScrolledBy;
+			let tailHeight=nHeight-toBeScrolledBy;
 			next.addClass("scrollable");
 			nHeight=next.height();
 			window.scrollTo(0,(nHeight>tailHeight)?nOffsetTop+nHeight-tailHeight:nOffsetTop);
@@ -410,7 +410,7 @@ kipid.ShowHide=function(elem) {
 	setTimeout(function() {$window.trigger("scroll.delayedLoad");}, 1000);
 };
 kipid.Hide=function(elem) {
-	var $elem=$(elem).parent();
+	let $elem=$(elem).parent();
 	window.scrollBy(0,-$elem.outerHeight());
 	$elem.hide();
 	$elem.parent().find(".ShowHide").html("▼ Show");
@@ -519,9 +519,9 @@ $window.on("resize.deviceInfo", function() {
 
 // Share a link through SNS
 kipid.shareSNS=function(service) {
-	var title=encodeURIComponent( $("title").text() );
-	var url=encodeURIComponent(window.location.href);
-	var open="";
+	let title=encodeURIComponent( $("title").text() );
+	let url=encodeURIComponent(window.location.href);
+	let open="";
 	switch (service) {
 		case 'twitter':
 			open="https://twitter.com/intent/tweet"+"?via=kipacti"+"&text="+title+"&url="+url;
@@ -543,17 +543,17 @@ kipid.delayedElems=[];
 kipid.previous=Date.now();
 $.fn.inView=function() {
 	if (this.is(":visible")) {
-		var viewportHeight=window.innerHeight;
-		var scrollTop=$window.scrollTop();
-		var elemTop=this.offset().top-kipid.delayPad;
-		var elemBottom=elemTop+this.height()+kipid.delayPad;
+		let viewportHeight=window.innerHeight;
+		let scrollTop=$window.scrollTop();
+		let elemTop=this.offset().top-kipid.delayPad;
+		let elemBottom=elemTop+this.height()+kipid.delayPad;
 		return (scrollTop+viewportHeight>elemTop)&&(scrollTop<elemBottom);
 	} else {
 		return false;
 	}
 };
 $.fn.delayedLoad=function() {
-	var done=false;
+	let done=false;
 	if (this.inView()) {
 		if (this.hasClass("to-be-executed")) {
 			this.trigger("click");
@@ -595,8 +595,8 @@ kipid.delayedLoadAll=function() {
 };
 kipid.delayedLoadByScroll=function() {
 	$window.off("scroll.delayedLoad");
-	var now=Date.now();
-	var passed=now-kipid.previous;
+	let now=Date.now();
+	let passed=now-kipid.previous;
 	if (passed>kipid.wait) {
 		kipid.delayedLoadAll();
 	} else {
@@ -613,19 +613,19 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	// Possible duplicate id is handled.
 	docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
 	kipid.logPrint("<br><br>docuK-"+docuKI+" scripts started!<br><span class='emph'>If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>");
-	var docuK=kipid.docuK.eq(docuKI);
+	let docuK=kipid.docuK.eq(docuKI);
 	if (docuK.is(".rendered")) {
 		kipid.logPrint("<br><br>docuK-"+docuKI+" is already rendered.");
 		return;
 	}
 
-	var postId="-in-docuK"+docuKI;
-	var postIdRegEx=new RegExp(postId+"$");
+	let postId="-in-docuK"+docuKI;
+	let postIdRegEx=new RegExp(postId+"$");
 	if (docuK.is(".noDIdHandle")) {
 		postId="";
 	} else {
 		docuK.find("[id]").each(function() {
-			var $this=$(this);
+			let $this=$(this);
 			$this[0].id+=postId;
 		});
 	}
@@ -652,12 +652,12 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	kipid.logPrint("<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.");
 
 	// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
-	var secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
-	var secI, secIH2, subsecJH3, subsubsecKH4;
-	var secN=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
-	var eqqs, eqN="", eqC="", figs;
+	let secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
+	let secI, secIH2, subsecJH3, subsubsecKH4;
+	let secN=0, secITxt="", subsecI=0, subsubsecI=0, tocHtml="", txt="", secId="", secPreTxt="";
+	let eqqs, eqN="", eqC="", figs;
 	function fTocHtml(numbering) {
-		var secN=(numbering===undefined||numbering)?"secN":"none";
+		let secN=(numbering===undefined||numbering)?"secN":"none";
 		return "<h"+hN+">"
 		+"<a class='jump' id='toc"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
 			+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
@@ -665,7 +665,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		+"</a></h"+hN+">";
 	}
 	function fSecHtml(numbering) {
-		var secN="none", endA0="", endA1="</a>";
+		let secN="none", endA0="", endA1="</a>";
 		if (numbering===undefined||numbering) {
 			secN="secN"; endA0="</a>"; endA1="";
 		}
@@ -680,7 +680,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			+'<div class="eqC">'+eqC+'</div>'
 		+'</div>';
 	}
-	for (var i=0;i<secs.length;i++) {
+	for (let i=0;i<secs.length;i++) {
 		secI=secs.eq(i);
 		secIH2=secI.find("h2:first-child");
 		if (secIH2.exists() && !secIH2.is(".notSec")) { // exclude ".sec>h1" and ".sec>h2.notSec" in ToC
@@ -705,14 +705,14 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			}
 
 			subsecs=secI.find(".subsec"); subsecI=0;
-			for (var j=0;j<subsecs.length;j++) {
+			for (let j=0;j<subsecs.length;j++) {
 				subsecJH3=subsecs.eq(j).find("h3:first-child");
 				hN="3"; subsecI++; secId=secITxt+"-"+subsecI; secPreTxt=secITxt+"."+subsecI; txt=subsecJH3.html();
 				tocHtml+=fTocHtml();
 				subsecJH3.html(fSecHtml());
 
 				subsubsecs=subsecs.eq(j).find(".subsubsec"); subsubsecI=0;
-				for (var k=0;k<subsubsecs.length;k++) {
+				for (let k=0;k<subsubsecs.length;k++) {
 					subsubsecKH4=subsubsecs.eq(k).find("h4:first-child");
 					hN="4"; subsubsecI++; secId=secITxt+"-"+subsecI+"-"+subsubsecI; secPreTxt=secITxt+"."+subsecI+"."+subsubsecI; txt=subsubsecKH4.html();
 					tocHtml+=fTocHtml();
@@ -743,9 +743,9 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		str=str.toString();
 		return str.length<max?pad("0"+str,max):str;
 	}
-	var refN="", preRefHtml="", refHtml="", citeN="";
+	let refN="", preRefHtml="", refHtml="", citeN="";
 	function fCiteHtml() {
-		var str='<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">'
+		let str='<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">'
 			+refN
 			+'<div class="bubbleRef">'
 				+'<div class="content">'+preRefHtml+refHtml+'</div>'
@@ -763,21 +763,21 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		}
 		return str;
 	}
-	var olRefs=docuK.find("ol.refs");
+	let olRefs=docuK.find("ol.refs");
 	olRefs=olRefs.eq(olRefs.length-1);
-	var refs=docuK.find("ol.refs>li");
-	var refsN=refs.length;
+	let refs=docuK.find("ol.refs>li");
+	let refsN=refs.length;
 	for (i=0;i<refsN;i++) { // ref [i+1] with id
 		refs.eq(i).prepend('<span class="refN">Ref. <span class="number">['+pad(i+1,2)+']</span> </span>');
 	}
-	var cites=docuK.find("cite"), citeI, refered;
+	let cites=docuK.find("cite"), citeI, refered;
 	for (i=0;i<cites.length;i++) {
 		citeI=cites.eq(i);
 		if (citeI.is("[class]")) {
 			if (citeI.html()!=="") {
 				refered=docuK.find("#"+citeI.attr("class")+postId);
 				if (refered.exists()) {
-					var refNHtml=refered.find(".refN").html();
+					let refNHtml=refered.find(".refN").html();
 					refered.html('<span class="refN">'+refNHtml+'</span>'+citeI.html());
 				} else {
 					refsN+=1;
@@ -798,7 +798,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			}
 		}
 	}
-	var refers=docuK.find("refer"), referI;
+	let refers=docuK.find("refer"), referI;
 	refers.html('<span class="emph">( No refer. )</span>');
 	for (i=0;i<refers.length;i++) {
 		referI=refers.eq(i);

@@ -1,21 +1,21 @@
 (function(kipid, $, undefined) {
 // Printing codes in <codeprint> with id into <pre>.
-var codeprints=$("codeprint");
-for (var i=0;i<codeprints.length;i++) {
+let codeprints=$("codeprint");
+for (let i=0;i<codeprints.length;i++) {
 	kipid.printCode(codeprints.eq(i).attr('id'));
 }
 
 // SEE (Super Easy Edit)
-var $SEE=$("codeprint.SEE");
-for (var i=0;i<$SEE.length;i++) {
-	var $SEEi=$SEE.eq(i);
-	var SEEiHTML=$SEEi.html().trim();
+let $SEE=$("codeprint.SEE");
+for (let i=0;i<$SEE.length;i++) {
+	let $SEEi=$SEE.eq(i);
+	let SEEiHTML=$SEEi.html().trim();
 	$SEEi.html("");
 	$SEEi.after(kipid.renderToDocuK( SEEiHTML ));
 }
 $("pre.prettyprint.scrollable").addClass("linenums");
 
-var docuK=$(".docuK");
+let docuK=$(".docuK");
 kipid.docuK=docuK;
 
 // Showing disableQ0 only in width>321.
@@ -27,33 +27,33 @@ if (kipid.browserWidth>321) {
 }
 
 // <eq> and <eqq> tags to MathJax format
-var eqs=$("eq");
-for (var i=0;i<eqs.length;i++) {
+let eqs=$("eq");
+for (let i=0;i<eqs.length;i++) {
 	eqs.eq(i).html(function(ith,orgTxt) {return "\\( "+orgTxt.trim()+" \\)";});
 }
-var eqqs=$("eqq");
-for (var i=0;i<eqqs.length;i++) {
+let eqqs=$("eqq");
+for (let i=0;i<eqqs.length;i++) {
 	eqqs.eq(i).html(function(ith,orgTxt) {return "\\[ "+orgTxt.trim()+" \\]";});
 }
 kipid.logPrint("<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).");
 
 // docuK process.
 docuK.has("script").addClass("noDIdHandle");
-var k=docuK.length;
-for(var i=1;i<k;i++) {
+let k=docuK.length;
+for(let i=1;i<k;i++) {
 	kipid.docuKProcess(kipid, jQuery, i);
 }
 
 kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
 
-var inRefs=docuK.find(".inRef");
+let inRefs=docuK.find(".inRef");
 // Centering arrow.
 inRefs.each(function() {
-	var $elem=$(this);
-	var width=$elem.width()-2;
-	var $arrow=$elem.find(".arrow");
-	var borderWidth=parseFloat($arrow.css("borderWidth"));
-	var fontSize=parseFloat($arrow.css("fontSize"));
+	let $elem=$(this);
+	let width=$elem.width()-2;
+	let $arrow=$elem.find(".arrow");
+	let borderWidth=parseFloat($arrow.css("borderWidth"));
+	let fontSize=parseFloat($arrow.css("fontSize"));
 	$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
 });
 // Delayed-Load in bubble ref.
@@ -78,7 +78,7 @@ $(document).ready(function() {
 	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 
-	var cookieItem;
+	let cookieItem;
 	kipid.logPrint("<br>");
 	cookieItem=kipid.docCookies.getItem("kipid.mode");
 	if (cookieItem!==null) {
@@ -116,7 +116,7 @@ $(document).ready(function() {
 
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	if (docuK.find('.prettyprint').exists()) {
-		var gcp=document.createElement('script');
+		let gcp=document.createElement('script');
 		gcp.defer='';
 		gcp.src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js';
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(gcp);
@@ -125,7 +125,7 @@ $(document).ready(function() {
 
 	// MathJax js script (from cdn.mathjax.org) is added.
 	if (docuK.find('eq, eqq').exists()) {
-		var mjx=document.createElement('script');
+		let mjx=document.createElement('script');
 		mjx.defer='';
 		mjx.src='https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
@@ -157,9 +157,9 @@ $(document).ready(function() {
 		switch (event.keyCode) {
 			case 70: //F = 70
 			case 68: //D = 68
-				var scrollTop=$window.scrollTop();
-				var i, k=kipid.hLists.length;
-				var hI;
+				let scrollTop=$window.scrollTop();
+				let i, k=kipid.hLists.length;
+				let hI;
 
 				if (event.keyCode===70) {
 					scrollTop+=10;
@@ -187,9 +187,9 @@ $(document).ready(function() {
 				$window.scrollTop(hI.offset().top);
 				break;
 			case 84: //T = 84
-				var scrollTop=$window.scrollTop();
-				var i, k=kipid.tocs.length;
-				var tocI;
+				let scrollTop=$window.scrollTop();
+				let i, k=kipid.tocs.length;
+				let tocI;
 				scrollTop-=10;
 				for (i=k-1;i>=0;i--) {
 					tocI=kipid.tocs.eq(i);
@@ -201,9 +201,9 @@ $(document).ready(function() {
 				$window.scrollTop(tocI.offset().top);
 				break;
 			case 82: //R = 82
-				var scrollTop=$window.scrollTop();
-				var i, k=kipid.rras.length;
-				var rraI;
+				let scrollTop=$window.scrollTop();
+				let i, k=kipid.rras.length;
+				let rraI;
 				scrollTop-=10;
 				for (i=k-1;i>=0;i--) {
 					rraI=kipid.rras.eq(i);
@@ -231,7 +231,7 @@ $(document).ready(function() {
 		}
 	}
 	document.onkeydown=kipid.processShortKey;
-	var shortkeyDesc=$("#shortkey>ul");
+	let shortkeyDesc=$("#shortkey>ul");
 	if (shortkeyDesc.exists()) {
 		shortkeyDesc.prepend(
 			"<li>T: Table of Contents</li>"
