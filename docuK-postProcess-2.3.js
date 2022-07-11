@@ -124,17 +124,22 @@ $(document).ready(function() {
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(kakao_js);
 	}
 	kipid.logPrint('<br><br>kakao.js is loaded.');
-	Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
+	if (!Kakao.isInitialized()) {
+		Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
+	}
 	kipid.logPrint('<br>Kakao.isInitialized()='+Kakao.isInitialized());
 	kipid.popUpKakao=function () {
 		let $desc=$("meta[name='description']");
-		Kakao.Link.sendScrap({
-			requestUrl: 'https://kipid.tistory.com/',
-			templateId: 79466,
-			templateArgs: {
-				TITLE: $("title").text(), // ${TITLE}: title
-				DESC: $desc?$desc[0].content:'', // ${DESC}: description
-				PATH: window.location.pathname, // ${PATH}: path
+		let href=window.location.href;
+		Kakao.Share.sendDefault({
+			objectType: 'feed',
+			content: {
+				title: $("title").text(),
+				description: $desc?$desc[0].content:'',
+				link: {
+					mobileWebUrl: href,
+					webUrl: href,
+				},
 			},
 		});
 	};
@@ -179,11 +184,13 @@ $(document).ready(function() {
 		switch (event.target.nodeName) {
 			case "INPUT": case "SELECT": case "TEXTAREA": return;
 		}
+		let scrollTop=null;
+		let i, k;
 		switch (event.keyCode) {
 			case 70: //F = 70
 			case 68: //D = 68
-				let scrollTop=$window.scrollTop();
-				let i, k=kipid.hLists.length;
+				scrollTop=$window.scrollTop();
+				k=kipid.hLists.length;
 				let hI;
 
 				if (event.keyCode===70) {
@@ -212,8 +219,8 @@ $(document).ready(function() {
 				$window.scrollTop(hI.offset().top);
 				break;
 			case 84: //T = 84
-				let scrollTop=$window.scrollTop();
-				let i, k=kipid.tocs.length;
+				scrollTop=$window.scrollTop();
+				k=kipid.tocs.length;
 				let tocI;
 				scrollTop-=10;
 				for (i=k-1;i>=0;i--) {
@@ -226,8 +233,8 @@ $(document).ready(function() {
 				$window.scrollTop(tocI.offset().top);
 				break;
 			case 82: //R = 82
-				let scrollTop=$window.scrollTop();
-				let i, k=kipid.rras.length;
+				scrollTop=$window.scrollTop();
+				k=kipid.rras.length;
 				let rraI;
 				scrollTop-=10;
 				for (i=k-1;i>=0;i--) {
