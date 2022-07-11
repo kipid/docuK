@@ -1,27 +1,27 @@
-(function(kipid, $, undefined) {
+(function (kipid, $, undefined) {
 $window=$(window);
 
-$.fn.exists=function() { return this.length!==0; };
+$.fn.exists=function () { return this.length!==0; };
 kipid.browserWidth=window.innerWidth;
 const docuK=$(".docuK");
 kipid.docuK=docuK;
 
 // logPrint function.
 kipid.log=$("#docuK-log");
-kipid.logPrint=function(str) {
+kipid.logPrint=function (str) {
 	kipid.log.append(str);
 	kipid.log.scrollTop(kipid.log[0].scrollHeight);
 };
 kipid.logPrint("kipid.logPrint is working!");
 
 // String to Array
-kipid.encloseStr=function(str) {
+kipid.encloseStr=function (str) {
 	if (!str||str.constructor!==String) { return ''; }
 	if (str.charAt(0)==='"'||/[\n\t]/.test(str)) {
 		return `"${str.replace(/"/g,'""')}"`;
 	} return str;
 };
-kipid.strToJSON=function(str, colMap=true, rowMap=false) {
+kipid.strToJSON=function (str, colMap=true, rowMap=false) {
 	if (!str||str.constructor!==String) { return []; }
 	if (str.charAt(str.length-1)!=="\n") {
 		str+="\n";
@@ -83,10 +83,10 @@ kipid.strToJSON=function(str, colMap=true, rowMap=false) {
 	}
 	return ret;
 };
-kipid.strToArray=function(str) {
+kipid.strToArray=function (str) {
 	return kipid.strToJSON(str,false,false);
 };
-kipid.arrayToTableHTML=function(txtArray) {
+kipid.arrayToTableHTML=function (txtArray) {
 	let tableStr="<table>";
 	for (let row=0;row<txtArray.length;row++) {
 		tableStr+="<tr>";
@@ -100,7 +100,7 @@ kipid.arrayToTableHTML=function(txtArray) {
 };
 
 // SEE (Super Easy Edit).
-kipid.SEEToArray=function(SEE) {
+kipid.SEEToArray=function (SEE) {
 	SEE=SEE.trim();
 	const dE=/\s*\n\n+\s*/g; // split by double enter.
 	let start=end=0;
@@ -148,7 +148,7 @@ kipid.SEEToArray=function(SEE) {
 	return ps;
 };
 
-kipid.renderToDocuK=function(toBeRendered) {
+kipid.renderToDocuK=function (toBeRendered) {
 	const ps=kipid.SEEToArray(toBeRendered);
 	const p=ps.length;
 
@@ -283,7 +283,7 @@ kipid.renderToDocuK=function(toBeRendered) {
 	return str;
 };
 
-kipid.getContentsJoinedWithEnter=function($elem) {
+kipid.getContentsJoinedWithEnter=function ($elem) {
 	const contents=$elem.contents();
 	const contentsL=contents.length;
 	const strArray=[];
@@ -304,18 +304,18 @@ kipid.getContentsJoinedWithEnter=function($elem) {
 // cookies.js (copied from cookie-test.html)
 kipid.expire=365*24*60*60; // max-age in seconds.
 kipid.docCookies={
-	hasItem:function(sKey) {
+	hasItem:function (sKey) {
 		return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=")).test(document.cookie);
 	}
-	, getItem:function(sKey) {
+	, getItem:function (sKey) {
 		return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null;
 	}
-	, removeItem:function(sKey, sPath, sDomain, bSecure) {
+	, removeItem:function (sKey, sPath, sDomain, bSecure) {
 		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
 		document.cookie=encodeURIComponent(sKey)+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT"+(sDomain?"; domain="+sDomain:"")+(sPath?"; path="+sPath:"")+(bSecure?"; secure":"");
 		return true;
 	}
-	, setItem:function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+	, setItem:function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
 		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
 		let sExpires="";
 		if (vEnd) { switch (vEnd.constructor) {
@@ -332,7 +332,7 @@ kipid.docCookies={
 		document.cookie=encodeURIComponent(sKey)+"="+encodeURIComponent(sValue)+sExpires+(sDomain?"; domain="+sDomain:"")+(sPath?"; path="+sPath:"")+(bSecure?"; secure":"");
 		return true;
 	}
-	, keys:function() {
+	, keys:function () {
 		let aKeys=document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g,"").split(/\s*(?:\=[^;]*)?;\s*/);
 		for (let nIdx=0;nIdx<aKeys.length;nIdx++) { aKeys[nIdx]=decodeURIComponent(aKeys[nIdx]); }
 		return aKeys;
@@ -340,7 +340,7 @@ kipid.docCookies={
 };
 
 // Functions for printing codes into 'pre.prettyprint'.
-kipid.indentsRemove=function(str) {
+kipid.indentsRemove=function (str) {
 	let firstIndent=str.match(/^\n\t+/), indentRegExp;
 	if (firstIndent!==null) { // if match (first indent) is found
 		indentRegExp=new RegExp("\\n\\t{1,"+(firstIndent[0].length-1)+"}",'g'); // /\n\t{1,n}/g: global greedy matching
@@ -349,10 +349,10 @@ kipid.indentsRemove=function(str) {
 	}
 	return str.replace(indentRegExp,'\n');
 };
-kipid.escapeHTML=function(str) {
+kipid.escapeHTML=function (str) {
 	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 };
-kipid.printCode=function(codeId) {
+kipid.printCode=function (codeId) {
 	const $pre=$("#pre-"+codeId);
 	const $code=$("#"+codeId);
 	if ($pre.exists()) {
@@ -368,7 +368,7 @@ kipid.printCode=function(codeId) {
 };
 
 // Function for toggling height, i.e. switching scrollability with conserving view.
-kipid.toggleHeight=function(obj) {
+kipid.toggleHeight=function (obj) {
 	let next=$(obj).next();
 	let toBeScrolledBy=0;
 	let windowScrollTop=$window.scrollTop();
@@ -400,16 +400,16 @@ kipid.toggleHeight=function(obj) {
 };
 
 // section's show/hide functions
-kipid.ShowHide=function(elem) {
+kipid.ShowHide=function (elem) {
 	$(elem).next().toggle();
 	if ($(elem).next().is(":visible")) {
 		$(elem).html("▼ Hide");
 	} else {
 		$(elem).html("▼ Show");
 	}
-	setTimeout(function() {$window.trigger("scroll.delayedLoad");}, 1000);
+	setTimeout(function () {$window.trigger("scroll.delayedLoad");}, 1000);
 };
-kipid.Hide=function(elem) {
+kipid.Hide=function (elem) {
 	let $elem=$(elem).parent();
 	window.scrollBy(0,-$elem.outerHeight());
 	$elem.hide();
@@ -417,15 +417,15 @@ kipid.Hide=function(elem) {
 };
 
 // bubbleRef's show/hide functions
-kipid.ShowBR=function(elem) {
+kipid.ShowBR=function (elem) {
 	clearTimeout(kipid.timerHideBRQueue);
 	kipid.bubbleRefs.hide();
 	$(elem).find(">.bubbleRef").show();
 };
-kipid.timerHideBR=function(elem) {
-	kipid.timerHideBRQueue=setTimeout(function() {$(elem).find(">.bubbleRef").hide();}, 1000);
+kipid.timerHideBR=function (elem) {
+	kipid.timerHideBRQueue=setTimeout(function () {$(elem).find(">.bubbleRef").hide();}, 1000);
 };
-kipid.HideBR=function(elem) {
+kipid.HideBR=function (elem) {
 	$(elem).parent().hide();
 };
 
@@ -439,7 +439,7 @@ kipid.lineHeight10=0; // parseInt(parseFloat(docuK.css('line-height'))/kipid.fon
 kipid.fontFamily=""; // docuK.css('font-family').trim().split(/\s*,\s*/)[0];
 kipid.mode=""; // (docuK.is(".bright"))?"Bright":"Dark";
 
-kipid.printDeviceInfo=function(){
+kipid.printDeviceInfo=function (){
 	if (kipid.deviceInfo) {
 		kipid.deviceInfo.html(
 			"Mode:"+kipid.mode
@@ -452,7 +452,7 @@ kipid.printDeviceInfo=function(){
 	}
 };
 
-kipid.Cmode=function(modeI) {
+kipid.Cmode=function (modeI) {
 	if (modeI=="Dark") {
 		kipid.docuK.removeClass("bright");
 	} else if (modeI=="Bright") {
@@ -467,14 +467,14 @@ kipid.Cmode=function(modeI) {
 	kipid.docCookies.setItem("kipid.mode", kipid.mode, kipid.expire, "/");
 	return true;
 };
-kipid.CfontFamily=function(font) {
+kipid.CfontFamily=function (font) {
 	kipid.docuK.css({fontFamily:font});
 	kipid.fontFamily=font;
 	kipid.printDeviceInfo();
 	kipid.docCookies.setItem("kipid.fontFamily", kipid.fontFamily, kipid.expire, "/");
 	return true;
 };
-kipid.CfontSize=function(increment) {
+kipid.CfontSize=function (increment) {
 	if (increment.constructor===Number&&!isNaN(increment)) {
 		kipid.fontSize+=increment;
 		if (kipid.fontSize<7) {
@@ -490,7 +490,7 @@ kipid.CfontSize=function(increment) {
 	}
 	return false;
 };
-kipid.ClineHeight=function(increment) {
+kipid.ClineHeight=function (increment) {
 	if (increment.constructor===Number&&!isNaN(increment)) {
 		kipid.lineHeight10+=increment;
 		if (kipid.lineHeight10<10) {
@@ -508,7 +508,7 @@ kipid.ClineHeight=function(increment) {
 	}
 	return false;
 };
-$window.on("resize.deviceInfo", function() {
+$window.on("resize.deviceInfo", function () {
 	if (window.innerWidth!==kipid.browserWidth) {
 		kipid.browserWidth=window.innerWidth;
 		kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
@@ -518,7 +518,7 @@ $window.on("resize.deviceInfo", function() {
 });
 
 // Share a link through SNS
-kipid.shareSNS=function(service) {
+kipid.shareSNS=function (service) {
 	let title=encodeURIComponent( $("title").text() );
 	let url=encodeURIComponent(window.location.href);
 	let open="";
@@ -544,7 +544,7 @@ kipid.delayPad=kipid.delayPad||1024;
 kipid.wait=kipid.wait||512;
 kipid.delayedElems=[];
 kipid.previous=Date.now();
-$.fn.inView=function() {
+$.fn.inView=function () {
 	if (this.is(":visible")) {
 		let viewportHeight=window.innerHeight;
 		let scrollTop=$window.scrollTop();
@@ -555,7 +555,7 @@ $.fn.inView=function() {
 		return false;
 	}
 };
-$.fn.delayedLoad=function() {
+$.fn.delayedLoad=function () {
 	let done=false;
 	if (this.inView()) {
 		if (this.hasClass("to-be-executed")) {
@@ -581,9 +581,9 @@ $.fn.delayedLoad=function() {
 	}
 	return done;
 };
-kipid.delayedLoadAll=function() {
+kipid.delayedLoadAll=function () {
 	kipid.logPrint("<br>Doing delayed-load. : "+kipid.delayedElems.length);
-	kipid.delayedElems.each(function() {
+	kipid.delayedElems.each(function () {
 		if ($(this).delayedLoad()) {
 			kipid.delayedElems=kipid.delayedElems.not(this);
 			kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
@@ -596,14 +596,14 @@ kipid.delayedLoadAll=function() {
 	}
 	kipid.previous=Date.now();
 };
-kipid.delayedLoadByScroll=function() {
+kipid.delayedLoadByScroll=function () {
 	$window.off("scroll.delayedLoad");
 	let now=Date.now();
 	let passed=now-kipid.previous;
 	if (passed>kipid.wait) {
 		kipid.delayedLoadAll();
 	} else {
-		setTimeout(function() {
+		setTimeout(function () {
 			kipid.delayedLoadAll();
 		}, kipid.wait*1.1-passed);
 		kipid.logPrint("<br>wait "+(kipid.wait*1.1-passed).toFixed(0)+"ms.");
@@ -627,7 +627,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	if (docuK.is(".noDIdHandle")) {
 		postId="";
 	} else {
-		docuK.find("[id]").each(function() {
+		docuK.find("[id]").each(function () {
 			let $this=$(this);
 			$this[0].id+=postId;
 		});
@@ -734,7 +734,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		figs=secI.find("figure");
 		for (j=0;j<figs.length;j++) {
 			figN=secITxt+"-"+(j+1).toString();
-			figs.eq(j).find(".caption").html(function(ith,orgTxt) {return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
+			figs.eq(j).find(".caption").html(function (ith,orgTxt) {return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
 		}
 	}
 	secs.find(".toc").html(tocHtml);

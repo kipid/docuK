@@ -48,7 +48,7 @@ kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
 
 let inRefs=docuK.find(".inRef");
 // Centering arrow.
-inRefs.each(function() {
+inRefs.each(function () {
 	let $elem=$(this);
 	let width=$elem.width()-2;
 	let $arrow=$elem.find(".arrow");
@@ -57,14 +57,14 @@ inRefs.each(function() {
 	$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
 });
 // Delayed-Load in bubble ref.
-inRefs.on("mouseenter.delayedLoad", function() {
+inRefs.on("mouseenter.delayedLoad", function () {
 	kipid.logPrint("<br>Do delayed-load in bubble ref.");
 	$window.trigger("scroll.delayedLoad");
 	$(this).off("mouseenter.delayedLoad");
 });
 
 // On ready.
-$(document).ready(function() {
+$(document).ready(function () {
 	// Hiding hiden sections.
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
@@ -118,16 +118,22 @@ $(document).ready(function() {
 	kipid.kakao_js_id='kakao-jssdk';
 	if (!document.getElementById(kipid.kakao_js_id)) {
 		let kakao_js=document.createElement('script');
-		kakao_js.defer='';
 		kakao_js.src='https://developers.kakao.com/sdk/js/kakao.js';
 		kakao_js.id=kipid.kakao_js_id;
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(kakao_js);
 	}
 	kipid.logPrint('<br><br>kakao.js is loaded.');
-	if (!Kakao.isInitialized()) {
-		Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
-	}
-	kipid.logPrint('<br>Kakao.isInitialized()='+Kakao.isInitialized());
+	kipid.kakaoInitDo=function () {
+		if (typeof Kakao!=='undefined') {
+			clearInterval(kipid.kakaoInit);
+			if (!Kakao.isInitialized()) {
+				Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
+			}
+			kipid.logPrint('<br>Kakao.isInitialized()='+Kakao.isInitialized());
+		}
+	};
+	kipid.kakaoInit=setInterval(kipid.kakaoInitDo, 2000);
+
 	kipid.popUpKakao=function () {
 		let $desc=$("meta[name='description']");
 		let href=window.location.href;
@@ -162,11 +168,11 @@ $(document).ready(function() {
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
 		kipid.logPrint('<br><br>MathJax.js is loaded since "eq, eqq" is there in your document.');
 		// MathJax PreProcess after the above MathJax.js is loaded.
-		kipid.mathJaxPreProcessDo = function() {
+		kipid.mathJaxPreProcessDo=function () {
 			if (typeof MathJax!=='undefined') {
 				clearInterval(kipid.mathJaxPreProcess);
 				MathJax.Hub.Queue(["PreProcess",MathJax.Hub]);
-				MathJax.Hub.Queue(function() {
+				MathJax.Hub.Queue(function () {
 					kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
 					kipid.logPrint("<br><br>\".MathJax_Preview\" are added to kipid.delayedElems. Now its length is: "+kipid.delayedElems.length);
 					$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
@@ -188,8 +194,8 @@ $(document).ready(function() {
 		let scrollTop=null;
 		let i, k;
 		switch (event.keyCode) {
-			case 70: //F = 70
-			case 68: //D = 68
+			case 70: //F=70
+			case 68: //D=68
 				scrollTop=$window.scrollTop();
 				k=kipid.hLists.length;
 				let hI;
@@ -219,7 +225,7 @@ $(document).ready(function() {
 				}
 				$window.scrollTop(hI.offset().top);
 				break;
-			case 84: //T = 84
+			case 84: //T=84
 				scrollTop=$window.scrollTop();
 				k=kipid.tocs.length;
 				let tocI;
@@ -233,7 +239,7 @@ $(document).ready(function() {
 				}
 				$window.scrollTop(tocI.offset().top);
 				break;
-			case 82: //R = 82
+			case 82: //R=82
 				scrollTop=$window.scrollTop();
 				k=kipid.rras.length;
 				let rraI;
@@ -247,7 +253,7 @@ $(document).ready(function() {
 				}
 				$window.scrollTop(rraI.offset().top);
 				break;
-			case 76: //L = 76
+			case 76: //L=76
 				window.location="/category/0";
 				break;
 			case 90: //Z
@@ -276,10 +282,10 @@ $(document).ready(function() {
 	}
 	kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.");
 
-	kipid.logPrint("<br><br>kipid.delayPad = "+kipid.delayPad+";<br>kipid.wait = "+kipid.wait+";");
+	kipid.logPrint("<br><br>kipid.delayPad="+kipid.delayPad+";<br>kipid.wait="+kipid.wait+";");
 
 	// Closing docuK Log.
 	kipid.logPrint("<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>");
-	setTimeout(function() {kipid.log.hide();}, 300);
+	setTimeout(function () {kipid.log.hide();}, 300);
 });
 })(window.kipid, jQuery);
