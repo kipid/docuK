@@ -136,6 +136,7 @@ $(document).ready(function() {
 			content: {
 				title: $("title").text(),
 				description: $desc?$desc[0].content:'',
+				imageUrl: '',
 				link: {
 					mobileWebUrl: href,
 					webUrl: href,
