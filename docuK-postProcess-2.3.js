@@ -114,6 +114,31 @@ $(document).ready(function() {
 	$window.trigger("scroll.delayedLoad");
 	// $window.off("scroll.delayedLoad");
 
+	// Kakao js script (from kakao.com CDN) is added.
+	kipid.kakao_js_id='kakao-jssdk';
+	if (!document.getElementById(kipid.kakao_js_id)) {
+		let kakao_js=document.createElement('script');
+		kakao_js.defer='';
+		kakao_js.src='https://developers.kakao.com/sdk/js/kakao.js';
+		kakao_js.id=kipid.kakao_js_id;
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(kakao_js);
+	}
+	kipid.logPrint('<br><br>kakao.js is loaded.');
+	Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
+	kipid.logPrint('<br>Kakao.isInitialized()='+Kakao.isInitialized());
+	kipid.popUpKakao=function () {
+		let $desc=$("meta[name='description']");
+		Kakao.Link.sendScrap({
+			requestUrl: 'https://kipid.tistory.com/',
+			templateId: 79466,
+			templateArgs: {
+				TITLE: $("title").text(), // ${TITLE}: title
+				DESC: $desc?$desc[0].content:'', // ${DESC}: description
+				PATH: window.location.pathname, // ${PATH}: path
+			},
+		});
+	};
+
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	if (docuK.find('.prettyprint').exists()) {
 		let gcp=document.createElement('script');

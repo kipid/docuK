@@ -532,6 +532,9 @@ kipid.shareSNS=function(service) {
 		case 'recoeve':
 			open="http://recoeve.net/reco?"+"uri="+url+"&title="+title;
 			break;
+		case 'kakao':
+			kipid.popUpKakao();
+			return;
 	}
 	window.open(open);
 };
@@ -643,9 +646,9 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		+'<div class="deviceInfo"></div>'
 		+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>'
 	+'</div>'
-		+'<div class="SNS-top"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"></div>'
+		+'<div class="SNS-top"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS(\'kakao\')"></div>'
 	);
-	docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"></div>');
+	docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS(\'kakao\')"></div>');
 
 	// Scrollable switching of 'pre.prettyprint'.
 	docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
