@@ -108,7 +108,7 @@ $(document).ready(function () {
 	kipid.logPrint("<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.");
 
 	// Initial Delayed Load.
-	kipid.delayedElems=docuK.find("[delayed-src], [delayed-bgimage]");
+	kipid.delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
 	kipid.logPrint("<br><br>There are "+kipid.delayedElems.length+" delayed elements.");
 	$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 	$window.trigger("scroll.delayedLoad");
