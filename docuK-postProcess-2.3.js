@@ -183,7 +183,7 @@ $(document).ready(function () {
 	}
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	kipid.hLists=$("#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,#disqus_thread"); // Ordered automatically by jQuery.
+	kipid.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,#entry1Comment,#disqus_thread,#aside"); // Ordered automatically by jQuery.
 	kipid.tocs=$(".docuK>.sec").has(".toc");
 	kipid.rras=$(".docuK>.sec").has("ol.refs");
 	kipid.processShortKey=function(event) {
@@ -197,28 +197,28 @@ $(document).ready(function () {
 			case 70: //F=70
 			case 68: //D=68
 				scrollTop=$window.scrollTop();
-				k=kipid.hLists.length;
+				k=kipid.fdList.length;
 				let hI;
 
 				if (event.keyCode===70) {
 					scrollTop+=10;
 					for (i=0;i<k;i++) {
-						hI=kipid.hLists.eq(i);
+						hI=kipid.fdList.eq(i);
 						if (hI.is(":visible")&&scrollTop<hI.offset().top) { break; }
 					}
 					if (i===k) {
-						// hI=kipid.hLists.eq(0);
+						// hI=kipid.fdList.eq(0);
 						// alert("This is the last section.");
 						return;
 					}
 				} else{
 					scrollTop-=10;
 					for (i=k-1;i>=0;i--) {
-						hI=kipid.hLists.eq(i);
+						hI=kipid.fdList.eq(i);
 						if (hI.is(":visible")&&scrollTop>hI.offset().top) { break; }
 					}
 					if (i===-1) {
-						// hI=kipid.hLists.eq(k-1);
+						// hI=kipid.fdList.eq(k-1);
 						// alert("This is the first section.");
 						return;
 					}
