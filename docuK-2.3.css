@@ -5,7 +5,7 @@ codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
 .docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
-.docuK div, textarea {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
+.docuK div, textarea {box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
 .docuK data {display:none}
 
 .docuK ::-webkit-scrollbar {width:3px; height:3px}
@@ -14,9 +14,9 @@ codeprint.SEE {display:none}
 .docuK ::-webkit-scrollbar-corner {background:transparent}
 
 .docuK button {cursor:pointer}
-.docuK .SNS-top {margin-top:-35px; margin-bottom:-5px}
-.docuK .SNS-bottom {margin:35px 0; text-align:center}
-.docuK .SNS-img {width:35px; height:35px; border:2px gray solid; border-left:0; cursor:pointer}
+.docuK .SNS-top {margin-top:-36px; margin-bottom:-6px}
+.docuK .SNS-bottom {margin:36px 0; text-align:center}
+.docuK .SNS-img {width:36px; height:36px; border:2px gray solid; border-left:0; cursor:pointer}
 .docuK .SNS-img:first-child {border-left:2px gray solid}
 .docuK>.sec {position:relative; background:black; color:white; border-bottom:2px rgb(25,60,25) solid; border-top:5px rgb(25,60,25) solid; padding:.5em; margin:.3em 0; font-size:1.8em} .docuK.bright>.sec {background:white; color:black}
 .docuK>.sec .head-text {color:white} .docuK.bright>.sec .head-text {color:black}
@@ -86,7 +86,7 @@ codeprint.SEE {display:none}
 
 /* r(S)C: Ratio (Sub)Container */
 .docuK .rC {}
-.docuK .rC>.rSC {box-sizing:content-box; -moz-box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
+.docuK .rC>.rSC {box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
 .docuK .rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
 .docuK .rC>.rSC>*>* {position:absolute; width:100%; height:100%; left:0; top:0}
 .docuK .rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
@@ -101,7 +101,7 @@ codeprint.SEE {display:none}
 .docuK figure {display:block; margin:1em 0 2em; padding:0; text-indent:0}
 .docuK figure img:not([width]) {width:auto}
 .docuK .fig {margin:1em 0; padding:1em; border:1px solid gray; text-align:center; text-indent:0; box-shadow:inset 0 0 20px white} .docuK.bright .fig {box-shadow:inset 0 0 20px black}
-.docuK img {box-sizing:border-box; -moz-box-sizing:border-box; max-width:100%; border:none; width:auto; height:auto; vertical-align:middle}
+.docuK img {box-sizing:content-box; max-width:100%; border:none; width:auto; height:auto; vertical-align:middle}
 .docuK .fig>.image {}
 .docuK .fig>.image img {display:block; margin:0 auto}
 .docuK .fig>.caption {display:inline-block; padding:0 .5em; text-align:justify; margin:0 auto; text-indent:0}
