@@ -3,6 +3,7 @@
 body {margin:0; padding:0}
 codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
+#shortkey {color:white}
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
 .docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
 .docuK div, textarea {box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
@@ -79,7 +80,8 @@ codeprint.SEE {display:none}
 .docuK .center {text-align:center}
 .docuK .right {text-align:right}
 .docuK .dCenter {margin-left:auto; margin-right:auto}
-.docuK .bold {font-weight:bold}
+.docuK .bold,.bold {font-weight:bold}
+.docuK .underline,.underline {text-decoration:underline}
 .docuK .italic {font-style:italic}
 .docuK .emph {color:rgb(255,150,150)} .docuK.bright .emph {color:rgb(255,60,60)}
 .docuK .none {display:none}
