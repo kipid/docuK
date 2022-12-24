@@ -12,6 +12,18 @@ for (let i=0;i<$SEE.length;i++) {
 	let SEEiHTML=$SEEi.html().trim();
 	$SEEi.html("");
 	$SEEi.after(kipid.renderToDocuK( SEEiHTML ));
+	$SEEi.after(`<div id="shortkey">
+	Short Keys
+	<ul>
+		<li><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
+		<li><span class="bold underline">D</span>: Previous Section</li>
+		<li><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
+		<li><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</li>
+		<li><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</li>
+		<li><span class="bold underline">Z</span>: Tistory comments</li>
+		<li><span class="bold underline">X</span>: DISQUS comments</li>
+	</ul>
+</div>`);
 }
 $("pre.prettyprint.scrollable").addClass("linenums");
 
@@ -183,7 +195,7 @@ $(document).ready(function () {
 	}
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	kipid.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,#entry1Comment,#disqus_thread,#aside"); // Ordered automatically by jQuery.
+	kipid.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,div.comments,#disqus_thread,#aside"); // Ordered automatically by jQuery.
 	kipid.tocs=$(".docuK>.sec").has(".toc");
 	kipid.rras=$(".docuK>.sec").has("ol.refs");
 	kipid.processShortKey=function(event) {
@@ -261,29 +273,16 @@ $(document).ready(function () {
 				}
 				break;
 			case 90: //Z
-				if ($("#recentEntries").exists()) $window.scrollTop($("#recentEntries").offset().top);
+				if ($("div.comments").exists()) $window.scrollTop($("div.comments").offset().top);
 				break;
 			case 88: //X
-				if ($("#recentComment").exists()) $window.scrollTop($("#recentComment").offset().top);
-				break;
-			case 67: //C
-				if ($("#recentTrackback").exists()) $window.scrollTop($("#recentTrackback").offset().top);
+				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
 				break;
 			default:
-				if (window['processShortcut']!==undefined) processShortcut(event);
+				if (window['processShortcut']!==undefined) {processShortcut(event);}
 		}
 	}
 	document.onkeydown=kipid.processShortKey;
-	let shortkeyDesc=$("#shortkey>ul");
-	if (shortkeyDesc.exists()) {
-		shortkeyDesc.prepend(
-			"<li>T: Table of Contents</li>"
-			+"<li>R: References</li>"
-			+"<li>F: Forward Section</li>"
-			+"<li>D: Previous Section</li>"
-			+"<li>L: To 전체목록/[Lists]</li>"
-		);
-	}
 	kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.");
 
 	kipid.logPrint("<br><br>kipid.delayPad="+kipid.delayPad+";<br>kipid.wait="+kipid.wait+";");
