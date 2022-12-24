@@ -254,7 +254,11 @@ $(document).ready(function () {
 				$window.scrollTop(rraI.offset().top);
 				break;
 			case 76: //L=76
-				window.location="/category/0";
+				if (window.location.pathname==="/entry/Lists") {
+					window.location="/category";
+				} else {
+					window.location="/entry/Lists";
+				}
 				break;
 			case 90: //Z
 				if ($("#recentEntries").exists()) $window.scrollTop($("#recentEntries").offset().top);
