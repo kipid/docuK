@@ -448,6 +448,12 @@ kipid.printDeviceInfo=function (){
 	}
 };
 
+kipid.resetStyle=function () {
+	kipid.Cmode("Dark");
+	kipid.CfontFamily("맑은 고딕");
+	kipid.CfontSize(10-kipid.fontSize);
+	kipid.ClineHeight(16-kipid.lineHeight10);
+}
 kipid.Cmode=function (modeI) {
 	if (modeI=="Dark") {
 		kipid.docuK.removeClass("bright");
@@ -493,8 +499,7 @@ kipid.ClineHeight=function (increment) {
 			kipid.lineHeight10=25;
 			return false;
 		}
-		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toString()});
-		// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
+		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toFixed(1)});
 		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
 		return true;
@@ -643,6 +648,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	// Style change widget, and SNS widget.
 	docuK.prepend(
 		`<div class="change-docuK-style">
+	<form><button type="button" onclick="kipid.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
 	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
 	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
 	<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form>

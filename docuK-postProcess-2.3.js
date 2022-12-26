@@ -103,8 +103,8 @@ $(document).ready(function () {
 
 	cookieItem=kipid.docCookies.getItem("kipid.lineHeight10");
 	if (cookieItem!==null) {
-		kipid.ClineHeight(parseInt(cookieItem)-16);
-		kipid.logPrint("<br>Line-height "+(parseInt(cookieItem)/10).toFixed(1)+" is set from cookie.");
+		kipid.ClineHeight(Number(cookieItem)-16);
+		kipid.logPrint("<br>Line-height "+(Number(cookieItem)/10).toFixed(1)+" is set from cookie.");
 	}
 
 	kipid.printDeviceInfo();
