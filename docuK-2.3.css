@@ -3,7 +3,8 @@
 body {margin:0; padding:0}
 codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
-#shortkey {color:white}
+.shortkey {color:white; background-color:#141414}
+.shortkey ul {line-height:1.4; padding:0 1.5em}
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
 .docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
 .docuK div, textarea {box-sizing:border-box; max-width:100%} /* MathJax must be handled. */

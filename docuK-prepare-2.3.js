@@ -633,22 +633,36 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		});
 	}
 
+	// Short Keys announcement.
+	docuK.before(`<div class="shortkey">
+	Short Keys
+	<ul>
+		<li><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
+		<li><span class="bold underline">D</span>: Previous Section</li>
+		<li><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
+		<li><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</li>
+		<li><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</li>
+		<li><span class="bold underline">Z</span>: Tistory comments</li>
+		<li><span class="bold underline">X</span>: DISQUS comments</li>
+	</ul>
+</div>`);
+
 	// Style change widget, and SNS widget.
 	docuK.prepend(
-		'<div class="change-docuK-style">'
-		+'<form><input id="button'+docuKI+'-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>'
-		+'</input><input id="button'+docuKI+'-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button'+docuKI+'-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form> '
-		+'<form><input class="bold" type="text" name="font" value="맑은 고딕" style="font-family:\'맑은 고딕\'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form> '
-		+((docuKI===1)?'<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button>'+'<button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form> '
-		+'<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1.3em">=</button>'+'<button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.3em">〓</button></form> ':'')
-		+'<form><button type="button" onclick="MathJax.Hub.Queue([\'Typeset\', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form> '
-		+'<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form> '
-		+'<div class="deviceInfo"></div>'
-		+'<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>'
-	+'</div>'
-		+'<div class="SNS-top"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS(\'kakao\')"></div>'
+		`<div class="change-docuK-style">
+	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
+	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
+	<form><input class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form>
+	<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
+	<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.6em">=</button></form>
+	<form><button type="button" onclick="MathJax.Hub.Queue(['Typeset', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form>
+	<form><button type="button" onclick="kipid.log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form>
+	<div class="deviceInfo"></div>
+	<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>
+	</div>
+<div class="SNS-top"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS('kakao')"></div>`
 	);
-	docuK.append('<div class="SNS-bottom"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS(\'twitter\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS(\'facebook\')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS(\'recoeve\')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS(\'kakao\')"></div>');
+	docuK.append(`<div class="SNS-bottom"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS('kakao')"></div>`);
 
 	// Scrollable switching of 'pre.prettyprint'.
 	docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');

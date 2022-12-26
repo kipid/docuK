@@ -12,18 +12,6 @@ for (let i=0;i<$SEE.length;i++) {
 	let SEEiHTML=$SEEi.html().trim();
 	$SEEi.html("");
 	$SEEi.after(kipid.renderToDocuK( SEEiHTML ));
-	$SEEi.after(`<div id="shortkey">
-	Short Keys
-	<ul>
-		<li><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
-		<li><span class="bold underline">D</span>: Previous Section</li>
-		<li><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
-		<li><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</li>
-		<li><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</li>
-		<li><span class="bold underline">Z</span>: Tistory comments</li>
-		<li><span class="bold underline">X</span>: DISQUS comments</li>
-	</ul>
-</div>`);
 }
 $("pre.prettyprint.scrollable").addClass("linenums");
 
