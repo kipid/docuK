@@ -499,7 +499,7 @@ kipid.ClineHeight=function (increment) {
 			kipid.lineHeight10=25;
 			return false;
 		}
-		kipid.docuK.css({"line-height":(kipid.lineHeight10/10).toFixed(1)});
+		kipid.docuK.attr("style", `line-height:${(kipid.lineHeight10/10).toFixed(1)} !important`);
 		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
 		return true;
