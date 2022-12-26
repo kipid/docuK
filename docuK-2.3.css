@@ -177,15 +177,16 @@ codeprint.SEE {display:none}
 .docuK img[delayed-src] {border:15px solid rgb(10,60,10); min-width:100px; min-height:100px}
 
 @media all and (min-width:321px) {
+	.docuK {line-height:1.6}
 	.docuK .p {overflow:auto}
 	.docuK .eqCC {max-width:100%; overflow-x:auto}
 }
 @media all and (min-width:401px) {
-	.docuK {font-size:9px}
+	.docuK {font-size:9px; line-height:1.6}
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
 @media all and (min-width:500px) {
-	.docuK {font-size:10px}
+	.docuK {font-size:10px; line-height:1.6}
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 }
