@@ -69,41 +69,44 @@ $(document).ready(function () {
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
 	// Setting and Printing Styles
-	// kipid.TFontSize=docuK.find(".TFontSize");
-	// kipid.TLineHeight=docuK.find(".TLineHeight");
 
 	kipid.deviceInfo=docuK.find(".deviceInfo");
-	kipid.fontSize=parseFloat(docuK.css('font-size'));
-	kipid.lineHeight10=parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
-	kipid.fontFamily=docuK.css('font-family').trim().split(/\s*,\s*/)[0];
-	kipid.mode=(docuK.is(".bright"))?"Bright":"Dark";
 
 	let cookieItem;
 	kipid.logPrint("<br>");
+
 	cookieItem=kipid.docCookies.getItem("kipid.mode");
 	if (cookieItem!==null) {
 		kipid.Cmode(cookieItem);
 		kipid.logPrint("<br>Mode "+cookieItem+" is set from cookie.");
+	} else {
+		kipid.Cmode("Dark");
 	}
+	for(let i=1;i<kipid.docuK.length;i++) {
+		$(`#button${i}-${kipid.mode}`).prop('checked', true);
+	}
+
 	cookieItem=kipid.docCookies.getItem("kipid.fontFamily");
 	if (cookieItem!==null) {
 		kipid.CfontFamily(cookieItem);
 		kipid.logPrint("<br>Font "+cookieItem+" is set from cookie.");
+		for(let i=1;i<kipid.docuK.length;i++) {
+			$(`#input${i}-font-family`)[0].value=kipid.fontFamily;
+		}
 	}
+
 	cookieItem=kipid.docCookies.getItem("kipid.fontSize");
 	if (cookieItem!==null) {
-		kipid.CfontSize(Number(cookieItem)-kipid.fontSize);
+		kipid.CfontSize(Number(cookieItem)-10);
 		kipid.logPrint("<br>Font-size "+(Number(cookieItem)*1.8).toFixed(1)+" is set from cookie.");
 	}
+
 	cookieItem=kipid.docCookies.getItem("kipid.lineHeight10");
 	if (cookieItem!==null) {
-		kipid.ClineHeight(parseInt(cookieItem)-kipid.lineHeight10);
+		kipid.ClineHeight(parseInt(cookieItem)-16);
 		kipid.logPrint("<br>Line-height "+(parseInt(cookieItem)/10).toFixed(1)+" is set from cookie.");
 	}
 
-	// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
-	// kipid.TLineHeight.html((kipid.lineHeight10/10).toFixed(1));
-	// kipid.deviceInfo.html("browser width: "+kipid.browserWidth);
 	kipid.printDeviceInfo();
 	kipid.logPrint("<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.");
 

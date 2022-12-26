@@ -302,7 +302,7 @@ kipid.getContentsJoinedWithEnter=function ($elem) {
 };
 
 // cookies.js (copied from cookie-test.html)
-kipid.expire=365*24*60*60; // max-age in seconds.
+kipid.expire=31*24*60*60; // max-age in seconds.
 kipid.docCookies={
 	hasItem:function (sKey) {
 		return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=")).test(document.cookie);
@@ -430,14 +430,10 @@ kipid.HideBR=function (elem) {
 };
 
 // Changing Styles of docuK
-// kipid.TFontSize=docuK.find(".TFontSize");
-// kipid.TLineHeight=docuK.find(".TLineHeight");
-
-kipid.deviceInfo=null; // docuK.find(".deviceInfo");
-kipid.fontSize=0; // parseInt(docuK.css('font-size'));
-kipid.lineHeight10=0; // parseInt(parseFloat(docuK.css('line-height'))/kipid.fontSize*10);
-kipid.fontFamily=""; // docuK.css('font-family').trim().split(/\s*,\s*/)[0];
-kipid.mode=""; // (docuK.is(".bright"))?"Bright":"Dark";
+kipid.mode="Dark";
+kipid.fontFamily="맑은 고딕";
+kipid.fontSize=10;
+kipid.lineHeight10=16;
 
 kipid.printDeviceInfo=function (){
 	if (kipid.deviceInfo) {
@@ -461,8 +457,6 @@ kipid.Cmode=function (modeI) {
 		return false;
 	}
 	kipid.mode=modeI;
-	// kipid.browserWidth=0;
-	// $window.trigger("resize.deviceInfo");
 	kipid.printDeviceInfo();
 	kipid.docCookies.setItem("kipid.mode", kipid.mode, kipid.expire, "/");
 	return true;
@@ -483,7 +477,6 @@ kipid.CfontSize=function (increment) {
 			kipid.fontSize=20;
 		}
 		kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
-		// kipid.TFontSize.html((kipid.fontSize*1.8).toFixed(1)+"px");
 		kipid.printDeviceInfo();
 		kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize.toFixed(1), kipid.expire, "/");
 		return true;
@@ -652,7 +645,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		`<div class="change-docuK-style">
 	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
 	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
-	<form><input class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form>
+	<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form>
 	<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
 	<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.6em">=</button></form>
 	<form><button type="button" onclick="MathJax.Hub.Queue(['Typeset', MathJax.Hub])" style="width:auto; padding:0 .5em">All Maths</button></form>
