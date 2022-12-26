@@ -517,7 +517,7 @@ $window.on("resize.deviceInfo", function () {
 
 // Share a link through SNS
 kipid.shareSNS=function (service) {
-	let title=encodeURIComponent( $("title").text() );
+	let title=encodeURIComponent( $("title").html() );
 	let url=encodeURIComponent(window.location.href);
 	let open="";
 	switch (service) {

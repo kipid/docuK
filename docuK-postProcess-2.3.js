@@ -143,7 +143,7 @@ $(document).ready(function () {
 		Kakao.Share.sendDefault({
 			objectType: 'feed',
 			content: {
-				title: $("title").text(),
+				title: $("title").html(),
 				description: $desc?$desc[0].content:'',
 				imageUrl: '',
 				link: {
