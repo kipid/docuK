@@ -3,7 +3,7 @@
 body {margin:0; padding:0}
 codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
-.shortkey {color:white; background-color:#141414}
+.shortkey {color:white; background-color:#141414; max-width:1000px; margin:auto}
 .shortkey ul {line-height:1.4; padding:0 1.5em}
 .shortkey li {color:white !important}
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
