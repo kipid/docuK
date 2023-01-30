@@ -167,7 +167,7 @@ $(document).ready(function () {
 	if (docuK.find('eq, eqq').exists()) {
 		let mjx=document.createElement('script');
 		mjx.defer='';
-		mjx.src='https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+		mjx.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML';
 		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
 		kipid.logPrint('<br><br>MathJax.js is loaded since "eq, eqq" is there in your document.');
 		// MathJax PreProcess after the above MathJax.js is loaded.
