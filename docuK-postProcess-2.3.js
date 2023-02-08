@@ -265,6 +265,7 @@ $(document).ready(function () {
 				break;
 			case 90: //Z
 				if ($("div.comments").exists()) $window.scrollTop($("div.comments").offset().top);
+				kipid.HandleAhrefInComment();
 				break;
 			case 88: //X
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
@@ -278,13 +279,16 @@ $(document).ready(function () {
 
 	kipid.logPrint("<br><br>kipid.delayPad="+kipid.delayPad+";<br>kipid.wait="+kipid.wait+";");
 
-	$("div.comments").find("p").each(function (i, elem) {
-		$(elem).html(
-			$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-				return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
-			})
-		);
-	});
+	kipid.HandleAhrefInComment=function () {
+		$("div.comments").find("p").each(function (i, elem) {
+			$(elem).html(
+				$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
+					return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
+				})
+			);
+		});
+	};
+	kipid.HandleAhrefInComment();
 
 	// Closing docuK Log.
 	kipid.logPrint("<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>");
