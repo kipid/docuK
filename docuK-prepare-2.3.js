@@ -435,7 +435,7 @@ kipid.fontFamily="맑은 고딕";
 kipid.fontSize=10;
 kipid.lineHeight10=16;
 
-kipid.printDeviceInfo=function (){
+kipid.printDeviceInfo=function () {
 	if (kipid.deviceInfo) {
 		kipid.deviceInfo.html(
 			"Mode:"+kipid.mode
