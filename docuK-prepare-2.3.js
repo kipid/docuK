@@ -632,16 +632,20 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	}
 
 	// Short Keys announcement.
+	kipid.topShortKeys=function (keyDowned) {
+		let key=keyDowned.charCodeAt(0);
+		$(document).trigger("keydown", {keyCode: key, which: key});
+	};
 	docuK.before(`<div class="shortkey">
 	Short Keys
 	<ul>
-		<li><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
-		<li><span class="bold underline">D</span>: Previous Section</li>
-		<li><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
-		<li><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</li>
-		<li><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</li>
-		<li><span class="bold underline">Z</span>: Tistory comments</li>
-		<li><span class="bold underline">X</span>: DISQUS comments</li>
+		<li><span onclick="kipid.topShortKeys('F')"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</span></li>
+		<li><span onclick="kipid.topShortKeys('D')"><span class="bold underline">D</span>: Previous Section</span></li>
+		<li><span onclick="kipid.topShortKeys('T')"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</span></li>
+		<li><span onclick="kipid.topShortKeys('R')"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</span></li>
+		<li><span onclick="kipid.topShortKeys('L')"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</span></li>
+		<li><span onclick="kipid.topShortKeys('Z')"><span class="bold underline">Z</span>: Tistory comments</span></li>
+		<li><span onclick="kipid.topShortKeys('X')"><span class="bold underline">X</span>: DISQUS comments</span></li>
 	</ul>
 </div>`);
 
