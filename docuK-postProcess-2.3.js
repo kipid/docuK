@@ -113,9 +113,10 @@ $(document).ready(function () {
 	// Initial Delayed Load.
 	kipid.delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
 	kipid.logPrint("<br><br>There are "+kipid.delayedElems.length+" delayed elements.");
-	$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
-	$window.trigger("scroll.delayedLoad");
-	// $window.off("scroll.delayedLoad");
+	setTimeout(function () {
+		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+		$window.trigger("scroll.delayedLoad");
+	}, 2000);
 
 	// Kakao js script (from kakao.com CDN) is added.
 	kipid.kakao_js_id='kakao-jssdk';
