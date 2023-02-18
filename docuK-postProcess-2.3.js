@@ -63,13 +63,15 @@ inRefs.on("mouseenter.delayedLoad", function () {
 	$(this).off("mouseenter.delayedLoad");
 });
 
+// Scripts will be appended on this.
+window.$headOrBody=$("head")||$("body")||$("#docuK-style");
+
 // On ready.
 $(document).ready(function () {
 	// Hiding hiden sections.
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
 	// Setting and Printing Styles
-
 	kipid.deviceInfo=docuK.find(".deviceInfo");
 
 	let cookieItem;
@@ -120,11 +122,9 @@ $(document).ready(function () {
 
 	// Kakao js script (from kakao.com CDN) is added.
 	kipid.kakao_js_id='kakao-jssdk';
-	if (!document.getElementById(kipid.kakao_js_id)) {
-		let kakao_js=document.createElement('script');
-		kakao_js.src='https://developers.kakao.com/sdk/js/kakao.js';
-		kakao_js.id=kipid.kakao_js_id;
-		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(kakao_js);
+	if (!$(`#${kipid.kakao_js_id}`)) {
+		let $kakao_js=$(`<script id="${kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></script>`);
+		$headOrBody.append($kakao_js);
 	}
 	kipid.logPrint('<br><br>kakao.js is loaded.');
 	kipid.kakaoInitDo=function () {
@@ -157,20 +157,45 @@ $(document).ready(function () {
 
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	if (docuK.find('.prettyprint').exists()) {
-		let gcp=document.createElement('script');
-		gcp.defer='';
-		gcp.src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js';
-		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(gcp);
+		let $gcp=$(`<script id="js-prettyfy" defer src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>`);
+		$headOrBody.append($gcp);
 		kipid.logPrint('<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.');
 	}
 
 	// MathJax js script (from cdn.mathjax.org) is added.
 	if (docuK.find('eq, eqq').exists()) {
-		let mjx=document.createElement('script');
-		mjx.defer='';
-		mjx.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML';
-		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(mjx);
-		kipid.logPrint('<br><br>MathJax.js is loaded since "eq, eqq" is there in your document.');
+		let $mjxConfig=$(`<script>
+window.MathJax = {
+	startup: {
+		typeset: true // Skip startup typeset.
+	},
+	asciimath: {
+		delimiters: [['$','$']] // AsciiMath to Jax
+	},
+	tex: {
+		inlineMath: [['\\\\(','\\\\)']], // Using $ for inline math.
+		displayMath: [['\\\\[','\\\\]']], // Using $$ for outline math.
+		processEscapes: false, // Escape \\$
+		processEnvironments: false, // Ignore \\begin{something} ... \\end{something}
+		autoload: {
+			color: [],
+			colorv2: ['color']
+		},
+		packages: {'[+]': ['noerrors']}
+	},
+	options: {
+		ignoreHtmlClass: 'tex2jax_ignore',
+		processHtmlClass: 'tex2jax_process'
+	},
+	loader: {
+		load: ['[tex]/noerrors']
+	}
+};
+</script>`);
+		$headOrBody.append($mjxConfig);
+		let $mjx=$(`<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>`);
+		$headOrBody.append($mjx);
+		kipid.logPrint('<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "eq, eqq" is there in your document.');
 		// MathJax PreProcess after the above MathJax.js is loaded.
 		kipid.mathJaxPreProcessDo=function () {
 			if (typeof MathJax!=='undefined') {
@@ -275,7 +300,7 @@ $(document).ready(function () {
 				if (window['processShortcut']!==undefined) {processShortcut(event);}
 		}
 	}
-	document.onkeydown=kipid.processShortKey;
+	$(document).on("keydown", kipid.processShortKey);
 	kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.");
 
 	kipid.logPrint("<br><br>kipid.delayPad="+kipid.delayPad+";<br>kipid.wait="+kipid.wait+";");
