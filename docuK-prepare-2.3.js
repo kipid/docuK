@@ -302,7 +302,7 @@ kipid.getContentsJoinedWithEnter=function ($elem) {
 };
 
 // cookies.js (copied from cookie-test.html)
-kipid.expire=31*24*60*60; // max-age in seconds.
+kipid.expire=365*24*60*60; // max-age in seconds.
 kipid.docCookies={
 	hasItem:function (sKey) {
 		return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=")).test(document.cookie);
@@ -639,13 +639,13 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	docuK.before(`<div class="shortkey">
 	Short Keys
 	<ul>
-		<li><span onclick="kipid.topShortKeys('F')"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</span></li>
-		<li><span onclick="kipid.topShortKeys('D')"><span class="bold underline">D</span>: Previous Section</span></li>
-		<li><span onclick="kipid.topShortKeys('T')"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</span></li>
-		<li><span onclick="kipid.topShortKeys('R')"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</span></li>
-		<li><span onclick="kipid.topShortKeys('L')"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</span></li>
-		<li><span onclick="kipid.topShortKeys('Z')"><span class="bold underline">Z</span>: Tistory comments</span></li>
-		<li><span onclick="kipid.topShortKeys('X')"><span class="bold underline">X</span>: DISQUS comments</span></li>
+		<li><a onclick="kipid.topShortKeys('F')"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</a></li>
+		<li><a onclick="kipid.topShortKeys('D')"><span class="bold underline">D</span>: Previous Section</a></li>
+		<li><a onclick="kipid.topShortKeys('T')"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</a></li>
+		<li><a onclick="kipid.topShortKeys('R')"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</a></li>
+		<li><a onclick="kipid.topShortKeys('L')"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</a></li>
+		<li><a onclick="kipid.topShortKeys('Z')"><span class="bold underline">Z</span>: Tistory comments</a></li>
+		<li><a onclick="kipid.topShortKeys('X')"><span class="bold underline">X</span>: DISQUS comments</a></li>
 	</ul>
 </div>`);
 
