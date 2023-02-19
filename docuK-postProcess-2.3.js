@@ -21,7 +21,7 @@ kipid.docuK=docuK;
 // Showing disableQ0 only in width>321.
 if (kipid.browserWidth>321) {
 	docuK.find(".disableQ0").html(function(ith,orgText) {
-		kipid.logPrint("<br><br>\".disableQ0\"s are enabled at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document.");
+		kipid.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100*$(this).offset().top/$(document).height()).toPrecision(3)}% of document.`);
 		return orgText.replace(/<!--/g,'').replace(/-->/g,'');
 	});
 }
@@ -35,7 +35,7 @@ let eqqs=$("eqq");
 for (let i=0;i<eqqs.length;i++) {
 	eqqs.eq(i).html(function(ith,orgTxt) {return "\\[ "+orgTxt.trim()+" \\]";});
 }
-kipid.logPrint("<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).");
+kipid.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).`);
 
 // docuK process.
 docuK.has("script").addClass("noDIdHandle");
@@ -58,7 +58,7 @@ inRefs.each(function () {
 });
 // Delayed-Load in bubble ref.
 inRefs.on("mouseenter.delayedLoad", function () {
-	kipid.logPrint("<br>Do delayed-load in bubble ref.");
+	kipid.logPrint(`<br>Do delayed-load in bubble ref.`);
 	$window.trigger("scroll.delayedLoad");
 	$(this).off("mouseenter.delayedLoad");
 });
@@ -75,12 +75,12 @@ $(document).ready(function () {
 	kipid.deviceInfo=docuK.find(".deviceInfo");
 
 	let cookieItem;
-	kipid.logPrint("<br>");
+	kipid.logPrint(`<br>`);
 
 	cookieItem=kipid.docCookies.getItem("kipid.mode");
 	if (cookieItem!==null) {
 		kipid.Cmode(cookieItem);
-		kipid.logPrint("<br>Mode "+cookieItem+" is set from cookie.");
+		kipid.logPrint(`<br>Mode ${cookieItem} is set from cookie.`);
 	} else {
 		kipid.Cmode("Dark");
 	}
@@ -91,7 +91,7 @@ $(document).ready(function () {
 	cookieItem=kipid.docCookies.getItem("kipid.fontFamily");
 	if (cookieItem!==null) {
 		kipid.CfontFamily(cookieItem);
-		kipid.logPrint("<br>Font "+cookieItem+" is set from cookie.");
+		kipid.logPrint(`<br>Font ${cookieItem} is set from cookie.`);
 		for(let i=1;i<kipid.docuK.length;i++) {
 			$(`#input${i}-font-family`)[0].value=kipid.fontFamily;
 		}
@@ -100,21 +100,21 @@ $(document).ready(function () {
 	cookieItem=kipid.docCookies.getItem("kipid.fontSize");
 	if (cookieItem!==null) {
 		kipid.CfontSize(Number(cookieItem)-10);
-		kipid.logPrint("<br>Font-size "+(Number(cookieItem)*1.8).toFixed(1)+" is set from cookie.");
+		kipid.logPrint(`<br>Font-size ${(Number(cookieItem)*1.8).toFixed(1)} is set from cookie.`);
 	}
 
 	cookieItem=kipid.docCookies.getItem("kipid.lineHeight10");
 	if (cookieItem!==null) {
 		kipid.ClineHeight(Number(cookieItem)-16);
-		kipid.logPrint("<br>Line-height "+(Number(cookieItem)/10).toFixed(1)+" is set from cookie.");
+		kipid.logPrint(`<br>Line-height ${(Number(cookieItem)/10).toFixed(1)} is set from cookie.`);
 	}
 
 	kipid.printDeviceInfo();
-	kipid.logPrint("<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.");
+	kipid.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
 
 	// Initial Delayed Load.
 	kipid.delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
-	kipid.logPrint("<br><br>There are "+kipid.delayedElems.length+" delayed elements.");
+	kipid.logPrint(`<br><br>There are ${kipid.delayedElems.length} delayed elements.`);
 	setTimeout(function () {
 		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 		$window.trigger("scroll.delayedLoad");
@@ -123,17 +123,17 @@ $(document).ready(function () {
 	// Kakao js script (from kakao.com CDN) is added.
 	kipid.kakao_js_id='kakao-jssdk';
 	if (!$(`#${kipid.kakao_js_id}`)) {
-		let $kakao_js=$(`<script id="${kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></script>`);
+		let $kakao_js=$(`<script id="${kipid.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></script>`);
 		$headOrBody.append($kakao_js);
 	}
-	kipid.logPrint('<br><br>kakao.js is loaded.');
+	kipid.logPrint(`<br><br>kakao.js with id="${kipid.kakao_js_id}" is loaded.`);
 	kipid.kakaoInitDo=function () {
 		if (typeof Kakao!=='undefined') {
 			clearInterval(kipid.kakaoInit);
 			if (!Kakao.isInitialized()) {
 				Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
 			}
-			kipid.logPrint('<br>Kakao.isInitialized()='+Kakao.isInitialized());
+			kipid.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
 		}
 	};
 	kipid.kakaoInit=setInterval(kipid.kakaoInitDo, 2000);
@@ -157,9 +157,9 @@ $(document).ready(function () {
 
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	if (docuK.find('.prettyprint').exists()) {
-		let $gcp=$(`<script id="js-prettyfy" defer src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>`);
+		let $gcp=$(`<script id="prettyfy-js" defer src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>`);
 		$headOrBody.append($gcp);
-		kipid.logPrint('<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.');
+		kipid.logPrint(`<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.`);
 	}
 
 	// MathJax js script (from cdn.mathjax.org) is added.
@@ -167,14 +167,14 @@ $(document).ready(function () {
 		let $mjxConfig=$(`<script>
 window.MathJax = {
 	startup: {
-		typeset: true // Skip startup typeset.
+		typeset: false // Skip startup typeset.
 	},
 	asciimath: {
 		delimiters: [['$','$']] // AsciiMath to Jax
 	},
 	tex: {
-		inlineMath: [['\\\\(','\\\\)']], // Using $ for inline math.
-		displayMath: [['\\\\[','\\\\]']], // Using $$ for outline math.
+		inlineMath: [['$','$'], ['\\\\(','\\\\)']], // Using $ for inline math.
+		displayMath: [['$$','$$'], ['\\\\[','\\\\]']], // Using $$ for outline math.
 		processEscapes: false, // Escape \\$
 		processEnvironments: false, // Ignore \\begin{something} ... \\end{something}
 		autoload: {
@@ -195,7 +195,7 @@ window.MathJax = {
 		$headOrBody.append($mjxConfig);
 		let $mjx=$(`<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>`);
 		$headOrBody.append($mjx);
-		kipid.logPrint('<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "eq, eqq" is there in your document.');
+		kipid.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "eq, eqq" is there in your document.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
 		kipid.mathJaxPreProcessDo=function () {
 			if (typeof MathJax!=='undefined') {
@@ -203,7 +203,7 @@ window.MathJax = {
 				MathJax.Hub.Queue(["PreProcess",MathJax.Hub]);
 				MathJax.Hub.Queue(function () {
 					kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
-					kipid.logPrint("<br><br>\".MathJax_Preview\" are added to kipid.delayedElems. Now its length is: "+kipid.delayedElems.length);
+					kipid.logPrint(`<br><br>".MathJax_Preview" are added to kipid.delayedElems. Now its length is: ${kipid.delayedElems.length}`);
 					$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 				});
 			}
@@ -301,9 +301,9 @@ window.MathJax = {
 		}
 	}
 	$(document).on("keydown", kipid.processShortKey);
-	kipid.logPrint("<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.");
+	kipid.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
-	kipid.logPrint("<br><br>kipid.delayPad="+kipid.delayPad+";<br>kipid.wait="+kipid.wait+";");
+	kipid.logPrint(`<br><br>kipid.delayPad=${kipid.delayPad};<br>kipid.wait=${kipid.wait};`);
 
 	kipid.HandleAhrefInComment=function () {
 		$("div.comments").find("p").each(function (i, elem) {
@@ -317,7 +317,7 @@ window.MathJax = {
 	kipid.HandleAhrefInComment();
 
 	// Closing docuK Log.
-	kipid.logPrint("<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>");
+	kipid.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
 	setTimeout(function () {kipid.log.hide();}, 300);
 });
 })(window.kipid, jQuery);

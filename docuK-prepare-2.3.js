@@ -12,7 +12,7 @@ kipid.logPrint=function (str) {
 	kipid.log.append(str);
 	kipid.log.scrollTop(kipid.log[0].scrollHeight);
 };
-kipid.logPrint("kipid.logPrint is working!");
+kipid.logPrint(`kipid.logPrint is working!`);
 
 // String to Array
 kipid.encloseStr=function (str) {
@@ -580,17 +580,17 @@ $.fn.delayedLoad=function () {
 	return done;
 };
 kipid.delayedLoadAll=function () {
-	kipid.logPrint("<br>Doing delayed-load. : "+kipid.delayedElems.length);
+	kipid.logPrint(`<br>Doing delayed-load. : ${kipid.delayedElems.length}`);
 	if (kipid.delayedElems.length>0) {
 		kipid.delayedElems.each(function () {
 			if ($(this).delayedLoad()) {
 				kipid.delayedElems=kipid.delayedElems.not(this);
-				kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
+				kipid.logPrint(`<br><span class="emph">${this} at vertical position of ${(100*$(this).offset().top/$(document).height()).toPrecision(3)}% of document is delayed-loaded.</span><br>${kipid.delayedElems.length} of delayedElems are remained.<br>`);
 			}
 		});
 		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 	} else {
-		kipid.logPrint("<br><br>All delayedElem are loaded.");
+		kipid.logPrint(`<br><br>All delayedElem are loaded.`);
 	}
 	kipid.previous=Date.now();
 };
@@ -604,7 +604,7 @@ kipid.delayedLoadByScroll=function () {
 		setTimeout(function () {
 			kipid.delayedLoadAll();
 		}, kipid.wait*1.1-passed);
-		kipid.logPrint("<br>wait "+(kipid.wait*1.1-passed).toFixed(0)+"ms.");
+		kipid.logPrint(`<br>wait ${(kipid.wait*1.1-passed).toFixed(0)}ms.`);
 	}
 };
 $window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
@@ -613,10 +613,10 @@ $window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	// Possible duplicate id is handled.
 	docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
-	kipid.logPrint("<br><br>docuK-"+docuKI+" scripts started!<br><span class='emph'>If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>");
+	kipid.logPrint(`<br><br>docuK-${docuKI} scripts started!<br><span class="emph">If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>`);
 	let docuK=kipid.docuK.eq(docuKI);
 	if (docuK.is(".rendered")) {
-		kipid.logPrint("<br><br>docuK-"+docuKI+" is already rendered.");
+		kipid.logPrint(`<br><br>docuK-${docuKI} is already rendered.`);
 		return;
 	}
 
@@ -669,7 +669,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 
 	// Scrollable switching of 'pre.prettyprint'.
 	docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
-	kipid.logPrint("<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.");
+	kipid.logPrint(`<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`);
 
 	// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
 	let secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
@@ -755,7 +755,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		}
 	}
 	secs.find(".toc").html(tocHtml);
-	kipid.logPrint("<br><br>Table of Contents is filled out.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.");
+	kipid.logPrint(`<br><br>Table of Contents is filled out.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.`);
 
 	// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
 	// Make 'refer' tags bubble-refer equations (eqq tag) or figures (figure tag). Any tag with id can be bubble-refered with refer tag.
@@ -832,7 +832,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			}
 		}
 	}
-	kipid.logPrint("<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.");
+	kipid.logPrint(`<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.`);
 
 	docuK.addClass("rendered");
 };
