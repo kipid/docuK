@@ -581,13 +581,13 @@ $.fn.delayedLoad=function () {
 };
 kipid.delayedLoadAll=function () {
 	kipid.logPrint("<br>Doing delayed-load. : "+kipid.delayedElems.length);
-	kipid.delayedElems.each(function () {
-		if ($(this).delayedLoad()) {
-			kipid.delayedElems=kipid.delayedElems.not(this);
-			kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
-		}
-	});
 	if (kipid.delayedElems.length>0) {
+		kipid.delayedElems.each(function () {
+			if ($(this).delayedLoad()) {
+				kipid.delayedElems=kipid.delayedElems.not(this);
+				kipid.logPrint("<br><span class=\"emph\">"+this+" at vertical position of "+(100*$(this).offset().top/$(document).height()).toPrecision(3)+"% of document is delayed-loaded.</span><br>"+kipid.delayedElems.length+" of delayedElems are remained.<br>");
+			}
+		});
 		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 	} else {
 		kipid.logPrint("<br><br>All delayedElem are loaded.");
