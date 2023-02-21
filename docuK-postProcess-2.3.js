@@ -1,10 +1,4 @@
 (function(kipid, $, undefined) {
-// Printing codes in <codeprint> with id into <pre>.
-let codeprints=$("codeprint");
-for (let i=0;i<codeprints.length;i++) {
-	kipid.printCode(codeprints.eq(i).attr('id'));
-}
-
 // SEE (Super Easy Edit)
 let $SEE=$("codeprint.SEE");
 for (let i=0;i<$SEE.length;i++) {
@@ -67,7 +61,16 @@ inRefs.on("mouseenter.delayedLoad", function () {
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 
 // On ready.
-$(document).ready(function () {
+	$(document).ready(function () {
+	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
+	let codeprints=$("codeprint");
+	for (let i=0;i<codeprints.length;i++) {
+		let codeId=codeprints.eq(i).attr('id');
+		if (codeId!==null&&codeId!==undefined&&codeId.startWith("code-")) {
+			kipid.printCode(codeId);
+		}
+	}
+
 	// Hiding hiden sections.
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
@@ -123,7 +126,7 @@ $(document).ready(function () {
 	// Kakao js script (from kakao.com CDN) is added.
 	kipid.kakao_js_id='kakao-jssdk';
 	if (!$(`#${kipid.kakao_js_id}`)) {
-		let $kakao_js=$(`<script id="${kipid.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></script>`);
+		let $kakao_js=$(`<script id="${kipid.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($kakao_js);
 	}
 	kipid.logPrint(`<br><br>kakao.js with id="${kipid.kakao_js_id}" is loaded.`);
@@ -157,7 +160,7 @@ $(document).ready(function () {
 
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	if (docuK.find('.prettyprint').exists()) {
-		let $gcp=$(`<script id="prettyfy-js" defer src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>`);
+		let $gcp=$(`<script id="prettyfy-js" defer src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($gcp);
 		kipid.logPrint(`<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.`);
 	}
@@ -191,9 +194,9 @@ window.MathJax = {
 		load: ['[tex]/noerrors']
 	}
 };
-</script>`);
+</`+`script>`); // Avoid closing script
 		$headOrBody.append($mjxConfig);
-		let $mjx=$(`<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>`);
+		let $mjx=$(`<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($mjx);
 		kipid.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "eq, eqq" is there in your document.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
