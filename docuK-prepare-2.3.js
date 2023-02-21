@@ -353,7 +353,7 @@ kipid.escapeHTML=function (str) {
 	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 };
 kipid.printCode=function (codeId) {
-	const $pre=$("#pre-"+codeId);
+	const $pre=$("pre#pre-"+codeId);
 	const $code=$("#"+codeId);
 	if ($pre.exists()) {
 		let html=// ('<codeprint id="'+codeId+'">'+
