@@ -66,7 +66,7 @@ window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 	let codeprints=$("codeprint");
 	for (let i=0;i<codeprints.length;i++) {
 		let codeId=codeprints.eq(i).attr('id');
-		if (codeId!==null&&codeId!==undefined&&codeId.startWith("code-")) {
+		if (codeId!==null&&codeId!==undefined&&codeId.startsWith("code-")) {
 			kipid.printCode(codeId);
 		}
 	}
@@ -168,9 +168,14 @@ window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 	// MathJax js script (from cdn.mathjax.org) is added.
 	if (docuK.find('eq, eqq').exists()) {
 		let $mjxConfig=$(`<script>
-window.MathJax = {
+window.MathJax={
 	startup: {
-		typeset: false // Skip startup typeset.
+		typeset: false, // Skip startup typeset.
+		ready: () => {
+			kipid.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
+			MathJax.startup.defaultReady();
+			kipid.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
+		}
 	},
 	asciimath: {
 		delimiters: [['$','$']] // AsciiMath to Jax
@@ -185,6 +190,9 @@ window.MathJax = {
 			colorv2: ['color']
 		},
 		packages: {'[+]': ['noerrors']}
+	},
+	svg: {
+		fontCache: 'global'
 	},
 	options: {
 		ignoreHtmlClass: 'tex2jax_ignore',
