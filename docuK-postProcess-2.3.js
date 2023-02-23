@@ -40,18 +40,20 @@ for(let i=1;i<k;i++) {
 
 kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
 
-let inRefs=docuK.find(".inRef");
+let $inRefs=docuK.find(".inRef");
 // Centering arrow.
-inRefs.each(function () {
-	let $elem=$(this);
-	let width=$elem.width()-2;
-	let $arrow=$elem.find(".arrow");
-	let borderWidth=parseFloat($arrow.css("borderWidth"));
-	let fontSize=parseFloat($arrow.css("fontSize"));
-	$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
-});
+if ($inRefs.length>0) {
+	$inRefs.each(function () {
+		let $elem=$(this);
+		let width=$elem.width()-2;
+		let $arrow=$elem.find(".arrow");
+		let borderWidth=parseFloat($arrow.css("borderWidth"));
+		let fontSize=parseFloat($arrow.css("fontSize"));
+		$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
+	});
+}
 // Delayed-Load in bubble ref.
-inRefs.on("mouseenter.delayedLoad", function () {
+$inRefs.on("mouseenter.delayedLoad", function () {
 	kipid.logPrint(`<br>Do delayed-load in bubble ref.`);
 	$window.trigger("scroll.delayedLoad");
 	$(this).off("mouseenter.delayedLoad");
@@ -61,7 +63,7 @@ inRefs.on("mouseenter.delayedLoad", function () {
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 
 // On ready.
-	$(document).ready(function () {
+$(document).ready(function () {
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
 	let codeprints=$("codeprint");
 	for (let i=0;i<codeprints.length;i++) {
@@ -171,7 +173,7 @@ window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 window.MathJax={
 	startup: {
 		typeset: false, // Skip startup typeset.
-		ready: () => {
+		ready: function () {
 			kipid.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
 			MathJax.startup.defaultReady();
 			kipid.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
@@ -184,39 +186,27 @@ window.MathJax={
 		inlineMath: [['$','$'], ['\\\\(','\\\\)']], // Using $ for inline math.
 		displayMath: [['$$','$$'], ['\\\\[','\\\\]']], // Using $$ for outline math.
 		processEscapes: false, // Escape \\$
-		processEnvironments: false, // Ignore \\begin{something} ... \\end{something}
-		autoload: {
-			color: [],
-			colorv2: ['color']
-		},
-		packages: {'[+]': ['noerrors']}
+		processEnvironments: false // Ignore \\begin{something} ... \\end{something}
 	},
 	svg: {
 		fontCache: 'global'
-	},
-	options: {
-		ignoreHtmlClass: 'tex2jax_ignore',
-		processHtmlClass: 'tex2jax_process'
-	},
-	loader: {
-		load: ['[tex]/noerrors']
 	}
 };
 </`+`script>`); // Avoid closing script
 		$headOrBody.append($mjxConfig);
 		let $mjx=$(`<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($mjx);
-		kipid.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "eq, eqq" is there in your document.`);
+		kipid.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "&lt;eq&gt;, &lt;eqq&gt;" is there in your document.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
 		kipid.mathJaxPreProcessDo=function () {
-			if (typeof MathJax!=='undefined') {
+			if (typeof (MathJax.startup)!=='undefined') {
 				clearInterval(kipid.mathJaxPreProcess);
-				MathJax.Hub.Queue(["PreProcess",MathJax.Hub]);
-				MathJax.Hub.Queue(function () {
-					kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
-					kipid.logPrint(`<br><br>".MathJax_Preview" are added to kipid.delayedElems. Now its length is: ${kipid.delayedElems.length}`);
-					$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
-				});
+				MathJax.typeset();
+				// MathJax.Hub.Queue(function () {
+				// 	kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
+				// 	kipid.logPrint(`<br><br>".MathJax_Preview" are added to kipid.delayedElems. Now its length is: ${kipid.delayedElems.length}`);
+				// 	$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+				// });
 			}
 		};
 		kipid.mathJaxPreProcess=setInterval(kipid.mathJaxPreProcessDo, 2000);
@@ -317,13 +307,16 @@ window.MathJax={
 	kipid.logPrint(`<br><br>kipid.delayPad=${kipid.delayPad};<br>kipid.wait=${kipid.wait};`);
 
 	kipid.HandleAhrefInComment=function () {
-		$("div.comments").find("p").each(function (i, elem) {
-			$(elem).html(
-				$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-					return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
-				})
-			);
-		});
+		let $tistoryComments=$("div.comments").find("p");
+		if ($tistoryComments.length>0) {
+			$tistoryComments.each(function (i, elem) {
+				$(elem).html(
+					$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
+						return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
+					})
+				);
+			});
+		}
 	};
 	kipid.HandleAhrefInComment();
 
