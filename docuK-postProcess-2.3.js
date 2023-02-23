@@ -118,8 +118,8 @@ $(document).ready(function () {
 	kipid.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
 
 	// Initial Delayed Load.
-	kipid.delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
-	kipid.logPrint(`<br><br>There are ${kipid.delayedElems.length} delayed elements.`);
+	kipid.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
+	kipid.logPrint(`<br><br>There are ${kipid.$delayedElems.length} delayed elements.`);
 	setTimeout(function () {
 		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
 		$window.trigger("scroll.delayedLoad");
@@ -202,11 +202,6 @@ window.MathJax={
 			if (typeof (MathJax.startup)!=='undefined') {
 				clearInterval(kipid.mathJaxPreProcess);
 				MathJax.typeset();
-				// MathJax.Hub.Queue(function () {
-				// 	kipid.delayedElems=kipid.delayedElems.add(".MathJax_Preview");
-				// 	kipid.logPrint(`<br><br>".MathJax_Preview" are added to kipid.delayedElems. Now its length is: ${kipid.delayedElems.length}`);
-				// 	$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
-				// });
 			}
 		};
 		kipid.mathJaxPreProcess=setInterval(kipid.mathJaxPreProcessDo, 2000);
