@@ -42,16 +42,14 @@ kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
 
 let $inRefs=docuK.find(".inRef");
 // Centering arrow.
-if ($inRefs.length>0) {
-	$inRefs.each(function () {
-		let $elem=$(this);
-		let width=$elem.width()-2;
-		let $arrow=$elem.find(".arrow");
-		let borderWidth=parseFloat($arrow.css("borderWidth"));
-		let fontSize=parseFloat($arrow.css("fontSize"));
-		$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
-	});
-}
+$inRefs.each(function () {
+	let $elem=$(this);
+	let width=$elem.width()-2;
+	let $arrow=$elem.find(".arrow");
+	let borderWidth=parseFloat($arrow.css("borderWidth"));
+	let fontSize=parseFloat($arrow.css("fontSize"));
+	$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
+});
 // Delayed-Load in bubble ref.
 $inRefs.on("mouseenter.delayedLoad", function () {
 	kipid.logPrint(`<br>Do delayed-load in bubble ref.`);
@@ -302,16 +300,13 @@ window.MathJax={
 	kipid.logPrint(`<br><br>kipid.delayPad=${kipid.delayPad};<br>kipid.wait=${kipid.wait};`);
 
 	kipid.HandleAhrefInComment=function () {
-		let $tistoryComments=$("div.comments").find("p");
-		if ($tistoryComments.length>0) {
-			$tistoryComments.each(function (i, elem) {
-				$(elem).html(
-					$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-						return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
-					})
-				);
-			});
-		}
+		$("div.comments").find("p").each(function (i, elem) {
+			$(elem).html(
+				$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
+					return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
+				})
+			);
+		});
 	};
 	kipid.HandleAhrefInComment();
 
