@@ -218,7 +218,7 @@ How Language Seems To Shape One's View Of The World
 ## Figures
 
 <figure><div class="fig">
-	<img delayed-src="" alt="">
+	<img delayed-src="./img with delayed-src.png" alt="img with delayed-src">
 	<div class="caption">Caption.</div>
 </div></figure>
 
@@ -228,10 +228,19 @@ How Language Seems To Shape One's View Of The World
 
 Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="prettyprint">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
 
-The first two are converted to inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one is converted to outline math like
+The first two are converted to inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one is converted to <span class="emph">outline math like
 
 <eqq>
 	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq>
+</span>
+
+<eqq>
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
 </eqq>
 
 
