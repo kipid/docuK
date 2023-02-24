@@ -3,9 +3,33 @@
 body {margin:0; padding:0}
 codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
+
+.copyright {font-size:13px; color:rgb(100,255,100); background-color:rgb(128,128,128); max-width:1000px; margin:1em auto}
+.copyright ul {line-height:1.4; padding:0 1.5em}
+.copyright li.license {color:rgb(100,255,100) !important}
+.copyright li.by::before {background-image:url(https://recoeve.net/CDN/copyright-attribution.png)}
+.copyright li.nc::before {background-image:url(https://recoeve.net/CDN/copyright-no-profit.png)}
+.copyright li.nd::before {background-image:url(https://recoeve.net/CDN/copyright-equal.png)}
+.copyright li.by::before, .copyright li.nc::before, .copyright li.nd::before {
+	position:absolute;
+	top:4px; right:auto; left:0;
+	background-repeat:no-repeat;
+	background-size:31px 31px;
+	display:inline-block;
+	width:31px; height:31px;
+	content:"";
+	-webkit-print-color-adjust:exact
+}
+.copyright li.license {
+	list-style:none;
+	position:relative;
+	margin-bottom:15px
+}
+
 .shortkey {color:white; background-color:#141414; max-width:1000px; margin:auto}
 .shortkey ul {line-height:1.4; padding:0 1.5em}
 .shortkey li {color:white !important}
+
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
 .docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
 .docuK div, textarea {box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
@@ -89,7 +113,7 @@ codeprint.SEE {display:none}
 .docuK .emph {color:rgb(255,150,150)} .docuK.bright .emph {color:rgb(255,60,60)}
 .docuK .none {display:none}
 
-/* r(S)C: Ratio (Sub)Container */
+/* r(S)C:Ratio (Sub)Container */
 .docuK .rC {}
 .docuK .rC>.rSC {box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
 .docuK .rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
@@ -179,7 +203,7 @@ codeprint.SEE {display:none}
 
 .docuK pre .str, .docuK code .str {color:#65B042}/* string - green */
 .docuK pre .kwd, .docuK code .kwd {color:#E28964}/* keyword - dark pink */
-.docuK pre .com, .docuK code .com {color:#AEAEAE; font-style: italic}/* comment - gray */
+.docuK pre .com, .docuK code .com {color:#AEAEAE; font-style:italic}/* comment - gray */
 .docuK pre .typ, .docuK code .typ {color:#89bdff}/* type - light blue */
 .docuK pre .lit, .docuK code .lit {color:#3387CC}/* literal - blue */
 .docuK pre .pun, .docuK code .pun {color:#fff}/* punctuation - white */

@@ -634,12 +634,13 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		});
 	}
 
-	// Short Keys announcement.
-	kipid.topShortKeys=function (keyDowned) {
-		let key=keyDowned.charCodeAt(0);
-		$(document).trigger("keydown", {keyCode: key, which: key});
-	};
-	docuK.before(`<div class="shortkey">
+	// Copyright and Short Keys announcement.
+	docuK.before(`<div class="copyright"><ul>
+	<li class="license by"><span class="bold">저작자표시</span> - 적절한 출처와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지해야 합니다. 합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 됩니다.</li>
+	<li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
+	<li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
+</ul></div>
+<div class="shortkey">
 	Short Keys
 	<ul>
 		<li onclick="kipid.processShortKey({keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
@@ -651,10 +652,14 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		<li onclick="kipid.processShortKey({keyCode:'X'.charCodeAt(0)})"><span class="bold underline">X</span>: DISQUS comments</li>
 	</ul>
 </div>`);
+	docuK.after(`<div class="copyright"><ul>
+	<li class="license by"><span class="bold">저작자표시</span> - 적절한 출처와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지해야 합니다. 합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 됩니다.</li>
+	<li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
+	<li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
+</ul></div>`);
 
 	// Style change widget, and SNS widget.
-	docuK.prepend(
-		`<div class="change-docuK-style">
+	docuK.prepend(`<div class="change-docuK-style">
 	<form><button type="button" onclick="kipid.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
 	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
 	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
