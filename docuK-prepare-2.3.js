@@ -7,10 +7,11 @@ const docuK=$(".docuK");
 kipid.docuK=docuK;
 
 // logPrint function.
-kipid.log=$("#docuK-log");
+kipid.$log=$("#docuK-log");
+kipid.$log.addClass("fixed");
 kipid.logPrint=function (str) {
-	kipid.log.append(str);
-	kipid.log.scrollTop(kipid.log[0].scrollHeight);
+	kipid.$log.append(str);
+	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
 };
 kipid.logPrint(`kipid.logPrint is working!`);
 

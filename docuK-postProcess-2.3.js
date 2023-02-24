@@ -183,7 +183,7 @@ window.MathJax={
 	tex: {
 		inlineMath: [['$','$'], ['\\\\(','\\\\)']], // Using $ for inline math.
 		displayMath: [['$$','$$'], ['\\\\[','\\\\]']], // Using $$ for outline math.
-		processEscapes: false, // Escape \\$
+		processEscapes: true, // Escape \\$
 		processEnvironments: false // Ignore \\begin{something} ... \\end{something}
 	},
 	svg: {
@@ -312,6 +312,6 @@ window.MathJax={
 
 	// Closing docuK Log.
 	kipid.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
-	setTimeout(function () {kipid.log.hide();}, 300);
+	setTimeout(function () {kipid.$log.hide();}, 300);
 });
 })(window.kipid, jQuery);
