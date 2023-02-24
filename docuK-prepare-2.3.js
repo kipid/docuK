@@ -9,6 +9,7 @@ kipid.docuK=docuK;
 // logPrint function.
 kipid.$log=$("#docuK-log");
 kipid.$log.addClass("fixed");
+kipid.$log.html(`<div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 kipid.logPrint=function (str) {
 	kipid.$log.append(str);
 	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
