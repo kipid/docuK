@@ -211,7 +211,7 @@ window.MathJax={
 	kipid.rras=$(".docuK>.sec").has("ol.refs");
 	kipid.processShortKey=function(event) {
 		if (event.altKey||event.ctrlKey||event.metaKey) return;
-		switch (event.target.nodeName) {
+		switch (event.target&&event.target.nodeName) {
 			case "INPUT": case "SELECT": case "TEXTAREA": return;
 		}
 		let scrollTop=null;

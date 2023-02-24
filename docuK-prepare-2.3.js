@@ -642,13 +642,13 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	docuK.before(`<div class="shortkey">
 	Short Keys
 	<ul>
-		<li><a onclick="kipid.topShortKeys('F')"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</a></li>
-		<li><a onclick="kipid.topShortKeys('D')"><span class="bold underline">D</span>: Previous Section</a></li>
-		<li><a onclick="kipid.topShortKeys('T')"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</a></li>
-		<li><a onclick="kipid.topShortKeys('R')"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</a></li>
-		<li><a onclick="kipid.topShortKeys('L')"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</a></li>
-		<li><a onclick="kipid.topShortKeys('Z')"><span class="bold underline">Z</span>: Tistory comments</a></li>
-		<li><a onclick="kipid.topShortKeys('X')"><span class="bold underline">X</span>: DISQUS comments</a></li>
+		<li onclick="kipid.processShortKey({keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
+		<li onclick="kipid.processShortKey({keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Previous Section</li>
+		<li onclick="kipid.processShortKey({keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
+		<li onclick="kipid.processShortKey({keyCode:'R'.charCodeAt(0)})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</li>
+		<li onclick="kipid.processShortKey({keyCode:'L'.charCodeAt(0)})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</li>
+		<li onclick="kipid.processShortKey({keyCode:'Z'.charCodeAt(0)})"><span class="bold underline">Z</span>: Tistory comments</li>
+		<li onclick="kipid.processShortKey({keyCode:'X'.charCodeAt(0)})"><span class="bold underline">X</span>: DISQUS comments</li>
 	</ul>
 </div>`);
 
