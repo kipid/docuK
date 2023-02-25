@@ -8,29 +8,19 @@
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-
-<style>
-.exit {z-index:100; position:absolute; display:inline-block; left:.3em; width:1.8em; height:1.8em; text-align:center; margin-top:-.5em; border-radius:.4em; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white}
-.exit>svg {width:100%; height:100%; font-size:1.8em; line-height:1.0}
-</style>
-<div class="docuK rendered">
-  <!-- <div class="exit" onclick="kipid.HideBR(this)"><svg>
-    <g style="stroke:white;stroke-width:23%">
-      <line x1="20%" y1="20%" x2="80%" y2="80%"/>
-      <line x1="80%" y1="20%" x2="20%" y2="80%"/>
-    </g>
-    ✖
-  </svg></div> -->
-  <div class="sec" id="docuK-log"></div>
-</div>
-
-<!-- From local -->
-<link rel="stylesheet" href="./docuK-2.3.css">
-<script src="./docuK-prepare-2.3.js" charset="utf-8"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
 
 <!-- From kipid.tistory CDN -->
 <!-- <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<!-- From recoeve.net CDN -->
+<!-- <link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
+<script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-style -->
 
 <meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
@@ -873,9 +863,12 @@ kipid.wait=512;
 kipid.delayPad=0;
 </script>
 
-<!-- From local -->
-<script src="./docuK-postProcess-2.3.js" charset="utf-8"></script>
-
 <!-- From kipid.tistory CDN -->
 <!-- <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<script src="./docuK-postProcess-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-script -->
