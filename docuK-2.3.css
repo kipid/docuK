@@ -4,26 +4,28 @@ body {margin:0; padding:0}
 codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
 
-.copyright {font-size:13px; color:rgb(100,255,100); background-color:rgb(128,128,128); max-width:1000px; margin:1em auto}
-.copyright ul {line-height:1.4; padding:0 1.5em}
-.copyright li.license {color:rgb(100,255,100) !important}
-.copyright li.by::before {background-image:url(https://recoeve.net/CDN/copyright-attribution.png)}
-.copyright li.nc::before {background-image:url(https://recoeve.net/CDN/copyright-no-profit.png)}
-.copyright li.nd::before {background-image:url(https://recoeve.net/CDN/copyright-equal.png)}
-.copyright li.by::before, .copyright li.nc::before, .copyright li.nd::before {
+.copyright {font-size:13px; color:rgb(100,255,100); background-color:rgb(0,0,0); max-width:1000px; margin:1em auto}
+.copyright ul {line-height:1.4; padding:.1em .5em}
+.copyright li.cc::before {background-image:url(https://recoeve.net/CDN/cc.png)}
+.copyright li.by::before {background-image:url(https://recoeve.net/CDN/by.png)}
+.copyright li.nc::before {background-image:url(https://recoeve.net/CDN/nc.png)}
+.copyright li.nd::before {background-image:url(https://recoeve.net/CDN/nd.png)}
+.copyright li.cc::before, .copyright li.by::before, .copyright li.nc::before, .copyright li.nd::before {
 	position:absolute;
-	top:4px; right:auto; left:0;
+	top:-7px; right:auto; left:0;
 	background-repeat:no-repeat;
-	background-size:31px 31px;
+	background-size:32px 32px;
 	display:inline-block;
-	width:31px; height:31px;
+	width:32px; height:32px;
 	content:"";
 	-webkit-print-color-adjust:exact
 }
 .copyright li.license {
+	color:rgb(200,200,40) !important;
 	list-style:none;
 	position:relative;
-	margin-bottom:15px
+	margin:15px 0;
+	padding-left:38px
 }
 
 .shortkey {color:white; background-color:#141414; max-width:1000px; margin:auto}
