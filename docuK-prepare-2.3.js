@@ -530,7 +530,7 @@ kipid.shareSNS=function (service) {
 			open="https://www.facebook.com/sharer/sharer.php"+"?u="+url;
 			break;
 		case 'recoeve':
-			open="http://recoeve.net/reco?"+"uri="+url+"&title="+title;
+			open="https://recoeve.net/reco?"+"uri="+url+"&title="+title;
 			break;
 		case 'kakao':
 			kipid.popUpKakao();
