@@ -440,12 +440,7 @@ kipid.lineHeight10=16;
 kipid.printDeviceInfo=function () {
 	if (kipid.$deviceInfo) {
 		kipid.$deviceInfo.html(
-			"Mode:"+kipid.mode
-			+"; Font:"+kipid.fontFamily
-			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)+"px("+kipid.fontSize.toFixed(1)+")"
-			+"; line-height:"+(kipid.lineHeight10/10).toFixed(1)
-			+";<br>width: "+kipid.browserWidth
-			+", height: "+window.innerHeight
+			`Mode: ${kipid.mode}; Font: ${kipid.fontFamily}; font-size: ${(kipid.fontSize*1.8).toFixed(1)}px (${kipid.fontSize.toFixed(1)}); line-height: ${(kipid.lineHeight10/10).toFixed(1)};<br>width: ${kipid.browserWidth}, height: ${window.innerHeight}`
 		);
 	}
 };
