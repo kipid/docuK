@@ -75,7 +75,7 @@ $(document).ready(function () {
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
 	// Setting and Printing Styles
-	kipid.deviceInfo=docuK.find(".deviceInfo");
+	kipid.$deviceInfo=docuK.find(".deviceInfo");
 
 	let cookieItem;
 	kipid.logPrint(`<br>`);

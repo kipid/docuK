@@ -438,8 +438,8 @@ kipid.fontSize=10;
 kipid.lineHeight10=16;
 
 kipid.printDeviceInfo=function () {
-	if (kipid.deviceInfo) {
-		kipid.deviceInfo.html(
+	if (kipid.$deviceInfo) {
+		kipid.$deviceInfo.html(
 			"Mode:"+kipid.mode
 			+"; Font:"+kipid.fontFamily
 			+"; font-size:"+(kipid.fontSize*1.8).toFixed(1)+"px("+kipid.fontSize.toFixed(1)+")"
