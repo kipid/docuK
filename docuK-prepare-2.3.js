@@ -440,10 +440,12 @@ kipid.defaultStyles={mode:kipid.mode, fontFamily:kipid.fontFamily, fontSize:kipi
 
 kipid.printDeviceInfo=function () {
 	if (kipid.$deviceInfo) {
+		let referrer=document.referrer;
+		let referrerHTML=(referrer?`<a target="_blank" href="${referrer}">${kipid.escapeHTML(decodeURIComponent(referrer))}</a>`:`Empty`);
 		kipid.$deviceInfo.html(
 			`Mode: ${kipid.mode}; Font: ${kipid.fontFamily}; font-size: ${(kipid.fontSize*1.8).toFixed(1)}px (${kipid.fontSize.toFixed(1)}); line-height: ${(kipid.lineHeight10/10).toFixed(1)};<br>
 width: ${kipid.browserWidth}, height: ${window.innerHeight}<br>
-document.referrer: ${document.referrer?kipid.escapeHTML(decodeURIComponent(document.referrer)):`''`}`
+document.referrer: ${referrerHTML}`
 		);
 	}
 };
