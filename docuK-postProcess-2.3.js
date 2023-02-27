@@ -123,6 +123,12 @@ $(document).ready(function () {
 		$window.trigger("scroll.delayedLoad");
 	}, 2000);
 
+	// Disqus js script
+	kipid.disqus_js_id='disqus-js';
+	if (!$(`#${kipid.disqus_js_id}`)) {
+		let $disqus_js=$(`<script id="${kipid.disqus_js_id}" src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
+		$headOrBody.append($disqus_js);
+	}
 	// Kakao js script (from kakao.com CDN) is added.
 	kipid.kakao_js_id='kakao-jssdk';
 	if (!$(`#${kipid.kakao_js_id}`)) {
