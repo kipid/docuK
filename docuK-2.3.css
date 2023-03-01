@@ -43,6 +43,76 @@ codeprint.SEE {display:none}
 .docuK ::-webkit-scrollbar-thumb {background:rgb(0,120,120); -webkit-box-shadow:inset 0 0 3px rgb(0,0,0)}
 .docuK ::-webkit-scrollbar-corner {background:transparent}
 
+#fuzzy-search-container {
+	position:fixed; left:0; top:0;
+	z-index:100;
+	font-size:1.8em;
+	width:30em; max-width:100%;
+	height:auto;
+	text-align:left
+}
+#fuzzy-search {
+	height:2em; max-height:5em; overflow-y:auto;
+	font:inherit; font-size:1.3em; color:black;
+	width:100%;
+	padding:.1em 2em 0 .2em;
+	border:2px gray solid;
+	background:white
+}
+#fuzzy-search-list {
+	height:auto; min-height:3em; max-height:15em; overflow-y:auto;
+	border:2px gray solid;
+	background:rgb(20,20,20)
+}
+#fuzzy-search-list .list-item {
+	background:black; color:white;
+	padding:.2em .5em .4em
+}
+.bright #fuzzy-search-list .list-item {
+	background:white; color:black
+}
+#fuzzy-search-list .list-item:nth-child(2n) {
+	background:rgb(40,40,40)
+}
+.bright #fuzzy-search-list .list-item:nth-child(2n) {
+	background:rgb(200,200,200)
+}
+#fuzzy-search-list .list-item.selected {border:.15em solid rgb(210,150,150)}
+#fuzzy-search-list .list-item .cat {font-size:.9em;}
+#fuzzy-search-list .list-item .highlighted {
+	font-size:.5em; color:rgb(150,150,150)
+}
+#fuzzy-search-list .list-item .maxMatchScore {
+	font-weight:bold; color:rgb(150,250,250)
+}
+.bright #fuzzy-search-list .list-item .maxMatchScore {
+	color:rgb(0,100,100)
+}
+#fuzzy-search-list .list-item .highlighted .bold {
+	color:rgb(170,250,170)
+}
+.bright #fuzzy-search-list .list-item .highlighted .bold {
+	color:rgb(0,50,0)
+}
+#fuzzy-search-container .exit {
+	z-index:20000;
+	position:absolute; display:inline-block;
+	right:0; top:0;
+	width:1.8em; height:1.8em; line-height:1.0;
+	text-align:center;
+	/*border-radius:.4em;*/
+	cursor:pointer;
+	border:2px rgb(80, 80, 80) solid;
+	background-color:rgb(30,30,30); color:white
+}
+#fuzzy-search-container .exit>svg {
+	width:100%; height:100%;
+	font-size:1.8em; line-height:1.0
+}
+@media all and (min-height:500px) {
+	#fuzzy-search-list {max-height:430px;}
+}
+
 .docuK button {cursor:pointer}
 .docuK .SNS-top {margin-top:-36px; margin-bottom:-6px}
 .docuK .SNS-bottom {margin:36px 0; text-align:center}
@@ -81,6 +151,12 @@ codeprint.SEE {display:none}
 .docuK a:visited {color:rgb(180,180,255)}
 .docuK a:active {color:rgb(80,250,250)}
 .docuK a:hover {color:rgb(100,255,100); text-decoration:underline}
+
+.docuK a.emph {font-weight:bold}
+.docuK a.emph:link {color:rgb(255,160,200)}
+.docuK a.emph:visited {color:rgb(255,140,180)}
+.docuK a.emph:active {color:rgb(80,250,250)}
+.docuK a.emph:hover {color:rgb(200,255,100); text-decoration:underline}
 
 .docuK a.jump:link {color:rgb(230,235,255)}
 .docuK a.jump:visited {color:rgb(230,235,255)}

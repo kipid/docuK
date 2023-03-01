@@ -15,6 +15,12 @@ kipid.logPrint=function (str) {
 	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
 };
 kipid.logPrint(`kipid.logPrint is working!`);
+kipid.$log.after(`<div id="fuzzy-search-container" style="display:none">
+	<div id="fuzzy-search" contenteditable="true"></div>
+	<div id="fuzzy-search-list"></div>
+	<div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
+</div>
+<div id="out-focus" class="none">out focus</div>`);
 
 // String to Array
 kipid.encloseStr=function (str) {
@@ -688,6 +694,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
 	<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.6em">=</button></form>
 	<form><button type="button" onclick="kipid.$log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form>
+	<form><button type="button" onclick="kipid.button_FS()" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
 	<div class="deviceInfo"></div>
 	<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>
 	</div>

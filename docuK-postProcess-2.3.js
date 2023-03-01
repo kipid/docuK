@@ -20,6 +20,279 @@ if (kipid.browserWidth>321) {
 	});
 }
 
+// Fuzzy Search
+$out_focus=$("#out-focus");
+$fuzzy_search_container=$("#fuzzy-search-container");
+$fuzzy_search=$("#fuzzy-search");
+$fuzzy_search_list=$("#fuzzy-search-list");
+kipid.button_FS=function () {
+	$fuzzy_search_container.toggle();
+	if ($fuzzy_search_container.is(":visible")) {
+		$fuzzy_search.focus();
+	} else {
+		$out_focus.focus();
+	}
+};
+
+////////////////////////////////////////////////////
+// Hangul (Korean) split and map to English
+// KE : Korean Expanded
+////////////////////////////////////////////////////
+kipid.jamoKE=["ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄷㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+kipid.jamo=["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅃ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+
+kipid.mapKE={"q":"ㅂ", "Q":"ㅃ", "w":"ㅈ", "W":"ㅉ", "e":"ㄷ", "E":"ㄸ", "r":"ㄱ", "R":"ㄲ", "t":"ㅅ", "T":"ㅆ", "y":"ㅛ", "Y":"ㅛ", "u":"ㅕ", "U":"ㅕ", "i":"ㅑ", "I":"ㅑ", "o":"ㅐ", "O":"ㅒ", "p":"ㅔ", "P":"ㅖ", "a":"ㅁ", "A":"ㅁ", "s":"ㄴ", "S":"ㄴ", "d":"ㅇ", "D":"ㅇ", "f":"ㄹ", "F":"ㄹ", "g":"ㅎ", "G":"ㅎ", "h":"ㅗ", "H":"ㅗ", "j":"ㅓ", "J":"ㅓ", "k":"ㅏ", "K":"ㅏ", "l":"ㅣ", "L":"ㅣ", "z":"ㅋ", "Z":"ㅋ", "x":"ㅌ", "X":"ㅌ", "c":"ㅊ", "C":"ㅊ", "v":"ㅍ", "V":"ㅍ", "b":"ㅠ", "B":"ㅠ", "n":"ㅜ", "N":"ㅜ", "m":"ㅡ", "M":"ㅡ"};
+for (let p in kipid.mapKE) {
+	kipid.mapKE[kipid.mapKE[p]]=p;
+}
+
+kipid.rChoKE=["ㄱ", "ㄱㄱ", "ㄴ", "ㄷ", "ㄷㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+kipid.rCho=["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+
+kipid.rJungKE=["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+kipid.rJung=["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+
+kipid.rJongKE=["", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+kipid.rJong=["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+
+kipid.splitHangul=function(str) {
+	let res=[];
+	res.originalStr=str;
+	res.splitted3="";
+	res.splitted="";
+	res.pCho=[]; // position of word-start or 초성
+	let p=0;
+	res.pCho[p]=true;
+	let cho, jung, jong;
+	for (let i=0;i<str.length;i++) {
+		let c=str.charAt(i)
+		let n=str.charCodeAt(i);
+		if (n>=0x3131&&n<=0x3163) {
+			n-=0x3131;
+			res[i]={"char":c, "splitted3":c, "splitted":kipid.jamoKE[n]};
+			res.pCho[p]=true;
+		}
+		else if (n>=0xAC00&&n<=0xD7A3) {
+			n-=0xAC00;
+			jong=n%28;
+			jung=( (n-jong)/28 )%21;
+			cho=( ((n-jong)/28)-jung )/21;
+			res[i]={"char":c
+				, "splitted3":kipid.rCho[cho]+kipid.rJung[jung]+kipid.rJong[jong]
+				, "splitted":kipid.rChoKE[cho]+kipid.rJungKE[jung]+kipid.rJongKE[jong]};
+			res.pCho[p]=true;
+		}
+		else {
+			res[i]={"char":c, "splitted3":c, "splitted":c};
+			if (i>0&&/[^a-zA-Z0-9]$/.test(res[i-1].splitted)&&/[a-zA-Z0-9]/.test(c)) {
+				res.pCho[p]=true;
+			}
+		}
+		p+=res[i].splitted.length;
+		res.splitted3+=res[i].splitted3;
+		res.splitted+=res[i].splitted;
+	}
+	return res;
+};
+
+////////////////////////////////////////////////////
+// Fuzzy search prepare
+////////////////////////////////////////////////////
+kipid.fsGo=[];
+kipid.fsGo[0]=kipid.fsGo[1]=[];
+kipid.fsGo[0]["ptnSH"]=kipid.fsGo[1]["ptnSH"]=kipid.splitHangul("$!@#");
+kipid.fsGo.fullList=[];
+kipid.fsGo.$fs=$fuzzy_search;
+kipid.fsGo.$fsl=$fuzzy_search_list;
+kipid.fsGo.$fsLis=$fuzzy_search_list.find(".list-item");
+RegExp.quote=function(str) {
+	return str.replace(/[.?*+^$[\]\\{}()|-]/g, "\\$&").replace(/\s/g, "[\\s\\S]");
+};
+kipid.arrayRegExs=function(ptnSH) {
+	let str=ptnSH.splitted;
+	let res=[];
+	for (let i=0;i<str.length;i++) {
+		let c=str.charAt(i);
+		let mapKE=kipid.mapKE[c];
+		if (mapKE) {
+			res.push( new RegExp("["+c+mapKE+"]", "ig") );
+		}
+		else {
+			res.push( new RegExp(RegExp.quote(c), "ig") );
+		}
+	}
+	return res;
+};
+kipid.highlightStrFromIndices=function(strSplitted, indices) {
+	let res="";
+	for (let i=0, j=1, k=0, p1=0, p2=0;j<=indices.length;i=j,j++) {
+		while (j<indices.length&&indices[j-1].end===indices[j].start) {
+			j++;
+		}
+		for (;k<strSplitted.length;k++) {
+			p1=p2;
+			p2=p1+strSplitted[k]["splitted"].length;
+			if (p2<=indices[i].start) {
+				strSplitted[k]["matched"]=false;
+			}
+			else if (p1<indices[j-1].end) {
+				strSplitted[k]["matched"]=true;
+			}
+			else {
+				if (j===indices.length) {
+					for (;k<strSplitted.length;k++) {
+						strSplitted[k]["matched"]=false;
+					}
+				}
+				p2=p1;
+				break;
+			}
+		}
+	}
+	for (let i=0;i<strSplitted.length;) {
+		if (strSplitted[i]["matched"]) {
+			res+='<span class="bold">';
+			while (i<strSplitted.length&&strSplitted[i]["matched"]) {
+				res+=kipid.escapeHTML(strSplitted[i]["char"]);
+				i++;
+			}
+			res+='</span>';
+		}
+		else {
+			while (i<strSplitted.length&&!strSplitted[i]["matched"]) {
+				res+=kipid.escapeHTML(strSplitted[i]["char"]);
+				i++;
+			}
+		}
+	}
+	return res;
+};
+kipid.matchScoreFromIndices=function(strSH, ptnSH, indices) {
+	let res=0;
+	for (let i=0;i<indices.length;i++) {
+		if (strSH.pCho[indices[i].start])
+			res+=10;
+	}
+	for (let i=1;i<indices.length;i++) {
+		let diff=indices[i].start-indices[i-1].start;
+		if (diff<5) res+=8*(5-diff);
+	}
+	return res;
+};
+kipid.fuzzySearch=function(ptnSH, fs) {
+	if (ptnSH.splitted===fs[0].ptnSH.splitted) {
+		return;
+	}
+	if (ptnSH.splitted.indexOf(fs[0].ptnSH.splitted)===0) {
+		fs[1]=fs[0];
+	}
+	else if (fs[1]&&ptnSH.splitted.indexOf(fs[1].ptnSH.splitted)===0) {
+		if (ptnSH.splitted===fs[1].ptnSH.splitted) {
+			return fs[1];
+		}
+	}
+	else {
+		fs[1]=null;
+	}
+	let list=[];
+	if (fs[1]&&fs[1].sorted) {
+		let sorted=fs[1].sorted;
+		for (let i=0;i<sorted.length;i++) {
+			list.push(fs.fullList[fs[1][sorted[i]].i]);
+		}
+	}
+	else {
+		if (fs.shuffled) {
+			let shuffled=fs.shuffled;
+			for (let i=0;i<shuffled.length;i++) {
+				list.push(fs.fullList[shuffled[i].i]);
+			}
+		}
+		else {
+			let l=fs.fullList.length;
+			for (let i=0;i<l;i++) {
+				list.push(fs.fullList[l-1-i]);
+			}
+		}
+	}
+	fs[0]=[];
+	fs[0].ptnSH=ptnSH;
+	let regExs=kipid.arrayRegExs(ptnSH);
+	for (let i=0;i<list.length;i++) {
+	if (regExs.length>0) {
+		let txt=list[i].txt;
+		let txtS=txt.splitted;
+		regExs[0].lastIndex=0;
+		let exec=regExs[0].exec(txtS);
+		let matched=(exec!==null);
+		let indices=[];
+		if (matched) {
+			indices[0]={start:exec.index, end:regExs[0].lastIndex};
+		}
+		for (let j=1;matched&&(j<regExs.length);j++) {
+			regExs[j].lastIndex=regExs[j-1].lastIndex;
+			exec=regExs[j].exec(txtS);
+			matched=(exec!==null);
+			if (matched) {
+				indices[j]={start:exec.index, end:regExs[j].lastIndex};
+			}
+		}
+		if (matched) {
+			let maxMatchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+			let indicesMMS=[]; // indices of max match score
+			for (let p=0;p<indices.length;p++) {
+				indicesMMS[p]=indices[p]; // hard copy of indices
+			}
+			for (let k=indices.length-2;k>=0;) {
+				regExs[k].lastIndex=indices[k].start+1;
+				exec=regExs[k].exec(txtS);
+				matched=(exec!==null);
+				if (matched) {
+					indices[k]={start:exec.index, end:regExs[k].lastIndex};
+				}
+				for (let j=k+1;matched&&(j<regExs.length);j++) {
+					regExs[j].lastIndex=regExs[j-1].lastIndex;
+					exec=regExs[j].exec(txtS);
+					matched=(exec!==null);
+					if (matched) {
+						indices[j]={start:exec.index, end:regExs[j].lastIndex};
+					}
+				}
+				if (matched) {
+					let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+					if (matchScore>maxMatchScore) {
+						maxMatchScore=matchScore;
+						for (let p=0;p<indices.length;p++) {
+							indicesMMS[p]=indices[p]; // hard copy of indices
+						}
+					}
+					k=indices.length-2;
+				}
+				else {
+					k--;
+				}
+			}
+			fs[0].push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:kipid.highlightStrFromIndices(txt, indicesMMS)});
+		}
+	}
+	else {
+		fs[0].push({i:list[i].i, maxMatchScore:0});
+	}}
+	let sorted=fs[0].sorted=[];
+	for (let i=0;i<fs[0].length;i++) {
+		// sorted[i]=fs[0].length-1-i;
+		// sorted[i]=i;
+		sorted.push(i);
+	}
+	for (let i=1;i<sorted.length;i++) {
+		let temp=sorted[i];
+		let j=i;
+		for (;(j>0)&&(fs[0][sorted[j-1]].maxMatchScore<fs[0][temp].maxMatchScore);j--)
+			sorted[j]=sorted[j-1];
+		sorted[j]=temp;
+	}
+};
+
 // <eq> and <eqq> tags to MathJax format
 let eqs=$("eq");
 for (let i=0;i<eqs.length;i++) {
