@@ -20,6 +20,43 @@ if (kipid.browserWidth>321) {
 	});
 }
 
+// <eq> and <eqq> tags to MathJax format
+let eqs=$("eq");
+for (let i=0;i<eqs.length;i++) {
+	eqs.eq(i).html(function(ith,orgTxt) {return "\\( "+orgTxt.trim()+" \\)";});
+}
+let eqqs=$("eqq");
+for (let i=0;i<eqqs.length;i++) {
+	eqqs.eq(i).html(function(ith,orgTxt) {return "\\[ "+orgTxt.trim()+" \\]";});
+}
+kipid.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).`);
+
+// docuK process.
+docuK.has("script").addClass("noDIdHandle");
+let k=docuK.length;
+for(let i=1;i<k;i++) {
+	kipid.docuKProcess(kipid, jQuery, i);
+}
+
+kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
+
+let $inRefs=docuK.find(".inRef");
+// Centering arrow.
+$inRefs.each(function () {
+	let $elem=$(this);
+	let width=$elem.width()-2;
+	let $arrow=$elem.find(".arrow");
+	let borderWidth=parseFloat($arrow.css("borderWidth"));
+	let fontSize=parseFloat($arrow.css("fontSize"));
+	$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
+});
+// Delayed-Load in bubble ref.
+$inRefs.on("mouseenter.delayedLoad", function () {
+	kipid.logPrint(`<br>Do delayed-load in bubble ref.`);
+	$window.trigger("scroll.delayedLoad");
+	$(this).off("mouseenter.delayedLoad");
+});
+
 // Fuzzy Search
 $out_focus=$("#out-focus");
 $fuzzy_search_container=$("#fuzzy-search-container");
@@ -385,69 +422,8 @@ kipid.fsGoOn=function() {
 	}
 };
 $fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
-$fuzzy_search.trigger("keyup");
-
+$fuzzy_search.trigger("keyup.fs");
 $button_Go=$(".button-Go");
-kipid.processShortKey=function (e) {
-	if (e.altKey||e.ctrlKey||e.metaKey) { return; }
-	switch (e.target.nodeName) {
-		case "INPUT": case "SELECT": case "TEXTAREA": return;
-	}
-	switch (e.keyCode) {
-		case 71: // G=71
-			e.preventDefault();
-			if ($fuzzy_search_container.is(":visible")) {
-				$fuzzy_search_container.hide();
-				$out_focus.focus();
-				$button_Go.removeClass("enabled");
-			}
-			else {
-				$fuzzy_search_container.show();
-				$fuzzy_search.focus();
-				$button_Go.addClass("enabled");
-			}
-			break;
-		default:
-	}
-};
-$window.on("keydown.fs", kipid.processShortKey);
-
-// <eq> and <eqq> tags to MathJax format
-let eqs=$("eq");
-for (let i=0;i<eqs.length;i++) {
-	eqs.eq(i).html(function(ith,orgTxt) {return "\\( "+orgTxt.trim()+" \\)";});
-}
-let eqqs=$("eqq");
-for (let i=0;i<eqqs.length;i++) {
-	eqqs.eq(i).html(function(ith,orgTxt) {return "\\[ "+orgTxt.trim()+" \\]";});
-}
-kipid.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).`);
-
-// docuK process.
-docuK.has("script").addClass("noDIdHandle");
-let k=docuK.length;
-for(let i=1;i<k;i++) {
-	kipid.docuKProcess(kipid, jQuery, i);
-}
-
-kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
-
-let $inRefs=docuK.find(".inRef");
-// Centering arrow.
-$inRefs.each(function () {
-	let $elem=$(this);
-	let width=$elem.width()-2;
-	let $arrow=$elem.find(".arrow");
-	let borderWidth=parseFloat($arrow.css("borderWidth"));
-	let fontSize=parseFloat($arrow.css("fontSize"));
-	$arrow.css({marginLeft:((width/2-borderWidth)/fontSize).toFixed(2)+"em"});
-});
-// Delayed-Load in bubble ref.
-$inRefs.on("mouseenter.delayedLoad", function () {
-	kipid.logPrint(`<br>Do delayed-load in bubble ref.`);
-	$window.trigger("scroll.delayedLoad");
-	$(this).off("mouseenter.delayedLoad");
-});
 
 // Scripts will be appended on this.
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
@@ -615,6 +591,19 @@ window.MathJax={
 		let scrollTop=null;
 		let i, k;
 		switch (event.keyCode) {
+			case 71: // G=71
+				e.preventDefault();
+				if ($fuzzy_search_container.is(":visible")) {
+					$fuzzy_search_container.hide();
+					$out_focus.focus();
+					$button_Go.removeClass("enabled");
+				}
+				else {
+					$fuzzy_search_container.show();
+					$fuzzy_search.focus();
+					$button_Go.addClass("enabled");
+				}
+				break;
 			case 70: //F=70
 			case 68: //D=68
 				scrollTop=$window.scrollTop();
@@ -692,7 +681,7 @@ window.MathJax={
 				if (window['processShortcut']!==undefined) {processShortcut(event);}
 		}
 	}
-	$(document).on("keydown", kipid.processShortKey);
+	$window.on("keydown", kipid.processShortKey);
 	kipid.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
 	kipid.logPrint(`<br><br>kipid.delayPad=${kipid.delayPad};<br>kipid.wait=${kipid.wait};`);
