@@ -694,7 +694,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
 	<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.6em">=</button></form>
 	<form><button type="button" onclick="kipid.$log.toggle()" style="width:auto; padding:0 .5em">DocuK Log</button></form>
-	<form><button type="button button-Go" onclick='$window.trigger({type:"keydown", keyCode:71});' style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
+	<form><button type="button button-Go" onclick="$window.trigger({type:'keydown', keyCode:71})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
 	<div class="deviceInfo"></div>
 	<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>
 	</div>
