@@ -25,14 +25,6 @@ $out_focus=$("#out-focus");
 $fuzzy_search_container=$("#fuzzy-search-container");
 $fuzzy_search=$("#fuzzy-search");
 $fuzzy_search_list=$("#fuzzy-search-list");
-kipid.button_FS=function () {
-	$fuzzy_search_container.toggle();
-	if ($fuzzy_search_container.is(":visible")) {
-		$fuzzy_search.focus();
-	} else {
-		$out_focus.focus();
-	}
-};
 
 ////////////////////////////////////////////////////
 // Hangul (Korean) split and map to English
