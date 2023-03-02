@@ -285,6 +285,133 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 	}
 };
 
+$fuzzy_search.on("keydown", function(e) {
+	e.stopPropagation();
+	switch (e.keyCode) {
+	case 27: // ESC=27
+		e.preventDefault();
+		$window.trigger({type:"keydown", keyCode:71}); // G=71
+		break;
+	case 38: // up=38
+	case 40: // down=40
+		e.preventDefault();
+		let $fsl=$fuzzy_search_list;
+		let $lis=$fsl.find(".list-item");
+		let $liSelected=$fsl.find(".list-item.selected").eq(0);
+		let $liTo=null;
+		if ($liSelected.exists()) {
+			if (e.keyCode===38) {
+				$liTo=$liSelected.prev();
+			}
+			else {
+				$liTo=$liSelected.next();
+			}
+			if ($liTo.exists()) {
+				$liTo.eq(0).trigger("click");
+				if ($liTo.offset().top<$fsl.offset().top+2) { // $liTo at upside of scroll.
+					$fsl.scrollTop($fsl.scrollTop()+$liTo.offset().top-$fsl.offset().top-2);
+				}
+				else if ($liTo.offset().top+$liTo.outerHeight()>$fsl.offset().top+$fsl.height()+2) { // $liTo at downside of scroll.
+					$fsl.scrollTop($fsl.scrollTop()+$liTo.offset().top+$liTo.outerHeight()-$fsl.offset().top-$fsl.height()-2);
+				}
+			}
+		}
+		else {
+			if ($lis.exists()) {
+				if (e.keyCode===38) {
+					$liTo=$lis.last();
+					$fsl.scrollTop($fsl[0].scrollHeight);
+				}
+				else {
+					$liTo=$lis.first();
+					$fsl.scrollTop(0);
+				}
+				$liTo.eq(0).trigger("click");
+			}
+		}
+		break;
+	}
+});
+kipid.gotoLi=function(e, elem, k, fs) {
+if (e&&e.srcElement&&e.srcElement.nodeName=="A") {
+}
+else {
+	let $elem=$(elem);
+	if ($elem.hasClass("selected")) {
+		$fuzzy_search.trigger({type:"keydown", keyCode:27}); // keyCode:27=ESC
+	}
+	else {
+		fs.$fsLis.removeClass("selected");
+		$elem.addClass("selected");
+	}
+	let $listI=fs.fullList[k].$listI;
+	if ($listI) {
+		if (!$listI.is(":visible")) {
+			$listI.parents("*").show();
+		}
+		$window.scrollTop($listI.offset().top);
+	}
+}};
+kipid.doFSGo=function(fs) {
+	let fsPtnSH=kipid.splitHangul(fs.$fs.text());
+	if (fs[0].ptnSH.splitted!==fsPtnSH.splitted) {
+		kipid.fuzzySearch(fsPtnSH, fs);
+		let res=fs[0];
+		let sorted=res.sorted;
+		let str="";
+		for (let i=0;i<sorted.length;i++) {
+			let k=res[sorted[i]].i;
+			let fsFLk=fs.fullList[k];
+			str+=`<div class="list-item" onclick="kipid.gotoLi(event,this,${k},kipid.fsGo)">${fsFLk.html}${res[sorted[i]].highlight!==undefined?`<div class="highlighted"><span class="maxMatchScore">${res[sorted[i]].maxMatchScore}</span> :: ${res[sorted[i]].highlight}</div>`:''}</div>`;
+		}
+		fs.$fsl.html(str);
+		fs.$fsLis=fs.$fsl.find(".list-item");
+	}
+};
+kipid.fsGoOn=function() {
+	let now=Date.now();
+	let passed=now-kipid.previous;
+	if (passed>kipid.wait) {
+		kipid.previous=now;
+		kipid.doFSGo(kipid.fsGo);
+	}
+	else {
+		$fuzzy_search.off("input.fs keyup.fs cut.fs paste.fs");
+		setTimeout(function() {
+			$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
+			kipid.previous=Date.now();
+			kipid.doFSGo(kipid.fsGo);
+		}, kipid.wait*1.1-passed);
+	}
+};
+$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
+$fuzzy_search.trigger("keyup");
+
+$button_Go=$(".button-Go");
+kipid.processShortKey=function (e) {
+	if (e.altKey||e.ctrlKey||e.metaKey) { return; }
+	switch (e.target.nodeName) {
+		case "INPUT": case "SELECT": case "TEXTAREA": return;
+	}
+	switch (e.keyCode) {
+		case 71: // G=71
+			e.preventDefault();
+			if ($fuzzy_search_container.is(":visible")) {
+				$fuzzy_search_container.hide();
+				$out_focus.focus();
+				$button_Go.removeClass("enabled");
+			}
+			else {
+				$fuzzy_search_container.show();
+				$fuzzy_search.focus();
+				$button_Go.addClass("enabled");
+			}
+			break;
+		default:
+	}
+};
+$window.on("keydown.fs", kipid.processShortKey);
+
 // <eq> and <eqq> tags to MathJax format
 let eqs=$("eq");
 for (let i=0;i<eqs.length;i++) {
