@@ -592,7 +592,7 @@ window.MathJax={
 		let i, k;
 		switch (event.keyCode) {
 			case 71: // G=71
-				e.preventDefault();
+				event.preventDefault();
 				if ($fuzzy_search_container.is(":visible")) {
 					$fuzzy_search_container.hide();
 					$out_focus.focus();
