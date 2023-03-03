@@ -9,7 +9,7 @@ kipid.docuK=docuK;
 // logPrint function.
 kipid.$log=$("#docuK-log");
 kipid.$log.addClass("fixed");
-kipid.$log.html(`<div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
+kipid.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:75})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 kipid.logPrint=function (str) {
 	kipid.$log.append(str);
 	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
@@ -18,7 +18,7 @@ kipid.logPrint(`kipid.logPrint() is working!`);
 kipid.$log.after(`<div id="fuzzy-search-container" style="display:none">
 	<div id="fuzzy-search" contenteditable="true"></div>
 	<div id="fuzzy-search-list"></div>
-	<div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
+	<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:71})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
 </div>
 <div id="out-focus" class="none">out focus</div>`);
 
