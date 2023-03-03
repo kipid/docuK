@@ -14,7 +14,7 @@ kipid.logPrint=function (str) {
 	kipid.$log.append(str);
 	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
 };
-kipid.logPrint(`kipid.logPrint is working!`);
+kipid.logPrint(`kipid.logPrint() is working!`);
 kipid.$log.after(`<div id="fuzzy-search-container" style="display:none">
 	<div id="fuzzy-search" contenteditable="true"></div>
 	<div id="fuzzy-search-list"></div>
