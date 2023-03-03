@@ -129,7 +129,7 @@ codeprint.SEE {display:none}
 .docuK h1, .docuK h2, .docuK h3, .docuK h4 {margin:0}
 .docuK h3 {margin-left:.5em}
 .docuK h4 {margin-left:1em}
-.docuK>.sec>.toc {font-size:.8em} .docuK>.sec>.toc>h2 {margin-left:0; margin-top:.5em} .docuK>.sec>.toc>h3 {margin-left:1em} .docuK>.sec>.toc>h4 {margin-left:2em}
+.docuK>.sec>.toc {font-size:.8em; padding:0.2em 0.2em 1em 0.2em; text-indent:0.5em} .docuK>.sec>.toc>h2 {margin-left:0; margin-top:.5em} .docuK>.sec>.toc>h3 {margin-left:1em} .docuK>.sec>.toc>h4 {margin-left:2em}
 .docuK>.sec>.toc h2, .docuK>.sec>.toc h3, .docuK>.sec>.toc h4 {padding:.2em 0}
 .docuK h1 {font-weight:bold; font-size:1.4em; padding:.3em .3em .6em}
 .docuK h2 {font-weight:bold; font-size:1.3em} .docuK .sec>h2 {display:inline}

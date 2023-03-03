@@ -230,16 +230,16 @@ kipid.renderToDocuK=function (toBeRendered) {
 					docuOn=secOn=true; break;
 				case 2:
 					if (head==="TOC") {
-						str+='<div class="sec">';
+						str+=`<div class="sec">`;
 						head=TOC;
-						str+=`<h2 class="notSec">${head}</h2><div class="p toc"></div></div>`; // self closing.
+						str+=`<h2 class="notSec">${head}</h2><div class="toc"></div></div>`; // self closing.
 					} else if (head==="PH") {
-						str+='<div class="sec hiden">';
+						str+=`<div class="sec hiden">`;
 						head=PH;
 						str+=`<h2 class="no-sec-N" id="sec-PH">${head}</h2>`;
 						secOn=true;
 					} else if (head==="RRA") {
-						str+='<div class="sec">';
+						str+=`<div class="sec">`;
 						head=RRA;
 						str+=`<h2 class="no-sec-N" id="sec-Refs">${head}</h2>`;
 						secOn=true;
@@ -715,27 +715,18 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	let eqqs, eqN="", eqC="", figs;
 	function fTocHtml(numbering) {
 		let secN=(numbering===undefined||numbering)?"secN":"none";
-		return "<h"+hN+">"
-		+"<a class='jump' id='toc"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
-			+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
-			+txt
-		+"</a></h"+hN+">";
+		return `<h${hN}>"
+		+"<a class="jump" id="toc${docuKI}-${secId}" href="#secId${docuKI}-${secId}"><span class="${secN}"><span class="number">${secPreTxt}</span>.</span>${txt}</a></h${hN}>`;
 	}
 	function fSecHtml(numbering) {
 		let secN="none", endA0="", endA1="</a>";
 		if (numbering===undefined||numbering) {
 			secN="secN"; endA0="</a>"; endA1="";
 		}
-		return "<a class='jump tJump' href='#toc"+docuKI+"-"+secId+"'>T</a>"
-		+"<a class='jump' id='secId"+docuKI+"-"+secId+"' href='#secId"+docuKI+"-"+secId+"'>"
-			+"<span class=\""+secN+"\"><span class=\"number\">"+secPreTxt+"</span>.</span>"
-		+endA0+'<span class="head-txt">'+txt+'</span>'+endA1;
+		return `<a class="jump tJump" href="#toc${docuKI}-${secId}">T</a><a class="jump" id="secId${docuKI}-${secId}" href="#secId${docuKI}-${secId}"><span class="${secN}"><span class="number">${secPreTxt}</span>.</span>${endA0}<span class="head-txt">${txt}</span>${endA1}`;
 	}
 	function fEqqHtml() {
-		return '<div class="eqCC">'
-			+'<div class="eqN"><span class="number">('+eqN+')</span></div>'
-			+'<div class="eqC">'+eqC+'</div>'
-		+'</div>';
+		return `<div class="eqCC"><div class="eqN"><span class="number">(${eqN})</span></div><div class="eqC">${eqC}</div></div>`;
 	}
 	for (let i=0;i<secs.length;i++) {
 		secI=secs.eq(i);
@@ -754,11 +745,11 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			}
 
 			if (!secI.is(".noToggleUI")) {
-				secContentsId="sec"+docuKI+"-"+secITxt+"-contents";
-				secI.append("<div class=\"cBoth\"></div><div class=\"Hide\" onclick=\"kipid.Hide(this)\">▲ Hide</div><div class=\"cBoth\"></div>");
-				secI.contents().slice(1).wrapAll("<div class=\"sec-contents\" id=\""+secContentsId+"\"></div>");
-				secIH2.after("<div class=\"ShowHide\" onclick=\"kipid.ShowHide(this)\">▼ Show/Hide</div>");
-				secI.append("<div class=\"cBoth\"></div>");
+				secContentsId=`sec${docuKI}-${secITxt}-contents`;
+				secI.append(`<div class="cBoth"></div><div class="Hide" onclick="kipid.Hide(this)">▲ Hide</div><div class="cBoth"></div>`);
+				secI.contents().slice(1).wrapAll(`<div class="sec-contents" id="${secContentsId}"></div>`);
+				secIH2.after(`<div class="ShowHide" onclick="kipid.ShowHide(this)">▼ Show/Hide</div>`);
+				secI.append(`<div class="cBoth"></div>`);
 			}
 
 			subsecs=secI.find(".subsec"); subsecI=0;
@@ -788,7 +779,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		figs=secI.find("figure");
 		for (j=0;j<figs.length;j++) {
 			figN=secITxt+"-"+(j+1).toString();
-			figs.eq(j).find(".caption").html(function (ith,orgTxt) {return "Fig. <span class=\"number\">("+figN+")</span>: "+orgTxt.trim();});
+			figs.eq(j).find(".caption").html(function (ith,orgTxt) {return `Fig. <span class="number">(${figN})</span>: ${orgTxt.trim()}`;});
 		}
 	}
 	secs.find(".toc").html(tocHtml);
@@ -802,19 +793,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	}
 	let refN="", preRefHtml="", refHtml="", citeN="";
 	function fCiteHtml() {
-		let str='<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">'
-			+refN
-			+'<div class="bubbleRef">'
-				+'<div class="content">'+preRefHtml+refHtml+'</div>'
-				+'<div class="arrow"></div>'
-				+'<div class="exit" onclick="kipid.HideBR(this)"><svg>'
-					+'<g style="stroke:white;stroke-width:23%">'
-						+'<line x1="20%" y1="20%" x2="80%" y2="80%"/>'
-						+'<line x1="80%" y1="20%" x2="20%" y2="80%"/>'
-					+'</g>'
-					+'✖'
-				+'</svg></div>'
-			+'</div></div>';
+		let str=`<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">${refN}<div class="bubbleRef"><div class="content">${preRefHtml}${refHtml}</div><div class="arrow"></div><div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"/><line x1="80%" y1="20%" x2="20%" y2="80%"/></g>✖</svg></div></div></div>`;
 		if (kipid.browserWidth<321) {
 			str=str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
 		}
@@ -825,7 +804,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	let refs=docuK.find("ol.refs>li");
 	let refsN=refs.length;
 	for (i=0;i<refsN;i++) { // ref [i+1] with id
-		refs.eq(i).prepend('<span class="refN">Ref. <span class="number">['+pad(i+1,2)+']</span> </span>');
+		refs.eq(i).prepend(`<span class="refN">Ref. <span class="number">[${pad(i+1,2)}]</span> </span>`);
 	}
 	let cites=docuK.find("cite"), citeI, refered;
 	for (i=0;i<cites.length;i++) {
@@ -835,13 +814,10 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				refered=docuK.find("#"+citeI.attr("class")+postId);
 				if (refered.exists()) {
 					let refNHtml=refered.find(".refN").html();
-					refered.html('<span class="refN">'+refNHtml+'</span>'+citeI.html());
+					refered.html(`<span class="refN">${refNHtml}</span>${citeI.html()}`);
 				} else {
 					refsN+=1;
-					olRefs.append("<li id='"+citeI.attr("class")+postId+"'>"
-							+'<span class="refN">Ref. <span class="number">['+pad(refsN,2)+']</span> </span>'
-							+citeI.html()
-						+"</li>");
+					olRefs.append(`<li id="${citeI.attr("class")}${postId}"><span class="refN">Ref. <span class="number">[${pad(refsN,2)}]</span> </span>${citeI.html()}</li>`);
 				}
 			}
 			refered=docuK.find("#"+citeI.attr("class")+postId);
@@ -851,12 +827,12 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				refN=refered.find(".number").html();
 				citeI.html(fCiteHtml());
 			} else {
-				citeI.html('<span class="emph">( No refer. )</span>');
+				citeI.html(`<span class="emph">( No refer. )</span>`);
 			}
 		}
 	}
 	let refers=docuK.find("refer"), referI;
-	refers.html('<span class="emph">( No refer. )</span>');
+	refers.html(`<span class="emph">( No refer. )</span>`);
 	for (i=0;i<refers.length;i++) {
 		referI=refers.eq(i);
 		if (referI.is("[class]")) {
