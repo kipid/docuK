@@ -145,7 +145,7 @@ kipid.SEEToArray=function (SEE) {
 			while (!/-->$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
-				subStr=SEE.substring(start,end).trim();
+				subStr=""; // SEE.substring(start,end).trim();
 			}
 		}
 		ps.push(subStr);
