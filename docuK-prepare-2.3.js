@@ -145,8 +145,9 @@ kipid.SEEToArray=function (SEE) {
 			while (!/-->$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
-				subStr=""; // SEE.substring(start,end).trim();
+				subStr=SEE.substring(start,end).trim();
 			}
+			subStr="";
 		}
 		if (subStr) { ps.push(subStr); }
 		start=end;
@@ -158,7 +159,6 @@ kipid.SEEToArray=function (SEE) {
 
 kipid.renderToDocuK=function (toBeRendered) {
 	const ps=kipid.SEEToArray(toBeRendered);
-	console.log(ps);
 	const p=ps.length;
 
 	const TOC="Table of Contents";
