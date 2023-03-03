@@ -424,6 +424,7 @@ kipid.fsGoOn=function() {
 $fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
 $fuzzy_search.trigger("keyup.fs");
 $button_Go=$(".button-Go");
+$button_log=$(".button-log");
 
 // Scripts will be appended on this.
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
