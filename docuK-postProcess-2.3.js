@@ -604,8 +604,20 @@ window.MathJax={
 					$button_Go.addClass("enabled");
 				}
 				break;
-			case 70: //F=70
-			case 68: //D=68
+			case 75: // K=75
+				event.preventDefault();
+				if (kipid.$log.is(":visible")) {
+					kipid.$log.hide();
+					$out_focus.focus();
+					$button_log.removeClass("enabled");
+				}
+				else {
+					kipid.$log.show();
+					$button_log.addClass("enabled");
+				}
+				break;
+			case 70: // F=70
+			case 68: // D=68
 				scrollTop=$window.scrollTop();
 				k=kipid.fdList.length;
 				let hI;
@@ -635,7 +647,7 @@ window.MathJax={
 				}
 				$window.scrollTop(hI.offset().top);
 				break;
-			case 84: //T=84
+			case 84: // T=84
 				scrollTop=$window.scrollTop();
 				k=kipid.tocs.length;
 				let tocI;
@@ -649,7 +661,7 @@ window.MathJax={
 				}
 				$window.scrollTop(tocI.offset().top);
 				break;
-			case 82: //R=82
+			case 82: // R=82
 				scrollTop=$window.scrollTop();
 				k=kipid.rras.length;
 				let rraI;
@@ -663,18 +675,18 @@ window.MathJax={
 				}
 				$window.scrollTop(rraI.offset().top);
 				break;
-			case 76: //L=76
+			case 76: // L=76
 				if (window.location.pathname==="/entry/Lists") {
 					window.location="/category";
 				} else {
 					window.location="/entry/Lists";
 				}
 				break;
-			case 90: //Z
+			case 90: // Z=90
 				if ($("div.comments").exists()) $window.scrollTop($("div.comments").offset().top);
 				kipid.HandleAhrefInComment();
 				break;
-			case 88: //X
+			case 88: // X=88
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
 				break;
 			default:

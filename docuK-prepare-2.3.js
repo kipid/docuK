@@ -669,6 +669,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 <div class="shortkey">
 	Short Keys
 	<ul>
+		<li onclick="kipid.processShortKey({keyCode:'G'.charCodeAt(0)})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search)</li>
+		<li onclick="kipid.processShortKey({keyCode:'K'.charCodeAt(0)})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log</li>
 		<li onclick="kipid.processShortKey({keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
 		<li onclick="kipid.processShortKey({keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Previous Section</li>
 		<li onclick="kipid.processShortKey({keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
