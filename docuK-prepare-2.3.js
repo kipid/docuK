@@ -152,7 +152,7 @@ kipid.SEEToArray=function (SEE) {
 		start=end;
 	}
 	subStr=SEE.substring(start).trim();
-	ps.push(subStr);
+	if (subStr) { ps.push(subStr); }
 	return ps;
 };
 
