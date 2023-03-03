@@ -158,6 +158,7 @@ kipid.SEEToArray=function (SEE) {
 
 kipid.renderToDocuK=function (toBeRendered) {
 	const ps=kipid.SEEToArray(toBeRendered);
+	console.log(ps);
 	const p=ps.length;
 
 	const TOC="Table of Contents";
