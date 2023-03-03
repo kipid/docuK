@@ -148,7 +148,7 @@ kipid.SEEToArray=function (SEE) {
 				subStr=""; // SEE.substring(start,end).trim();
 			}
 		}
-		ps.push(subStr);
+		if (subStr) { ps.push(subStr); }
 		start=end;
 	}
 	subStr=SEE.substring(start).trim();
