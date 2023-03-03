@@ -129,7 +129,7 @@ kipid.splitHangul=function(str) {
 ////////////////////////////////////////////////////
 kipid.fsGo=[];
 kipid.fsGo[0]=kipid.fsGo[1]=[];
-kipid.fsGo[0]["ptnSH"]=kipid.fsGo[1]["ptnSH"]=kipid.splitHangul("$!@#");
+kipid.fsGo[0].ptnSH=kipid.fsGo[1].ptnSH=kipid.splitHangul("$!@#");
 kipid.fsGo.fullList=[];
 kipid.fsGo.$fs=$fuzzy_search;
 kipid.fsGo.$fsl=$fuzzy_search_list;
@@ -160,17 +160,17 @@ kipid.highlightStrFromIndices=function(strSplitted, indices) {
 		}
 		for (;k<strSplitted.length;k++) {
 			p1=p2;
-			p2=p1+strSplitted[k]["splitted"].length;
+			p2=p1+strSplitted[k].splitted.length;
 			if (p2<=indices[i].start) {
-				strSplitted[k]["matched"]=false;
+				strSplitted[k].matched=false;
 			}
 			else if (p1<indices[j-1].end) {
-				strSplitted[k]["matched"]=true;
+				strSplitted[k].matched=true;
 			}
 			else {
 				if (j===indices.length) {
 					for (;k<strSplitted.length;k++) {
-						strSplitted[k]["matched"]=false;
+						strSplitted[k].matched=false;
 					}
 				}
 				p2=p1;
@@ -179,17 +179,17 @@ kipid.highlightStrFromIndices=function(strSplitted, indices) {
 		}
 	}
 	for (let i=0;i<strSplitted.length;) {
-		if (strSplitted[i]["matched"]) {
+		if (strSplitted[i].matched) {
 			res+='<span class="bold">';
-			while (i<strSplitted.length&&strSplitted[i]["matched"]) {
-				res+=kipid.escapeHTML(strSplitted[i]["char"]);
+			while (i<strSplitted.length&&strSplitted[i].matched) {
+				res+=kipid.escapeHTML(strSplitted[i].char);
 				i++;
 			}
 			res+='</span>';
 		}
 		else {
-			while (i<strSplitted.length&&!strSplitted[i]["matched"]) {
-				res+=kipid.escapeHTML(strSplitted[i]["char"]);
+			while (i<strSplitted.length&&!strSplitted[i].matched) {
+				res+=kipid.escapeHTML(strSplitted[i].char);
 				i++;
 			}
 		}
@@ -424,9 +424,9 @@ kipid.fsGoOn=function() {
 $fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
 
 //////////////////////////////////////////
-// Fuzzy search implementation
+// Fuzzy search fullList
 //////////////////////////////////////////
-let $list=$(".docuK li");
+let $list=$(".docuK .p, .docuK li");
 for (let i=0;i<$list.length;i++) {
 	let $listI=$list.eq(i);
 	let $sec=$listI.parents(".docuK>.sec");
