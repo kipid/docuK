@@ -188,7 +188,7 @@ codeprint.SEE {display:none}
 .docuK a.tJump {display:inline-block; font-size:.6em; margin:0 1em 0 -.5em; vertical-align:middle; padding:0 .26em; border:2px solid rgb(50,50,122); font-weight:bold}
 .docuK.bright a.tJump {text-decoration:none}
 
-.docuK .p {padding:.2em .2em 1em .2em; text-indent:.5em}
+.docuK .p {overflow-x:scroll; overflow-y:visible; padding:.2em .2em 1em .2em; text-indent:.5em}
 .docuK .ex {border:.2em solid gray; padding:0 .5em .5em; margin:.5em auto}
 .docuK cite, .docuK refer {font:inherit; font-size:1em; text-indent:0}
 .docuK div.borderByBackground {display:inline-block; padding:10px; background:white}
@@ -211,7 +211,7 @@ codeprint.SEE {display:none}
 .docuK .pc {text-align:center; font-size:.6em} /* position change */
 
 .docuK eqq {display:block; background:black} .docuK.bright eqq {background:white}
-.docuK .eqCC {text-align:center; padding:1em .2em; margin:.5em 0; background:inherit}
+.docuK .eqCC {overflow-x:scroll; overflow-y:visible; text-align:center; padding:1em .2em; margin:.5em 0; background:inherit}
 .docuK .eqN {float:right; padding-top:1em}
 .docuK eqq.no-N .eqN {display:none}
 .docuK .eqC {display:inline-block; padding:1px; max-width:none; background:inherit}
@@ -309,17 +309,12 @@ codeprint.SEE {display:none}
 .docuK .change-docuK-style form button {width:29px; height:25px; padding:0}
 .docuK img[delayed-src] {border:15px solid rgb(10,60,10); min-width:100px; min-height:100px}
 
-@media all and (min-width:321px) {
-	.docuK {line-height:1.6}
-	.docuK .p {overflow:auto}
-	.docuK .eqCC {max-width:100%; overflow-x:auto}
-}
 @media all and (min-width:401px) {
-	.docuK {font-size:9px; line-height:1.6}
+	.docuK {font-size:9px}
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
 @media all and (min-width:500px) {
-	.docuK {font-size:10px; line-height:1.6}
+	.docuK {font-size:10px}
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 	#docuK-log.fixed>.exit {bottom:280px}
