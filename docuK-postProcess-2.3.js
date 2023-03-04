@@ -72,7 +72,7 @@ kipid.jamo=["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ"
 
 kipid.mapKE={"q":"ㅂ", "Q":"ㅃ", "w":"ㅈ", "W":"ㅉ", "e":"ㄷ", "E":"ㄸ", "r":"ㄱ", "R":"ㄲ", "t":"ㅅ", "T":"ㅆ", "y":"ㅛ", "Y":"ㅛ", "u":"ㅕ", "U":"ㅕ", "i":"ㅑ", "I":"ㅑ", "o":"ㅐ", "O":"ㅒ", "p":"ㅔ", "P":"ㅖ", "a":"ㅁ", "A":"ㅁ", "s":"ㄴ", "S":"ㄴ", "d":"ㅇ", "D":"ㅇ", "f":"ㄹ", "F":"ㄹ", "g":"ㅎ", "G":"ㅎ", "h":"ㅗ", "H":"ㅗ", "j":"ㅓ", "J":"ㅓ", "k":"ㅏ", "K":"ㅏ", "l":"ㅣ", "L":"ㅣ", "z":"ㅋ", "Z":"ㅋ", "x":"ㅌ", "X":"ㅌ", "c":"ㅊ", "C":"ㅊ", "v":"ㅍ", "V":"ㅍ", "b":"ㅠ", "B":"ㅠ", "n":"ㅜ", "N":"ㅜ", "m":"ㅡ", "M":"ㅡ"};
 for (let p in kipid.mapKE) {
-	kipid.mapKE[kipid.mapKE[p]]=p;
+	kipid.mapKE[kipid.mapKE[p]]=p; // Add reversed mapping.
 }
 
 kipid.rChoKE=["ㄱ", "ㄱㄱ", "ㄴ", "ㄷ", "ㄷㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
@@ -272,34 +272,39 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 			for (let p=0;p<indices.length;p++) {
 				indicesMMS[p]=indices[p]; // hard copy of indices
 			}
-			for (let k=indices.length-2;k>=0;) {
-				regExs[k].lastIndex=indices[k].start+1;
-				exec=regExs[k].exec(txtS);
-				matched=(exec!==null);
-				if (matched) {
-					indices[k]={start:exec.index, end:regExs[k].lastIndex};
-				}
-				for (let j=k+1;matched&&(j<regExs.length);j++) {
-					regExs[j].lastIndex=regExs[j-1].lastIndex;
-					exec=regExs[j].exec(txtS);
+			if (txt.length<255) {
+				for (let k=indices.length-2;k>=0;) {
+					regExs[k].lastIndex=indices[k].start+1;
+					exec=regExs[k].exec(txtS);
 					matched=(exec!==null);
 					if (matched) {
-						indices[j]={start:exec.index, end:regExs[j].lastIndex};
+						indices[k]={start:exec.index, end:regExs[k].lastIndex};
 					}
-				}
-				if (matched) {
-					let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
-					if (matchScore>maxMatchScore) {
-						maxMatchScore=matchScore;
-						for (let p=0;p<indices.length;p++) {
-							indicesMMS[p]=indices[p]; // hard copy of indices
+					for (let j=k+1;matched&&(j<regExs.length);j++) {
+						regExs[j].lastIndex=regExs[j-1].lastIndex;
+						exec=regExs[j].exec(txtS);
+						matched=(exec!==null);
+						if (matched) {
+							indices[j]={start:exec.index, end:regExs[j].lastIndex};
 						}
 					}
-					k=indices.length-2;
+					if (matched) {
+						let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+						if (matchScore>maxMatchScore) {
+							maxMatchScore=matchScore;
+							for (let p=0;p<indices.length;p++) {
+								indicesMMS[p]=indices[p]; // hard copy of indices
+							}
+						}
+						k=indices.length-2;
+					}
+					else {
+						k--;
+					}
 				}
-				else {
-					k--;
-				}
+			}
+			else {
+				// Reverse search and compare only two results.
 			}
 			fs[0].push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:kipid.highlightStrFromIndices(txt, indicesMMS)});
 		}

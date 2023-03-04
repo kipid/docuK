@@ -564,7 +564,7 @@ kipid.shareSNS=function (service) {
 
 // Delayed Loading. (Copied from user-page.html)
 kipid.delayPad=kipid.delayPad||1024;
-kipid.wait=kipid.wait||512;
+kipid.wait=kipid.wait||1024;
 kipid.$delayedElems=$("#nothing");
 kipid.previous=Date.now();
 $.fn.inView=function () {
@@ -833,7 +833,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	for (i=0;i<refers.length;i++) {
 		referI=refers.eq(i);
 		if (referI.is("[class]")) {
-			refered=docuK.find("#"+referI.attr("class")+postId);
+			refered=docuK.find(`#${referI.attr("class")}${postId}`);
 			if (refered.exists()) {
 				citeN=(i+1).toString()+"-"+referI.attr("class")+postId;
 				refHtml=refered.html().trim().replace(/\bid\s*=/gi,'psudoId=');
