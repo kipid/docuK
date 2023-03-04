@@ -305,6 +305,37 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 			}
 			else {
 				// Reverse search and compare only two results.
+				let txtSReversed=txtS.split("").reverse().join("");
+				let regExsReversed=regExs.reverse();
+				regExsReversed[0].lastIndex=0;
+				let exec=regExsReversed[0].exec(txtSReversed);
+				matched=(exec!==null);
+				let indicesReversed=[];
+				if (matched) {
+					indicesReversed[0]={start:exec.index, end:regExsReversed[0].lastIndex};
+				}
+				for (let j=1;matched&&(j<regExsReversed.length);j++) {
+					regExsReversed[j].lastIndex=regExsReversed[j-1].lastIndex;
+					exec=regExsReversed[j].exec(txtSReversed);
+					matched=(exec!==null);
+					if (matched) {
+						indicesReversed[j]={start:exec.index, end:regExsReversed[j].lastIndex};
+					}
+				}
+				if (matched) {
+					indices=[];
+					for (let j=0;j<indicesReversed.length;j++) {
+						let iR=indicesReversed[indicesReversed.length-1-j];
+						indices[j]={start:txtS.length-iR.end, end:txtS.length-iR.start};
+					}
+					let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+					if (matchScore>maxMatchScore) {
+						maxMatchScore=matchScore;
+						for (let p=0;p<indices.length;p++) {
+							indicesMMS[p]=indices[p]; // hard copy of indices
+						}
+					}
+				}
 			}
 			fs[0].push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:kipid.highlightStrFromIndices(txt, indicesMMS)});
 		}
