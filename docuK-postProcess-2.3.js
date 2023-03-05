@@ -275,7 +275,10 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 		let maxMatchScore=0;
 		if (matched) {
 			maxMatchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
-			let indicesMMS=indices; // indices of max match score
+			let indicesMMS=[]; // indices of max match score
+			for (let p=0;p<indices.length;p++) {
+				indicesMMS[p]=indices[p]; // hard copy of indices
+			}
 			if (txt.length<255) {
 				for (let k=indices.length-2;k>=0;) {
 					regExs[k].lastIndex=indices[k].start+1;
@@ -296,6 +299,7 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 						let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
 						if (matchScore>maxMatchScore) {
 							maxMatchScore=matchScore;
+							indicesMMS=[];
 							for (let p=0;p<indices.length;p++) {
 								indicesMMS[p]=indices[p]; // hard copy of indices
 							}
@@ -308,7 +312,7 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 				}
 			}
 			else {
-				// Reverse search and compare only two results.
+				// Reverse match and compare only two results.
 				regExsReversed[0].lastIndex=0;
 				exec=regExsReversed[0].exec(txtSReversed);
 				matched=(exec!==null);
