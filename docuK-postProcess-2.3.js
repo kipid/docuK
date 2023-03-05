@@ -210,12 +210,12 @@ kipid.matchScoreFromIndices=function(strSH, ptnSH, indices) {
 };
 kipid.fuzzySearch=function(ptnSH, fs) {
 	if (ptnSH.splitted===fs[0].ptnSH.splitted) {
-		return;
+		return fs[0];
 	}
-	if (ptnSH.splitted.indexOf(fs[0].ptnSH.splitted)===0) {
+	if (ptnSH.splitted.indexOf(fs[0].ptnSH.splitted)!==-1) {
 		fs[1]=fs[0];
 	}
-	else if (fs[1]&&ptnSH.splitted.indexOf(fs[1].ptnSH.splitted)===0) {
+	else if (fs[1]&&ptnSH.splitted.indexOf(fs[1].ptnSH.splitted)!==-1) {
 		if (ptnSH.splitted===fs[1].ptnSH.splitted) {
 			return fs[1];
 		}
@@ -247,10 +247,16 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 	fs[0]=[];
 	fs[0].ptnSH=ptnSH;
 	let regExs=kipid.arrayRegExs(ptnSH);
+	let regExsReversed=[];
+	for (let i=0;i<regExs.length;i++) {
+		regExsReversed[i]=regExs[regExs.length-1-i];
+	}
 	for (let i=0;i<list.length;i++) {
+	 let listI=list[i];
 	if (regExs.length>0) {
-		let txt=list[i].txt;
+		let txt=listI.txt;
 		let txtS=txt.splitted;
+		let txtSReversed=txtS.split("").reverse().join("");
 		regExs[0].lastIndex=0;
 		let exec=regExs[0].exec(txtS);
 		let matched=(exec!==null);
@@ -266,12 +272,10 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 				indices[j]={start:exec.index, end:regExs[j].lastIndex};
 			}
 		}
+		let maxMatchScore=0;
 		if (matched) {
-			let maxMatchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
-			let indicesMMS=[]; // indices of max match score
-			for (let p=0;p<indices.length;p++) {
-				indicesMMS[p]=indices[p]; // hard copy of indices
-			}
+			maxMatchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+			let indicesMMS=indices; // indices of max match score
 			if (txt.length<255) {
 				for (let k=indices.length-2;k>=0;) {
 					regExs[k].lastIndex=indices[k].start+1;
@@ -305,10 +309,8 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 			}
 			else {
 				// Reverse search and compare only two results.
-				let txtSReversed=txtS.split("").reverse().join("");
-				let regExsReversed=regExs.reverse();
 				regExsReversed[0].lastIndex=0;
-				let exec=regExsReversed[0].exec(txtSReversed);
+				exec=regExsReversed[0].exec(txtSReversed);
 				matched=(exec!==null);
 				let indicesReversed=[];
 				if (matched) {
@@ -326,22 +328,20 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 					indices=[];
 					for (let j=0;j<indicesReversed.length;j++) {
 						let iR=indicesReversed[indicesReversed.length-1-j];
-						indices[j]={start:txtS.length-iR.end, end:txtS.length-iR.start};
+						indices[j]={start:(txtSReversed.length-iR.end), end:(txtSReversed.length-iR.start)};
 					}
 					let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
 					if (matchScore>maxMatchScore) {
 						maxMatchScore=matchScore;
-						for (let p=0;p<indices.length;p++) {
-							indicesMMS[p]=indices[p]; // hard copy of indices
-						}
+						indicesMMS=indices;
 					}
 				}
 			}
-			fs[0].push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:kipid.highlightStrFromIndices(txt, indicesMMS)});
+			fs[0].push({i:listI.i, maxMatchScore:maxMatchScore, highlight:kipid.highlightStrFromIndices(txt, indicesMMS)});
 		}
 	}
 	else {
-		fs[0].push({i:list[i].i, maxMatchScore:0});
+		fs[0].push({i:listI.i, maxMatchScore:0});
 	}}
 	let sorted=fs[0].sorted=[];
 	for (let i=0;i<fs[0].length;i++) {
@@ -352,10 +352,12 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 	for (let i=1;i<sorted.length;i++) {
 		let temp=sorted[i];
 		let j=i;
-		for (;(j>0)&&(fs[0][sorted[j-1]].maxMatchScore<fs[0][temp].maxMatchScore);j--)
+		for (;(j>0)&&(fs[0][sorted[j-1]].maxMatchScore<fs[0][temp].maxMatchScore);j--) {
 			sorted[j]=sorted[j-1];
+		}
 		sorted[j]=temp;
 	}
+	return fs[0];
 };
 
 $fuzzy_search.on("keydown", function(e) {
@@ -426,10 +428,9 @@ else {
 	}
 }};
 kipid.doFSGo=function(fs) {
-	let fsPtnSH=kipid.splitHangul(fs.$fs.text());
+	let fsPtnSH=kipid.splitHangul(fs.$fs.text().trim());
 	if (fs[0].ptnSH.splitted!==fsPtnSH.splitted) {
-		kipid.fuzzySearch(fsPtnSH, fs);
-		let res=fs[0];
+		let res=kipid.fuzzySearch(fsPtnSH, fs);
 		let sorted=res.sorted;
 		let str="";
 		for (let i=0;i<sorted.length;i++) {
