@@ -1,5 +1,6 @@
 (function (kipid, $, undefined) {
 $window=$(window);
+$html=$("html");
 
 $.fn.exists=function () { return this.length!==0; };
 kipid.browserWidth=window.innerWidth;
@@ -16,11 +17,58 @@ kipid.logPrint=function (str) {
 };
 kipid.logPrint(`kipid.logPrint() is working!`);
 kipid.$log.after(`<div id="fuzzy-search-container" style="display:none">
+	<div class="move" style="z-index:20000; position:absolute; display:inline-block; left:0; top:0; width:1.8em; height:1.8em; line-height:1.0; text-align:center; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white"><svg style="display:inline-block; width:100%; height:100%"><g style="stroke:white; stroke-width:10%; stroke-linecap:round">
+		<line x1="10%" y1="50%" x2="90%" y2="50%"></line>
+		<line x1="10%" y1="50%" x2="20%" y2="40%"></line>
+		<line x1="10%" y1="50%" x2="20%" y2="60%"></line>
+		<line x1="80%" y1="40%" x2="90%" y2="50%"></line>
+		<line x1="80%" y1="60%" x2="90%" y2="50%"></line>
+		<line x1="50%" y1="10%" x2="50%" y2="90%"></line>
+		<line x1="50%" y1="10%" x2="40%" y2="20%"></line>
+		<line x1="50%" y1="10%" x2="60%" y2="20%"></line>
+		<line x1="40%" y1="80%" x2="50%" y2="90%"></line>
+		<line x1="60%" y1="80%" x2="50%" y2="90%"></line>
+	</g></svg></div>
 	<div id="fuzzy-search" contenteditable="true"></div>
 	<div id="fuzzy-search-list"></div>
+	<div class="reset" style="z-index:20000; position:absolute; display:inline-block; right:1.8em; top:0; width:1.8em; height:1.8em; line-height:1.0; text-align:center; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white"><svg style="display:inline-block; width:100%; height:100%"><g style="stroke:white; stroke-width:10%; stroke-linecap:round">
+		<line x1="20%" y1="30%" x2="80%" y2="30%"></line>
+		<line x1="80%" y1="30%" x2="80%" y2="70%"></line>
+		<line x1="80%" y1="70%" x2="20%" y2="70%"></line>
+		<line x1="20%" y1="70%" x2="30%" y2="60%"></line>
+		<line x1="20%" y1="70%" x2="30%" y2="80%"></line>
+	</g></svg></div>
 	<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:71})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
 </div>
 <div id="out-focus" class="none">out focus</div>`);
+
+$out_focus=$("#out-focus");
+$fuzzy_search_container=$("#fuzzy-search-container");
+$fuzzy_search_container_move=$("#fuzzy-search-container>.move");
+$fuzzy_search=$("#fuzzy-search");
+$fuzzy_search_list=$("#fuzzy-search-list");
+
+$fuzzy_search_container_move.on("mousedown.move touchstart.move", function (e) {
+	let touch0=(e.type==='touchstart')?e.originalEvent.touches[0]:e;
+	let relativeX=touch0.clientX-Math.round($fuzzy_search_container_move.offset().left)+$window.scrollLeft();
+	let relativeY=touch0.clientY-Math.round($fuzzy_search_container_move.offset().top)+$window.scrollTop();
+	$html.on("mousemove.move touchmove.move", function (e) {
+		window.getSelection().removeAllRanges();
+		e.preventDefault();
+		e.stopPropagation();
+		let touch0=(e.type==='touchmove')?e.originalEvent.touches[0]:e;
+		$fuzzy_search_container.css({left:touch0.clientX-relativeX, top:touch0.clientY-relativeY});
+		$html.on("mouseup.move touchend.move", function () {
+			$html.off("mouseup.move touchend.move mousemove.move touchmove.move");
+		});
+	});
+});
+
+$("#fuzzy-search-container>.reset").on("click.reset", function (e) {
+	$fuzzy_search.html("");
+	$fuzzy_search.focus();
+	$fuzzy_search.trigger("input.fs");
+});
 
 // String to Array
 kipid.encloseStr=function (str) {
@@ -667,15 +715,15 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 <div class="shortkey">
 	Short Keys
 	<ul>
-		<li onclick="$window.trigger({type:'keydown', keyCode:71})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search)</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:75})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Previous Section</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'Z'.charCodeAt(0)})"><span class="bold underline">Z</span>: Tistory comments</li>
-		<li onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})"><span class="bold underline">X</span>: DISQUS comments</li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:71})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search)</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:75})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Previous Section</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'Z'.charCodeAt(0)})"><span class="bold underline">Z</span>: Tistory comments</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})"><span class="bold underline">X</span>: DISQUS comments</span></li>
 	</ul>
 </div>`);
 	docuK.after(`<div class="copyright"><ul>

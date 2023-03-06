@@ -58,11 +58,6 @@ $inRefs.on("mouseenter.delayedLoad", function () {
 });
 
 // Fuzzy Search
-$out_focus=$("#out-focus");
-$fuzzy_search_container=$("#fuzzy-search-container");
-$fuzzy_search=$("#fuzzy-search");
-$fuzzy_search_list=$("#fuzzy-search-list");
-
 ////////////////////////////////////////////////////
 // Hangul (Korean) split and map to English
 // KE : Korean Expanded
