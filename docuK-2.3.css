@@ -6,10 +6,10 @@ codeprint.SEE {display:none}
 
 .copyright {font-size:13px; color:rgb(100,255,100); background-color:rgb(0,0,0); max-width:1000px; margin:1em auto}
 .copyright ul {line-height:1.4; padding:.1em .5em}
-.copyright li.cc::before {background-image:url(https://recoeve.net/CDN/cc.png)}
-.copyright li.by::before {background-image:url(https://recoeve.net/CDN/by.png)}
-.copyright li.nc::before {background-image:url(https://recoeve.net/CDN/nc.png)}
-.copyright li.nd::before {background-image:url(https://recoeve.net/CDN/nd.png)}
+.copyright li.cc::before {background-image:url(https://tistory2.daumcdn.net/tistory/1468360/skin/images/cc.png)}
+.copyright li.by::before {background-image:url(https://tistory2.daumcdn.net/tistory/1468360/skin/images/by.png)}
+.copyright li.nc::before {background-image:url(https://tistory2.daumcdn.net/tistory/1468360/skin/images/nc.png)}
+.copyright li.nd::before {background-image:url(https://tistory2.daumcdn.net/tistory/1468360/skin/images/nd.png)}
 .copyright li.cc::before, .copyright li.by::before, .copyright li.nc::before, .copyright li.nd::before {
 	position:absolute;
 	top:-7px; right:auto; left:0;
