@@ -11,16 +11,16 @@
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
 
 <!-- From kipid.tistory CDN -->
-<!-- <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
 
 <!-- From recoeve.net CDN -->
 <!-- <link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
 <script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<link rel="stylesheet" href="./docuK-2.3.css">
-<script src="./docuK-prepare-2.3.js" charset="utf-8"></script>
+<!-- <link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
 </codeprint><!-- docuK-style -->
 
 <meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit of docuK).">
@@ -29,6 +29,14 @@
 # Working on SEE (Super Easy Edit)
 
 The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below (or <code>Shift+Enter</code>).
+
+
+
+## Warning
+
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>kipid.variables</code> already asigned before, will not work in the afterward rendering.
+
+Only <code>kipid.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -223,7 +231,7 @@ How Language Seems To Shape One's View Of The World
 ## Figures
 
 <figure><div class="fig">
-	<img delayed-src="./img with delayed-src.png" alt="img with delayed-src">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
 	<div class="caption">Caption.</div>
 </div></figure>
 
@@ -328,12 +336,9 @@ public class HelloWorldServer extends Verticle {
 ```/
 
 
+## New Section
 
-## More infos
-
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>kipid.variables</code> already asigned before, will not work in the afterward rendering.
-
-Only <code>kipid.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+"```/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
 </codeprint><!-- SEE -->
 
 <codeprint id="docuK-script">
@@ -352,11 +357,11 @@ window.disqus_config=function () {
 </script>
 
 <!-- From kipid.tistory CDN -->
-<!-- <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
 
 <!-- From recoeve.net CDN -->
 <!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<script src="./docuK-postProcess-2.3.js" charset="utf-8"></script>
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 </codeprint><!-- docuK-script -->
