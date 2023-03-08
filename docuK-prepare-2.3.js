@@ -407,7 +407,12 @@ kipid.indentsRemove=function (str) {
 	return str.replace(indentRegExp,'\n');
 };
 kipid.escapeHTML=function (str) {
+	if (!str||str.constructor!==String) { return ""; }
 	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+};
+kipid.unescapeHTML=function (str) {
+	if (!str||str.constructor!==String) { return ""; }
+	return str.replace(/&gt;/g,'>').replace(/&lt;/g,'<').replace(/&amp;/g,'&');
 };
 kipid.printCode=function (codeId) {
 	const $pre=$("pre#pre-"+codeId);
@@ -688,7 +693,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	// Possible duplicate id is handled.
 	docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
 	kipid.logPrint(`<br><br>docuK-${docuKI} scripts started!<br><span class="emph">If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>`);
-	let docuK=kipid.docuK.eq(docuKI);
+	let docuK=$(".docuK").eq(docuKI);
 	if (docuK.is(".rendered")) {
 		kipid.logPrint(`<br><br>docuK-${docuKI} is already rendered.`);
 		return;
