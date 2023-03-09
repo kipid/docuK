@@ -482,7 +482,7 @@ for (let i=0;i<$list.length;i++) {
 		html='<div class="cat">'+cat.replace(/\n/g, "<br>")+'</div>';
 	}
 	txt+="* "+$listI.text();
-	html+=`<div class="li">* ${$listI.html()}</div>`;
+	html+=`<div class="li">* ${$listI.html().trim().replace(/\sid=/g,"\squasi-id=")}</div>`;
 	kipid.fsGo.fullList[$list.length-1-i]={i:$list.length-1-i, txt:kipid.splitHangul(txt), html:html, $listI:$listI};
 }
 
