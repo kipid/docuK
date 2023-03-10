@@ -1,5 +1,6 @@
 (function (kipid, $, undefined) {
 $window=$(window);
+$document=$(document);
 $html=$("html");
 
 $.fn.exists=function () { return this.length!==0; };
@@ -663,7 +664,7 @@ kipid.delayedLoadAll=function () {
 		kipid.$delayedElems.each(function () {
 			if ($(this).delayedLoad()) {
 				kipid.$delayedElems=kipid.$delayedElems.not(this);
-				kipid.logPrint(`<br><span class="emph">${this} at vertical position of ${(100*$(this).offset().top/$(document).height()).toPrecision(3)}% of document is delayed-loaded.</span><br>${kipid.$delayedElems.length} of $delayedElems are remained.<br>`);
+				kipid.logPrint(`<br><span class="emph">${this} at vertical position of ${(100*$(this).offset().top/$document.height()).toPrecision(3)}% of document is delayed-loaded.</span><br>${kipid.$delayedElems.length} of $delayedElems are remained.<br>`);
 			}
 		});
 		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);

@@ -15,7 +15,7 @@ kipid.docuK=docuK;
 // Showing disableQ0 only in width>321.
 if (kipid.browserWidth>321) {
 	docuK.find(".disableQ0").html(function(ith,orgText) {
-		kipid.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100*$(this).offset().top/$(document).height()).toPrecision(3)}% of document.`);
+		kipid.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100*$(this).offset().top/$document.height()).toPrecision(3)}% of document.`);
 		return orgText.replace(/<!--/g,'').replace(/-->/g,'');
 	});
 }
@@ -494,7 +494,7 @@ $button_log=$(".button-log");
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 
 // On ready.
-$(document).ready(function () {
+$document.ready(function () {
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
 	let codeprints=$("codeprint");
 	for (let i=0;i<codeprints.length;i++) {
