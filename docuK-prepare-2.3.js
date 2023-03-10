@@ -596,8 +596,8 @@ $window.on("resize.deviceInfo", function () {
 
 // Share a link through SNS
 kipid.shareSNS=function (service) {
-	let title=encodeURIComponent( $("title").html() );
-	let url=encodeURIComponent(window.location.href);
+	let title=$("title").eq(0).html();
+	let url=window.location.href;
 	let open="";
 	switch (service) {
 		case 'link':
@@ -610,16 +610,18 @@ kipid.shareSNS=function (service) {
 			});
 			return;
 		case 'twitter':
-			open="https://twitter.com/intent/tweet"+"?via=kipacti"+"&text="+title+"&url="+url;
+			open="https://twitter.com/intent/tweet?via=kipacti&text="+encodeURIComponent(title)+"&url="+encodeURIComponent(url);
 			break;
 		case 'facebook':
-			open="https://www.facebook.com/sharer/sharer.php"+"?u="+url;
+			open="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
 			break;
 		case 'recoeve':
-			open="https://recoeve.net/reco?"+"uri="+url+"&title="+title;
+			open="https://recoeve.net/reco?uri="+encodeURIComponent(url)+"&title="+encodeURIComponent(title);
 			break;
 		case 'kakao':
 			kipid.popUpKakao();
+			return;
+		default:
 			return;
 	}
 	window.open(open);
