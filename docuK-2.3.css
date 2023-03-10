@@ -113,7 +113,7 @@ codeprint.SEE {display:none}
 }
 
 .docuK button {cursor:pointer}
-.docuK .SNS-top {margin-top:-36px; margin-bottom:-6px}
+.docuK .SNS-top {margin-top:-36px; padding-top:36px; margin-bottom:-6px}
 .docuK .SNS-bottom {margin:36px 0; text-align:center}
 .docuK .SNS-img {width:36px; height:36px; border:2px gray solid; border-left:0; cursor:pointer}
 .docuK .SNS-img:first-child {border-left:2px gray solid}
@@ -138,7 +138,6 @@ codeprint.SEE {display:none}
 .docuK h1, .docuK h2, .docuK h3, .docuK h4 {color:white}
 .docuK.bright h1, .docuK.bright h2, .docuK.bright h3, .docuK.bright h4 {color:black !important}
 
-.docuK .deviceInfo, .docuK .promoting-docuK {margin-left:152px}
 .docuK .promoting-docuK a {text-decoration:none}
 .docuK .promoting-docuK a:link {color:rgb(200,200,255)}
 .docuK .promoting-docuK a:visited {color:rgb(230,230,255)}
@@ -316,4 +315,8 @@ codeprint.SEE {display:none}
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 	#docuK-log.fixed>.exit {bottom:280px}
+}
+@media all and (min-width:600px) {
+	.docuK .SNS-top {padding-top:0}
+	.docuK .deviceInfo, .docuK .promoting-docuK {margin-left:188px}
 }
