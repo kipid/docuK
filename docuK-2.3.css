@@ -33,7 +33,7 @@ codeprint.SEE {display:none}
 .shortkey li {color:white !important}
 
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
-.docuK {font-size:8px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
+.docuK {font-size:10px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}
 .docuK div, textarea {box-sizing:border-box; max-width:100%} /* MathJax must be handled. */
 .docuK data {display:none}
 
@@ -307,11 +307,9 @@ codeprint.SEE {display:none}
 .docuK img[delayed-src] {border:15px solid rgb(10,60,10); min-width:100px; min-height:100px}
 
 @media all and (min-width:401px) {
-	.docuK {font-size:9px}
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
 @media all and (min-width:500px) {
-	.docuK {font-size:10px}
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 	#docuK-log.fixed>.exit {bottom:280px}
