@@ -557,6 +557,9 @@ $document.ready(function () {
 	}, 2000);
 
 	// Disqus js script
+	if (!($("#disqus_thread").exists())) {
+		$(body).append(`<div id="disqus_thread"></div>`);
+	}
 	let $disqus_js=$(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
 	$headOrBody.append($disqus_js);
 	kipid.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
