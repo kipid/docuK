@@ -274,7 +274,7 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 			for (let p=0;p<indices.length;p++) {
 				indicesMMS[p]=indices[p]; // hard copy of indices
 			}
-			if (txt.length<256) {
+			if (txt.length<512) {
 				for (let k=indices.length-2;k>=0;) {
 					regExs[k].lastIndex=indices[k].start+1;
 					exec=regExs[k].exec(txtS);
