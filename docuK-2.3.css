@@ -306,6 +306,8 @@ codeprint.SEE {display:none}
 .docuK .change-docuK-style form button {width:29px; height:25px; padding:0}
 .docuK img[delayed-src] {border:15px solid rgb(10,60,10); min-width:100px; min-height:100px}
 
+#disqus_thread {background:black; padding:.2em .5em}
+
 @media all and (min-width:401px) {
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
