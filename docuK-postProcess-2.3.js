@@ -494,10 +494,10 @@ $button_log=$(".button-log");
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 
 window.onpopstate=function (e) {
-	if (e.state?.goOn!==m.goOn) {
+	if (e.state?.goOn!==kipid.goOn) {
 		$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)});
 	}
-	if (e.state?.logOn!==m.logOn) {
+	if (e.state?.logOn!==kipid.logOn) {
 		$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)});
 	}
 };
