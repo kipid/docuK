@@ -11,7 +11,7 @@ kipid.docuK=docuK;
 // logPrint function.
 kipid.$log=$("#docuK-log");
 kipid.$log.addClass("fixed");
-kipid.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:75})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
+kipid.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 kipid.logPrint=function (str) {
 	kipid.$log.append(str);
 	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
@@ -39,7 +39,7 @@ kipid.$log.after(`<div id="fuzzy-search-container" style="display:none">
 		<line x1="20%" y1="70%" x2="30%" y2="60%"></line>
 		<line x1="20%" y1="70%" x2="30%" y2="80%"></line>
 	</g></svg></div>
-	<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:71})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
+	<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
 </div>
 <div id="out-focus" class="none">out focus</div>`);
 
@@ -732,8 +732,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 <div class="shortkey">
 	Short Keys
 	<ul>
-		<li><span onclick="$window.trigger({type:'keydown', keyCode:71})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search)</span></li>
-		<li><span onclick="$window.trigger({type:'keydown', keyCode:75})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search)</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Previous Section</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</span></li>
@@ -758,8 +758,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form>
 	<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
 	<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.6em">=</button></form>
-	<form><button class="button-log" type="button" onclick="$window.trigger({type:'keydown', keyCode:75})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
-	<form><button class="button-Go" type="button" onclick="$window.trigger({type:'keydown', keyCode:71})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
+	<form><button class="button-log" type="button" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
+	<form><button class="button-Go" type="button" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
 	<div class="deviceInfo"></div>
 	<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>
 	</div>
