@@ -493,6 +493,15 @@ $button_log=$(".button-log");
 // Scripts will be appended on this.
 window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 
+window.onpopstate=function (e) {
+	if (e.state?.goOn!==m.goOn) {
+		$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)});
+	}
+	if (e.state?.logOn!==m.logOn) {
+		$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)});
+	}
+};
+
 // On ready.
 $document.ready(function () {
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
@@ -650,6 +659,8 @@ window.MathJax={
 	kipid.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,div.comments,#disqus_thread,#aside"); // Ordered automatically by jQuery.
 	kipid.tocs=$(".docuK>.sec").has(".toc");
 	kipid.rras=$(".docuK>.sec").has("ol.refs");
+	kipid.goOn=false;
+	kipid.logOn=false;
 	kipid.processShortKey=function(event) {
 		if (event.altKey||event.ctrlKey||event.metaKey) return;
 		switch (event.target&&event.target.nodeName) {
@@ -664,11 +675,15 @@ window.MathJax={
 					$fuzzy_search_container.hide();
 					$out_focus.focus();
 					$button_Go.removeClass("enabled");
+					kipid.goOn=false;
+					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
 				}
 				else {
 					$fuzzy_search_container.show();
 					$fuzzy_search.focus();
 					$button_Go.addClass("enabled");
+					kipid.goOn=true;
+					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
 				}
 				break;
 			case 75: // K=75
@@ -677,10 +692,14 @@ window.MathJax={
 					kipid.$log.hide();
 					$out_focus.focus();
 					$button_log.removeClass("enabled");
+					kipid.logOn=false;
+					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
 				}
 				else {
 					kipid.$log.show();
 					$button_log.addClass("enabled");
+					kipid.logOn=true;
+					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
 				}
 				break;
 			case 70: // F=70
