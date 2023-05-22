@@ -96,6 +96,36 @@ See the predefined sections implemented below, and you can easily figure it out 
 
 
 
+## Citing RRA and Refering HTML elements with id.
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+&lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+&lt;refer class="eqq-1"&gt;&lt;/refer&gt;, &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+&lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+<cite class="ref-docuK"></cite>, <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+<refer class="eqq-1"></refer>, <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+<refer class="fig-1"></refer>
+</div>
+
+
+
 ## PH
 
 ###/ Posting History
@@ -245,7 +275,7 @@ How Language Seems To Shape One's View Of The World
 
 ## Figures
 
-<figure><div class="fig">
+<figure id="fig-1"><div class="fig">
 	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
 	<div class="caption">Caption.</div>
 </div></figure>
@@ -258,11 +288,11 @@ Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&
 
 The first two are converted to <span class="emph">inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one</span> is converted to outline math like
 
-<span class="emph"><eqq>
+<span class="emph"><eqq id="eqq-1">
 	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
 </eqq></span>
 
-<eqq>
+<eqq id="eqq-2">
 \begin{split}
 	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
 		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
