@@ -136,6 +136,10 @@ See the predefined sections implemented below, and you can easily figure it out 
 &lt;div class="p"&gt;
 &lt;refer class="fig-1"&gt;&lt;/refer&gt;
 &lt;/div&gt;
+
+&lt;div class="p"&gt;
+&lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
 ```/
 
 <div class="p">
@@ -149,6 +153,81 @@ See the predefined sections implemented below, and you can easily figure it out 
 <div class="p">
 <refer class="fig-1"></refer>
 </div>
+
+<div class="p">
+<refer class="code-1"></refer>
+</div>
+
+There are the blow HTML elments in this <code>docuK.SEE</code>.
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+	&lt;li id="ref-docuKShort"&gt;&lt;a href="http://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
 
 
 
@@ -372,6 +451,8 @@ public class HelloWorldServer extends Verticle {
 
 Using <code>```Codes to be pretty-printed.```/</code>, or <code>```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
 
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
 ```[.scrollable.lang-java]
 import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
 
@@ -405,6 +486,9 @@ public class HelloWorldServer extends Verticle {
 	}
 }
 ```/
+
+</div>
+
 
 
 ## New Section
