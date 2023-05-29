@@ -93,7 +93,8 @@ kipid.strToJSON=function (str, colMap=true, rowMap=false) {
 	function increseRC(delim) {
 		if (delim==='\t') {
 			col++; return true;
-		} else if (delim==='\n') {
+		}
+		else if (delim==='\n') {
 			row++; col=0; ret.push([]); return true;
 		} return false;
 	}
@@ -104,18 +105,21 @@ kipid.strToJSON=function (str, colMap=true, rowMap=false) {
 				strElem=str.substring(start+1, lastQuote.lastIndex-2);
 				delim=exec[1];
 				start=delimiter.lastIndex=lastQuote.lastIndex;
-			} else {
+			}
+			else {
 				strElem=str.substring(start+1);
 				delim="";
 				start=str.length;
 			}
 			strElem=strElem.replace(/""/g,'"');
-		} else {
+		}
+		else {
 			if ((exec=delimiter.exec(str))!==null) {
 				strElem=exec[1];
 				delim=exec[2];
 				start=delimiter.lastIndex;
-			} else {
+			}
+			else {
 				strElem=str.substring(start);
 				delim="";
 				start=str.length;
@@ -172,25 +176,29 @@ kipid.SEEToArray=function (SEE) {
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
-		} else if (/^```/.test(subStr)) {
+		}
+		else if (/^```/.test(subStr)) {
 			while (!/```\/$/.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
-		} else if (/^<script\s*[^>]*>/i.test(subStr)) {
+		}
+		else if (/^<script\s*[^>]*>/i.test(subStr)) {
 			while (!/<\/script>$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
-		} else if (/^<data\s*[^>]*>/i.test(subStr)) {
+		}
+		else if (/^<data\s*[^>]*>/i.test(subStr)) {
 			while (!/<\/data>$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
 				subStr=SEE.substring(start,end).trim();
 			}
-		} else if (/^<!--/i.test(subStr)) {
+		}
+		else if (/^<!--/i.test(subStr)) {
 			while (!/-->$/i.test(subStr)) {
 				re=dE.exec(SEE);
 				end=dE.lastIndex;
@@ -212,6 +220,7 @@ kipid.renderToDocuK=function (toBeRendered) {
 
 	const TOC="Table of Contents";
 	const PH="Posting History";
+	const COTD="Categories of this document";
 	const RRA="References and Related Articles";
 	const RSR="Referneces and Suggested Readings";
 
@@ -283,17 +292,26 @@ kipid.renderToDocuK=function (toBeRendered) {
 						str+=`<div class="sec">`;
 						head=TOC;
 						str+=`<h2 class="notSec">${head}</h2><div class="toc"></div></div>`; // self closing.
-					} else if (head==="PH") {
+					}
+					else if (head==="COTD") {
+						str+=`<div class="sec hiden">`;
+						head=COTD;
+						str+=`<h2 class="no-sec-N" id="sec-COTD">${head}</h2>`;
+						secOn=true;
+					}
+					else if (head==="PH") {
 						str+=`<div class="sec hiden">`;
 						head=PH;
 						str+=`<h2 class="no-sec-N" id="sec-PH">${head}</h2>`;
 						secOn=true;
-					} else if (head==="RRA") {
+					}
+					else if (head==="RRA") {
 						str+=`<div class="sec">`;
 						head=RRA;
 						str+=`<h2 class="no-sec-N" id="sec-Refs">${head}</h2>`;
 						secOn=true;
-					} else {
+					}
+					else {
 						str+=`<div class="sec${classes}">`;
 						str+=`<h2${elemId}>${head}</h2>`;
 						secOn=true;
@@ -306,7 +324,8 @@ kipid.renderToDocuK=function (toBeRendered) {
 				default: str+=`<h${hN}${elemId}>${head}</h${hN}>`;
 			}
 			ps[i]=ps[i].substring(untilEnter.lastIndex).trim();
-		} else if (hN=/^#+(?=\/)/.exec(ps[i])) {
+		}
+		else if (hN=/^#+(?=\/)/.exec(ps[i])) {
 			hN=hN[0].length;
 			closeSec(hN);
 			continue; // Text after '#/' is ignored. Use '#####/' for comment.
@@ -315,7 +334,8 @@ kipid.renderToDocuK=function (toBeRendered) {
 		if (ps[i].length) {
 			if (/^<\/?\w/.test(ps[i])) {
 				str+=ps[i];
-			} else if (/^```/.test(ps[i])) {
+			}
+			else if (/^```/.test(ps[i])) {
 				ps[i]=ps[i].replace(/^```/,'').replace(/```\/$/,'').trim();
 				emmet=getEmmetFromHead(ps[i]);
 				classes=elemId="";
@@ -331,7 +351,8 @@ kipid.renderToDocuK=function (toBeRendered) {
 					}
 				}
 				str+=`<pre class="prettyprint${classes}"${elemId}>${ps[i].replace(/<\/pre>/ig,'/pre replaced>')}</pre>`;
-			} else {
+			}
+			else {
 				str+=`<div class="p">${ps[i]}</div>`;
 			}
 		}
@@ -352,7 +373,8 @@ kipid.getContentsJoinedWithEnter=function ($elem) {
 			for (let j=0;j<lis.length;j++) {
 				strArray.push(lis.eq(j).text().trim());
 			}
-		} else {
+		}
+		else {
 			strArray.push(contentI.text().trim());
 		}
 	}
@@ -402,7 +424,8 @@ kipid.indentsRemove=function (str) {
 	let firstIndent=str.match(/^\n\t+/), indentRegExp;
 	if (firstIndent!==null) { // if match (first indent) is found
 		indentRegExp=new RegExp("\\n\\t{1,"+(firstIndent[0].length-1)+"}",'g'); // /\n\t{1,n}/g: global greedy matching
-	} else {
+	}
+	else {
 		indentRegExp=/^\n/; // just for minimum match
 	}
 	return str.replace(indentRegExp,'\n');
@@ -441,11 +464,13 @@ kipid.toggleHeight=function (obj) {
 		toBeScrolledBy=next.scrollTop();
 		next.removeClass("scrollable");
 		window.scrollTo(0,windowScrollTop+toBeScrolledBy);
-	} else { // becomes scrollable.
+	}
+	else { // becomes scrollable.
 		if (windowScrollTop<nOffsetTop) {
 			// case0: no scroll
 			next.addClass("scrollable");
-		} else {
+		}
+		else {
 			// case1: scroll both
 			toBeScrolledBy=windowScrollTop-nOffsetTop;
 			let tailHeight=nHeight-toBeScrolledBy;
@@ -464,7 +489,8 @@ kipid.ShowHide=function (elem) {
 	$(elem).next().toggle();
 	if ($(elem).next().is(":visible")) {
 		$(elem).html("▼ Hide");
-	} else {
+	}
+	else {
 		$(elem).html("▼ Show");
 	}
 	setTimeout(function () {$window.trigger("scroll.delayedLoad");}, 1000);
@@ -517,9 +543,11 @@ kipid.resetStyle=function () {
 kipid.Cmode=function (modeI) {
 	if (modeI=="Dark") {
 		kipid.docuK.removeClass("bright");
-	} else if (modeI=="Bright") {
+	}
+	else if (modeI=="Bright") {
 		kipid.docuK.addClass("bright");
-	} else {
+	}
+	else {
 		return false;
 	}
 	kipid.mode=modeI;
@@ -549,7 +577,8 @@ kipid.CfontSize=function (increment) {
 		kipid.fontSize+=increment;
 		if (kipid.fontSize<5) {
 			kipid.fontSize=5;
-		} else if (kipid.fontSize>33) {
+		}
+		else if (kipid.fontSize>33) {
 			kipid.fontSize=33;
 		}
 		kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
@@ -570,7 +599,8 @@ kipid.ClineHeight=function (increment) {
 		if (kipid.lineHeight10<10) {
 			kipid.lineHeight10=10;
 			return false;
-		} else if (kipid.lineHeight10>25) {
+		}
+		else if (kipid.lineHeight10>25) {
 			kipid.lineHeight10=25;
 			return false;
 		}
@@ -639,7 +669,8 @@ $.fn.inView=function () {
 		let elemTop=this.offset().top-kipid.delayPad;
 		let elemBottom=elemTop+this.height()+kipid.delayPad;
 		return (scrollTop+viewportHeight>elemTop)&&(scrollTop<elemBottom);
-	} else {
+	}
+	else {
 		return false;
 	}
 };
@@ -679,7 +710,8 @@ kipid.delayedLoadAll=function () {
 			}
 		});
 		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
-	} else {
+	}
+	else {
 		kipid.logPrint(`<br><br>All delayedElem are loaded.`);
 		$window.off("scroll.delayedLoad");
 	}
@@ -691,7 +723,8 @@ kipid.delayedLoadByScroll=function () {
 	let passed=now-kipid.previous;
 	if (passed>kipid.wait) {
 		kipid.delayedLoadAll();
-	} else {
+	}
+	else {
 		setTimeout(function () {
 			kipid.delayedLoadAll();
 		}, kipid.wait*1.1-passed);
@@ -715,7 +748,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	let postIdRegEx=new RegExp(postId+"$");
 	if (docuK.is(".noDIdHandle")) {
 		postId="";
-	} else {
+	}
+	else {
 		docuK.find("[id]").each(function () {
 			let $this=$(this);
 			$this[0].id+=postId;
@@ -799,7 +833,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				secPreTxt=secId=secITxt=(secIH2.is("[id]"))?secIH2.attr('id').replace(/^sec-/i,'').replace(postIdRegEx,''):`secPreTxt${docuKI}-${i}`;
 				tocHtml+=fTocHtml(false);
 				secIH2.html(fSecHtml(false));
-			} else {
+			}
+			else {
 				secN++;
 				secPreTxt=secId=secITxt=secN.toString();
 				tocHtml+=fTocHtml();
@@ -829,7 +864,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 					subsubsecKH4.html(fSecHtml());
 				}
 			}
-		} else {
+		}
+		else {
 			secITxt="x";
 		}
 		eqqs=secI.find("eqq");
@@ -877,7 +913,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				if (refered.exists()) {
 					let refNHtml=refered.find(".refN").html();
 					refered.html(`<span class="refN">${refNHtml}</span>${citeI.html()}`);
-				} else {
+				}
+				else {
 					refsN+=1;
 					olRefs.append(`<li id="${citeI.attr("class")}${postId}"><span class="refN">Ref. <span class="number">[${pad(refsN,2)}]</span> </span>${citeI.html()}</li>`);
 				}
@@ -888,7 +925,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 				refHtml=refered.html().trim().replace(/\bid\s*=/gi,'psudoId=');
 				refN=refered.find(".number").html();
 				citeI.html(fCiteHtml());
-			} else {
+			}
+			else {
 				citeI.html(`<span class="emph">( No refer. )</span>`);
 			}
 		}

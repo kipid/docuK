@@ -528,7 +528,8 @@ $document.ready(function () {
 	if (cookieItem!==null) {
 		kipid.Cmode(cookieItem);
 		kipid.logPrint(`<br>Mode ${cookieItem} is set from cookie.`);
-	} else {
+	}
+	else {
 		kipid.Cmode("Dark");
 	}
 	for(let i=1;i<kipid.docuK.length;i++) {
@@ -721,7 +722,8 @@ window.MathJax={
 						// alert("This is the last section.");
 						return;
 					}
-				} else{
+				}
+				else{
 					scrollTop-=10;
 					for (i=k-1;i>=0;i--) {
 						hI=kipid.fdList.eq(i);
@@ -766,7 +768,8 @@ window.MathJax={
 			case 76: // L=76
 				if (window.location.pathname==="/entry/Lists") {
 					window.location="/category";
-				} else {
+				}
+				else {
 					window.location="/entry/Lists";
 				}
 				break;
