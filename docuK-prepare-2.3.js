@@ -547,10 +547,10 @@ kipid.CfontFamily=function (font) {
 kipid.CfontSize=function (increment) {
 	if (increment.constructor===Number&&!isNaN(increment)) {
 		kipid.fontSize+=increment;
-		if (kipid.fontSize<8) {
-			kipid.fontSize=8;
-		} else if (kipid.fontSize>27) {
-			kipid.fontSize=27;
+		if (kipid.fontSize<5) {
+			kipid.fontSize=5;
+		} else if (kipid.fontSize>33) {
+			kipid.fontSize=33;
 		}
 		kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
 		kipid.printDeviceInfo();
