@@ -38,7 +38,7 @@
   <div class="subsec"><h3>Upto version 2.3</h3></div>
   <ul>
   	<li>2022-12-26: Short Keys announcement.</li>
-    <li>2015-01-18: SNS widget. "2014-08-07: kipid.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
+    <li>2015-01-18: SNS widget. "2014-08-07: m.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
     <li>2014-11-23: Super Easy Citation all at once.</li>
     <li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
     <li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
@@ -185,7 +185,7 @@
   <div class="p">Dark/Bright, Font-family, Font-size, and Line-height를 사용자/독자가 바꿀 수 있도록.</div>
   <ol>
     <li>
-      "Dark/Bright mode": 밤에 볼때 흰 바탕이 너무 눈이 부시길래, 검은색 바탕에 흰 글씨 (Dark, Energy/Battery saving, Night mode) 로 기본적으로 해놓긴 했는데... 거부감이 있는 사람도 있을거 같아서 가장 기본적인 흰 바탕에 검은 글씨 (Bright, Day mode) 로도 돌아갈 수 있게. <button type="button" onclick="kipid.Cmode('Dark')">Dark Mode</button> <button type="button" onclick="kipid.Cmode('Bright')">Bright Mode</button><br>
+      "Dark/Bright mode": 밤에 볼때 흰 바탕이 너무 눈이 부시길래, 검은색 바탕에 흰 글씨 (Dark, Energy/Battery saving, Night mode) 로 기본적으로 해놓긴 했는데... 거부감이 있는 사람도 있을거 같아서 가장 기본적인 흰 바탕에 검은 글씨 (Bright, Day mode) 로도 돌아갈 수 있게. <button type="button" onclick="m.Cmode('Dark')">Dark Mode</button> <button type="button" onclick="m.Cmode('Bright')">Bright Mode</button><br>
       jQuery의 addClass 이용해서 하긴 했는데... ".docuK.bright>.sec"로 제일 앞쪽에 넣고 할까? ".docuK>.sec.bright"처럼 뒷쪽에 넣고 할까? 앞쪽이 더 간단(?)하고 구조적이니 앞쪽으로 우선 구현. css의 우선순위 (priority) 좀 공부해 보긴 해야할듯. (이거에 관해 제대로 정리가 안되어 있는거 보면, browser마다 우선 순위가 다를거 같기도 하고...)<br>
     </li>
     <li>
@@ -750,9 +750,9 @@
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
   <ol class="refs">
     <div class="subsec"><h3>Main</h3></div>
-    <li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+    <li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
       // Updated regularly by the current html file. If you see this in kipid's blog, this is the link you are seeing.</li>
-    <li id="ref-docuKShort"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a></li>
+    <li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a></li>
     <li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
 
     <div class="subsec"><h3>Supported by</h3></div>
@@ -764,13 +764,13 @@
       // Code prettyfier.</li>
 
     <div class="subsec"><h3 id="sec-Refs-subex">Related Postings</h3></div>
-    <li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a></li>
-    <li id="ref-cite"><a href="http://kipid.tistory.com/entry/Citing-the-references-automatically-in-HTML-like-LaTeX">kipid's blog - Citing the references automatically in HTML (like LaTeX)</a>; ref는 id를 부여하고 (보통 구분을 확실히 하기 위해 "ref-"를 prefix로 붙임.) cite tag with class로 cite함. 이후 자동으로 parsing.</li>
-    <li id="ref-math"><a href="http://kipid.tistory.com/entry/equations-in-html">kipid's blog - 인터넷, Web, HTML, 블로그에서 수식 사용하기 (Equation or math in HTML, blog)</a></li>
-    <li id="ref-code"><a href="http://kipid.tistory.com/entry/Syntax-Highlighter-in-HTML-google-code-prettify">kipid's blog - 인터넷에서 예쁘게 코드 입력하기 (google code prettify)</a></li>
-    <li id="ref-scrollStyle"><a href="http://kipid.tistory.com/entry/Customized-styling-of-scroll-bars-in-HTML">kipid's blog - Customized styling of scroll bars in HTML</a>, 2014-05-25</li>
-    <li id="ref-webPerf"><a href="http://kipid.tistory.com/entry/Improving-web-performance">kipid's blog - Improving web performance</a></li>
-    <li id="ref-delayedLoad"><a href="http://kipid.tistory.com/entry/Delayed-Loading-in-HTML-by-JavaScript-jQuery">kipid's blog - Delayed Loading in HTML by JavaScript (+jQuery)</a></li>
+    <li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a></li>
+    <li id="ref-cite"><a href="https://kipid.tistory.com/entry/Citing-the-references-automatically-in-HTML-like-LaTeX">kipid's blog - Citing the references automatically in HTML (like LaTeX)</a>; ref는 id를 부여하고 (보통 구분을 확실히 하기 위해 "ref-"를 prefix로 붙임.) cite tag with class로 cite함. 이후 자동으로 parsing.</li>
+    <li id="ref-math"><a href="https://kipid.tistory.com/entry/equations-in-html">kipid's blog - 인터넷, Web, HTML, 블로그에서 수식 사용하기 (Equation or math in HTML, blog)</a></li>
+    <li id="ref-code"><a href="https://kipid.tistory.com/entry/Syntax-Highlighter-in-HTML-google-code-prettify">kipid's blog - 인터넷에서 예쁘게 코드 입력하기 (google code prettify)</a></li>
+    <li id="ref-scrollStyle"><a href="https://kipid.tistory.com/entry/Customized-styling-of-scroll-bars-in-HTML">kipid's blog - Customized styling of scroll bars in HTML</a>, 2014-05-25</li>
+    <li id="ref-webPerf"><a href="https://kipid.tistory.com/entry/Improving-web-performance">kipid's blog - Improving web performance</a></li>
+    <li id="ref-delayedLoad"><a href="https://kipid.tistory.com/entry/Delayed-Loading-in-HTML-by-JavaScript-jQuery">kipid's blog - Delayed Loading in HTML by JavaScript (+jQuery)</a></li>
 
     <div class="subsec"><h3>참고</h3></div>
     <li id="ref-thinsp"><a href="http://stackoverflow.com/questions/2720770/how-to-create-small-spaces-in-html">Stack Overflow - How to create small SPACES in HTML?</a>, 2010-04-27, asked by user89021; I used the answer from knittl and Gumbo. Thanks.<br>
@@ -845,10 +845,10 @@
     </li>
 
     <div class="subsec"><h3>Etc.</h3></div>
-    <li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.0</a>;<br>
+    <li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.0</a>;<br>
       // 자동으로 수식에 numbering이 되도록 만든 html 문서. 다른 section numbering이나 table of contents 등의 기능들도 구현해놨으니 참고해 보시길.
     </li>
-    <li><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>;<br>
+    <li><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>;<br>
       // LaTeX가 무엇인지 궁금하시다면 방문해 보시길.
     </li>
 
@@ -860,8 +860,8 @@
 
 <codeprint id="docuK-script">
 <script>
-kipid.wait=1024;
-kipid.delayPad=0;
+m.wait=1024;
+m.delayPad=0;
 </script>
 
 <!-- From kipid.tistory CDN -->

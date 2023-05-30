@@ -1,16 +1,17 @@
-(function (kipid, $, undefined) {
+window.m={};
+(function (m, $, undefined) {
 $window=$(window);
 $document=$(document);
 $html=$("html");
 
 $.fn.exists=function () { return this.length!==0; };
-kipid.browserWidth=window.innerWidth;
+m.browserWidth=window.innerWidth;
 const docuK=$(".docuK");
-kipid.docuK=docuK;
+m.docuK=docuK;
 
 // cookies.js (copied from cookie-test.html)
-kipid.expire=365*24*60*60; // max-age in seconds.
-kipid.docCookies={
+m.expire=365*24*60*60; // max-age in seconds.
+m.docCookies={
 	hasItem:function (sKey) {
 		return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=")).test(document.cookie);
 	}
@@ -61,19 +62,19 @@ m.toggleFK=function () {
 };
 
 // logPrint function.
-kipid.$log=$("#docuK-log");
-kipid.$log.addClass("fixed");
-kipid.$log.before(``);
+m.$log=$("#docuK-log");
+m.$log.addClass("fixed");
+m.$log.before(``);
 if (m.docCookies.getItem("hideFK")==="y") {
 	$floating_key.hide();
 }
-kipid.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
-kipid.logPrint=function (str) {
-	kipid.$log.append(str);
-	kipid.$log.scrollTop(kipid.$log[0].scrollHeight);
+m.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
+m.logPrint=function (str) {
+	m.$log.append(str);
+	m.$log.scrollTop(m.$log[0].scrollHeight);
 };
-kipid.logPrint(`kipid.logPrint() is working!`);
-kipid.$log.after(`<div id="fuzzy-search-container" style="display:none">
+m.logPrint(`m.logPrint() is working!`);
+m.$log.after(`<div id="fuzzy-search-container" style="display:none">
 	<div class="move" style="z-index:20000; position:absolute; display:inline-block; left:0; top:0; width:1.8em; height:1.8em; line-height:1.0; text-align:center; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white"><svg style="display:inline-block; width:100%; height:100%"><g style="stroke:white; stroke-width:10%; stroke-linecap:round">
 		<line x1="10%" y1="50%" x2="90%" y2="50%"></line>
 		<line x1="10%" y1="50%" x2="20%" y2="40%"></line>
@@ -128,13 +129,13 @@ $("#fuzzy-search-container>.reset").on("click.reset", function (e) {
 });
 
 // String to Array
-kipid.encloseStr=function (str) {
+m.encloseStr=function (str) {
 	if (!str||str.constructor!==String) { return ''; }
 	if (str.charAt(0)==='"'||/[\n\t]/.test(str)) {
 		return `"${str.replace(/"/g,'""')}"`;
 	} return str;
 };
-kipid.strToJSON=function (str, colMap=true, rowMap=false) {
+m.strToJSON=function (str, colMap=true, rowMap=false) {
 	if (!str||str.constructor!==String) { return []; }
 	if (str.charAt(str.length-1)!=="\n") {
 		str+="\n";
@@ -200,15 +201,15 @@ kipid.strToJSON=function (str, colMap=true, rowMap=false) {
 	}
 	return ret;
 };
-kipid.strToArray=function (str) {
-	return kipid.strToJSON(str,false,false);
+m.strToArray=function (str) {
+	return m.strToJSON(str,false,false);
 };
-kipid.arrayToTableHTML=function (txtArray) {
+m.arrayToTableHTML=function (txtArray) {
 	let tableStr="<table>";
 	for (let row=0;row<txtArray.length;row++) {
 		tableStr+="<tr>";
 		for (let col=0;col<txtArray[row].length;col++) {
-			tableStr+=`<td>${kipid.escapeHTML(txtArray[row][col]).replace(/\n/g,'<br>')}</td>`;
+			tableStr+=`<td>${m.escapeHTML(txtArray[row][col]).replace(/\n/g,'<br>')}</td>`;
 		}
 		tableStr+="</tr>";
 	}
@@ -217,7 +218,7 @@ kipid.arrayToTableHTML=function (txtArray) {
 };
 
 // SEE (Super Easy Edit).
-kipid.SEEToArray=function (SEE) {
+m.SEEToArray=function (SEE) {
 	SEE=SEE.trim();
 	const dE=/\s*\n\n+\s*/g; // split by double enter.
 	let start=end=0;
@@ -270,8 +271,8 @@ kipid.SEEToArray=function (SEE) {
 	return ps;
 };
 
-kipid.renderToDocuK=function (toBeRendered) {
-	const ps=kipid.SEEToArray(toBeRendered);
+m.renderToDocuK=function (toBeRendered) {
+	const ps=m.SEEToArray(toBeRendered);
 	const p=ps.length;
 
 	const TOC="Table of Contents";
@@ -418,7 +419,7 @@ kipid.renderToDocuK=function (toBeRendered) {
 	return str;
 };
 
-kipid.getContentsJoinedWithEnter=function ($elem) {
+m.getContentsJoinedWithEnter=function ($elem) {
 	const contents=$elem.contents();
 	const contentsL=contents.length;
 	const strArray=[];
@@ -438,7 +439,7 @@ kipid.getContentsJoinedWithEnter=function ($elem) {
 };
 
 // Functions for printing codes into 'pre.prettyprint'.
-kipid.indentsRemove=function (str) {
+m.indentsRemove=function (str) {
 	let firstIndent=str.match(/^\n\t+/), indentRegExp;
 	if (firstIndent!==null) { // if match (first indent) is found
 		indentRegExp=new RegExp("\\n\\t{1,"+(firstIndent[0].length-1)+"}",'g'); // /\n\t{1,n}/g: global greedy matching
@@ -448,35 +449,35 @@ kipid.indentsRemove=function (str) {
 	}
 	return str.replace(indentRegExp,'\n');
 };
-kipid.escapeHTML=function (str) {
+m.escapeHTML=function (str) {
 	if (!str||str.constructor!==String) { return ""; }
 	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 };
-kipid.unescapeHTML=function (str) {
+m.unescapeHTML=function (str) {
 	if (!str||str.constructor!==String) { return ""; }
 	return str.replace(/&gt;/g,'>').replace(/&lt;/g,'<').replace(/&amp;/g,'&');
 };
-kipid.printCode=function (codeId) {
+m.printCode=function (codeId) {
 	const $pre=$("pre#pre-"+codeId);
 	const $code=$("#"+codeId);
 	if ($pre.exists()) {
-		let html=kipid.indentsRemove($code.html()).trim();
+		let html=m.indentsRemove($code.html()).trim();
 		if (!$code.is(".noEscapeHTML")) {
-			html=kipid.escapeHTML(html);
+			html=m.escapeHTML(html);
 		}
 		$pre.html(html);
 	}
 };
 
 // Function for toggling height, i.e. switching scrollability with conserving view.
-kipid.toggleHeight=function (obj) {
+m.toggleHeight=function (obj) {
 	let next=$(obj).next();
 	let toBeScrolledBy=0;
 	let windowScrollTop=$window.scrollTop();
 		// (window.pageYOffset!==undefined)?window.pageYOffset:(document.documentElement||document.body.parentNode||document.body).scrollTop
 	let nOffsetTop=next.offset().top;
 	let nHeight=next.height();
-	// kipid.resultTest.append("before:\twindowScrollTop: "+windowScrollTop+";\tnOffsetTop: "+nOffsetTop+";\tnHeight: "+nHeight+"\n");
+	// m.resultTest.append("before:\twindowScrollTop: "+windowScrollTop+";\tnOffsetTop: "+nOffsetTop+";\tnHeight: "+nHeight+"\n");
 
 	if (next.is(".scrollable")) { // becomes expanded.
 		toBeScrolledBy=next.scrollTop();
@@ -498,12 +499,12 @@ kipid.toggleHeight=function (obj) {
 			next[0].scrollTop=toBeScrolledBy;
 		}
 	}
-	// kipid.resultTest.append("after : \twindowScrollTop: "+$window.scrollTop()+";\tnOffsetTop: "+next.offset().top+";\tnHeight: "+next.height()+"\n\n");
-	// kipid.resultTest[0].scrollTop=kipid.resultTest[0].scrollHeight;
+	// m.resultTest.append("after : \twindowScrollTop: "+$window.scrollTop()+";\tnOffsetTop: "+next.offset().top+";\tnHeight: "+next.height()+"\n\n");
+	// m.resultTest[0].scrollTop=m.resultTest[0].scrollHeight;
 };
 
 // section's show/hide functions
-kipid.ShowHide=function (elem) {
+m.ShowHide=function (elem) {
 	$(elem).next().toggle();
 	if ($(elem).next().is(":visible")) {
 		$(elem).html("▼ Hide");
@@ -513,7 +514,7 @@ kipid.ShowHide=function (elem) {
 	}
 	setTimeout(function () {$window.trigger("scroll.delayedLoad");}, 1000);
 };
-kipid.Hide=function (elem) {
+m.Hide=function (elem) {
 	let $elem=$(elem).parent();
 	window.scrollBy(0,-$elem.outerHeight());
 	$elem.hide();
@@ -521,132 +522,132 @@ kipid.Hide=function (elem) {
 };
 
 // bubbleRef's show/hide functions
-kipid.ShowBR=function (elem) {
-	clearTimeout(kipid.timerHideBRQueue);
-	kipid.bubbleRefs.hide();
+m.ShowBR=function (elem) {
+	clearTimeout(m.timerHideBRQueue);
+	m.bubbleRefs.hide();
 	$(elem).find(">.bubbleRef").show();
 };
-kipid.timerHideBR=function (elem) {
-	kipid.timerHideBRQueue=setTimeout(function () {$(elem).find(">.bubbleRef").hide();}, 1000);
+m.timerHideBR=function (elem) {
+	m.timerHideBRQueue=setTimeout(function () {$(elem).find(">.bubbleRef").hide();}, 1000);
 };
-kipid.HideBR=function (elem) {
+m.HideBR=function (elem) {
 	$(elem).parent().hide();
 };
 
 // Changing Styles of docuK
-kipid.mode="Dark";
-kipid.fontFamily="맑은 고딕";
-kipid.fontSize=10;
-kipid.lineHeight10=16;
-kipid.defaultStyles={mode:kipid.mode, fontFamily:kipid.fontFamily, fontSize:kipid.fontSize, lineHeight10:kipid.lineHeight10};
+m.mode="Dark";
+m.fontFamily="맑은 고딕";
+m.fontSize=10;
+m.lineHeight10=16;
+m.defaultStyles={mode:m.mode, fontFamily:m.fontFamily, fontSize:m.fontSize, lineHeight10:m.lineHeight10};
 
-kipid.printDeviceInfo=function () {
-	if (kipid.$deviceInfo) {
+m.printDeviceInfo=function () {
+	if (m.$deviceInfo) {
 		let referrer=document.referrer;
-		let referrerHTML=(referrer?`<a target="_blank" href="${referrer}">${kipid.escapeHTML(decodeURIComponent(referrer))}</a>`:`Empty`);
-		kipid.$deviceInfo.html(
-			`Mode: ${kipid.mode}; Font: ${kipid.fontFamily}; font-size: ${(kipid.fontSize*1.8).toFixed(1)}px (${kipid.fontSize.toFixed(1)}); line-height: ${(kipid.lineHeight10/10).toFixed(1)};<br>
-width: ${kipid.browserWidth}, height: ${window.innerHeight}<br>
+		let referrerHTML=(referrer?`<a target="_blank" href="${referrer}">${m.escapeHTML(decodeURIComponent(referrer))}</a>`:`Empty`);
+		m.$deviceInfo.html(
+			`Mode: ${m.mode}; Font: ${m.fontFamily}; font-size: ${(m.fontSize*1.8).toFixed(1)}px (${m.fontSize.toFixed(1)}); line-height: ${(m.lineHeight10/10).toFixed(1)};<br>
+width: ${m.browserWidth}, height: ${window.innerHeight}<br>
 document.referrer: ${referrerHTML}`
 		);
 	}
 };
 
-kipid.resetStyle=function () {
-	kipid.Cmode(kipid.defaultStyles.mode);
-	kipid.CfontFamily(kipid.defaultStyles.fontFamily);
-	kipid.CfontSize(kipid.defaultStyles.fontSize-kipid.fontSize);
-	kipid.ClineHeight(kipid.defaultStyles.lineHeight10-kipid.lineHeight10);
+m.resetStyle=function () {
+	m.Cmode(m.defaultStyles.mode);
+	m.CfontFamily(m.defaultStyles.fontFamily);
+	m.CfontSize(m.defaultStyles.fontSize-m.fontSize);
+	m.ClineHeight(m.defaultStyles.lineHeight10-m.lineHeight10);
 	if (!$floating_key.is(":visible")) {
 		m.toggleFK();
 	}
 }
-kipid.Cmode=function (modeI) {
+m.Cmode=function (modeI) {
 	if (modeI=="Dark") {
-		kipid.docuK.removeClass("bright");
+		m.docuK.removeClass("bright");
 	}
 	else if (modeI=="Bright") {
-		kipid.docuK.addClass("bright");
+		m.docuK.addClass("bright");
 	}
 	else {
 		return false;
 	}
-	kipid.mode=modeI;
-	kipid.printDeviceInfo();
-	if (kipid.mode===kipid.defaultStyles.mode) {
-		kipid.docCookies.removeItem("kipid.mode", "/");
+	m.mode=modeI;
+	m.printDeviceInfo();
+	if (m.mode===m.defaultStyles.mode) {
+		m.docCookies.removeItem("m.mode", "/");
 	}
 	else {
-		kipid.docCookies.setItem("kipid.mode", kipid.mode, kipid.expire, "/");
+		m.docCookies.setItem("m.mode", m.mode, m.expire, "/");
 	}
 	return true;
 };
-kipid.CfontFamily=function (font) {
-	kipid.docuK.css({fontFamily:font});
-	kipid.fontFamily=font;
-	kipid.printDeviceInfo();
-	if (kipid.fontFamily===kipid.defaultStyles.fontFamily) {
-		kipid.docCookies.removeItem("kipid.fontFamily", "/");
+m.CfontFamily=function (font) {
+	m.docuK.css({fontFamily:font});
+	m.fontFamily=font;
+	m.printDeviceInfo();
+	if (m.fontFamily===m.defaultStyles.fontFamily) {
+		m.docCookies.removeItem("m.fontFamily", "/");
 	}
 	else {
-		kipid.docCookies.setItem("kipid.fontFamily", kipid.fontFamily, kipid.expire, "/");
+		m.docCookies.setItem("m.fontFamily", m.fontFamily, m.expire, "/");
 	}
 	return true;
 };
-kipid.CfontSize=function (increment) {
+m.CfontSize=function (increment) {
 	if (increment.constructor===Number&&!isNaN(increment)) {
-		kipid.fontSize+=increment;
-		if (kipid.fontSize<5) {
-			kipid.fontSize=5;
+		m.fontSize+=increment;
+		if (m.fontSize<5) {
+			m.fontSize=5;
 		}
-		else if (kipid.fontSize>33) {
-			kipid.fontSize=33;
+		else if (m.fontSize>33) {
+			m.fontSize=33;
 		}
-		kipid.docuK.css({"font-size":kipid.fontSize.toFixed(1)+"px"});
-		kipid.printDeviceInfo();
-		if (kipid.fontSize===kipid.defaultStyles.fontSize) {
-			kipid.docCookies.removeItem("kipid.fontSize", "/");
+		m.docuK.css({"font-size":m.fontSize.toFixed(1)+"px"});
+		m.printDeviceInfo();
+		if (m.fontSize===m.defaultStyles.fontSize) {
+			m.docCookies.removeItem("m.fontSize", "/");
 		}
 		else {
-			kipid.docCookies.setItem("kipid.fontSize", kipid.fontSize.toFixed(1), kipid.expire, "/");
+			m.docCookies.setItem("m.fontSize", m.fontSize.toFixed(1), m.expire, "/");
 		}
 		return true;
 	}
 	return false;
 };
-kipid.ClineHeight=function (increment) {
+m.ClineHeight=function (increment) {
 	if (increment.constructor===Number&&!isNaN(increment)) {
-		kipid.lineHeight10+=increment;
-		if (kipid.lineHeight10<10) {
-			kipid.lineHeight10=10;
+		m.lineHeight10+=increment;
+		if (m.lineHeight10<10) {
+			m.lineHeight10=10;
 			return false;
 		}
-		else if (kipid.lineHeight10>25) {
-			kipid.lineHeight10=25;
+		else if (m.lineHeight10>25) {
+			m.lineHeight10=25;
 			return false;
 		}
-		kipid.docuK.attr("style", `line-height:${(kipid.lineHeight10/10).toFixed(1)} !important`);
-		kipid.printDeviceInfo();
-		if (kipid.lineHeight10===kipid.defaultStyles.lineHeight10) {
-			kipid.docCookies.removeItem("kipid.lineHeight10", "/");
+		m.docuK.attr("style", `line-height:${(m.lineHeight10/10).toFixed(1)} !important`);
+		m.printDeviceInfo();
+		if (m.lineHeight10===m.defaultStyles.lineHeight10) {
+			m.docCookies.removeItem("m.lineHeight10", "/");
 		}
 		else {
-			kipid.docCookies.setItem("kipid.lineHeight10", kipid.lineHeight10, kipid.expire, "/");
+			m.docCookies.setItem("m.lineHeight10", m.lineHeight10, m.expire, "/");
 		}
 		return true;
 	}
 	return false;
 };
 $window.on("resize.deviceInfo", function () {
-	if (window.innerWidth!==kipid.browserWidth) {
-		kipid.browserWidth=window.innerWidth;
-		kipid.fontSize=parseInt(kipid.docuK.css("font-size"));
-		kipid.printDeviceInfo();
+	if (window.innerWidth!==m.browserWidth) {
+		m.browserWidth=window.innerWidth;
+		m.fontSize=parseInt(m.docuK.css("font-size"));
+		m.printDeviceInfo();
 	}
 });
 
 // Share a link through SNS
-kipid.shareSNS=function (service) {
+m.shareSNS=function (service) {
 	let title=$("title").eq(0).html();
 	let url=window.location.href;
 	let open="";
@@ -670,7 +671,7 @@ kipid.shareSNS=function (service) {
 			open="https://recoeve.net/reco?uri="+encodeURIComponent(url)+"&title="+encodeURIComponent(title);
 			break;
 		case 'kakao':
-			kipid.popUpKakao();
+			m.popUpKakao();
 			return;
 		default:
 			return;
@@ -679,16 +680,16 @@ kipid.shareSNS=function (service) {
 };
 
 // Delayed Loading. (Copied from user-page.html)
-kipid.delayPad=kipid.delayPad||1024;
-kipid.wait=kipid.wait||1024;
-kipid.$delayedElems=$("#nothing");
-kipid.previous=Date.now();
+m.delayPad=m.delayPad||1024;
+m.wait=m.wait||1024;
+m.$delayedElems=$("#nothing");
+m.previous=Date.now();
 $.fn.inView=function () {
 	if (this.is(":visible")) {
 		let viewportHeight=window.innerHeight;
 		let scrollTop=$window.scrollTop();
-		let elemTop=this.offset().top-kipid.delayPad;
-		let elemBottom=elemTop+this.height()+kipid.delayPad;
+		let elemTop=this.offset().top-m.delayPad;
+		let elemBottom=elemTop+this.height()+m.delayPad;
 		return (scrollTop+viewportHeight>elemTop)&&(scrollTop<elemBottom);
 	}
 	else {
@@ -721,47 +722,47 @@ $.fn.delayedLoad=function () {
 	}
 	return done;
 };
-kipid.delayedLoadAll=function () {
-	kipid.logPrint(`<br>Doing delayed-load. : ${kipid.$delayedElems.length}`);
-	if (kipid.$delayedElems.length>0) {
-		kipid.$delayedElems.each(function () {
+m.delayedLoadAll=function () {
+	m.logPrint(`<br>Doing delayed-load. : ${m.$delayedElems.length}`);
+	if (m.$delayedElems.length>0) {
+		m.$delayedElems.each(function () {
 			if ($(this).delayedLoad()) {
-				kipid.$delayedElems=kipid.$delayedElems.not(this);
-				kipid.logPrint(`<br><span class="emph">${this} at vertical position of ${(100*$(this).offset().top/$document.height()).toPrecision(3)}% of document is delayed-loaded.</span><br>${kipid.$delayedElems.length} of $delayedElems are remained.<br>`);
+				m.$delayedElems=m.$delayedElems.not(this);
+				m.logPrint(`<br><span class="emph">${this} at vertical position of ${(100*$(this).offset().top/$document.height()).toPrecision(3)}% of document is delayed-loaded.</span><br>${m.$delayedElems.length} of $delayedElems are remained.<br>`);
 			}
 		});
-		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
 	}
 	else {
-		kipid.logPrint(`<br><br>All delayedElem are loaded.`);
+		m.logPrint(`<br><br>All delayedElem are loaded.`);
 		$window.off("scroll.delayedLoad");
 	}
-	kipid.previous=Date.now();
+	m.previous=Date.now();
 };
-kipid.delayedLoadByScroll=function () {
+m.delayedLoadByScroll=function () {
 	$window.off("scroll.delayedLoad");
 	let now=Date.now();
-	let passed=now-kipid.previous;
-	if (passed>kipid.wait) {
-		kipid.delayedLoadAll();
+	let passed=now-m.previous;
+	if (passed>m.wait) {
+		m.delayedLoadAll();
 	}
 	else {
 		setTimeout(function () {
-			kipid.delayedLoadAll();
-		}, kipid.wait*1.1-passed);
-		kipid.logPrint(`<br>wait ${(kipid.wait*1.1-passed).toFixed(0)}ms.`);
+			m.delayedLoadAll();
+		}, m.wait*1.1-passed);
+		m.logPrint(`<br>wait ${(m.wait*1.1-passed).toFixed(0)}ms.`);
 	}
 };
-$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
 
 // docuK Process
-kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
+m.docuKProcess=function docuK(m, $, docuKI, undefined) {
 	// Possible duplicate id is handled.
 	docuKI=(isNaN(docuKI)||docuKI<0)?0:parseInt(docuKI);
-	kipid.logPrint(`<br><br>docuK-${docuKI} scripts started!<br><span class="emph">If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>`);
+	m.logPrint(`<br><br>docuK-${docuKI} scripts started!<br><span class="emph">If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>`);
 	let docuK=$(".docuK").eq(docuKI);
 	if (docuK.is(".rendered")) {
-		kipid.logPrint(`<br><br>docuK-${docuKI} is already rendered.`);
+		m.logPrint(`<br><br>docuK-${docuKI} is already rendered.`);
 		return;
 	}
 
@@ -807,24 +808,24 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 
 	// Style change widget, and SNS widget.
 	docuK.prepend(`<div class="change-docuK-style">
-	<form><button type="button" onclick="kipid.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
-	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
-	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="kipid.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
-	<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="kipid.CfontFamily(this.value)"></input></form>
-	<form><button type="button" onclick="kipid.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="kipid.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
-	<form><button type="button" onclick="kipid.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="kipid.ClineHeight(1)" style="font-size:1.6em">=</button></form>
+	<form><button type="button" onclick="m.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
+	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="m.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
+	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="m.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
+	<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="맑은 고딕" style="font-family:'맑은 고딕'; font-size:1.2em; width:73px; height:23px; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
+	<form><button type="button" onclick="m.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="m.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
+	<form><button type="button" onclick="m.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="m.ClineHeight(1)" style="font-size:1.6em">=</button></form>
 	<form><button class="button-log" type="button" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
 	<form><button class="button-Go" type="button" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
 	<div class="deviceInfo"></div>
 	<div class="promoting-docuK">This document is rendered by <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit)</a>).</div>
 	</div>
-<div class="SNS-top"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="kipid.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS('kakao')"></div>`
+<div class="SNS-top"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="m.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="m.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="m.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="m.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="m.shareSNS('kakao')"></div>`
 	);
-	docuK.append(`<div class="SNS-bottom"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="kipid.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="kipid.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="kipid.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="kipid.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="kipid.shareSNS('kakao')"></div>`);
+	docuK.append(`<div class="SNS-bottom"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="m.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="m.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="m.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="m.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="m.shareSNS('kakao')"></div>`);
 
 	// Scrollable switching of 'pre.prettyprint'.
-	docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="kipid.toggleHeight(this)"></div>');
-	kipid.logPrint(`<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`);
+	docuK.find("pre.prettyprint.scrollable").wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="m.toggleHeight(this)"></div>');
+	m.logPrint(`<br><br>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`);
 
 	// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
 	let secs=docuK.find(">.sec"), subsecs, subsubsecs, secContentsId="";
@@ -864,9 +865,9 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 
 			if (!secI.is(".noToggleUI")) {
 				secContentsId=`sec${docuKI}-${secITxt}-contents`;
-				secI.append(`<div class="cBoth"></div><div class="Hide" onclick="kipid.Hide(this)">▲ Hide</div><div class="cBoth"></div>`);
+				secI.append(`<div class="cBoth"></div><div class="Hide" onclick="m.Hide(this)">▲ Hide</div><div class="cBoth"></div>`);
 				secI.contents().slice(1).wrapAll(`<div class="sec-contents" id="${secContentsId}"></div>`);
-				secIH2.after(`<div class="ShowHide" onclick="kipid.ShowHide(this)">▼ Show/Hide</div>`);
+				secIH2.after(`<div class="ShowHide" onclick="m.ShowHide(this)">▼ Show/Hide</div>`);
 				secI.append(`<div class="cBoth"></div>`);
 			}
 
@@ -902,7 +903,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		}
 	}
 	secs.find(".toc").html(tocHtml);
-	kipid.logPrint(`<br><br>Table of Contents is filled out.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.`);
+	m.logPrint(`<br><br>Table of Contents is filled out.<br><br>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.`);
 
 	// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
 	// Make 'refer' tags bubble-refer equations (eqq tag) or figures (figure tag). Any tag with id can be bubble-refered with refer tag.
@@ -912,8 +913,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 	}
 	let refN="", preRefHtml="", refHtml="", citeN="";
 	function fCiteHtml() {
-		let str=`<div class="inRef" onmouseover="kipid.ShowBR(this)" onmouseout="kipid.timerHideBR(this)">${refN}<div class="bubbleRef"><div class="content">${preRefHtml}${refHtml}</div><div class="arrow"></div><div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"/><line x1="80%" y1="20%" x2="20%" y2="80%"/></g>✖</svg></div></div></div>`;
-		if (kipid.browserWidth<321) {
+		let str=`<div class="inRef" onmouseover="m.ShowBR(this)" onmouseout="m.timerHideBR(this)">${refN}<div class="bubbleRef"><div class="content">${preRefHtml}${refHtml}</div><div class="arrow"></div><div class="exit" onclick="m.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"/><line x1="80%" y1="20%" x2="20%" y2="80%"/></g>✖</svg></div></div></div>`;
+		if (m.browserWidth<321) {
 			str=str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
 		}
 		return str;
@@ -966,8 +967,8 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 			}
 		}
 	}
-	kipid.logPrint(`<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.`);
+	m.logPrint(`<br><br>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.`);
 
 	docuK.addClass("rendered");
 };
-})(window.kipid=window.kipid||{}, jQuery);
+})(window.m, jQuery);

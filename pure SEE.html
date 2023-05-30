@@ -64,9 +64,9 @@ Categories of this document is put here with links to <a target="_blank" href="h
 
 ## Warning
 
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>kipid.variables</code> already asigned before, will not work in the afterward rendering.
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>m.variables</code> already asigned before, will not work in the afterward rendering.
 
-Only <code>kipid.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+Only <code>m.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -199,9 +199,9 @@ There are the blow HTML elments in this <code>docuK.SEE</code>.
 &lt;!-- ## RRA with ol.refs --&gt;
 &lt;ol class="refs"&gt;
 &lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
-	&lt;li id="ref-docuK"&gt;&lt;a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
 		// Updated regularly&lt;/li&gt;
-	&lt;li id="ref-docuKShort"&gt;&lt;a href="http://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
+	&lt;li id="ref-docuKShort"&gt;&lt;a href="https://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
 		// Updated regularly&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -297,9 +297,9 @@ Table will be automatically filled up.
 
 <ol class="refs">
 <div class="subsec"><h3>Main</h3></div>
-	<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
 		// Updated regularly</li>
-	<li id="ref-docuKShort"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
+	<li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
 		// Updated regularly</li>
 	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
 <div class="subsec"><h3>Supported by</h3></div>
@@ -313,7 +313,7 @@ Table will be automatically filled up.
 	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
 	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
 <div class="subsec"><h3>Other markdown/markup languages</h3></div>
-	<li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
 		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
 		// 그래도 문법은 차용해서 쓰기 좋음.</li>
 	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
@@ -525,8 +525,8 @@ public class HelloWorldServer extends Verticle {
 
 <codeprint id="docuK-script">
 <script>
-kipid.wait=512;
-kipid.delayPad=0;
+m.wait=512;
+m.delayPad=0;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.

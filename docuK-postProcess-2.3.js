@@ -1,21 +1,21 @@
-(function(kipid, $, undefined) {
+(function(m, $, undefined) {
 // SEE (Super Easy Edit)
 let $SEE=$("codeprint.SEE");
 for (let i=0;i<$SEE.length;i++) {
 	let $SEEi=$SEE.eq(i);
 	let SEEiHTML=$SEEi.html().trim();
 	$SEEi.html("");
-	$SEEi.after(kipid.renderToDocuK(SEEiHTML));
+	$SEEi.after(m.renderToDocuK(SEEiHTML));
 }
 $("pre.prettyprint.scrollable").addClass("linenums");
 
 let docuK=$(".docuK");
-kipid.docuK=docuK;
+m.docuK=docuK;
 
 // Showing disableQ0 only in width>321.
-if (kipid.browserWidth>321) {
+if (m.browserWidth>321) {
 	docuK.find(".disableQ0").html(function(ith,orgText) {
-		kipid.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100*$(this).offset().top/$document.height()).toPrecision(3)}% of document.`);
+		m.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100*$(this).offset().top/$document.height()).toPrecision(3)}% of document.`);
 		return orgText.replace(/<!--/g,'').replace(/-->/g,'');
 	});
 }
@@ -29,16 +29,16 @@ let eqqs=$("eqq");
 for (let i=0;i<eqqs.length;i++) {
 	eqqs.eq(i).html(function(ith,orgTxt) {return "\\[ "+orgTxt.trim()+" \\]";});
 }
-kipid.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).`);
+m.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( and \\ ).`);
 
 // docuK process.
 docuK.has("script").addClass("noDIdHandle");
 let k=docuK.length;
 for(let i=1;i<k;i++) {
-	kipid.docuKProcess(kipid, jQuery, i);
+	m.docuKProcess(m, jQuery, i);
 }
 
-kipid.bubbleRefs=docuK.find(".bubbleRef"); // for function kipid.ShowBR
+m.bubbleRefs=docuK.find(".bubbleRef"); // for function m.ShowBR
 
 let $inRefs=docuK.find(".inRef");
 // Centering arrow.
@@ -52,7 +52,7 @@ $inRefs.each(function () {
 });
 // Delayed-Load in bubble ref.
 $inRefs.on("mouseenter.delayedLoad", function () {
-	kipid.logPrint(`<br>Do delayed-load in bubble ref.`);
+	m.logPrint(`<br>Do delayed-load in bubble ref.`);
 	$window.trigger("scroll.delayedLoad");
 	$(this).off("mouseenter.delayedLoad");
 });
@@ -62,24 +62,24 @@ $inRefs.on("mouseenter.delayedLoad", function () {
 // Hangul (Korean) split and map to English
 // KE : Korean Expanded
 ////////////////////////////////////////////////////
-kipid.jamoKE=["ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄷㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
-kipid.jamo=["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅃ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+m.jamoKE=["ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄷㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+m.jamo=["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅃ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 
-kipid.mapKE={"q":"ㅂ", "Q":"ㅃ", "w":"ㅈ", "W":"ㅉ", "e":"ㄷ", "E":"ㄸ", "r":"ㄱ", "R":"ㄲ", "t":"ㅅ", "T":"ㅆ", "y":"ㅛ", "Y":"ㅛ", "u":"ㅕ", "U":"ㅕ", "i":"ㅑ", "I":"ㅑ", "o":"ㅐ", "O":"ㅒ", "p":"ㅔ", "P":"ㅖ", "a":"ㅁ", "A":"ㅁ", "s":"ㄴ", "S":"ㄴ", "d":"ㅇ", "D":"ㅇ", "f":"ㄹ", "F":"ㄹ", "g":"ㅎ", "G":"ㅎ", "h":"ㅗ", "H":"ㅗ", "j":"ㅓ", "J":"ㅓ", "k":"ㅏ", "K":"ㅏ", "l":"ㅣ", "L":"ㅣ", "z":"ㅋ", "Z":"ㅋ", "x":"ㅌ", "X":"ㅌ", "c":"ㅊ", "C":"ㅊ", "v":"ㅍ", "V":"ㅍ", "b":"ㅠ", "B":"ㅠ", "n":"ㅜ", "N":"ㅜ", "m":"ㅡ", "M":"ㅡ"};
-for (let p in kipid.mapKE) {
-	kipid.mapKE[kipid.mapKE[p]]=p; // Add reversed mapping.
+m.mapKE={"q":"ㅂ", "Q":"ㅃ", "w":"ㅈ", "W":"ㅉ", "e":"ㄷ", "E":"ㄸ", "r":"ㄱ", "R":"ㄲ", "t":"ㅅ", "T":"ㅆ", "y":"ㅛ", "Y":"ㅛ", "u":"ㅕ", "U":"ㅕ", "i":"ㅑ", "I":"ㅑ", "o":"ㅐ", "O":"ㅒ", "p":"ㅔ", "P":"ㅖ", "a":"ㅁ", "A":"ㅁ", "s":"ㄴ", "S":"ㄴ", "d":"ㅇ", "D":"ㅇ", "f":"ㄹ", "F":"ㄹ", "g":"ㅎ", "G":"ㅎ", "h":"ㅗ", "H":"ㅗ", "j":"ㅓ", "J":"ㅓ", "k":"ㅏ", "K":"ㅏ", "l":"ㅣ", "L":"ㅣ", "z":"ㅋ", "Z":"ㅋ", "x":"ㅌ", "X":"ㅌ", "c":"ㅊ", "C":"ㅊ", "v":"ㅍ", "V":"ㅍ", "b":"ㅠ", "B":"ㅠ", "n":"ㅜ", "N":"ㅜ", "m":"ㅡ", "M":"ㅡ"};
+for (let p in m.mapKE) {
+	m.mapKE[m.mapKE[p]]=p; // Add reversed mapping.
 }
 
-kipid.rChoKE=["ㄱ", "ㄱㄱ", "ㄴ", "ㄷ", "ㄷㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
-kipid.rCho=["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+m.rChoKE=["ㄱ", "ㄱㄱ", "ㄴ", "ㄷ", "ㄷㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+m.rCho=["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 
-kipid.rJungKE=["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
-kipid.rJung=["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+m.rJungKE=["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+m.rJung=["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 
-kipid.rJongKE=["", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
-kipid.rJong=["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+m.rJongKE=["", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+m.rJong=["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 
-kipid.splitHangul=function(str) {
+m.splitHangul=function(str) {
 	let res=[];
 	res.originalStr=str;
 	res.splitted3="";
@@ -93,7 +93,7 @@ kipid.splitHangul=function(str) {
 		let n=str.charCodeAt(i);
 		if (n>=0x3131&&n<=0x3163) {
 			n-=0x3131;
-			res[i]={"char":c, "splitted3":c, "splitted":kipid.jamoKE[n]};
+			res[i]={"char":c, "splitted3":c, "splitted":m.jamoKE[n]};
 			res.pCho[p]=true;
 		}
 		else if (n>=0xAC00&&n<=0xD7A3) {
@@ -102,8 +102,8 @@ kipid.splitHangul=function(str) {
 			jung=( (n-jong)/28 )%21;
 			cho=( ((n-jong)/28)-jung )/21;
 			res[i]={"char":c
-				, "splitted3":kipid.rCho[cho]+kipid.rJung[jung]+kipid.rJong[jong]
-				, "splitted":kipid.rChoKE[cho]+kipid.rJungKE[jung]+kipid.rJongKE[jong]};
+				, "splitted3":m.rCho[cho]+m.rJung[jung]+m.rJong[jong]
+				, "splitted":m.rChoKE[cho]+m.rJungKE[jung]+m.rJongKE[jong]};
 			res.pCho[p]=true;
 		}
 		else {
@@ -122,22 +122,22 @@ kipid.splitHangul=function(str) {
 ////////////////////////////////////////////////////
 // Fuzzy search prepare
 ////////////////////////////////////////////////////
-kipid.fsGo=[];
-kipid.fsGo[0]=kipid.fsGo[1]=[];
-kipid.fsGo[0].ptnSH=kipid.fsGo[1].ptnSH=kipid.splitHangul("$!@#");
-kipid.fsGo.fullList=[];
-kipid.fsGo.$fs=$fuzzy_search;
-kipid.fsGo.$fsl=$fuzzy_search_list;
-kipid.fsGo.$fsLis=$fuzzy_search_list.find(".list-item");
+m.fsGo=[];
+m.fsGo[0]=m.fsGo[1]=[];
+m.fsGo[0].ptnSH=m.fsGo[1].ptnSH=m.splitHangul("$!@#");
+m.fsGo.fullList=[];
+m.fsGo.$fs=$fuzzy_search;
+m.fsGo.$fsl=$fuzzy_search_list;
+m.fsGo.$fsLis=$fuzzy_search_list.find(".list-item");
 RegExp.quote=function(str) {
 	return str.replace(/[.?*+^$[\]\\{}()|-]/g, "\\$&").replace(/\s/g, "[\\s\\S]");
 };
-kipid.arrayRegExs=function(ptnSH) {
+m.arrayRegExs=function(ptnSH) {
 	let str=ptnSH.splitted;
 	let res=[];
 	for (let i=0;i<str.length;i++) {
 		let c=str.charAt(i);
-		let mapKE=kipid.mapKE[c];
+		let mapKE=m.mapKE[c];
 		if (mapKE) {
 			res.push( new RegExp("["+c+mapKE+"]", "ig") );
 		}
@@ -147,7 +147,7 @@ kipid.arrayRegExs=function(ptnSH) {
 	}
 	return res;
 };
-kipid.highlightStrFromIndices=function(strSplitted, indices) {
+m.highlightStrFromIndices=function(strSplitted, indices) {
 	let res="";
 	for (let i=0, j=1, k=0, p1=0, p2=0;j<=indices.length;i=j,j++) {
 		while (j<indices.length&&indices[j-1].end===indices[j].start) {
@@ -177,21 +177,21 @@ kipid.highlightStrFromIndices=function(strSplitted, indices) {
 		if (strSplitted[i].matched) {
 			res+='<span class="bold">';
 			while (i<strSplitted.length&&strSplitted[i].matched) {
-				res+=kipid.escapeHTML(strSplitted[i].char);
+				res+=m.escapeHTML(strSplitted[i].char);
 				i++;
 			}
 			res+='</span>';
 		}
 		else {
 			while (i<strSplitted.length&&!strSplitted[i].matched) {
-				res+=kipid.escapeHTML(strSplitted[i].char);
+				res+=m.escapeHTML(strSplitted[i].char);
 				i++;
 			}
 		}
 	}
 	return res;
 };
-kipid.matchScoreFromIndices=function(strSH, ptnSH, indices) {
+m.matchScoreFromIndices=function(strSH, ptnSH, indices) {
 	let res=0;
 	for (let i=0;i<indices.length;i++) {
 		if (strSH.pCho[indices[i].start])
@@ -203,7 +203,7 @@ kipid.matchScoreFromIndices=function(strSH, ptnSH, indices) {
 	}
 	return res;
 };
-kipid.fuzzySearch=function(ptnSH, fs) {
+m.fuzzySearch=function(ptnSH, fs) {
 	if (ptnSH.splitted===fs[0].ptnSH.splitted) {
 		return fs[0];
 	}
@@ -241,7 +241,7 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 	}
 	fs[0]=[];
 	fs[0].ptnSH=ptnSH;
-	let regExs=kipid.arrayRegExs(ptnSH);
+	let regExs=m.arrayRegExs(ptnSH);
 	let regExsReversed=[];
 	for (let i=0;i<regExs.length;i++) {
 		regExsReversed[i]=regExs[regExs.length-1-i];
@@ -269,7 +269,7 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 		}
 		let maxMatchScore=0;
 		if (matched) {
-			maxMatchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+			maxMatchScore=m.matchScoreFromIndices(txt, ptnSH, indices);
 			let indicesMMS=[]; // indices of max match score
 			for (let p=0;p<indices.length;p++) {
 				indicesMMS[p]=indices[p]; // hard copy of indices
@@ -291,7 +291,7 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 						}
 					}
 					if (matched) {
-						let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+						let matchScore=m.matchScoreFromIndices(txt, ptnSH, indices);
 						if (matchScore>maxMatchScore) {
 							maxMatchScore=matchScore;
 							indicesMMS=[];
@@ -329,14 +329,14 @@ kipid.fuzzySearch=function(ptnSH, fs) {
 						let iR=indicesReversed[indicesReversed.length-1-j];
 						indices[j]={start:(txtSReversed.length-iR.end), end:(txtSReversed.length-iR.start)};
 					}
-					let matchScore=kipid.matchScoreFromIndices(txt, ptnSH, indices);
+					let matchScore=m.matchScoreFromIndices(txt, ptnSH, indices);
 					if (matchScore>maxMatchScore) {
 						maxMatchScore=matchScore;
 						indicesMMS=indices;
 					}
 				}
 			}
-			fs[0].push({i:listI.i, maxMatchScore:maxMatchScore, highlight:kipid.highlightStrFromIndices(txt, indicesMMS)});
+			fs[0].push({i:listI.i, maxMatchScore:maxMatchScore, highlight:m.highlightStrFromIndices(txt, indicesMMS)});
 		}
 	}
 	else {
@@ -406,7 +406,7 @@ $fuzzy_search.on("keydown", function(e) {
 		break;
 	}
 });
-kipid.gotoLi=function(e, elem, k, fs) {
+m.gotoLi=function(e, elem, k, fs) {
 if (e&&e.srcElement&&e.srcElement.nodeName=="A") {
 }
 else {
@@ -426,38 +426,38 @@ else {
 		$window.scrollTop($listI.offset().top);
 	}
 }};
-kipid.doFSGo=function(fs) {
-	let fsPtnSH=kipid.splitHangul(fs.$fs.text().trim());
+m.doFSGo=function(fs) {
+	let fsPtnSH=m.splitHangul(fs.$fs.text().trim());
 	if (fs[0].ptnSH.splitted!==fsPtnSH.splitted) {
-		let res=kipid.fuzzySearch(fsPtnSH, fs);
+		let res=m.fuzzySearch(fsPtnSH, fs);
 		let sorted=res.sorted;
 		let str="";
 		for (let i=0;i<sorted.length;i++) {
 			let k=res[sorted[i]].i;
 			let fsFLk=fs.fullList[k];
-			str+=`<div class="list-item" onclick="kipid.gotoLi(event,this,${k},kipid.fsGo)">${fsFLk.html}${res[sorted[i]].highlight!==undefined?`<div class="highlighted"><span class="maxMatchScore">${res[sorted[i]].maxMatchScore}</span> :: ${res[sorted[i]].highlight}</div>`:''}</div>`;
+			str+=`<div class="list-item" onclick="m.gotoLi(event,this,${k},m.fsGo)">${fsFLk.html}${res[sorted[i]].highlight!==undefined?`<div class="highlighted"><span class="maxMatchScore">${res[sorted[i]].maxMatchScore}</span> :: ${res[sorted[i]].highlight}</div>`:''}</div>`;
 		}
 		fs.$fsl.html(str);
 		fs.$fsLis=fs.$fsl.find(".list-item");
 	}
 };
-kipid.fsGoOn=function() {
+m.fsGoOn=function() {
 	let now=Date.now();
-	let passed=now-kipid.previous;
-	if (passed>kipid.wait) {
-		kipid.previous=now;
-		kipid.doFSGo(kipid.fsGo);
+	let passed=now-m.previous;
+	if (passed>m.wait) {
+		m.previous=now;
+		m.doFSGo(m.fsGo);
 	}
 	else {
 		$fuzzy_search.off("input.fs keyup.fs cut.fs paste.fs");
 		setTimeout(function() {
-			$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
-			kipid.previous=Date.now();
-			kipid.doFSGo(kipid.fsGo);
-		}, kipid.wait*1.1-passed);
+			$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", m.fsGoOn);
+			m.previous=Date.now();
+			m.doFSGo(m.fsGo);
+		}, m.wait*1.1-passed);
 	}
 };
-$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", kipid.fsGoOn);
+$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", m.fsGoOn);
 
 //////////////////////////////////////////
 // Fuzzy search fullList
@@ -483,7 +483,7 @@ for (let i=0;i<$list.length;i++) {
 	}
 	txt+="* "+$listI.text();
 	html+=`<div class="li">* ${$listI.html().trim().replace(/\sid=/g,"\squasi-id=")}</div>`;
-	kipid.fsGo.fullList[$list.length-1-i]={i:$list.length-1-i, txt:kipid.splitHangul(txt), html:html, $listI:$listI};
+	m.fsGo.fullList[$list.length-1-i]={i:$list.length-1-i, txt:m.splitHangul(txt), html:html, $listI:$listI};
 }
 
 $fuzzy_search.trigger("keyup.fs");
@@ -495,10 +495,10 @@ window.$headOrBody=$("head")||$("body")||$("#docuK-style");
 
 window.onpopstate=function (e) {
 	if (!!e.state) {
-		if (e.state?.goOn!==kipid.goOn) {
+		if (e.state?.goOn!==m.goOn) {
 			$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)});
 		}
-		if (e.state?.logOn!==kipid.logOn) {
+		if (e.state?.logOn!==m.logOn) {
 			$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)});
 		}
 	}
@@ -511,7 +511,7 @@ $document.ready(function () {
 	for (let i=0;i<codeprints.length;i++) {
 		let codeId=codeprints.eq(i).attr('id');
 		if (codeId!==null&&codeId!==undefined&&codeId.startsWith("code-")) {
-			kipid.printCode(codeId);
+			m.printCode(codeId);
 		}
 	}
 
@@ -519,52 +519,52 @@ $document.ready(function () {
 	docuK.find(".sec.hiden").find(">.sec-contents").css({display:"none"});
 
 	// Setting and Printing Styles
-	kipid.$deviceInfo=docuK.find(".deviceInfo");
+	m.$deviceInfo=docuK.find(".deviceInfo");
 
 	let cookieItem;
-	kipid.logPrint(`<br>`);
+	m.logPrint(`<br>`);
 
-	cookieItem=kipid.docCookies.getItem("kipid.mode");
+	cookieItem=m.docCookies.getItem("m.mode");
 	if (cookieItem!==null) {
-		kipid.Cmode(cookieItem);
-		kipid.logPrint(`<br>Mode ${cookieItem} is set from cookie.`);
+		m.Cmode(cookieItem);
+		m.logPrint(`<br>Mode ${cookieItem} is set from cookie.`);
 	}
 	else {
-		kipid.Cmode("Dark");
+		m.Cmode("Dark");
 	}
-	for(let i=1;i<kipid.docuK.length;i++) {
-		$(`#button${i}-${kipid.mode}`).prop('checked', true);
+	for(let i=1;i<m.docuK.length;i++) {
+		$(`#button${i}-${m.mode}`).prop('checked', true);
 	}
 
-	cookieItem=kipid.docCookies.getItem("kipid.fontFamily");
+	cookieItem=m.docCookies.getItem("m.fontFamily");
 	if (cookieItem!==null) {
-		kipid.CfontFamily(cookieItem);
-		kipid.logPrint(`<br>Font ${cookieItem} is set from cookie.`);
-		for(let i=1;i<kipid.docuK.length;i++) {
-			$(`#input${i}-font-family`)[0].value=kipid.fontFamily;
+		m.CfontFamily(cookieItem);
+		m.logPrint(`<br>Font ${cookieItem} is set from cookie.`);
+		for(let i=1;i<m.docuK.length;i++) {
+			$(`#input${i}-font-family`)[0].value=m.fontFamily;
 		}
 	}
 
-	cookieItem=kipid.docCookies.getItem("kipid.fontSize");
+	cookieItem=m.docCookies.getItem("m.fontSize");
 	if (cookieItem!==null) {
-		kipid.CfontSize(Number(cookieItem)-10);
-		kipid.logPrint(`<br>Font-size ${(Number(cookieItem)*1.8).toFixed(1)} is set from cookie.`);
+		m.CfontSize(Number(cookieItem)-10);
+		m.logPrint(`<br>Font-size ${(Number(cookieItem)*1.8).toFixed(1)} is set from cookie.`);
 	}
 
-	cookieItem=kipid.docCookies.getItem("kipid.lineHeight10");
+	cookieItem=m.docCookies.getItem("m.lineHeight10");
 	if (cookieItem!==null) {
-		kipid.ClineHeight(Number(cookieItem)-16);
-		kipid.logPrint(`<br>Line-height ${(Number(cookieItem)/10).toFixed(1)} is set from cookie.`);
+		m.ClineHeight(Number(cookieItem)-16);
+		m.logPrint(`<br>Line-height ${(Number(cookieItem)/10).toFixed(1)} is set from cookie.`);
 	}
 
-	kipid.printDeviceInfo();
-	kipid.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
+	m.printDeviceInfo();
+	m.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
 
 	// Initial Delayed Load.
-	kipid.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
-	kipid.logPrint(`<br><br>There are ${kipid.$delayedElems.length} delayed elements.`);
+	m.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
+	m.logPrint(`<br><br>There are ${m.$delayedElems.length} delayed elements.`);
 	setTimeout(function () {
-		$window.on("scroll.delayedLoad", kipid.delayedLoadByScroll);
+		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
 		$window.trigger("scroll.delayedLoad");
 	}, 2000);
 
@@ -572,29 +572,29 @@ $document.ready(function () {
 	if (!($("#disqus_thread").exists())) {
 		($("body")||$("#docuK-script")).append(`<div id="disqus_thread"></div>`);
 	}
-	let $disqus_js=$(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
+	let $disqus_js=$(`<script id="disqus-js" defer src="https://m.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
 	$headOrBody.append($disqus_js);
-	kipid.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
+	m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
 	// Kakao js script (from kakao.com CDN) is added.
-	kipid.kakao_js_id='kakao-jssdk';
-	if (!$(`#${kipid.kakao_js_id}`)) {
-		let $kakao_js=$(`<script id="${kipid.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></`+`script>`); // Avoid closing script
+	m.kakao_js_id='kakao-jssdk';
+	if (!$(`#${m.kakao_js_id}`)) {
+		let $kakao_js=$(`<script id="${m.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($kakao_js);
 	}
-	kipid.logPrint(`<br><br>kakao.js with id="${kipid.kakao_js_id}" is loaded.`);
-	kipid.kakaoInitDo=function () {
+	m.logPrint(`<br><br>kakao.js with id="${m.kakao_js_id}" is loaded.`);
+	m.kakaoInitDo=function () {
 		if (typeof Kakao!=='undefined') {
-			clearInterval(kipid.kakaoInit);
+			clearInterval(m.kakaoInit);
 			if (!Kakao.isInitialized()) {
 				Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
 			}
-			kipid.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
+			m.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
 		}
 	};
-	kipid.kakaoInit=setInterval(kipid.kakaoInitDo, 2000);
+	m.kakaoInit=setInterval(m.kakaoInitDo, 2000);
 
-	kipid.popUpKakao=function () {
+	m.popUpKakao=function () {
 		let $desc=$("meta[name='description']");
 		let href=window.location.href;
 		Kakao.Share.sendDefault({
@@ -615,7 +615,7 @@ $document.ready(function () {
 	if (docuK.find('.prettyprint').exists()) {
 		let $gcp=$(`<script id="prettyfy-js" defer src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($gcp);
-		kipid.logPrint(`<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.`);
+		m.logPrint(`<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.`);
 	}
 
 	// MathJax js script (from cdn.mathjax.org) is added.
@@ -625,9 +625,9 @@ window.MathJax={
 	startup: {
 		typeset: false, // Skip startup typeset.
 		ready: function () {
-			kipid.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
+			m.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
 			MathJax.startup.defaultReady();
-			kipid.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
+			m.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
 		}
 	},
 	asciimath: {
@@ -647,24 +647,24 @@ window.MathJax={
 		$headOrBody.append($mjxConfig);
 		let $mjx=$(`<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($mjx);
-		kipid.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "&lt;eq&gt;, &lt;eqq&gt;" is there in your document.`);
+		m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "&lt;eq&gt;, &lt;eqq&gt;" is there in your document.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
-		kipid.mathJaxPreProcessDo=function () {
+		m.mathJaxPreProcessDo=function () {
 			if (typeof (MathJax.startup)!=='undefined') {
-				clearInterval(kipid.mathJaxPreProcess);
+				clearInterval(m.mathJaxPreProcess);
 				MathJax.typeset();
 			}
 		};
-		kipid.mathJaxPreProcess=setInterval(kipid.mathJaxPreProcessDo, 2000);
+		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	kipid.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,div.comments,#disqus_thread,#aside"); // Ordered automatically by jQuery.
-	kipid.tocs=$(".docuK>.sec").has(".toc");
-	kipid.rras=$(".docuK>.sec").has("ol.refs");
-	kipid.goOn=false;
-	kipid.logOn=false;
-	kipid.processShortKey=function(event) {
+	m.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,div.comments,#disqus_thread,#aside"); // Ordered automatically by jQuery.
+	m.tocs=$(".docuK>.sec").has(".toc");
+	m.rras=$(".docuK>.sec").has("ol.refs");
+	m.goOn=false;
+	m.logOn=false;
+	m.processShortKey=function(event) {
 		if (event.altKey||event.ctrlKey||event.metaKey) return;
 		switch (event.target&&event.target.nodeName) {
 			case "INPUT": case "SELECT": case "TEXTAREA": return;
@@ -678,47 +678,47 @@ window.MathJax={
 					$fuzzy_search_container.hide();
 					$out_focus.focus();
 					$button_Go.removeClass("enabled");
-					kipid.goOn=false;
-					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
+					m.goOn=false;
+					window.history.pushState({goOn:m.goOn, logOn:m.logOn}, "");
 				}
 				else {
 					$fuzzy_search_container.show();
 					$fuzzy_search.focus();
 					$button_Go.addClass("enabled");
-					kipid.goOn=true;
-					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
+					m.goOn=true;
+					window.history.pushState({goOn:m.goOn, logOn:m.logOn}, "");
 				}
 				break;
 			case 75: // K=75
 				event.preventDefault();
-				if (kipid.$log.is(":visible")) {
-					kipid.$log.hide();
+				if (m.$log.is(":visible")) {
+					m.$log.hide();
 					$out_focus.focus();
 					$button_log.removeClass("enabled");
-					kipid.logOn=false;
-					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
+					m.logOn=false;
+					window.history.pushState({goOn:m.goOn, logOn:m.logOn}, "");
 				}
 				else {
-					kipid.$log.show();
+					m.$log.show();
 					$button_log.addClass("enabled");
-					kipid.logOn=true;
-					window.history.pushState({goOn:kipid.goOn, logOn:kipid.logOn}, "");
+					m.logOn=true;
+					window.history.pushState({goOn:m.goOn, logOn:m.logOn}, "");
 				}
 				break;
 			case 70: // F=70
 			case 68: // D=68
 				scrollTop=$window.scrollTop();
-				k=kipid.fdList.length;
+				k=m.fdList.length;
 				let hI;
 
 				if (event.keyCode===70) {
 					scrollTop+=10;
 					for (i=0;i<k;i++) {
-						hI=kipid.fdList.eq(i);
+						hI=m.fdList.eq(i);
 						if (hI.is(":visible")&&scrollTop<hI.offset().top) { break; }
 					}
 					if (i===k) {
-						// hI=kipid.fdList.eq(0);
+						// hI=m.fdList.eq(0);
 						// alert("This is the last section.");
 						return;
 					}
@@ -726,11 +726,11 @@ window.MathJax={
 				else{
 					scrollTop-=10;
 					for (i=k-1;i>=0;i--) {
-						hI=kipid.fdList.eq(i);
+						hI=m.fdList.eq(i);
 						if (hI.is(":visible")&&scrollTop>hI.offset().top) { break; }
 					}
 					if (i===-1) {
-						// hI=kipid.fdList.eq(k-1);
+						// hI=m.fdList.eq(k-1);
 						// alert("This is the first section.");
 						return;
 					}
@@ -739,29 +739,29 @@ window.MathJax={
 				break;
 			case 84: // T=84
 				scrollTop=$window.scrollTop();
-				k=kipid.tocs.length;
+				k=m.tocs.length;
 				let tocI;
 				scrollTop-=10;
 				for (i=k-1;i>=0;i--) {
-					tocI=kipid.tocs.eq(i);
+					tocI=m.tocs.eq(i);
 					if (tocI.is(":visible")&&scrollTop>tocI.offset().top) { break; }
 				}
 				if (i===-1) {
-					tocI=kipid.tocs.eq(k-1);
+					tocI=m.tocs.eq(k-1);
 				}
 				$window.scrollTop(tocI.offset().top);
 				break;
 			case 82: // R=82
 				scrollTop=$window.scrollTop();
-				k=kipid.rras.length;
+				k=m.rras.length;
 				let rraI;
 				scrollTop-=10;
 				for (i=k-1;i>=0;i--) {
-					rraI=kipid.rras.eq(i);
+					rraI=m.rras.eq(i);
 					if (rraI.is(":visible")&&scrollTop>rraI.offset().top) { break; }
 				}
 				if (i===-1) {
-					rraI=kipid.rras.eq(k-1);
+					rraI=m.rras.eq(k-1);
 				}
 				$window.scrollTop(rraI.offset().top);
 				break;
@@ -775,7 +775,7 @@ window.MathJax={
 				break;
 			case 90: // Z=90
 				if ($("div.comments").exists()) $window.scrollTop($("div.comments").offset().top);
-				// kipid.HandleAhrefInComment();
+				// m.HandleAhrefInComment();
 				break;
 			case 88: // X=88
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
@@ -787,24 +787,24 @@ window.MathJax={
 				if (window['processShortcut']!==undefined) {processShortcut(event);}
 		}
 	}
-	$window.on("keydown", kipid.processShortKey);
-	kipid.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
+	$window.on("keydown", m.processShortKey);
+	m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
-	kipid.logPrint(`<br><br>kipid.delayPad=${kipid.delayPad};<br>kipid.wait=${kipid.wait};`);
+	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
-	kipid.HandleAhrefInComment=function () {
+	m.HandleAhrefInComment=function () {
 		$("div.comments").find("p").each(function (i, elem) {
 			$(elem).html(
 				$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-					return `<a target="_blank" href="${match}">${kipid.escapeHTML(decodeURIComponent(match))}</a>`
+					return `<a target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a>`
 				})
 			);
 		});
 	};
-	kipid.HandleAhrefInComment();
+	m.HandleAhrefInComment();
 
 	// Closing docuK Log.
-	kipid.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
-	setTimeout(function () {kipid.$log.hide();}, 300);
+	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
+	setTimeout(function () {m.$log.hide();}, 300);
 });
-})(window.kipid, jQuery);
+})(window.m, jQuery);

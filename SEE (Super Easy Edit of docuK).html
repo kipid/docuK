@@ -90,9 +90,9 @@ Categories of this document is put here with links to <a target="_blank" href="h
 
 ## Warning
 
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>kipid.variables</code> already asigned before, will not work in the afterward rendering.
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>m.variables</code> already asigned before, will not work in the afterward rendering.
 
-Only <code>kipid.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+Only <code>m.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -578,7 +578,7 @@ public class HelloWorldServer extends Verticle {
 </codeprint><!-- docuK-docu -->
 
 <script>
-kipid.printFullSEE=function (SEE) {
+m.printFullSEE=function (SEE) {
 	let fullSEE=`<!DOCTYPE html>
 
 <meta charset="UTF-8"/>
@@ -604,20 +604,20 @@ ${SEE.trim()}
 
 <codeprint id="docuK-script">
 <script>
-kipid.wait=512;
-kipid.delayPad=0;
+m.wait=512;
+m.delayPad=0;
 <`+`/script>
 
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-script -->`;
 
-	$("#pre-code-docuK-HTML").html(kipid.escapeHTML(fullSEE));
+	$("#pre-code-docuK-HTML").html(m.escapeHTML(fullSEE));
 	$("#pre-code-docuK-HTML").removeClass("prettyprinted");
 	setTimeout(function later() {
 		if (typeof PR!=='undefined'&&PR.prettyPrint) {
 			PR.prettyPrint(function () {
-				kipid.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
+				m.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
 			}, $("#pre-code-docuK-HTML")[0]);
 		}
 		else {
@@ -626,17 +626,17 @@ kipid.delayPad=0;
 	}, 0);
 };
 
-kipid.renderIt=function () {
-	$("#rendered-docuK").html(kipid.renderToDocuK($("#pre-SEE")[0].value));
-	kipid.docuKProcess(kipid, jQuery, 2);
+m.renderIt=function () {
+	$("#rendered-docuK").html(m.renderToDocuK($("#pre-SEE")[0].value));
+	m.docuKProcess(kipid, jQuery, 2);
 	$("#time-last-render").html("Lastly rendered at "+new Date().toLocaleString());
 };
 
 let SEEHtml=$("#SEE").html().trim();
-kipid.printFullSEE(SEEHtml);
-$("#pre-SEE").html(kipid.escapeHTML(SEEHtml));
+m.printFullSEE(SEEHtml);
+$("#pre-SEE").html(m.escapeHTML(SEEHtml));
 $("#SEE").remove();
-$("#rendered-docuK").html(kipid.renderToDocuK(SEEHtml));
+$("#rendered-docuK").html(m.renderToDocuK(SEEHtml));
 
 $(document).ready(function () {
 	$("#button-render-it-to-docuK").on("click", function anonyRender(){
@@ -644,7 +644,7 @@ $(document).ready(function () {
 		$elem.off("click");
 		$("#pre-SEE").attr({contenteditable:false});
 		$elem.css({background:"rgb(100,100,100)"});
-		kipid.renderIt();
+		m.renderIt();
 		$elem.css({background:"rgb(209, 112, 112)"});
 		$("#pre-SEE").attr({contenteditable:true});
 		$elem.on("click", anonyRender);
@@ -665,8 +665,8 @@ $(document).ready(function () {
 
 <codeprint id="docuK-script">
 <script>
-kipid.wait=512;
-kipid.delayPad=0;
+m.wait=512;
+m.delayPad=0;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
