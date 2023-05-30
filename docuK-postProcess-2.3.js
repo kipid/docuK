@@ -572,7 +572,7 @@ $document.ready(function () {
 	if (!($("#disqus_thread").exists())) {
 		($("body")||$("#docuK-script")).append(`<div id="disqus_thread"></div>`);
 	}
-	let $disqus_js=$(`<script id="disqus-js" defer src="https://m.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
+	let $disqus_js=$(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
 	$headOrBody.append($disqus_js);
 	m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
