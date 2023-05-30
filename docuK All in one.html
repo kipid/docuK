@@ -8,23 +8,23 @@
 
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"></script>
-<!-- <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
 
 <!-- From recoeve.net CDN -->
 <!-- <link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
 <script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<link rel="stylesheet" href="./docuK-2.3.css">
-<script src="./docuK-prepare-2.3.js" charset="utf-8"></script>
+<!-- <link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
 </codeprint><!-- docuK-style -->
 
 <meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
 
 <codeprint id="docuK-docu">
 <div class="docuK">
-<div class="sec"><h1>HTML docuK format ver. 2.3 (2022-12-26)</h1>
+<div class="sec"><h1>HTML docuK format ver. 2.3 (2023-05-30)</h1>
   <div class="p">
     개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 '<span class="emph">document designed by kipid</span>'란 뜻.
   </div>
@@ -857,16 +857,25 @@
 
 <codeprint id="docuK-script">
 <script>
-m.wait=1024;
+m.wait=512;
 m.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="HTML-docuK-format-ver-20"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
 </script>
 
 <!-- From kipid.tistory CDN -->
-<!-- <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
 
 <!-- From recoeve.net CDN -->
 <!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<script src="./docuK-postProcess-2.3.js" charset="utf-8"></script>
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 </codeprint><!-- docuK-script -->
