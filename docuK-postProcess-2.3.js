@@ -780,6 +780,9 @@ window.MathJax={
 			case 88: // X=88
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
 				break;
+			case 73: // I=73
+				window.location.href="https://www.tistory.com/auth/login";
+				break;
 			default:
 				if (window['processShortcut']!==undefined) {processShortcut(event);}
 		}

@@ -8,9 +8,65 @@ kipid.browserWidth=window.innerWidth;
 const docuK=$(".docuK");
 kipid.docuK=docuK;
 
+// cookies.js (copied from cookie-test.html)
+kipid.expire=365*24*60*60; // max-age in seconds.
+kipid.docCookies={
+	hasItem:function (sKey) {
+		return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=")).test(document.cookie);
+	}
+	, getItem:function (sKey) {
+		return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null;
+	}
+	, removeItem:function (sKey, sPath, sDomain, bSecure) {
+		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+		document.cookie=encodeURIComponent(sKey)+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT"+(sDomain?"; domain="+sDomain:"")+(sPath?"; path="+sPath:"")+(bSecure?"; secure":"");
+		return true;
+	}
+	, setItem:function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+		let sExpires="";
+		if (vEnd) { switch (vEnd.constructor) {
+			case Number:
+				sExpires=vEnd===Infinity?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+vEnd;
+				break;
+			case String:
+				sExpires="; expires="+vEnd;
+				break;
+			case Date:
+				sExpires="; expires="+vEnd.toUTCString();
+				break;
+		}}
+		document.cookie=encodeURIComponent(sKey)+"="+encodeURIComponent(sValue)+sExpires+(sDomain?"; domain="+sDomain:"")+(sPath?"; path="+sPath:"")+(bSecure?"; secure":"");
+		return true;
+	}
+	, keys:function () {
+		let aKeys=document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g,"").split(/\s*(?:\=[^;]*)?;\s*/);
+		for (let nIdx=0;nIdx<aKeys.length;nIdx++) { aKeys[nIdx]=decodeURIComponent(aKeys[nIdx]); }
+		return aKeys;
+	}
+};
+
+m.hideFK=function () {
+	$floating_key.hide();
+	m.docCookies.setItem("hideFK", "y", Infinity, "/", false, true);
+};
+m.toggleFK=function () {
+	if ($floating_key.is(":visible")) {
+		m.docCookies.setItem("hideFK", "y", Infinity, "/", false, true);
+	}
+	else {
+		m.docCookies.removeItem("hideFK", "/", false, true);
+	}
+	$floating_key.toggle();
+};
+
 // logPrint function.
 kipid.$log=$("#docuK-log");
 kipid.$log.addClass("fixed");
+kipid.$log.before(``);
+if (m.docCookies.getItem("hideFK")==="y") {
+	$floating_key.hide();
+}
 kipid.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 kipid.logPrint=function (str) {
 	kipid.$log.append(str);
@@ -381,44 +437,6 @@ kipid.getContentsJoinedWithEnter=function ($elem) {
 	return strArray.join("\n");
 };
 
-// cookies.js (copied from cookie-test.html)
-kipid.expire=365*24*60*60; // max-age in seconds.
-kipid.docCookies={
-	hasItem:function (sKey) {
-		return (new RegExp("(?:^|;\\s*)"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=")).test(document.cookie);
-	}
-	, getItem:function (sKey) {
-		return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(sKey).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null;
-	}
-	, removeItem:function (sKey, sPath, sDomain, bSecure) {
-		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-		document.cookie=encodeURIComponent(sKey)+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT"+(sDomain?"; domain="+sDomain:"")+(sPath?"; path="+sPath:"")+(bSecure?"; secure":"");
-		return true;
-	}
-	, setItem:function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
-		if (!sKey||/^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-		let sExpires="";
-		if (vEnd) { switch (vEnd.constructor) {
-			case Number:
-				sExpires=vEnd===Infinity?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+vEnd;
-				break;
-			case String:
-				sExpires="; expires="+vEnd;
-				break;
-			case Date:
-				sExpires="; expires="+vEnd.toUTCString();
-				break;
-		}}
-		document.cookie=encodeURIComponent(sKey)+"="+encodeURIComponent(sValue)+sExpires+(sDomain?"; domain="+sDomain:"")+(sPath?"; path="+sPath:"")+(bSecure?"; secure":"");
-		return true;
-	}
-	, keys:function () {
-		let aKeys=document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g,"").split(/\s*(?:\=[^;]*)?;\s*/);
-		for (let nIdx=0;nIdx<aKeys.length;nIdx++) { aKeys[nIdx]=decodeURIComponent(aKeys[nIdx]); }
-		return aKeys;
-	}
-};
-
 // Functions for printing codes into 'pre.prettyprint'.
 kipid.indentsRemove=function (str) {
 	let firstIndent=str.match(/^\n\t+/), indentRegExp;
@@ -539,6 +557,9 @@ kipid.resetStyle=function () {
 	kipid.CfontFamily(kipid.defaultStyles.fontFamily);
 	kipid.CfontSize(kipid.defaultStyles.fontSize-kipid.fontSize);
 	kipid.ClineHeight(kipid.defaultStyles.lineHeight10-kipid.lineHeight10);
+	if (!$floating_key.is(":visible")) {
+		m.toggleFK();
+	}
 }
 kipid.Cmode=function (modeI) {
 	if (modeI=="Dark") {
@@ -769,7 +790,7 @@ kipid.docuKProcess=function docuK(kipid, $, docuKI, undefined) {
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search)</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section</span></li>
-		<li><span onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Previous Section</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Backwar<span class="bold underline">d</span> Section</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</span></li>
