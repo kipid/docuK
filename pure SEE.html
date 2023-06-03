@@ -8,24 +8,65 @@
 
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"></script>
-<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+<!-- <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script> -->
 
 <!-- From recoeve.net CDN -->
 <!-- <link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
 <script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<!-- <link rel="stylesheet" href="./docuK-2.3.css">
-<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+<link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script>
+
+<style>
+.docuK pre.printSEE {box-sizing:border-box; width:100%; height:40em; background:black; color:white; font-size:.8em; margin-left:1em}
+</style>
 </codeprint><!-- docuK-style -->
 
 <meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial)."/>
 
-<codeprint class="SEE">
+<codeprint id="SEE0" class="SEE">
 # pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial).
 
-The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below (or <code>Shift+Enter</code>).
+The docuK rendered from the current text is being represented.
+
+<script>
+// Hack to avoid duplicate id handling of docuK process.
+</script>
+
+
+
+## Abstract | Description of docuK and SEE
+
+Specific features are
+
+<ul>
+<li>Changable mode, font-family.</li>
+<li>Resizable font-size, line-height.</li>
+<li>Table of contents.</li>
+<li>Numbering of sections/figures/equations.</li>
+<li>Citing references in bubble-shape pop up.</li>
+<li>Refering figures and equations.</li>
+<li>Refering anything with id and element with class="number".</li>
+<li>Delayed(lazy)-loading of figures (images, iframes).</li>
+<li>Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.</li>
+<li>Auto code printing from `<code class="prettyprint">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="prettyprint">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>`.</li>
+</ul>
+
+Quite similar to LaTeX or Wiki document, but extended a little bit.
+
+
+
+## SEE (Super Easy Edit) code only
+
+<pre class="printSEE prettyprint lang-html" id="pre0-SEE"></pre>
+
+
+
+## Full SEE code
+
+<pre class="printSEE prettyprint lang-html" id="pre0-full-SEE"></pre>
 
 
 
@@ -522,6 +563,39 @@ public class HelloWorldServer extends Verticle {
 
 <codeprint id="docuK-script">
 <script>
+(function(m, $, undefined) {
+m.SEEHTMLs=[];
+m.SEEHTMLs[0]=$("#SEE0").html().trim();
+$("#pre0-SEE").html(m.escapeHTML(m.SEEHTMLs[0]));
+$("#pre0-full-SEE").html(m.escapeHTML(`<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"><`+`/script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+<!-- docuK-style -->
+
+<codeprint class="SEE">
+${m.SEEHTMLs[0]}
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+m.wait=512;
+m.delayPad=0;
+<`+`/script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-script -->`));
+m.SEEHTMLs[0]=$("#SEE0").html().trim();
+
 m.wait=512;
 m.delayPad=0;
 
@@ -533,14 +607,15 @@ window.disqus_config=function () {
 	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
 };
+})(window.m, jQuery)
 </script>
 
 <!-- From kipid.tistory CDN -->
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+<!-- <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 
 <!-- From recoeve.net CDN -->
 <!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+<script src="./docuK-postProcess-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-script -->
