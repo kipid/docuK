@@ -248,6 +248,13 @@ m.SEEToArray=function (SEE) {
 				subStr=SEE.substring(start,end).trim();
 			}
 		}
+		else if (/^<textarea\s*[^>]*>/i.test(subStr)) {
+			while (!/<\/textarea>$/i.test(subStr)) {
+				re=dE.exec(SEE);
+				end=dE.lastIndex;
+				subStr=SEE.substring(start,end).trim();
+			}
+		}
 		else if (/^<data\s*[^>]*>/i.test(subStr)) {
 			while (!/<\/data>$/i.test(subStr)) {
 				re=dE.exec(SEE);
