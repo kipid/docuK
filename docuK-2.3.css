@@ -125,7 +125,7 @@ codeprint.SEE {display:none}
 .docuK>.sec .head-text {color:white} .docuK.bright>.sec .head-text {color:black}
 .docuK .ShowHide {float:right; padding:.3em 0; cursor:pointer}
 .docuK .Hide {float:right; padding:0 0 .3em; clear:both; cursor:pointer}
-.docuK .sec-contents, .docuK>.sec.noToggleUI>h2+* {clear:both; margin-top:.6em; padding-top:0}
+.docuK .sec-contents, .docuK>.sec.noToggleUI>h2+* {clear:both; margin-top:.6em; padding:0 .35em 0 0}
 /*.docuK>.sec.hiden>.sec-contents {display:none}*/
 .docuK .subsec, .docuK .subsubsec {margin:2em 0 .3em}
 .docuK .secN {margin-right:.5em}
