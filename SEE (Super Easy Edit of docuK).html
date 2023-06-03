@@ -18,16 +18,45 @@
 <!-- From local -->
 <!-- <link rel="stylesheet" href="./docuK-2.3.css">
 <script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<style>
+.docuK pre.printSEE {font-size:.75em}
+</style>
 </codeprint><!-- docuK-style -->
 
-<meta charset="utf-8" name="description" content="Super Easy Edit (SEE) of docuK: 사용 설명서 (Manual | Documentation | Tutorial).">
+<meta charset="utf-8" name="description" content="Super Easy Edit (SEE) of docuK (MarkDown): 사용 설명서 (Manual | Documentation | Tutorial). This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are * Changable mode, font-family. * Resizable font-size, line-height. * Table of contents. * Numbering of sections/figures/equations. * Citing references in bubble-shape pop up. * Refering figures and equations. * Refering anything with id and element with class='number'. * Delayed(lazy)-loading of figures (images, iframes). * Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning. * Auto code printing. Quite similar to LaTeX or Wiki document, but extended a little bit.">
 
 <codeprint id="docuK-docu">
 <div class="docuK noDIdHandle">
-<div class="sec"><h1># Super Easy Edit (SEE) of docuK: 사용 설명서 (Manual | Documentation | Tutorial).</h1>
+<div class="sec"><h1># Super Easy Edit (SEE) of docuK (MarkDown): 사용 설명서 (Manual | Documentation | Tutorial).</h1>
 	<div class="p">
 		쉽게 문서를 작성합시다.
 	</div>
+</div>
+<div class="sec"><h2>Abstract | Description of docuK and SEE</h2>
+	<div class="p">
+		This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier.
+	</div>
+	<div class="p">
+		Specific features are
+		<ul>
+			<li>Changable mode, font-family.</li>
+			<li>Resizable font-size, line-height.</li>
+			<li>Table of contents.</li>
+			<li>Numbering of sections/figures/equations.</li>
+			<li>Citing references in bubble-shape pop up.</li>
+			<li>Refering figures and equations.</li>
+			<li>Refering anything with id and element with class="number".</li>
+			<li>Delayed(lazy)-loading of figures (images, iframes).</li>
+			<li>Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.</li>
+			<li>Auto code printing from `<code class="prettyprint">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="prettyprint">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>`.</li>
+		</ul>
+	</div>
+	<div class="p">
+		Quite similar to LaTeX or Wiki document, but extended a little bit.
+	</div>
+</div>
+<div class="sec">
 	<h2>Try it yourself</h2><br>
 	<div class="p">
 		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield. You can use <code>Shift+Enter</code> for rendering. You can copy and paste the code in <a href="#sec-CPSEE">Copy and Paste</a> where the full stand-alone code is.
@@ -36,7 +65,7 @@
 		For the full stand-alone code, put meta tags additionally <code class="prettyprint">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></code> for encoding ('utf-8' is recommended. The html file must be saved with the same encoding.) and <code class="prettyprint">&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/></code> for mobile view.
 	</div>
 
-	<textarea id="pre-SEE" style="width:100%; height:40em; background:black; color:white; font:inherit; font-size:.8em; padding:.5em; margin:1em 0"></textarea>
+	<pre id="pre-SEE" class="printSEE prettyprint lang-html scrollable"></pre>
 
 	<div class="center">
 		<button id="button-render-it-to-docuK" style="background:rgb(209, 112, 112); margin:0; padding:0 0.5em; font:inherit">Render it to docuK below</button>
@@ -48,10 +77,47 @@
 
 <div id="rendered-docuK"></div>
 
-<codeprint id="SEE" class="SEE">
+<codeprint id="SEE0" class="SEE">
 # pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial).
 
-The docuK rendered from the current text is represented. Try it yourself: Edit the text and click the button below (or <code>Shift+Enter</code>).
+The docuK rendered from the current text is being represented.
+
+<script>
+// Hack to avoid duplicate id handling of docuK process.
+</script>
+
+
+
+## Abstract | Description of docuK and SEE
+
+Specific features are
+
+<ul>
+<li>Changable mode, font-family.</li>
+<li>Resizable font-size, line-height.</li>
+<li>Table of contents.</li>
+<li>Numbering of sections/figures/equations.</li>
+<li>Citing references in bubble-shape pop up.</li>
+<li>Refering figures and equations.</li>
+<li>Refering anything with id and element with class="number".</li>
+<li>Delayed(lazy)-loading of figures (images, iframes).</li>
+<li>Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.</li>
+<li>Auto code printing from `<code class="prettyprint">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="prettyprint">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>`.</li>
+</ul>
+
+Quite similar to LaTeX or Wiki document, but extended a little bit.
+
+
+
+## SEE (Super Easy Edit) code only
+
+<pre class="printSEE prettyprint scrollable lang-html" id="pre0-SEE"></pre>
+
+
+
+## Full SEE code
+
+<pre class="printSEE prettyprint scrollable lang-html" id="pre0-full-SEE"></pre>
 
 
 
@@ -222,9 +288,9 @@ There are the blow HTML elments in this <code>docuK.SEE</code>.
 &lt;!-- ## RRA with ol.refs --&gt;
 &lt;ol class="refs"&gt;
 &lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
-	&lt;li id="ref-docuK"&gt;&lt;a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
 		// Updated regularly&lt;/li&gt;
-	&lt;li id="ref-docuKShort"&gt;&lt;a href="http://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
+	&lt;li id="ref-docuKShort"&gt;&lt;a href="https://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
 		// Updated regularly&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -320,9 +386,9 @@ Table will be automatically filled up.
 
 <ol class="refs">
 <div class="subsec"><h3>Main</h3></div>
-	<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
 		// Updated regularly</li>
-	<li id="ref-docuKShort"><a href="http://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
+	<li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
 		// Updated regularly</li>
 	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
 <div class="subsec"><h3>Supported by</h3></div>
@@ -336,7 +402,7 @@ Table will be automatically filled up.
 	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
 	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
 <div class="subsec"><h3>Other markdown/markup languages</h3></div>
-	<li id="ref-latex"><a href="http://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
 		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
 		// 그래도 문법은 차용해서 쓰기 좋음.</li>
 	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
@@ -544,7 +610,7 @@ public class HelloWorldServer extends Verticle {
 ## New Section
 
 "```/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
-</codeprint><!-- codeprint#SEE.SEE -->
+</codeprint><!-- codeprint#SEE0.SEE -->
 
 <div class="docuK noDIdHandle">
 <div class="sec"><h1># Update History and <code>pure SEE.html</code> file</h1>
@@ -568,13 +634,13 @@ public class HelloWorldServer extends Verticle {
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-CPSEE">Copy and Paste this code. (<code>pure SEE.html</code>)</h2>
-	<pre id="pre-code-docuK-HTML" class="prettyprint scrollable" contenteditable="true"></pre>
-	<!--  style="width:100%; height:40em; background:black; color:white; font:inherit; font-size:.8em; padding:.5em; margin:1em 0" -->
+	<pre id="pre-code-docuK-HTML" class="printSEE prettyprint scrollable" contenteditable="true"></pre>
 </div>
 </div><!-- docuK -->
 </codeprint><!-- docuK-docu -->
 
 <script>
+(function(m, $, undefined) {
 m.printFullSEE=function (SEE) {
 	let fullSEE=`<!DOCTYPE html>
 
@@ -582,13 +648,10 @@ m.printFullSEE=function (SEE) {
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
 
 <codeprint id="docuK-style">
-<script
-	src="https://code.jquery.com/jquery-3.2.1.min.js"
-	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	crossorigin="anonymous"><`+`/script>
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
 
 <!-- From kipid.tistory CDN -->
+<script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"><`+`/script>
 <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-style -->
@@ -629,11 +692,44 @@ m.renderIt=function () {
 	$("#time-last-render").html("Lastly rendered at "+new Date().toLocaleString());
 };
 
-let SEEHtml=$("#SEE").html().trim();
+let SEEHtml=$("#SEE0").html().trim();
 m.printFullSEE(SEEHtml);
 $("#pre-SEE").html(m.escapeHTML(SEEHtml));
-$("#SEE").remove();
+// $("#pre-SEE")[0].value=m.escapeHTML(SEEHtml);
+// $("#SEE0").remove();
 $("#rendered-docuK").html(m.renderToDocuK(SEEHtml));
+
+m.SEEHTMLs=[];
+m.SEEHTMLs[0]=$("#SEE0").html().trim();
+$("#pre0-SEE").html(m.escapeHTML(m.SEEHTMLs[0]));
+$("#pre0-full-SEE").html(m.escapeHTML(`<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"><`+`/script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+<!-- docuK-style -->
+
+<codeprint class="SEE">
+${m.SEEHTMLs[0]}
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+m.wait=512;
+m.delayPad=0;
+<`+`/script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-script -->`));
+m.SEEHTMLs[0]=$("#SEE0").html().trim();
 
 $(document).ready(function () {
 	$("#button-render-it-to-docuK").on("click", function anonyRender(){
@@ -658,6 +754,7 @@ $(document).ready(function () {
 		}
 	});
 });
+})(window.m, jQuery);
 </script>
 
 <codeprint id="docuK-script">
