@@ -796,7 +796,7 @@ window.MathJax={
 		$("div.comments").find("p").each(function (i, elem) {
 			$(elem).html(
 				$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-					return `<a target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a>`
+					return `<a style="color:wheat" target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a>`
 				})
 			);
 		});
