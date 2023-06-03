@@ -12,7 +12,7 @@ Specific features are
 * Refering figures and equations.
 * Refering anything with id and element with class="number".
 * Delayed(lazy)-loading of figures (images, iframes).
-* Delayed(lazy)-rendering of maths (MathJax).
+* Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.
 * Auto code printing from `<codeprint id="code-id"></codeprint>` to `<pre id="pre-code-id"></pre>`.
 
 Quite similar to LaTeX or Wiki document, but extended a little bit.
