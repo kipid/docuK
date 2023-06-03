@@ -1,11 +1,18 @@
 (function(m, $, undefined) {
 // SEE (Super Easy Edit)
 let $SEE=$("codeprint.SEE");
+m.SEEHTMLs=m.SEEHTMLs||[];
 for (let i=0;i<$SEE.length;i++) {
 	let $SEEi=$SEE.eq(i);
-	let SEEiHTML=$SEEi.html().trim();
+	let SEEHTMLi="";
+	if (!!m.SEEHTMLs[i]) {
+		SEEHTMLi=m.SEEHTMLs[i].trim();
+	}
+	else {
+		SEEHTMLi=$SEEi.html().trim();
+	}
 	$SEEi.html("");
-	$SEEi.after(m.renderToDocuK(SEEiHTML));
+	$SEEi.after(m.renderToDocuK(SEEHTMLi));
 }
 $("pre.prettyprint.scrollable").addClass("linenums");
 
@@ -802,6 +809,12 @@ window.MathJax={
 		});
 	};
 	m.HandleAhrefInComment();
+
+	m.tistoryAddComment=window.addComment;
+	window.addComment=async function (elem, number) {
+		await m.tistoryAddComment(elem, number);
+		m.HandleAhrefInComment();
+	};
 
 	// Closing docuK Log.
 	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
