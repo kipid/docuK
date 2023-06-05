@@ -34,10 +34,12 @@ codeprint.SEE {display:none}
 
 #floating-key {z-index:20000; font-size:1.1em; display:flex; flex-wrap:wrap; position:fixed; right:.2em; bottom:2.45em; width:9em; height:auto}
 #floating-key div.button {text-align:center; margin:0; padding:0; width:9em; height:auto}
-#toggle-floating-key {font-size:1em; position:fixed; right:.2em; bottom:.2em; text-align:center; width:2.2em; height:2.4em; margin:0; padding:.1em}
+#toggle-floating-key {z-index:20000; font-size:1em; position:fixed; right:.2em; bottom:.2em; text-align:center; width:2.2em; height:2.4em; margin:0; padding:.1em}
 #SNS-floating {width:100%; text-align:center}
 #SNS-floating .SNS-img {box-sizing:border-box; width:1.8em; height:1.8em; border:1px gray solid; border-left:0; cursor:pointer}
 #SNS-floating .SNS-img:first-child {border-left:1px gray solid}
+.docuK #floating-key, .docuK #toggle-floating-key {color:wheat}
+.docuK.bright #floating-key, .docuK.bright #toggle-floating-key {color:black}
 
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
 .docuK {font-size:10px; line-height:1.6; font-family:'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif; text-align:justify; max-width:1000px; margin:.5em auto; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word}

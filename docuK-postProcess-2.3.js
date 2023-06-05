@@ -800,15 +800,27 @@ window.MathJax={
 	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
 	m.HandleAhrefInComment=function () {
-		$("div.comments").find("p").each(function (i, elem) {
-			$(elem).html(
-				$(elem).html().replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-					return `<a style="color:wheat" target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a>`
-				})
-			);
+		$("div.comments>.comment-list").find("p").each(function (i, elem) {
+			let $elem=$(elem);
+			let contents=$elem.contents();
+			let elemHTML="";
+			for (let i=0;i<contents.length;i++) {
+				let toBeAdded="";
+				if (contents[i].nodeType===Node.TEXT_NODE) { // Node.TEXT_NODE=3
+					toBeAdded=contents[i].innerHTML=contents[i].wholeText.replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
+						return `<a style="color:wheat" target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a>`
+					});
+				}
+				else {
+					toBeAdded=contents[i].outerHTML;
+				}
+				elemHTML+=toBeAdded;
+			}
+			$elem.html(elemHTML);
 		});
 	};
 	m.HandleAhrefInComment();
+	$("div.comments>.comment-list").after(`<div class="button right" onclick="m.HandleAhrefInComment()">댓글 링크 연결해주기</div>`);
 
 	m.tistoryAddComment=window.addComment;
 	window.addComment=async function (elem, number) {

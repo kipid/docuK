@@ -81,16 +81,16 @@ m.$log.before(`<div id="floating-key">
 	<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})">
 		<span class="bold underline">F</span>orward
 	</div>
-	<div class="button button-Go" style="width:4em" onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})">
+	<div class="button" style="width:4em" onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})">
 		<span class="bold underline">R</span>RA
 	</div>
-	<div class="button button-ToC" style="width:5em" onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})">
+	<div class="button" style="width:5em" onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})">
 		<span class="bold underline">L</span>ists
 	</div>
-	<div class="button button-Go" style="width:4em" onclick="$window.trigger({type:'keydown', keyCode:'Z'.charCodeAt(0)})">
+	<div class="button" style="width:4.5em" onclick="$window.trigger({type:'keydown', keyCode:'Z'.charCodeAt(0)})">
 		Cmt<span class="bold underline">Z</span>
 	</div>
-	<div class="button button-ToC" style="width:5em" onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})">
+	<div class="button" style="width:4.5em" onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})">
 		Cmt<span class="bold underline">X</span>
 	</div>
 	${m.docCookies.hasItem("REACTION_GUEST")?`<div class="button button-mode button-multireco-mode" onclick="$window.trigger({type:'keydown', keyCode:'I'.charCodeAt(0)})">
