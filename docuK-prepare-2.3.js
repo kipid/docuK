@@ -64,7 +64,26 @@ m.toggleFK=function () {
 // logPrint function.
 m.$log=$("#docuK-log");
 m.$log.addClass("fixed");
-m.$log.before(``);
+m.$log.before(`<div id="floating-key">
+	<div id="button-hideFK" class="button" onclick="m.hideFK()">▼ Hide</div>
+	<div class="button button-Go" style="width:4em" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})">
+		<span class="bold underline">G</span>o
+	</div>
+	<div class="button button-ToC" style="width:5em" onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})">
+		<span class="bold underline">T</span>ofC
+	</div>
+	<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})">
+		Backwar<span class="bold underline">d</span>
+	</div>
+	<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})">
+		<span class="bold underline">F</span>orward
+	</div>
+	${m.docCookies.hasItem("REACTION_GUEST")?`<div class="button button-mode button-multireco-mode" onclick="$window.trigger({type:'keydown', keyCode:'M'.charCodeAt(0)})">
+		Log <span class="bold underline">i</span>n
+	</div>`:""}
+	<div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="m.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="m.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="m.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="m.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="m.shareSNS('kakao')"></div>
+</div>
+<div class="button" id="toggle-floating-key" onclick="m.toggleFK()">▲</div>`);
 if (m.docCookies.getItem("hideFK")==="y") {
 	$floating_key.hide();
 }
