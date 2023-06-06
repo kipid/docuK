@@ -829,12 +829,9 @@ window.MathJax={
 	};
 	m.HandleAhrefInComment();
 
-	// TODO: 아래 덮어씌운건 동작 안하는듯?
-	m.tistoryAddComment=window.addComment;
-	window.addComment=async function (elem, number) {
-		await m.tistoryAddComment(elem, number);
-		m.HandleAhrefInComment();
-	};
+	$window.on("resize.menubar", function (e) {
+		$("#menubar_wrapper").parents().show();
+	});
 
 	// Closing docuK Log.
 	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
