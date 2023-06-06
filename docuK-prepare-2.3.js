@@ -93,9 +93,14 @@ m.$log.before(`<div id="floating-key">
 	<div class="button" style="width:4.5em" onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})">
 		Cmt<span class="bold underline">X</span>
 	</div>
-	${m.docCookies.hasItem("REACTION_GUEST")?`<div class="button button-mode button-multireco-mode" onclick="$window.trigger({type:'keydown', keyCode:'I'.charCodeAt(0)})">
+	<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'H'.charCodeAt(0)})">
+		<span class="bold underline">H</span>andle CmtZ
+	</div>
+	${m.docCookies.removeItem("REACTION_GUEST")&&m.docCookies.hasItem("REACTION_GUEST")?`<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'I'.charCodeAt(0)})">
 		Log <span class="bold underline">i</span>n
-	</div>`:""}
+	</div>`:`<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'O'.charCodeAt(0)})">
+		Log <span class="bold underline">o</span>ut
+	</div>`}
 	<div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="m.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="m.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="m.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="m.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="m.shareSNS('kakao')"></div></div><div class="button" id="toggle-floating-key" onclick="m.toggleFK()">▲</div>`);
 $floating_key=$("#floating-key");
 if (m.docCookies.getItem("hideFK")==="y") {
@@ -834,9 +839,17 @@ m.docuKProcess=function docuK(m, $, docuKI, undefined) {
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})"><span class="bold underline">D</span>: Backwar<span class="bold underline">d</span> Section</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences</span></li>
+	</ul>
+	<ul>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists]</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'Z'.charCodeAt(0)})"><span class="bold underline">Z</span>: Tistory comments</span></li>
 		<li><span onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})"><span class="bold underline">X</span>: DISQUS comments</span></li>
+	</ul>
+	<ul>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'I'.charCodeAt(0)})"><span class="bold underline">I</span>: Log <span class="bold underline">i</span>n to Tistory
+	</span></li>
+		<li><span onclick="$window.trigger({type:'keydown', keyCode:'O'.charCodeAt(0)})"><span class="bold underline">O</span>: Log <span class="bold underline">o</span>ut from Tistory
+	</span></li>
 	</ul>
 </div>`);
 	docuK.after(`<div class="copyright"><ul>

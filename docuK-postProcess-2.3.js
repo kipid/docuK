@@ -782,7 +782,9 @@ window.MathJax={
 				break;
 			case 90: // Z=90
 				if ($("div.comments").exists()) $window.scrollTop($("div.comments").offset().top);
-				// m.HandleAhrefInComment();
+				break;
+			case 72: // H=72
+				m.HandleAhrefInComment();
 				break;
 			case 88: // X=88
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
@@ -790,8 +792,13 @@ window.MathJax={
 			case 73: // I=73
 				window.location.href="https://www.tistory.com/auth/login";
 				break;
+			case 79: // O=79
+				window.location.href="https://www.tistory.com/auth/logout";
+				break;
 			default:
-				if (window['processShortcut']!==undefined) {processShortcut(event);}
+				if (window.processShortcut!==undefined) {
+					window.processShortcut(event);
+				}
 		}
 	}
 	$window.on("keydown", m.processShortKey);
@@ -820,8 +827,8 @@ window.MathJax={
 		});
 	};
 	m.HandleAhrefInComment();
-	$("div.comments>.comment-list").after(`<div class="button right" onclick="m.HandleAhrefInComment()">댓글 링크 연결해주기</div>`);
 
+	// TODO: 아래 덮어씌운건 동작 안하는듯?
 	m.tistoryAddComment=window.addComment;
 	window.addComment=async function (elem, number) {
 		await m.tistoryAddComment(elem, number);

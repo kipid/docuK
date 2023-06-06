@@ -32,7 +32,7 @@ codeprint.SEE {display:none}
 .shortkey ul {line-height:1.4; padding:0 1.5em}
 .shortkey li {color:white !important}
 
-#floating-key {z-index:20000; font-size:1.1em; display:flex; flex-wrap:wrap; position:fixed; right:.2em; bottom:2.45em; width:9em; height:auto}
+#floating-key {z-index:20000; font-size:1.2em; display:flex; flex-wrap:wrap; position:fixed; right:.2em; bottom:2.45em; width:9em; height:auto}
 #floating-key div.button {text-align:center; margin:0; padding:0; width:9em; height:auto}
 #toggle-floating-key {z-index:20000; font-size:1em; position:fixed; right:.2em; bottom:.2em; text-align:center; width:2.2em; height:2.4em; margin:0; padding:.1em}
 #SNS-floating {width:100%; text-align:center}
