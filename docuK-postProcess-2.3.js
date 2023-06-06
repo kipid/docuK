@@ -790,6 +790,7 @@ window.MathJax={
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
 				break;
 			case 73: // I=73
+				m.docCookies.removeItem("REACTION_GUEST", "/");
 				window.location.href="https://www.tistory.com/auth/login";
 				break;
 			case 79: // O=79

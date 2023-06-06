@@ -29,16 +29,17 @@ codeprint.SEE {display:none}
 }
 
 .shortkey {color:white; background-color:#141414; max-width:1000px; margin:auto}
-.shortkey ul {line-height:1.4; padding:0 1.5em}
+.shortkey ul.ul-short-key {line-height:1.4; padding:0 1.5em; margin:.7em 0}
 .shortkey li {color:white !important}
 
-#floating-key {z-index:20000; font-size:1.2em; display:flex; flex-wrap:wrap; position:fixed; right:.2em; bottom:2.45em; width:9em; height:auto}
-#floating-key div.button {text-align:center; margin:0; padding:0; width:9em; height:auto}
-#toggle-floating-key {z-index:20000; font-size:1em; position:fixed; right:.2em; bottom:.2em; text-align:center; width:2.2em; height:2.4em; margin:0; padding:.1em}
+#floating-key {display:flex; flex-wrap:wrap; bottom:2.6em; width:9em; height:auto}
+#floating-key div.button {border-top:none; text-align:center; margin:0; padding:0; width:9em; height:auto}
+	#floating-key div.button:first-child {border-top:2px;}
+#toggle-floating-key {bottom:.2em; text-align:center; width:2.2em; height:2.3em; margin:0; padding:.1em}
 #SNS-floating {width:100%; text-align:center}
 #SNS-floating .SNS-img {box-sizing:border-box; width:1.8em; height:1.8em; border:1px gray solid; border-left:0; cursor:pointer}
-#SNS-floating .SNS-img:first-child {border-left:1px gray solid}
-.docuK #floating-key, .docuK #toggle-floating-key {color:wheat}
+	#SNS-floating .SNS-img:first-child {border-left:1px gray solid}
+.docuK #floating-key, .docuK #toggle-floating-key {color:wheat; z-index:20000; position:fixed; right:.2em;}
 .docuK.bright #floating-key, .docuK.bright #toggle-floating-key {color:black}
 
 .docuK ::selection, .docuK ::-moz-selection {background:#aa0000; color:white}
@@ -69,7 +70,7 @@ codeprint.SEE {display:none}
 	background:white
 }
 #fuzzy-search-list {
-	height:auto; min-height:3em; max-height:15em; overflow-y:auto;
+	height:auto; min-height:3em; max-height:200px; overflow-y:auto;
 	border:2px gray solid;
 	background:rgb(20,20,20)
 }
@@ -87,7 +88,7 @@ codeprint.SEE {display:none}
 	background:rgb(200,200,200)
 }
 #fuzzy-search-list .list-item.selected {border:.15em solid rgb(210,150,150)}
-#fuzzy-search-list .list-item .cat {font-size:.9em;}
+#fuzzy-search-list .list-item .cat {font-size:.9em}
 #fuzzy-search-list .list-item .highlighted {
 	font-size:.5em; color:rgb(150,150,150)
 }
@@ -116,9 +117,6 @@ codeprint.SEE {display:none}
 #fuzzy-search-container .exit>svg {
 	width:100%; height:100%;
 	font-size:1.8em; line-height:1.0
-}
-@media all and (min-height:500px) {
-	#fuzzy-search-list {max-height:430px;}
 }
 
 .docuK button {cursor:pointer}
@@ -181,7 +179,7 @@ codeprint.SEE {display:none}
 .docuK.bright a.jump:hover {color:rgb(50,105,0)}
 .docuK.bright span.nolink {color:rgb(150,150,0)}
 
-.button {display:inline-block; cursor:pointer; margin:0; padding:.2em .5em; border:.15em solid rgb(50,50,50); background:rgb(110,110,110)}
+.button {display:inline-block; cursor:pointer; margin:0; padding:.2em .5em; border:2px solid rgb(50,50,50); background:rgb(110,110,110)}
 	.bright .button {border-color:rgb(200,200,200); background:rgb(190,190,190)}
 .button:active {background:rgb(0,80,80)}
 	.bright .button:active {background:rgb(100,180,180)}
@@ -317,15 +315,40 @@ codeprint.SEE {display:none}
 
 #disqus_thread {background:black; padding:.2em .5em}
 
-@media all and (min-width:401px) {
+@media all and (min-width:400px) {
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
+	#floating-key {font-size:1.3em}
 }
 @media all and (min-width:500px) {
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 	#docuK-log.fixed>.exit {bottom:280px}
+	#floating-key {font-size:1.4em}
 }
 @media all and (min-width:600px) {
 	.docuK .SNS-top {padding-top:0}
 	.docuK .deviceInfo, .docuK .promoting-docuK {margin-left:188px}
+	#floating-key {font-size:1.5em}
+}
+@media all and (min-width:700px) {
+	#floating-key {font-size:1.6em}
+}
+@media all and (min-width:800px) {
+	#floating-key {font-size:1.7em}
+}
+@media all and (min-width:900px) {
+	#floating-key {font-size:1.8em}
+}
+
+@media all and (min-height:300px) {
+	#fuzzy-search-list {max-height:250px}
+}
+@media all and (min-height:400px) {
+	#fuzzy-search-list {max-height:330px}
+}
+@media all and (min-height:500px) {
+	#fuzzy-search-list {max-height:410px}
+}
+@media all and (min-height:600px) {
+	#fuzzy-search-list {max-height:500px}
 }
