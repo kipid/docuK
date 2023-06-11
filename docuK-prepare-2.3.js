@@ -318,7 +318,6 @@ m.SEEToArray=function (SEE) {
 
 m.renderToDocuK=function (toBeRendered) {
 	const ps=m.SEEToArray(toBeRendered);
-	const p=ps.length;
 
 	const TOC="Table of Contents";
 	const PH="Posting History";
@@ -365,7 +364,7 @@ m.renderToDocuK=function (toBeRendered) {
 		return "";
 	}
 
-	for (let i=0;i<p;i++) {
+	for (let i=0;i<ps.length;i++) {
 		ps[i]=ps[i].trim();
 
 		if (hN=/^#+(?![#\/])/.exec(ps[i])) {
