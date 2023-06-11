@@ -34,7 +34,7 @@ codeprint.SEE {display:none}
 
 #floating-key {display:flex; flex-wrap:wrap; bottom:2.6em; width:9em; height:auto}
 #floating-key div.button {border-top:none; text-align:center; margin:0; padding:0; width:9em; height:auto}
-	#floating-key div.button:first-child {border-top:2px;}
+	#floating-key div.button:first-child {border-top:2px solid rgb(50,50,50)}
 #toggle-floating-key {bottom:.2em; text-align:center; width:2.2em; height:2.3em; margin:0; padding:.1em}
 #SNS-floating {width:100%; text-align:center}
 #SNS-floating .SNS-img {box-sizing:border-box; width:1.8em; height:1.8em; border:1px gray solid; border-left:0; cursor:pointer}
