@@ -61,6 +61,41 @@ m.toggleFK=function () {
 	$floating_key.toggle();
 };
 
+m.promoting=`<div class="promoting">
+<div class="p">* Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</div>
+<div class="bcf">
+For the usage examples of <a class="wheat" target="_blank" href="https://recoeve.net/"><span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a>, visit my (kipid | <a class="wheat" target="_blank" href="https://kipid.tistory.com/entry/Career-Portfolio-%EC%9D%B4%EA%B0%95%EC%88%98">이강수</a>) page
+<ul style="margin:0">
+<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMy%20Blog%5D--%5BMusic%2FBreak%5D--%EC%B8%84%EC%B8%84">[My Blog]--[Music/Break]--츄츄 (My Pet) of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC">[Music/Break]--남규리 | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
+</ul>
+</div>
+<div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/o/ssRqY4of">open.kakao.com :: Recoeve.net 개발 관련</a></div>
+<div class="p"></div>
+<div class="p">* Promoting 서울 덕은 치과 의원</div>
+<div class="p">
+<a class="wheat" target="_blank" href="https://www.instagram.com/seouldeogeun_dental_clinic/">Instagram (인스타그램) :: 서울 덕은 치과</a><br>
+경기도 고양시 덕양구 으뜸로 130, 위프라임 트윈타워 3층<br>
+TEL: 02-3158-2882<br>
+<a class="wheat" target="_blank" href="https://seouldedc.modoo.at/">modoo.at :: 서울 덕은 치과 :: 우리동네 서울대 치과병원 (원장: 최영섭)</a>
+</div>
+<div class="p center">
+<a class="wheat" href="https://map.kakao.com/?urlX=471428.0&urlY=1133326.0&itemId=1601307680&q=%EC%84%9C%EC%9A%B8%EB%8D%95%EC%9D%80%EC%B9%98%EA%B3%BC%EC%9D%98%EC%9B%90&srcid=1601307680&map_type=TYPE_MAP&from=roughmap&level=9" target="_blank"><img delayed-src="https://blog.kakaocdn.net/dn/dhLyQZ/btsjtzoXmYE/ln5BPmntQkr1GDIkQlW44K/img.png"/></a>
+</div>
+<div class="p"></div>
+<div class="p">* Promoting 이숨 (이완되고 숨이 쉬어지는) 정신과 의원</div>
+<div class="p">
+<a class="wheat" target="_blank" href="https://yisoom.modoo.at/">modoo.at :: 이숨 정신건강 의학과 의원 :: 이완되고 숨이 쉬어집니다.</a><br>
+경기도 광명시 일직동 512-3 T타워 3층 310,311,312호<br>
+TEL: 02-897-2325
+</div>
+<div class="p center">
+<a class="wheat" href="https://map.kakao.com/?urlX=473933.0&urlY=1088439.0&itemId=725265712&q=%EC%9D%B4%EC%88%A8%EC%A0%95%EC%8B%A0%EA%B1%B4%EA%B0%95%EC%9D%98%ED%95%99%EA%B3%BC%EC%9D%98%EC%9B%90&srcid=725265712&map_type=TYPE_MAP&from=roughmap&level=9" target="_blank"><img delayed-src="https://blog.kakaocdn.net/dn/czveOa/btsjmCte5rA/UU7KxwFmJrIycCsa76siw0/img.png"/></a>
+</div>
+</div>`;
+
 // logPrint function.
 m.$log=$("#docuK-log");
 m.$log.addClass("fixed");

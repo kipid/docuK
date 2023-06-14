@@ -513,6 +513,10 @@ window.onpopstate=function (e) {
 
 // On ready.
 $document.ready(function () {
+	for (let i=1;i<m.docuK;i++) {
+		m.docuK.eq(i).before(m.promoting);
+		m.docuK.eq(i).after(m.promoting);
+	}
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
 	let codeprints=$("codeprint");
 	for (let i=0;i<codeprints.length;i++) {
@@ -666,7 +670,7 @@ window.MathJax={
 	}
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	m.fdList=$("#header,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,div.comments,#disqus_thread,#aside"); // Ordered automatically by jQuery.
+	m.fdList=$("#header,.promoting,#content,#container,#wrapContent,.docuK .sec>h1,.docuK .sec>h2,.docuK .subsec>h3,.docuK .subsubsec>h4,div.comments,#disqus_thread,#aside"); // Ordered automatically by jQuery.
 	m.tocs=$(".docuK>.sec").has(".toc");
 	m.rras=$(".docuK>.sec").has("ol.refs");
 	m.goOn=false;

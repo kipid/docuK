@@ -4,6 +4,12 @@ body {margin:0; padding:0}
 codeprint.SEE {display:none}
 #content .inner {padding:0 !important}
 
+.promoting {font-size:13px; color:white; background:black; max-width:1000px; margin:1em auto; padding:.5em .8em}
+.promoting .p {margin:.7em 0; padding-bottom:.5em}
+.promoting a, .promoting a.wheat {color:wheat}
+.promoting .center {text-align:center}
+.promoting img {max-width:100%; min-width:70%; width:auto}
+
 .copyright {font-size:13px; color:rgb(100,255,100); background-color:rgb(0,0,0); max-width:1000px; margin:1em auto}
 .copyright ul {line-height:1.4; padding:.1em .5em}
 .copyright li.cc::before {background-image:url(https://tistory2.daumcdn.net/tistory/1468360/skin/images/cc.png)}
