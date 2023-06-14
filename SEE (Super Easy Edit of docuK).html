@@ -56,8 +56,7 @@
 		Quite similar to LaTeX or Wiki document, but extended a little bit.
 	</div>
 </div>
-<div class="sec">
-	<h2>Try it yourself</h2><br>
+<div class="sec"><h2>Try it yourself</h2>
 	<div class="p">
 		Edit the text and click the button below it to render the text to the docuK HTML format. Then the document will be represented beneath the textfield. You can use <code>Shift+Enter</code> for rendering. You can copy and paste the code in <a href="#sec-CPSEE">Copy and Paste</a> where the full stand-alone code is.
 	</div>
@@ -610,7 +609,7 @@ public class HelloWorldServer extends Verticle {
 ## New Section
 
 "```/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
-</codeprint><!-- codeprint#SEE0.SEE -->
+</codeprint><!-- codeprint#SEE0.SEE copied from "pure SEE.html" -->
 
 <div class="docuK noDIdHandle">
 <div class="sec"><h1># Update History and <code>pure SEE.html</code> file</h1>
@@ -688,7 +687,7 @@ m.delayPad=0;
 
 m.renderIt=function () {
 	$("#rendered-docuK").html(m.renderToDocuK($("#pre-SEE")[0].value));
-	m.docuKProcess(kipid, jQuery, 2);
+	m.docuKProcess(m, jQuery, 2);
 	$("#time-last-render").html("Lastly rendered at "+new Date().toLocaleString());
 };
 
