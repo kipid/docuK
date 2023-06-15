@@ -6,6 +6,7 @@ codeprint.SEE {display:none}
 
 .promoting {font-size:13px; color:white; background:black; max-width:1000px; margin:1em auto; padding:.5em .8em}
 .promoting .p {margin:.7em 0; padding-bottom:.5em}
+.promoting li {margin:.2em 0 .3em 2em; }
 .promoting a, .promoting a.wheat {color:wheat}
 .promoting .center {text-align:center}
 .promoting img {max-width:100%; min-width:70%; width:auto}
@@ -265,10 +266,10 @@ codeprint.SEE {display:none}
 
 .docuK ol, .docuK ul {margin:.3em 0 1.7em; padding-left:2em} .docuK dl {margin:0 0 1em}
 .docuK ol {list-style-type:decimal} .docuK ul {list-style-type:disc}
-.docuK li, .docuK dd {padding:.3em 0; color:rgb(210,210,210) !important}
+.docuK li, .docuK dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 .docuK.bright li, .docuK.bright dd {color:rgb(40,40,40) !important}
 .docuK ol.refs {counter-reset:item; list-style-type:none; padding-left:2.4em}
-.docuK ol.refs>li {padding-bottom:1em}
+.docuK ol.refs>li {margin:.3em 0 .5em 2em}
 .docuK ol.refs>li:before {content:'[' counter(item, decimal-leading-zero) ']'; counter-increment:item; margin-left:-2em; margin-right:.5em}
 .docuK ol.refs>li>.refN {display:none}
 .docuK ol.refs>.subsec {margin:1.5em 0 0 -2.1em}
