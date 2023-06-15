@@ -264,7 +264,7 @@ codeprint.SEE {display:none}
 	font-size:1.8em; line-height:1.0
 }
 
-.docuK ol, .docuK ul {margin:.3em 0 1.7em; padding-left:2em} .docuK dl {margin:0 0 1em}
+.docuK ol, .docuK ul {margin:.3em 0 1.7em} .docuK dl {margin:0 0 1em}
 .docuK ol {list-style-type:decimal} .docuK ul {list-style-type:disc}
 .docuK li, .docuK dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 .docuK.bright li, .docuK.bright dd {color:rgb(40,40,40) !important}
@@ -272,7 +272,7 @@ codeprint.SEE {display:none}
 .docuK ol.refs>li {margin:.3em 0 .5em 2em}
 .docuK ol.refs>li:before {content:'[' counter(item, decimal-leading-zero) ']'; counter-increment:item; margin-left:-2em; margin-right:.5em}
 .docuK ol.refs>li>.refN {display:none}
-.docuK ol.refs>.subsec {margin:1.5em 0 0 -2.1em}
+.docuK ol.refs>.subsec {margin:1.5em 0 0 0}
 
 .docuK .cmt, .docuK .bcf {padding:.5em; margin:0 0 1.3em; background:rgb(15,15,15); color:white} .docuK.bright .cmt, .docuK.bright .bcf {background:rgb(200,200,200); color:black}
 .docuK .cmt {border-left:.5em solid rgb(70,0,70)}
