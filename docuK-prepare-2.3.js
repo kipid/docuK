@@ -87,7 +87,7 @@ TEL: 02-3158-2882<br>
 <div class="p"></div>
 <div class="p">* Promoting 이숨 (이완되고 숨이 쉬어지는) 정신과 의원</div>
 <div class="p">
-<a class="wheat" target="_blank" href="https://yisoom.modoo.at/">modoo.at :: 이숨 정신건강 의학과 의원 :: 이완되고 숨이 쉬어집니다.</a><br>
+<a class="wheat" target="_blank" href="https://yisoom.modoo.at/">modoo.at :: 이숨 정신건강 의학과 의원 :: 이완되고 숨이 쉬어집니다. (원장: 김현명)</a><br>
 경기도 광명시 일직동 512-3 T타워 3층 310,311,312호<br>
 TEL: 02-897-2325
 </div>
