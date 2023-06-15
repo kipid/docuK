@@ -72,7 +72,7 @@ For the usage examples of <a class="wheat" target="_blank" href="https://recoeve
 <li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
 </ul>
 </div>
-<div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/o/ssRqY4of">open.kakao.com :: Recoeve.net 개발 관련</a></div>
+<div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
 <div class="p"></div>
 <div class="p">* Promoting 서울 덕은 치과 의원</div>
 <div class="p">
