@@ -129,6 +129,7 @@ m.splitHangul=function(str) {
 ////////////////////////////////////////////////////
 // Fuzzy search prepare
 ////////////////////////////////////////////////////
+m.fsLength=m.fsLength||512;
 m.fsGo=[];
 m.fsGo[0]=m.fsGo[1]=[];
 m.fsGo[0].ptnSH=m.fsGo[1].ptnSH=m.splitHangul("$!@#");
@@ -281,7 +282,7 @@ m.fuzzySearch=function(ptnSH, fs) {
 			for (let p=0;p<indices.length;p++) {
 				indicesMMS[p]=indices[p]; // hard copy of indices
 			}
-			if (txt.length<512) {
+			if (txt.length<m.fsLength) {
 				for (let k=indices.length-2;k>=0;) {
 					regExs[k].lastIndex=indices[k].start+1;
 					exec=regExs[k].exec(txtS);
