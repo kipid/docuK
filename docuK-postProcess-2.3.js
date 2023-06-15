@@ -513,7 +513,7 @@ window.onpopstate=function (e) {
 
 // On ready.
 $document.ready(function () {
-	for (let i=1;i<m.docuK;i++) {
+	for (let i=1;i<m.docuK.length;i++) {
 		m.docuK.eq(i).before(m.promoting);
 		m.docuK.eq(i).after(m.promoting);
 	}
