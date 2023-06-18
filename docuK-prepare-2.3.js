@@ -74,7 +74,7 @@ For the usage examples of <a class="wheat" target="_blank" href="https://recoeve
 </div>
 <div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
 <div class="p"></div>
-<div class="p">* Promoting 서울 덕은 치과 의원</div>
+<div class="p">* Promoting 서울 덕은 치과 의원 (내 친구 최영섭이 운영하는 치과. 짱 친절하면서도 최고의 실력과 경영능력을 갖췄음.)</div>
 <div class="p">
 <a class="wheat" target="_blank" href="https://www.instagram.com/seouldeogeun_dental_clinic/">Instagram (인스타그램) :: 서울 덕은 치과</a><br>
 경기도 고양시 덕양구 으뜸로 130, 위프라임 트윈타워 3층<br>
@@ -85,7 +85,7 @@ TEL: 02-3158-2882<br>
 <a class="wheat" href="https://map.kakao.com/?urlX=471428.0&urlY=1133326.0&itemId=1601307680&q=%EC%84%9C%EC%9A%B8%EB%8D%95%EC%9D%80%EC%B9%98%EA%B3%BC%EC%9D%98%EC%9B%90&srcid=1601307680&map_type=TYPE_MAP&from=roughmap&level=9" target="_blank"><img delayed-src="https://blog.kakaocdn.net/dn/dhLyQZ/btsjtzoXmYE/ln5BPmntQkr1GDIkQlW44K/img.png"/></a>
 </div>
 <div class="p"></div>
-<div class="p">* Promoting 이숨 (이완되고 숨이 쉬어지는) 정신과 의원</div>
+<div class="p">* Promoting 이숨 (이완되고 숨이 쉬어지는) 정신과 의원 (성안드레아 병원에서 인연이 생겨서 계속 치료받고 있는 병원. 개원하신걸 알고 일부러 찾아갈 정도로 믿음을 주셨던 정신과 의사. 설명을 친절하게 잘 해주시고, 병을 이해를 시키셔서 치료를 해주시는 스타일.)</div>
 <div class="p">
 <a class="wheat" target="_blank" href="https://yisoom.modoo.at/">modoo.at :: 이숨 정신건강 의학과 의원 :: 이완되고 숨이 쉬어집니다. (원장: 김현명)</a><br>
 경기도 광명시 일직동 512-3 T타워 3층 310,311,312호<br>
