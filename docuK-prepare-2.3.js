@@ -73,6 +73,7 @@ For the usage examples of <a class="wheat" target="_blank" href="https://recoeve
 </ul>
 </div>
 <div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
+<div class="rC"><div class="rSC"><iframe delayed-src="https://www.youtube.com/embed/Kb2XRGWtRFE" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div></div>
 <div class="p"></div>
 <div class="p">* Promoting 서울 덕은 치과 의원 (내 친구 최영섭이 운영하는 치과. 짱 친절하면서도 최고의 실력과 경영능력을 갖췄음.)</div>
 <div class="p">
