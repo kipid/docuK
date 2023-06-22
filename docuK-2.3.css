@@ -215,12 +215,12 @@ codeprint.SEE {display:none}
 .docuK .none {display:none}
 
 /* r(S)C:Ratio (Sub)Container */
-.docuK .rC {}
-.docuK .rC>.rSC {box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
-.docuK .rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
-.docuK .rC>.rSC>*>* {position:absolute; width:100%; height:100%; left:0; top:0}
-.docuK .rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
-.docuK .pc {text-align:center; font-size:.6em} /* position change */
+.rC {}
+.rC>.rSC {box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
+.rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
+.rC>.rSC>*>* {position:absolute; width:100%; height:100%; left:0; top:0}
+.rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
+.pc {text-align:center; font-size:10px} /* position change */
 
 .docuK eqq {display:block; background:black} .docuK.bright eqq {background:white}
 .docuK .eqCC {overflow-x:auto; overflow-y:hidden; text-align:center; padding:1.5em .2em; margin:.5em 0; background:inherit}
