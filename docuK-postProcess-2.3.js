@@ -470,7 +470,7 @@ $fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", m.fsGoOn);
 //////////////////////////////////////////
 // Fuzzy search fullList
 //////////////////////////////////////////
-let $list=$(".docuK .p, .docuK .cmt, .docuK .bcf, .docuK li");
+let $list=$(".docuK .p, .docuK .cmt, .docuK .bcf, .docuK li, .docuK pre");
 for (let i=0;i<$list.length;i++) {
 	let $listI=$list.eq(i);
 	let $sec=$listI.parents(".docuK>.sec");
