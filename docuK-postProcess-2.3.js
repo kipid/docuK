@@ -520,8 +520,10 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 		type:"POST", url:"https://recoeve.net/BlogStat", data:blogStat, dataType:"text"
 	}).fail(function (resp) {
 		m.logPrint("<br><br>BlogStat timeout. "+resp);
+		// console.log("fail", resp);
 	}).done(function (resp) {
 		m.logPrint("<br><br>BlogStat is logged. "+resp);
+		// console.log("done", resp);
 	});
 
 	for (let i=1;i<m.docuK.length;i++) {
