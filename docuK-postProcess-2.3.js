@@ -519,7 +519,7 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 	$.ajax({
 		type:"POST", url:"https://recoeve.net/BlogStat", data:blogStat, dataType:"text"
 	}).fail(function (resp) {
-		m.logPrint("<br><br>BlogStat timeout.");
+		m.logPrint("<br><br>BlogStat timeout. "+resp);
 	}).done(function (resp) {
 		m.logPrint("<br><br>BlogStat is logged. "+resp);
 	});
