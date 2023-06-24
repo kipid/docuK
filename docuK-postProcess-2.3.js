@@ -514,6 +514,16 @@ window.onpopstate=function (e) {
 
 // On ready.
 $document.ready(function () {
+	let blogStat=`URI	referer	REACTION_GUEST
+${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GUEST")}`;
+	$.ajax({
+		type:"POST", url:"https://recoeve.net/BlogStat", data:blogStat, dataType:"text"
+	}).fail(function (resp) {
+		m.logPrint("<br><br>BlogStat timeout.");
+	}).done(function (resp) {
+		m.logPrint("<br><br>BlogStat is logged. "+resp);
+	});
+
 	for (let i=1;i<m.docuK.length;i++) {
 		m.docuK.eq(i).before(m.promoting);
 		m.docuK.eq(i).after(m.promoting);
