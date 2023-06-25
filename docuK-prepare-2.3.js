@@ -9,6 +9,18 @@ m.browserWidth=window.innerWidth;
 const docuK=$(".docuK");
 m.docuK=docuK;
 
+m.ptnURL=/^https?:\/\/\S+/i;
+m.uriToA=function (uri) {
+	if (!uri||uri.constructor!==String) { return ""; }
+	let exec=m.ptnURL.exec(uri);
+	if (exec!==null) {
+		return `<a target="_blank" href="${exec[0]}">${m.escapeHTML(decodeURIComponent(uri))}</a>`;
+	}
+	else {
+		return m.escapeHTML(uri);
+	}
+};
+
 // cookies.js (copied from cookie-test.html)
 m.expire=365*24*60*60; // max-age in seconds.
 m.docCookies={
