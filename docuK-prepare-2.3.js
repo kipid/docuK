@@ -348,6 +348,13 @@ m.SEEToArray=function (SEE) {
 				subStr=SEE.substring(start,end).trim();
 			}
 		}
+		else if (/^<eqq\s*[^>]*>/i.test(subStr)) {
+			while (!/<\/eqq>$/i.test(subStr)) {
+				re=dE.exec(SEE);
+				end=dE.lastIndex;
+				subStr=SEE.substring(start,end).trim();
+			}
+		}
 		else if (/^<!--/i.test(subStr)) {
 			while (!/-->$/i.test(subStr)) {
 				re=dE.exec(SEE);
