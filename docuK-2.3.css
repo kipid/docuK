@@ -264,7 +264,7 @@ codeprint.SEE {display:none}
 	font-size:1.8em; line-height:1.0
 }
 
-.docuK ol, .docuK ul {margin:.3em 0 1.7em} .docuK dl {margin:0 0 1em}
+.docuK ol, .docuK ul {margin:.3em 0 1.7em; padding:0} .docuK dl {margin:0 0 1em}
 .docuK ol {list-style-type:decimal} .docuK ul {list-style-type:disc}
 .docuK li, .docuK dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 .docuK.bright li, .docuK.bright dd {color:rgb(40,40,40) !important}
