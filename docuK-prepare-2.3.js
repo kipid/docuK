@@ -636,7 +636,7 @@ m.HideBR=function (elem) {
 // Changing Styles of docuK
 m.mode="Dark";
 m.fontFamily="맑은 고딕";
-m.fontSize=5;
+m.fontSize=10;
 m.lineHeight10=16;
 m.defaultStyles={mode:m.mode, fontFamily:m.fontFamily, fontSize:m.fontSize, lineHeight10:m.lineHeight10};
 

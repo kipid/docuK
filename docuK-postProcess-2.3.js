@@ -571,13 +571,13 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 
 	cookieItem=m.docCookies.getItem("m.fontSize");
 	if (cookieItem!==null) {
-		m.CfontSize(Number(cookieItem)-10);
+		m.CfontSize(Number(cookieItem)-m.defaultStyles.fontSize);
 		m.logPrint(`<br>Font-size ${(Number(cookieItem)*1.8).toFixed(1)} is set from cookie.`);
 	}
 
 	cookieItem=m.docCookies.getItem("m.lineHeight10");
 	if (cookieItem!==null) {
-		m.ClineHeight(Number(cookieItem)-16);
+		m.ClineHeight(Number(cookieItem)-m.defaultStyles.lineHeight10);
 		m.logPrint(`<br>Line-height ${(Number(cookieItem)/10).toFixed(1)} is set from cookie.`);
 	}
 
