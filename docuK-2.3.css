@@ -282,7 +282,7 @@ codeprint.SEE {display:none}
 /* Pretty printing styles. Used with prettify.js. */
 /* Vim sunburst theme by David Leibovic */
 .docuK pre, .docuK code {text-indent:0; overflow-wrap:break-word; word-wrap:break-word; white-space:pre-wrap; word-break:break-all}
-.docuK pre {font-family:inherit; font-size:.9em; display:block; margin:.6em 0 2em; padding:.5em; border:1px solid white; max-height:none; overflow-y:scroll} .docuK pre.scrollable {max-height:600px}
+.docuK pre {font-family:inherit; font-size:.7em; line-height:1.5; display:block; margin:.6em 0 2em; padding:.5em; border:1px solid white; max-height:none; overflow-y:scroll} .docuK pre.scrollable {max-height:600px}
 .docuK code {font-family:monospace; font-size:.9em; padding:.2em; display:inline; border:2px solid rgb(200,150,150); border-radius:.2em; background:rgb(30,30,30)} .docuK.bright code {background:rgb(230,230,230)}
 .docuK pre code {font-size:1em; padding:0; border-width:0; background:inherit}
 .docuK pre.prettyprint, .docuK code.prettyprint {background-color:black} .docuK.bright pre.prettyprint, .docuK.bright code.prettyprint {background-color:rgb(70,70,70)}
@@ -295,7 +295,7 @@ codeprint.SEE {display:none}
 
 /* Specify class=linenums on a pre to get line numbering */
 .docuK pre ol.linenums {margin:0; color:#AEBEAE; padding-left:3em}
-.docuK pre.prettyprint li {padding:.2em 0}
+.docuK pre.prettyprint li {margin:0; padding:0}
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:none}
 /* Alternate shading for lines */
 .docuK pre li {background:inherit} .docuK.bright pre li {background:inherit}
