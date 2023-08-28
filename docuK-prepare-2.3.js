@@ -89,7 +89,10 @@ Come here and just drag stars/points.<br>
 Based on your points on URIs (musics), you will be connected to your neighbors of your kind. And you will get recoms (recommendations) from them, and also give recoms to them.<br>
 </div>
 <div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
-<div class="rC"><div class="rSC"><iframe delayed-src="https://www.youtube.com/embed/Kb2XRGWtRFE" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div></div>
+<div class="p rC"><div class="rSC"><iframe delayed-src="https://www.youtube.com/embed/--osTq8m3T4" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div></div>
+<div class="p rC" style="border-right:1em solid rgb(20,20,70)"><div class="rSC" style="padding-bottom:130%">
+	<iframe delayed-src="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dgfk3QLU1x0E"></iframe>
+</div></div>
 <div class="p"></div>
 <div class="p">* Promoting 서울 덕은 치과 의원 (내 친구 최영섭이 운영하는 치과. 짱 친절하면서도 최고의 실력과 경영능력을 갖췄음.)</div>
 <div class="p">
