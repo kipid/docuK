@@ -76,13 +76,17 @@ m.toggleFK=function () {
 m.promoting=`<div class="promoting">
 <div class="p">* Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</div>
 <div class="bcf">
-For the usage examples of <a class="wheat" target="_blank" href="https://recoeve.net/"><span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a>, visit my (kipid | <a class="wheat" target="_blank" href="https://kipid.tistory.com/entry/Career-Portfolio-%EC%9D%B4%EA%B0%95%EC%88%98">이강수</a>) page
-<ul style="margin:0">
-<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMy%20Blog%5D--%5BMusic%2FBreak%5D--%EC%B8%84%EC%B8%84">[My Blog]--[Music/Break]--츄츄 (My Pet) of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC">[Music/Break]--남규리 | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-</ul>
+자신만의 플레이리스트를 만들어 보세요.<br>
+aespa (에스파) - Better Things<br>
+<a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dgfk3QLU1x0E">https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dgfk3QLU1x0E</a><br>
+여기로 오셔서 별점만 메기면 됩니다.<br>
+별점들을 바탕으로 당신과 비슷한 이웃과 자동으로 연결되고 그들로부터 새로운 곡들도 추천받아보세요.<br>
+<br>
+Try to make your own playlist.<br>
+aespa (에스파) - Better Things<br>
+<a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=en#https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dgfk3QLU1x0E">https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=en#https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dgfk3QLU1x0E</a><br>
+Come here and just drag stars/points.<br>
+Based on your points on URIs (musics), you will be connected to your neighbors of your kind. And you will get recoms (recommendations) from them, and also give recoms to them.<br>
 </div>
 <div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
 <div class="rC"><div class="rSC"><iframe delayed-src="https://www.youtube.com/embed/Kb2XRGWtRFE" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div></div>
