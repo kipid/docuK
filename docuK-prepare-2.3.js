@@ -93,27 +93,6 @@ Based on your points on URIs (musics), you will be connected to your neighbors o
 <div class="p rC" style="border-right:1em solid rgb(20,20,70)"><div class="rSC" style="padding-bottom:130%">
 	<iframe delayed-src="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dgfk3QLU1x0E"></iframe>
 </div></div>
-<div class="p"></div>
-<div class="p">* Promoting 서울 덕은 치과 의원 (내 친구 최영섭이 운영하는 치과. 짱 친절하면서도 최고의 실력과 경영능력을 갖췄음.)</div>
-<div class="p">
-<a class="wheat" target="_blank" href="https://www.instagram.com/seouldeogeun_dental_clinic/">Instagram (인스타그램) :: 서울 덕은 치과</a><br>
-경기도 고양시 덕양구 으뜸로 130, 위프라임 트윈타워 3층<br>
-TEL: 02-3158-2882<br>
-<a class="wheat" target="_blank" href="https://seouldedc.modoo.at/">modoo.at :: 서울 덕은 치과 :: 우리동네 서울대 치과병원 (원장: 최영섭)</a>
-</div>
-<div class="p center">
-<a class="wheat" href="https://map.kakao.com/?urlX=471428.0&urlY=1133326.0&itemId=1601307680&q=%EC%84%9C%EC%9A%B8%EB%8D%95%EC%9D%80%EC%B9%98%EA%B3%BC%EC%9D%98%EC%9B%90&srcid=1601307680&map_type=TYPE_MAP&from=roughmap&level=9" target="_blank"><img delayed-src="https://blog.kakaocdn.net/dn/dhLyQZ/btsjtzoXmYE/ln5BPmntQkr1GDIkQlW44K/img.png"/></a>
-</div>
-<div class="p"></div>
-<div class="p">* Promoting 이숨 (이완되고 숨이 쉬어지는) 정신과 의원 (성안드레아 병원에서 인연이 생겨서 계속 치료받고 있는 병원. 개원하신걸 알고 일부러 찾아갈 정도로 믿음을 주셨던 정신과 의사. 설명을 친절하게 잘 해주시고, 병을 이해를 시키셔서 치료를 해주시는 스타일.)</div>
-<div class="p">
-<a class="wheat" target="_blank" href="https://yisoom.modoo.at/">modoo.at :: 이숨 정신건강 의학과 의원 :: 이완되고 숨이 쉬어집니다. (원장: 김현명)</a><br>
-경기도 광명시 일직동 512-3 T타워 3층 310,311,312호<br>
-TEL: 02-897-2325
-</div>
-<div class="p center">
-<a class="wheat" href="https://map.kakao.com/?urlX=473933.0&urlY=1088439.0&itemId=725265712&q=%EC%9D%B4%EC%88%A8%EC%A0%95%EC%8B%A0%EA%B1%B4%EA%B0%95%EC%9D%98%ED%95%99%EA%B3%BC%EC%9D%98%EC%9B%90&srcid=725265712&map_type=TYPE_MAP&from=roughmap&level=9" target="_blank"><img delayed-src="https://blog.kakaocdn.net/dn/czveOa/btsjmCte5rA/UU7KxwFmJrIycCsa76siw0/img.png"/></a>
-</div>
 </div>`;
 
 // logPrint function.
