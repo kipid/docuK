@@ -514,19 +514,17 @@ window.onpopstate=function (e) {
 
 // On ready.
 $document.ready(function () {
-	if (window.location.host==="kipid.tistory.com") {
-		let blogStat=`URI	referer	REACTION_GUEST
+	let blogStat=`URI	referer	REACTION_GUEST
 ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GUEST")}`;
-		$.ajax({
-			type:"POST", url:"https://recoeve.net/BlogStat", data:blogStat, dataType:"text"
-		}).fail(function (resp) {
-			m.logPrint("<br><br>BlogStat timeout. "+resp);
-			// console.log("fail", resp);
-		}).done(function (resp) {
-			m.logPrint("<br><br>BlogStat is logged. "+resp);
-			// console.log("done", resp);
-		});
-	}
+	$.ajax({
+		type:"POST", url:"https://recoeve.net/BlogStat", data:blogStat, dataType:"text"
+	}).fail(function (resp) {
+		m.logPrint("<br><br>BlogStat timeout. "+resp);
+		// console.log("fail", resp);
+	}).done(function (resp) {
+		m.logPrint("<br><br>BlogStat is logged. "+resp);
+		// console.log("done", resp);
+	});
 
 	for (let i=1;i<m.docuK.length;i++) {
 		m.docuK.eq(i).before(m.promoting);
