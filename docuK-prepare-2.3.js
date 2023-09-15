@@ -77,23 +77,26 @@ m.promoting=`<div class="promoting">
 <div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</div>
 <div class="bcf">
 유튜브 음악 MV 들을 광고없이 목록재생 해보세요.<br>
+접속하셔서 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br>
+그리고 자신의 페이지로 이동한 뒤 추천 받기를 누르시면 자신이 점수 메긴것들로 이웃을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.<br>
+<br>
 Come here and just drag stars/points.<br>
 Based on your points on URIs (musics), you will be connected to your neighbors of your kind. And you will get recoms (recommendations) from them, and also give recoms to them.<br>
+</div>
+<div class="caption p cmt">
+* 참고 링크들 (Refer my pages)<br>
+<ul>
+<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC">[Music/Break]--남규리 | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMy%20Blog%5D--%5BMusic%2FBreak%5D--%EC%B8%84%EC%B8%84">[My Blog]--[Music/Break]--츄츄 (My Pet) of kipid's Recoeve.net (Multireco mode)</a></li>
+</ul>
 </div>
 <div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
 <div class="caption p cmt">Recoeve 사용 설명서/manual, How to use Multireco mode. (레코이브 사용 설명서, 다른 사람 페이지에서 멀티레코하기.)</div>
 <div class="rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/sywP3H-3OUQ" frameborder="0"></iframe>
 </div></div>
-<div class="caption p cmt">
-* 참고 링크들 (Refer my pages)<br>
-	<ul>
-	<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-	<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-	<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC">[Music/Break]--남규리 | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
-	<li><a target="_blank" href="/user/kipid/mode/multireco?cat=%5BMy%20Blog%5D--%5BMusic%2FBreak%5D--%EC%B8%84%EC%B8%84">[My Blog]--[Music/Break]--츄츄 (My Pet) of kipid's Recoeve.net (Multireco mode)</a></li>
-	</ul>
-</div>
 </div>`;
 
 // logPrint function.
