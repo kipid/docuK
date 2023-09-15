@@ -94,8 +94,12 @@ Based on your points on URIs (musics), you will be connected to your neighbors o
 </div>
 <div class="p">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
 <div class="caption p cmt">Recoeve 사용 설명서/manual, How to use Multireco mode. (레코이브 사용 설명서, 다른 사람 페이지에서 멀티레코하기.)</div>
-<div class="rC"><div class="rSC">
+<div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/sywP3H-3OUQ" frameborder="0"></iframe>
+</div></div>
+<div class="caption p cmt">Recoeve.net 목록 재생하기, Playing mv playlist.</div>
+<div class="p rC"><div class="rSC">
+	<iframe delayed-src="https://www.youtube.com/embed/t5Uc8Uyau38" frameborder="0"></iframe>
 </div></div>
 </div>`;
 
