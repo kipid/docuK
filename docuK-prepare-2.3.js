@@ -97,7 +97,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors o
 <div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/YGadSrC2UXw" frameborder="0"></iframe>
 </div></div>
-<div class="caption p cmt">Recoeve.net 목록 재생하기, Playing mv playlist.</div>
+<div class="caption p cmt">Recoeve.net 유튜브 뮤비들 목록 재생하기, Playing Youtube MV (Music Videos) playlist.</div>
 <div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/t5Uc8Uyau38" frameborder="0"></iframe>
 </div></div>
