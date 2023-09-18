@@ -216,7 +216,7 @@ codeprint.SEE {display:none}
 
 /* r(S)C:Ratio (Sub)Container */
 .rC {}
-.rC>.rSC {box-sizing:content-box; position:relative; height:3em; padding-bottom:63%}
+.rC>.rSC {position:relative; height:3em; padding-bottom:63%}
 .rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
 .rC>.rSC>*>* {position:absolute; width:100%; height:100%; left:0; top:0}
 .rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
@@ -231,7 +231,7 @@ codeprint.SEE {display:none}
 .docuK figure {display:block; margin:1em 0 2em; padding:0; text-indent:0}
 .docuK figure img:not([width]) {width:auto}
 .docuK .fig {margin:1em 0; padding:1em; border:1px solid gray; text-align:center; text-indent:0; box-shadow:inset 0 0 20px white} .docuK.bright .fig {box-shadow:inset 0 0 20px black}
-.docuK img {box-sizing:content-box; max-width:100%; border:none; width:auto; height:auto; vertical-align:middle}
+.docuK img {max-width:100%; border:none; width:auto; height:auto; vertical-align:middle}
 .docuK .fig>.image {}
 .docuK .fig>.image img {display:block; margin:0 auto}
 .docuK .fig>.caption {display:inline-block; padding:0 .5em; text-align:justify; margin:0 auto; text-indent:0}
