@@ -290,8 +290,8 @@ li, dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 /* pre Container, Scrollable Switch (Explaination) */
 .docuK .preC {position:relative; margin:.5em 0 2em}
 .docuK .preC pre {margin:0; padding:0}
-.docuK .preC .preSSE {font-size:.75em; border-left:3.5em rgb(80,0,0) solid}
-.docuK .preC .preSS {position:absolute; left:0; top:0; bottom:0; width:2.6em; cursor:pointer}
+.docuK .preC .preSSE {font-size:.75em; border-left:2.5em rgb(80,0,0) solid}
+.docuK .preC .preSS {position:absolute; left:0; top:0; bottom:0; width:1.9em; cursor:pointer}
 
 /* Specify class=linenums on a pre to get line numbering */
 .docuK pre ol.linenums {margin:0; color:#AEBEAE; padding-left:3em}
