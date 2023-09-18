@@ -744,7 +744,7 @@ $window.on("resize.deviceInfo", function () {
 
 // Share a link through SNS
 m.shareSNS=function (service) {
-	let title=$("title").eq(0).html();
+	let title=$("title").eq(0).html()+` at ${window.location.host}`;
 	let url=window.location.href;
 	let open="";
 	switch (service) {
@@ -764,7 +764,7 @@ m.shareSNS=function (service) {
 			open="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
 			break;
 		case 'recoeve':
-			open="https://recoeve.net/reco?uri="+encodeURIComponent(url)+"&title="+encodeURIComponent(title);
+			open=`https://recoeve.net/reco?uri=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}${m.recoCats?`&cats=${encodeURIComponent(m.recoCats)}`:""}`;
 			break;
 		case 'kakao':
 			m.popUpKakao();
