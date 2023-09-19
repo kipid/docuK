@@ -74,7 +74,7 @@ m.toggleFK=function () {
 };
 
 m.promoting=`<div class="promoting">
-<div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</div>
+<div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S|Slow/Sexy/Sincere SNS)</div>
 <div class="bcf">
 유튜브 음악 MV 들을 광고없이 목록재생 해보세요.<br>
 접속하셔서 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br>
@@ -90,7 +90,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors o
 <br>
 <span class="bold">Connect with Like-Minded Users</span>: The platform likely has features for connecting with other users who share your interests. You might follow or connect with these users to build your network.
 </div>
-<div class="caption p cmt">
+<div class="caption p cmt" style="margin:1em 0 0">
 * For the usage examples, visit my page (예제를 보시려면 제 페이지를 방문해 주세요.)
 <ul>
 <li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
@@ -101,13 +101,13 @@ Based on your points on URIs (musics), you will be connected to your neighbors o
 <li><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5B%EC%9D%8C%EC%8B%9D%2F%EC%9A%94%EB%A6%AC%2F%EA%B1%B4%EA%B0%95%5D--%EA%B1%B4%EA%B0%95&lang=ko&PRL=0.80&PRR=1.00">[음식/요리/건강]--건강 of kipid's Recoeve.net</a></li>
 </ul>
 </div>
-<div class="caption p cmt">Recoeve.net Manual collection | 사용방법 모음집: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid?cat=%5BRecoeve%5D--%EC%84%A4%EB%AA%85%EC%84%9C&PRL=0.85&PRR=1.00">[Recoeve]--설명서 | Manuals of kipid's Recoeve.net</a></div>
+<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net Manual collection | 사용방법 모음집: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid?cat=%5BRecoeve%5D--%EC%84%A4%EB%AA%85%EC%84%9C&PRL=0.85&PRR=1.00">[Recoeve]--설명서 | Manuals of kipid's Recoeve.net</a></div>
 <div class="p bcf">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
-<div class="caption p cmt">Recoeve manual, How to use. (레코이브 사용 설명서, 가입하기, 다른 사람 페이지에서 multireco 하기, 내 페이지에서 자동으로 연결된 이웃들로부터 추천받기.)</div>
+<div class="caption p cmt" style="margin:1em 0 0">Recoeve manual, How to use. (레코이브 사용 설명서, 가입하기, 다른 사람 페이지에서 multireco 하기, 내 페이지에서 자동으로 연결된 이웃들로부터 추천받기.)</div>
 <div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/YGadSrC2UXw" frameborder="0"></iframe>
 </div></div>
-<div class="caption p cmt">Recoeve.net 유튜브 뮤비들 목록 재생하기, Playing Youtube MV (Music Videos) playlist.</div>
+<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net 유튜브 뮤비들 목록 재생하기, Playing Youtube MV (Music Videos) playlist.</div>
 <div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/t5Uc8Uyau38" frameborder="0"></iframe>
 </div></div>
