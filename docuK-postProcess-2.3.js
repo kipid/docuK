@@ -733,33 +733,37 @@ window.MathJax={
 			case 68: // D=68
 				scrollTop=$window.scrollTop();
 				k=m.fdList.length;
-				let hI;
+				let $hI;
 
-				if (event.keyCode===70) {
+				if (event.keyCode===70) { // F=70
 					scrollTop+=10;
 					for (i=0;i<k;i++) {
-						hI=m.fdList.eq(i);
-						if (hI.is(":visible")&&scrollTop<hI.offset().top) { break; }
+						$hI=m.fdList.eq(i);
+						if ($hI.is(":visible")&&scrollTop<$hI.offset().top) { break; }
 					}
 					if (i===k) {
-						// hI=m.fdList.eq(0);
+						// $hI=m.fdList.eq(0);
 						// alert("This is the last section.");
 						return;
 					}
 				}
-				else{
+				else{ // D=68
 					scrollTop-=10;
 					for (i=k-1;i>=0;i--) {
-						hI=m.fdList.eq(i);
-						if (hI.is(":visible")&&scrollTop>hI.offset().top) { break; }
+						$hI=m.fdList.eq(i);
+						if ($hI.is(":visible")&&scrollTop>$hI.offset().top) { break; }
 					}
 					if (i===-1) {
-						// hI=m.fdList.eq(k-1);
+						// $hI=m.fdList.eq(k-1);
 						// alert("This is the first section.");
 						return;
 					}
 				}
-				$window.scrollTop(hI.offset().top);
+				let hIID=$hI[0].id;
+				if (hIID) {
+					window.location.hash=`#${hIID}`;
+				}
+				$window.scrollTop($hI.offset().top);
 				break;
 			case 84: // T=84
 				scrollTop=$window.scrollTop();

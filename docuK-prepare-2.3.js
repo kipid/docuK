@@ -76,12 +76,12 @@ m.toggleFK=function () {
 m.promoting=`<div class="promoting">
 <div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S|Slow/Sexy/Sincere SNS)</div>
 <div class="bcf">
-유튜브 음악 MV 들을 광고없이 목록재생 해보세요.<br>
+<a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#headPlay">유튜브 음악 MV 들을 광고없이 목록재생</a> 해보세요.<br>
 접속하셔서 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br>
-그리고 자신의 페이지로 이동한 뒤 추천 받기를 누르시면 자신이 점수 메긴것들로 이웃을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.<br>
+그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.<br>
 <br>
-Come here and just drag stars/points.<br>
-Based on your points on URIs (musics), you will be connected to your neighbors of your kind. And you will get recoms (recommendations) from them, and also give recoms to them.<br>
+Come <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop&lang=en#headPlay">here</a> and just drag stars/points.<br>
+Based on your points on URIs (musics), you will be connected to your neighbors (See neighbors: shortkey 'B') of your kind. And you will get recoms (recommendations: shortkey 'R') from them, and also give recoms to them.<br>
 <br>
 <span class="bold">평가와 기록</span>: 웹사이트에서 본 기사, 뉴스, 영상, 음악 등을 기록하고 평가하세요. 이 정보는 추천 알고리즘을 통해 사용자에게 맞춤형 추천을 제공하는 데 사용됩니다. 즉, 당신이 좋아하는 유형의 콘텐츠를 더 많이 발견할 수 있습니다.<br>
 <br>
