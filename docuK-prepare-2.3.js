@@ -82,9 +82,16 @@ m.promoting=`<div class="promoting">
 <br>
 Come here and just drag stars/points.<br>
 Based on your points on URIs (musics), you will be connected to your neighbors of your kind. And you will get recoms (recommendations) from them, and also give recoms to them.<br>
+<br>
+<span class="bold">평가와 기록</span>: 웹사이트에서 본 기사, 뉴스, 영상, 음악 등을 기록하고 평가하세요. 이 정보는 추천 알고리즘을 통해 사용자에게 맞춤형 추천을 제공하는 데 사용됩니다. 즉, 당신이 좋아하는 유형의 콘텐츠를 더 많이 발견할 수 있습니다.<br>
+<br>
+<br>
+<span class="bold">Evaluate and Rate Content</span>: As you explore content on the platform, you can evaluate and rate it based on your preferences and interests. This could involve liking, rating, or commenting on articles, posts, or other types of content.<br>
+<br>
+<span class="bold">Connect with Like-Minded Users</span>: The platform likely has features for connecting with other users who share your interests. You might follow or connect with these users to build your network.
 </div>
 <div class="caption p cmt">
-* 참고 링크들 (Refer my pages)<br>
+* For the usage examples, visit my page (예제를 보시려면 제 페이지를 방문해 주세요.)
 <ul>
 <li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
 <li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
