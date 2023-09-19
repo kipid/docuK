@@ -73,7 +73,8 @@ m.toggleFK=function () {
 	$floating_key.toggle();
 };
 
-m.promoting=`<div class="promoting">
+m.promoting=function (id) {
+	return `<div class="promoting"${id?` id="${id}"`:""}>
 <div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S|Slow/Sexy/Sincere SNS)</div>
 <div class="bcf">
 <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#headPlay">유튜브 음악 MV 들을 광고없이 목록재생</a> 해보세요.<br>
@@ -81,10 +82,10 @@ m.promoting=`<div class="promoting">
 그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.<br>
 <br>
 Come <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop&lang=en#headPlay">here</a> and just drag stars/points.<br>
-Based on your points on URIs (musics), you will be connected to your neighbors (See neighbors: shortkey 'B') of your kind. And you will get recoms (recommendations: shortkey 'R') from them, and also give recoms to them.<br>
-<br>
+Based on your points on URIs (musics), you will be connected to your neighbors (See neighbors: shortkey 'B') of your kind. And you will get recoms (recommendations: shortkey 'R') from them, and also give recoms to them.
+</div>
+<div class="bcf">
 <span class="bold">평가와 기록</span>: 웹사이트에서 본 기사, 뉴스, 영상, 음악 등을 기록하고 평가하세요. 이 정보는 추천 알고리즘을 통해 사용자에게 맞춤형 추천을 제공하는 데 사용됩니다. 즉, 당신이 좋아하는 유형의 콘텐츠를 더 많이 발견할 수 있습니다.<br>
-<br>
 <br>
 <span class="bold">Evaluate and Rate Content</span>: As you explore content on the platform, you can evaluate and rate it based on your preferences and interests. This could involve liking, rating, or commenting on articles, posts, or other types of content.<br>
 <br>
@@ -103,15 +104,16 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 </div>
 <div class="caption p cmt" style="margin:1em 0 0">Recoeve.net Manual collection | 사용방법 모음집: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid?cat=%5BRecoeve%5D--%EC%84%A4%EB%AA%85%EC%84%9C&PRL=0.85&PRR=1.00">[Recoeve]--설명서 | Manuals of kipid's Recoeve.net</a></div>
 <div class="p bcf">Kakao talk open chat (카카오톡 오픈 채팅방) :: <a class="wheat" target="_blank" href="https://open.kakao.com/me/kipid">open.kakao.com :: Recoeve.net 개발 관련</a></div>
-<div class="caption p cmt" style="margin:1em 0 0">Recoeve manual, How to use. (레코이브 사용 설명서, 가입하기, 다른 사람 페이지에서 multireco 하기, 내 페이지에서 자동으로 연결된 이웃들로부터 추천받기.)</div>
+<div class="caption p cmt" style="margin:1em 0 0">Recoeve manual, How to use. (레코이브 사용 설명서, 가입하기, 다른 사람 페이지에서 multireco 하기, 내 페이지에서 자동으로 연결된 이웃들로부터 추천받기.)
 <div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/YGadSrC2UXw" frameborder="0"></iframe>
-</div></div>
-<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net 유튜브 뮤비들 목록 재생하기, Playing Youtube MV (Music Videos) playlist.</div>
+</div></div></div>
+<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net 유튜브 뮤비들 목록 재생하기, Playing Youtube MV (Music Videos) playlist.
 <div class="p rC"><div class="rSC">
 	<iframe delayed-src="https://www.youtube.com/embed/t5Uc8Uyau38" frameborder="0"></iframe>
-</div></div>
+</div></div></div>
 </div>`;
+};
 
 // logPrint function.
 m.$log=$("#docuK-log");

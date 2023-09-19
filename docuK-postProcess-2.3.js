@@ -527,8 +527,8 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 	});
 
 	for (let i=1;i<m.docuK.length;i++) {
-		m.docuK.eq(i).before(m.promoting);
-		m.docuK.eq(i).after(m.promoting);
+		m.docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
+		m.docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
 	}
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
 	let codeprints=$("codeprint");
