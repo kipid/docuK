@@ -322,6 +322,11 @@ li, dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 
 #disqus_thread {background:black; padding:.2em .5em}
 
+rect.column {fill:rgb(255,255,0); stroke-width:1; stroke:rgb(0,150,150)}
+line.bar {stroke:darkgray; stroke-width:3}
+text.tick {fill:gray; font-size:1em}
+text.now-local {fill:green; font-size:1.1em}
+
 @media all and (min-width:400px) {
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
 }
