@@ -714,8 +714,11 @@ ${from} 15:00:00	${to} 15:00:00`;
 				}
 				pageViews++;
 			}
+			blogStatRes.pageViews=pageViews;
 		}
-		blogStatRes.pageViews=pageViews;
+		else {
+			blogStatRes={pageViews};
+		}
 		return blogStatRes;
 	}
 	m.weekDays=["월", "화", "수", "목", "금", "토", "일"];
@@ -746,7 +749,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 	let maxHeight=100.0-topPadding-bottomPadding;
 	let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
 	for (let i=0;i<m.daysToPlotCountChart;i++) {
-		m.blogStatRes.push(m.countBlogStat(m.from[i].date, m.to[i].date));
+		m.blogStatRes.push(await m.countBlogStat(m.from[i].date, m.to[i].date));
 	}
 	let maxCount=0;
 	for (let i=0;i<m.daysToPlotCountChart;i++) {
