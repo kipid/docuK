@@ -703,7 +703,6 @@ ${from} 15:00:00	${to} 15:00:00`;
 		let ignoreMe=true;
 		if (!m.blogStatRes[`${from} to ${to}`]) {
 			m.blogStatRes[`${from} to ${to}`]=await m.getBlogStat(from, to);
-			m.blogStatRes.push(m.blogStatRes[`${from} to ${to}`]);
 		}
 		let blogStatRes=m.blogStatRes[`${from} to ${to}`];
 		let pageViews=0;
@@ -738,7 +737,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 		day=String(fromDate.getDate()).padStart(2, '0');
 		m.from.push({date:year+'-'+month+'-'+day});
 	}
-	let countChartHTML+=`<div class="rC" style="padding:0 .5em"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
+	let countChartHTML=`<div class="rC" style="padding:0 .5em"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
 	let leftPadding=8.0;
 	let rightPadding=2.0;
 	let topPadding=7.0;
@@ -747,7 +746,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 	let maxHeight=100.0-topPadding-bottomPadding;
 	let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
 	for (let i=0;i<m.daysToPlotCountChart;i++) {
-		m.countBlogStat(m.from[i].date, m.to[i].date);
+		m.blogStatRes.push(m.countBlogStat(m.from[i].date, m.to[i].date));
 	}
 	let maxCount=0;
 	for (let i=0;i<m.daysToPlotCountChart;i++) {
@@ -757,7 +756,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 		}
 	}
 	for (let i=0;i<m.daysToPlotCountChart;i++) {
-		let x=(m.daysToPlotCountChart-1.0)*dx;
+		let x=(m.daysToPlotCountChart-1.0-i)*dx;
 		let h=maxHeight*m.blogStatRes[i].pageViews/maxCount;
 		countChartHTML+=`<rect class="column" x="${x}%" y="${bottomLine-h}%" width="${2.0*dx}%" height="${h}%"></rect>`;
 	}
