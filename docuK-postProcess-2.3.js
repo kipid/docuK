@@ -819,6 +819,9 @@ ${from} 15:00:00	${to} 15:00:00`;
 		let scrollTop=null;
 		let i, k;
 		switch (event.keyCode) {
+			case 69: // E=69 Expand/Hide floating keys
+				m.toggleFK();
+				break;
 			case 71: // G=71
 				event.preventDefault();
 				if ($fuzzy_search_container.is(":visible")) {

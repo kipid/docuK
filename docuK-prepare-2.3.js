@@ -404,10 +404,6 @@ m.docCookies={
 	}
 };
 
-m.hideFK=function () {
-	$floating_key.hide();
-	m.docCookies.setItem("hideFK", "y", Infinity, "/", false, true);
-};
 m.toggleFK=function () {
 	if ($floating_key.is(":visible")) {
 		m.docCookies.setItem("hideFK", "y", Infinity, "/", false, true);
@@ -464,7 +460,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 m.$log=$("#docuK-log");
 m.$log.addClass("fixed");
 m.$log.before(`<div id="floating-key">
-	<div id="button-hideFK" class="button" onclick="m.hideFK()">▼ Hide</div>
+	<div id="button-hideFK" class="button" onclick="m.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
 	<div class="button button-Go" style="width:4.5em; border-right:none" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})">
 		<span class="bold underline">G</span>o (FS)
 	</div>
