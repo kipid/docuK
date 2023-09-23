@@ -723,7 +723,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 			resolve(blogStatRes);
 		});
 	};
-	m.weekDays=["월", "화", "수", "목", "금", "토", "일"];
+	m.weekDays=["일", "월", "화", "수", "목", "금", "토"];
 	m.daysToPlotCountChart=30;
 	m.to=[];
 	m.from=[];
