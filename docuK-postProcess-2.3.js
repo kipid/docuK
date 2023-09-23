@@ -637,7 +637,7 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 
 	// google code prettify js script (from kipid.tistory CDN) is added.
 	if (docuK.find('.prettyprint').exists()) {
-		let $gcp=$(`<script id="prettyfy-js" defer src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></`+`script>`); // Avoid closing script
+		let $gcp=$(`<script id="prettyfy-js" src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></`+`script>`); // Avoid closing script
 		$headOrBody.append($gcp);
 		m.logPrint(`<br><br>Google code prettyfy.js is loaded since ".prettyprint" is there in your document.`);
 	}
@@ -682,8 +682,90 @@ window.MathJax={
 		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
+	m.getBlogStat=function (from, to) {
+		let reqTime=`from	to
+${from} 15:00:00	${to} 15:00:00`;
+		return new Promise(function (resolve, reject) {
+			$.ajax({
+				type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
+			}).fail(function (resp) {
+				m.logPrint("<br><br>BlogStat is failed to be got.");
+				resolve(null);
+			}).done(function (resp) {
+				m.logPrint("<br><br>BlogStat is got.");
+				resolve(m.strToJSON(resp));
+			});
+		});
+	};
+	m.blogStatRes=[];
+	m.countBlogStat=async function (from, to) {
+		let myIPs=["14.38.247.30", "175.212.158.53"];
+		let ignoreMe=true;
+		if (!m.blogStatRes[`${from} to ${to}`]) {
+			m.blogStatRes[`${from} to ${to}`]=await m.getBlogStat(from, to);
+			m.blogStatRes.push(m.blogStatRes[`${from} to ${to}`]);
+		}
+		let blogStatRes=m.blogStatRes[`${from} to ${to}`];
+		let pageViews=0;
+		if (!!blogStatRes) {
+			for(i=1;i<blogStatRes.length;i++) {
+				let ip=blogStatRes[i]["ip"].split(":")[0];
+				if (ignoreMe&&(ip===myIPs[0]||ip===myIPs[1])) {
+					continue;
+				}
+				pageViews++;
+			}
+		}
+		blogStatRes.pageViews=pageViews;
+		return blogStatRes;
+	}
+	m.weekDays=["월", "화", "수", "목", "금", "토", "일"];
+	m.daysToPlotCountChart=14;
+	m.to=[];
+	m.from=[];
+	let currentDate=new Date();
+	for (let i=0;i<m.daysToPlotCountChart;i++) {
+		let toDate=currentDate;
+		let year=toDate.getFullYear();
+		let month=String(toDate.getMonth()+1).padStart(2, '0'); // Adding 1 because months are zero-based
+		let day=String(toDate.getDate()).padStart(2, '0');
+		// Format the date as YYYY-MM-DD
+		m.to.push({date:year+'-'+month+'-'+day, weekday:m.weekDays[toDate.getDay()]});
+
+		let fromDate=new Date(currentDate.setDate(currentDate.getDate()-1));
+		year=fromDate.getFullYear();
+		month=String(fromDate.getMonth()+1).padStart(2, '0'); // Adding 1 because months are zero-based
+		day=String(fromDate.getDate()).padStart(2, '0');
+		m.from.push({date:year+'-'+month+'-'+day});
+	}
+	let countChartHTML+=`<div class="rC" style="padding:0 .5em"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
+	let leftPadding=8.0;
+	let rightPadding=2.0;
+	let topPadding=7.0;
+	let bottomPadding=20.0;
+	let bottomLine=100.0-bottomPadding;
+	let maxHeight=100.0-topPadding-bottomPadding;
+	let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
+	for (let i=0;i<m.daysToPlotCountChart;i++) {
+		m.countBlogStat(m.from[i].date, m.to[i].date);
+	}
+	let maxCount=0;
+	for (let i=0;i<m.daysToPlotCountChart;i++) {
+		let pageViews=m.blogStatRes[`${m.from[i].date} to ${m.to[i].date}`].pageViews;
+		if (pageViews>maxCount) {
+			maxCount=pageViews;
+		}
+	}
+	for (let i=0;i<m.daysToPlotCountChart;i++) {
+		let x=(m.daysToPlotCountChart-1.0)*dx;
+		let h=maxHeight*m.blogStatRes[i].pageViews/maxCount;
+		countChartHTML+=`<rect class="column" x="${x}%" y="${bottomLine-h}%" width="${2.0*dx}%" height="${h}%"></rect>`;
+	}
+	countChartHTML+=`</svg></div></div></div>`;
+	$("#count-chart").html(countChartHTML);
+
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	m.fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside"); // Ordered automatically by jQuery.
+	m.fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #count-chart"); // Ordered automatically by jQuery.
 	m.tocs=$(".docuK>.sec").has(".toc");
 	m.rras=$(".docuK>.sec").has("ol.refs");
 	m.goOn=false;
