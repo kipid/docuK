@@ -215,12 +215,19 @@ codeprint.SEE {display:none}
 .docuK .none {display:none}
 
 /* r(S)C:Ratio (Sub)Container */
-.rC {}
-.rC>.rSC {position:relative; height:3em; padding-bottom:63%}
-.rC>.rSC>* {position:absolute; width:100%; height:100%; left:0; top:0}
-.rC>.rSC>*>* {position:absolute; width:100%; height:100%; left:0; top:0}
-.rCfixed {position:fixed; z-index:100; top:0; right:0; width:640px; max-width:100%}
-.pc {text-align:center; font-size:10px} /* position change */
+.rC {margin:.5em 0}
+.rC.fixed {position:fixed; z-index:10000; top:0; left:0; width:100%; max-width:100%; margin:0; padding:1px; background:black; border-bottom:.15em solid white}
+	.bright .rC.fixed {background:white; border-color:black}
+.rC>.rSC {position:relative; height:0; padding-bottom:63%}
+.rC.soundcloud>.rSC {padding-bottom:20%}
+.rC.instagram>.rSC {padding-bottom:165%; overflow:auto}
+.rC.tiktok>.rSC {height:895px; padding-bottom:0; overflow-x:hidden; overflow-y:scroll}
+.rC.eveElse>.rSC {padding-bottom:80%}
+.rC>.rSC>* {position:absolute; width:100%; height:100%; max-width:100%; max-height:100%; left:0; top:0; overflow-x:hidden; overflow-y:hidden}
+.rC>.rSC>.center {position:absolute; text-align:center; width:100%; height:100%; max-width:100%; max-height:100%; left:0; top:0; overflow-x:hidden; overflow-y:hidden}
+.rC>.rSC>.center>iframe {position:absolute; width:100%; height:100%; max-width:100%; min-height:100%; left:0; top:0; overflow-x:hidden; overflow-y:auto}
+.rC>.rSC>.center>img {display:inline-block; max-width:100%; max-height:100%}
+.rC>.pc {text-align:center; font-size:10px} /* position change */
 
 .docuK eqq {display:block; background:black} .docuK.bright eqq {background:white}
 .docuK .eqCC {overflow-x:auto; overflow-y:hidden; text-align:center; padding:1.5em .2em; margin:.5em 0; background:inherit}
@@ -349,6 +356,9 @@ text.now-local {fill:#98fb98; font-size:1.1em}
 	#page-views-chart {font-size:11px}
 }
 @media all and (min-width:700px) {
+	.rC.fixed {width:50%; border-right:.15em solid white}
+	.rC.instagram.fixed, .rC.eveElse.fixed, .rC.tiktok.fixed {width:360px}
+	.rC.tiktok>.rSC {width:100%; height:895px; padding-bottom:0}
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.7em}
 	#page-views-chart {font-size:12px}
 }
@@ -357,6 +367,7 @@ text.now-local {fill:#98fb98; font-size:1.1em}
 	#page-views-chart {font-size:13px}
 }
 @media all and (min-width:900px) {
+	.rC.fixed {width:55%}
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.9em}
 	#page-views-chart {font-size:15px}
 }
@@ -368,8 +379,13 @@ text.now-local {fill:#98fb98; font-size:1.1em}
 	#fuzzy-search-list {max-height:330px}
 }
 @media all and (min-height:500px) {
+	.rC.tiktok.fixed {height:480px}
 	#fuzzy-search-list {max-height:410px}
 }
 @media all and (min-height:600px) {
 	#fuzzy-search-list {max-height:500px}
+}
+@media all and (min-height:905px) {
+	.rC.tiktok.fixed {height:895px}
+	.rC.tiktok.fixed>.rSC {height:100%; padding-bottom:0}
 }

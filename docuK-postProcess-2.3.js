@@ -806,7 +806,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 	}, 2048);
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	m.fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
+	m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
 	m.tocs=$(".docuK>.sec").has(".toc");
 	m.rras=$(".docuK>.sec").has("ol.refs");
 	m.goOn=false;
@@ -855,17 +855,17 @@ ${from} 15:00:00	${to} 15:00:00`;
 			case 70: // F=70
 			case 68: // D=68
 				scrollTop=$window.scrollTop();
-				k=m.fdList.length;
+				k=m.$fdList.length;
 				let $hI;
 
 				if (event.keyCode===70) { // F=70
 					scrollTop+=10;
 					for (i=0;i<k;i++) {
-						$hI=m.fdList.eq(i);
+						$hI=m.$fdList.eq(i);
 						if ($hI.is(":visible")&&scrollTop<$hI.offset().top) { break; }
 					}
 					if (i===k) {
-						// $hI=m.fdList.eq(0);
+						// $hI=m.$fdList.eq(0);
 						// alert("This is the last section.");
 						return;
 					}
@@ -873,11 +873,11 @@ ${from} 15:00:00	${to} 15:00:00`;
 				else{ // D=68
 					scrollTop-=10;
 					for (i=k-1;i>=0;i--) {
-						$hI=m.fdList.eq(i);
+						$hI=m.$fdList.eq(i);
 						if ($hI.is(":visible")&&scrollTop>$hI.offset().top) { break; }
 					}
 					if (i===-1) {
-						// $hI=m.fdList.eq(k-1);
+						// $hI=m.$fdList.eq(k-1);
 						// alert("This is the first section.");
 						return;
 					}
@@ -951,6 +951,13 @@ ${from} 15:00:00	${to} 15:00:00`;
 
 	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
+	m.reNewAndReOn=function () {
+		m.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
+		$window.off("scroll.delayedLoad");
+		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
+		$window.trigger("scroll.delayedLoad");
+		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #page-views-chart");
+	};
 	m.HandleAhrefInComment=function () {
 		$("div.comments>.comment-list").find("p").each(function (i, elem) {
 			let $elem=$(elem);
@@ -961,7 +968,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 				if (contents[i].nodeType===Node.TEXT_NODE) { // Node.TEXT_NODE=3
 					toBeAdded=contents[i].innerHTML=contents[i].wholeText.replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
 						return `<a style="color:wheat" target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a><br>
-${m.uriRendering(match, false, false)}`
+${m.uriRendering(match, false, false).html}`
 					});
 				}
 				else {
@@ -971,6 +978,7 @@ ${m.uriRendering(match, false, false)}`
 			}
 			$elem.html(elemHTML);
 		});
+		m.reNewAndReOn();
 	};
 	m.HandleAhrefInComment();
 
