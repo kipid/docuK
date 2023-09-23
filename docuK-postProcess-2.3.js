@@ -743,8 +743,8 @@ ${from} 15:00:00	${to} 15:00:00`;
 		m.from.push({date:`${year}-${month}-${day}`});
 	}
 	let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
-	let leftPadding=8.0;
-	let rightPadding=2.0;
+	let leftPadding=3.0;
+	let rightPadding=3.0;
 	let topPadding=7.0;
 	let bottomPadding=20.0;
 	let bottomLine=100.0-bottomPadding;
@@ -774,17 +774,17 @@ ${from} 15:00:00	${to} 15:00:00`;
 				let tick=leftPadding+(m.daysToPlotCountChart-0.5-k)*dx*2.0;
 
 				let h=maxHeight*blogStatRes.pageViews/maxPageViews;
-				pageViewsOfADay[k]={x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
+				pageViewsOfADay[k]={pageViews:blogStatRes.pageViews, x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
 			}
 			for (let i=0;i<pageViewsOfADay.length;i++) {
-				countChartHTML+=`<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine-pageViewsOfADay[i].h}%" width="${2.0*dx}%" height="${pageViewsOfADay[i].h}%"></rect>`;
+				countChartHTML+=`<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine-pageViewsOfADay[i].h}%" width="${2.0*dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine-pageViewsOfADay[i].h-1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews.toFixed(0)}</text>`;
 			}
 			countChartHTML+=`<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0-rightPadding}%" y2="${bottomLine}%"/>`;
 			for (let i=0;i<pageViewsOfADay.length;i++) {
 				countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-2.0}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+2.0}%"/>
 <text class="tick" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
-	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.7em">${pageViewsOfADay[i].month}</tspan>
-	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">/${pageViewsOfADay[i].day}</tspan>
+	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
+	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
 	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
 </text>`
 			}
