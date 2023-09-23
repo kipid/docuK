@@ -325,6 +325,8 @@ li, dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 rect.column {fill:rgb(255,255,0); stroke-width:1; stroke:rgb(0,150,150)}
 line.bar {stroke:#c8c8c8; stroke-width:3}
 text.tick {fill:#c8c8c8; font-size:.8em}
+text.tick.saturday {fill:#c584ff}
+text.tick.sunday {fill:#ff7b7b}
 text.page-views {fill:#6495ed; font-size:.7em}
 text.now-local {fill:#98fb98; font-size:1.1em}
 
