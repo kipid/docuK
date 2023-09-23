@@ -750,7 +750,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 	}
 	let maxCount=0;
 	for (let i=0;i<m.daysToPlotCountChart;i++) {
-		let pageViews=m.blogStatRes[`${m.from[i].date} to ${m.to[i].date}`].pageViews;
+		let pageViews=m.blogStatRes[i].pageViews;
 		if (pageViews>maxCount) {
 			maxCount=pageViews;
 		}
