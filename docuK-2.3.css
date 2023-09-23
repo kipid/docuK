@@ -322,6 +322,7 @@ li, dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 
 #disqus_thread {background:black; padding:.2em .5em}
 
+#page-views-chart {font-size:9px}
 rect.column {fill:rgb(255,255,0); stroke-width:1; stroke:rgb(0,150,150)}
 line.bar {stroke:#c8c8c8; stroke-width:3}
 text.tick {fill:#c8c8c8; font-size:.8em}
@@ -332,26 +333,32 @@ text.now-local {fill:#98fb98; font-size:1.1em}
 
 @media all and (min-width:400px) {
 	.docuK ::-webkit-scrollbar {width:9px; height:9px}
+	#page-views-chart {font-size:9.5px}
 }
 @media all and (min-width:500px) {
 	.docuK>.sec {border-left:2px rgb(25,60,25) solid; border-right:2px rgb(25,60,25) solid}
 	#docuK-log {max-width:500px; max-height:300px}
 	#docuK-log.fixed>.exit {bottom:280px}
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.5em}
+	#page-views-chart {font-size:10px}
 }
 @media all and (min-width:600px) {
 	.docuK .SNS-top {padding-top:0}
 	.docuK .deviceInfo, .docuK .promoting-docuK {margin-left:188px}
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.6em}
+	#page-views-chart {font-size:11px}
 }
 @media all and (min-width:700px) {
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.7em}
+	#page-views-chart {font-size:12px}
 }
 @media all and (min-width:800px) {
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.8em}
+	#page-views-chart {font-size:13px}
 }
 @media all and (min-width:900px) {
 	.docuK #floating-key, .docuK #toggle-floating-key {font-size:1.9em}
+	#page-views-chart {font-size:15px}
 }
 
 @media all and (min-height:300px) {

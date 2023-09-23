@@ -790,23 +790,23 @@ ${from} 15:00:00	${to} 15:00:00`;
 			}
 			countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
 			countChartHTML+=`</svg></div></div></div>`;
-			$count_chart=$("#count-chart");
-			if ($count_chart.exists()) {
-				$count_chart.html(countChartHTML);
+			$page_views_chart=$("#page-views-chart");
+			if ($page_views_chart.exists()) {
+				$page_views_chart.html(countChartHTML);
 			}
 			else {
 				$disqus_thread=$("#disqus_thread");
 				if ($disqus_thread.exists()) {
-					$disqus_thread.after(`<div id="count-chart"></div>`);
-					$count_chart=$("#count-chart");
-					$count_chart.html(countChartHTML);
+					$disqus_thread.after(`<div id="page-views-chart"></div>`);
+					$page_views_chart=$("#page-views-chart");
+					$page_views_chart.html(countChartHTML);
 				}
 			}
 		}
 	}, 2048);
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	m.fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #count-chart"); // Ordered automatically by jQuery.
+	m.fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
 	m.tocs=$(".docuK>.sec").has(".toc");
 	m.rras=$(".docuK>.sec").has("ol.refs");
 	m.goOn=false;
