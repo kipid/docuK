@@ -781,7 +781,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 			}
 			countChartHTML+=`<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0-rightPadding}%" y2="${bottomLine}%"/>`;
 			for (let i=0;i<pageViewsOfADay.length;i++) {
-				countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-2.0}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+2.0}%"/>
+				countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+1.0}%"/>
 <text class="tick${pageViewsOfADay[i].weekday==="토"?" saturday":pageViewsOfADay[i].weekday==="일"?" sunday":""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
 	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
 	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
