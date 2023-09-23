@@ -9,7 +9,14 @@ m.browserWidth=window.innerWidth;
 const docuK=$(".docuK");
 m.docuK=docuK;
 
+////////////////////////////////////////////////////
+// URI rendering :: http link itself, videos, images, maps.
+////////////////////////////////////////////////////
+m.ptnURI=[];
 m.ptnURL=/^https?:\/\/\S+/i;
+m.ptnTag=/^<\w+[\s\S]+>$/i;
+m.ptnVal=/^([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)$/;
+
 m.uriToA=function (uri) {
 	if (!uri||uri.constructor!==String) { return ""; }
 	let exec=m.ptnURL.exec(uri);
@@ -20,6 +27,321 @@ m.uriToA=function (uri) {
 		return m.escapeHTML(uri);
 	}
 };
+m.videoZIndex=10000;
+m.togglePosition=function (elem) {
+	let $elem=$(elem);
+	let $parent=$elem.parents(".rC");
+	if ($parent.hasClass("fixed")) {
+		$parent.removeClass("fixed");
+		$parent.css("z-index", 0);
+		window.scrollTo(0, $parent.offset().top);
+		$elem.text("▲ [--stick to the left top--]");
+		m.fsToRs.fixed=false;
+	}
+	else {
+		$parent.addClass("fixed");
+		$parent.css("z-index", m.videoZIndex--);
+		window.scrollBy(0, -$parent.height());
+		$elem.text("▲ [--return to the original position--]");
+		m.fsToRs.fixed=true;
+	}
+};
+m.rC=function (elemStr, option, id, noPc) {
+	return `<div class="rC${(option?` ${option}`:'')}"${!!id?` id="${id}"`:""}><div class="rSC">${elemStr}</div>${noPc?"":`<div class="pc"><span onclick="m.togglePosition(this)">▲ [--stick to the left top--]</span></div>`}</div>`;
+};
+m.uriRendering=function (uri, toA, inListPlay) {
+	if (uri&&uri.constructor===String) {
+		if (uri.length>6) {
+			if (uri.substring(0,4).toLowerCase()==="http") {
+				let k=4;
+				if (uri.charAt(k).toLowerCase()==='s') {
+					k++;
+				}
+				if (uri.substring(k,k+3)==="://") {
+					k+=3;
+					let l=uri.indexOf('/',k);
+					let uriHost=null;
+					let uriRest='';
+					if (l===-1) {
+						uriHost=uri.substring(k);
+					}
+					else {
+						uriHost=uri.substring(k,l);
+						uriRest=uri.substring(l+1);
+					}
+					if (m.ptnURI[uriHost]) {
+						let result=m.ptnURI[uriHost]&&m.ptnURI[uriHost].toIframe(uriRest, inListPlay);
+						if (result&&!result.list) { return result; }
+					}
+				}
+			}
+			for (let i=0;i<m.ptnURI.length;i++) {
+				let result=m.ptnURI[i].toIframe(uri, inListPlay); // img or video
+				if (result) { return result; }
+			}
+			return {html:(toA?m.uriToA(uri):"")};
+		}
+		return {html:m.escapeHTML(uri)};
+	}
+	return {html:""};
+};
+
+m.YTiframe=function (v, inListPlay) {
+	return m.rC(`<iframe delayed-src="https://www.youtube.com/embed/${v}?origin=https://recoeve.net" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null));
+};
+
+let ptnURI;
+ptnURI=m.ptnURI["www.youtube.com"]=m.ptnURI["youtube.com"]=m.ptnURI["youtu.be"]=m.ptnURI["m.youtube.com"]={};
+ptnURI.regEx=/^(?:watch|embed\/([\w-]+))(\?\S+)?/i;
+ptnURI.regEx1=/^shorts\/([\w-]+)/i;
+ptnURI.regEx2=/^([\w-]+)(\?\S+)?/i;
+ptnURI.regEx3=/^watch(\?\S+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["www.youtube.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		let vars=null;
+		if (exec[2]) { vars=m.getSearchVars(exec[2]); }
+		let v=null;
+		if (exec[1]) {
+			v=exec[1];
+		}
+		else if (vars&&vars.v) {
+			v=vars.v.val;
+		}
+		if (v) {
+			return {html:m.YTiframe(v, inListPlay), from:"youtube", videoId:v, list:vars?.list?.val};
+		}
+	}
+	else {
+		exec=m.ptnURI["www.youtube.com"].regEx1.exec(uriRest);
+		if (exec!==null) {
+			let v=exec[1];
+			if (v) {
+				return {html:m.YTiframe(v, inListPlay), from:"youtube", videoId:v};
+			}
+		}
+		else {
+			exec=m.ptnURI["youtu.be"].regEx2.exec(uriRest);
+			if (exec!==null) {
+				let vars=null;
+				if (exec[2]) {
+					vars=m.getSearchVars(exec[2]);
+				}
+				return {html:m.YTiframe(exec[1], inListPlay), from:"youtube", videoId:exec[1], list:vars?.list?.val};
+			}
+			else {
+				exec=m.ptnURI["m.youtube.com"].regEx3.exec(uriRest);
+				if (exec!==null) {
+					let vars=m.getSearchVars(exec[1]);
+					if (vars.v&&vars.v.val) {
+						return {html:m.YTiframe(vars.v.val, inListPlay), from:"youtube", videoId:vars.v.val};
+					}
+				}
+			}
+		}
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["instagram.com"]=m.ptnURI["www.instagram.com"]={};
+ptnURI.regEx=/^(?:p|tv|reel)\/([\w-]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["instagram.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<div class="center"><iframe delayed-src="https://www.instagram.com/p/${exec[1]}/embed" frameborder="0" scrolling="auto" allowtransparency="true"></iframe></div>`, "instagram", null, true), from:"instagram", imgId:exec[1]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["www.tiktok.com"]={};
+ptnURI.regEx=/^@(\S+)\/video\/([0-9]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["www.tiktok.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<div class="center"><iframe sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin" delayed-src="https://www.tiktok.com/embed/v2/${exec[2]}?referrer=${encodeURIComponent(window.location.href)}" frameborder="no" scrolling="auto"></iframe></div>`, "tiktok", null, true), from:"tiktok", userId:exec[1], videoId:exec[2]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["tv.naver.com"]={};
+ptnURI.regEx=/^(?:v|embed)\/([0-9]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["tv.naver.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<iframe delayed-src="https://tv.naver.com/embed/${exec[1]}?autoPlay=false" frameborder="no" scrolling="auto" marginwidth="0" marginheight="0" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"naver", videoId:exec[1]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["weverse.io"]={};
+ptnURI.regEx=/^(\S+)\/artist\/([0-9\-]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["weverse.io"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<iframe src="https://weverse.io/${exec[1]}/artist/${exec[2]}" frameborder="no" scrolling="auto" marginwidth="0" marginheight="0" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"weverse", singer:exec[1] ,videoId:exec[2]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["tv.kakao.com"]=m.ptnURI["entertain.daum.net"]={};
+ptnURI.regEx=/(?:v|cliplink)\/([0-9]+)/i;
+ptnURI.regEx1=/video\/([0-9]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["tv.kakao.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<iframe delayed-src="https://play-tv.kakao.com/embed/player/cliplink/${exec[1]}" frameborder="0" scrolling="auto" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"kakao", videoId:exec[1]};
+	}
+	else {
+		exec=m.ptnURI["entertain.daum.net"].regEx1.exec(uriRest);
+		if (exec!==null) {
+			return {html:m.rC(`<iframe delayed-src="https://play-tv.kakao.com/embed/player/cliplink/${exec[1]}" frameborder="0" scrolling="auto" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"kakao", videoId:exec[1]};
+		}
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["tvpot.daum.net"]={};
+ptnURI.regEx=/^v\/([\w-]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["tvpot.daum.net"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<iframe delayed-src="https://videofarm.daum.net/controller/video/viewer/Video.html?vid=${exec[1]}${exec[1].length<15?'$':''}&play_loc=undefined" frameborder="0" scrolling="auto"></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"daum", videoId:exec[1]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["videofarm.daum.net"]={};
+ptnURI.regEx=/^controller\/video\/viewer\/Video\.html(\?\S+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["videofarm.daum.net"].regEx.exec(uriRest);
+	if (exec!==null) {
+		let vars=m.getSearchVars(exec[1]);
+		return {html:m.rC(`<iframe delayed-src="https://videofarm.daum.net/controller/video/viewer/Video.html?vid=${vars.vid.val}&play_loc=${vars.play_loc.val}" frameborder="0" scrolling="auto"></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"daum", videoId:vars.vid.val};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["vimeo.com"]={};
+ptnURI.regEx=/^([0-9]+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["vimeo.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<iframe delayed-src="https://player.vimeo.com/video/${exec[1]}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"vimeo", videoId:exec[1]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["www.dailymotion.com"]={};
+ptnURI.regEx=/video\/(\w+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["www.dailymotion.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		return {html:m.rC(`<iframe delayed-src="https://www.dailymotion.com/embed/video/${exec[1]}" frameborder="0" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"dailymotion", videoId:exec[1]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["www.ted.com"]={};
+ptnURI.regEx=/^talks\//i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["www.ted.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		uriRest=uriRest.substring(6);
+		let k=uriRest.indexOf("?");
+		let vars=null;
+		if (k!==-1) {
+			vars=m.getSearchVars(uriRest.substring(k));
+			uriRest=uriRest.substring(0,k);
+		}
+		let v=uriRest;
+		if (vars&&vars.language) {
+			uriRest="lang/"+vars.language.val+"/"+uriRest;
+		}
+		return {html:m.rC(`<iframe delayed-src="https://embed.ted.com/talks/${uriRest}" frameborder="0" scrolling="auto" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"ted", videoId:v};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["embed.ted.com"]={};
+ptnURI.regEx=/^talks\//i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["embed.ted.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		uriRest=uriRest.substring(6);
+		let v=uriRest.replace(/^lang\/\w+\//i,"").replace(/\.html$/i,"");
+		return {html:m.rC(`<iframe delayed-src="https://embed.ted.com/talks/${uriRest}" frameborder="0" scrolling="auto" allowfullscreen></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:"ted", videoId:v};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI["w.soundcloud.com"]={};
+ptnURI.regEx=/^player\/(\?\S+)/i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+	let exec=m.ptnURI["w.soundcloud.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		let vars=m.getSearchVars(exec[1]);
+		let lastPath="player/?";
+		for (let i=0;i<vars.length;i++) {
+			if (vars[i].key==="auto_play") {
+				lastPath+="auto_play=false&";
+			}
+			else {
+				lastPath+=vars[i].key+"="+vars[i].val+"&";
+			}
+		}
+		return {html:m.rC(`<iframe delayed-src="https://w.soundcloud.com/${lastPath.substring(0,lastPath.length-1)}" scrolling="auto" frameborder="no"></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed soundcloud":"soundcloud")), from:"soundcloud", videoId:vars.url&&vars.url.val};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI[0]={};
+ptnURI.regEx=/^https?:\/\/\S+\.(?:jpg|jpeg|bmp|gif|png|webp|svg|tif)(?=$|\?|\s)/i;
+ptnURI.toIframe=function (uri, inListPlay) {
+	let exec=m.ptnURI[0].regEx.exec(uri);
+	if (exec!==null) {
+		return {html:m.rC(`<div class="center"><img delayed-src="${exec[0]}"/></div>`, (inListPlay&&m.fsToRs.fixed?"fixed eveElse":"eveElse")), from:'image', src:exec[0]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI[1]={};
+ptnURI.regEx=/^https?:\/\/\S+\.(?:mp4|ogg|webm)(?=$|\?|\s)/i;
+ptnURI.toIframe=function (uri, inListPlay) {
+	let exec=m.ptnURI[1].regEx.exec(uri);
+	if (exec!==null) {
+		return {html:m.rC(`<video controls preload="auto" delayed-src="${exec[0]}"></video>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:'video', src:exec[0]};
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI[2]={};
+ptnURI.regEx=/^https?:\/\/kr[\d]+\.sogirl\.so(?:(\/[\s\S]*))?/i;
+ptnURI.regEx1=/^https?:\/\/kr[\d]+\.sogirl\.co(?:(\/[\s\S]*))?/i;
+ptnURI.toIframe=function (uri, inListPlay) {
+	let exec=m.ptnURI[2].regEx.exec(uri);
+	if (exec!==null) {
+		return {html:`<a target="_blank" href="https://kr55.sogirl.so${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr55.sogirl.so${exec[1]?exec[1]:"/"}`)}</a>`, from:'sogirl', src:exec[1]};
+	}
+	else {
+		exec=m.ptnURI[2].regEx1.exec(uri);
+		if (exec!==null) {
+			return {html:`<a target="_blank" href="https://kr55.sogirl.so${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr55.sogirl.so${exec[1]?exec[1]:"/"}`)}</a>`, from:'sogirl', src:exec[1]};
+		}
+	}
+	return false;
+};
+
+ptnURI=m.ptnURI[3]={};
+ptnURI.regEx=/^https?:\/\/kr[\d]+\.topgirl\.co(?:(\/[\s\S]*))?/i;
+ptnURI.toIframe=function (uri, inListPlay) {
+	let exec=m.ptnURI[3].regEx.exec(uri);
+	if (exec!==null) {
+		return {html:`<a target="_blank" href="https://kr24.topgirl.co${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr24.topgirl.co${exec[1]?exec[1]:"/"}`)}</a>`, from:'topgirl', src:exec[1]};
+	}
+	return false;
+};
+
+
 
 // cookies.js (copied from cookie-test.html)
 m.expire=365*24*60*60; // max-age in seconds.

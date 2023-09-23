@@ -960,7 +960,8 @@ ${from} 15:00:00	${to} 15:00:00`;
 				let toBeAdded="";
 				if (contents[i].nodeType===Node.TEXT_NODE) { // Node.TEXT_NODE=3
 					toBeAdded=contents[i].innerHTML=contents[i].wholeText.replaceAll(/(https?:\/\/[^<>\s\t\n\r]+)/ig, function (match) {
-						return `<a style="color:wheat" target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a>`
+						return `<a style="color:wheat" target="_blank" href="${match}">${m.escapeHTML(decodeURIComponent(match))}</a><br>
+${m.uriRendering(match, false, false)}`
 					});
 				}
 				else {
