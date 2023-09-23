@@ -9,9 +9,32 @@ m.browserWidth=window.innerWidth;
 const docuK=$(".docuK");
 m.docuK=docuK;
 
+m.getSearchVars=function (searchStr) {
+	let vars=[];
+	if (searchStr!==null&&searchStr!==undefined&&searchStr.length!==0) {
+		if (searchStr.startsWith("?")) { searchStr=searchStr.substring(1); }
+		let j=searchStr.indexOf("#");
+		if (j!==-1) { searchStr=searchStr.substring(0,j); }
+		let splits=searchStr.replace(/&amp;/ig,"&").split("&");
+		for (let i=0;i<splits.length;i++) {
+			let key=splits[i];
+			let value="";
+			let k=key.indexOf("=");
+			if (k!==-1) {
+				value=decodeURIComponent(key.substring(k+1));
+				key=key.substring(0,k);
+			}
+			key=decodeURIComponent(key);
+			vars[i]=vars[key]={key:key, val:value};
+		}
+	}
+	return vars;
+};
+
 ////////////////////////////////////////////////////
 // URI rendering :: http link itself, videos, images, maps.
 ////////////////////////////////////////////////////
+m.fsToRs=[];
 m.ptnURI=[];
 m.ptnURL=/^https?:\/\/\S+/i;
 m.ptnTag=/^<\w+[\s\S]+>$/i;

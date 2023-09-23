@@ -806,7 +806,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 	}, 2048);
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
+	m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
 	m.tocs=$(".docuK>.sec").has(".toc");
 	m.rras=$(".docuK>.sec").has("ol.refs");
 	m.goOn=false;
@@ -865,8 +865,6 @@ ${from} 15:00:00	${to} 15:00:00`;
 						if ($hI.is(":visible")&&scrollTop<$hI.offset().top) { break; }
 					}
 					if (i===k) {
-						// $hI=m.$fdList.eq(0);
-						// alert("This is the last section.");
 						return;
 					}
 				}
@@ -877,8 +875,6 @@ ${from} 15:00:00	${to} 15:00:00`;
 						if ($hI.is(":visible")&&scrollTop>$hI.offset().top) { break; }
 					}
 					if (i===-1) {
-						// $hI=m.$fdList.eq(k-1);
-						// alert("This is the first section.");
 						return;
 					}
 				}
@@ -956,7 +952,7 @@ ${from} 15:00:00	${to} 15:00:00`;
 		$window.off("scroll.delayedLoad");
 		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
 		$window.trigger("scroll.delayedLoad");
-		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, div.comments, #disqus_thread, #aside, #page-views-chart");
+		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart");
 	};
 	m.HandleAhrefInComment=function () {
 		$("div.comments>.comment-list").find("p").each(function (i, elem) {
