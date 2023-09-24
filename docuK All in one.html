@@ -25,838 +25,824 @@
 <codeprint id="docuK-docu">
 <div class="docuK">
 <div class="sec"><h1>HTML docuK format ver. 2.3 (2023-05-30)</h1>
-  <div class="p">
-    개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 '<span class="emph">document designed by kipid</span>'란 뜻.
-  </div>
-  <div class="p">This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, auto numbering of sections/figures/equations, auto citing references, auto refering figures and equations, auto refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and auto code printing. Quite similar to LaTeX or Wiki document, but extended a little bit.</div>
+<div class="p">
+개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 '<span class="emph">document designed by kipid</span>'란 뜻.
+</div>
+<div class="p">This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, auto numbering of sections/figures/equations, auto citing references, auto refering figures and equations, auto refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and auto code printing. Quite similar to LaTeX or Wiki document, but extended a little bit.</div>
 </div>
 
 <div class="sec hiden no-sec-N"><h2 id="sec-UH">Update History</h2>
-  <div class="subsec"><h3>Upto version 2.3</h3></div>
-  <ul>
-  	<li>2022-12-26: Short Keys announcement.</li>
-    <li>2015-01-18: SNS widget. "2014-08-07: m.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
-    <li>2014-11-23: Super Easy Citation all at once.</li>
-    <li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
-    <li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
-    <li>2014-08-09: pre.scrollable 일때만 scroll switch fetch. bubbleRef show/hide "&gt;.bubbleRef"로. (chaining은 ㅡㅡ;;;)</li>
-    <li>2014-06-25: Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
-    <li>2014-06-25: 단축키 설정: F,D,L, (T to the TOC는 안했음. 만들까??)</li>
-    <li>2014-06-25: MathJax CDN is changed from "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js" to "https://cdn.mathjax.org/mathjax/latest/MathJax.js".</li>
-    <li>2014-06-25: 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
-    <li>2014-06-25: duplicate id handling, and "noDIdHandle" class</li>
-    <li>2014-06-21: element가 아닌 text가 sec 바깥으로 빠져나오는거 해결.</li>
-    <li>2014-06-16: change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle (no duplicate id handling) 겁시다. (자동으로도 처리 됨.)</li>
-    <li>2014-06-12: bubble ref arrow is centered.</li>
-    <li>2014-06-11: MathJax delayed-loading 구현. 글 간단하게 정리.</li>
-    <li>2014-05-31: Log show/hide. delayed-loading in bubble ref.</li>
-    <li>2014-05-29: Delayed Loading 구현. disableQ 구현. (disable query: [ex] iframe disable in Galaxy S.)</li>
-    <li>2014-05-27: CSS 수정. tJump 구현. (refer.sec- 할때 안에서 어디로 jump 할지 선택이 되도록.) progress log print.</li>
-    <li>2014-05-26: Styling of scroll bars, word-wrap, white-space.</li>
-    <li>2014-05-24: Toggle scrollable. Codeprint upgrade.</li>
-    <li>2014-05-23: 어느정도 완성.</li>
-  </ul>
+<div class="subsec"><h3>Upto version 2.3</h3></div>
+<ul>
+<li>2022?: Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
+<li>2022-12-26: Short Keys announcement.</li>
+<li>2015-01-18: SNS widget. "2014-08-07: m.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
+<li>2014-11-23: Super Easy Citation all at once.</li>
+<li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
+<li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
+<li>2014-08-09: pre.scrollable 일때만 scroll switch fetch. bubbleRef show/hide "&gt;.bubbleRef"로. (chaining은 ㅡㅡ;;;)</li>
+<li>2014-06-25: Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
+<li>2014-06-25: 단축키 설정: F,D,L, (T to the TOC는 안했음. 만들까??)</li>
+<li>2014-06-25: MathJax CDN is changed from "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js" to "https://cdn.mathjax.org/mathjax/latest/MathJax.js".</li>
+<li>2014-06-25: 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
+<li>2014-06-25: duplicate id handling, and "noDIdHandle" class</li>
+<li>2014-06-21: element가 아닌 text가 sec 바깥으로 빠져나오는거 해결.</li>
+<li>2014-06-16: change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle (no duplicate id handling) 겁시다. (자동으로도 처리 됨.)</li>
+<li>2014-06-12: bubble ref arrow is centered.</li>
+<li>2014-06-11: MathJax delayed-loading 구현. 글 간단하게 정리.</li>
+<li>2014-05-31: Log show/hide. delayed-loading in bubble ref.</li>
+<li>2014-05-29: Delayed Loading 구현. disableQ 구현. (disable query: [ex] iframe disable in Galaxy S.)</li>
+<li>2014-05-27: CSS 수정. tJump 구현. (refer.sec- 할때 안에서 어디로 jump 할지 선택이 되도록.) progress log print.</li>
+<li>2014-05-26: Styling of scroll bars, word-wrap, white-space.</li>
+<li>2014-05-24: Toggle scrollable. Codeprint upgrade.</li>
+<li>2014-05-23: 어느정도 완성.</li>
+</ul>
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-FE">앞으로 생각하고 있는 것들</h2>
-  <div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
-  <ul>
-    <li>MathJax delayed rendering 은 나중에 추가되는데, $window.on 을 추가로 해야할듯? 다른 delayed elem 가 없으면 동작을 멈추네.</li>
-
-    <li>2014-08-07: Dual view 구현? 버튼 누르면, Fill browser 되고 (최상위 div를 만들어서(?) fixed, z-index:1000, 같은걸로 채우고) rendered 된 docuK를 복사해서 오른편에 붙이기?</li>
-
-    <li>Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
-    <li>bubbleRef 속 bubbleRef 구현? Chaining으로? (이거 지금도 그냥 될것도 같은데 뭔가 코드가 제대로 적용이 안되는듯??? 분석하려면 오래걸리겠다 ㅡ,.ㅡ;;; 중요한 기능은 아니니 당장은 패스할까나?)</li>
-
-    <li>minor: 갤스에서는 마진이 안먹히는듯? (버블 애로우 센터 문제.)</li>
-    <li>minor: 갤4에서 폰트사이즈 보여주는게 이상. 표현은 제대로인데 이상하네. css("font-size")가 다른 방식으로 돌아가나?</li>
-
-    <li>eqq | figure numbering (sec-subsec-subsubsec-number). 지금은 (sec-number).</li>
-
-    <li>docuK Log draggable하게?</li>
-    <li><code class="prettyprint">$('&lt;div/&gt;', {id: someID, className: 'foobar', html: content});</code> 형태가 더 빠르다는 이야기가 있네. <a href="http://stackoverflow.com/questions/3015335/jquery-html-vs-append">Stackoverflow.com - jquery html vs append</a> 그런데 그닥 체감을 못하겠어서... 정확한 정보인지도 모르겠고. 당장은 패스.</li>
-    <li><code class="prettyprint">&lt;refer class="id" defer&gt;&lt;/refer&gt;</code> 같은것도 생각해볼까?? id 안의 html이 다른 script들 처리가 된 후에 복사해오면 더 속도가 빨라지는 경우도 많아서.. (예로 MathJax 수식, Highlighted code 같은? 잡다한 기능/설정이 많으면 작성하는 사람을 복잡하게만 만들듯도 해서 당장은 패스. 별로 쓰지도 않을 설정같고...)</li>
-    <li>IE/파폭에서도 스크롤바 꾸미기?</li>
-    <li>DISQUS 댓글창은 자동으로 잘 늘어나네? 갤4에서도 확인해보고 티스토리 댓글 css도 수정? (안해도 될듯하고... 분석이나 해보자.)</li>
-  </ul>
+<div class="p">중요하게 생각한 기능은 대부분 구현했고, 자잘한 것들이 많음.</div>
+<ul>
+<li>bubbleRef 속 bubbleRef 구현? Chaining으로? (이거 지금도 그냥 될것도 같은데 뭔가 코드가 제대로 적용이 안되는듯??? 분석하려면 오래걸리겠다 ㅡ,.ㅡ;;; 중요한 기능은 아니니 당장은 패스할까나?)</li>
+<li>docuK Log draggable하게?</li>
+</ul>
 </div>
 
 <div class="sec"><h2 class="notSec">Table of Contents</h2>
-  <div class="toc"></div>
+<div class="toc"></div>
 </div>
 
 <div class="sec"><h2 id="sec-Cite">Citing the references automatically like LaTeX</h2>
-  <div class="p">
-    With <code>&lt;cite class="id-of-element-you-are-citing"&gt;</code> tag, it automatically cites the specific reference in sec-<refer class="sec-Refs"></refer> and, when you mouse over the squared citation =&gt; <cite class="ref-cite"></cite>, it shows the reference in bubble-shape pop-up. When you mouse out the bubble reference, the bubble disappears with delayed 1.0 second. Clicking '✖' button exits the bubble immediately. The unknown citation <cite class="ref-xx"></cite> or citation with errata <cite class="ref-cito"></cite> will be highlighted like &lt;= that. Examples: <cite class="ref-latex"></cite> <cite class="ref-cite"></cite> <cite class="ref-math"></cite> <cite class="ref-code"></cite> <cite class="ref-thinsp"></cite>
-  </div>
-  <div class="p">
-    Reference 외에도 <code>&lt;refer class="id-of-element-you-are-refering"&gt;</code> tag를 이용해서 equation, figure, section, subsection 등 다양한 것들을 refer 할 수 있음. 단 refer 하는 tag 안에 class="number"를 가지는 tag가 있어야만 undefined가 아닌 것을 표시해줌. 없다면 다음과 같이 나타남: <refer class="ref-cite"></refer>.
-  </div>
-  <div class="p">
-    Refering equations: Eq. <refer class="eq-pos"></refer>, Eq. <refer class="eq-epsilon"></refer>.
-  </div>
-  <div class="p">
-    Refering figures: Fig. <refer class="fig-ex"></refer>, Fig. <refer class="fig-ex2"></refer>, Fig. <refer class="fig-youtube"></refer>.
-  </div>
-  <div class="p">
-    Refering sections: Sec. <refer class="sec-Cite"></refer>, Sec. <refer class="sec-Font"></refer>, <refer class="sec-Second"></refer>, Sec. <refer class="sec-Refs"></refer>, <refer class="sec-Refs-subex"></refer>, <refer class="sec-Math"></refer>, <refer class="sec-Figure"></refer>, <refer class="sec-Second-sub1"></refer>, <refer class="sec-Second-sub1-1"></refer>, <refer class="sec-Second-sub1-2"></refer>, <refer class="sec-ShowHide"></refer>, <refer class="sec-SH-1"></refer>, <refer class="sec-SH-2"></refer>, <refer class="sec-SH-2-1"></refer>, <refer class="sec-SH-2-3"></refer>.
-  </div>
+<div class="p">
+With <code>&lt;cite class="id-of-element-you-are-citing"&gt;</code> tag, it automatically cites the specific reference in sec-<refer class="sec-Refs"></refer> and, when you mouse over the squared citation =&gt; <cite class="ref-cite"></cite>, it shows the reference in bubble-shape pop-up. When you mouse out the bubble reference, the bubble disappears with delayed 1.0 second. Clicking '✖' button exits the bubble immediately. The unknown citation <cite class="ref-xx"></cite> or citation with errata <cite class="ref-cito"></cite> will be highlighted like &lt;= that. Examples: <cite class="ref-latex"></cite> <cite class="ref-cite"></cite> <cite class="ref-math"></cite> <cite class="ref-code"></cite> <cite class="ref-thinsp"></cite>
+</div>
+<div class="p">
+Reference 외에도 <code>&lt;refer class="id-of-element-you-are-refering"&gt;</code> tag를 이용해서 equation, figure, section, subsection 등 다양한 것들을 refer 할 수 있음. 단 refer 하는 tag 안에 class="number"를 가지는 tag가 있어야만 undefined가 아닌 것을 표시해줌. 없다면 다음과 같이 나타남: <refer class="ref-cite"></refer>.
+</div>
+<div class="p">
+Refering equations: Eq. <refer class="eq-pos"></refer>, Eq. <refer class="eq-epsilon"></refer>.
+</div>
+<div class="p">
+Refering figures: Fig. <refer class="fig-ex"></refer>, Fig. <refer class="fig-ex2"></refer>, Fig. <refer class="fig-youtube"></refer>.
+</div>
+<div class="p">
+Refering sections: Sec. <refer class="sec-Cite"></refer>, Sec. <refer class="sec-Font"></refer>, <refer class="sec-Second"></refer>, Sec. <refer class="sec-Refs"></refer>, <refer class="sec-Refs-subex"></refer>, <refer class="sec-Math"></refer>, <refer class="sec-Figure"></refer>, <refer class="sec-Second-sub1"></refer>, <refer class="sec-Second-sub1-1"></refer>, <refer class="sec-Second-sub1-2"></refer>, <refer class="sec-ShowHide"></refer>, <refer class="sec-SH-1"></refer>, <refer class="sec-SH-2"></refer>, <refer class="sec-SH-2-1"></refer>, <refer class="sec-SH-2-3"></refer>.
+</div>
 
-  <div class="subsec"><h3>Putting and Citing the references all at once</h3>
-    <div class="p">
-      You can put the references into <code>ol.refs</code> in RRA. And cite it with id. But this is sometimes tedious. You can put and cite the references all at once like <cite class="ref-putAndCiteAllAtOnce">This will be added to the last of <code>ol.refs</code></cite><cite class="ref-easy-cite">Quite easy is to cite something, isn't it? This is what we call super easy edit.</cite>.
-    </div>
-  </div>
-  <!-- subsec: Putting and Citing the references all at once -->
+<div class="subsec"><h3>Putting and Citing the references all at once</h3>
+<div class="p">
+You can put the references into <code>ol.refs</code> in RRA. And cite it with id. But this is sometimes tedious. You can put and cite the references all at once like <cite class="ref-putAndCiteAllAtOnce">This will be added to the last of <code>ol.refs</code></cite><cite class="ref-easy-cite">Quite easy is to cite something, isn't it? This is what we call super easy edit.</cite>.
+</div>
+</div>
+<!-- subsec: Putting and Citing the references all at once -->
 </div>
 
 <div class="sec hiden"><h2 id="sec-Font">Font-size:??em; Text-indent in div.p; Line-height; ol, ul, dl css</h2>
-  <div class="p">Font-size는 scalable/resizable이 쉽도록 제일 바깥 container (<code>&lt;div class="docuK"&gt;&lt;/div&gt;</code>) 를 10px로 정하고 안쪽은 em (1em=parent font-size의 100%) 으로 정함. CSS <code>@media</code> query 를 이용해서 기기별로 전체적인 글씨 크기를 조정.</div>
-  <div class="p">Paragraph의 text-indent:0.5em 정도로 해놨음.</div>
-  <div class="p">
-    line-height:1.6 으로.
-  </div>
+<div class="p">Font-size는 scalable/resizable이 쉽도록 제일 바깥 container (<code>&lt;div class="docuK"&gt;&lt;/div&gt;</code>) 를 10px로 정하고 안쪽은 em (1em=parent font-size의 100%) 으로 정함. CSS <code>@media</code> query 를 이용해서 기기별로 전체적인 글씨 크기를 조정.</div>
+<div class="p">Paragraph의 text-indent:0.5em 정도로 해놨음.</div>
+<div class="p">
+line-height:1.6 으로.
+</div>
 
-  <div class="subsec"><h3>기본적인 ol, ul, dl css 설정.</h3>
-    <div class="p">
-      ol tag: ordered list
-      <ol>
-        <li>첫 번째</li>
-        <li>두 번째</li>
-        <li>세 번째 등등등</li>
-      </ol>
-      <ol>
-        <li>
-          <div class="p">div tag가 안에 들어오면 list-style-type:none 으로 바뀌나? 안보이네?</div>
-          <div class="p">첫 번째</div>
-        </li>
-        <li>두 번째</li>
-        <li>세 번째 등등등</li>
-      </ol>
-      ul tag: unordered list
-      <ul>
-        <li>첫 번째</li>
-        <li>두 번째</li>
-        <li>세 번째 등등등</li>
-      </ul>
-      dl tag: description list인데, 그냥 data list로 외우고 있어도 될듯.
-      <dl>
-        <dt>첫 번째 타이틀</dt>
-          <dd>첫 번째 내용.</dd>
-        <dt>두 번째 타이틀이 있음</dt>
-          <dd>두 번째 내용.</dd>
-        <dt>세 번째 타이틀</dt>
-          <dd>세 번째 내용 등등등....</dd>
-      </dl>
-      이러한 list 들이 잘 보이도록 기본적인 css 설정. ".docuK ol, .docuK ul, .docuK dl {}"로 설정해서 docuK 바깥은 영향을 안주도록.
-    </div>
-  </div>
+<div class="subsec"><h3>기본적인 ol, ul, dl css 설정.</h3>
+<div class="p">
+ol tag: ordered list
+<ol>
+<li>첫 번째</li>
+<li>두 번째</li>
+<li>세 번째 등등등</li>
+</ol>
+<ol>
+<li>
+<div class="p">div tag가 안에 들어오면 list-style-type:none 으로 바뀌나? 안보이네?</div>
+<div class="p">첫 번째</div>
+</li>
+<li>두 번째</li>
+<li>세 번째 등등등</li>
+</ol>
+ul tag: unordered list
+<ul>
+<li>첫 번째</li>
+<li>두 번째</li>
+<li>세 번째 등등등</li>
+</ul>
+dl tag: description list인데, 그냥 data list로 외우고 있어도 될듯.
+<dl>
+<dt>첫 번째 타이틀</dt>
+<dd>첫 번째 내용.</dd>
+<dt>두 번째 타이틀이 있음</dt>
+<dd>두 번째 내용.</dd>
+<dt>세 번째 타이틀</dt>
+<dd>세 번째 내용 등등등....</dd>
+</dl>
+이러한 list 들이 잘 보이도록 기본적인 css 설정. ".docuK ol, .docuK ul, .docuK dl {}"로 설정해서 docuK 바깥은 영향을 안주도록.
+</div>
+</div>
 
-  <div class="subsec"><h3>'comment' box and 'be careful' box (cmt, bcf box)</h3>
-    <div class="p">어쨌거나 그냥 box 임. quote할 때 주로 쓰이기도 하고. 아무튼 이름은 붙이기 나름이고 쓰기 나름이긴 함.</div>
-    <div class="p">&lt;div class="p"&gt;을 box 안에다가 쓰고 싶을때도 많은데, padding-bottom 때문에 안 예뻤음 이건 ".docuK .cmt>.p:last-child, .docuK .bcf>.p:last-child {padding-bottom:0}"로 처리.</div>
-    <div class="cmt">
-      This is cmt box.
-    </div>
-    <div class="cmt">
-      <div class="p">This is cmt box.</div>
-    </div>
-    <div class="cmt">
-      <div class="p">This is cmt box.</div>
-      <div class="p">This is cmt box.</div>
-    </div>
-    <div class="bcf">
-      This is bcf box.
-    </div>
-    <div class="bcf">
-      <div class="p">This is bcf box.</div>
-    </div>
-    <div class="bcf">
-      <div class="p">This is bcf box.</div>
-      <div class="p">This is bcf box.</div>
-    </div>
-  </div>
+<div class="subsec"><h3>'comment' box and 'be careful' box (cmt, bcf box)</h3>
+<div class="p">어쨌거나 그냥 box 임. quote할 때 주로 쓰이기도 하고. 아무튼 이름은 붙이기 나름이고 쓰기 나름이긴 함.</div>
+<div class="p">&lt;div class="p"&gt;을 box 안에다가 쓰고 싶을때도 많은데, padding-bottom 때문에 안 예뻤음 이건 ".docuK .cmt>.p:last-child, .docuK .bcf>.p:last-child {padding-bottom:0}"로 처리.</div>
+<div class="cmt">
+This is cmt box.
+</div>
+<div class="cmt">
+<div class="p">This is cmt box.</div>
+</div>
+<div class="cmt">
+<div class="p">This is cmt box.</div>
+<div class="p">This is cmt box.</div>
+</div>
+<div class="bcf">
+This is bcf box.
+</div>
+<div class="bcf">
+<div class="p">This is bcf box.</div>
+</div>
+<div class="bcf">
+<div class="p">This is bcf box.</div>
+<div class="p">This is bcf box.</div>
+</div>
+</div>
 </div>
 
 <div class="sec hiden"><h2 id="sec-Mode">Mode selector: Dark/Bright, Font-family, Font-size, and Line-height.</h2>
-  <div class="p">Dark/Bright, Font-family, Font-size, and Line-height를 사용자/독자가 바꿀 수 있도록.</div>
-  <ol>
-    <li>
-      "Dark/Bright mode": 밤에 볼때 흰 바탕이 너무 눈이 부시길래, 검은색 바탕에 흰 글씨 (Dark, Energy/Battery saving, Night mode) 로 기본적으로 해놓긴 했는데... 거부감이 있는 사람도 있을거 같아서 가장 기본적인 흰 바탕에 검은 글씨 (Bright, Day mode) 로도 돌아갈 수 있게. <button type="button" onclick="m.Cmode('Dark')">Dark Mode</button> <button type="button" onclick="m.Cmode('Bright')">Bright Mode</button><br>
-      jQuery의 addClass 이용해서 하긴 했는데... ".docuK.bright>.sec"로 제일 앞쪽에 넣고 할까? ".docuK>.sec.bright"처럼 뒷쪽에 넣고 할까? 앞쪽이 더 간단(?)하고 구조적이니 앞쪽으로 우선 구현. css의 우선순위 (priority) 좀 공부해 보긴 해야할듯. (이거에 관해 제대로 정리가 안되어 있는거 보면, browser마다 우선 순위가 다를거 같기도 하고...)<br>
-    </li>
-    <li>
-      "Font-family": 폰트도 이것저것 고민끝에 대부분의 윈도우 컴퓨터에 깔려있고 예뻐보이는 '맑은 고딕' (or 'Malgun Gothic')으로 해놓긴 했는데... 이 폰트가 없는 컴퓨터도 있을테고, 폰트도 개인 취향을 타는 부분이니...<br>
-      폰트 이름을 입력하면 바뀌도록. 선택지 몇개 (맑은 고딕, 나눔고딕 등 괜찮은 애들 몇개) 는 주고, 직접 폰트 이름을 입력할수도 있게, 폰트 이름이 그 폰트로 표현되도록 (혹은 옆에 "가나다 AaBbCc" 정도 써줘서 적용전에 미리 확인할 수 있게?). 적용은 버튼을 눌렀을 때 바뀌도록. (수식 폰트도 바뀔 수 있게 할까???) 귀찮은 작업이네 이거.<br>
-    </li>
-    <li>
-      "Font-size": 글씨 크기도 너무 작지 않게 너무 크지도 않게, 1줄에 적당한 글자수가 되도록 적당히 잡긴 했는데, 사람마다 느끼는게 다를수도 있을거 같아서... 지금 font의 80%~120%까지는 조절할 수 있도록. Current font-size: <span class="emph TFontSize"></span>;
-    </li>
-    <li>
-      "Line-height": 이것도 대충 1.3~2.0까지 선택지. Current line-height: <span class="emph TLineHeight">1.6</span> (times font-size);
-    </li>
-  </ol>
+<div class="p">Dark/Bright, Font-family, Font-size, and Line-height를 사용자/독자가 바꿀 수 있도록.</div>
+<ol>
+<li>
+"Dark/Bright mode": 밤에 볼때 흰 바탕이 너무 눈이 부시길래, 검은색 바탕에 흰 글씨 (Dark, Energy/Battery saving, Night mode) 로 기본적으로 해놓긴 했는데... 거부감이 있는 사람도 있을거 같아서 가장 기본적인 흰 바탕에 검은 글씨 (Bright, Day mode) 로도 돌아갈 수 있게. <button type="button" onclick="m.Cmode('Dark')">Dark Mode</button> <button type="button" onclick="m.Cmode('Bright')">Bright Mode</button><br>
+jQuery의 addClass 이용해서 하긴 했는데... ".docuK.bright>.sec"로 제일 앞쪽에 넣고 할까? ".docuK>.sec.bright"처럼 뒷쪽에 넣고 할까? 앞쪽이 더 간단(?)하고 구조적이니 앞쪽으로 우선 구현. css의 우선순위 (priority) 좀 공부해 보긴 해야할듯. (이거에 관해 제대로 정리가 안되어 있는거 보면, browser마다 우선 순위가 다를거 같기도 하고...)<br>
+</li>
+<li>
+"Font-family": 폰트도 이것저것 고민끝에 대부분의 윈도우 컴퓨터에 깔려있고 예뻐보이는 '맑은 고딕' (or 'Malgun Gothic')으로 해놓긴 했는데... 이 폰트가 없는 컴퓨터도 있을테고, 폰트도 개인 취향을 타는 부분이니...<br>
+폰트 이름을 입력하면 바뀌도록. 선택지 몇개 (맑은 고딕, 나눔고딕 등 괜찮은 애들 몇개) 는 주고, 직접 폰트 이름을 입력할수도 있게, 폰트 이름이 그 폰트로 표현되도록 (혹은 옆에 "가나다 AaBbCc" 정도 써줘서 적용전에 미리 확인할 수 있게?). 적용은 버튼을 눌렀을 때 바뀌도록. (수식 폰트도 바뀔 수 있게 할까???) 귀찮은 작업이네 이거.<br>
+</li>
+<li>
+"Font-size": 글씨 크기도 너무 작지 않게 너무 크지도 않게, 1줄에 적당한 글자수가 되도록 적당히 잡긴 했는데, 사람마다 느끼는게 다를수도 있을거 같아서... 지금 font의 80%~120%까지는 조절할 수 있도록. Current font-size: <span class="emph TFontSize"></span>;
+</li>
+<li>
+"Line-height": 이것도 대충 1.3~2.0까지 선택지. Current line-height: <span class="emph TLineHeight">1.6</span> (times font-size);
+</li>
+</ol>
 </div>
 
 <div class="sec hiden"><h2 id="sec-Math">Equation (Math)</h2>
-  <div class="p">
-    개인적으로는 문서 작성할 때 수식을 쓸 일이 많은데 <cite class="ref-math"></cite>, 수식이 길어지면 폰에서 짤리는 경우가 많음. 이걸 잘 처리해야 함. $\alpha \beta = \int \sum_{i=1}^{\infty} g$ 이런 수식은 대충 잘 처리 되겠고. $fg \frac{1}{\sqrt{2}}$
-  </div>
-  <div class="p" style="padding-bottom:0; margin-bottom:1em">
-    .docuK .p {padding-bottom:1em; overflow:auto}로 css를 설정한 이유는 p tag가 다른 div를 품을수가 없어서 div.p tag로 paragraph tag를 대신했고, MathJax inline 수식이 막판에 들어가면 overflow가 나는 경우가 있어서 의도치 않게 scroll이 생기는 경우가 있음. 그래서 "padding-bottom:1em"을 줌. 여기서 예를 보이려고 in style로 "padding-bottom:0; margin-bottom:1em" 설정. 위 paragraph랑 비교. $fg \frac{1}{\sqrt{2}}$
-  </div>
-  <div class="p">
-    굉장히 긴 inline equation은 짤리는걸 어찌 막을수는 없을것도 같은데... 긴 inline equation은 그냥 manual 하게 글 작성자가 적당한 곳에서 잘라서 쓰게 하는게 나을듯. $\alpha ~ \beta ~$$\gamma ~ \omega ~$$\int \textrm{d}x ~ f(x) ~ g(x) ~$$\sum_{i=1}^{\infty} n_i ~$$\Gamma^{jk}_i ~ z ~ \zeta ~$$\hat{H}$$= \frac{1}{\sqrt{2}}$$\hat{\epsilon}$$\delta + V ~ $$\Phi ~ \phi ~$$\Psi ~ \psi$ 이런 식으로. 어차피 inline-block으로 처리돼서 이게 가장 좋은 방법 같음. 자동으로 처리해주면 작성자 마음에 안드는 곳에서 줄바꿈이 일어날수도 있음. &amp;ensp; 사용: $f(x)$&ensp;$= x^4$&ensp;$+ 3 x^3$&ensp;$- 8 x^2$&ensp;$+ x$&ensp;$- 5$, and &amp;thinsp; 사용: $f(x)$&thinsp;$= x^4$&thinsp;$+ 3 x^3$&thinsp;$- 8 x^2$&thinsp;$+ x$&thinsp;$- 5$, dollar 표시로만 구분: $f(x)$$= x^4$$+ 3 x^3$$- 8 x^2$$+ x$$- 5$, and 구분없이: $f(x)= x^4+ 3 x^3- 8 x^2+ x- 5$. 이것처럼 &amp;ensp; 혹은 &amp;thinsp; 써서 구분해줘야 하나? <cite class="ref-thinsp"></cite>
-  </div>
-  <div class="p">
-    Outline equation은 꽤나 긴 수식도 제대로 보여져야 하는데...
-    <div class="eqCC"><div class="eqN">Eq. (test-1)</div>
-      <div class="eqC">
-      \[ \begin{split}
-        \vec{x} &= x^{\bar{i}} ~ \vec{e}_{\bar{i}} = x ~ \vec{e}_x + y ~ \vec{e}_y + z ~ \vec{e}_z \\
-          &= x^{i} ~ \vec{e}_{i} = r ~ \vec{e}_r + \theta ~ \vec{e}_{\theta} + \phi ~ \vec{e}_{\phi} \\
-          &= x^{i'} ~ \vec{e}_{i'} = u ~ \vec{e}_u + v ~ \vec{e}_v + w ~ \vec{e}_w \\
-      \end{split} \]
-      </div>
-    </div>
-    위보다 더 긴 수식을 써보자. 테스트를 위해 우선 in style로 설정을 해놨음.
-    <div class="eqCC"><div class="eqN">Eq. (test-2)</div>
-      <div class="eqC">
-      \[ \begin{align*}
-        \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-        &= e_{A}^{i} \partial_{i}
-        \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-        &= e_{A}^{i} \partial_{i}
-        \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-        &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-        + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-        &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-        + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-      \end{align*} \]
-      </div>
-    </div>
-    잘 보이는듯?
-  </div>
-  <div class="p">
-    inline equation은 <code>&lt;eq&gt;</code> tag로 감싸고, outline equation은 <code>&lt;eqq&gt;</code> tag로 감싸면 자동으로 처리되도록 해놨음. 물론 MathJax가 처리하도록 달러 ('\$', '\$\$') 표시나 '\'를 앞에 둔 괄호 ('{', '}', '[', ']') 등으로 감싼 뒤, div 등으로 다시 감싸서 처리하는거니 굳이 equation을 쓸 때 tag로 안감싸서 써도 되긴 함. 특히 inline equation은 그냥 달러표시 써서 쓰는게 나을듯. <code>&lt;eqq&gt;</code> tag는 numbering도 자동으로 처리해주고 overflow도 자동으로 처리해 줄 것이기 때문에 tag로 쓰는게 나을듯.
-  </div>
+<div class="p">
+개인적으로는 문서 작성할 때 수식을 쓸 일이 많은데 <cite class="ref-math"></cite>, 수식이 길어지면 폰에서 짤리는 경우가 많음. 이걸 잘 처리해야 함. $\alpha \beta = \int \sum_{i=1}^{\infty} g$ 이런 수식은 대충 잘 처리 되겠고. $fg \frac{1}{\sqrt{2}}$
+</div>
+<div class="p" style="padding-bottom:0; margin-bottom:1em">
+.docuK .p {padding-bottom:1em; overflow:auto}로 css를 설정한 이유는 p tag가 다른 div를 품을수가 없어서 div.p tag로 paragraph tag를 대신했고, MathJax inline 수식이 막판에 들어가면 overflow가 나는 경우가 있어서 의도치 않게 scroll이 생기는 경우가 있음. 그래서 "padding-bottom:1em"을 줌. 여기서 예를 보이려고 in style로 "padding-bottom:0; margin-bottom:1em" 설정. 위 paragraph랑 비교. $fg \frac{1}{\sqrt{2}}$
+</div>
+<div class="p">
+굉장히 긴 inline equation은 짤리는걸 어찌 막을수는 없을것도 같은데... 긴 inline equation은 그냥 manual 하게 글 작성자가 적당한 곳에서 잘라서 쓰게 하는게 나을듯. $\alpha ~ \beta ~$$\gamma ~ \omega ~$$\int \textrm{d}x ~ f(x) ~ g(x) ~$$\sum_{i=1}^{\infty} n_i ~$$\Gamma^{jk}_i ~ z ~ \zeta ~$$\hat{H}$$= \frac{1}{\sqrt{2}}$$\hat{\epsilon}$$\delta + V ~ $$\Phi ~ \phi ~$$\Psi ~ \psi$ 이런 식으로. 어차피 inline-block으로 처리돼서 이게 가장 좋은 방법 같음. 자동으로 처리해주면 작성자 마음에 안드는 곳에서 줄바꿈이 일어날수도 있음. &amp;ensp; 사용: $f(x)$&ensp;$= x^4$&ensp;$+ 3 x^3$&ensp;$- 8 x^2$&ensp;$+ x$&ensp;$- 5$, and &amp;thinsp; 사용: $f(x)$&thinsp;$= x^4$&thinsp;$+ 3 x^3$&thinsp;$- 8 x^2$&thinsp;$+ x$&thinsp;$- 5$, dollar 표시로만 구분: $f(x)$$= x^4$$+ 3 x^3$$- 8 x^2$$+ x$$- 5$, and 구분없이: $f(x)= x^4+ 3 x^3- 8 x^2+ x- 5$. 이것처럼 &amp;ensp; 혹은 &amp;thinsp; 써서 구분해줘야 하나? <cite class="ref-thinsp"></cite>
+</div>
+<div class="p">
+Outline equation은 꽤나 긴 수식도 제대로 보여져야 하는데...
+<div class="eqCC"><div class="eqN">Eq. (test-1)</div>
+<div class="eqC">
+\[ \begin{split}
+\vec{x} &= x^{\bar{i}} ~ \vec{e}_{\bar{i}} = x ~ \vec{e}_x + y ~ \vec{e}_y + z ~ \vec{e}_z \\
+&= x^{i} ~ \vec{e}_{i} = r ~ \vec{e}_r + \theta ~ \vec{e}_{\theta} + \phi ~ \vec{e}_{\phi} \\
+&= x^{i'} ~ \vec{e}_{i'} = u ~ \vec{e}_u + v ~ \vec{e}_v + w ~ \vec{e}_w \\
+\end{split} \]
+</div>
+</div>
+위보다 더 긴 수식을 써보자. 테스트를 위해 우선 in style로 설정을 해놨음.
+<div class="eqCC"><div class="eqN">Eq. (test-2)</div>
+<div class="eqC">
+\[ \begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*} \]
+</div>
+</div>
+잘 보이는듯?
+</div>
+<div class="p">
+inline equation은 <code>&lt;eq&gt;</code> tag로 감싸고, outline equation은 <code>&lt;eqq&gt;</code> tag로 감싸면 자동으로 처리되도록 해놨음. 물론 MathJax가 처리하도록 달러 ('\$', '\$\$') 표시나 '\'를 앞에 둔 괄호 ('{', '}', '[', ']') 등으로 감싼 뒤, div 등으로 다시 감싸서 처리하는거니 굳이 equation을 쓸 때 tag로 안감싸서 써도 되긴 함. 특히 inline equation은 그냥 달러표시 써서 쓰는게 나을듯. <code>&lt;eqq&gt;</code> tag는 numbering도 자동으로 처리해주고 overflow도 자동으로 처리해 줄 것이기 때문에 tag로 쓰는게 나을듯.
+</div>
 
-  <div class="subsec"><h3>Highlighting equations</h3>
-    <div class="p">
-      span tag는 div tag (equation) 등을 포함할 수 있나? test: <span class="emph">p tag로 하면 같은 block이라서 자동으로 paragraph이 끝나네? 그래서 div.p 로 씀.
-      <eqq id="eq-pos">
-      \begin{split}
-        \vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
-          &= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
-          &= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
-      \end{split}
-      </eqq>
-      이러고 끝나는건데 paragraph는...</span> &lt; 요기에서 span tag가 끝났음. 잘 나오나? 잘 나옴. 이건 MathJax가 html과 css로 equation을 parsing 해줘서 가능한. codecogs 같이 이미지로 수식을 쏴주면 불가능.
-      <span class="emph"><eqq id="eq-epsilon">
-      \begin{align*}
-        \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-        &= e_{A}^{i} \partial_{i}
-        \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-        &= e_{A}^{i} \partial_{i}
-        \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-        &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-        + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-        &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-        + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-      \end{align*}
-      </eqq></span>
-      추가로 긴 수식.
-    </div>
-  </div>
+<div class="subsec"><h3>Highlighting equations</h3>
+<div class="p">
+span tag는 div tag (equation) 등을 포함할 수 있나? test: <span class="emph">p tag로 하면 같은 block이라서 자동으로 paragraph이 끝나네? 그래서 div.p 로 씀.
+<eqq id="eq-pos">
+\begin{split}
+\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+이러고 끝나는건데 paragraph는...</span> &lt; 요기에서 span tag가 끝났음. 잘 나오나? 잘 나옴. 이건 MathJax가 html과 css로 equation을 parsing 해줘서 가능한. codecogs 같이 이미지로 수식을 쏴주면 불가능.
+<span class="emph"><eqq id="eq-epsilon">
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq></span>
+추가로 긴 수식.
+</div>
+</div>
 
-  <div class="subsec"><h3>Refering equations</h3>
-    <div class="p">Equation을 자동으로 numbering 하고 id 붙이고 ref 하면 자동으로 parsing 되도록. Bubble 형식으로 equation 보여주기까지. refer tag로 refer를 하면 자동으로 bubble reference가 보이도록 짜놓긴 했는데 <refer class="eq-pos"></refer><refer class="eq-epsilon"></refer> 잘 나오나? 나오긴 하는데, bubble reference 안의 font-size가 본문보다 약간 줄어드네? 왜 때문이지?</div>
-  </div>
+<div class="subsec"><h3>Refering equations</h3>
+<div class="p">Equation을 자동으로 numbering 하고 id 붙이고 ref 하면 자동으로 parsing 되도록. Bubble 형식으로 equation 보여주기까지. refer tag로 refer를 하면 자동으로 bubble reference가 보이도록 짜놓긴 했는데 <refer class="eq-pos"></refer><refer class="eq-epsilon"></refer> 잘 나오나? 나오긴 하는데, bubble reference 안의 font-size가 본문보다 약간 줄어드네? 왜 때문이지?</div>
+</div>
 
-  <div class="subsec"><h3>Equations in Smart Phones</h3>
-    <div class="p">폰에서도 수식이 잘 보이게 만들고 싶은데... 최근 폰들 (갤럭시 S4 등) 에서는 잘 보이는거 같은데, 옛날 폰들 (갤럭시 S 등) 이나 아이폰에서는 div의 scroll이 먹통이 되는듯함. 전체 화면의 스크롤만 허용되고 내부쪽 스크롤은 막아놓은듯. 화면이 작아서, 혹은 스마트폰이 느려질까봐 이렇게 해놓은듯 한데... 폰에서도 수식을 제대로 보이게 하려면 css를 어찌처리해야 할지 고민중. Media query로 옛날 폰들의 device-width로 (갤럭시 S나 아이폰은 가로사이즈가 작음. 320px.) 걸러내면 될듯하긴 한데... 테스트 좀 해봐야 할듯.</div>
-    <div class="p">대충 해결하긴 함.</div>
-  </div>
+<div class="subsec"><h3>Equations in Smart Phones</h3>
+<div class="p">폰에서도 수식이 잘 보이게 만들고 싶은데... 최근 폰들 (갤럭시 S4 등) 에서는 잘 보이는거 같은데, 옛날 폰들 (갤럭시 S 등) 이나 아이폰에서는 div의 scroll이 먹통이 되는듯함. 전체 화면의 스크롤만 허용되고 내부쪽 스크롤은 막아놓은듯. 화면이 작아서, 혹은 스마트폰이 느려질까봐 이렇게 해놓은듯 한데... 폰에서도 수식을 제대로 보이게 하려면 css를 어찌처리해야 할지 고민중. Media query로 옛날 폰들의 device-width로 (갤럭시 S나 아이폰은 가로사이즈가 작음. 320px.) 걸러내면 될듯하긴 한데... 테스트 좀 해봐야 할듯.</div>
+<div class="p">대충 해결하긴 함.</div>
+</div>
 
-  <div class="subsec"><h3>Equation (Math) Test</h3>
-    <div class="p">
-      Test: <span class="emph">p tag로 하면 같은 block이라서 자동으로 paragraph이 끝나네? 그래서 div.p 로 씀.
-      <eqq>f(a)=g(b)</eqq>
-      <eqq>f(a)=g(b)=g(b)</eqq>
-      <eqq>f(a)=g(b)=g(b)=g(b)</eqq>
-      <eqq>f(a)=g(b)=g(b)=g(b)=g(b)</eqq>
-      <eqq>f(a)=g(b)=g(b)=g(b)=g(b)=</eqq>
-      <eqq>f(a)=g(b)=g(b)=g(b)=g(b)=g</eqq>
-      <eqq>f(a)=g(b)=g(b)=g(b)=g(b)=g(c)</eqq>
-      <eqq id="eq-pos">
-      \begin{split}
-        \vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
-          &= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
-          &= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
-      \end{split}
-      </eqq>
-      <eqq id="eq-epsilon">
-      \begin{align*}
-        \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-        &= e_{A}^{i} \partial_{i}
-        \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-        &= e_{A}^{i} \partial_{i}
-        \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-        &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-        + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-        &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-        + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-        \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-      \end{align*}
-      </eqq>
-      이러고 끝나는건데 paragraph는...</span> 요기에서 span tag가 끝났음. 잘 나오나?
-    </div>
-  </div>
+<div class="subsec"><h3>Equation (Math) Test</h3>
+<div class="p">
+Test: <span class="emph">p tag로 하면 같은 block이라서 자동으로 paragraph이 끝나네? 그래서 div.p 로 씀.
+<eqq>f(a)=g(b)</eqq>
+<eqq>f(a)=g(b)=g(b)</eqq>
+<eqq>f(a)=g(b)=g(b)=g(b)</eqq>
+<eqq>f(a)=g(b)=g(b)=g(b)=g(b)</eqq>
+<eqq>f(a)=g(b)=g(b)=g(b)=g(b)=</eqq>
+<eqq>f(a)=g(b)=g(b)=g(b)=g(b)=g</eqq>
+<eqq>f(a)=g(b)=g(b)=g(b)=g(b)=g(c)</eqq>
+<eqq id="eq-pos">
+\begin{split}
+\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+<eqq id="eq-epsilon">
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+이러고 끝나는건데 paragraph는...</span> 요기에서 span tag가 끝났음. 잘 나오나?
+</div>
+</div>
 
-  <div class="subsec"><h3>Delayed(Lazy)-Loading of MathJax</h3>
-    <div class="p">Delayed(Lazy)-Loading Test 용 수식들.</div>
-    <eqq>
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-    <div class="p">Equation with class="no-N".</div>
-    <eqq class="no-N">
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-    <eqq>
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-    <eqq>
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-    <eqq>
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-    <eqq>
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-    <eqq>
-    \begin{align*}
-      \nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
-      &= e_{A}^{i} \partial_{i}
-      \big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
-      &~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
-      + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
-      \big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
-    \end{align*}
-    </eqq>
-  </div>
+<div class="subsec"><h3>Delayed(Lazy)-Loading of MathJax</h3>
+<div class="p">Delayed(Lazy)-Loading Test 용 수식들.</div>
+<eqq>
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+<div class="p">Equation with class="no-N".</div>
+<eqq class="no-N">
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+<eqq>
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+<eqq>
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+<eqq>
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+<eqq>
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+<eqq>
+\begin{align*}
+\nabla_{A} \big(T^{BCD\cdots}_{FGH\cdots} \big)
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \big) \\
+&= e_{A}^{i} \partial_{i}
+\big( T^{jkl\cdots}_{pqr\cdots} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{B}_{j} \big) e^{CD\cdots}_{k~l\cdots} e^{p~q~r\cdots}_{FGH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{C}_{k} \big) e^{BD\cdots}_{j~l\cdots} e^{p~q~r\cdots}_{FGH\cdots} + \cdots \\
+&~~ + e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{p}_{F} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{q~r\cdots}_{GH\cdots}
++ e_{A}^{i} T^{jkl\cdots}_{pqr\cdots} \partial_{i}
+\big( e^{q}_{G} \big) e^{BCD\cdots}_{j~k~l\cdots} e^{p~r\cdots}_{FH\cdots} + \cdots \\
+\end{align*}
+</eqq>
+</div>
 </div>
 
 <div class="sec hiden"><h2 id="sec-disableQ">Disable Query class</h2>
-  <div class="p">Cross-Browsing check 하면서 특히나 스마트폰 (갤s) 에서 자꾸 스크롤탑이 먹히길래 만들어봄. 문제가 되는 놈들은 query를 만들어서 안에 있는 <code>&lt;!--, --&gt;</code>을 없애줌. <code>&lt;div class="disableQ0"&gt;&lt;/div&gt;</code> 같은걸로 감싸고 한꺼번에 처리.</div>
-  <div class="p">Elements with disableQ0 class remove <code>&lt;!-- --&gt;</code> inside them only when deviceWidth>321. This is for Galaxy S (or old smartphones) problem like unexpected scrollTop.</div>
-  <figure id="fig-"><div class="fig disableQ0">
-    <!-- <div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
-      <iframe src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
-    </div></div> -->
-    <div class="caption">iframe youtube 동영상 with fixed ratio. And border formatting</div>
-  </div></figure>
+<div class="p">Cross-Browsing check 하면서 특히나 스마트폰 (갤s) 에서 자꾸 스크롤탑이 먹히길래 만들어봄. 문제가 되는 놈들은 query를 만들어서 안에 있는 <code>&lt;!--, --&gt;</code>을 없애줌. <code>&lt;div class="disableQ0"&gt;&lt;/div&gt;</code> 같은걸로 감싸고 한꺼번에 처리.</div>
+<div class="p">Elements with disableQ0 class remove <code>&lt;!-- --&gt;</code> inside them only when deviceWidth>321. This is for Galaxy S (or old smartphones) problem like unexpected scrollTop.</div>
+<figure id="fig-"><div class="fig disableQ0">
+	<div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
+		<iframe src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
+	</div></div>
+<div class="caption">iframe youtube 동영상 with fixed ratio. And border formatting</div>
+</div></figure>
 </div>
 
 <div class="sec hiden"><h2 id="sec-Figure">Figure: Image, Graph, and Video</h2>
-  <div class="subsec"><h3>Border formatting</h3>
-    <figure><div class="fig">
-      <div class="caption">img tag를 div tag with style="display:inline-block; padding:15px; background:gray" 로 감싸기.</div>
-      <div style="display:inline-block; padding:15px; background:gray">
-        <img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6"/>
-      </div>
-    </div></figure>
-    <figure id="fig-ex"><div class="fig">
-      [##_1N|cfile1.uf@2479CF495319A30A248DC6.png|filename="f_x.png" filemime="image/jpeg" style="border:15px gray solid"|_##]
-      <div class="caption">$f(x)$&ensp;$= x^4$&ensp;$+ 3 x^3$&ensp;$- 8 x^2$&ensp;$+ x$&ensp;$- 5$. 티스토리 자동 이미지 삽입 with style="border:15px gray solid".</div>
-    </div></figure>
-    <div class="p">
-      svg image도 잘 나오나? inline image testing: <img delayed-src="https://upload.wikimedia.org/wikipedia/commons/2/22/SVG_Simple_Logo.svg" style="background:rgb(200,200,230); border:5px gray solid"/> svg image testing, and <img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6"/> png image testing, and <img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6" style="border:15px gray solid"/> png image with style="border:15px gray solid" testing, and <div style="display:inline-block; border:15px gray solid; text-indent:0"><img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6"/></div> png image enclosed by div tag with style="display:inline-block; border:15px gray solid; text-indent:0" testing.
-    </div>
-    <figure><div class="fig">
-      <img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6" style="border:15px gray solid"/>
-      <div class="caption">img tag에 style="border:15px gray solid". 갤s에선 역시나 "box-sizing:border-box; -moz-box-sizing:border-box"가 안먹힘.</div>
-    </div></figure>
-    <figure id="fig-youtube" class="disableQ0"><div class="fig">
-      <!-- <div class="rC" style="border:5px rgb(30,30,30) solid">
-        <div class="rSC"><iframe delayed-src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe></div>
-      </div> -->
-      <div class="caption">iframe 동영상 테스트. class="disableQ0": See also sec-<refer class="sec-disableQ"></refer>.</div>
-    </div></figure>
-  </div>
+<div class="subsec"><h3>Border formatting</h3>
+<figure><div class="fig">
+	<div class="caption">img tag를 div tag with style="display:inline-block; padding:15px; background:gray" 로 감싸기.</div>
+	<div style="display:inline-block; padding:15px; background:gray">
+		<img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6"/>
+	</div>
+</div></figure>
+<figure id="fig-ex"><div class="fig">
+	[##_1N|cfile1.uf@2479CF495319A30A248DC6.png|filename="f_x.png" filemime="image/jpeg" style="border:15px gray solid"|_##]
+	<div class="caption">$f(x)$&ensp;$= x^4$&ensp;$+ 3 x^3$&ensp;$- 8 x^2$&ensp;$+ x$&ensp;$- 5$. 티스토리 자동 이미지 삽입 with style="border:15px gray solid".</div>
+</div></figure>
+<div class="p">
+svg image도 잘 나오나? inline image testing: <img delayed-src="https://upload.wikimedia.org/wikipedia/commons/2/22/SVG_Simple_Logo.svg" style="background:rgb(200,200,230); border:5px gray solid"/> svg image testing, and <img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6"/> png image testing, and <img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6" style="border:15px gray solid"/> png image with style="border:15px gray solid" testing, and <div style="display:inline-block; border:15px gray solid; text-indent:0"><img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6"/></div> png image enclosed by div tag with style="display:inline-block; border:15px gray solid; text-indent:0" testing.
+</div>
+<figure><div class="fig">
+	<img delayed-src="http://cfile1.uf.tistory.com/image/2479CF495319A30A248DC6" style="border:15px gray solid"/>
+	<div class="caption">img tag에 style="border:15px gray solid". 갤s에선 역시나 "box-sizing:border-box; -moz-box-sizing:border-box"가 안먹힘.</div>
+</div></figure>
+<figure id="fig-youtube" class="disableQ0"><div class="fig">
+	<div class="rC" style="border:5px rgb(30,30,30) solid"><div class="rSC">
+		<iframe delayed-src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
+	</div></div>
+<div class="caption">iframe 동영상 테스트. class="disableQ0": See also sec-<refer class="sec-disableQ"></refer>.</div>
+</div></figure>
+</div>
 
-  <div class="subsec"><h3>Refering figures</h3>
-    <div class="p">
-      Reference와 equation ref처럼 image/figure도 ref 자동으로 되도록. 안에 있는 애들 html도 잘 동작하도록.
-    </div>
-    <div class="p">
-      다음과 같이 &lt;refer&gt; tag with class="id" 로 refer하면 됨 fig <refer class="fig-test"></refer><refer class="fig-ex"></refer><refer class="fig-ex2"></refer><refer class="fig-youtube"></refer>
-    </div>
-    <div class="p">iframe (유투브) 이 들어간 figure를 refer 할 때, anchor 나 Show/Hide 등을 클릭할 때 scrollTop 이 자꾸 먹히는 문제가 있었음. (갤s에서만 문제이긴 했지만) 뭐 큰 문제는 아닐수도 있겠지만, 많은 bubble ref 에 iframe 이 들어가면 loading 하는 데에도 오래걸리고, 데이터도 의도치않게 많이 잡아먹을것도 같아서 bubble ref 안에서의 iframe 은 disable 처리 했음.</div>
-    <figure id="fig-youtube1" class="disableQ0"><div class="fig">
-      <div class="caption">iframe loading이 초반에 많으면 이상해지는듯. delayed loading하면 잘 됨.</div >
-      <!-- <div class="rC" style="border:6px rgb(70,70,70) solid">
-        <div class="rSC"><iframe delayed-src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe></div>
-      </div> -->
-    </div></figure>
-    <div class="p">문제가 안되도록 iframe은 text로 대체하기는 했는데, 이상하려나? <refer class="fig-youtube"></refer><refer class="fig-youtube"></refer><refer class="fig-youtube"></refer></div>
-  </div>
+<div class="subsec"><h3>Refering figures</h3>
+<div class="p">
+Reference와 equation ref처럼 image/figure도 ref 자동으로 되도록. 안에 있는 애들 html도 잘 동작하도록.
+</div>
+<div class="p">
+다음과 같이 &lt;refer&gt; tag with class="id" 로 refer하면 됨 fig <refer class="fig-test"></refer><refer class="fig-ex"></refer><refer class="fig-ex2"></refer><refer class="fig-youtube"></refer>
+</div>
+<div class="p">iframe (유투브) 이 들어간 figure를 refer 할 때, anchor 나 Show/Hide 등을 클릭할 때 scrollTop 이 자꾸 먹히는 문제가 있었음. (갤s에서만 문제이긴 했지만) 뭐 큰 문제는 아닐수도 있겠지만, 많은 bubble ref 에 iframe 이 들어가면 loading 하는 데에도 오래걸리고, 데이터도 의도치않게 많이 잡아먹을것도 같아서 bubble ref 안에서의 iframe 은 disable 처리 했음.</div>
+<figure id="fig-youtube1" class="disableQ0"><div class="fig">
+	<div class="caption">iframe loading이 초반에 많으면 이상해지는듯. delayed loading하면 잘 됨.</div >
+	<div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
+		<iframe delayed-src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
+	</div></div>
+</div></figure>
+<div class="p">문제가 안되도록 iframe은 text로 대체하기는 했는데, 이상하려나? <refer class="fig-youtube"></refer><refer class="fig-youtube"></refer><refer class="fig-youtube"></refer></div>
+</div>
 </div>
 
 <div class="sec hiden"><h2>Delayed-Loading: Images, Videos, Maths and possibly Graphs</h2>
-  <div class="p">This is sometimes called 'Lazy Loading'. (Some of this document are written in Korean (called Hangul). People who do not know Hangul, just read english part. That will be enough.) 사용자가 안보고 넘길것 같은 부분은 굳이 미리 로딩해놓지 말고, 속도를 빠르게, 서버 부담을 적게 덜어주자는 목적으로 Delayed Loading이라는 개념이 있음. 특히나 용량이 큰 이미지나 동영상, 수식을 이렇게 처리해주면 좋은듯 <cite class="ref-delayedLoad"></cite><cite class="ref-webPerf"></cite>.</div>
-  <div class="p">imgs or iframes with delayed-src attribute (:<code class="prettyprint lang-html">&lt;img delayed-src="image file path"&gt;</code>, <code class="prettyprint lang-html">&lt;iframe delayed-src="url to load"&gt;</code>), divs with delayed-bgimage (:<code class="prettyprint lang-html">&lt;div delayed-bgimage="image file path" style="background-repeat:no-repeat; background-attachment:fixed; background-position:center"&gt;&lt;/div&gt;</code>) will be delayed-loaded.</div>
-  <div class="p">Graphs or Charts by JavaScript can also be delayed-loaded by window's "on scroll" event. But not implemented yet here.</div>
-  <figure id="fig-youtube"><div class="fig">
-    <div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
-      <iframe delayed-src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
-    </div></div>
-    <div class="caption">iframe 동영상 테스트. fixed ratio 동영상.</div>
-  </div></figure>
-  <img delayed-src="http://cfile30.uf.tistory.com/image/263D80345349322F12A056" height="439" width="582">
-  <img delayed-src="http://cfile29.uf.tistory.com/image/2610A8345349323224FE0E" height="1009" width="1278">
-  <div class="p">
-    This is an image with delayed-src. <img delayed-src="https://www.kastatic.org/images/featured-actions/pollock.jpg"><br>
-  </div>
+<div class="p">This is sometimes called 'Lazy Loading'. (Some of this document are written in Korean (called Hangul). People who do not know Hangul, just read english part. That will be enough.) 사용자가 안보고 넘길것 같은 부분은 굳이 미리 로딩해놓지 말고, 속도를 빠르게, 서버 부담을 적게 덜어주자는 목적으로 Delayed Loading이라는 개념이 있음. 특히나 용량이 큰 이미지나 동영상, 수식을 이렇게 처리해주면 좋은듯 <cite class="ref-delayedLoad"></cite><cite class="ref-webPerf"></cite>.</div>
+<div class="p">imgs or iframes with delayed-src attribute (:<code class="prettyprint lang-html">&lt;img delayed-src="image file path"&gt;</code>, <code class="prettyprint lang-html">&lt;iframe delayed-src="url to load"&gt;</code>), divs with delayed-bgimage (:<code class="prettyprint lang-html">&lt;div delayed-bgimage="image file path" style="background-repeat:no-repeat; background-attachment:fixed; background-position:center"&gt;&lt;/div&gt;</code>) will be delayed-loaded.</div>
+<div class="p">Graphs or Charts by JavaScript can also be delayed-loaded by window's "on scroll" event. But not implemented yet here.</div>
+<figure id="fig-youtube"><div class="fig">
+<div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
+<iframe delayed-src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
+</div></div>
+<div class="caption">iframe 동영상 테스트. fixed ratio 동영상.</div>
+</div></figure>
+<img delayed-src="http://cfile30.uf.tistory.com/image/263D80345349322F12A056" height="439" width="582">
+<img delayed-src="http://cfile29.uf.tistory.com/image/2610A8345349323224FE0E" height="1009" width="1278">
+<div class="p">
+This is an image with delayed-src. <img delayed-src="https://www.kastatic.org/images/featured-actions/pollock.jpg"><br>
+</div>
 </div>
 
 <div class="sec hiden"><h2 id="sec-ShowHide">Show/Hide Toggle, initially hiden sections.</h2>
-  <div class="subsec"><h3 id="sec-SH-1">ToC Test: subsection</h3>
-    <div class="p">문서가 길어지면, 스크롤 하는 것도 일이기 때문에 Toggle(Show/Hide)가 되는 버튼을 추가하고 싶음. 이것도 자동으로. section div에서 class="sec hiden"를 넣으면 default display가 hiden이 되도록, .docuK>.sec.hiden>.sec-contents {display:none}으로 처리.</div>
-    <div class="p">sec-contents의 Default display를 none(hide)으로 해놨었는데, 그냥 show 로 해놓는게 더 나은듯. 감춰놓으니 reference만 강조되는 느낌. 아예 sec class를 통해서 contents를 show 할 것인지, hide 할 것인지를 처리함. 그냥 css만으로 쉽게 처리 되는.</div>
-    <div class="p">여러 문단이 있고 subsection들이 있어도 자동으로 toggle 할 부분을 잘 선택해서 작동하도록.</div>
-  </div>
+<div class="subsec"><h3 id="sec-SH-1">ToC Test: subsection</h3>
+<div class="p">문서가 길어지면, 스크롤 하는 것도 일이기 때문에 Toggle(Show/Hide)가 되는 버튼을 추가하고 싶음. 이것도 자동으로. section div에서 class="sec hiden"를 넣으면 default display가 hiden이 되도록, .docuK>.sec.hiden>.sec-contents {display:none}으로 처리.</div>
+<div class="p">sec-contents의 Default display를 none(hide)으로 해놨었는데, 그냥 show 로 해놓는게 더 나은듯. 감춰놓으니 reference만 강조되는 느낌. 아예 sec class를 통해서 contents를 show 할 것인지, hide 할 것인지를 처리함. 그냥 css만으로 쉽게 처리 되는.</div>
+<div class="p">여러 문단이 있고 subsection들이 있어도 자동으로 toggle 할 부분을 잘 선택해서 작동하도록.</div>
+</div>
 
-  <div class="subsec"><h3 id="sec-SH-2">ToC Test: subsection</h3>
-    <div class="subsubsec"><h4 id="sec-SH-2-1">ToC Test: subsubsection</h4>
-      <div class="p">subsubsection까지 있음. LaTeX랑 비슷하게 맞춤.</div>
-      <div class="p">subsubsection까지 있음. LaTeX랑 비슷하게 맞춤.</div>
-    </div>
+<div class="subsec"><h3 id="sec-SH-2">ToC Test: subsection</h3>
+<div class="subsubsec"><h4 id="sec-SH-2-1">ToC Test: subsubsection</h4>
+<div class="p">subsubsection까지 있음. LaTeX랑 비슷하게 맞춤.</div>
+<div class="p">subsubsection까지 있음. LaTeX랑 비슷하게 맞춤.</div>
+</div>
 
-    <div class="subsubsec"><h4 id="sec-SH-2-2">ToC Test: subsubsection 이겠지?</h4>
-      <div class="p">내용.</div>
-    </div>
+<div class="subsubsec"><h4 id="sec-SH-2-2">ToC Test: subsubsection 이겠지?</h4>
+<div class="p">내용.</div>
+</div>
 
-    <div class="subsubsec"><h4 id="sec-SH-2-3">ToC Test: subsubsection 이겠지?</h4>
-      <div class="p">내용.</div>
-    </div>
-  </div>
+<div class="subsubsec"><h4 id="sec-SH-2-3">ToC Test: subsubsection 이겠지?</h4>
+<div class="p">내용.</div>
+</div>
+</div>
 
-  <div class="subsec"><h3>ToC Test: subsection</h3>
-    <div class="p">꽤 많은 section, subsection, subsubsection들이 있을 수 있음. 이렇게 많은 section들로 나뉘어도 table of contents가 자동으로 처리 (parsing: section 문의 분석) 되도록.</div>
-  </div>
+<div class="subsec"><h3>ToC Test: subsection</h3>
+<div class="p">꽤 많은 section, subsection, subsubsection들이 있을 수 있음. 이렇게 많은 section들로 나뉘어도 table of contents가 자동으로 처리 (parsing: section 문의 분석) 되도록.</div>
+</div>
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-Second">ToC Test: class="no-sec-N"; id="sec-Second"; The second section</h2>
-  <div class="p">h2 tag에 class="no-sec-N"를 해놓으면 section numbering이 안됨. 대신 여기에 subsection이 있으면, 주어진 id를 이용해서 prefix로 붙임. 첫부분의 'sec-'은 replace(/^sec-/i,'') 로 지우고 처리함. (^: start with, i: case-insensitive search)</div>
-  <div class="p">첫 번째 섹션의 내용이 들어감. 앞에 "1."을 자동으로 붙여서 "1. The First section"으로 head가 바뀌도록 짜야 함. 두 번째 section은 당연히 "2."가 붙겠고. subsection은 "1.1."이런게 붙겠지.</div>
-  <div class="p">inner anchor로 toc랑 section간 jump 되도록 만들자. mutual anchor.</div>
+<div class="p">h2 tag에 class="no-sec-N"를 해놓으면 section numbering이 안됨. 대신 여기에 subsection이 있으면, 주어진 id를 이용해서 prefix로 붙임. 첫부분의 'sec-'은 replace(/^sec-/i,'') 로 지우고 처리함. (^: start with, i: case-insensitive search)</div>
+<div class="p">첫 번째 섹션의 내용이 들어감. 앞에 "1."을 자동으로 붙여서 "1. The First section"으로 head가 바뀌도록 짜야 함. 두 번째 section은 당연히 "2."가 붙겠고. subsection은 "1.1."이런게 붙겠지.</div>
+<div class="p">inner anchor로 toc랑 section간 jump 되도록 만들자. mutual anchor.</div>
 
-  <div class="subsec"><h3 id="sec-Second-sub1">Toc Test: subsection of the second section</h3>
-    <div class="p">내용. Table of Contents 가 자동으로 잘 parsing 되는지 보기 위한 테스트. Mutual anchor (jump) 도 구현해야지.</div>
+<div class="subsec"><h3 id="sec-Second-sub1">Toc Test: subsection of the second section</h3>
+<div class="p">내용. Table of Contents 가 자동으로 잘 parsing 되는지 보기 위한 테스트. Mutual anchor (jump) 도 구현해야지.</div>
 
-    <div class="subsubsec"><h4 id="sec-Second-sub1-1">subsubsection</h4>
-      <div class="p">내용.</div>
-    </div>
-    <div class="subsubsec"><h4 id="sec-Second-sub1-2">subsubsection</h4>
-      <div class="p">내용.</div>
-    </div>
-  </div>
+<div class="subsubsec"><h4 id="sec-Second-sub1-1">subsubsection</h4>
+<div class="p">내용.</div>
+</div>
+<div class="subsubsec"><h4 id="sec-Second-sub1-2">subsubsection</h4>
+<div class="p">내용.</div>
+</div>
+</div>
 </div>
 
 <div class="sec hiden"><h2>Syntax Highlighting of Programming Codes</h2>
-  <div class="p">
-    인터넷에서 예쁘게 코드 입력하기 (google code prettify) <cite class="ref-code"></cite>. overflow를 방지하기 위한 css style은
-    <pre id="pre-code-wordWrap" class="prettyprint linenums lang-html"></pre>
-    <codeprint id="code-wordWrap" class="none">
-    /* Only in pre tag, otherwise too much linebreaks. */
-    pre {
-      white-space:pre-wrap;    /* css-3 */
-      white-space:-moz-pre-wrap;  /* Mozilla, since 1999 */
-      white-space:-pre-wrap;    /* Opera 4-6 */
-      white-space:-o-pre-wrap;    /* Opera 7 */
-      word-wrap:break-word;    /* Internet Explorer 5.5~7 */
-      overflow-wrap:break-word;  /* Chrome?? */
+<div class="p">
+인터넷에서 예쁘게 코드 입력하기 (google code prettify) <cite class="ref-code"></cite>. overflow를 방지하기 위한 css style은
+<pre id="pre-code-wordWrap" class="prettyprint linenums lang-html"></pre>
+<codeprint id="code-wordWrap" class="none">
+/* Only in pre tag, otherwise too much linebreaks. */
+pre {
+	white-space:pre-wrap;    /* css-3 */
+	white-space:-moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space:-pre-wrap;    /* Opera 4-6 */
+	white-space:-o-pre-wrap;    /* Opera 7 */
+	word-wrap:break-word;    /* Internet Explorer 5.5~7 */
+	overflow-wrap:break-word;  /* Chrome?? */
+	word-break:break-all;    /* break words */
+}
+</codeprint>
+인듯. Firefox를 확인을 안했었네 ㅡ,.ㅡ;;; 이 죽일놈의 cross-browsing. 왜이리 파편화 되어 있는겨?
+</div>
+<div class="p">
+구식 스마트폰을 위해 height랑 overflow-y 등 설정 해줘야 함.
+</div>
 
-      word-break:break-all;    /* break words */
-    }
-    </codeprint>
-    인듯. Firefox를 확인을 안했었네 ㅡ,.ㅡ;;; 이 죽일놈의 cross-browsing. 왜이리 파편화 되어 있는겨?
-  </div>
-  <div class="p">
-    구식 스마트폰을 위해 height랑 overflow-y 등 설정 해줘야 함.
-  </div>
+<div class="subsec"><h3>Escaping HTML</h3>
+<div class="p">
+기본적으로 &lt;, &gt;, &amp;는 HTML에서 쓰고 있기 때문에 escape 해줘야 함. 기본 설정이 escapeHTML이고 pre 안에서도 html tag를 사용하고 싶다면, <code>&lt;codeprint class="none noEscapeHTML"&gt;</code>처럼 noEscapeHTML를 추가해 주면 됨. "none" class는 codeprint elem를 숨기기 위해 붙임. HTML code도 프린트하고 싶은 경우가 많기 때문에 "none"을 빼고 쓸때도 많음.
+</div>
+<pre id="pre-code-noEscapeHTML" class="prettyprint linenums"></pre>
+<codeprint id="code-noEscapeHTML" class="noEscapeHTML none">
+이렇게 <span style="border:3px solid red">span with border 3px solid red</span> 활용할 수 있음.
+</codeprint>
+</div>
 
-  <div class="subsec"><h3>Escaping HTML</h3>
-    <div class="p">
-      기본적으로 &lt;, &gt;, &amp;는 HTML에서 쓰고 있기 때문에 escape 해줘야 함. 기본 설정이 escapeHTML이고 pre 안에서도 html tag를 사용하고 싶다면, <code>&lt;codeprint class="none noEscapeHTML"&gt;</code>처럼 noEscapeHTML를 추가해 주면 됨. "none" class는 codeprint elem를 숨기기 위해 붙임. HTML code도 프린트하고 싶은 경우가 많기 때문에 "none"을 빼고 쓸때도 많음.
-    </div>
-    <pre id="pre-code-noEscapeHTML" class="prettyprint linenums"></pre>
-    <codeprint id="code-noEscapeHTML" class="noEscapeHTML none">
-    이렇게 <span style="border:3px solid red">span with border 3px solid red</span> 활용할 수 있음.
-    </codeprint>
-  </div>
+<div class="subsec"><h3>inline code styling</h3>
+<div class="p">
+inline code는 &lt;code&gt; tag를 사용하고, outline code는 &lt;pre class="prettyprint linenums"&gt; tag를 사용함. 두 태그안에 'prettyprint' class가 들어가면 google code prettyfier가 자동으로 예쁘게 꾸며주고, 이 class를 안넣어도 code tag는 적당히 styling 되도록, pre tag는 그냥 그대로 보여주고.
+</div>
+<div class="p">
+Ex: <code>monospace code</code>, <code>var</code>, <code class="prettyprint">for (var i=0;i&gt;length;i++){}</code> ... 별로 가독성이 좋아보이지는 않네. 중요한건 아닌듯하니 천천히 바꿔야지.
+</div>
+</div>
 
-  <div class="subsec"><h3>inline code styling</h3>
-    <div class="p">
-      inline code는 &lt;code&gt; tag를 사용하고, outline code는 &lt;pre class="prettyprint linenums"&gt; tag를 사용함. 두 태그안에 'prettyprint' class가 들어가면 google code prettyfier가 자동으로 예쁘게 꾸며주고, 이 class를 안넣어도 code tag는 적당히 styling 되도록, pre tag는 그냥 그대로 보여주고.
-    </div>
-    <div class="p">
-      Ex: <code>monospace code</code>, <code>var</code>, <code class="prettyprint">for (var i=0;i&gt;length;i++){}</code> ... 별로 가독성이 좋아보이지는 않네. 중요한건 아닌듯하니 천천히 바꿔야지.
-    </div>
-  </div>
-
-  <div class="subsec"><h3>Scroll problems (onclick switching from expanded to scrollable div)</h3>
-    <div class="p">
-      갤s 같은 구형 폰에서는 전체 scroll만 되고, 내부 div들의 scroll은 막힘. 뭐 이것 때문만은 아니고 code가 길어지고, 다른 pre에 있는 code랑 비교해보고 싶고 이럴때 div height를 줄이고 scroll auto로 해놓으면 왔다갔다 비교하기 편해짐.
-    </div>
-    <div class="p">
-      {overflow-y:scroll} 로 고정해야 +1, -1 줄 같은 현상이 안 일어나서 scroll 해주기 편해짐. 보는 사람도 덜 헷갈리고. scrollable의 변화가 일어났다는것을 보여주기 위해서 scroll의 style은 바꿔줘야 할듯.
-    </div>
-    <div class="p">
-      small
-      <pre class="prettyprint">
-        a
-        b
-        c
-        d
-      </pre>
-    </div>
-    <div class="p">
-      Result for the test:
-      <pre id="result-test" class="prettyprint scrollable"></pre>
-    </div>
-    <div class="p">
-      <pre id="pre-code-ex0" class="prettyprint linenums lang-html scrollable"></pre>
-      <codeprint id="code-ex0" class="none">
-        non-breaking word
-        adkfjiqeiasdvzxcmvnasdfqlkwjeoirthguasdflxcvansdflaksdjfzxc,vmznxcvlasdkfjgoiqjalskdfjzxmcvbgassldkjfqoiwjetyaslkdfhalskdjflzkxjcvzxdlkfjqoweijeijfzxcvvznxxmsseeqijwerosghtiasoery
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        a
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        b
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        c
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        d
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        e
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        f
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        g
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        h
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        i
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        j
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        k
-        fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
-        asdf
-        asdf
-        asdfsdfsdf
-        asdfasdf
-        asdfasdf
-        asdf
-        asdff
-        f
-        fa
-        sdf
-        asd
-        f
-        asdf
-        asdf
-        asdf
-        asd
-        fas
-        asd
-        asdf
-        f
-        f
-        we
-        q
-        w
-        e
-        rr
-        2
-        3r
-        2
-        r
-        w
-        ef
-        s
-        df
-        se
-        f
-        we
-        fs
-        df
-        s
-        df
-        sd
-        fs
-        df
-        sd
-        f
-        sdf
-        s
-        df
-        sd
-        fs
-        df
-        s
-        df
-        sd
-        fsd
-        f
-        sd
-        fsdf
-        sd
-        dfa
-        sas
-        dfa
-        sdf
-        as
-        asdfasdf
-        asdfasdf
-        assseser
-      </codeprint>
-      <codeprint>codeprint without id attr.</codeprint>
-    </div>
-  </div>
+<div class="subsec"><h3>Scroll problems (onclick switching from expanded to scrollable div)</h3>
+<div class="p">
+갤s 같은 구형 폰에서는 전체 scroll만 되고, 내부 div들의 scroll은 막힘. 뭐 이것 때문만은 아니고 code가 길어지고, 다른 pre에 있는 code랑 비교해보고 싶고 이럴때 div height를 줄이고 scroll auto로 해놓으면 왔다갔다 비교하기 편해짐.
+</div>
+<div class="p">
+{overflow-y:scroll} 로 고정해야 +1, -1 줄 같은 현상이 안 일어나서 scroll 해주기 편해짐. 보는 사람도 덜 헷갈리고. scrollable의 변화가 일어났다는것을 보여주기 위해서 scroll의 style은 바꿔줘야 할듯.
+</div>
+<div class="p">
+small
+<pre class="prettyprint">
+a
+b
+c
+d
+</pre>
+</div>
+<div class="p">
+Result for the test:
+<pre id="result-test" class="prettyprint scrollable"></pre>
+</div>
+<div class="p">
+<pre id="pre-code-ex0" class="prettyprint linenums lang-html scrollable"></pre>
+<codeprint id="code-ex0" class="none">
+non-breaking word
+adkfjiqeiasdvzxcmvnasdfqlkwjeoirthguasdflxcvansdflaksdjfzxc,vmznxcvlasdkfjgoiqjalskdfjzxmcvbgassldkjfqoiwjetyaslkdfhalskdjflzkxjcvzxdlkfjqoweijeijfzxcvvznxxmsseeqijwerosghtiasoery
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+a
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+b
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+c
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+d
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+e
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+f
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+g
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+h
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+i
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+j
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+k
+fasd asd a fasdas d fa sasd fasda sdfasdasdfasdasdfasdasdf as dasf asdasdfas dasdf asd asddfasd fasdfasdfasdfa
+asdf
+asdf
+asdfsdfsdf
+asdfasdf
+asdfasdf
+asdf
+asdff
+f
+fa
+sdf
+asd
+f
+asdf
+asdf
+asdf
+asd
+fas
+asd
+asdf
+f
+f
+we
+q
+w
+e
+rr
+2
+3r
+2
+r
+w
+ef
+s
+df
+se
+f
+we
+fs
+df
+s
+df
+sd
+fs
+df
+sd
+f
+sdf
+s
+df
+sd
+fs
+df
+s
+df
+sd
+fsd
+f
+sd
+fsdf
+sd
+dfa
+sas
+dfa
+sdf
+as
+asdfasdf
+asdfasdf
+assseser
+</codeprint>
+<codeprint>codeprint without id attr.</codeprint>
+</div>
+</div>
 </div>
 
 <div class="sec hiden"><h2>Opening Sources</h2>
-  <div class="subsec"><h3>docuK CSS style</h3>
-    <pre id="pre-docuK-style" class="prettyprint linenums lang-html"></pre>
-  </div>
+<div class="subsec"><h3>docuK CSS style</h3>
+<pre id="pre-docuK-style" class="prettyprint linenums lang-html"></pre>
+</div>
 
-  <div class="subsec"><h3>docuK HTML document</h3>
-    <pre id="pre-docuK-docu" class="prettyprint linenums lang-html scrollable"></pre>
-  </div>
+<div class="subsec"><h3>docuK HTML document</h3>
+<pre id="pre-docuK-docu" class="prettyprint linenums lang-html scrollable"></pre>
+</div>
 
-  <div class="subsec"><h3>docuK SCRIPT (JavaScript including jQuery, MathJax, and Google code prettyfier)</h3>
-    <pre id="pre-docuK-script" class="prettyprint linenums lang-html"></pre>
-  </div>
+<div class="subsec"><h3>docuK SCRIPT (JavaScript including jQuery, MathJax, and Google code prettyfier)</h3>
+<pre id="pre-docuK-script" class="prettyprint linenums lang-html"></pre>
+</div>
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
-  <ol class="refs">
-    <div class="subsec"><h3>Main</h3></div>
-    <li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
-      // Updated regularly by the current html file. If you see this in kipid's blog, this is the link you are seeing.</li>
-    <li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a></li>
-    <li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<ol class="refs">
+<div class="subsec"><h3>Main</h3></div>
+<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+// Updated regularly by the current html file. If you see this in kipid's blog, this is the link you are seeing.</li>
+<li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a></li>
+<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
 
-    <div class="subsec"><h3>Supported by</h3></div>
-    <li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
-      // JavaScript enhancer</li>
-    <li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
-      // Math renderer.</li>
-    <li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
-      // Code prettyfier.</li>
+<div class="subsec"><h3>Supported by</h3></div>
+<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+// JavaScript enhancer</li>
+<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+// Math renderer.</li>
+<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+// Code prettyfier.</li>
 
-    <div class="subsec"><h3 id="sec-Refs-subex">Related Postings</h3></div>
-    <li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a></li>
-    <li id="ref-cite"><a href="https://kipid.tistory.com/entry/Citing-the-references-automatically-in-HTML-like-LaTeX">kipid's blog - Citing the references automatically in HTML (like LaTeX)</a>; ref는 id를 부여하고 (보통 구분을 확실히 하기 위해 "ref-"를 prefix로 붙임.) cite tag with class로 cite함. 이후 자동으로 parsing.</li>
-    <li id="ref-math"><a href="https://kipid.tistory.com/entry/equations-in-html">kipid's blog - 인터넷, Web, HTML, 블로그에서 수식 사용하기 (Equation or math in HTML, blog)</a></li>
-    <li id="ref-code"><a href="https://kipid.tistory.com/entry/Syntax-Highlighter-in-HTML-google-code-prettify">kipid's blog - 인터넷에서 예쁘게 코드 입력하기 (google code prettify)</a></li>
-    <li id="ref-scrollStyle"><a href="https://kipid.tistory.com/entry/Customized-styling-of-scroll-bars-in-HTML">kipid's blog - Customized styling of scroll bars in HTML</a>, 2014-05-25</li>
-    <li id="ref-webPerf"><a href="https://kipid.tistory.com/entry/Improving-web-performance">kipid's blog - Improving web performance</a></li>
-    <li id="ref-delayedLoad"><a href="https://kipid.tistory.com/entry/Delayed-Loading-in-HTML-by-JavaScript-jQuery">kipid's blog - Delayed Loading in HTML by JavaScript (+jQuery)</a></li>
+<div class="subsec"><h3 id="sec-Refs-subex">Related Postings</h3></div>
+<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a></li>
+<li id="ref-cite"><a href="https://kipid.tistory.com/entry/Citing-the-references-automatically-in-HTML-like-LaTeX">kipid's blog - Citing the references automatically in HTML (like LaTeX)</a>; ref는 id를 부여하고 (보통 구분을 확실히 하기 위해 "ref-"를 prefix로 붙임.) cite tag with class로 cite함. 이후 자동으로 parsing.</li>
+<li id="ref-math"><a href="https://kipid.tistory.com/entry/equations-in-html">kipid's blog - 인터넷, Web, HTML, 블로그에서 수식 사용하기 (Equation or math in HTML, blog)</a></li>
+<li id="ref-code"><a href="https://kipid.tistory.com/entry/Syntax-Highlighter-in-HTML-google-code-prettify">kipid's blog - 인터넷에서 예쁘게 코드 입력하기 (google code prettify)</a></li>
+<li id="ref-scrollStyle"><a href="https://kipid.tistory.com/entry/Customized-styling-of-scroll-bars-in-HTML">kipid's blog - Customized styling of scroll bars in HTML</a>, 2014-05-25</li>
+<li id="ref-webPerf"><a href="https://kipid.tistory.com/entry/Improving-web-performance">kipid's blog - Improving web performance</a></li>
+<li id="ref-delayedLoad"><a href="https://kipid.tistory.com/entry/Delayed-Loading-in-HTML-by-JavaScript-jQuery">kipid's blog - Delayed Loading in HTML by JavaScript (+jQuery)</a></li>
 
-    <div class="subsec"><h3>참고</h3></div>
-    <li id="ref-thinsp"><a href="http://stackoverflow.com/questions/2720770/how-to-create-small-spaces-in-html">Stack Overflow - How to create small SPACES in HTML?</a>, 2010-04-27, asked by user89021; I used the answer from knittl and Gumbo. Thanks.<br>
-      &amp;thinsp;: thin space a&thinsp;b&thinsp;c&thinsp;d&thinsp;e&thinsp;f&thinsp;g<br>
-      &amp;nbsp;: non breaking space a&nbsp;b&nbsp;c&nbsp;d&nbsp;e&nbsp;f&nbsp;g<br>
-      &amp;ensp;: en size space a&ensp;b&ensp;c&ensp;d&ensp;e&ensp;f&ensp;g<br>
-      &amp;ndash;: n size dash a&ndash;b&ndash;c&ndash;d&ndash;e&ndash;f&ndash;g<br>
-      &amp;emsp;: em size space a&emsp;b&emsp;c&emsp;d&emsp;e&emsp;f&emsp;g<br>
-      &amp;mdash;: m size dash a&mdash;b&mdash;c&mdash;d&mdash;e&mdash;f&mdash;g</li>
+<div class="subsec"><h3>참고</h3></div>
+<li id="ref-thinsp"><a href="http://stackoverflow.com/questions/2720770/how-to-create-small-spaces-in-html">Stack Overflow - How to create small SPACES in HTML?</a>, 2010-04-27, asked by user89021; I used the answer from knittl and Gumbo. Thanks.<br>
+&amp;thinsp;: thin space a&thinsp;b&thinsp;c&thinsp;d&thinsp;e&thinsp;f&thinsp;g<br>
+&amp;nbsp;: non breaking space a&nbsp;b&nbsp;c&nbsp;d&nbsp;e&nbsp;f&nbsp;g<br>
+&amp;ensp;: en size space a&ensp;b&ensp;c&ensp;d&ensp;e&ensp;f&ensp;g<br>
+&amp;ndash;: n size dash a&ndash;b&ndash;c&ndash;d&ndash;e&ndash;f&ndash;g<br>
+&amp;emsp;: em size space a&emsp;b&emsp;c&emsp;d&emsp;e&emsp;f&emsp;g<br>
+&amp;mdash;: m size dash a&mdash;b&mdash;c&mdash;d&mdash;e&mdash;f&mdash;g</li>
 
-    <div class="subsec"><h3>No link</h3></div>
-    <li><span class="nolink">No link reference like book.</span> Link 가 없는 것들은 span tag with class "nolink" 로 처리. 즉 &lt;span class="nolink"&gt;No link&lt;/span&gt; 처럼 처리하면 됨.</li>
+<div class="subsec"><h3>No link</h3></div>
+<li><span class="nolink">No link reference like book.</span> Link 가 없는 것들은 span tag with class "nolink" 로 처리. 즉 &lt;span class="nolink"&gt;No link&lt;/span&gt; 처럼 처리하면 됨.</li>
 
-    <div class="subsec"><h3>Minify or Compress css and js</h3></div>
-    <li><a href="http://www.csscompressor.com/">CSSCompressor.com</a>; 필요없는 space 같은걸 깔끔하게 제거해주지는 않는듯. 그래도 뭐 쓸만함. Log Messages를 보여줘서 좋은듯.</li>
-    <li><a href="https://developers.google.com/closure/">developers.google.com - closure</a>; and <a href="http://closure-compiler.appspot.com/home">closure-compiler.appspot.com</a>; 미리 발생할만한 Warnings, Errors도 알려줘서 좋은듯. 제대로 잡아주는 건지는 확신이 없지만.</li>
-  </ol>
+<div class="subsec"><h3>Minify or Compress css and js</h3></div>
+<li><a href="http://www.csscompressor.com/">CSSCompressor.com</a>; 필요없는 space 같은걸 깔끔하게 제거해주지는 않는듯. 그래도 뭐 쓸만함. Log Messages를 보여줘서 좋은듯.</li>
+<li><a href="https://developers.google.com/closure/">developers.google.com - closure</a>; and <a href="http://closure-compiler.appspot.com/home">closure-compiler.appspot.com</a>; 미리 발생할만한 Warnings, Errors도 알려줘서 좋은듯. 제대로 잡아주는 건지는 확신이 없지만.</li>
+</ol>
 </div>
 </div><!-- docuK -->
 
 <div class="docuK">
 <div class="sec"><h1>The second document</h1>
-  <div class="p">Is it possible? <cite class="ref-docuK"></cite><cite class="ref-new-reference">이것은 새로운 ref 입니다. 잘 동작하는지 확인해야됨.</cite><cite class="ref-new2">Auto citation filling is working...</cite></div>
+<div class="p">Is it possible? <cite class="ref-docuK"></cite><cite class="ref-new-reference">이것은 새로운 ref 입니다. 잘 동작하는지 확인해야됨.</cite><cite class="ref-new2">Auto citation filling is working...</cite></div>
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-PH">Posting History</h2>
-  <ul>
-    <li>2014-??-??: First Posting.</li>
-  </ul>
+<ul>
+<li>2014-??-??: First Posting.</li>
+</ul>
 </div>
 
 <div class="sec"><h2 class="notSec">Table of Contents</h2>
-  <div class="toc"></div>
+<div class="toc"></div>
 </div>
 
 <div class="sec hiden"><h2>Sections</h2>
-  <eqq>
-    \alpha \beta \gamma
-  </eqq>
+<eqq>
+\alpha \beta \gamma
+</eqq>
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-Refs">References and Related Articles</h2>
-  <ol class="refs">
-    <div class="subsec"><h3>Math Renderer</h3></div>
-    <li><a href="http://www.codecogs.com/latex/eqneditor.php" target="_blank">CodeCogs: Online LaTeX Equation Editor</a>;<br>
-      // 깔끔한 온라인 LaTeX 수식 편집기. 툴바들이 잘 되어 있어서 LaTeX math 명령어들을 몰라도 손쉽게 수식을 작성할 수 있음. 이 사이트에서 제공하는 메뉴얼 <a href="http://www.codecogs.com/latex/integration/htmlequations.php">Equations in HTML</a>도 읽어보시길. "Our servers' daily limit for equation generation is 3,000."라고 하니 방문자가 많은 분들이 쓰기에는 그닥 좋은 방법은 아닌듯 하기도. 그 이상 쓰려면 돈 내라고;;; image들을 이 서버에서 쏴주는 식이라 그런듯. 꽤 많이 사용하실분들은 <a href="http://www.codecogs.com/latex/usage.php" target="_blank">Usage Policy</a>도 읽어보시길.<br>
-      Promoting image: <a href="http://www.codecogs.com"><img src="http://www.codecogs.com/images/logo.gif" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library" style="vertical-align:middle; border:3px solid gray; margin:0.3em 0"></a>
-    </li>
-    <li><a href="http://www.mathjax.org/">MathJax.org - Beautiful math in all browsers</a>; and
-      <a href="http://docs.mathjax.org/en/latest/start.html">Getting started</a>; and
-      <a href="http://docs.mathjax.org/en/latest/configuration.html">Loading and Configuring MathJax</a>; and
-      <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and
-      <a href="http://www.mathjax.org/download/mathjax-cdn-terms-of-service/">Terms of service</a>;<br>
-      and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
-      // LaTeX 형태의 수식도 표현해주고 <a href="http://docs.mathjax.org/en/latest/glossary.html#term-mathml">MathML</a> 형태의 수식(Mathematica랑 MS word 등에서 쓰이는 수식 code인듯? more machine-readable이라고. 최신 browser에서 MathML은 자동으로 처리해주는듯도. HTML/XML이랑 비슷한.), <a href="http://docs.mathjax.org/en/latest/glossary.html#term-asciimath">AsciiMath</a>도 표현해 준다고 함.<br>
-      // CodeCogs보다 옵션들도 많고 더 좋아보이기도 하는데, 제대로 사용하려면 JavaScript도 어느정도는 알아야하고 공부가 조금 필요한듯.<br>
-      Promoting image:<br><img src="https://www.mathjax.org/badge/mj-logo.svg" style="vertical-align:middle; background:white; border:3px solid gray; margin:0.3em 0">
-    </li>
-    <li><a href="http://s1.daumcdn.net/editor/fp/service_nc/pencil/Pencil_chromestore.html">Daum Equation Editor</a>;<br>
-      '다음'에서도 LaTeX Equation Editor(tistory도 이것을 이용)를 제공하긴 하는데, text code를 바로 처리해주는 기능은 없는듯해서... 수식그림내에서도 수식을 편집할 수 있다는 장점은 있네요.
-    </li>
-    <li><a href="http://detexify.kirelabs.org/classify.html">Detexify\(^2\) - LaTeX symbol classifier</a>;<br>
-      // 오유 '살얼음'님이 알려주심. 여긴 그림을 그리면 LaTeX 수식으로 알려주는듯. 신기방기.
-    </li>
+<ol class="refs">
+<div class="subsec"><h3>Math Renderer</h3></div>
+<li><a href="http://www.codecogs.com/latex/eqneditor.php" target="_blank">CodeCogs: Online LaTeX Equation Editor</a>;<br>
+// 깔끔한 온라인 LaTeX 수식 편집기. 툴바들이 잘 되어 있어서 LaTeX math 명령어들을 몰라도 손쉽게 수식을 작성할 수 있음. 이 사이트에서 제공하는 메뉴얼 <a href="http://www.codecogs.com/latex/integration/htmlequations.php">Equations in HTML</a>도 읽어보시길. "Our servers' daily limit for equation generation is 3,000."라고 하니 방문자가 많은 분들이 쓰기에는 그닥 좋은 방법은 아닌듯 하기도. 그 이상 쓰려면 돈 내라고;;; image들을 이 서버에서 쏴주는 식이라 그런듯. 꽤 많이 사용하실분들은 <a href="http://www.codecogs.com/latex/usage.php" target="_blank">Usage Policy</a>도 읽어보시길.<br>
+Promoting image: <a href="http://www.codecogs.com"><img src="http://www.codecogs.com/images/logo.gif" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library" style="vertical-align:middle; border:3px solid gray; margin:0.3em 0"></a>
+</li>
+<li><a href="http://www.mathjax.org/">MathJax.org - Beautiful math in all browsers</a>; and
+<a href="http://docs.mathjax.org/en/latest/start.html">Getting started</a>; and
+<a href="http://docs.mathjax.org/en/latest/configuration.html">Loading and Configuring MathJax</a>; and
+<a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and
+<a href="http://www.mathjax.org/download/mathjax-cdn-terms-of-service/">Terms of service</a>;<br>
+and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+// LaTeX 형태의 수식도 표현해주고 <a href="http://docs.mathjax.org/en/latest/glossary.html#term-mathml">MathML</a> 형태의 수식(Mathematica랑 MS word 등에서 쓰이는 수식 code인듯? more machine-readable이라고. 최신 browser에서 MathML은 자동으로 처리해주는듯도. HTML/XML이랑 비슷한.), <a href="http://docs.mathjax.org/en/latest/glossary.html#term-asciimath">AsciiMath</a>도 표현해 준다고 함.<br>
+// CodeCogs보다 옵션들도 많고 더 좋아보이기도 하는데, 제대로 사용하려면 JavaScript도 어느정도는 알아야하고 공부가 조금 필요한듯.<br>
+Promoting image:<br><img src="https://www.mathjax.org/badge/mj-logo.svg" style="vertical-align:middle; background:white; border:3px solid gray; margin:0.3em 0">
+</li>
+<li><a href="http://s1.daumcdn.net/editor/fp/service_nc/pencil/Pencil_chromestore.html">Daum Equation Editor</a>;<br>
+'다음'에서도 LaTeX Equation Editor(tistory도 이것을 이용)를 제공하긴 하는데, text code를 바로 처리해주는 기능은 없는듯해서... 수식그림내에서도 수식을 편집할 수 있다는 장점은 있네요.
+</li>
+<li><a href="http://detexify.kirelabs.org/classify.html">Detexify\(^2\) - LaTeX symbol classifier</a>;<br>
+// 오유 '살얼음'님이 알려주심. 여긴 그림을 그리면 LaTeX 수식으로 알려주는듯. 신기방기.
+</li>
 
-    <div class="subsec"><h3>Related</h3></div>
-    <li><a href="http://argente.tistory.com/29">argente's blog - 블로그(티스토리 및 다른 블로그)에서 LaTeX 수식 입력하기</a>;<br>
-      // 여기서 처음 배웠음. JavaScript를 조금 더 깔끔하게 만들수도 있을거 같긴한데... (이땐 JavaScript를 거의 몰랐을때라 대충 썼던 기억이. 제가 만든 JavaScript code가 더 깔끔할듯.)
-    </li>
-    <li><a href="http://ghebook.blogspot.kr/2010/06/latex.html">EM turtle(전파거북이)'s blog - LaTex 수식을 그림으로 만드는 방법</a>;<br>
-      // 매우 훌륭한 수학/물리 관련 글들을 많이 올려놓으셨는데, 아예 수식을 직접 그림파일로 올려서 수식을 지원하는 사이트들이 죽어도 상관없게끔 하신듯. 난 귀찮아서라도 이렇게까진 못할듯;;; 대단하신 분. 아마도 예전에는 수식을 지원해주는 사이트의 도움을 받다가 이 사이트가 죽으면서 수식이 다 깨지니 아예 방법을 이렇게 바꾸신듯도.
-    </li>
+<div class="subsec"><h3>Related</h3></div>
+<li><a href="http://argente.tistory.com/29">argente's blog - 블로그(티스토리 및 다른 블로그)에서 LaTeX 수식 입력하기</a>;<br>
+// 여기서 처음 배웠음. JavaScript를 조금 더 깔끔하게 만들수도 있을거 같긴한데... (이땐 JavaScript를 거의 몰랐을때라 대충 썼던 기억이. 제가 만든 JavaScript code가 더 깔끔할듯.)
+</li>
+<li><a href="http://ghebook.blogspot.kr/2010/06/latex.html">EM turtle(전파거북이)'s blog - LaTex 수식을 그림으로 만드는 방법</a>;<br>
+// 매우 훌륭한 수학/물리 관련 글들을 많이 올려놓으셨는데, 아예 수식을 직접 그림파일로 올려서 수식을 지원하는 사이트들이 죽어도 상관없게끔 하신듯. 난 귀찮아서라도 이렇게까진 못할듯;;; 대단하신 분. 아마도 예전에는 수식을 지원해주는 사이트의 도움을 받다가 이 사이트가 죽으면서 수식이 다 깨지니 아예 방법을 이렇게 바꾸신듯도.
+</li>
 
-    <div class="subsec"><h3>Etc.</h3></div>
-    <li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.0</a>;<br>
-      // 자동으로 수식에 numbering이 되도록 만든 html 문서. 다른 section numbering이나 table of contents 등의 기능들도 구현해놨으니 참고해 보시길.
-    </li>
-    <li><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>;<br>
-      // LaTeX가 무엇인지 궁금하시다면 방문해 보시길.
-    </li>
+<div class="subsec"><h3>Etc.</h3></div>
+<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.0</a>;<br>
+// 자동으로 수식에 numbering이 되도록 만든 html 문서. 다른 section numbering이나 table of contents 등의 기능들도 구현해놨으니 참고해 보시길.
+</li>
+<li><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>;<br>
+// LaTeX가 무엇인지 궁금하시다면 방문해 보시길.
+</li>
 
-    <div class="subsec"><h3>Automatically added by inner citation (like footnote)</h3></div>
-  </ol>
+<div class="subsec"><h3>Automatically added by inner citation (like footnote)</h3></div>
+</ol>
 </div>
 </div><!-- second docuK -->
 </codeprint><!-- docuK-docu -->
 
 <codeprint id="docuK-script">
 <script>
+m.recoCats="[Recoeve]--docuK";
 m.wait=512;
 m.delayPad=0;
 
