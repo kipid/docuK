@@ -1146,6 +1146,7 @@ $.fn.delayedLoad=function () {
 	let done=false;
 	if (this.inView()) {
 		if (this.hasClass("to-be-executed")) {
+			this.removeClass("to-be-executed");
 			this.trigger("click");
 		}
 		// divs with background-image
@@ -1160,11 +1161,11 @@ $.fn.delayedLoad=function () {
 			this.removeAttr("delayed-src");
 			done=true;
 		}
-		// MathJax Process
-		if (typeof MathJax!=='undefined'&&this.is(".MathJax_Preview")) {
-			MathJax.Hub.Queue(["Process", MathJax.Hub, this.next()[0]]);
-			done=true;
-		}
+		// MathJax Process :: TODO: update MathJax (maybe typesetPromise?)
+		// if (typeof MathJax!=='undefined'&&this.is(".MathJax_Preview")) {
+		// 	MathJax.Hub.Queue(["Process", MathJax.Hub, this.next()[0]]);
+		// 	done=true;
+		// }
 	}
 	return done;
 };

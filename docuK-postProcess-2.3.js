@@ -584,21 +584,21 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 	m.printDeviceInfo();
 	m.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
 
-	// Initial Delayed Load.
-	m.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
-	m.logPrint(`<br><br>There are ${m.$delayedElems.length} delayed elements.`);
-	setTimeout(function () {
-		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
-		$window.trigger("scroll.delayedLoad");
-	}, 2000);
-
 	// Disqus js script
-	if (!($("#disqus_thread").exists())) {
+	$disqus_thread=$("#disqus_thread");
+	if (!($disqus_thread.exists())) {
 		($("body")||$("#docuK-script")).append(`<div id="disqus_thread"></div>`);
+		$disqus_thread=$("#disqus_thread");
 	}
 	let $disqus_js=$(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
 	$headOrBody.append($disqus_js);
 	m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
+
+	$page_views_chart=$("#page-views-chart");
+	if (!($page_views_chart.exists())) {
+		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="m.loadPageViewsStat(this)"></div>`);
+		$page_views_chart=$("#page-views-chart");
+	}
 
 	// Kakao js script (from kakao.com CDN) is added.
 	m.kakao_js_id='kakao-jssdk';
@@ -682,7 +682,8 @@ window.MathJax={
 		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
-m.loadPageViewsStat=function () {
+m.loadPageViewsStat=function (elem) {
+	$(elem).off("click");
 	m.getBlogStat=function (from, to) {
 		let reqTime=`from	to
 ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
@@ -953,13 +954,6 @@ ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 
 	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
-	m.reNewAndReOn=function () {
-		m.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
-		$window.off("scroll.delayedLoad");
-		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
-		$window.trigger("scroll.delayedLoad");
-		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart");
-	};
 	m.HandleAhrefInComment=function () {
 		$("div.comments>.comment-list").find("p").each(function (i, elem) {
 			let $elem=$(elem);
@@ -988,8 +982,17 @@ ${m.uriRendering(match, false, false).html}`
 		$("#menubar_wrapper").parents().show();
 	});
 
+	m.reNewAndReOn=function () {
+		m.$delayedElems=$("[delayed-src], [delayed-bgimage], .to-be-executed");
+		$window.off("scroll.delayedLoad");
+		$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
+		$window.trigger("scroll.delayedLoad");
+		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart");
+	};
+	m.reNewAndReOn();
+
 	// Closing docuK Log.
 	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
-	setTimeout(function () {m.$log.hide();}, 300);
+	setTimeout(function () {m.$log.hide();}, 2048);
 });
 })(window.m, jQuery);
