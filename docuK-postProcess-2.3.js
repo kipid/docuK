@@ -682,6 +682,7 @@ window.MathJax={
 		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
+m.loadPageViewsStat=function () {
 	m.getBlogStat=function (from, to) {
 		let reqTime=`from	to
 ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
@@ -805,6 +806,7 @@ ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 			}
 		}
 	}, 2048);
+};
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
 	m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
