@@ -92,8 +92,8 @@ Posting History is put here. This section is automatically hiden.
 Categories of this document is put here with links to <a target="_blank" href="https://kipid.tistory.com/entry/Lists">Lists of kipid's blog</a>. This section is automatically hiden.
 
 <ul>
-<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#secId1-IT-1">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
-<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#secId1-interest">Recent interests</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest">Recent interests</a></li>
 </ul>
 
 ##/ Categories of this document
@@ -579,7 +579,9 @@ $("#pre0-full-SEE").html(m.escapeHTML(`<!DOCTYPE html>
 <script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"><`+`/script>
 <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
-<!-- docuK-style -->
+</codeprint><!-- docuK-style -->
+
+<meta charset="utf-8" name="description" content="Description of this document. This is good for search engine."/>
 
 <codeprint class="SEE">
 ${m.SEEHTMLs[0]}
@@ -587,8 +589,23 @@ ${m.SEEHTMLs[0]}
 
 <codeprint id="docuK-script">
 <script>
-m.wait=512;
-m.delayPad=0;
+(function(m, $, undefined) {
+
+// Some codes used only in this document. i.e. Filling the pre#pre0-SEE and pre#pre0-full-SEE
+
+m.recoCats="[Recoeve]--docuK";
+m.wait=1024;
+m.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=\`https://kipid.tistory.com/entry/\${this.page.identifier}\`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery);
 <`+`/script>
 
 <!-- From kipid.tistory CDN -->
@@ -596,8 +613,9 @@ m.delayPad=0;
 </codeprint><!-- docuK-script -->`));
 m.SEEHTMLs[0]=$("#SEE0").html().trim();
 
-m.wait=512;
-m.delayPad=0;
+m.recoCats="[Recoeve]--docuK";
+m.wait=1024;
+m.delayPad=512;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
