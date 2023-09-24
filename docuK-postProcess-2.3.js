@@ -976,7 +976,6 @@ ${m.uriRendering(match, false, false).html}`
 		});
 		m.reNewAndReOn();
 	};
-	m.HandleAhrefInComment();
 
 	$window.on("resize.menubar", function (e) {
 		$("#menubar_wrapper").parents().show();
@@ -989,7 +988,7 @@ ${m.uriRendering(match, false, false).html}`
 		$window.trigger("scroll.delayedLoad");
 		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart");
 	};
-	m.reNewAndReOn();
+	m.HandleAhrefInComment();
 
 	// Closing docuK Log.
 	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
