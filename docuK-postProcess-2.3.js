@@ -596,7 +596,7 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 
 	$page_views_chart=$("#page-views-chart");
 	if (!($page_views_chart.exists())) {
-		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="m.loadPageViewsStat(this)"></div>`);
+		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed"></div>`);
 		$page_views_chart=$("#page-views-chart");
 	}
 
@@ -682,11 +682,12 @@ window.MathJax={
 		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
-m.loadPageViewsStat=function (elem) {
-	let $elem=$(elem);
-	$elem.removeClass("to-be-executed");
-	$elem.off("click");
-	$elem.on("click", function () {});
+m.loadPageViewsStat=function () {
+	$page_views_chart.removeClass("to-be-executed");
+	$page_views_chart.off("click");
+	$page_views_chart.on("click", function () {
+		$page_views_chart.off("click");
+	});
 	m.getBlogStat=function (from, to) {
 		let reqTime=`from	to
 ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
@@ -796,21 +797,11 @@ ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 			}
 			countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
 			countChartHTML+=`</svg></div></div></div>`;
-			$page_views_chart=$("#page-views-chart");
-			if ($page_views_chart.exists()) {
-				$page_views_chart.html(countChartHTML);
-			}
-			else {
-				$disqus_thread=$("#disqus_thread");
-				if ($disqus_thread.exists()) {
-					$disqus_thread.after(`<div id="page-views-chart"></div>`);
-					$page_views_chart=$("#page-views-chart");
-					$page_views_chart.html(countChartHTML);
-				}
-			}
+			$page_views_chart.html(countChartHTML);
 		}
 	}, 2048);
 };
+	$page_views_chart.on("click", m.loadPageViewsStat);
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
 	m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.
