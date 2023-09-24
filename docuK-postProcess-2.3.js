@@ -752,7 +752,8 @@ ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 	let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
 	m.viewCounts=[];
 	(async function () {
-		for (let i=0;i<m.daysToPlotCountChart;i++) {
+		m.blogStatRes[0]=await m.countBlogStat(m.from[0].date, m.to[0].date);
+		for (let i=1;i<m.daysToPlotCountChart;i++) {
 			m.blogStatRes[i]=await m.countBlogStat(m.from[i].date, m.to[i].date);
 		}
 	})();
