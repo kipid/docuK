@@ -3,7 +3,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
 
-<codeprint id="docuK-style">
+<codeprint id="code-docuK-style">
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
 
 <!-- From kipid.tistory CDN -->
@@ -20,11 +20,11 @@
 <script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
 </codeprint><!-- docuK-style -->
 
-<meta name="description" content="A description of the page. This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
+<meta name="description" content="HTML docuK format ver. 2.3 (2023-09-24). This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
 
-<codeprint id="docuK-docu">
-<div class="docuK">
-<div class="sec"><h1>HTML docuK format ver. 2.3 (2023-05-30)</h1>
+<codeprint id="code-docuK-docu">
+<div class="docuK noDIdHandle">
+<div class="sec"><h1>HTML docuK format ver. 2.3 (2023-09-24)</h1>
 <div class="p">
 개인적으로 만들고 있는 LaTeX <cite class="ref-latex"></cite> 비슷한 형태의 HTML document format + JavaScript. 이름은 그냥 docuK로 '<span class="emph">document designed by kipid</span>'란 뜻.
 </div>
@@ -34,28 +34,29 @@
 <div class="sec hiden no-sec-N"><h2 id="sec-UH">Update History</h2>
 <div class="subsec"><h3>Upto version 2.3</h3></div>
 <ul>
-<li>2022?: Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
-<li>2022-12-26: Short Keys announcement.</li>
-<li>2015-01-18: SNS widget. "2014-08-07: m.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
-<li>2014-11-23: Super Easy Citation all at once.</li>
-<li>2014-09-18: "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
-<li>2014-09-03: "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
-<li>2014-08-09: pre.scrollable 일때만 scroll switch fetch. bubbleRef show/hide "&gt;.bubbleRef"로. (chaining은 ㅡㅡ;;;)</li>
-<li>2014-06-25: Working on Super Easy Edit (SEE): 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
-<li>2014-06-25: 단축키 설정: F,D,L, (T to the TOC는 안했음. 만들까??)</li>
-<li>2014-06-25: MathJax CDN is changed from "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js" to "https://cdn.mathjax.org/mathjax/latest/MathJax.js".</li>
-<li>2014-06-25: 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
-<li>2014-06-25: duplicate id handling, and "noDIdHandle" class</li>
-<li>2014-06-21: element가 아닌 text가 sec 바깥으로 빠져나오는거 해결.</li>
-<li>2014-06-16: change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle (no duplicate id handling) 겁시다. (자동으로도 처리 됨.)</li>
-<li>2014-06-12: bubble ref arrow is centered.</li>
-<li>2014-06-11: MathJax delayed-loading 구현. 글 간단하게 정리.</li>
-<li>2014-05-31: Log show/hide. delayed-loading in bubble ref.</li>
-<li>2014-05-29: Delayed Loading 구현. disableQ 구현. (disable query: [ex] iframe disable in Galaxy S.)</li>
-<li>2014-05-27: CSS 수정. tJump 구현. (refer.sec- 할때 안에서 어디로 jump 할지 선택이 되도록.) progress log print.</li>
-<li>2014-05-26: Styling of scroll bars, word-wrap, white-space.</li>
-<li>2014-05-24: Toggle scrollable. Codeprint upgrade.</li>
-<li>2014-05-23: 어느정도 완성.</li>
+<li>2023-09-24 : Removed indents, and 앞으로 생각하고 있는 것들 정리.</li>
+<li>2022? : Reference 쓰는거 조금 더 쉽게 되도록 구상을 해봐야 할듯. 위키처럼 글에 바로 reference를 쓰면 아래에 모이도록 하거나... 이 경우도 드래그 앤 드랍으로 위치 조정이 되도록 하는게 좋을듯. 마우스 오버하면 id (혹은 아예 <code class="prettyprint">&lt;cite class="id"&gt;&lt;/cite&gt;</code>) 가 뜨게 하거나.</li>
+<li>2022-12-26 : Short Keys announcement.</li>
+<li>2015-01-18 : SNS widget. "2014-08-07 : m.wait 같은 설정을 나중에 바꿔도 logPrint에는 이전 값만 출력 됨. 위치를 바꿔야 할듯." 해결.</li>
+<li>2014-11-23 : Super Easy Citation all at once.</li>
+<li>2014-09-18 : "no-sec-N" 이 div.sec 에 있어도 제대로 처리되도록.</li>
+<li>2014-09-03 : "eq, eqq" tag 가 있을때에만 MathJax.js from https 를 자동으로 load. (이전에 쓰던 MathJax CDN 이 죽었음 ㅡㅡ;;;)</li>
+<li>2014-08-09 : pre.scrollable 일때만 scroll switch fetch. bubbleRef show/hide "&gt;.bubbleRef"로. (chaining은 ㅡㅡ;;;)</li>
+<li>2014-06-25 : Working on Super Easy Edit (SEE) : 나중에는 적당히 LaTeX 문법을 차용해서 LaTeX 형식으로 글을 쓰면, 혹은 wiki edit 같은 형식으로 글을 쓰면, 자동으로 이것과 비슷한 형태의 HTML로 만들어주기? Wiki 처럼 section 별로 편집할 수 있으면 좋긴할듯. sublime text 나 atom.io 같은 편집기도 같이 딸려있어야 편집이 쉽긴 할테지만...</li>
+<li>2014-06-25 : 단축키 설정 : F,D,L, (T to the TOC는 안했음. 만들까??)</li>
+<li>2014-06-25 : MathJax CDN is changed from "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js" to "https://cdn.mathjax.org/mathjax/latest/MathJax.js".</li>
+<li>2014-06-25 : 사용자 캐쉬 | cookie에 정보 저장했다가 자동으로 스타일링하기. default 설정?</li>
+<li>2014-06-25 : duplicate id handling, and "noDIdHandle" class</li>
+<li>2014-06-21 : element가 아닌 text가 sec 바깥으로 빠져나오는거 해결.</li>
+<li>2014-06-16 : change-docuK-style (Style Selector) update. script가 안에 있으면 id 사용할수도 있으니 noDIdHandle (no duplicate id handling) 겁시다. (자동으로도 처리 됨.)</li>
+<li>2014-06-12 : bubble ref arrow is centered.</li>
+<li>2014-06-11 : MathJax delayed-loading 구현. 글 간단하게 정리.</li>
+<li>2014-05-31 : Log show/hide. delayed-loading in bubble ref.</li>
+<li>2014-05-29 : Delayed Loading 구현. disableQ 구현. (disable query : [ex] iframe disable in Galaxy S.)</li>
+<li>2014-05-27 : CSS 수정. tJump 구현. (refer.sec- 할때 안에서 어디로 jump 할지 선택이 되도록.) progress log print.</li>
+<li>2014-05-26 : Styling of scroll bars, word-wrap, white-space.</li>
+<li>2014-05-24 : Toggle scrollable. Codeprint upgrade.</li>
+<li>2014-05-23 : 어느정도 완성.</li>
 </ul>
 </div>
 
@@ -73,10 +74,10 @@
 
 <div class="sec"><h2 id="sec-Cite">Citing the references automatically like LaTeX</h2>
 <div class="p">
-With <code>&lt;cite class="id-of-element-you-are-citing"&gt;</code> tag, it automatically cites the specific reference in sec-<refer class="sec-Refs"></refer> and, when you mouse over the squared citation =&gt; <cite class="ref-cite"></cite>, it shows the reference in bubble-shape pop-up. When you mouse out the bubble reference, the bubble disappears with delayed 1.0 second. Clicking '✖' button exits the bubble immediately. The unknown citation <cite class="ref-xx"></cite> or citation with errata <cite class="ref-cito"></cite> will be highlighted like &lt;= that. Examples: <cite class="ref-latex"></cite> <cite class="ref-cite"></cite> <cite class="ref-math"></cite> <cite class="ref-code"></cite> <cite class="ref-thinsp"></cite>
+With <code class="prettyprint">&lt;cite class="id-of-element-you-are-citing"&gt;</code> tag, it automatically cites the specific reference in sec-<refer class="sec-Refs"></refer> and, when you mouse over the squared citation =&gt; <cite class="ref-cite"></cite>, it shows the reference in bubble-shape pop-up. When you mouse out the bubble reference, the bubble disappears with delayed 1.0 second. Clicking '✖' button exits the bubble immediately. The unknown citation <cite class="ref-xx"></cite> or citation with errata <cite class="ref-cito"></cite> will be highlighted like &lt;= that. Examples: <cite class="ref-latex"></cite> <cite class="ref-cite"></cite> <cite class="ref-math"></cite> <cite class="ref-code"></cite> <cite class="ref-thinsp"></cite>
 </div>
 <div class="p">
-Reference 외에도 <code>&lt;refer class="id-of-element-you-are-refering"&gt;</code> tag를 이용해서 equation, figure, section, subsection 등 다양한 것들을 refer 할 수 있음. 단 refer 하는 tag 안에 class="number"를 가지는 tag가 있어야만 undefined가 아닌 것을 표시해줌. 없다면 다음과 같이 나타남: <refer class="ref-cite"></refer>.
+Reference 외에도 <code class="prettyprint">&lt;refer class="id-of-element-you-are-refering"&gt;</code> tag를 이용해서 equation, figure, section, subsection 등 다양한 것들을 refer 할 수 있음. 단 refer 하는 tag 안에 class="number"를 가지는 tag가 있어야만 undefined가 아닌 것을 표시해줌. 없다면 다음과 같이 나타남: <refer class="ref-cite"></refer>.
 </div>
 <div class="p">
 Refering equations: Eq. <refer class="eq-pos"></refer>, Eq. <refer class="eq-epsilon"></refer>.
@@ -90,14 +91,36 @@ Refering sections: Sec. <refer class="sec-Cite"></refer>, Sec. <refer class="sec
 
 <div class="subsec"><h3>Putting and Citing the references all at once</h3>
 <div class="p">
-You can put the references into <code>ol.refs</code> in RRA. And cite it with id. But this is sometimes tedious. You can put and cite the references all at once like <cite class="ref-putAndCiteAllAtOnce">This will be added to the last of <code>ol.refs</code></cite><cite class="ref-easy-cite">Quite easy is to cite something, isn't it? This is what we call super easy edit.</cite>.
+You can put the references into <code class="prettyprint">ol.refs</code> in RRA. And cite it with id. But this is sometimes tedious. You can put and cite the references all at once like <cite class="ref-putAndCiteAllAtOnce">This will be added to the last of <code class="prettyprint">ol.refs</code></cite><cite class="ref-easy-cite">Quite easy is to cite something, isn't it? This is what we call super easy edit.</cite>.
 </div>
 </div>
 <!-- subsec: Putting and Citing the references all at once -->
+
+<div class="subsec"><h3>Citing | Refering chaining</h3>
+<div class="p">
+Citing before the inline citing test: <cite class="ref-recoeve-K-Pop"></cite>.
+</div>
+<div class="p">
+Refer chaining before the HTML element: <refer class="fig-chain"></refer>.
+</div>
+<figure id="fig-chain"><div class="fig">
+	<div class="caption">Refering chaining test <cite class="ref-recoeve-K-Pop"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop&PRL=0.80&PRR=1.00#headPlay">[Music/Break]--K-Pop of kipid's Recoeve.net</a></cite>.</div>
+	<div class="rC"><div class="rSC">
+		<iframe delayed-src="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop&PRL=0.80&PRR=1.00#headPlay" frameborder="0"></iframe>
+	</div></div>
+</div></figure>
+<div class="p">
+Refer chaining after the HTML element: <refer class="fig-chain"></refer>. Cite test after inline citing <cite class="ref-recoeve-K-Pop"></cite>.
+</div>
+<div class="p">
+As you can see, refering | citing chaining is not possible. But the number is shown correctly. I am satisfied with this enough.
+</div>
+</div>
+<!-- subsec: Citing | Refering chaining -->
 </div>
 
 <div class="sec hiden"><h2 id="sec-Font">Font-size:??em; Text-indent in div.p; Line-height; ol, ul, dl css</h2>
-<div class="p">Font-size는 scalable/resizable이 쉽도록 제일 바깥 container (<code>&lt;div class="docuK"&gt;&lt;/div&gt;</code>) 를 10px로 정하고 안쪽은 em (1em=parent font-size의 100%) 으로 정함. CSS <code>@media</code> query 를 이용해서 기기별로 전체적인 글씨 크기를 조정.</div>
+<div class="p">Font-size는 scalable/resizable이 쉽도록 제일 바깥 container (<code class="prettyprint">&lt;div class="docuK"&gt;&lt;/div&gt;</code>) 를 10px로 정하고 안쪽은 em (1em=parent font-size의 100%) 으로 정함. CSS <code class="prettyprint">@media</code> query 를 이용해서 기기별로 전체적인 글씨 크기를 조정.</div>
 <div class="p">Paragraph의 text-indent:0.5em 정도로 해놨음.</div>
 <div class="p">
 line-height:1.6 으로.
@@ -228,7 +251,7 @@ Outline equation은 꽤나 긴 수식도 제대로 보여져야 하는데...
 잘 보이는듯?
 </div>
 <div class="p">
-inline equation은 <code>&lt;eq&gt;</code> tag로 감싸고, outline equation은 <code>&lt;eqq&gt;</code> tag로 감싸면 자동으로 처리되도록 해놨음. 물론 MathJax가 처리하도록 달러 ('\$', '\$\$') 표시나 '\'를 앞에 둔 괄호 ('{', '}', '[', ']') 등으로 감싼 뒤, div 등으로 다시 감싸서 처리하는거니 굳이 equation을 쓸 때 tag로 안감싸서 써도 되긴 함. 특히 inline equation은 그냥 달러표시 써서 쓰는게 나을듯. <code>&lt;eqq&gt;</code> tag는 numbering도 자동으로 처리해주고 overflow도 자동으로 처리해 줄 것이기 때문에 tag로 쓰는게 나을듯.
+inline equation은 <code class="prettyprint">&lt;eq&gt;</code> tag로 감싸고, outline equation은 <code class="prettyprint">&lt;eqq&gt;</code> tag로 감싸면 자동으로 처리되도록 해놨음. 물론 MathJax가 처리하도록 달러 ('\$', '\$\$') 표시나 '\'를 앞에 둔 괄호 ('{', '}', '[', ']') 등으로 감싼 뒤, div 등으로 다시 감싸서 처리하는거니 굳이 equation을 쓸 때 tag로 안감싸서 써도 되긴 함. 특히 inline equation은 그냥 달러표시 써서 쓰는게 나을듯. <code class="prettyprint">&lt;eqq&gt;</code> tag는 numbering도 자동으로 처리해주고 overflow도 자동으로 처리해 줄 것이기 때문에 tag로 쓰는게 나을듯.
 </div>
 
 <div class="subsec"><h3>Highlighting equations</h3>
@@ -436,8 +459,8 @@ Test: <span class="emph">p tag로 하면 같은 block이라서 자동으로 para
 </div>
 
 <div class="sec hiden"><h2 id="sec-disableQ">Disable Query class</h2>
-<div class="p">Cross-Browsing check 하면서 특히나 스마트폰 (갤s) 에서 자꾸 스크롤탑이 먹히길래 만들어봄. 문제가 되는 놈들은 query를 만들어서 안에 있는 <code>&lt;!--, --&gt;</code>을 없애줌. <code>&lt;div class="disableQ0"&gt;&lt;/div&gt;</code> 같은걸로 감싸고 한꺼번에 처리.</div>
-<div class="p">Elements with disableQ0 class remove <code>&lt;!-- --&gt;</code> inside them only when deviceWidth>321. This is for Galaxy S (or old smartphones) problem like unexpected scrollTop.</div>
+<div class="p">Cross-Browsing check 하면서 특히나 스마트폰 (갤s) 에서 자꾸 스크롤탑이 먹히길래 만들어봄. 문제가 되는 놈들은 query를 만들어서 안에 있는 <code class="prettyprint">&lt;!--, --&gt;</code>을 없애줌. <code class="prettyprint">&lt;div class="disableQ0"&gt;&lt;/div&gt;</code> 같은걸로 감싸고 한꺼번에 처리.</div>
+<div class="p">Elements with disableQ0 class remove <code class="prettyprint">&lt;!-- --&gt;</code> inside them only when deviceWidth>321. This is for Galaxy S (or old smartphones) problem like unexpected scrollTop.</div>
 <figure id="fig-"><div class="fig disableQ0">
 	<div class="rC" style="border:6px rgb(70,70,70) solid"><div class="rSC">
 		<iframe src="http://www.youtube.com/embed/Az9hckMi6KI" frameborder="0" allowfullscreen></iframe>
@@ -576,7 +599,7 @@ pre {
 
 <div class="subsec"><h3>Escaping HTML</h3>
 <div class="p">
-기본적으로 &lt;, &gt;, &amp;는 HTML에서 쓰고 있기 때문에 escape 해줘야 함. 기본 설정이 escapeHTML이고 pre 안에서도 html tag를 사용하고 싶다면, <code>&lt;codeprint class="none noEscapeHTML"&gt;</code>처럼 noEscapeHTML를 추가해 주면 됨. "none" class는 codeprint elem를 숨기기 위해 붙임. HTML code도 프린트하고 싶은 경우가 많기 때문에 "none"을 빼고 쓸때도 많음.
+기본적으로 &lt;, &gt;, &amp;는 HTML에서 쓰고 있기 때문에 escape 해줘야 함. 기본 설정이 escapeHTML이고 pre 안에서도 html tag를 사용하고 싶다면, <code class="prettyprint">&lt;codeprint class="none noEscapeHTML"&gt;</code>처럼 noEscapeHTML를 추가해 주면 됨. "none" class는 codeprint elem를 숨기기 위해 붙임. HTML code도 프린트하고 싶은 경우가 많기 때문에 "none"을 빼고 쓸때도 많음.
 </div>
 <pre id="pre-code-noEscapeHTML" class="prettyprint linenums"></pre>
 <codeprint id="code-noEscapeHTML" class="noEscapeHTML none">
@@ -589,7 +612,7 @@ pre {
 inline code는 &lt;code&gt; tag를 사용하고, outline code는 &lt;pre class="prettyprint linenums"&gt; tag를 사용함. 두 태그안에 'prettyprint' class가 들어가면 google code prettyfier가 자동으로 예쁘게 꾸며주고, 이 class를 안넣어도 code tag는 적당히 styling 되도록, pre tag는 그냥 그대로 보여주고.
 </div>
 <div class="p">
-Ex: <code>monospace code</code>, <code>var</code>, <code class="prettyprint">for (var i=0;i&gt;length;i++){}</code> ... 별로 가독성이 좋아보이지는 않네. 중요한건 아닌듯하니 천천히 바꿔야지.
+Ex: <code class="prettyprint">monospace code</code>, <code class="prettyprint">var</code>, <code class="prettyprint">for (var i=0;i&gt;length;i++){}</code> ... 별로 가독성이 좋아보이지는 않네. 중요한건 아닌듯하니 천천히 바꿔야지.
 </div>
 </div>
 
@@ -716,16 +739,19 @@ assseser
 </div>
 
 <div class="sec hiden"><h2>Opening Sources</h2>
+<div class="p">
+I recommend to use SEE (Super Easy Edit) of docuK <cite class="ref-SEE"><a target="_blank" href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">kipid's blog :: Super Easy Edit (SEE) of docuK: 사용 설명서 (Manual | Documentation | Tutorial).</a></cite> rather than using this raw HTML docuK. This is tedious work. Use SEE <cite class="ref-pure-SEE"><a target="_blank" href="https://kipid.tistory.com/entry/pure-SEE">pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial).</a></cite>.
+</div>
 <div class="subsec"><h3>docuK CSS style</h3>
-<pre id="pre-docuK-style" class="prettyprint linenums lang-html"></pre>
+<pre id="pre-code-docuK-style" class="prettyprint linenums lang-html"></pre>
 </div>
 
 <div class="subsec"><h3>docuK HTML document</h3>
-<pre id="pre-docuK-docu" class="prettyprint linenums lang-html scrollable"></pre>
+<pre id="pre-code-docuK-docu" class="prettyprint linenums lang-html scrollable"></pre>
 </div>
 
 <div class="subsec"><h3>docuK SCRIPT (JavaScript including jQuery, MathJax, and Google code prettyfier)</h3>
-<pre id="pre-docuK-script" class="prettyprint linenums lang-html"></pre>
+<pre id="pre-code-docuK-script" class="prettyprint linenums lang-html"></pre>
 </div>
 </div>
 
@@ -769,6 +795,8 @@ assseser
 <div class="subsec"><h3>Minify or Compress css and js</h3></div>
 <li><a href="http://www.csscompressor.com/">CSSCompressor.com</a>; 필요없는 space 같은걸 깔끔하게 제거해주지는 않는듯. 그래도 뭐 쓸만함. Log Messages를 보여줘서 좋은듯.</li>
 <li><a href="https://developers.google.com/closure/">developers.google.com - closure</a>; and <a href="http://closure-compiler.appspot.com/home">closure-compiler.appspot.com</a>; 미리 발생할만한 Warnings, Errors도 알려줘서 좋은듯. 제대로 잡아주는 건지는 확신이 없지만.</li>
+
+<div class="subsec"><h3>Automatically added by inner | inline citing.</h3></div>
 </ol>
 </div>
 </div><!-- docuK -->
@@ -780,7 +808,7 @@ assseser
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-PH">Posting History</h2>
 <ul>
-<li>2014-??-??: First Posting.</li>
+<li>2014-??-?? : First Posting.</li>
 </ul>
 </div>
 
@@ -832,15 +860,14 @@ Promoting image:<br><img src="https://www.mathjax.org/badge/mj-logo.svg" style="
 </li>
 <li><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">kipid's blog - LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>;<br>
 // LaTeX가 무엇인지 궁금하시다면 방문해 보시길.
-</li>
 
-<div class="subsec"><h3>Automatically added by inner citation (like footnote)</h3></div>
+<div class="subsec"><h3>Automatically added by inner | inline citing (like footnote)</h3></div>
 </ol>
 </div>
 </div><!-- second docuK -->
-</codeprint><!-- docuK-docu -->
+</codeprint><!-- code-docuK-docu -->
 
-<codeprint id="docuK-script">
+<codeprint id="code-docuK-script">
 <script>
 m.recoCats="[Recoeve]--docuK";
 m.wait=512;
