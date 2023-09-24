@@ -684,7 +684,7 @@ window.MathJax={
 
 	m.getBlogStat=function (from, to) {
 		let reqTime=`from	to
-${from} 15:00:00	${to} 15:00:00`;
+${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 		return new Promise(function (resolve, reject) {
 			$.ajax({
 				type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
