@@ -683,7 +683,10 @@ window.MathJax={
 	}
 
 m.loadPageViewsStat=function (elem) {
-	$(elem).off("click");
+	let $elem=$(elem);
+	$elem.removeClass("to-be-executed");
+	$elem.off("click");
+	$elem.on("click", function () {});
 	m.getBlogStat=function (from, to) {
 		let reqTime=`from	to
 ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
