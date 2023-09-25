@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"></script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<meta charset="utf-8" name="description" content="pure SEE. 검색 엔진에 잘 검색되게 하기 위해서는 이 부분을 잘 작성해 주셔야 합니다."/>
+
+<codeprint class="SEE">
+# 순수한 완전 쉬운 편집 (SEE: Super Easy Edit) 문서K (Markdown: 마크다운): 사용 설명서.
+
+현재 문자들로부터 만들어진 HTML 문서K 가 보여지고 있는 중입니다.
+
+<script>
+// 중복되는 id 를 처리하기 위한 코드 동작을 막기 위한 빈 script.
+</script>
+
+
+
+## 문서K 와 SEE (완전 쉬운 편집) 의 초록 | 설명
+
+문서K 의 특징은 다음과 같습니다.
+
+<ul>
+<li>선택 가능한 모드 (밝은 화면, 어두운 화면, 추가로 핑크도 구현할 예정), 글씨체 선택 가능.</li>
+<li>글씨 크기 바꾸기 가능, 줄 간격 바꾸기 가능.</li>
+<li>자동으로 만들어 주는 목차 (각 섹션, 하위 섹션으로 점프도 가능하고 각 섹션의 왼쪽 T 버튼을 누르면 목차로 이동됩니다.).</li>
+<li>섹션들과 그림들 수식들 자동으로 숫자 이름 메겨주기.</li>
+<li>참고 문헌 참조 (citing) 쉽게 하기, 팝업 형태로 참조한 문헌들 바로 보여주기.</li>
+<li>그림이나 수식도 쉽게 참조 (refering) 하기. 팝업 형태로 참조한 그림 수식 바로 보여주기.</li>
+<li>ID 가 붙은 어떠한 원소들 (HTML elements with id) 도 참조 (refering with class="id") 가능.</li>
+<li>데이터를 아끼고 전자기기의 과부하를 방지하기 위한, 지연 된 그림과 영상들 로딩.</li>
+<li>자동적인 코드 출력 : `<code class="prettyprint">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="prettyprint">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>`.</li>
+</ul>
+
+라텍스 (LaTeX) 나 위키 편집 (Wiki edit) 과 비슷하지만 조금 더 확장된 버전이라고 생각하심 됩니다.
+
+
+
+## PH
+
+###/ Posting History
+
+포스팅 역사기록을 위한 섹션. 이 섹션은 페이지를 처음 열땐 숨겨져 있습니다.
+
+<ul>
+<li>2023-09-25 : 업데이트.</li>
+<li>2023-05-18 : 업데이트.</li>
+<li>2014-06-18 : 첫번째 포스팅.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## COTD
+
+###/ Categories of this document
+
+이 문서의 카테고리가 여기에 쓰여집니다. 이 섹션도 초기엔 자동으로 숨겨져 있습니다.
+
+<ul>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#secId1-IT-1">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#secId1-interest">Recent interests</a></li>
+</ul>
+
+##/ Categories of this document
+
+
+
+## 경고
+
+이 데모 | 예제 에서는 문서K 및 SEE (완전 쉬운 편집) 의 몇가지 기능들이 제한될 수 있습니다. 지연된 로딩, 브라우저 정보, 코드 예쁘게 출력하기, 수식 출력하기, 추가로 초반에 한번만 실행되는 자바스크립트 코드 같은 것들은 제대로 동작하지 않을수도 있습니다.
+
+여기서는 오직 <code>m.docuKProcess()</code> 함수만이 호출될 것이고, HTML 문서K 를 따로 작성하시거나 script 가 허용되는 블로그나 홈페이지 사이트에 이 문서K 및 SEE (완전 쉬운 편집) 문서를 올리실 경우에는 전체 기능들을 모두 제대로 사용하실 수 있을겁니다.
+
+
+
+## TOC
+
+##/ Table of Contents.
+목차는 자동으로 채워집니다. 자세한 사항들은 뒤따라오는 섹션들에 설명되어 있습니다.
+
+
+
+## 명령문 (Statement)
+
+각각의 명령문 (Statement) 이나 문단은 두개의 엔터 이상으로 띄어져 있어야 합니다.
+
+명령문의 처음에 '#' 이나 '&lt;' 가 올 경우 특별하게 처리 됩니다.
+
+
+
+## 문서K 와 섹션들
+
+'#' 는 문서K 전체 제목을 의미합니다. 그리고 '##' | '###' | '####' 은 섹션 | 하위섹션 | 하하위섹션을 의미합니다.
+
+문서K 의 마지막은 '#/' 로 표현하고, 섹션 | 하위섹션 | 하하위섹션의 마지막은 '##/' | '###/' | '####/' 로 표현되지만, 이걸 꼭 명시적으로 적으실 필요는 없습니다. ('#/' | '##/' | '###/' | '####/' are <span class="emph">optional</span>.) 문서 처리기가 알아서 계층 구조를 파악해 문서K | 섹션 | 하위섹션 | 하하위섹션의 끝을 감지합니다.
+
+
+
+##[.class0#sec-Test] 클래스 (class) 와 아이디 (id) 를 가지는 섹션
+
+섹션은 class 와 id 를 가질 수 있습니다. 아이디를 설정하면 이 아이디를 이용해 다음과 같이 <code class="prettyprint">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code>: Sec. <refer class="sec-Test"></refer> 섹션을 참조할 수도 있습니다.
+
+<div class="p">클래스 (Class) 와 아이디 (Id) 는 다음과 같은 [emmet 스타일] <code>##[.class0.class1.hiden#sec-Test] Section head</code> 로 설정됩니다.</div>
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```/
+
+
+
+## 미리 정의된 섹션들: "PH", "COTD", "RRA", "TOC"
+
+문서K SEE (완전 쉬운 편집) 에는 4가지 미리 정의된 섹션들이 있습니다. "PH": Posting History, "COTD":Categories of This Document, "TOC": Table of Contents, "RRA": References and Related Articles.
+
+아래에서 미리 정의된 섹션들이 구현 된 것을 살펴보세요. 어떤식으로 동작 되는지 쉽게 파악하실 수 있을 겁니다.
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] 섹션 숫자로 표현 안하기 (class="no-sec-N")
+
+섹션이 숫자로 표현되길 원하지 않으시면 다음과 같이 class 와 id 를 정하세요.
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```/
+
+
+
+###[#subsec-No-sec-numbering] 하위섹션 [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] 하위섹션 [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+####[#subsubsec-No-sec-numbering] 하하위섹션 [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] 하하위섹션 [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+## 문헌이나 다른 사이트들 참조하기 와 id 가 있는 HTML 원소들 참조하기.
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+Ref. <cite class="ref-docuK"></cite>, Ref. <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+Eq. <refer class="eqq-1"></refer>, Eq. <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+Fig. <refer class="fig-1"></refer>
+</div>
+
+<div class="p">
+Code: <refer class="code-1"></refer>
+</div>
+
+<div class="p">
+Sec. <refer class="sec-Test"></refer>, Sec. <refer class="sec-No-sec-numbering"></refer>, SubSec. <refer class="subsec-No-sec-numbering"></refer>, SubSubSec. <refer class="subsubsec-No-sec-numbering"></refer>
+</div>
+
+이 <code>docuK.SEE</code> 문서에는 아래와 같은 HTML 원소들이 있답니다.
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+	&lt;li id="ref-docuKShort"&gt;&lt;a href="https://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &amp;= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&amp;= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&amp;= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop() {
+		// do something.
+	}
+}
+```/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
+
+
+
+## PH
+
+###/ Posting History
+
+포스팅 역사가 여기 기록됩니다. 이 섹션은 자동으로 숨겨져 있습니다.
+
+<ul>
+	<li>Posting History is put here.</li>
+	<li>2014-06-18: First posting.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## TOC
+
+목차 (TOC) 섹션은 자동으로 닫히는 섹션입니다., 예를 들자면 다른 글자들은 이 안에 들어올 수 없습니다. 따라서 이 글자들은 목차 (TOC) 바깥에 위치하게 될겁니다.
+
+##/ Table of Contents.
+Table will be automatically filled up.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>Main</h3></div>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// Updated regularly</li>
+	<li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
+		// Updated regularly</li>
+	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<div class="subsec"><h3>Supported by</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// JavaScript enhancer</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// Math renderer.</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// Code prettyfier.</li>
+<div class="subsec"><h3>API documentation</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
+<div class="subsec"><h3>Other markdown/markup languages</h3></div>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
+		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
+		// 그래도 문법은 차용해서 쓰기 좋음.</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// Wikipedia uses its own markdown language.</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// Stack Overflow uses its own markdown language.</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// This might be used in GitHub wiki.</li>
+</ol>
+
+##/ References and Related Articles
+
+
+
+## head (h2) of section
+
+section contents
+
+
+
+### head (h3) of subsection
+
+contents of subsection
+
+
+
+#### head (h4) of subsubsection
+
+contents of subsubsection
+
+####/ optional end of subsubsection
+
+###/ optional end of subsection
+
+##/ optional end of section
+
+
+
+##[.hiden#sec-HidenSec] 초반엔 숨겨지는 섹션
+
+[emmet style] class <code>.hiden</code> 로 해당 섹션을 초반에 숨겨놓을 수 있습니다.
+
+
+
+## 직접적인 HTML tag | code
+
+무언가 새로운 걸 배우고 외운다는게 쉽지 않고 시간이 걸린다는걸 알기에, 이 문서K 는 최대한 간단하게 만들었습니다. 그리고 이 문서K 가 해주는 일은 간단히 문자들로 형식화되어 쓰여긴 글을 HTML 로 적당히 바꿔주는 일일 뿐이기 때문에 새로운 문법은 최소화 시켰고 직접적인 HTML tag | code 를 활용하도록 만들었습니다.
+
+<div class="p">
+Raw HTML can be added like this. A paragraph starting with '&lt;' will be appended without any change.
+</div>
+
+Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>.
+
+<div class="cmt">
+
+This is default comment box: <code class="prettyprint">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+
+You can put multiple paragraphs and nested htmls.
+
+<ul>
+	<li>Unordered list 1.</li>
+	<li>Unordered list 2.</li>
+</ul>
+<ol>
+	<li>Ordered list 1.</li>
+	<li>Ordered list 2.</li>
+</ol>
+
+This is it.
+
+</div>
+
+<div class="bcf">
+
+This is default 'be careful' box: <code class="prettyprint">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+
+</div>
+
+
+
+## Links | URLs to appropriate html
+
+Planning to implement this.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## Figures
+
+<figure id="fig-1"><div class="fig">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
+	<div class="caption">Caption.</div>
+</div></figure>
+
+
+
+## Maths or Equations
+
+Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="prettyprint">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
+
+The first two are converted to <span class="emph">inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one</span> is converted to outline math like
+
+<span class="emph"><eqq id="eqq-1">
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq></span>
+
+<eqq id="eqq-2">
+\begin{split}
+	\vec{x} &amp;= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&amp;= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&amp;= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+
+
+
+## Codes
+
+Codes can be pretty-printed.
+
+Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
+
+<pre class="prettyprint scrollable lang-java">import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop() {
+		// do something.
+	}
+}
+</pre>
+
+<div class="p"></div>
+
+Using <code>```Codes to be pretty-printed.```/</code>, or <code>```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop() {
+		// do something.
+	}
+}
+```/
+
+</div>
+
+
+
+## New Section
+
+"```/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(m, $, undefined) {
+m.recoCats="[Recoeve]--docuK";
+m.wait=512;
+m.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE-ko"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery)
+</script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->
