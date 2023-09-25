@@ -35,7 +35,7 @@ codeprint.SEE {display:none}
 	padding-left:38px
 }
 
-#shortkey.shortkey {font-size:16px; color:white; background-color:#141414; max-width:100%; margin:auto}
+#shortkey.shortkey {font-size:13px; color:white; background-color:black; max-width:100%; margin:auto}
 #shortkey.shortkey ul.ul-short-key {font-size:1em; line-height:1.4; padding:0 1.5em; margin:.7em 0}
 #shortkey.shortkey li {font-size:1em; color:white !important}
 
