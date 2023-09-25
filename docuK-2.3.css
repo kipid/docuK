@@ -302,7 +302,7 @@ li, dd {margin:.3em 0 .5em 2em; color:rgb(210,210,210) !important}
 
 /* Specify class=linenums on a pre to get line numbering */
 .docuK pre ol.linenums {margin:0; color:#AEBEAE; padding-left:3em}
-.docuK pre.prettyprint li {margin:0; padding:0}
+.docuK pre.prettyprint li {margin:0; padding:0; min-height:1.5em}
 .docuK li.L0,.docuK li.L1,.docuK li.L2,.docuK li.L3,.docuK li.L5,.docuK li.L6,.docuK li.L7,.docuK li.L8 {list-style-type:none}
 /* Alternate shading for lines */
 .docuK pre li {background:inherit} .docuK.bright pre li {background:inherit}
