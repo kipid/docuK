@@ -37,9 +37,12 @@ The docuK rendered from the current text is being represented.
 
 To avoid end of code printing, I escaped <code class="prettyprint">```/</code> to <code class="prettyprint">```\/</code> in the below printed.
 
-<div id="pre-code-full-SEE-docuK">
+<div class="p">
+<div class="button" id="Copy-Full-SEE-Code">Copy the below Full SEE Code</div>
+</div>
 
 ```[.scrollable.lang-html]
+<div id="pre-code-full-SEE-docuK">
 &lt;!DOCTYPE html&gt;
 
 &lt;meta charset="UTF-8"/&gt;
@@ -52,14 +55,6 @@ To avoid end of code printing, I escaped <code class="prettyprint">```/</code> t
 &lt;script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css"&gt;
 &lt;script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"&gt;&lt;/script&gt;
-
-&lt;!-- From recoeve.net CDN --&gt;
-&lt;!-- &lt;link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css"&gt;
-&lt;script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"&gt;&lt;/script&gt; --&gt;
-
-&lt;!-- From local --&gt;
-&lt;!-- &lt;link rel="stylesheet" href="./docuK-2.3.css"&gt;
-&lt;script src="./docuK-prepare-2.3.js" charset="utf-8"&gt;&lt;/script&gt; --&gt;
 &lt;/codeprint&gt;&lt;!-- docuK-style --&gt;
 
 &lt;meta charset="utf-8" name="description" content="pure SEE."/&gt;
@@ -77,11 +72,30 @@ The docuK rendered from the current text is being represented.
 
 ## Full SEE (Super Easy Edit) docuK codes
 
-To avoid end of code printing, I escaped &lt;code&gt;```/&lt;/code&gt; to &lt;code&gt;```\/&lt;/code&gt; in the below printed.
+To avoid end of code printing, I escaped &lt;code&gt;```/&lt;/code&gt; to &lt;code&gt;```\/&lt;/code&gt; in the below document by hand printed.
+
+&lt;div class="p"&gt;
+&lt;div class="button" id="Copy-Full-SEE-Code"&gt;Copy the below Full SEE Code&lt;/div&gt;
+&lt;/div&gt;
 
 ```[.scrollable.lang-html]
-// Copied from this document by hand. (Escaped <code>&amp;, &lt;, &gt;, ```/</code> to <code>&amp;amp;, &amp;lt;, &amp;gt;, ```\/</code>)
+&lt;div id="pre-code-full-SEE-docuK"&gt;
+// Copied from this document by hand. (Escaped <code class="prettyprint" style="padding:.2em; border:2px solid #9acd32; background:#cd5c5c">&amp;, &lt;, &gt;, ```/</code> to <code class="prettyprint" style="padding:.2em; border:2px solid #9acd32; background:#cd5c5c">&amp;amp;, &amp;lt;, &amp;gt;, ```\/</code>)
+&lt;/div&gt;
 ```\/
+
+&lt;script&gt;
+m.toBeCopied=m.unescapeHTML($("#pre-code-full-SEE-docuK").html().trim());
+$("#Copy-Full-SEE-Code").on("click", function () {
+	let written=m.toBeCopied;
+	navigator.clipboard.writeText(written).then(function () {
+		alert(`The following is copied!\n"${written}"`);
+	}
+	, function (err) {
+		alert(`Could not copy text: ${err}`);
+	});
+});
+&lt;/script&gt;
 
 
 
@@ -602,8 +616,8 @@ public class HelloWorldServer extends Verticle {
 &lt;script&gt;
 (function(m, $, undefined) {
 m.recoCats="";
-m.wait=512;
-m.delayPad=0;
+m.wait=1024;
+m.delayPad=512;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -618,16 +632,23 @@ window.disqus_config=function () {
 
 &lt;!-- From kipid.tistory CDN --&gt;
 &lt;script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"&gt;&lt;/script&gt;
-
-&lt;!-- From recoeve.net CDN --&gt;
-&lt;!-- &lt;script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"&gt;&lt;/script&gt; --&gt;
-
-&lt;!-- From local --&gt;
-&lt;!-- &lt;script src="./docuK-postProcess-2.3.js" charset="utf-8"&gt;&lt;/script&gt; --&gt;
 &lt;/codeprint&gt;&lt;!-- docuK-script --&gt;
+</div>
+
 ```/
 
-</div>
+<script>
+m.toBeCopied=m.unescapeHTML($("#pre-code-full-SEE-docuK").html().trim());
+$("#Copy-Full-SEE-Code").on("click", function () {
+	let written=m.toBeCopied;
+	navigator.clipboard.writeText(written).then(function () {
+		alert(`The following is copied!\n"${written}"`);
+	}
+	, function (err) {
+		alert(`Could not copy text: ${err}`);
+	});
+});
+</script>
 
 
 
@@ -1149,7 +1170,7 @@ public class HelloWorldServer extends Verticle {
 <script>
 (function(m, $, undefined) {
 m.recoCats="";
-m.wait=512;
+m.wait=1024;
 m.delayPad=512;
 
 /**
@@ -1160,7 +1181,7 @@ window.disqus_config=function () {
 	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
 };
-})(window.m, jQuery)
+})(window.m, jQuery);
 </script>
 
 <!-- From kipid.tistory CDN -->
