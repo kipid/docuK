@@ -18,11 +18,11 @@
 <!-- From local -->
 <!-- <link rel="stylesheet" href="./docuK-2.3.css">
 <script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-style -->
 
 <style>
-.docuK pre.printSEE {font-size:.75em}
+#textarea-SEE {font-size:.8em; width:100%; height:50em; background:white; color:black}
 </style>
-</codeprint><!-- docuK-style -->
 
 <meta charset="utf-8" name="description" content="Super Easy Edit (SEE) of docuK (MarkDown): 사용 설명서 (Manual | Documentation | Tutorial). This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are * Changable mode, font-family. * Resizable font-size, line-height. * Table of contents. * Numbering of sections/figures/equations. * Citing references in bubble-shape pop up. * Refering figures and equations. * Refering anything with id and element with class='number'. * Delayed(lazy)-loading of figures (images, iframes). * Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning. * Auto code printing. Quite similar to LaTeX or Wiki document, but extended a little bit.">
 
@@ -64,7 +64,7 @@
 		For the full stand-alone code, put meta tags additionally <code class="prettyprint">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></code> for encoding ('utf-8' is recommended. The html file must be saved with the same encoding.) and <code class="prettyprint">&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/></code> for mobile view.
 	</div>
 
-	<pre id="pre-SEE" class="printSEE prettyprint lang-html scrollable"></pre>
+	<textarea id="textarea-SEE" class="printSEE prettyprint lang-html scrollable"></textarea>
 
 	<div class="center">
 		<button id="button-render-it-to-docuK" style="background:rgb(209, 112, 112); margin:0; padding:0 0.5em; font:inherit">Render it to docuK below</button>
@@ -108,18 +108,6 @@ Quite similar to LaTeX or Wiki document, but extended a little bit.
 
 
 
-## SEE (Super Easy Edit) code only
-
-<pre class="printSEE prettyprint scrollable lang-html" id="pre0-SEE"></pre>
-
-
-
-## Full SEE code
-
-<pre class="printSEE prettyprint scrollable lang-html" id="pre0-full-SEE"></pre>
-
-
-
 ## PH
 
 ###/ Posting History
@@ -127,8 +115,9 @@ Quite similar to LaTeX or Wiki document, but extended a little bit.
 Posting History is put here. This section is automatically hiden.
 
 <ul>
-	<li>2023-05-18: Update.</li>
-	<li>2014-06-18: First posting.</li>
+<li>2023-09-26 : Update.</li>
+<li>2023-05-18 : Update.</li>
+<li>2014-06-18 : First posting.</li>
 </ul>
 
 ##/ Posting History
@@ -633,13 +622,23 @@ public class HelloWorldServer extends Verticle {
 </div>
 
 <div class="sec hiden"><h2 class="no-sec-N" id="sec-CPSEE">Copy and Paste this code. (<code>pure SEE.html</code>)</h2>
-	<pre id="pre-code-docuK-HTML" class="printSEE prettyprint scrollable" contenteditable="true"></pre>
+	<pre id="pre-docuK-full-HTML" class="printSEE prettyprint scrollable" contenteditable="true"></pre>
 </div>
 </div><!-- docuK -->
 </codeprint><!-- docuK-docu -->
 
 <script>
 (function(m, $, undefined) {
+$("#textarea-SEE")[0].value=$("#SEE0").html().trim();
+$("#Copy-Full-SEE-Code").on("click", function () {
+	let written=m.toBeCopied;
+	navigator.clipboard.writeText(written).then(function () {
+		alert(`The following is copied!\n"${written}"`);
+	}
+	, function (err) {
+		alert(`Could not copy text: ${err}`);
+	});
+});
 m.printFullSEE=function (SEE) {
 	let fullSEE=`<!DOCTYPE html>
 
@@ -655,7 +654,7 @@ m.printFullSEE=function (SEE) {
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-style -->
 
-<meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit of docuK).">
+<meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit of docuK). For the search engine optimization, you should describe your document abstractly here.">
 
 <codeprint class="SEE">
 ${SEE.trim()}
@@ -663,86 +662,61 @@ ${SEE.trim()}
 
 <codeprint id="docuK-script">
 <script>
+(function(m, $, undefined) {
+m.recoCats="[Recoeve]--docuK";
 m.wait=512;
 m.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE-ko"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=\`https://kipid.tistory.com/entry/\${this.page.identifier}\`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery)
 <`+`/script>
 
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-script -->`;
-
-	$("#pre-code-docuK-HTML").html(m.escapeHTML(fullSEE));
-	$("#pre-code-docuK-HTML").removeClass("prettyprinted");
+	m.toBeCopied=fullSEE.trim();
+	$("#pre-docuK-full-HTML").html(m.escapeHTML(fullSEE));
+	$("#pre-docuK-full-HTML").removeClass("prettyprinted");
+	let tryN=0;
 	setTimeout(function later() {
-		if (typeof PR!=='undefined'&&PR.prettyPrint) {
+		if (typeof PR!=='undefined'&&PR.prettyPrint||tryN++>17) {
 			PR.prettyPrint(function () {
-				m.logPrint("<br><br>Code in '#pre-code-docuK-HTML' is prettyPrinted.");
-			}, $("#pre-code-docuK-HTML")[0]);
+				m.logPrint("<br><br>Code in '#pre-docuK-full-HTML' is prettyPrinted.");
+			}, $("#pre-docuK-full-HTML")[0]);
 		}
 		else {
-			setTimeout(later, 1000);
+			setTimeout(later, 1024);
 		}
-	}, 0);
+	}, 512);
 };
+m.printFullSEE($("#textarea-SEE")[0].value);
 
 m.renderIt=function () {
-	$("#rendered-docuK").html(m.renderToDocuK($("#pre-SEE")[0].value));
+	$("#rendered-docuK").html(m.renderToDocuK($("#textarea-SEE")[0].value));
 	m.docuKProcess(m, jQuery, 2);
 	$("#time-last-render").html("Lastly rendered at "+new Date().toLocaleString());
 };
-
-let SEEHtml=$("#SEE0").html().trim();
-m.printFullSEE(SEEHtml);
-$("#pre-SEE").html(m.escapeHTML(SEEHtml));
-// $("#pre-SEE")[0].value=m.escapeHTML(SEEHtml);
-// $("#SEE0").remove();
-$("#rendered-docuK").html(m.renderToDocuK(SEEHtml));
-
-m.SEEHTMLs=[];
-m.SEEHTMLs[0]=$("#SEE0").html().trim();
-$("#pre0-SEE").html(m.escapeHTML(m.SEEHTMLs[0]));
-$("#pre0-full-SEE").html(m.escapeHTML(`<!DOCTYPE html>
-
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
-
-<codeprint id="docuK-style">
-<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
-
-<!-- From kipid.tistory CDN -->
-<script src="https://tistory4.daumcdn.net/tistory/1468360/skin/images/docuK-jquery.min.js"><`+`/script>
-<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
-<!-- docuK-style -->
-
-<codeprint class="SEE">
-${m.SEEHTMLs[0]}
-</codeprint><!-- SEE -->
-
-<codeprint id="docuK-script">
-<script>
-m.wait=512;
-m.delayPad=0;
-<`+`/script>
-
-<!-- From kipid.tistory CDN -->
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
-</codeprint><!-- docuK-script -->`));
-m.SEEHTMLs[0]=$("#SEE0").html().trim();
 
 $(document).ready(function () {
 	$("#button-render-it-to-docuK").on("click", function anonyRender(){
 		let $elem=$(this);
 		$elem.off("click");
-		$("#pre-SEE").attr({contenteditable:false});
+		$("#textarea-SEE")[0].disabled=true;
 		$elem.css({background:"rgb(100,100,100)"});
 		m.renderIt();
 		$elem.css({background:"rgb(209, 112, 112)"});
-		$("#pre-SEE").attr({contenteditable:true});
+		$("#textarea-SEE")[0].disabled=false;
 		$elem.on("click", anonyRender);
 	});
 
-	$("#pre-SEE").on("keydown",function(event){
+	$("#textarea-SEE").on("keydown",function(event){
 		event.stopPropagation();
 		if (event.shiftKey){
 			switch (event.keyCode){
@@ -758,6 +732,7 @@ $(document).ready(function () {
 
 <codeprint id="docuK-script">
 <script>
+m.recoCats="[Recoeve]--docuK";
 m.wait=512;
 m.delayPad=512;
 

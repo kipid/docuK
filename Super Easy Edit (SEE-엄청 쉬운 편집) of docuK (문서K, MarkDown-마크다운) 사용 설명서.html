@@ -113,7 +113,7 @@
 포스팅 역사기록을 위한 섹션. 이 섹션은 페이지를 처음 열땐 숨겨져 있습니다.
 
 <ul>
-<li>2023-09-25 : 업데이트.</li>
+<li>2023-09-26 : 업데이트.</li>
 <li>2023-05-18 : 업데이트.</li>
 <li>2014-06-18 : 첫번째 포스팅.</li>
 </ul>
@@ -620,9 +620,6 @@ public class HelloWorldServer extends Verticle {
 <script>
 (function(m, $, undefined) {
 $("#textarea-SEE")[0].value=$("#SEE0").html().trim();
-m.promoting=function () {
-	return ``;
-};
 $("#Copy-Full-SEE-Code").on("click", function () {
 	let written=m.toBeCopied;
 	navigator.clipboard.writeText(written).then(function () {
@@ -673,8 +670,7 @@ window.disqus_config=function () {
 
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
-</codeprint><!-- docuK-script -->
-`;
+</codeprint><!-- docuK-script -->`;
 	m.toBeCopied=fullSEE.trim();
 	$("#pre-docuK-full-HTML").html(m.escapeHTML(fullSEE));
 	$("#pre-docuK-full-HTML").removeClass("prettyprinted");
@@ -703,11 +699,11 @@ $(document).ready(function () {
 	$("#button-render-it-to-docuK").on("click", function anonyRender() {
 		let $elem=$(this);
 		$elem.off("click");
-		$("#textarea-SEE").attr({contenteditable:false});
+		$("#textarea-SEE")[0].disabled=true;
 		$elem.css({background:"rgb(100,100,100)"});
 		m.renderIt();
 		$elem.css({background:"rgb(209, 112, 112)"});
-		$("#textarea-SEE").attr({contenteditable:true});
+		$("#textarea-SEE")[0].disabled=false;
 		$elem.on("click", anonyRender);
 	});
 
@@ -727,7 +723,7 @@ $(document).ready(function () {
 
 <codeprint id="docuK-script">
 <script>
-m.recoCats="[Recoeve]--docuK"
+m.recoCats="[Recoeve]--docuK";
 m.wait=512;
 m.delayPad=512;
 
