@@ -701,6 +701,7 @@ window.MathJax={
 		day=String(fromDate.getDate()).padStart(2, '0');
 		m.from.push({date:`${year}-${month}-${day}`});
 	}
+	m.blogStatRes=[];
 	m.loadPageViewsStat=function () {
 		$page_views_chart.removeClass("to-be-executed");
 		$page_views_chart.off("click");
@@ -712,40 +713,34 @@ window.MathJax={
 			for (let i=0;i<m.daysToPlotCountChart;i++) {
 				reqTime+=`\n${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 			}
-			return new Promise(function (resolve, reject) {
-				$.ajax({
-					type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
-				}).fail(function (resp) {
-					m.logPrint("<br><br>BlogStat is failed to be got.");
-					resolve(null);
-				}).done(function (resp) {
-					m.logPrint("<br><br>BlogStat is got.");
-					resolve(m.strToJSON(resp));
-				});
+			$.ajax({
+				type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
+			}).fail(function (resp) {
+				m.logPrint("<br><br>BlogStat is failed to be got.");
+				resolve(null);
+			}).done(function (resp) {
+				m.logPrint("<br><br>BlogStat is got.");
+				m.blogStatRes=m.strToJSON(resp);
+				m.countBlogStat();
 			});
 		};
-		m.blogStatRes=[];
 		m.countBlogStat=function () {
-			return new Promise(async function (resolve, reject) {
-				let myIPs=["14.38.247.30", "175.212.158.53"];
-				let ignoreMe=true;
-				m.blogStatRes=await m.getBlogStat();
-				for (let i=1;i<m.blogStatRes.length;i++) {
-					let statI=m.blogStatRes[i];
-					statI.stats=m.strToJSON(statI.stats);
-					m.blogStatRes[`${statI.from}\t${statI.to}`]=statI;
-					let pageViews=0;
-					for(i=1;i<statI.stats.length;i++) {
-						let ip=statI.stats[i]["ip"].split(":")[0];
-						if (ignoreMe&&(ip===myIPs[0]||ip===myIPs[1])) {
-							continue;
-						}
-						pageViews++;
+			let myIPs=["14.38.247.30", "175.212.158.53"];
+			let ignoreMe=true;
+			for (let i=1;i<m.blogStatRes.length;i++) {
+				let statI=m.blogStatRes[i];
+				statI.stats=m.strToJSON(statI.stats);
+				m.blogStatRes[`${statI.from}\t${statI.to}`]=statI;
+				let pageViews=0;
+				for(i=1;i<statI.stats.length;i++) {
+					let ip=statI.stats[i]["ip"].split(":")[0];
+					if (ignoreMe&&(ip===myIPs[0]||ip===myIPs[1])) {
+						continue;
 					}
-					statI.pageViews=pageViews;
+					pageViews++;
 				}
-				resolve();
-			});
+				statI.pageViews=pageViews;
+			}
 		};
 		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
 		let leftPadding=3.0;
@@ -756,9 +751,6 @@ window.MathJax={
 		let maxHeight=100.0-topPadding-bottomPadding;
 		let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
 		m.viewCounts=[];
-		(async function () {
-			await m.countBlogStat();
-		})();
 		m.setIntervalBlogStatN=0;
 		m.setIntervalBlogStat=setInterval(function () {
 			if (m.blogStatRes?.length>=m.daysToPlotCountChart||m.setIntervalBlogStatN++>17) {
