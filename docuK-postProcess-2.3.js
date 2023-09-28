@@ -682,53 +682,6 @@ window.MathJax={
 		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
-m.loadPageViewsStat=function () {
-	$page_views_chart.removeClass("to-be-executed");
-	$page_views_chart.off("click");
-	$page_views_chart.on("click", function () {
-		$page_views_chart.off("click");
-	});
-	m.getBlogStat=function (from, to) {
-		let reqTime=`from	to
-${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
-		return new Promise(function (resolve, reject) {
-			$.ajax({
-				type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
-			}).fail(function (resp) {
-				m.logPrint("<br><br>BlogStat is failed to be got.");
-				resolve(null);
-			}).done(function (resp) {
-				m.logPrint("<br><br>BlogStat is got.");
-				resolve(m.strToJSON(resp));
-			});
-		});
-	};
-	m.blogStatRes=[];
-	m.countBlogStat=function (from, to) {
-		return new Promise(async function (resolve, reject) {
-			let myIPs=["14.38.247.30", "175.212.158.53"];
-			let ignoreMe=true;
-			if (!m.blogStatRes[`${from} to ${to}`]) {
-				m.blogStatRes[`${from} to ${to}`]=await m.getBlogStat(from, to);
-			}
-			let blogStatRes=m.blogStatRes[`${from} to ${to}`];
-			let pageViews=0;
-			if (!!blogStatRes) {
-				for(i=1;i<blogStatRes.length;i++) {
-					let ip=blogStatRes[i]["ip"].split(":")[0];
-					if (ignoreMe&&(ip===myIPs[0]||ip===myIPs[1])) {
-						continue;
-					}
-					pageViews++;
-				}
-				blogStatRes.pageViews=pageViews;
-			}
-			else {
-				blogStatRes={pageViews};
-			}
-			resolve(blogStatRes);
-		});
-	};
 	m.weekDays=["일", "월", "화", "수", "목", "금", "토"];
 	m.daysToPlotCountChart=30;
 	m.to=[];
@@ -748,59 +701,102 @@ ${from} 15:00:00	${to} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 		day=String(fromDate.getDate()).padStart(2, '0');
 		m.from.push({date:`${year}-${month}-${day}`});
 	}
-	let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
-	let leftPadding=3.0;
-	let rightPadding=3.0;
-	let topPadding=7.0;
-	let bottomPadding=20.0;
-	let bottomLine=100.0-bottomPadding;
-	let maxHeight=100.0-topPadding-bottomPadding;
-	let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
-	m.viewCounts=[];
-	(async function () {
-		m.blogStatRes[0]=await m.countBlogStat(m.from[0].date, m.to[0].date);
-		for (let i=1;i<m.daysToPlotCountChart;i++) {
-			m.blogStatRes[i]=await m.countBlogStat(m.from[i].date, m.to[i].date);
-		}
-	})();
-	m.setIntervalBlogStatN=0;
-	m.setIntervalBlogStat=setInterval(function () {
-		if (m.blogStatRes?.length>=m.daysToPlotCountChart||m.setIntervalBlogStatN++>17) {
-			clearInterval(m.setIntervalBlogStat);
-			let maxPageViews=0;
-			for (let i=0;i<m.blogStatRes.length;i++) {
-				let pageViews=m.blogStatRes[i].pageViews;
-				if (pageViews>maxPageViews) {
-					maxPageViews=pageViews;
+	m.loadPageViewsStat=function () {
+		$page_views_chart.removeClass("to-be-executed");
+		$page_views_chart.off("click");
+		$page_views_chart.on("click", function () {
+			$page_views_chart.off("click");
+		});
+		m.getBlogStat=function () {
+			let reqTime=`from\tto`;
+			for (let i=0;i<m.daysToPlotCountChart;i++) {
+				reqTime+=`\n${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
+			}
+			return new Promise(function (resolve, reject) {
+				$.ajax({
+					type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
+				}).fail(function (resp) {
+					m.logPrint("<br><br>BlogStat is failed to be got.");
+					resolve(null);
+				}).done(function (resp) {
+					m.logPrint("<br><br>BlogStat is got.");
+					resolve(m.strToJSON(resp));
+				});
+			});
+		};
+		m.blogStatRes=[];
+		m.countBlogStat=function () {
+			return new Promise(async function (resolve, reject) {
+				let myIPs=["14.38.247.30", "175.212.158.53"];
+				let ignoreMe=true;
+				let blogStatRes=await m.getBlogStat();
+				for (let i=1;i<blogStatRes;i++) {
+					let statI=blogStatRes[i];
+					statI.stats=m.strToJSON(statI.stats);
+					blogStatRes[`${statI.from}\t${statI.to}`]=statI;
+					let pageViews=0;
+					for(i=1;i<statI.stats.length;i++) {
+						let ip=statI.stats[i]["ip"].split(":")[0];
+						if (ignoreMe&&(ip===myIPs[0]||ip===myIPs[1])) {
+							continue;
+						}
+						pageViews++;
+					}
+					statI.pageViews=pageViews;
 				}
-			}
-			let pageViewsOfADay=[];
-			for (let k=0;k<m.blogStatRes.length;k++) {
-				let blogStatRes=m.blogStatRes[k];
-				let x=leftPadding+(m.daysToPlotCountChart-1.0-k)*dx*2.0;
-				let tick=leftPadding+(m.daysToPlotCountChart-0.5-k)*dx*2.0;
+				resolve(blogStatRes);
+			});
+		};
+		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
+		let leftPadding=3.0;
+		let rightPadding=3.0;
+		let topPadding=7.0;
+		let bottomPadding=20.0;
+		let bottomLine=100.0-bottomPadding;
+		let maxHeight=100.0-topPadding-bottomPadding;
+		let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
+		m.viewCounts=[];
+		(async function () {
+			m.blogStatRes=await m.countBlogStat();
+		})();
+		m.setIntervalBlogStatN=0;
+		m.setIntervalBlogStat=setInterval(function () {
+			if (m.blogStatRes?.length>=m.daysToPlotCountChart||m.setIntervalBlogStatN++>17) {
+				clearInterval(m.setIntervalBlogStat);
+				let maxPageViews=0;
+				for (let i=0;i<m.blogStatRes.length;i++) {
+					let pageViews=m.blogStatRes[i].pageViews;
+					if (pageViews>maxPageViews) {
+						maxPageViews=pageViews;
+					}
+				}
+				let pageViewsOfADay=[];
+				for (let k=0;k<m.blogStatRes.length;k++) {
+					let blogStatRes=m.blogStatRes[k];
+					let x=leftPadding+(m.daysToPlotCountChart-1.0-k)*dx*2.0;
+					let tick=leftPadding+(m.daysToPlotCountChart-0.5-k)*dx*2.0;
 
-				let h=maxHeight*blogStatRes.pageViews/maxPageViews;
-				pageViewsOfADay[k]={pageViews:blogStatRes.pageViews, x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
-			}
-			for (let i=0;i<pageViewsOfADay.length;i++) {
-				countChartHTML+=`<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine-pageViewsOfADay[i].h}%" width="${2.0*dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine-pageViewsOfADay[i].h-1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews.toFixed(0)}</text>`;
-			}
-			countChartHTML+=`<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0-rightPadding}%" y2="${bottomLine}%"/>`;
-			for (let i=0;i<pageViewsOfADay.length;i++) {
-				countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+1.0}%"/>
+					let h=maxHeight*blogStatRes.pageViews/maxPageViews;
+					pageViewsOfADay[k]={pageViews:blogStatRes.pageViews, x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
+				}
+				for (let i=0;i<pageViewsOfADay.length;i++) {
+					countChartHTML+=`<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine-pageViewsOfADay[i].h}%" width="${2.0*dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine-pageViewsOfADay[i].h-1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews.toFixed(0)}</text>`;
+				}
+				countChartHTML+=`<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0-rightPadding}%" y2="${bottomLine}%"/>`;
+				for (let i=0;i<pageViewsOfADay.length;i++) {
+					countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+1.0}%"/>
 <text class="tick${pageViewsOfADay[i].weekday==="토"?" saturday":pageViewsOfADay[i].weekday==="일"?" sunday":""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
 	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
 	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
 	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
 </text>`
+				}
+				countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
+				countChartHTML+=`</svg></div></div></div>`;
+				$page_views_chart.html(countChartHTML);
 			}
-			countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
-			countChartHTML+=`</svg></div></div></div>`;
-			$page_views_chart.html(countChartHTML);
-		}
-	}, 2048);
-};
+		}, 2048);
+	};
 	$page_views_chart.on("click", m.loadPageViewsStat);
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
