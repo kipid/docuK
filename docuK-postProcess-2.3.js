@@ -729,11 +729,11 @@ window.MathJax={
 			return new Promise(async function (resolve, reject) {
 				let myIPs=["14.38.247.30", "175.212.158.53"];
 				let ignoreMe=true;
-				let blogStatRes=await m.getBlogStat();
-				for (let i=1;i<blogStatRes;i++) {
-					let statI=blogStatRes[i];
+				m.blogStatRes=await m.getBlogStat();
+				for (let i=1;i<m.blogStatRes;i++) {
+					let statI=m.blogStatRes[i];
 					statI.stats=m.strToJSON(statI.stats);
-					blogStatRes[`${statI.from}\t${statI.to}`]=statI;
+					m.blogStatRes[`${statI.from}\t${statI.to}`]=statI;
 					let pageViews=0;
 					for(i=1;i<statI.stats.length;i++) {
 						let ip=statI.stats[i]["ip"].split(":")[0];
@@ -744,7 +744,7 @@ window.MathJax={
 					}
 					statI.pageViews=pageViews;
 				}
-				resolve(blogStatRes);
+				resolve();
 			});
 		};
 		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
@@ -757,7 +757,7 @@ window.MathJax={
 		let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
 		m.viewCounts=[];
 		(async function () {
-			m.blogStatRes=await m.countBlogStat();
+			await m.countBlogStat();
 		})();
 		m.setIntervalBlogStatN=0;
 		m.setIntervalBlogStat=setInterval(function () {
