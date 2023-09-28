@@ -730,7 +730,7 @@ window.MathJax={
 				let myIPs=["14.38.247.30", "175.212.158.53"];
 				let ignoreMe=true;
 				m.blogStatRes=await m.getBlogStat();
-				for (let i=1;i<m.blogStatRes;i++) {
+				for (let i=1;i<m.blogStatRes.length;i++) {
 					let statI=m.blogStatRes[i];
 					statI.stats=m.strToJSON(statI.stats);
 					m.blogStatRes[`${statI.from}\t${statI.to}`]=statI;
@@ -771,11 +771,10 @@ window.MathJax={
 					}
 				}
 				let pageViewsOfADay=[];
-				for (let k=0;k<m.blogStatRes.length;k++) {
+				for (let k=0;k<m.daysToPlotCountChart.length;k++) {
 					let blogStatRes=m.blogStatRes[k];
 					let x=leftPadding+(m.daysToPlotCountChart-1.0-k)*dx*2.0;
 					let tick=leftPadding+(m.daysToPlotCountChart-0.5-k)*dx*2.0;
-
 					let h=maxHeight*blogStatRes.pageViews/maxPageViews;
 					pageViewsOfADay[k]={pageViews:blogStatRes.pageViews, x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
 				}
