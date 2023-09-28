@@ -740,7 +740,7 @@ window.MathJax={
 		$page_views_chart.on("click", function () {
 			$page_views_chart.off("click");
 		});
-
+		m.getBlogStat();
 		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
 		let leftPadding=3.0;
 		let rightPadding=3.0;
