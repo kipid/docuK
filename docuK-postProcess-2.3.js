@@ -596,7 +596,7 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 
 	$page_views_chart=$("#page-views-chart");
 	if (!($page_views_chart.exists())) {
-		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed"></div>`);
+		$disqus_thread.after(`<div id="page-views-chart" class="button to-be-executed">Get page views</div>`);
 		$page_views_chart=$("#page-views-chart");
 	}
 
@@ -702,29 +702,20 @@ window.MathJax={
 		m.from.push({date:`${year}-${month}-${day}`});
 	}
 	m.blogStatRes=[];
-	m.loadPageViewsStat=function () {
-		$page_views_chart.removeClass("to-be-executed");
-		$page_views_chart.off("click");
-		$page_views_chart.on("click", function () {
-			$page_views_chart.off("click");
-		});
-		m.getBlogStat=function () {
-			let reqTime=`from\tto`;
-			for (let i=0;i<m.daysToPlotCountChart;i++) {
-				reqTime+=`\n${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
-			}
-			$.ajax({
-				type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
-			}).fail(function (resp) {
-				m.logPrint("<br><br>BlogStat is failed to be got.");
-				resolve(null);
-			}).done(function (resp) {
-				m.logPrint("<br><br>BlogStat is got.");
-				m.blogStatRes=m.strToJSON(resp);
-				m.countBlogStat();
-			});
-		};
-		m.countBlogStat=function () {
+	m.getBlogStat=function () {
+		let reqTime=`from\tto`;
+		for (let i=0;i<m.daysToPlotCountChart;i++) {
+			reqTime+=`\n${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
+		}
+		$.ajax({
+			type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
+		}).fail(function (resp) {
+			m.logPrint("<br><br>BlogStat is failed to be got.");
+			console.log(resp);
+		}).done(function (resp) {
+			m.logPrint("<br><br>BlogStat is got.");
+			console.log(resp);
+			m.blogStatRes=m.strToJSON(resp);
 			let myIPs=["14.38.247.30", "175.212.158.53"];
 			let ignoreMe=true;
 			for (let i=1;i<m.blogStatRes.length;i++) {
@@ -741,7 +732,15 @@ window.MathJax={
 				}
 				statI.pageViews=pageViews;
 			}
-		};
+		});
+	};
+	m.loadPageViewsStat=function () {
+		$page_views_chart.removeClass("to-be-executed");
+		$page_views_chart.off("click");
+		$page_views_chart.on("click", function () {
+			$page_views_chart.off("click");
+		});
+
 		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
 		let leftPadding=3.0;
 		let rightPadding=3.0;
