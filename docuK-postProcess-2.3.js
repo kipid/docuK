@@ -755,14 +755,14 @@ window.MathJax={
 			if (m.blogStatRes?.length>=m.daysToPlotCountChart||m.setIntervalBlogStatN++>17) {
 				clearInterval(m.setIntervalBlogStat);
 				let maxPageViews=0;
-				for (let i=0;i<m.blogStatRes.length;i++) {
+				for (let i=0;i<m.daysToPlotCountChart;i++) {
 					let pageViews=m.blogStatRes[i].pageViews;
 					if (pageViews>maxPageViews) {
 						maxPageViews=pageViews;
 					}
 				}
 				let pageViewsOfADay=[];
-				for (let k=0;k<m.daysToPlotCountChart.length;k++) {
+				for (let k=0;k<m.daysToPlotCountChart;k++) {
 					let blogStatRes=m.blogStatRes[k];
 					let x=leftPadding+(m.daysToPlotCountChart-1.0-k)*dx*2.0;
 					let tick=leftPadding+(m.daysToPlotCountChart-0.5-k)*dx*2.0;
