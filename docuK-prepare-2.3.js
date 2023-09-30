@@ -569,13 +569,13 @@ m.encloseStr=function (str) {
 	} return str;
 };
 m.strToJSON=function (str, colMap=true, rowMap=false) {
-	const ret=[];
 	if (!str||str.constructor!==String) {
-		return Promise.resolve(ret);
+		return Promise.resolve(str);
 	}
 	if (str.charAt(str.length-1)!=="\n") {
 		str+="\n";
 	}
+	const ret=[];
 	const delimiter=/([^\t\n]*)([\t\n])/g;
 	const lastQuote=/[^"](?:"")*"([\t\n])/g;
 	let exec;

@@ -596,7 +596,7 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 
 	$page_views_chart=$("#page-views-chart");
 	if (!($page_views_chart.exists())) {
-		$disqus_thread.after(`<div id="page-views-chart" class="button to-be-executed">Get page views</div>`);
+		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed">Get page views</div>`);
 		$page_views_chart=$("#page-views-chart");
 	}
 
@@ -682,17 +682,19 @@ window.MathJax={
 		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
 	}
 
+	m.myIPs=["14.38.247.30", "175.212.158.53"];
+	m.ignoreMe=true;
 	m.weekDays=["일", "월", "화", "수", "목", "금", "토"];
-	m.daysToPlotCountChart=30;
+	m.daysToPlotPageViewsChart=31;
 	m.to=[];
 	m.from=[];
 	let currentDate=new Date();
-	for (let i=0;i<m.daysToPlotCountChart;i++) {
+	for (let i=0;i<m.daysToPlotPageViewsChart;i++) {
 		let toDate=currentDate;
 		let year=toDate.getFullYear();
 		let month=String(toDate.getMonth()+1).padStart(2, '0'); // Adding 1 because months are zero-based
 		let day=String(toDate.getDate()).padStart(2, '0');
-		// Format the date as YYYY-MM-DD
+		// Format the date as YYYY-MM-DD (Locale date)
 		m.to.push({date:`${year}-${month}-${day}`, month, day, weekday:m.weekDays[toDate.getDay()]});
 
 		let fromDate=new Date(currentDate.setDate(currentDate.getDate()-1));
@@ -704,33 +706,40 @@ window.MathJax={
 	m.blogStatRes=[];
 	m.getBlogStat=function () {
 		let reqTime=`from\tto`;
-		for (let i=0;i<m.daysToPlotCountChart;i++) {
+		for (let i=0;i<m.daysToPlotPageViewsChart;i++) {
 			reqTime+=`\n${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 		}
 		$.ajax({
 			type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
 		}).fail(function (resp) {
 			m.logPrint("<br><br>BlogStat is failed to be got.");
-			console.log(resp);
-		}).done(function (resp) {
+		}).done(async function (resp) {
 			m.logPrint("<br><br>BlogStat is got.");
-			console.log(resp);
-			m.blogStatRes=m.strToJSON(resp);
-			let myIPs=["14.38.247.30", "175.212.158.53"];
-			let ignoreMe=true;
+			m.blogStatRes=await m.strToJSON(resp);
+			let promise=Promise.all(m.blogStatRes);
 			for (let i=1;i<m.blogStatRes.length;i++) {
-				let statI=m.blogStatRes[i];
-				statI.stats=m.strToJSON(statI.stats);
-				m.blogStatRes[`${statI.from}\t${statI.to}`]=statI;
-				let pageViews=0;
-				for(i=1;i<statI.stats.length;i++) {
-					let ip=statI.stats[i]["ip"].split(":")[0];
-					if (ignoreMe&&(ip===myIPs[0]||ip===myIPs[1])) {
-						continue;
+				promise.then(async function (blogStatRes) {
+					let statI=blogStatRes[i];
+					statI.splice(2,1);
+					let id=`${statI.from}\t${statI.to}`;
+					statI.id=id;
+					m.blogStatRes[id]=statI;
+					return Promise.all(m.blogStatRes);
+				});
+				promise=promise.then(async function (blogStatRes) {
+					let statI=blogStatRes[i];
+					let stats=statI.stats=await m.strToJSON(statI.stats);
+					let pageViews=0;
+					for(let k=1;k<stats.length;k++) {
+						let ip=stats[k].ip.split(":")[0];
+						if (m.ignoreMe&&(ip===m.myIPs[0]||ip===m.myIPs[1])) {
+							continue;
+						}
+						pageViews++;
 					}
-					pageViews++;
-				}
-				statI.pageViews=pageViews;
+					m.blogStatRes[i].pageViews=pageViews;
+					return Promise.all(m.blogStatRes);
+				});
 			}
 		});
 	};
@@ -748,44 +757,44 @@ window.MathJax={
 		let bottomPadding=20.0;
 		let bottomLine=100.0-bottomPadding;
 		let maxHeight=100.0-topPadding-bottomPadding;
-		let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotCountChart/2.0;
+		let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotPageViewsChart/2.0;
 		m.viewCounts=[];
 		m.setIntervalBlogStatN=0;
-		m.setIntervalBlogStat=setInterval(function () {
-			if (m.blogStatRes?.length>=m.daysToPlotCountChart||m.setIntervalBlogStatN++>17) {
-				clearInterval(m.setIntervalBlogStat);
-				let maxPageViews=0;
-				for (let i=0;i<m.daysToPlotCountChart;i++) {
-					let pageViews=m.blogStatRes[i].pageViews;
-					if (pageViews>maxPageViews) {
-						maxPageViews=pageViews;
-					}
-				}
-				let pageViewsOfADay=[];
-				for (let k=0;k<m.daysToPlotCountChart;k++) {
-					let blogStatRes=m.blogStatRes[k];
-					let x=leftPadding+(m.daysToPlotCountChart-1.0-k)*dx*2.0;
-					let tick=leftPadding+(m.daysToPlotCountChart-0.5-k)*dx*2.0;
-					let h=maxHeight*blogStatRes.pageViews/maxPageViews;
-					pageViewsOfADay[k]={pageViews:blogStatRes.pageViews, x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
-				}
-				for (let i=0;i<pageViewsOfADay.length;i++) {
-					countChartHTML+=`<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine-pageViewsOfADay[i].h}%" width="${2.0*dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine-pageViewsOfADay[i].h-1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews.toFixed(0)}</text>`;
-				}
-				countChartHTML+=`<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0-rightPadding}%" y2="${bottomLine}%"/>`;
-				for (let i=0;i<pageViewsOfADay.length;i++) {
-					countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+1.0}%"/>
-<text class="tick${pageViewsOfADay[i].weekday==="토"?" saturday":pageViewsOfADay[i].weekday==="일"?" sunday":""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
-	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
-	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
-	<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
-</text>`
-				}
-				countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
-				countChartHTML+=`</svg></div></div></div>`;
-				$page_views_chart.html(countChartHTML);
+		setTimeout(function self() {
+			if (m.blogStatRes?.length<m.daysToPlotPageViewsChart&&m.setIntervalBlogStatN++<=17) {
+				setTimeout(self, 4096);
 			}
-		}, 2048);
+			let maxPageViews=0;
+			for (let i=1;i<m.blogStatRes.length;i++) {
+				let pageViews=m.blogStatRes[i].pageViews;
+				if (pageViews>maxPageViews) {
+					maxPageViews=pageViews;
+				}
+			}
+			let pageViewsOfADay=[];
+			for (let k=0;k<m.daysToPlotPageViewsChart;k++) {
+				let blogStatResK=m.blogStatRes[k+1];
+				let x=leftPadding+(m.daysToPlotPageViewsChart-1.0-k)*dx*2.0;
+				let tick=leftPadding+(m.daysToPlotPageViewsChart-0.5-k)*dx*2.0;
+				let h=maxHeight*blogStatResK.pageViews/maxPageViews;
+				pageViewsOfADay[k]={pageViews:blogStatResK.pageViews, x, tick, month:m.to[k].month, day:m.to[k].day, weekday:m.to[k].weekday, h};
+			}
+			for (let i=0;i<pageViewsOfADay.length;i++) {
+				countChartHTML+=`<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine-pageViewsOfADay[i].h}%" width="${2.0*dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine-pageViewsOfADay[i].h-1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews?.toFixed(0)}</text>`;
+			}
+			countChartHTML+=`<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0-rightPadding}%" y2="${bottomLine}%"/>`;
+			for (let i=0;i<pageViewsOfADay.length;i++) {
+				countChartHTML+=`<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine-1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine+1.0}%"/>
+<text class="tick${pageViewsOfADay[i].weekday==="토"?" saturday":pageViewsOfADay[i].weekday==="일"?" sunday":""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
+</text>`
+			}
+			countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
+			countChartHTML+=`</svg></div></div></div>`;
+			$page_views_chart.html(countChartHTML);
+		}, 4096);
 	};
 	$page_views_chart.on("click", m.loadPageViewsStat);
 
