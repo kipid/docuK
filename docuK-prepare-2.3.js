@@ -343,12 +343,12 @@ ptnURI.regEx1=/^https?:\/\/kr[\d]+\.sogirl\.co(?:(\/[\s\S]*))?/i;
 ptnURI.toIframe=function (uri, inListPlay) {
 	let exec=m.ptnURI[2].regEx.exec(uri);
 	if (exec!==null) {
-		return {html:`<a target="_blank" href="https://kr55.sogirl.so${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr55.sogirl.so${exec[1]?exec[1]:"/"}`)}</a>`, from:'sogirl', src:exec[1]};
+		return {html:`<a target="_blank" href="https://kr56.sogirl.so${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr56.sogirl.so${exec[1]?exec[1]:"/"}`)}</a>`, from:'sogirl', src:exec[1]};
 	}
 	else {
 		exec=m.ptnURI[2].regEx1.exec(uri);
 		if (exec!==null) {
-			return {html:`<a target="_blank" href="https://kr55.sogirl.so${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr55.sogirl.so${exec[1]?exec[1]:"/"}`)}</a>`, from:'sogirl', src:exec[1]};
+			return {html:`<a target="_blank" href="https://kr56.sogirl.so${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr56.sogirl.so${exec[1]?exec[1]:"/"}`)}</a>`, from:'sogirl', src:exec[1]};
 		}
 	}
 	return false;
@@ -359,7 +359,7 @@ ptnURI.regEx=/^https?:\/\/kr[\d]+\.topgirl\.co(?:(\/[\s\S]*))?/i;
 ptnURI.toIframe=function (uri, inListPlay) {
 	let exec=m.ptnURI[3].regEx.exec(uri);
 	if (exec!==null) {
-		return {html:`<a target="_blank" href="https://kr24.topgirl.co${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr24.topgirl.co${exec[1]?exec[1]:"/"}`)}</a>`, from:'topgirl', src:exec[1]};
+		return {html:`<a target="_blank" href="https://kr25.topgirl.co${exec[1]?exec[1]:"/"}">${decodeURIComponent(`https://kr25.topgirl.co${exec[1]?exec[1]:"/"}`)}</a>`, from:'topgirl', src:exec[1]};
 	}
 	return false;
 };
@@ -569,18 +569,20 @@ m.encloseStr=function (str) {
 	} return str;
 };
 m.strToJSON=function (str, colMap=true, rowMap=false) {
-	if (!str||str.constructor!==String) { return []; }
+	const ret=[];
+	if (!str||str.constructor!==String) {
+		return Promise.resolve(ret);
+	}
 	if (str.charAt(str.length-1)!=="\n") {
 		str+="\n";
 	}
-	const ret=[];
 	const delimiter=/([^\t\n]*)([\t\n])/g;
 	const lastQuote=/[^"](?:"")*"([\t\n])/g;
 	let exec;
 	let start=0;
 	let row=-1, col=-1, delim="\n";
 	let strElem="";
-	function increseRC(delim) {
+	function increaseRC(delim) {
 		if (delim==='\t') {
 			col++; return true;
 		}
@@ -588,7 +590,7 @@ m.strToJSON=function (str, colMap=true, rowMap=false) {
 			row++; col=0; ret.push([]); return true;
 		} return false;
 	}
-	while (start<str.length&&increseRC(delim)) {
+	while (start<str.length&&increaseRC(delim)) {
 		if ((str.substring(start, start+1))==='"') {
 			lastQuote.lastIndex=start+1;
 			if ((exec=lastQuote.exec(str))!==null) {
@@ -621,9 +623,16 @@ m.strToJSON=function (str, colMap=true, rowMap=false) {
 		const firstColSize=ret[0].length;
 		for (let i=0;i<ret.length;i++) {
 			let jMax=ret[i].length;
-			if (jMax>firstColSize) { jMax=firstColSize; }
-			for (let j=0;j<jMax;j++) {
-				ret[i][ret[0][j]]=ret[i][j];
+			if (jMax>firstColSize) {
+				jMax=firstColSize;
+			}
+			for (let j=0;j<firstColSize;j++) {
+				if (j<jMax) {
+					ret[i][ret[0][j]]=ret[i][j];
+				}
+				else {
+					ret[i][ret[0][j]]=="";
+				}
 			}
 		}
 	}
@@ -632,7 +641,7 @@ m.strToJSON=function (str, colMap=true, rowMap=false) {
 			ret[ret[i][0]]=ret[i];
 		}
 	}
-	return ret;
+	return Promise.resolve(ret);
 };
 m.strToArray=function (str) {
 	return m.strToJSON(str,false,false);
