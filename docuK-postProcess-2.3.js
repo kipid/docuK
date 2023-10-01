@@ -718,17 +718,18 @@ window.MathJax={
 			m.blogStatRes=await m.strToJSON(resp);
 			let promise=Promise.all(m.blogStatRes);
 			for (let i=1;i<m.blogStatRes.length;i++) {
-				promise.then(async function (blogStatRes) {
+				promise=promise.then(async function (blogStatRes) {
 					let statI=blogStatRes[i];
 					statI.splice(2,1);
 					let id=`${statI.from}\t${statI.to}`;
 					statI.id=id;
 					m.blogStatRes[id]=statI;
+					statI.stats=await m.strToJSON(statI.stats);
 					return Promise.all(m.blogStatRes);
 				});
 				promise=promise.then(async function (blogStatRes) {
 					let statI=blogStatRes[i];
-					let stats=statI.stats=await m.strToJSON(statI.stats);
+					let stats=statI.stats; // =await m.strToJSON(statI.stats);
 					let pageViews=0;
 					for(let k=1;k<stats.length;k++) {
 						let ip=stats[k].ip.split(":")[0];
