@@ -72,7 +72,7 @@ m.togglePosition=function (elem) {
 m.rC=function (elemStr, option, id, noPc) {
 	return `<div class="rC${(option?` ${option}`:'')}"${!!id?` id="${id}"`:""}><div class="rSC">${elemStr}</div>${noPc?"":`<div class="pc"><span onclick="m.togglePosition(this)">▲ [--stick to the left top--]</span></div>`}</div>`;
 };
-m.uriRendering=function (uri, toA, inListPlay) {
+m.uriRendering=async function (uri, toA, inListPlay) {
 	if (uri&&uri.constructor===String) {
 		if (uri.length>6) {
 			if (uri.substring(0,4).toLowerCase()==="http") {
@@ -93,7 +93,7 @@ m.uriRendering=function (uri, toA, inListPlay) {
 						uriRest=uri.substring(l+1);
 					}
 					if (m.ptnURI[uriHost]) {
-						let result=m.ptnURI[uriHost]&&m.ptnURI[uriHost].toIframe(uriRest, inListPlay);
+						let result=m.ptnURI[uriHost]&&await m.ptnURI[uriHost].toIframe(uriRest, inListPlay);
 						if (result&&!result.list) { return result; }
 					}
 				}
@@ -184,6 +184,27 @@ ptnURI.toIframe=function (uriRest, inListPlay) {
 		return {html:m.rC(`<div class="center"><iframe sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin" delayed-src="https://www.tiktok.com/embed/v2/${exec[2]}?referrer=${encodeURIComponent(window.location.href)}" frameborder="no" scrolling="auto"></iframe></div>`, "tiktok", null, true), from:"tiktok", userId:exec[1], videoId:exec[2]};
 	}
 	return false;
+};
+
+ptnURI=m.ptnURI["vt.tiktok.com"]={};
+ptnURI.regEx=/^(\w+)\//i;
+ptnURI.toIframe=function (uriRest, inListPlay) {
+return new Promise(function (resolve, reject) {
+	let exec=m.ptnURI["vt.tiktok.com"].regEx.exec(uriRest);
+	if (exec!==null) {
+		let shortURI=`https://vt.tiktok.com/${exec[1]}/`;
+		$.ajax({
+			type:"POST", url:"/BlogStat/getFullURI", data:shortURI, dataType:"text"
+		}).fail(function (resp) {
+			console.log(resp);
+			resolve(resp);
+			throw new Error("Failed to expand TikTok URL");
+		}).done(function (resp) {
+			console.log(resp);
+			resolve(m.uriRendering(resp, true, inListPlay));
+		});
+	}
+});
 };
 
 ptnURI=m.ptnURI["tv.naver.com"]={};
@@ -416,7 +437,7 @@ m.toggleFK=function () {
 
 m.promoting=function (id) {
 	return `<div class="promoting"${id?` id="${id}"`:""}>
-<div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S|Slow/Sexy/Sincere SNS)</div>
+<div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
 <div class="bcf">
 <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop&lang=ko#headPlay">유튜브 음악 MV 들을 광고없이 목록재생</a> 해보세요.<br>
 접속하셔서 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br>
