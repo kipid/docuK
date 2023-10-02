@@ -616,7 +616,7 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 			m.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
 		}
 	};
-	m.kakaoInit=setInterval(m.kakaoInitDo, 4096);
+	m.kakaoInit=setInterval(m.kakaoInitDo, 2048);
 
 	m.popUpKakao=function () {
 		let $desc=$("meta[name='description']");
@@ -674,12 +674,14 @@ window.MathJax={
 		m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded since "&lt;eq&gt;, &lt;eqq&gt;" is there in your document.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
 		m.mathJaxPreProcessDo=function () {
-			if (typeof (MathJax.startup)!=='undefined') {
-				clearInterval(m.mathJaxPreProcess);
+			if (MathJax.startup!==undefined&&MathJax.typeset) {
 				MathJax.typeset();
 			}
+			else {
+				setTimeout(m.mathJaxPreProcessDo, 2048);
+			}
 		};
-		m.mathJaxPreProcess=setInterval(m.mathJaxPreProcessDo, 2000);
+		m.mathJaxPreProcess=setTimeout(m.mathJaxPreProcessDo, 2048);
 	}
 
 	m.myIPs=["14.38.247.30", "175.212.158.53"];
@@ -763,7 +765,8 @@ window.MathJax={
 		m.setIntervalBlogStatN=0;
 		setTimeout(function self() {
 			if (m.blogStatRes?.length<m.daysToPlotPageViewsChart&&m.setIntervalBlogStatN++<=17) {
-				setTimeout(self, 4096);
+				setTimeout(self, 2048);
+				return;
 			}
 			let maxPageViews=0;
 			for (let i=1;i<m.blogStatRes.length;i++) {
@@ -795,7 +798,7 @@ window.MathJax={
 			countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
 			countChartHTML+=`</svg></div></div></div>`;
 			$page_views_chart.html(countChartHTML);
-		}, 4096);
+		}, 2048);
 	};
 	$page_views_chart.on("click", m.loadPageViewsStat);
 
@@ -921,7 +924,7 @@ window.MathJax={
 				if ($("div.comments").exists()) $window.scrollTop($("div.comments").offset().top);
 				break;
 			case 72: // H=72
-				m.HandleAhrefInComment();
+				m.handleAhrefInComment();
 				break;
 			case 88: // X=88
 				if ($("#disqus_thread").exists()) $window.scrollTop($("#disqus_thread").offset().top);
@@ -944,27 +947,71 @@ window.MathJax={
 
 	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
-	m.HandleAhrefInComment=function () {
-		$("div.comments>.comment-list").find("p").each(function (i, elem) {
-			let $elem=$(elem);
+	m.handleAhrefInComment=function () {
+		let promise=Promise.resolve(0);
+		let $ps=$("div.comments>.comment-list").find("p");
+		let toBeAdded=[];
+		for (let k=0;k<$ps.length;k++) {
+			let $elem=$ps.eq(k);
 			let contents=$elem.contents();
 			let elemHTML="";
+			toBeAdded[k]=[];
+			promise=promise.then(function () {
+				return Promise.all(toBeAdded[k]);
+			});
 			for (let i=0;i<contents.length;i++) {
-				let toBeAdded="";
+				promise=promise.then(function (toBeAddedK) {
+					toBeAdded[k][i]="";
+					return Promise.all(toBeAdded[k]);
+				});
 				if (contents[i].nodeType===Node.TEXT_NODE) { // Node.TEXT_NODE=3
-					toBeAdded=contents[i].innerHTML=contents[i].wholeText.replaceAll(/(https?:\/\/\S+)/ig, function (match) {
-						let uriRendered=await uriRendering(match, true, false);
-						return uriRendered.html;
-					});
+					let contentsText=contents[i].wholeText;
+					let start=0;
+					let exec=null;
+					let ptnURL=/https?:\/\/\S+/ig;
+					if ((exec=ptnURL.exec(contentsText))!==null) { // TODO: multiple https links should be handled. Here only the first one is handled.
+						promise=promise.then(async function (toBeAddedK) {
+							toBeAdded[k][i]+=contentsText.substring(start, exec.index);
+							let uri=exec[0];
+							start=exec.lastIndex;
+							if (!start) {
+								start=contentsText.length;
+							}
+							let uriRendered=await uriRendering(uri, true, false);
+							return Promise.resolve(uriRendered);
+						});
+						promise=promise.then(function (uriRendered) {
+							console.log("uriRendered: ", uriRendered);
+							if (uriRendered?.html) {
+								toBeAdded[k][i]+=uriRendered.html;
+							}
+							return Promise.all(toBeAdded[k]);
+						});
+					}
+					promise=promise.then(function (toBeAddedK) {
+						toBeAdded[k][i]+=contentsText.substring(start);
+						return Promise.all(toBeAdded[k]);
+					})
 				}
 				else {
-					toBeAdded=contents[i].outerHTML;
+					promise=promise.then(function (toBeAddedK) {
+						toBeAdded[k][i]+=contents[i].outerHTML;
+						return Promise.all(toBeAdded[k]);
+					});
 				}
-				elemHTML+=toBeAdded;
 			}
-			$elem.html(elemHTML);
-		});
-		m.reNewAndReOn();
+			promise=promise.then(function (toBeAddedK) {
+				for (let i=0;i<toBeAdded[k].length;i++) {
+					elemHTML+=toBeAdded[k][i];
+				}
+				$elem.html(elemHTML);
+				return Promise.all(toBeAdded[k]);
+			});
+		}
+		promise=promise.then(function (toBeAddedK) {
+			m.reNewAndReOn();
+			return Promise.all(toBeAdded[k]);
+		})
 	};
 
 	$window.on("resize.menubar", function (e) {
@@ -978,7 +1025,7 @@ window.MathJax={
 		$window.trigger("scroll.delayedLoad");
 		m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart");
 	};
-	m.HandleAhrefInComment();
+	m.handleAhrefInComment();
 
 	// Closing docuK Log.
 	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);

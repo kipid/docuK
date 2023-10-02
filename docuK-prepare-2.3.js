@@ -72,49 +72,6 @@ m.togglePosition=function (elem) {
 m.rC=function (elemStr, option, id, noPc) {
 	return `<div class="rC${(option?` ${option}`:'')}"${!!id?` id="${id}"`:""}><div class="rSC">${elemStr}</div>${noPc?"":`<div class="pc"><span onclick="m.togglePosition(this)">▲ [--stick to the left top--]</span></div>`}</div>`;
 };
-window.uriRendering=function (uri, toA, inListPlay) {
-return new Promise(async function (resolve, reject) {
-	if (uri&&uri.constructor===String) {
-		if (uri.length>6) {
-			if (uri.substring(0,4).toLowerCase()==="http") {
-				let k=4;
-				if (uri.charAt(k).toLowerCase()==='s') {
-					k++;
-				}
-				if (uri.substring(k,k+3)==="://") {
-					k+=3;
-					let l=uri.indexOf('/',k);
-					let uriHost=null;
-					let uriRest='';
-					if (l===-1) {
-						uriHost=uri.substring(k);
-					}
-					else {
-						uriHost=uri.substring(k,l);
-						uriRest=uri.substring(l+1);
-					}
-					if (m.ptnURI[uriHost]) {
-						let result=m.ptnURI[uriHost]&&(await m.ptnURI[uriHost].toIframe(uriRest, inListPlay, toA));
-						if (result&&(!result.list)) { return resolve(result); }
-					}
-				}
-			}
-			for (let i=0;i<m.ptnURI.length;i++) {
-				let result=m.ptnURI[i].toIframe(uri, inListPlay, toA); // img or video
-				if (result) { return resolve(result); }
-			}
-			return resolve({html:(toA?m.uriToA(uri):"")});
-		}
-		else {
-			return resolve({html:m.escapeHTML(uri)});
-		}
-	}
-	else {
-		return resolve({html:""});
-	}
-});
-};
-
 m.YTiframe=function (v, inListPlay) {
 	return m.rC(`<iframe delayed-src="https://www.youtube.com/embed/${v}?origin=https://recoeve.net" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>`, (inListPlay&&m.fsToRs.fixed?"fixed":null));
 };
@@ -217,7 +174,7 @@ return new Promise(function (resolve, reject) {
 			type:"POST", url:"https://recoeve.net/BlogStat/getFullURI", data:shortURI, dataType:"text"
 		}).fail(function (resp) {
 			resolve(resp);
-			throw new Error("Failed to expand TikTok URL");
+			// throw new Error("Failed to expand TikTok URL");
 		}).done(async function (resp) {
 			let uriRendered=await uriRendering(resp, toA, inListPlay);
 			uriRendered.newURI=resp;
@@ -371,7 +328,7 @@ ptnURI.toIframe=function (uri, inListPlay, toA) {
 return new Promise(function (resolve, reject) {
 	let exec=m.ptnURI[0].regEx.exec(uri);
 	if (exec!==null) {
-		return resolve({html:(toA?`<a target="_blank" href="${exec[0]}">${m.escapeHTML(m.decodeURIComponent(uri))}</a><br>`:"")+m.rC(`<div class="center"><img delayed-src="${exec[0]}"/></div>`, (inListPlay&&m.fsToRs.fixed?"fixed eveElse":"eveElse")), from:'image', src:exec[0]});
+		return resolve({html:(toA?`<a target="_blank" href="${exec[0]}">${m.escapeHTML(decodeURIComponent(uri))}</a><br>`:"")+m.rC(`<div class="center"><img delayed-src="${exec[0]}"/></div>`, (inListPlay&&m.fsToRs.fixed?"fixed eveElse":"eveElse")), from:'image', src:exec[0]});
 	}
 	else {
 		return resolve(false);
@@ -385,7 +342,7 @@ ptnURI.toIframe=function (uri, inListPlay, toA) {
 return new Promise(function (resolve, reject) {
 	let exec=m.ptnURI[1].regEx.exec(uri);
 	if (exec!==null) {
-		return resolve({html:(toA?`<a target="_blank" href="${exec[0]}">${m.escapeHTML(m.decodeURIComponent(uri))}</a><br>`:"")+m.rC(`<video controls preload="auto" delayed-src="${exec[0]}"></video>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:'video', src:exec[0]});
+		return resolve({html:(toA?`<a target="_blank" href="${exec[0]}">${m.escapeHTML(decodeURIComponent(uri))}</a><br>`:"")+m.rC(`<video controls preload="auto" delayed-src="${exec[0]}"></video>`, (inListPlay&&m.fsToRs.fixed?"fixed":null)), from:'video', src:exec[0]});
 	}
 	else {
 		return resolve(false);
@@ -425,6 +382,59 @@ return new Promise(function (resolve, reject) {
 	else {
 		return resolve(false);
 	}
+});
+};
+
+window.uriRendering=function (uri, toA, inListPlay) {
+return new Promise(async function (resolve, reject) {
+	if (uri?.constructor===String) {
+		if (uri.length>6) {
+			if (uri.substring(0,4).toLowerCase()==="http") {
+				let k=4;
+				if (uri.charAt(k).toLowerCase()==='s') {
+					k++;
+				}
+				if (uri.substring(k,k+3)==="://") {
+					k+=3;
+					let l=uri.indexOf('/',k);
+					let uriHost=null;
+					let uriRest='';
+					if (l===-1) {
+						uriHost=uri.substring(k);
+					}
+					else {
+						uriHost=uri.substring(k,l);
+						uriRest=uri.substring(l+1);
+					}
+					if (m.ptnURI[uriHost]) {
+						let promise=m.ptnURI[uriHost].toIframe(uriRest, inListPlay, toA);
+						let result=await promise;
+						promise.then(function (result) {
+							if (result!==false&&(!result.list)) {
+								return resolve(result);
+							}
+						});
+					}
+				}
+			}
+			for (let i=0;i<m.ptnURI.length;i++) {
+				let promise=m.ptnURI[i].toIframe(uri, inListPlay, toA); // img or video
+				let result=await promise;
+				promise.then(function (result) {
+					if (result!==false) {
+						return resolve(result);
+					}
+				});
+			}
+			if (toA) {
+				return resolve({html:m.uriToA(uri)});
+			}
+		}
+		else {
+			return resolve({html:m.escapeHTML(uri)});
+		}
+	}
+	return resolve({html:""});
 });
 };
 
