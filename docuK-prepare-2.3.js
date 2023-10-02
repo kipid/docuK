@@ -31,10 +31,10 @@ m.getSearchVars=function (searchStr) {
 	return vars;
 };
 
+m.fsToRs=[];
 ////////////////////////////////////////////////////
 // URI rendering :: http link itself, videos, images, maps.
 ////////////////////////////////////////////////////
-m.fsToRs=[];
 m.ptnURI=[];
 m.ptnURL=/^https?:\/\/\S+/i;
 m.ptnTag=/^<\w+[\s\S]+>$/i;
@@ -697,28 +697,60 @@ m.strToJSON=function (str, colMap=true, rowMap=false) {
 		const firstColSize=ret[0].length;
 		for (let i=0;i<ret.length;i++) {
 			let jMax=ret[i].length;
-			if (jMax>firstColSize) {
-				jMax=firstColSize;
-			}
 			for (let j=0;j<firstColSize;j++) {
-				if (j<jMax) {
-					ret[i][ret[0][j]]=ret[i][j];
+				let key=ret[0][j];
+				if (j>=jMax) {
+					ret[i][key]="";
 				}
 				else {
-					ret[i][ret[0][j]]=="";
+					ret[i][key]=ret[i][j];
 				}
 			}
 		}
 	}
 	if (rowMap) {
 		for (let i=0;i<ret.length;i++) {
-			ret[ret[i][0]]=ret[i];
+			let key=ret[i][0];
+			ret[key]=ret[i];
 		}
 	}
 	return Promise.resolve(ret);
 };
-m.strToArray=function (str) {
-	return m.strToJSON(str,false,false);
+m.csvToJSON=function (str, colMap=true, rowMap=false) {
+	if (!str||str.constructor!==String) {
+		return Promise.resolve(str);
+	}
+	let rows=str.split("\n");
+	for (let i=0;i<rows.length;i++) {
+		if (rows[i].substring(0,1)==='"'&&rows[i].substring(rows[i].length-1)==='"') {
+			rows[i]=rows[i].substring(1,rows[i].length-1).split('","');
+		}
+		else {
+			rows[i]=rows[i].split(",");
+		}
+	}
+	if (colMap) {
+		const firstColSize=rows[0].length;
+		for (let i=0;i<rows.length;i++) {
+			let jMax=rows[i].length;
+			if (jMax>firstColSize) { jMax=firstColSize; }
+			for (let j=0;j<jMax;j++) {
+				let key=rows[0][j];
+				if (key!==undefined) {
+					rows[i][key]=rows[i][j];
+				}
+			}
+		}
+	}
+	if (rowMap) {
+		for (let i=0;i<rows.length;i++) {
+			let key=rows[i][0];
+			if (key!==undefined) {
+				rows[key]=rows[i];
+			}
+		}
+	}
+	return Promise.resolve(rows);
 };
 m.arrayToTableHTML=function (txtArray) {
 	let tableStr="<table>";
