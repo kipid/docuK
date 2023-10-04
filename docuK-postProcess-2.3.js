@@ -1007,7 +1007,7 @@ window.MathJax={
 		}
 		promise=promise.then(function (toBeAddedK) {
 			m.reNewAndReOn();
-			return Promise.all(toBeAdded[k]);
+			return Promise.all(toBeAdded);
 		})
 	};
 
