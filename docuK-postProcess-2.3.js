@@ -524,9 +524,11 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 		m.logPrint("<br><br>BlogStat is logged. "+resp);
 	});
 
-	for (let i=1;i<m.docuK.length;i++) {
-		m.docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
-		m.docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
+	if (!m.printMode) {
+		for (let i=1;i<m.docuK.length;i++) {
+			m.docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
+			m.docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
+		}
 	}
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
 	let codeprints=$("codeprint");
@@ -583,19 +585,23 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 	m.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
 
 	// Disqus js script
-	$disqus_thread=$("#disqus_thread");
-	if (!($disqus_thread.exists())) {
-		($("body")||$("#docuK-script")).append(`<div id="disqus_thread"></div>`);
+	if (!m.printMode) {
 		$disqus_thread=$("#disqus_thread");
+		if (!($disqus_thread.exists())) {
+			($("body")||$("#docuK-script")).append(`<div id="disqus_thread"></div>`);
+			$disqus_thread=$("#disqus_thread");
+		}
+		let $disqus_js=$(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
+		$headOrBody.append($disqus_js);
+		m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 	}
-	let $disqus_js=$(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></`+`script>`); // Avoid closing script
-	$headOrBody.append($disqus_js);
-	m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
-	$page_views_chart=$("#page-views-chart");
-	if (!($page_views_chart.exists())) {
-		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed">Get page views</div>`);
+	if (!m.printMode) {
 		$page_views_chart=$("#page-views-chart");
+		if (!($page_views_chart.exists())) {
+			$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed">Get page views</div>`);
+			$page_views_chart=$("#page-views-chart");
+		}
 	}
 
 	// Kakao js script (from kakao.com CDN) is added.
@@ -682,6 +688,7 @@ window.MathJax={
 		m.mathJaxPreProcess=setTimeout(m.mathJaxPreProcessDo, 2048);
 	}
 
+if (!m.printMode) {
 	m.myIPs=["14.38.247.30", "175.212.158.53"];
 	m.ignoreMe=true;
 	m.weekDays=["일", "월", "화", "수", "목", "금", "토"];
@@ -799,6 +806,7 @@ window.MathJax={
 		}, 2048);
 	};
 	$page_views_chart.on("click", m.loadPageViewsStat);
+}
 
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
 	m.$fdList=$("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart"); // Ordered automatically by jQuery.

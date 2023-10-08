@@ -533,6 +533,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 // logPrint function.
 m.$log=$("#docuK-log");
 m.$log.addClass("fixed");
+if (!m.printMode) {
 m.$log.before(`<div id="floating-key">
 	<div id="button-hideFK" class="button" onclick="m.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
 	<div class="button button-Go" style="width:4.5em; border-right:none" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})">
@@ -574,6 +575,7 @@ m.$log.before(`<div id="floating-key">
 $floating_key=$("#floating-key");
 if (m.docCookies.getItem("hideFK")==="y") {
 	$floating_key.hide();
+}
 }
 m.$log.html(`<div class="exit" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 m.logPrint=function (str) {
@@ -1341,6 +1343,7 @@ m.docuKProcess=function docuK(m, $, docuKI, undefined) {
 		});
 	}
 
+if (!m.printMode) {
 	// Copyright and Short Keys announcement.
 	docuK.before(`<div class="copyright"><ul>
 	<li class="license cc"><span class="bold">Creative Commons</span></li>
@@ -1375,6 +1378,7 @@ m.docuKProcess=function docuK(m, $, docuKI, undefined) {
 	<li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
 	<li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
 </ul></div>`);
+}
 
 	// Style change widget, and SNS widget.
 	docuK.prepend(`<div class="change-docuK-style">
