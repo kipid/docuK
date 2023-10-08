@@ -524,12 +524,54 @@ ${window.location.href}	${document.referrer}	${m.docCookies.getItem("REACTION_GU
 		m.logPrint("<br><br>BlogStat is logged. "+resp);
 	});
 
-	if (!m.printMode) {
-		for (let i=1;i<m.docuK.length;i++) {
-			m.docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
-			m.docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
-		}
+if (!m.printMode) {
+	m.$log.before(`<div id="floating-key">
+<div id="button-hideFK" class="button" onclick="m.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
+<div class="button button-Go" style="width:4.5em; border-right:none" onclick="$window.trigger({type:'keydown', keyCode:'G'.charCodeAt(0)})">
+	<span class="bold underline">G</span>o (FS)
+</div>
+<div class="button" style="width:4.5em" onclick="$window.trigger({type:'keydown', keyCode:'T'.charCodeAt(0)})">
+	<span class="bold underline">T</span>ofC
+</div>
+<div class="button button-log" onclick="$window.trigger({type:'keydown', keyCode:'K'.charCodeAt(0)})">
+	Docu<span class="bold underline">K</span> Log
+</div>
+<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'D'.charCodeAt(0)})">
+	Backwar<span class="bold underline">d</span>
+</div>
+<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'F'.charCodeAt(0)})">
+	<span class="bold underline">F</span>orward
+</div>
+<div class="button" style="width:4.5em; border-right:none" onclick="$window.trigger({type:'keydown', keyCode:'R'.charCodeAt(0)})">
+	<span class="bold underline">R</span>RA
+</div>
+<div class="button" style="width:4.5em" onclick="$window.trigger({type:'keydown', keyCode:'L'.charCodeAt(0)})">
+	<span class="bold underline">L</span>ists
+</div>
+<div class="button" style="width:4.5em; border-right:none" onclick="$window.trigger({type:'keydown', keyCode:'Z'.charCodeAt(0)})">
+	Cmt<span class="bold underline">Z</span>
+</div>
+<div class="button" style="width:4.5em" onclick="$window.trigger({type:'keydown', keyCode:'X'.charCodeAt(0)})">
+	Cmt<span class="bold underline">X</span>
+</div>
+<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'H'.charCodeAt(0)})">
+	<span class="bold underline">H</span>andle CmtZ
+</div>
+${m.docCookies.hasItem("REACTION_GUEST")?`<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'I'.charCodeAt(0)})">
+	Log <span class="bold underline">i</span>n
+</div>`:`<div class="button" onclick="$window.trigger({type:'keydown', keyCode:'O'.charCodeAt(0)})">
+	Log <span class="bold underline">o</span>ut
+</div>`}
+<div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="m.shareSNS('link')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Twitter.png" onclick="m.shareSNS('twitter')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="m.shareSNS('facebook')"><img class="SNS-img" src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="m.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory2.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="m.shareSNS('kakao')"></div></div><div class="button" id="toggle-floating-key" onclick="m.toggleFK()">▲</div>`);
+	$floating_key=$("#floating-key");
+	if (m.docCookies.getItem("hideFK")==="y") {
+		$floating_key.hide();
 	}
+	for (let i=1;i<m.docuK.length;i++) {
+		m.docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
+		m.docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
+	}
+}
 	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
 	let codeprints=$("codeprint");
 	for (let i=0;i<codeprints.length;i++) {
