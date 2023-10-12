@@ -754,6 +754,7 @@ if (!m.printMode) {
 	}
 	m.blogStatRes=[];
 	m.getBlogStat=function () {
+	return new Promise(function (resolve, reject) {
 		let reqTime=`from\tto`;
 		for (let i=0;i<m.daysToPlotPageViewsChart;i++) {
 			reqTime+=`\n${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
@@ -762,6 +763,7 @@ if (!m.printMode) {
 			type:"POST", url:"https://recoeve.net/BlogStat/Get", data:reqTime, dataType:"text"
 		}).fail(function (resp) {
 			m.logPrint("<br><br>BlogStat is failed to be got.");
+			reject();
 		}).done(async function (resp) {
 			m.logPrint("<br><br>BlogStat is got.");
 			m.blogStatRes=await m.strToJSON(resp);
@@ -791,16 +793,18 @@ if (!m.printMode) {
 					return Promise.all(m.blogStatRes);
 				});
 			}
+			resolve();
 		});
+	});
 	};
-	m.loadPageViewsStat=function () {
+	m.loadPageViewsStat=async function () {
 		$page_views_chart.removeClass("to-be-executed");
 		$page_views_chart.off("click");
 		$page_views_chart.on("click", function () {
 			$page_views_chart.off("click");
 		});
-		m.getBlogStat();
-		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg class="vals-stat" width="100%" height="100%">`;
+		await m.getBlogStat();
+		let countChartHTML=`<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg width="100%" height="100%">`;
 		let leftPadding=3.0;
 		let rightPadding=3.0;
 		let topPadding=7.0;
@@ -808,7 +812,6 @@ if (!m.printMode) {
 		let bottomLine=100.0-bottomPadding;
 		let maxHeight=100.0-topPadding-bottomPadding;
 		let dx=(100.0-leftPadding-rightPadding)/m.daysToPlotPageViewsChart/2.0;
-		m.viewCounts=[];
 		m.setIntervalBlogStatN=0;
 		setTimeout(function self() {
 			if (m.blogStatRes?.length<m.daysToPlotPageViewsChart&&m.setIntervalBlogStatN++<=17) {
@@ -845,7 +848,7 @@ if (!m.printMode) {
 			countChartHTML+=`<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
 			countChartHTML+=`</svg></div></div></div>`;
 			$page_views_chart.html(countChartHTML);
-		}, 2048);
+		}, 512);
 	};
 	$page_views_chart.on("click", m.loadPageViewsStat);
 }
