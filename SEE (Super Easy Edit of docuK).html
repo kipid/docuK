@@ -709,10 +709,11 @@ $(document).ready(function () {
 	});
 
 	$("#textarea-SEE").on("keydown",function(event){
-		event.stopPropagation();
 		if (event.shiftKey){
 			switch (event.keyCode){
 				case 13: // shift+enter
+					event.preventDefault();
+					event.stopPropagation();
 					$("#button-render-it-to-docuK").trigger("click");
 					break;
 			}
