@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From recoeve.net CDN -->
+<script src="https://recoeve.net/CDN/jquery.js"></script>
+<link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
+<script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<meta charset="utf-8" name="description" content="pure SEE."/>
+
+<codeprint class="SEE">
+# pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial).
+
+The docuK rendered from the current text is being represented.
+
+<script>
+// Hack to avoid duplicate id handling of docuK process.
+</script>
+
+
+
+## Full SEE (Super Easy Edit) docuK codes
+
+To avoid end of code printing, I escaped <code class="prettyprint">```/</code> to <code class="prettyprint">```\/</code> in the below printed.
+
+<div class="p">
+<div class="button" id="Copy-Full-SEE-Code">Copy the below Full SEE Code</div>
+</div>
+
+```[.scrollable.lang-html]
+<div id="pre-code-full-SEE-docuK">
+&lt;!DOCTYPE html&gt;
+
+&lt;meta charset="UTF-8"/&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/&gt;
+
+&lt;codeprint id="docuK-style"&gt;
+&lt;div class="docuK rendered"&gt;&lt;div class="sec" id="docuK-log"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;!-- From recoeve.net CDN --&gt;
+&lt;script src="https://recoeve.net/CDN/jquery.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css"&gt;
+&lt;script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/codeprint&gt;&lt;!-- docuK-style --&gt;
+
+&lt;meta charset="utf-8" name="description" content="pure SEE."/&gt;
+
+&lt;codeprint class="SEE"&gt;
+# pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial).
+
+The docuK rendered from the current text is being represented.
+
+&lt;script&gt;
+// Hack to avoid duplicate id handling of docuK process.
+&lt;/script&gt;
+
+
+
+## Full SEE (Super Easy Edit) docuK codes
+
+To avoid end of code printing, I escaped &lt;code&gt;```/&lt;/code&gt; to &lt;code&gt;```\/&lt;/code&gt; in the below document by hand printed.
+
+&lt;div class="p"&gt;
+&lt;div class="button" id="Copy-Full-SEE-Code"&gt;Copy the below Full SEE Code&lt;/div&gt;
+&lt;/div&gt;
+
+```[.scrollable.lang-html]
+&lt;div id="pre-code-full-SEE-docuK"&gt;
+// Copied from this document by hand. (Escaped <code class="prettyprint" style="padding:.2em; border:2px solid #9acd32; background:#cd5c5c">&amp;, &lt;, &gt;, ```/</code> to <code class="prettyprint" style="padding:.2em; border:2px solid #9acd32; background:#cd5c5c">&amp;amp;, &amp;lt;, &amp;gt;, ```\/</code>)
+&lt;/div&gt;
+```\/
+
+&lt;script&gt;
+m.toBeCopied=m.unescapeHTML($("#pre-code-full-SEE-docuK").html().trim());
+$("#Copy-Full-SEE-Code").on("click", function () {
+	let written=m.toBeCopied;
+	navigator.clipboard.writeText(written).then(function () {
+		alert(`The following is copied!\n"${written}"`);
+	}
+	, function (err) {
+		alert(`Could not copy text: ${err}`);
+	});
+});
+&lt;/script&gt;
+
+
+
+## Abstract | Description of docuK and SEE
+
+Specific features are
+
+&lt;ul&gt;
+&lt;li&gt;Changable mode, font-family.&lt;/li&gt;
+&lt;li&gt;Resizable font-size, line-height.&lt;/li&gt;
+&lt;li&gt;Table of contents.&lt;/li&gt;
+&lt;li&gt;Numbering of sections/figures/equations.&lt;/li&gt;
+&lt;li&gt;Citing references in bubble-shape pop up.&lt;/li&gt;
+&lt;li&gt;Refering figures and equations.&lt;/li&gt;
+&lt;li&gt;Refering anything with id and element with class="number".&lt;/li&gt;
+&lt;li&gt;Delayed(lazy)-loading of figures (images, iframes).&lt;/li&gt;
+&lt;li&gt;Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.&lt;/li&gt;
+&lt;li&gt;Auto code printing from `&lt;code class="prettyprint"&gt;&amp;lt;codeprint id="code-id"&amp;gt;&amp;lt;/codeprint&amp;gt;&lt;/code&gt;` to `&lt;code class="prettyprint"&gt;&amp;lt;pre id="pre-code-id"&amp;gt;&amp;lt;/pre&amp;gt;&lt;/code&gt;`.&lt;/li&gt;
+&lt;/ul&gt;
+
+Quite similar to LaTeX or Wiki document, but extended a little bit.
+
+
+
+## PH
+
+###/ Posting History
+
+Posting History is put here. This section is automatically hiden.
+
+&lt;ul&gt;
+	&lt;li&gt;2023-05-18 : Update.&lt;/li&gt;
+	&lt;li&gt;2014-06-18 : First posting.&lt;/li&gt;
+&lt;/ul&gt;
+
+##/ Posting History
+
+
+
+## COTD
+
+###/ Categories of this document
+
+Categories of this document is put here with links to &lt;a target="_blank" href="https://kipid.tistory.com/entry/Lists"&gt;Lists of kipid's blog&lt;/a&gt;. This section is automatically hiden.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK"&gt;[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest"&gt;Recent interests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+##/ Categories of this document
+
+
+
+## Warning
+
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (&lt;code&gt;docuK-prepare.js&lt;/code&gt;), or which are using &lt;code&gt;m.variables&lt;/code&gt; already asigned before, will not work in the afterward rendering.
+
+Only &lt;code&gt;m.docuKProcess()&lt;/code&gt; will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+
+
+
+## TOC
+
+##/ Table of Contents.
+Table will be automatically filled up. Details will be explained in the following sections.
+
+
+
+## Statement
+
+Each statement or paragraph is splitted by double (or more than double) enters, e.g. /\n\n+/.
+
+If '#' and '&amp;lt;' comes first in a statement, the paragraph will be specially treated.
+
+
+
+## DocuK and sections
+
+'#' indicates docuK, and '##' | '###' | '####' to sec | subsec | subsubsec.
+
+End of docuK: '#/', and end of section | subsec | subsubsec: '##/' | '###/' | '####/' are &lt;span class="emph"&gt;optional&lt;/span&gt;. Renderer detects end of something automatically according the hierarchy.
+
+End of something can be used as comments.
+Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
+Or just &lt;span class="emph"&gt;end of something which are not yet opened&lt;/span&gt; is OK.
+
+The following is ignored, as you see it in the rendered docuK.
+
+###/ End of something can be used as comments.
+Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
+Or just &lt;span class="emph"&gt;end of something which are not yet opened&lt;/span&gt; is OK.
+
+
+
+##[.class0#sec-Test] Section with class and id
+
+Section can have class and id attributes. Using the id, you can refer it like &lt;code class="prettyprint"&gt;&amp;lt;refer class="sec-Test"&amp;gt;&amp;lt;/refer&amp;gt;&lt;/code&gt; &lt;refer class="sec-Test"&gt;&lt;/refer&gt;.
+
+&lt;div class="p"&gt;Class and Id are asigned with [emmet style] like &lt;code&gt;##[.class0.class1.hiden#sec-Test] Section head&lt;/code&gt;.&lt;/div&gt;
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```\/
+
+
+
+## Predifined section: "PH", "RRA", "TOC"
+
+There are three predefined sections. "PH": Posting History, "TOC": Table of Contents, "RRA": References and Related Articles. Possibly I will add more predefined sections which can be used frequently.
+
+See the predefined sections implemented below, and you can easily figure it out how to use it.
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+
+To avoid section numbering, do it like this.
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```\/
+
+
+
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+```\/
+
+
+
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+```\/
+
+
+
+## Citing RRA and Refering HTML elements with id.
+
+```[.linenums.lang-html]
+&amp;lt;div class="p"&amp;gt;
+Ref. &amp;lt;cite class="ref-docuK"&amp;gt;&amp;lt;/cite&amp;gt;, Ref. &amp;lt;cite class="ref-docuKShort"&amp;gt;&amp;lt;/cite&amp;gt;.
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class="p"&amp;gt;
+Eq. &amp;lt;refer class="eqq-1"&amp;gt;&amp;lt;/refer&amp;gt;, Eq. &amp;lt;refer class="eqq-2"&amp;gt;&amp;lt;/refer&amp;gt;.
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class="p"&amp;gt;
+Fig. &amp;lt;refer class="fig-1"&amp;gt;&amp;lt;/refer&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class="p"&amp;gt;
+Code: &amp;lt;refer class="code-1"&amp;gt;&amp;lt;/refer&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class="p"&amp;gt;
+Sec. &amp;lt;refer class="sec-Test"&amp;gt;&amp;lt;/refer&amp;gt;, Sec. &amp;lt;refer class="sec-No-sec-numbering"&amp;gt;&amp;lt;/refer&amp;gt;, SubSec. &amp;lt;refer class="subsec-No-sec-numbering"&amp;gt;&amp;lt;/refer&amp;gt;, SubSubSec. &amp;lt;refer class="subsubsec-No-sec-numbering"&amp;gt;&amp;lt;/refer&amp;gt;
+&amp;lt;/div&amp;gt;
+```\/
+
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+There are the blow HTML elments in this &lt;code&gt;docuK.SEE&lt;/code&gt;.
+
+```[.linenums.lang-html]
+&amp;lt;!-- ## RRA with ol.refs --&amp;gt;
+&amp;lt;ol class="refs"&amp;gt;
+&amp;lt;div class="subsec"&amp;gt;&amp;lt;h3&amp;gt;Main&amp;lt;/h3&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;li id="ref-docuK"&amp;gt;&amp;lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&amp;gt;kipid's blog - HTML docuK format ver. 2.1&amp;lt;/a&amp;gt;;&amp;lt;br&amp;gt;
+		// Updated regularly&amp;lt;/li&amp;gt;
+	&amp;lt;li id="ref-docuKShort"&amp;gt;&amp;lt;a href="https://kipid.tistory.com/entry/docuK-short-copiable-version"&amp;gt;kipid's blog - docuK short copiable version&amp;lt;/a&amp;gt;;&amp;lt;br&amp;gt;
+		// Updated regularly&amp;lt;/li&amp;gt;
+&amp;lt;/ol&amp;gt;
+
+&amp;lt;!-- ## eqq tag (LaTeX equations) --&amp;gt;
+&amp;lt;span class="emph"&amp;gt;&amp;lt;eqq id="eqq-1"&amp;gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&amp;lt;/eqq&amp;gt;&amp;lt;/span&amp;gt;
+
+&amp;lt;eqq id="eqq-2"&amp;gt;
+\begin{split}
+	\vec{x} &amp;= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&amp;= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&amp;= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&amp;lt;/eqq&amp;gt;
+
+&amp;lt;!-- ## figure tag (img or iframe such as youtube video) --&amp;gt;
+&amp;lt;figure id="fig-1"&amp;gt;&amp;lt;div class="fig"&amp;gt;
+	&amp;lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&amp;gt;
+	&amp;lt;div class="caption"&amp;gt;Caption.&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/figure&amp;gt;
+
+&amp;lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&amp;gt;
+&amp;lt;div id="code-1"&amp;gt;&amp;lt;span class="number"&amp;gt;Java vertx server code example&amp;lt;/span&amp;gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&amp;gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&amp;lt;/div&amp;gt;
+```\/
+
+
+
+## PH
+
+###/ Posting History
+
+Posting History is put here. This section is automatically hiden.
+
+&lt;ul&gt;
+	&lt;li&gt;2023-09-25 : Update.&lt;/li&gt;
+	&lt;li&gt;Posting History is put here.&lt;/li&gt;
+	&lt;li&gt;2014-06-18 : First posting.&lt;/li&gt;
+&lt;/ul&gt;
+
+##/ Posting History
+
+
+
+## TOC
+
+TOC is a self-closing section, i.e. no other texts can be put inside.
+Next text will be out of TOC.
+
+##/ Table of Contents.
+Table will be automatically filled up.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+	&lt;li id="ref-docuKShort"&gt;&lt;a href="https://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+	&lt;li id="ref-docuKGithub"&gt;&lt;a href="https://github.com/kipid/docuK"&gt;github.com - kipid - docuK&lt;/a&gt;&lt;/li&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Supported by&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-jQuery"&gt;&lt;a href="http://jquery.com/"&gt;jQuery.com&lt;/a&gt;; and &lt;a href="http://jquery.com/download/"&gt;jQuery - download&lt;/a&gt;;&lt;br&gt;
+		// JavaScript enhancer&lt;/li&gt;
+	&lt;li id="ref-mathjax"&gt;&lt;a href="http://www.mathjax.org/"&gt;MathJax.org&lt;/a&gt;; and &lt;a href="http://docs.mathjax.org/en/latest/index.html"&gt;MathJax Documentation - latest&lt;/a&gt;; and &lt;a href="http://docs.mathjax.org/en/latest/options/hub.html"&gt;The Core Configuration Options&lt;/a&gt;; and &lt;a href="http://docs.mathjax.org/en/latest/api/hub.html"&gt;The MathJax.Hub Object&lt;/a&gt;;&lt;br&gt;
+		// Math renderer.&lt;/li&gt;
+	&lt;li id="ref-googleCodePrettyfy"&gt;&lt;a href="https://code.google.com/p/google-code-prettify/"&gt;Google Code Prettify&lt;/a&gt; and &lt;a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted"&gt;Getting Started&lt;/a&gt;;&lt;br&gt;
+		// Code prettyfier.&lt;/li&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;API documentation&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-jQuery-contents"&gt;&lt;a href="http://api.jquery.com/contents/"&gt;jQuery - contents()&lt;/a&gt;: Get array of immediate children of element, including text nodes.&lt;/li&gt;
+	&lt;li id="ref-MDN-css-reference"&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference"&gt;MDN - CSS full reference&lt;/a&gt;; and especially &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes"&gt;Pseudo-classes&lt;/a&gt; is useful. Ex: &lt;code class="prettyprint"&gt;element:nth-of-type(an + b) { style properties }&lt;/code&gt; &lt;code class="prettyprint"&gt;element:nth-child(an + b) { style properties }&lt;/code&gt;&lt;/li&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Other markdown/markup languages&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-latex"&gt;&lt;a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides"&gt;LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들&lt;/a&gt;, 2014-03-24&lt;br&gt;
+		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.&lt;br&gt;
+		// 그래도 문법은 차용해서 쓰기 좋음.&lt;/li&gt;
+	&lt;li&gt;&lt;a href="http://www.wikipedia.org/"&gt;wikipedia.org&lt;/a&gt;;&lt;br&gt;
+		// Wikipedia uses its own markdown language.&lt;/li&gt;
+	&lt;li&gt;&lt;a href="https://stackoverflow.com/"&gt;stackoverflow.com&lt;/a&gt;;&lt;br&gt;
+		// Stack Overflow uses its own markdown language.&lt;/li&gt;
+	&lt;li&gt;&lt;a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"&gt;GitHub/adam-p - Markdown (GitHub)&lt;/a&gt;; and &lt;a href="http://markdown-here.com/livedemo.html"&gt;live demo page&lt;/a&gt;&lt;br&gt;
+		// This might be used in GitHub wiki.&lt;/li&gt;
+&lt;/ol&gt;
+
+##/ References and Related Articles
+
+
+
+## head (h2) of section
+
+section contents
+
+
+
+### head (h3) of subsection
+
+contents of subsection
+
+
+
+#### head (h4) of subsubsection
+
+contents of subsubsection
+
+####/ optional end of subsubsection
+
+###/ optional end of subsection
+
+##/ optional end of section
+
+
+
+##[.hiden#sec-HidenSec] Initially Hiden Section
+
+With hiden class, the section will be hiden initially.
+
+
+
+## Raw HTML
+
+Since learning and remembering something new takes time, this is designed to be just as simple as possible. And as what this actually do is simply renderring/making a text to the HTML format, new grammers will be minimized by adopting raw HTML grammers.
+
+&lt;div class="p"&gt;
+Raw HTML can be added like this. A paragraph starting with '&amp;lt;' will be appended without any change.
+&lt;/div&gt;
+
+Raw text is appended as a paragraph, enclosed by &lt;code class="prettyprint"&gt;&amp;lt;div class="p"&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;.
+
+&lt;div class="cmt"&gt;
+
+This is default comment box: &lt;code class="prettyprint"&gt;&amp;lt;div class="cmt"&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;.
+
+You can put multiple paragraphs and nested htmls.
+
+&lt;ul&gt;
+	&lt;li&gt;Unordered list 1.&lt;/li&gt;
+	&lt;li&gt;Unordered list 2.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+	&lt;li&gt;Ordered list 1.&lt;/li&gt;
+	&lt;li&gt;Ordered list 2.&lt;/li&gt;
+&lt;/ol&gt;
+
+This is it.
+
+&lt;/div&gt;
+
+&lt;div class="bcf"&gt;
+
+This is default 'be careful' box: &lt;code class="prettyprint"&gt;&amp;lt;div class="bcf"&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;.
+
+&lt;/div&gt;
+
+
+
+## Links | URLs to appropriate html
+
+Planning to implement this.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## Figures
+
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+
+
+## Maths or Equations
+
+Maths or Equations can be put by using \$TeX math\$, &lt;code class="prettyprint"&gt;&amp;lt;eq&amp;gt;TeX math&amp;lt;/eq&amp;gt;&lt;/code&gt;, and &lt;code class="prettyprint"&gt;&amp;lt;eqq&amp;gt;TeX math&amp;lt;/eqq&amp;gt;&lt;/code&gt;.
+
+The first two are converted to &lt;span class="emph"&gt;inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one&lt;/span&gt; is converted to outline math like
+
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &amp;= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&amp;= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&amp;= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+
+
+## Codes
+
+Codes can be pretty-printed.
+
+Using &lt;code class="prettyprint"&gt;&amp;lt;pre class="prettyprint scrollable lang-java"&amp;gt;Codes to be pretty-printed.&amp;lt;/pre&amp;gt;&lt;/code&gt;,
+
+&lt;pre class="prettyprint scrollable lang-java"&gt;
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&amp;gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+&lt;/pre&gt;
+
+&lt;div class="p"&gt;&lt;/div&gt;
+
+Using &lt;code&gt;```Codes to be pretty-printed.```\/&lt;/code&gt;, or &lt;code&gt;```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```\/&lt;/code&gt;,
+
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&amp;gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/
+
+&lt;/div&gt;
+
+
+
+## New Section
+
+"```\/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
+&lt;/codeprint&gt;&lt;!-- SEE --&gt;
+
+&lt;codeprint id="docuK-script"&gt;
+&lt;script&gt;
+(function(m, $, undefined) {
+m.recoCats="";
+m.wait=1024;
+m.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery)
+&lt;/script&gt;
+
+&lt;!-- From recoeve.net CDN --&gt;
+&lt;script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/codeprint&gt;&lt;!-- docuK-script --&gt;
+</div>
+```/
+
+<script>
+m.toBeCopied=m.unescapeHTML($("#pre-code-full-SEE-docuK").html().trim());
+$("#Copy-Full-SEE-Code").on("click", function () {
+	let written=m.toBeCopied;
+	navigator.clipboard.writeText(written).then(function () {
+		alert(`The following is copied!\n"${written}"`);
+	}
+	, function (err) {
+		alert(`Could not copy text: ${err}`);
+	});
+});
+</script>
+
+
+
+## Abstract | Description of docuK and SEE
+
+Specific features are
+
+<ul>
+<li>Changable mode, font-family.</li>
+<li>Resizable font-size, line-height.</li>
+<li>Table of contents.</li>
+<li>Numbering of sections/figures/equations.</li>
+<li>Citing references in bubble-shape pop up.</li>
+<li>Refering figures and equations.</li>
+<li>Refering anything with id and element with class="number".</li>
+<li>Delayed(lazy)-loading of figures (images, iframes).</li>
+<li>Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.</li>
+<li>Auto code printing from `<code class="prettyprint">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="prettyprint">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>`.</li>
+</ul>
+
+Quite similar to LaTeX or Wiki document, but extended a little bit.
+
+
+
+## PH
+
+###/ Posting History
+
+Posting History is put here. This section is automatically hiden.
+
+<ul>
+<li>2023-09-24 : Full SEE (Super Easy Edit) docuK codes.</li>
+<li>2023-05-18 : Update.</li>
+<li>2014-06-18 : First posting.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## COTD
+
+###/ Categories of this document
+
+Categories of this document is put here with links to <a target="_blank" href="https://kipid.tistory.com/entry/Lists">Lists of kipid's blog</a>. This section is automatically hiden.
+
+<ul>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest">Recent interests</a></li>
+</ul>
+
+##/ Categories of this document
+
+
+
+## Warning
+
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code class="prettyprint">docuK-prepare.js</code>), or which are using <code class="prettyprint">m.variables</code> already asigned before, will not work in the afterward rendering.
+
+Only <code class="prettyprint">m.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+
+
+
+## TOC
+
+##/ Table of Contents.
+Table will be automatically filled up. Details will be explained in the following sections.
+
+
+
+## Statement
+
+Each statement or paragraph is splitted by double (or more than double) enters, e.g. /\n\n+/.
+
+If '#' and '&lt;' comes first in a statement, the paragraph will be specially treated.
+
+
+
+## DocuK and sections
+
+'#' indicates docuK, and '##' | '###' | '####' to sec | subsec | subsubsec.
+
+End of docuK: '#/', and end of section | subsec | subsubsec: '##/' | '###/' | '####/' are <span class="emph">optional</span>. Renderer detects end of something automatically according the hierarchy.
+
+End of something can be used as comments.
+Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
+Or just <span class="emph">end of something which are not yet opened</span> is OK.
+
+The following is ignored, as you see it in the rendered docuK.
+
+###/ End of something can be used as comments.
+Text after '#/' is ignored. Therefore use '#####/' for super concrete comment.
+Or just <span class="emph">end of something which are not yet opened</span> is OK.
+
+
+
+##[.class0#sec-Test] Section with class and id
+
+Section can have class and id attributes. Using the id, you can refer it like <code class="prettyprint">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
+
+<div class="p">Class and Id are asigned with [emmet style] like <code class="prettyprint">##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```/
+
+
+
+## Predifined section: "PH", "RRA", "TOC", "COTD"
+
+There are three predefined sections. "PH": Posting History, "TOC": Table of Contents, "RRA": References and Related Articles, "COTD": Categories of this document. Possibly I will add more predefined sections which can be used frequently.
+
+See the predefined sections implemented below, and you can easily figure it out how to use it.
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+
+To avoid section numbering, do it like this.
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```/
+
+
+
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+## Citing RRA and Refering HTML elements with id.
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+Ref. <cite class="ref-docuK"></cite>, Ref. <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+Eq. <refer class="eqq-1"></refer>, Eq. <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+Fig. <refer class="fig-1"></refer>
+</div>
+
+<div class="p">
+Code: <refer class="code-1"></refer>
+</div>
+
+<div class="p">
+Sec. <refer class="sec-Test"></refer>, Sec. <refer class="sec-No-sec-numbering"></refer>, SubSec. <refer class="subsec-No-sec-numbering"></refer>, SubSubSec. <refer class="subsubsec-No-sec-numbering"></refer>
+</div>
+
+There are the blow HTML elments in this <code class="prettyprint">docuK.SEE</code>.
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+	&lt;li id="ref-docuKShort"&gt;&lt;a href="https://kipid.tistory.com/entry/docuK-short-copiable-version"&gt;kipid's blog - docuK short copiable version&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
+
+
+
+## PH
+
+###/ Posting History
+
+Posting History is put here. This section is automatically hiden.
+
+<ul>
+<li>2023-09-24 : Update.</li>
+<li>Posting History is put here.</li>
+<li>2014-06-18 : First posting.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## TOC
+
+TOC is a self-closing section, i.e. no other texts can be put inside.
+Next text will be out of TOC.
+
+##/ Table of Contents.
+Table will be automatically filled up.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>Main</h3></div>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// Updated regularly</li>
+	<li id="ref-docuKShort"><a href="https://kipid.tistory.com/entry/docuK-short-copiable-version">kipid's blog - docuK short copiable version</a>;<br>
+		// Updated regularly</li>
+	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<div class="subsec"><h3>Supported by</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// JavaScript enhancer</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// Math renderer.</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// Code prettyfier.</li>
+<div class="subsec"><h3>API documentation</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
+<div class="subsec"><h3>Other markdown/markup languages</h3></div>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
+		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
+		// 그래도 문법은 차용해서 쓰기 좋음.</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// Wikipedia uses its own markdown language.</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// Stack Overflow uses its own markdown language.</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// This might be used in GitHub wiki.</li>
+</ol>
+
+##/ References and Related Articles
+
+
+
+## head (h2) of section
+
+section contents
+
+
+
+### head (h3) of subsection
+
+contents of subsection
+
+
+
+#### head (h4) of subsubsection
+
+contents of subsubsection
+
+####/ optional end of subsubsection
+
+###/ optional end of subsection
+
+##/ optional end of section
+
+
+
+##[.hiden#sec-HidenSec] Initially Hiden Section
+
+With hiden class, the section will be hiden initially.
+
+
+
+## Raw HTML
+
+Since learning and remembering something new takes time, this is designed to be just as simple as possible. And as what this actually do is simply renderring/making a text to the HTML format, new grammers will be minimized by adopting raw HTML grammers.
+
+<div class="p">
+Raw HTML can be added like this. A paragraph starting with '&lt;' will be appended without any change.
+</div>
+
+Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>.
+
+<div class="cmt">
+
+This is default comment box: <code class="prettyprint">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+
+You can put multiple paragraphs and nested htmls.
+
+<ul>
+	<li>Unordered list 1.</li>
+	<li>Unordered list 2.</li>
+</ul>
+<ol>
+	<li>Ordered list 1.</li>
+	<li>Ordered list 2.</li>
+</ol>
+
+This is it.
+
+</div>
+
+<div class="bcf">
+
+This is default 'be careful' box: <code class="prettyprint">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+
+</div>
+
+
+
+## Links | URLs to appropriate html
+
+Planning to implement this.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## Figures
+
+<figure id="fig-1"><div class="fig">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
+	<div class="caption">Caption.</div>
+</div></figure>
+
+
+
+## Maths or Equations
+
+Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="prettyprint">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
+
+The first two are converted to <span class="emph">inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one</span> is converted to outline math like
+
+<span class="emph"><eqq id="eqq-1">
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq></span>
+
+<eqq id="eqq-2">
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+
+
+
+## Codes
+
+Codes can be pretty-printed.
+
+Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
+
+<pre class="prettyprint scrollable lang-java">
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+</pre>
+
+<div class="p"></div>
+
+Using <code class="prettyprint">```Codes to be pretty-printed.```/</code>, or <code class="prettyprint">```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+</div>
+
+
+
+## New Section
+
+"```/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(m, $, undefined) {
+m.printMode=false;
+m.recoCats="";
+m.wait=1024;
+m.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery);
+</script>
+
+<!-- From recoeve.net CDN -->
+<script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->
