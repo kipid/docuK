@@ -1150,9 +1150,31 @@ public class HelloWorldServer extends Verticle {
 
 
 
-## New Section
+## Fuzzy Search of Contents of the SEE document
 
-"```/" 로 끝나면 에러남 ㅡ,.ㅡ;;; 귀찮네 해결하기.
+You can easily fuzzy-search contents of the SEE document with FS (<span class="bold">G</span>o: shortkey <span class="bold">G</span>).
+
+
+
+## Header, Footer (Promoting recoeve.net)
+
+In header and footer, there are promotions of <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
+
+You can set the recoeve page of yours with <code>m.recoeveUserId="your-recoeve-id";</code>, and <code>m.recoCats="Current pages categories, ; separated multiple categories"</code>.
+
+You can disable these promotions with <code>m.printMode=true</code> setting.
+
+In this page, I set the recoeve-related variables like the below.
+
+```
+m.printMode=false;
+m.recoeveUserId="kipid";
+m.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+```/
+
+So the iframe pages in the header and footer will be <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (multireco mode)</a>.
+
+The default value of <code>m.recoeveUserId="kipid"</code> and <code>m.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
 </codeprint><!-- SEE -->
 
 <codeprint id="docuK-script">
