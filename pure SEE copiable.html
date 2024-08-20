@@ -77,6 +77,7 @@ To avoid end of code printing, I escaped &lt;code&gt;```/&lt;/code&gt; to &lt;co
 ```\/
 
 &lt;script&gt;
+(function (m, $, undefined) {
 m.toBeCopied=m.unescapeHTML($("#pre-code-full-SEE-docuK").html().trim());
 $("#Copy-Full-SEE-Code").on("click", function () {
 	let written=m.toBeCopied;
@@ -87,6 +88,7 @@ $("#Copy-Full-SEE-Code").on("click", function () {
 		alert(`Could not copy text: ${err}`);
 	});
 });
+})(window.k, jQuery);
 &lt;/script&gt;
 
 
@@ -144,9 +146,9 @@ Categories of this document is put here with links to &lt;a target="_blank" href
 
 ## Warning
 
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (&lt;code&gt;docuK-prepare.js&lt;/code&gt;), or which are using &lt;code&gt;m.variables&lt;/code&gt; already asigned before, will not work in the afterward rendering.
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (&lt;code&gt;docuK-prepare.js&lt;/code&gt;), or which are using &lt;code&gt;k.variables&lt;/code&gt; already asigned before, will not work in the afterward rendering.
 
-Only &lt;code&gt;m.docuKProcess()&lt;/code&gt; will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+Only &lt;code&gt;k.docuKProcess()&lt;/code&gt; will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -629,6 +631,7 @@ window.disqus_config=function () {
 ```/
 
 <script>
+(function (m, $) {
 m.toBeCopied=m.unescapeHTML($("#pre-code-full-SEE-docuK").html().trim());
 $("#Copy-Full-SEE-Code").on("click", function () {
 	let written=m.toBeCopied;
@@ -639,6 +642,7 @@ $("#Copy-Full-SEE-Code").on("click", function () {
 		alert(`Could not copy text: ${err}`);
 	});
 });
+})(window.k, jQuery);
 </script>
 
 
@@ -697,9 +701,9 @@ Categories of this document is put here with links to <a target="_blank" href="h
 
 ## Warning
 
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code class="prettyprint">docuK-prepare.js</code>), or which are using <code class="prettyprint">m.variables</code> already asigned before, will not work in the afterward rendering.
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code class="prettyprint">docuK-prepare.js</code>), or which are using <code class="prettyprint">k.variables</code> already asigned before, will not work in the afterward rendering.
 
-Only <code class="prettyprint">m.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+Only <code class="prettyprint">k.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -1160,21 +1164,21 @@ You can easily fuzzy-search contents of the SEE document with FS (<span class="b
 
 In header and footer, there are promotions of <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
 
-You can set the recoeve page of yours with <code>m.recoeveUserId="your-recoeve-id";</code>, and <code>m.recoCats="Current pages categories, ; separated multiple categories"</code>.
+You can set the recoeve page of yours with <code>k.recoeveUserId="your-recoeve-id";</code>, and <code>k.recoCats="Current pages categories, ; separated multiple categories"</code>.
 
-You can disable these promotions with <code>m.printMode=true</code> setting.
+You can disable these promotions with <code>k.printMode=true</code> setting.
 
 In this page, I set the recoeve-related variables like the below.
 
 ```
-m.printMode=false;
-m.recoeveUserId="kipid";
-m.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
 ```/
 
 So the iframe pages in the header and footer will be <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (multireco mode)</a>.
 
-The default value of <code>m.recoeveUserId="kipid"</code> and <code>m.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
+The default value of <code>k.recoeveUserId="kipid"</code> and <code>k.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
 </codeprint><!-- SEE -->
 
 <codeprint id="docuK-script">
@@ -1194,7 +1198,7 @@ window.disqus_config=function () {
 	this.page.identifier=""; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
 };
-})(window.m, jQuery);
+})(window.k, jQuery);
 </script>
 
 <!-- From kipid.tistory CDN -->
