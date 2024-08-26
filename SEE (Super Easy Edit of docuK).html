@@ -31,8 +31,9 @@
 <div class="docuK noDIdHandle">
 <div class="sec"><h1># Super Easy Edit (SEE) of docuK (MarkDown): 사용 설명서 (Manual | Documentation | Tutorial).</h1>
 	<div class="p">
-		쉽게 문서를 작성합시다.
+		쉽게 문서를 작성합시다. Download the below file, and learn how to write SEE (Super Easy Edit) of docuK from the file texts. Replacing only <code class="prettyprint">&lt;codeprint class="SEE"&gt;...&lt;/codeprint&gt;&lt;!-- SEE --&gt;</code> part, write well-formatted extended-MarkDown documents easily.
 	</div>
+	<div style="display:inline-block; background-color:white; color:black; max-width:100%; padding:.1em 2em; margin:0 auto">[##_File|kage@dSInGd/btsIRe24PXF/2YHLGGOn97cE4IXRV52Gt0/tfile.html|filename="pure SEE copiable.html" size="0.04MB" data-ke-align="alignCenter"|_##]</div>
 </div>
 <div class="sec"><h2>Abstract | Description of docuK and SEE</h2>
 	<div class="p">
@@ -142,9 +143,9 @@ Categories of this document is put here with links to <a target="_blank" href="h
 
 ## Warning
 
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>m.variables</code> already asigned before, will not work in the afterward rendering.
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>k.variables</code> already asigned before, will not work in the afterward rendering.
 
-Only <code>m.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+Only <code>k.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -606,21 +607,21 @@ You can easily fuzzy-search contents of the SEE document with FS (<span class="b
 
 In header and footer, there are promotions of <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
 
-You can set the recoeve page of yours with <code>m.recoeveUserId="your-recoeve-id";</code>, and <code>m.recoCats="Current pages categories, ; separated multiple categories"</code>.
+You can set the recoeve page of yours with <code>k.recoeveUserId="your-recoeve-id";</code>, and <code>k.recoCats="Current pages categories, ; separated multiple categories"</code>.
 
-You can disable these promotions with <code>m.printMode=true</code> setting.
+You can disable these promotions with <code>k.printMode=true</code> setting.
 
 In this page, I set the recoeve-related variables like the below.
 
 ```
-m.printMode=false;
-m.recoeveUserId="kipid";
-m.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
 ```/
 
 So the iframe pages in the header and footer will be <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (multireco mode)</a>.
 
-The default value of <code>m.recoeveUserId="kipid"</code> and <code>m.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
+The default value of <code>k.recoeveUserId="kipid"</code> and <code>k.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
 </codeprint><!-- codeprint#SEE0.SEE copied from "pure SEE.html" -->
 
 <div class="docuK noDIdHandle">
@@ -651,10 +652,10 @@ The default value of <code>m.recoeveUserId="kipid"</code> and <code>m.recoCats="
 </codeprint><!-- docuK-docu -->
 
 <script>
-(function(m, $, undefined) {
+(function(k, $, undefined) {
 $("#textarea-SEE")[0].value=$("#SEE0").html().trim();
 $("#Copy-Full-SEE-Code").on("click", function () {
-	let written=m.toBeCopied;
+	let written=k.toBeCopied;
 	navigator.clipboard.writeText(written).then(function () {
 		alert(`The following is copied!\n"${written}"`);
 	}
@@ -662,7 +663,7 @@ $("#Copy-Full-SEE-Code").on("click", function () {
 		alert(`Could not copy text: ${err}`);
 	});
 });
-m.printFullSEE=function (SEE) {
+k.printFullSEE=function (SEE) {
 	let fullSEE=`<!DOCTYPE html>
 
 <meta charset="UTF-8"/>
@@ -685,10 +686,10 @@ ${SEE.trim()}
 
 <codeprint id="docuK-script">
 <script>
-(function(m, $, undefined) {
-m.recoCats="[Recoeve]--docuK";
-m.wait=512;
-m.delayPad=0;
+(function(k, $, undefined) {
+k.recoCats="[Recoeve]--docuK";
+k.wait=512;
+k.delayPad=0;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -704,14 +705,14 @@ window.disqus_config=function () {
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-script -->`;
-	m.toBeCopied=fullSEE.trim();
-	$("#pre-docuK-full-HTML").html(m.escapeHTML(fullSEE));
+	k.toBeCopied=fullSEE.trim();
+	$("#pre-docuK-full-HTML").html(k.escapeHTML(fullSEE));
 	$("#pre-docuK-full-HTML").removeClass("prettyprinted");
 	let tryN=0;
 	setTimeout(function later() {
 		if (typeof PR!=='undefined'&&PR.prettyPrint||tryN++>17) {
 			PR.prettyPrint(function () {
-				m.logPrint("<br><br>Code in '#pre-docuK-full-HTML' is prettyPrinted.");
+				k.logPrint("<br><br>Code in '#pre-docuK-full-HTML' is prettyPrinted.");
 			}, $("#pre-docuK-full-HTML")[0]);
 		}
 		else {
@@ -719,11 +720,11 @@ window.disqus_config=function () {
 		}
 	}, 512);
 };
-m.printFullSEE($("#textarea-SEE")[0].value);
+k.printFullSEE($("#textarea-SEE")[0].value);
 
-m.renderIt=function () {
-	$("#rendered-docuK").html(m.renderToDocuK($("#textarea-SEE")[0].value));
-	m.docuKProcess(m, jQuery, 2);
+k.renderIt=function () {
+	$("#rendered-docuK").html(k.renderToDocuK($("#textarea-SEE")[0].value));
+	k.docuKProcess(m, jQuery, 2);
 	$("#time-last-render").html("Lastly rendered at "+new Date().toLocaleString());
 };
 
@@ -733,7 +734,7 @@ $(document).ready(function () {
 		$elem.off("click");
 		$("#textarea-SEE")[0].disabled=true;
 		$elem.css({background:"rgb(100,100,100)"});
-		m.renderIt();
+		k.renderIt();
 		$elem.css({background:"rgb(209, 112, 112)"});
 		$("#textarea-SEE")[0].disabled=false;
 		$elem.on("click", anonyRender);
@@ -751,15 +752,16 @@ $(document).ready(function () {
 		}
 	});
 });
-})(window.m, jQuery);
+})(window.k, jQuery);
 </script>
 
 <codeprint id="docuK-script">
 <script>
-m.printMode=false;
-m.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
-m.wait=1024;
-m.delayPad=512;
+(function (k, $, undefined) {
+k.printMode=false;
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=512;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -769,6 +771,7 @@ window.disqus_config=function () {
 	this.page.identifier="Super-Easy-Edit-SEE-of-docuK"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
 };
+})(window.k, jQuery);
 </script>
 
 <!-- From kipid.tistory CDN -->
