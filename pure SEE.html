@@ -37,8 +37,7 @@ The docuK rendered from the current text is being represented.
 
 I recommend you to save the below file, and copy and paste to new html file, and edit it with referencing the SEE document (pure SEE copiable.html).
 
-[##_File|kage@dSInGd/btsIRe24PXF/2YHLGGOn97cE4IXRV52Gt0/tfile.html|filename="pure SEE copiable.html" size="0.04MB" data-ke-align="alignCenter"|_##]
-
+<div style="display:inline-block; background-color:white; color:black; max-width:100%; padding:.1em 2em; margin:0 auto">[##_File|kage@dSInGd/btsIRe24PXF/2YHLGGOn97cE4IXRV52Gt0/tfile.html|filename="pure SEE copiable.html" size="0.04MB" data-ke-align="alignCenter"|_##]</div>
 
 
 ## Abstract | Description of docuK and SEE
@@ -107,9 +106,9 @@ Categories of this document is put here with links to <a target="_blank" href="h
 
 ## Warning
 
-In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>m.variables</code> already asigned before, will not work in the afterward rendering.
+In this live demo, there is some limitations. Delayed loading, browser-info, code prettyprint, maths, and possibly some additional javascript codes which are called only once in the beginning (<code>docuK-prepare.js</code>), or which are using <code>k.variables</code> already asigned before, will not work in the afterward rendering.
 
-Only <code>m.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
+Only <code>k.docuKProcess()</code> will be called in this demo example. But when you put "docuK HTML part" into a html file or post it to blogs (which allows script), the full feature of docuK will be loaded and every functionality of docuK will work.
 
 
 
@@ -567,30 +566,30 @@ You can easily fuzzy-search contents of the SEE document with FS (<span class="b
 
 In header and footer, there are promotions of <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
 
-You can set the recoeve page of yours with <code>m.recoeveUserId="your-recoeve-id";</code>, and <code>m.recoCats="Current pages categories, ; separated multiple categories"</code>.
+You can set the recoeve page of yours with <code>k.recoeveUserId="your-recoeve-id";</code>, and <code>k.recoCats="Current pages categories, ; separated multiple categories"</code>.
 
-You can disable these promotions with <code>m.printMode=true</code> setting.
+You can disable these promotions with <code>k.printMode=true</code> setting.
 
 In this page, I set the recoeve-related variables like the below.
 
 ```
-m.printMode=false;
-m.recoeveUserId="kipid";
-m.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
 ```/
 
 So the iframe pages in the header and footer will be <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (multireco mode)</a>.
 
-The default value of <code>m.recoeveUserId="kipid"</code> and <code>m.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
+The default value of <code>k.recoeveUserId="kipid"</code> and <code>k.recoCats="[Music/Break]--K-Pop"</code>, when those are not set or empty.
 </codeprint><!-- SEE -->
 
 <codeprint id="docuK-script">
 <script>
-(function(m, $, undefined) {
-m.SEEHTMLs=[];
-m.SEEHTMLs[0]=$("#SEE0").html().trim();
-$("#pre0-SEE").html(m.escapeHTML(m.SEEHTMLs[0]));
-$("#textarea-full-SEE").html(m.escapeHTML(`<!DOCTYPE html>
+(function(k, $, undefined) {
+k.SEEHTMLs=[];
+k.SEEHTMLs[0]=$("#SEE0").html().trim();
+$("#pre0-SEE").html(k.escapeHTML(k.SEEHTMLs[0]));
+$("#textarea-full-SEE").html(k.escapeHTML(`<!DOCTYPE html>
 
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
@@ -607,7 +606,7 @@ $("#textarea-full-SEE").html(m.escapeHTML(`<!DOCTYPE html>
 <meta charset="utf-8" name="description" content="Description of this document. This is good for search engine."/>
 
 <codeprint class="SEE">
-${m.SEEHTMLs[0]}
+${k.SEEHTMLs[0]}
 </codeprint><!-- SEE -->
 
 <codeprint id="docuK-script">
@@ -616,11 +615,11 @@ ${m.SEEHTMLs[0]}
 
 // Some codes used only in this document. i.e. Filling the pre#pre0-SEE and textarea#textarea-full-SEE
 
-m.printMode=false;
-m.recoeveUserId="";
-m.recoCats="";
-m.wait=1024;
-m.delayPad=512;
+k.printMode=false;
+k.recoeveUserId="";
+k.recoCats="";
+k.wait=1024;
+k.delayPad=512;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -636,13 +635,13 @@ window.disqus_config=function () {
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-script -->`));
-m.SEEHTMLs[0]=$("#SEE0").html().trim();
+k.SEEHTMLs[0]=$("#SEE0").html().trim();
 
-m.printMode=false;
-m.recoeveUserId="kipid";
-m.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
-m.wait=1024;
-m.delayPad=512;
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=0;
 
 /**
  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
