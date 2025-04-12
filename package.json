@@ -1,0 +1,33 @@
+{
+	"name": "docuk",
+	"version": "2.3.1",
+	"description": "MarkDown docuK SEE (Super Easy Edit)",
+	"main": "src/docuK-prepare-2.3.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kipid/docuK.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/kipid/docuK/issues"
+	},
+	"homepage": "https://github.com/kipid/docuK#readme",
+	"dependencies": {
+		"jquery": "^3.7.1",
+		"mathjax": "^3.2.2",
+		"prettier": "^3.5.3",
+		"prettyfy": "^0.0.1"
+	},
+	"devDependencies": {
+		"@types/jquery": "^3.5.32",
+		"@types/kakao-js-sdk": "^1.39.5",
+		"@types/mathjax": "^0.0.40",
+		"@types/node": "^22.14.1",
+		"typescript": "^5.8.3"
+	}
+}
