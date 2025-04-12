@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"target": "ES2022", // 출력할 JavaScript 버전
+		"module": "None", // 모듈 시스템 (브라우저에서 사용할 수 있도록 ESNext로 설정)
+		"moduleResolution": "node", // 모듈 해석 방식
+		"strict": false, // 엄격한 타입 검사
+		"noImplicitAny": false,
+		"strictNullChecks": false,
+		"esModuleInterop": true, // ES 모듈과 CommonJS 모듈 간의 호환성
+		"skipLibCheck": true, // 라이브러리 파일 검사 건너뛰기
+		"forceConsistentCasingInFileNames": true, // 파일 이름 대소문자 일관성 강제
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"outDir": "./", // 컴파일된 파일이 저장될 디렉토리
+		"rootDir": "./src", // 소스 파일의 루트 디렉토리
+		"allowJs": true // JavaScript 파일도 포함
+	},
+	"include": [
+		"src/**/*.ts" // 포함할 TypeScript 파일 경로
+	],
+	"exclude": [
+		"node_modules" // 제외할 디렉토리
+	]
+}

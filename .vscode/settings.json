@@ -1,0 +1,113 @@
+{
+	"workbench.colorTheme": "Cursor Dark High Contrast",
+	"editor.formatOnPaste": true,
+	"editor.formatOnType": false,
+	"prettier.enable": true,
+	"editor.quickSuggestionsDelay": 100,
+	"files.autoGuessEncoding": true,
+	"editor.indentSize": "tabSize",
+	"[html]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": false,
+		"editor.accessibilityPageSize": 500,
+		"editor.autoIndent": "advanced",
+		"editor.bracketPairColorization.independentColorPoolPerBracketType": true
+	},
+	"workbench.tree.indent": 16,
+	"html.format.wrapLineLength": 65536,
+	"workbench.editor.wrapTabs": true,
+	"editor.wordWrapColumn": 65536,
+	"workbench.settings.applyToAllProfiles": [
+		"html.format.wrapLineLength",
+		"editor.wordWrapColumn"
+	],
+	"diffEditor.wordWrap": "on",
+	"html.format.wrapAttributes": "preserve",
+	"editor.tabCompletion": "on",
+	"[javascript]": {
+		"editor.formatOnSave": false,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "brackets",
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"editor.stickyTabStops": true,
+	"workbench.tree.renderIndentGuides": "none",
+	"git.openRepositoryInParentFolders": "never",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"workbench.editorAssociations": {
+		"*.xls": "default"
+	},
+	"security.workspace.trust.untrustedFiles": "newWindow",
+	"editor.wordWrap": "on",
+	"editor.wrappingIndent": "indent",
+	"chat.editor.wordWrap": "on",
+	"liveServer.settings.donotShowInfoMsg": true,
+	"tabnine.experimentalAutoImports": true,
+	"git.ignoreMissingGitWarning": true,
+	"files.trimTrailingWhitespace": true,
+	"editor.linkedEditing": true,
+	"svg.preview.mode": "svg",
+	"java.import.gradle.user.home": "C:\\Users\\gram\\AppData\\Roaming\\Code\\User\\globalStorage\\redhat.java\\1.34.0\\config_win\\org.eclipse.osgi\\55\\0\\.cp\\gradle\\init\\init.gradle",
+	"java.import.gradle.home": "C:\\Users\\gram\\AppData\\Roaming\\Code\\User\\globalStorage\\redhat.java\\1.34.0\\config_win\\org.eclipse.osgi\\55\\0\\.cp\\gradle\\init\\init.gradle",
+	"java.import.gradle.java.home": "C:\\Users\\gram\\AppData\\Roaming\\Code\\User\\globalStorage\\redhat.java\\1.34.0\\config_win\\org.eclipse.osgi\\55\\0\\.cp\\gradle\\init\\init.gradle",
+	"java.import.gradle.version": "8.10",
+	"gradle.showStoppedDaemons": true,
+	"java.imports.gradle.wrapper.checksums": [],
+	"gradle.debug": true,
+	"gradle.javaDebug.cleanOutput": true,
+	"editor.fontFamily": "\"Nanum Gothic Coding\"",
+	"editor.insertSpaces": false,
+	"workbench.editor.tabSizing": "fixed",
+	"emmet.triggerExpansionOnTab": true,
+	"editor.guides.indentation": false,
+	"[css]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"html.format.wrapAttributesIndentSize": 2,
+	"explorer.confirmDragAndDrop": false,
+	"terminal.integrated.defaultProfile.windows": "Command Prompt",
+	"java.import.gradle.offline.enabled": true,
+	"maven.terminal.useJavaHome": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"workbench.settings.useSplitJSON": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+	"eslint.workingDirectories": [
+		{
+			"mode": "auto"
+		}
+	],
+	"eslint.enable": true,
+	"eslint.validate": ["javascript", "javascriptreact", "typescript"],
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	},
+	"editor.formatOnSave": true,
+	"[markdown]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"notebook.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.tabSize": 2,
+	"tailwindCSS.rootFontSize": 10,
+	"cursor.composer.collapsePaneInputBoxPills": true,
+	"cursor.cmdk.autoSelect": false,
+	"notebook.output.wordWrap": true,
+	"editor.foldingImportsByDefault": true,
+	"cursor.composer.shouldAutoScrollToBottom": false,
+	"css.format.maxPreserveNewLines": 2000,
+	"less.format.maxPreserveNewLines": 2000,
+	"scss.format.maxPreserveNewLines": 2000,
+	"files.insertFinalNewline": true,
+	"html.format.maxPreserveNewLines": 2000,
+	"errorLens.disableLineComments": {
+		"SAME_LINE": "\"eslint\": \"// eslint-disable-line $code SAME_LINE\""
+	},
+	"prettier.useTabs": true,
+	"editor.formatOnSaveMode": "modificationsIfAvailable",
+	"rest-client.addRequestBodyLineIndentationAroundBrackets": false,
+	"files.trimFinalNewlines": true,
+	"notebook.insertFinalNewline": true,
+	"editor.minimap.enabled": true
+}
