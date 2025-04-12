@@ -1,0 +1,1 @@
+node .\esbuild.config.js
