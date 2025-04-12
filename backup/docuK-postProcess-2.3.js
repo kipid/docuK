@@ -145,7 +145,7 @@ m.$document.ready(function () {
 	m.$title.html(m.$title.html() + ` at ${window.location.host}`);
 
 	m.$log.after(`<div id="floating-key">
-<div id="button-hideFK" class="button" onclick="k.toggleFK()">�� Hid<span class="bold underline">e</span></div>
+<div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
 <div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> mess</div>
 <div class="button button-Go" style="width:4.5em; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})">
 <span class="bold underline">G</span>o (FS)
@@ -182,7 +182,7 @@ Log <span class="bold underline">i</span>n
 </div>`: `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyO'})">
 Log <span class="bold underline">o</span>ut
 </div>`}
-<div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">��</div>`);
+<div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">▲</div>`);
 	m.$floating_key = $("#floating-key");
 	if (m.docCookies.getItem("hideFK") === "y") {
 		m.$floating_key.hide();
@@ -263,7 +263,7 @@ Log <span class="bold underline">o</span>ut
 
 	m.myIPs = ["14.38.247.30", "175.212.158.53"];
 	m.ignoreMe = true;
-	m.weekDays = ["��", "��", "��", "��", "紐�", "湲�", "��"];
+	m.weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 	m.daysToPlotPageViewsChart = 31;
 	m.to = [];
 	m.from = [];
@@ -363,7 +363,7 @@ Log <span class="bold underline">o</span>ut
 			countChartHTML += `<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0 - rightPadding}%" y2="${bottomLine}%"/>`;
 			for (let i = 0; i < pageViewsOfADay.length; i++) {
 				countChartHTML += `<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine - 1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine + 1.0}%"/>
-<text class="tick${pageViewsOfADay[i].weekday === "��" ? " saturday" : pageViewsOfADay[i].weekday === "��" ? " sunday" : ""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
+<text class="tick${pageViewsOfADay[i].weekday === "토" ? " saturday" : pageViewsOfADay[i].weekday === "일" ? " sunday" : ""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
 <tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
 <tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
 <tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
@@ -561,7 +561,7 @@ Log <span class="bold underline">o</span>ut
 		}
 	}
 	m.$window.on("keydown.shortkey", m.processShortKey);
-	m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To �꾩껜紐⑸줉/[Lists]) are set.`);
+	m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
 	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 

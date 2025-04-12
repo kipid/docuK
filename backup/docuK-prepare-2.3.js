@@ -145,7 +145,7 @@ m.togglePosition = function (elem) {
 		$parent.removeClass("fixed");
 		$parent.css("z-index", 0);
 		window.scrollTo(0, $parent.offset().top);
-		$elem.text("�� [--stick to the left top--]");
+		$elem.text("▲ [--stick to the left top--]");
 		m.fsToRs.fixed = false;
 	}
 	else {
@@ -161,12 +161,12 @@ m.togglePosition = function (elem) {
 			m.videoZIndex--;
 		}
 		$parent.css("z-index", zIndex);
-		$elem.text("�� [--return to the original position--]");
+		$elem.text("▲ [--return to the original position--]");
 		m.fsToRs.fixed = true;
 	}
 };
 m.rC = function (elemStr, option, id, noPc) {
-	return `<div class="rC${(option ? ` ${option}` : '')}"${!!id ? ` id="${id}"` : ""}><div class="rSC">${elemStr}</div>${noPc ? "" : `<div class="pc"><span onclick="k.togglePosition(this)">�� [--stick to the left top--]</span></div>`}</div>`;
+	return `<div class="rC${(option ? ` ${option}` : '')}"${!!id ? ` id="${id}"` : ""}><div class="rSC">${elemStr}</div>${noPc ? "" : `<div class="pc"><span onclick="k.togglePosition(this)">▲ [--stick to the left top--]</span></div>`}</div>`;
 };
 m.YTiframe = function (v, inListPlay, config, list) {
 	if (list && list.constructor === String) {
@@ -939,34 +939,34 @@ m.promoting = function (id) {
 	return `<div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="promoting order"${id ? ` id="${id}"` : ""}>
-<div class="p">* �띾낫/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
+<div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
 <div class="bcf">
-<a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">�좏뒠釉� �뚯븙 MV �ㅼ쓣 愿묎퀬�놁씠 紐⑸줉�ъ깮</a> �대낫�몄슂.<br/>
-�묒냽�섏뀛�� 蹂꾩젏留� �쒕젅洹� �섏떆硫� �먯떊�� �섏씠吏��� ���� �⑸땲��.<br/>
-洹몃━怨� �먯떊�� �섏씠吏�濡� �대룞�� �� 異붿쿇 諛쏄린 (�⑥텞�� R) 瑜� �꾨Ⅴ�쒕㈃ �먯떊�� �먯닔 硫붽릿寃껊뱾濡� �댁썐 (�댁썐蹂닿린 �⑥텞�� B) �� �먮룞�쇰줈 李얠븘二쇨퀬 洹� �댁썐�ㅻ줈遺��� 異붿쿇�� 諛쏆쓣 �� �덉뒿�덈떎.<br/>
+<a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">유튜브 음악 MV 들을 광고없이 목록재생</a> 해보세요.<br/>
+접속하셔서 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br/>
+그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.<br/>
 <br/>
 Come <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop#headPlay">here ([Music/Break]--Pop of kipid's Recoeve.net)</a> and just drag stars/points.<br/>
 Based on your points on URIs (musics), you will be connected to your neighbors (See neighbors: shortkey 'B') of your kind. And you will get recoms (recommendations: shortkey 'R') from them, and also give recoms to them.
 </div>
 <div class="bcf">
-<span class="bold">�됯��� 湲곕줉</span>: �뱀궗�댄듃�먯꽌 蹂� 湲곗궗, �댁뒪, �곸긽, �뚯븙 �깆쓣 湲곕줉�섍퀬 �됯��섏꽭��. �� �뺣낫�� 異붿쿇 �뚭퀬由ъ쬁�� �듯빐 �ъ슜�먯뿉寃� 留욎땄�� 異붿쿇�� �쒓났�섎뒗 �� �ъ슜�⑸땲��. 利�, �뱀떊�� 醫뗭븘�섎뒗 �좏삎�� 肄섑뀗痢좊� �� 留롮씠 諛쒓껄�� �� �덉뒿�덈떎.<br/>
+<span class="bold">평가와 기록</span>: 웹사이트에서 본 기사, 뉴스, 영상, 음악 등을 기록하고 평가하세요. 이 정보는 추천 알고리즘을 통해 사용자에게 맞춤형 추천을 제공하는 데 사용됩니다. 즉, 당신이 좋아하는 유형의 콘텐츠를 더 많이 발견할 수 있습니다.<br/>
 <br/>
 <span class="bold">Evaluate and Rate Content</span>: As you explore content on the platform, you can evaluate and rate it based on your preferences and interests. This could involve liking, rating, or commenting on articles, posts, or other types of content.<br/>
 <br/>
 <span class="bold">Connect with Like-Minded Users</span>: The platform likely has features for connecting with other users who share your interests. You might follow or connect with these users to build your network.
 </div>
 <div class="caption p cmt" style="margin:1em 0 0">
-* For the usage examples, visit my page (�덉젣瑜� 蹂댁떆�ㅻ㈃ �� �섏씠吏�瑜� 諛⑸Ц�� 二쇱꽭��.)
+* For the usage examples, visit my page (예제를 보시려면 제 페이지를 방문해 주세요.)
 <ul>
 <li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
 <li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop#headPlay">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC#headPlay">[Music/Break]--�④퇋由� | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
+<li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC#headPlay">[Music/Break]--남규리 | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
 <li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pet#headPlay">[Music/Break]--Pet of kipid's Recoeve.net (Multireco mode)</a></li>
 <li><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BPhysics%2FMath%2FScience%5D--Physics&PRL=0.80&PRR=1.00#headPlay">[Physics/Math/Science]--Physics of kipid's Recoeve.net</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5B%EC%9D%8C%EC%8B%9D%2F%EC%9A%94%EB%A6%AC%2F%EA%B1%B4%EA%B0%95%5D--%EA%B1%B4%EA%B0%95&PRL=0.80&PRR=1.00#headPlay">[�뚯떇/�붾━/嫄닿컯]--嫄닿컯 of kipid's Recoeve.net</a></li>
+<li><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5B%EC%9D%8C%EC%8B%9D%2F%EC%9A%94%EB%A6%AC%2F%EA%B1%B4%EA%B0%95%5D--%EA%B1%B4%EA%B0%95&PRL=0.80&PRR=1.00#headPlay">[음식/요리/건강]--건강 of kipid's Recoeve.net</a></li>
 </ul>
 </div>
-<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net Manual collection | �ъ슜諛⑸쾿 紐⑥쓬吏�: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BRecoeve%5D--Manual%2F%EC%84%A4%EB%AA%85%EC%84%9C#headPlay">[Recoeve]--Manual/�ㅻ챸�� of kipid's Recoeve.net</a></div>
+<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net Manual collection | 사용방법 모음집: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BRecoeve%5D--Manual%2F%EC%84%A4%EB%AA%85%EC%84%9C#headPlay">[Recoeve]--Manual/설명서 of kipid's Recoeve.net</a></div>
 <div class="caption p cmt" style="margin:1em 0 0"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}&ToR=#numbers-of-recos">${m.escapeOnlyTag(m.recoCat)} of ${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}'s Recoeve.net (multireco mode)</a>
 <div class="rC recoeve"><div class="rSC">
 <iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}&ToR=#numbers-of-recos" frameborder="0"></iframe>
@@ -979,7 +979,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 // logPrint function.
 m.$log = $("#docuK-log");
 m.$log.addClass("fixed");
-m.$log.before(`<div class="docuK-log exit" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>��</svg></div>`);
+m.$log.before(`<div class="docuK-log exit" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 m.$logAll = $("#docuK-log, .docuK-log.exit");
 m.logPrint = function (str) {
 	m.$log.append(str);
@@ -1009,7 +1009,7 @@ m.$log.after(`<div class="fs-container" id="fuzzy-search-container" style="displ
 	<line x1="20%" y1="70%" x2="30%" y2="60%"></line>
 	<line x1="20%" y1="70%" x2="30%" y2="80%"></line>
 </g></svg></div>
-<div class="exit" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>��</svg></div>
+<div class="exit" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
 </div>
 <a id="out-focus" class="none">out focus</a>`);
 
@@ -1046,29 +1046,29 @@ $("#fuzzy-search-container>.reset").on("click.reset", function (e) {
 // Hangul (Korean) split and map to English
 // KE : Korean Expanded
 ////////////////////////////////////////////////////
-m.jamoKE = ["��", "�긱꽦", "�긱뀉", "��", "�담뀍", "�담뀕", "��", "�룔꽬", "��", "�밤꽦", "�밤뀅", "�밤뀆", "�밤뀉", "�밤뀒", "�밤뀓", "�밤뀕", "��", "��", "�귙뀆", "�귙뀉", "��", "�끹뀉", "��", "��", "�덀뀍", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "�쀣뀖", "�쀣뀗", "�쀣뀭", "��", "��", "�쒌뀚", "�쒌뀛", "�쒌뀭", "��", "��", "�▲뀭", "��"];
-m.jamo = ["��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��"];
+m.jamoKE = ["ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄷㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+m.jamo = ["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅃ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 
-m.mapKE = { "q": "��", "Q": "��", "w": "��", "W": "��", "e": "��", "E": "��", "r": "��", "R": "��", "t": "��", "T": "��", "y": "��", "Y": "��", "u": "��", "U": "��", "i": "��", "I": "��", "o": "��", "O": "��", "p": "��", "P": "��", "a": "��", "A": "��", "s": "��", "S": "��", "d": "��", "D": "��", "f": "��", "F": "��", "g": "��", "G": "��", "h": "��", "H": "��", "j": "��", "J": "��", "k": "��", "K": "��", "l": "��", "L": "��", "z": "��", "Z": "��", "x": "��", "X": "��", "c": "��", "C": "��", "v": "��", "V": "��", "b": "��", "B": "��", "n": "��", "N": "��", "m": "��", "M": "��" };
+m.mapKE = { "q": "ㅂ", "Q": "ㅃ", "w": "ㅈ", "W": "ㅉ", "e": "ㄷ", "E": "ㄸ", "r": "ㄱ", "R": "ㄲ", "t": "ㅅ", "T": "ㅆ", "y": "ㅛ", "Y": "ㅛ", "u": "ㅕ", "U": "ㅕ", "i": "ㅑ", "I": "ㅑ", "o": "ㅐ", "O": "ㅒ", "p": "ㅔ", "P": "ㅖ", "a": "ㅁ", "A": "ㅁ", "s": "ㄴ", "S": "ㄴ", "d": "ㅇ", "D": "ㅇ", "f": "ㄹ", "F": "ㄹ", "g": "ㅎ", "G": "ㅎ", "h": "ㅗ", "H": "ㅗ", "j": "ㅓ", "J": "ㅓ", "k": "ㅏ", "K": "ㅏ", "l": "ㅣ", "L": "ㅣ", "z": "ㅋ", "Z": "ㅋ", "x": "ㅌ", "X": "ㅌ", "c": "ㅊ", "C": "ㅊ", "v": "ㅍ", "V": "ㅍ", "b": "ㅠ", "B": "ㅠ", "n": "ㅜ", "N": "ㅜ", "m": "ㅡ", "M": "ㅡ" };
 for (let p in m.mapKE) {
 	m.mapKE[m.mapKE[p]] = p; // Add reversed mapping.
 }
 
-m.rChoKE = ["��", "�긱꽦", "��", "��", "�룔꽬", "��", "��", "��", "�귙뀆", "��", "�끹뀉", "��", "��", "�덀뀍", "��", "��", "��", "��", "��"];
-m.rCho = ["��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��"];
+m.rChoKE = ["ㄱ", "ㄱㄱ", "ㄴ", "ㄷ", "ㄷㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+m.rCho = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 
-m.rJungKE = ["��", "��", "��", "��", "��", "��", "��", "��", "��", "�쀣뀖", "�쀣뀗", "�쀣뀭", "��", "��", "�쒌뀚", "�쒌뀛", "�쒌뀭", "��", "��", "�▲뀭", "��"];
-m.rJung = ["��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��"];
+m.rJungKE = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+m.rJung = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 
-m.rJongKE = ["", "��", "�긱꽦", "�긱뀉", "��", "�담뀍", "�담뀕", "��", "��", "�밤꽦", "�밤뀅", "�밤뀆", "�밤뀉", "�밤뀒", "�밤뀓", "�밤뀕", "��", "��", "�귙뀉", "��", "�끹뀉", "��", "��", "��", "��", "��", "��", "��"];
-m.rJong = ["", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��", "��"];
+m.rJongKE = ["", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+m.rJong = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 
 m.splitHangul = function (str) {
 	let res = [];
 	res.originalStr = str;
 	res.splitted3 = "";
 	res.splitted = "";
-	res.pCho = []; // position of word-start or 珥덉꽦
+	res.pCho = []; // position of word-start or 초성
 	let p = 0;
 	res.pCho[p] = true;
 	let cho, jung, jong;
@@ -1903,10 +1903,10 @@ m.toggleHeight = function (obj) {
 m.ShowHide = function (elem) {
 	$(elem).next().toggle();
 	if ($(elem).next().is(":visible")) {
-		$(elem).html("�� Hide");
+		$(elem).html("▼ Hide");
 	}
 	else {
-		$(elem).html("�� Show");
+		$(elem).html("▼ Show");
 	}
 	setTimeout(function () { m.$window.trigger("scroll.delayedLoad"); }, 1000);
 };
@@ -1914,7 +1914,7 @@ m.Hide = function (elem) {
 	let $elem = $(elem).parent();
 	window.scrollBy(0, -$elem.outerHeight());
 	$elem.hide();
-	$elem.parent().find(".ShowHide").html("�� Show");
+	$elem.parent().find(".ShowHide").html("▼ Show");
 };
 
 // bubbleRef's show/hide functions
@@ -2056,7 +2056,7 @@ $(`#docuK-style`).after(`<div id="notify-copied" class="block-touch">
 		<line x1="20%" y1="20%" x2="80%" y2="80%"></line>
 		<line x1="80%" y1="20%" x2="20%" y2="80%"></line>
 	</g>
-	��
+	✖
 </svg>
 </div>`);
 $('#notify-copied, #notify-copied-exit').hide();
@@ -2284,9 +2284,9 @@ m.docuKProcess = function docuK(m, $, docuKI, undefined) {
 <div class="cBoth"></div>
 <div class="copyright order"><ul>
 <li class="license cc"><span class="bold">Creative Commons</span></li>
-<li class="license by"><span class="bold">���묒옄�쒖떆</span> - �곸젅�� 異쒖쿂��, �대떦 �쇱씠�쇱뒪 留곹겕瑜� �쒖떆�섍퀬, 蹂�寃쎌씠 �덈뒗 寃쎌슦 怨듭��댁빞 �⑸땲��. �⑸━�곸씤 諛⑹떇�쇰줈 �대젃寃� �섎㈃ �섏�留�, �댁슜 �덈씫沅뚯옄媛� 洹��섏뿉寃� 沅뚮━瑜� 遺��ы븳�ㅺ굅�� 洹��섏쓽 �ъ슜�� �덇��쒕떎�� �댁슜�� �섑��댁꽌�� �� �⑸땲��.</li>
-<li class="license nc"><span class="bold">鍮꾩쁺由�</span> - �� ���묐Ъ�� �곷━ 紐⑹쟻�쇰줈 �댁슜�� �� �놁뒿�덈떎.</li>
-<li class="license nd"><span class="bold">蹂�寃쎄툑吏�</span> - �� ���묐Ъ�� 由щ���, 蹂��뺥븯嫄곕굹 2李⑥쟻 ���묐Ъ�� �묒꽦�섏��� 寃쎌슦 洹� 寃곌낵臾쇱쓣 怨듭쑀�� �� �놁뒿�덈떎.</li>
+<li class="license by"><span class="bold">저작자표시</span> - 적절한 출처와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지해야 합니다. 합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 됩니다.</li>
+<li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
+<li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
 </ul></div>
 <div id="shortkey" class="shortkey bcf order">
 Short Keys
@@ -2300,7 +2300,7 @@ Short Keys
 	<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyR'})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences.</span></li>
 </ul>
 <ul class="ul-short-key">
-	<li class="button-list"><span onclick="k.$window.trigger({type:'keydown', code:'KeyL'})"><span class="bold underline">L</span>: To �꾩껜紐⑸줉/[<span class="bold underline">L</span>ists].</span></li>
+	<li class="button-list"><span onclick="k.$window.trigger({type:'keydown', code:'KeyL'})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists].</span></li>
 	<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})"><span class="bold underline">Z</span>: Tistory comments.</span></li>
 	<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyX'})"><span class="bold underline">X</span>: DISQUS comments.</span></li>
 	<li class="button-cmt-handle"><span onclick="k.$window.trigger({type:'keydown', code:'KeyN'})"><span class="bold underline">N</span>: Ha<span class="bold underline">n</span>dle URI links in Tistory comments.</span></li>
@@ -2312,9 +2312,9 @@ Short Keys
 </div>`);
 		$docuKI.after(`<div class="copyright order"><ul>
 <li class="license cc"><span class="bold">Creative Commons</span></li>
-<li class="license by"><span class="bold">���묒옄�쒖떆</span> - �곸젅�� 異쒖쿂��, �대떦 �쇱씠�쇱뒪 留곹겕瑜� �쒖떆�섍퀬, 蹂�寃쎌씠 �덈뒗 寃쎌슦 怨듭��댁빞 �⑸땲��. �⑸━�곸씤 諛⑹떇�쇰줈 �대젃寃� �섎㈃ �섏�留�, �댁슜 �덈씫沅뚯옄媛� 洹��섏뿉寃� 沅뚮━瑜� 遺��ы븳�ㅺ굅�� 洹��섏쓽 �ъ슜�� �덇��쒕떎�� �댁슜�� �섑��댁꽌�� �� �⑸땲��.</li>
-<li class="license nc"><span class="bold">鍮꾩쁺由�</span> - �� ���묐Ъ�� �곷━ 紐⑹쟻�쇰줈 �댁슜�� �� �놁뒿�덈떎.</li>
-<li class="license nd"><span class="bold">蹂�寃쎄툑吏�</span> - �� ���묐Ъ�� 由щ���, 蹂��뺥븯嫄곕굹 2李⑥쟻 ���묐Ъ�� �묒꽦�섏��� 寃쎌슦 洹� 寃곌낵臾쇱쓣 怨듭쑀�� �� �놁뒿�덈떎.</li>
+<li class="license by"><span class="bold">저작자표시</span> - 적절한 출처와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지해야 합니다. 합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 됩니다.</li>
+<li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
+<li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
 </ul></div>
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>`);
@@ -2391,9 +2391,9 @@ Short Keys
 
 			if (!$secI.is(".noToggleUI")) {
 				secContentsId = `sec${docuKI}-${secITxt}-contents`;
-				$secI.append(`<div class="cBoth"></div><div class="Hide" onclick="k.Hide(this)">�� Hide</div><div class="cBoth"></div>`);
+				$secI.append(`<div class="cBoth"></div><div class="Hide" onclick="k.Hide(this)">▲ Hide</div><div class="cBoth"></div>`);
 				$secI.contents().slice(1).wrapAll(`<div class="sec-contents" id="${secContentsId}"></div>`);
-				$secIH2.after(`<div class="ShowHide" onclick="k.ShowHide(this)">�� Show/Hide</div>`);
+				$secIH2.after(`<div class="ShowHide" onclick="k.ShowHide(this)">▼ Show/Hide</div>`);
 				$secI.append(`<div class="cBoth"></div>`);
 			}
 
@@ -2439,9 +2439,9 @@ Short Keys
 	}
 	let refN = "", preRefHtml = "", refHtml = "", citeN = "";
 	function fCiteHtml() {
-		let str = `<div class="inRef" onmouseover="m.ShowBR(this)" onmouseout="m.timerHideBR(this)">${refN}<div class="bubbleRef"><div class="content">${preRefHtml}${refHtml}<div class="exit" onclick="k.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"/><line x1="80%" y1="20%" x2="20%" y2="80%"/></g>��</svg></div></div><div class="arrow"></div></div></div>`;
+		let str = `<div class="inRef" onmouseover="m.ShowBR(this)" onmouseout="m.timerHideBR(this)">${refN}<div class="bubbleRef"><div class="content">${preRefHtml}${refHtml}<div class="exit" onclick="k.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"/><line x1="80%" y1="20%" x2="20%" y2="80%"/></g>✖</svg></div></div><div class="arrow"></div></div></div>`;
 		if (m.browserWidth < 321) {
-			str = str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 留먰뭾�좎뿉�� 鍮꾨뵒�� �깆쓽 iframe�� �섎룄�곸쑝濡� 吏��먰븯吏� �딆븯�듬땲��. �먮옒�� �꾩튂�먯꽌 蹂댁꽭��.
+			str = str.replace(/<iframe[^>]*>[^<]*<\/iframe>/ig, '<span class="emph">In bubble refs, iframe (or youtube video) is intentionally NOT supported for various reasons (security, and cross browsing). See it in the original position of the iframe (video).</span>'); // 말풍선에서 비디오 등의 iframe을 의도적으로 지원하지 않았습니다. 원래의 위치에서 보세요.
 		}
 		return str;
 	}
