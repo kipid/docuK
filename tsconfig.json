@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
 		"target": "ES2022", // 출력할 JavaScript 버전
-		"module": "None", // 모듈 시스템 (브라우저에서 사용할 수 있도록 ESNext로 설정)
-		"moduleResolution": "node", // 모듈 해석 방식
-		"strict": false, // 엄격한 타입 검사
-		"noImplicitAny": false,
+		"module": "ESNext", // 모듈 시스템 (브라우저에서 사용할 수 있도록 ESNext로 설정)
+		"moduleResolution": "classic", // 모듈 해석 방식
+		"strict": true, // 엄격한 타입 검사
+		"noImplicitAny": true,
 		"strictNullChecks": false,
 		"esModuleInterop": true, // ES 모듈과 CommonJS 모듈 간의 호환성
 		"skipLibCheck": true, // 라이브러리 파일 검사 건너뛰기
