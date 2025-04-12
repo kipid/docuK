@@ -70,7 +70,7 @@
 	"java.import.gradle.offline.enabled": true,
 	"maven.terminal.useJavaHome": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"workbench.settings.useSplitJSON": true,
+	"workbench.settings.useSplitJSON": false,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
