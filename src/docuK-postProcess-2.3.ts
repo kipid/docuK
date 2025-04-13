@@ -22,12 +22,7 @@
 	// Showing disableQ0 only in width>321.
 	if (m.browserWidth > 321) {
 		m.$docuK.find(".disableQ0").html(function (ith, orgText) {
-			m.logPrint(
-				`<br><br>".disableQ0"s are enabled at vertical position of ${(
-					(100 * $(this).offset().top) /
-					m.$document.height()
-				).toPrecision(3)}% of document.`,
-			);
+			m.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${((100 * $(this).offset().top) / m.$document.height()).toPrecision(3)}% of document.`);
 			return orgText.replace(/<!--/g, "").replace(/-->/g, "");
 		});
 	}
@@ -812,4 +807,12 @@ fontCache: 'global'
 			m.reNewAndReOn();
 		}, 2048);
 	});
+
+	// Ads
+	const adsHTML = `<div class="docuK-ads">이 글이 도움이 되셨다면, 광고 클릭 한번씩만 부탁드립니다 =ㅂ=ㅋ. (If this article was helpful, please click the ad once. Thank you. ;)</div>`;
+	for (let i = 1; i < m.$docuK.length; i++) {
+		const $docuKI = m.$docuK.eq(i);
+		$docuKI.before(adsHTML);
+		$docuKI.after(adsHTML);
+	}
 })(window.k, jQuery);
