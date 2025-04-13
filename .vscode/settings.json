@@ -17,10 +17,7 @@
 	"html.format.wrapLineLength": 65536,
 	"workbench.editor.wrapTabs": true,
 	"editor.wordWrapColumn": 65536,
-	"workbench.settings.applyToAllProfiles": [
-		"html.format.wrapLineLength",
-		"editor.wordWrapColumn"
-	],
+	"workbench.settings.applyToAllProfiles": ["html.format.wrapLineLength", "editor.wordWrapColumn"],
 	"diffEditor.wordWrap": "on",
 	"html.format.wrapAttributes": "preserve",
 	"editor.tabCompletion": "on",
@@ -80,7 +77,7 @@
 		}
 	],
 	"eslint.enable": true,
-	"eslint.validate": ["javascript", "javascriptreact", "typescript"],
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 	"[prisma]": {
 		"editor.defaultFormatter": "Prisma.prisma"
 	},
@@ -105,6 +102,10 @@
 		"SAME_LINE": "\"eslint\": \"// eslint-disable-line $code SAME_LINE\""
 	},
 	"prettier.useTabs": true,
+	"prettier.tabWidth": 2,
+	"prettier.printWidth": 30000,
+	"prettier.singleQuote": false,
+	"prettier.trailingComma": "all",
 	"editor.formatOnSaveMode": "modificationsIfAvailable",
 	"rest-client.addRequestBodyLineIndentationAroundBrackets": false,
 	"files.trimFinalNewlines": true,
