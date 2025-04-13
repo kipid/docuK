@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 html,
 body {
 	font-family:'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif;
@@ -25,6 +24,17 @@ codeprint.SEE {
 
 #content .inner {
 	padding:0 !important
+}
+
+.docuK-ads {
+	font-size:18px;
+	text-align:center;
+	margin:.5em 0;
+	padding:.5em;
+	background-color:black;
+	color:antiquewhite;
+	border:1px solid antiquewhite;
+	border-radius:.5em;
 }
 
 .promoting {
@@ -281,7 +291,9 @@ textarea {
 	max-width:100%
 }
 
+
 /* MathJax must be handled. */
+
 .docuK data {
 	display:none
 }
@@ -558,7 +570,9 @@ textarea.multi-line {
 	padding:0 .35em 0 0
 }
 
+
 /*.docuK>.sec.hiden>.sec-contents {display:none}*/
+
 .docuK .subsec,
 .docuK .subsubsec {
 	margin:2em 0 .3em
@@ -932,7 +946,9 @@ img {
 	background-color:rgb(230, 230, 230)
 }
 
+
 /* r(S)C:Ratio (Sub)Container */
+
 .rC {
 	margin:.5em auto
 }
@@ -1049,7 +1065,9 @@ img {
 	max-width:37em
 }
 
+
 /* position change */
+
 .rC>.pc {
 	text-align:center;
 	font-size:10px
@@ -1142,7 +1160,9 @@ img {
 	padding-top:.5em
 }
 
+
 /* References and links */
+
 .docuK .inRef {
 	display:inline-block;
 	border:1px gray solid
@@ -1352,8 +1372,12 @@ dd {
 	padding-bottom:.2em
 }
 
+
 /* Pretty printing styles. Used with prettify.js. */
+
+
 /* Vim sunburst theme by David Leibovic */
+
 pre,
 code {
 	text-indent:0;
@@ -1410,7 +1434,9 @@ code.prettyprint {
 	background-color:rgb(70, 70, 70)
 }
 
+
 /* pre Container, Scrollable Switch (Explaination) */
+
 .preC {
 	position:relative;
 	margin:.5em 0 2em
@@ -1435,7 +1461,9 @@ code.prettyprint {
 	cursor:pointer
 }
 
+
 /* Specify class=linenums on a pre to get line numbering */
+
 pre ol.linenums {
 	margin:0;
 	color:#AEBEAE;
@@ -1464,7 +1492,9 @@ li.L9 {
 	list-style-type:decimal !important
 }
 
+
 /* Alternate shading for lines */
+
 pre li {
 	background:inherit
 }
@@ -1486,66 +1516,87 @@ code .str {
 	color:#65B042
 }
 
+
 /* string - green */
+
 pre .kwd,
 code .kwd {
 	color:#E28964
 }
 
+
 /* keyword - dark pink */
+
 pre .com,
 code .com {
 	color:#AEAEAE;
 	font-style:italic
 }
 
+
 /* comment - gray */
+
 pre .typ,
 code .typ {
 	color:#89bdff
 }
 
+
 /* type - light blue */
+
 pre .lit,
 code .lit {
 	color:#3387CC
 }
 
+
 /* literal - blue */
+
 pre .pun,
 code .pun {
 	color:#fff
 }
 
+
 /* punctuation - white */
+
 pre .pln,
 code .pln {
 	color:#fff
 }
 
+
 /* plaintext - white */
+
 pre .tag,
 code .tag {
 	color:#89bdff
 }
 
+
 /* html/xml tag - light blue */
+
 pre .atn,
 code .atn {
 	color:#bdb76b
 }
 
+
 /* html/xml attribute name - khaki */
+
 pre .atv,
 code .atv {
 	color:#F3FF64
 }
 
+
 /* html/xml attribute value - yellow */
+
 pre .dec,
 code .dec {
 	color:#3387CC
 }
+
 
 /* decimal - blue */
 
@@ -1654,11 +1705,9 @@ text.now-local {
 		width:9px;
 		height:9px
 	}
-
 	.rC.facebook>.rSC {
 		padding-bottom:209%;
 	}
-
 	#page-views-chart {
 		font-size:9.5px
 	}
@@ -1669,25 +1718,20 @@ text.now-local {
 		border-left:2px rgb(25, 60, 25) solid;
 		border-right:2px rgb(25, 60, 25) solid
 	}
-
 	.rC.facebook>.rSC {
 		padding-bottom:165%;
 	}
-
 	#docuK-log {
 		max-width:500px;
 		max-height:300px
 	}
-
 	.docuK-log.exit {
 		bottom:300px
 	}
-
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
 		font-size:1.5em
 	}
-
 	#page-views-chart {
 		font-size:10px
 	}
@@ -1697,21 +1741,17 @@ text.now-local {
 	.docuK .SNS-top {
 		padding-top:0
 	}
-
 	.rC.facebook>.rSC {
 		padding-bottom:136%;
 	}
-
 	.docuK .deviceInfo,
 	.docuK .promoting-docuK {
 		margin-left:20em
 	}
-
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
 		font-size:1.6em
 	}
-
 	#page-views-chart {
 		font-size:11px
 	}
@@ -1722,24 +1762,20 @@ text.now-local {
 		width:50%;
 		border-right:.15em solid white
 	}
-
 	.rC.instagram.fixed,
 	.rC.eveElse.fixed,
 	.rC.tiktok.fixed {
 		width:360px
 	}
-
 	.rC.tiktok>.rSC {
 		width:100%;
 		height:895px;
 		padding-bottom:0
 	}
-
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
 		font-size:1.7em
 	}
-
 	#page-views-chart {
 		font-size:12px
 	}
@@ -1750,7 +1786,6 @@ text.now-local {
 	.docuK #toggle-floating-key {
 		font-size:1.8em
 	}
-
 	#page-views-chart {
 		font-size:13px
 	}
@@ -1760,16 +1795,13 @@ text.now-local {
 	.rC.fixed {
 		width:55%
 	}
-
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
 		font-size:1.9em
 	}
-
 	#page-views-chart {
 		font-size:15px
 	}
-
 	.rC.imgur>.rSC {
 		padding-bottom:150%
 	}
@@ -1791,7 +1823,6 @@ text.now-local {
 	.rC.tiktok.fixed {
 		height:480px
 	}
-
 	#fuzzy-search-list {
 		max-height:410px
 	}
@@ -1807,7 +1838,6 @@ text.now-local {
 	.rC.tiktok.fixed {
 		height:895px
 	}
-
 	.rC.tiktok.fixed>.rSC {
 		height:100%;
 		padding-bottom:0
