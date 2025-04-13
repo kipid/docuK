@@ -2777,7 +2777,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 						classes = ` ${classes}`;
 					}
 					if (elemId) {
-						elemId = ` id="${elemId}"`;
+						elemId = ` id="${elemId}`;
 					} else {
 						elemId = ` id="docuK${docuKI}`;
 					}
@@ -2786,10 +2786,18 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 				let countCOTD = 0;
 				let countPH = 0;
 				let countRRA = 0;
+				let h1Count = 1;
+				let h2Count = 1;
+				let h3Count = 1;
+				let h4Count = 1;
+				let hNCount = 1;
 				switch (hN) {
 					case 1:
-						str += `<div class="docuK fromSEE" id="docuK${docuKI}"><div class="sec${classes}"><h1${elemId}>${head}</h1>`;
+						str += `<div class="docuK fromSEE" id="docuK${docuKI}"><div class="sec${classes}"><h1${elemId}-h1-${h1Count++}">${head}</h1>`;
 						docuOn = secOn = true;
+						h2Count = 1;
+						h3Count = 1;
+						h4Count = 1;
 						break;
 					case 2:
 						switch (head) {
@@ -2818,21 +2826,24 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 								break;
 							default:
 								str += `<div class="sec${classes}">`;
-								str += `<h2${elemId}>${head}</h2>`;
+								str += `<h2${elemId}-h2-${h2Count++}">${head}</h2>`;
+								h3Count = 1;
+								h4Count = 1;
 								secOn = true;
 								break;
 						}
 						break;
 					case 3:
-						str += `<div class="subsec${classes}"><h3${elemId}>${head}</h3>`;
+						str += `<div class="subsec${classes}"><h3${elemId}-h3-${h3Count++}">${head}</h3>`;
+						h4Count = 1;
 						subsecOn = true;
 						break;
 					case 4:
-						str += `<div class="subsubsec${classes}"><h4${elemId}>${head}</h4>`;
+						str += `<div class="subsubsec${classes}"><h4${elemId}-h4-${h4Count++}">${head}</h4>`;
 						subsubsecOn = true;
 						break;
 					default:
-						str += `<h${hN}${elemId}>${head}</h${hN}>`;
+						str += `<h${hN}${elemId}-h${hN}-${hNCount++}">${head}</h${hN}>`;
 				}
 				ps[i] = ps[i].substring(untilEnter.lastIndex).trim();
 			} else if ((hNExec = /^#+(?=\/)/.exec(ps[i]))) {
