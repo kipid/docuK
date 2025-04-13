@@ -20,6 +20,7 @@ declare global {
 		$page_views_chart?: JQuery<HTMLElement>;
 		MathJax?: {
 			startup?: boolean;
+			typeset?: (elements: HTMLElement[]) => void;
 			typesetPromise?: (elements: HTMLElement[]) => Promise<void>;
 		};
 		Kakao?: Kakao;
@@ -64,26 +65,9 @@ interface K {
 	getUTF8Length?: (s: string) => number;
 	symArray?: symbol;
 	getSearchVars?: (searchStr: string | null | undefined) => SearchVars;
-	heapify?: (
-		arr: any[],
-		key: string,
-		sorted: number[],
-		n: number,
-		i: number,
-	) => void;
-	heapsort?: (
-		arr: any[],
-		key: string,
-		sorted: number[],
-		upto: number,
-	) => number;
-	heapsortRest?: (
-		arr: any[],
-		key: string,
-		sorted: number[],
-		upto: number,
-		n: number,
-	) => number;
+	heapify?: (arr: any[], key: string, sorted: number[], n: number, i: number) => void;
+	heapsort?: (arr: any[], key: string, sorted: number[], upto: number) => number;
+	heapsortRest?: (arr: any[], key: string, sorted: number[], upto: number, n: number) => number;
 	escapeHTML?: (str: string) => string;
 	escapeOnlyTag?: (str: string) => string;
 	unescapeHTML?: (str: string) => string;
@@ -97,27 +81,12 @@ interface K {
 	uriToA?: (uri: string | null | undefined) => string;
 	videoZIndex?: number;
 	togglePosition?: (elem: HTMLElement) => void;
-	rC?: (
-		elemStr: string,
-		option?: string | null,
-		id?: string | null,
-		noPc?: boolean,
-	) => string;
-	YTiframe?: (
-		v: string,
-		inListPlay: boolean,
-		config: YTiframeConfig,
-		list?: string,
-	) => string;
+	rC?: (elemStr: string, option?: string | null, id?: string | null, noPc?: boolean) => string;
+	YTiframe?: (v: string, inListPlay: boolean, config: YTiframeConfig, list?: string) => string;
 	timeToSeconds?: (time: string) => number;
 	ptnURI?: PatternURI;
 	decomposeURI?: (uri: string) => DecomposedURI;
-	uriRendering?: (
-		uri: string,
-		toA: boolean,
-		inListPlay: boolean,
-		descR?: DescR,
-	) => Promise<RenderResult & DecomposedURI & { uri: string }>;
+	uriRendering?: (uri: string, toA: boolean, inListPlay: boolean, descR?: DescR) => Promise<RenderResult & DecomposedURI & { uri: string }>;
 	$textarea_copied?: JQuery<HTMLTextAreaElement>;
 	getConciseURI?: (uri: string) => Promise<string>;
 	ptnPureNumber?: RegExp;
@@ -127,19 +96,8 @@ interface K {
 	docCookies?: {
 		hasItem: (sKey: string) => boolean;
 		getItem: (sKey: string) => string;
-		removeItem: (
-			sKey: string,
-			sPath?: string | false,
-			sDomain?: string | false,
-		) => boolean;
-		setItem: (
-			sKey: string,
-			sValue: string,
-			vEnd?: number | string | Date,
-			sPath?: string | false,
-			sDomain?: string | false,
-			bSecure?: boolean,
-		) => boolean;
+		removeItem: (sKey: string, sPath?: string | false, sDomain?: string | false) => boolean;
+		setItem: (sKey: string, sValue: string, vEnd?: number | string | Date, sPath?: string | false, sDomain?: string | false, bSecure?: boolean) => boolean;
 		keys: () => string[];
 	};
 	localStorage?: {
@@ -174,15 +132,8 @@ interface K {
 	quote?: (str: string) => string;
 	spaceRegExpStr?: string;
 	arrayRegExs?: (ptnSH: SplitHangul) => RegExp[];
-	highlightStrFromIndices?: (
-		strSplitted: SplitHangul,
-		indices: { start: number; end: number }[],
-	) => string;
-	matchScoreFromIndices?: (
-		strSH: SplitHangul,
-		ptnSH: SplitHangul,
-		indices: { start: number; end: number }[],
-	) => number;
+	highlightStrFromIndices?: (strSplitted: SplitHangul, indices: { start: number; end: number }[]) => string;
+	matchScoreFromIndices?: (strSH: SplitHangul, ptnSH: SplitHangul, indices: { start: number; end: number }[]) => number;
 	fuzzySearch?: (ptnSH: SplitHangul, fs: FuzzySearch) => FuzzySearchResult;
 	gotoLi?: (e: any, elem: HTMLElement, k: number, fs: FuzzySearch) => void;
 	doFSGo?: (fs: FuzzySearch) => void;
@@ -190,16 +141,8 @@ interface K {
 	previous?: number;
 	wait?: number;
 	encloseStr?: (str: string) => string;
-	strToJSON?: (
-		str: string,
-		colMap?: boolean,
-		rowMap?: boolean,
-	) => Promise<StrToJSON>;
-	csvToJSON?: (
-		str: string,
-		colMap?: boolean,
-		rowMap?: boolean,
-	) => Promise<StrToJSON>;
+	strToJSON?: (str: string, colMap?: boolean, rowMap?: boolean) => Promise<StrToJSON>;
+	csvToJSON?: (str: string, colMap?: boolean, rowMap?: boolean) => Promise<StrToJSON>;
 	arrayToTableHTML?: (txtArray: StrToJSON) => string;
 	SEEToArray?: (SEE: string) => string[];
 	getEmmetFromHead?: (head: string) => string;
@@ -291,24 +234,14 @@ export interface PatternURI {
 		regEx0?: RegExp;
 		regEx1?: RegExp;
 		regEx2?: RegExp;
-		toIframe?: (
-			uriRest: string,
-			inListPlay: boolean,
-			toA: boolean,
-			descR: DescR,
-		) => Promise<RenderResult>;
+		toIframe?: (uriRest: string, inListPlay: boolean, toA: boolean, descR: DescR) => Promise<RenderResult>;
 	};
 	[array: symbol]: {
 		regEx?: RegExp;
 		regEx0?: RegExp;
 		regEx1?: RegExp;
 		regEx2?: RegExp;
-		toIframe?: (
-			uriRest: string,
-			inListPlay: boolean,
-			toA: boolean,
-			descR: DescR,
-		) => Promise<RenderResult>;
+		toIframe?: (uriRest: string, inListPlay: boolean, toA: boolean, descR: DescR) => Promise<RenderResult>;
 	}[];
 }
 
@@ -395,7 +328,7 @@ export type FuzzySearchResult = {
 export type FuzzySearch = {
 	array: FuzzySearchResult[];
 	fullList: FuzzySearchFullListItem[];
-	shuffled: { i: number }[];
+	shuffled: { i: number }[] | undefined | null | false;
 	$fsLis: JQuery<HTMLElement>;
 	$fs: JQuery<HTMLTextAreaElement>;
 	$fsl: JQuery<HTMLElement>;

@@ -32,6 +32,13 @@
 		});
 	}
 
+	$("code").each((index: number, elem: HTMLElement) => {
+		const $elem = $(elem);
+		if (!$elem.hasClass("no-escape-HTML")) {
+			$elem.html(m.escapeOnlyTag($elem.html()));
+		}
+	});
+	$("code").addClass("prettyprint");
 	// <eq> and <eqq> tags to MathJax format
 	let $eqs: JQuery<HTMLElement> = $("eq");
 	for (let i = 0; i < $eqs.length; i++) {
@@ -45,9 +52,7 @@
 			return "\\[ " + orgTxt.trim() + " \\]";
 		});
 	}
-	m.logPrint(
-		`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( \\ ) and \\ [ \\ ].`,
-	);
+	m.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( \\ ) and \\ [ \\ ].`);
 
 	// docuK process.
 	m.$docuK.has("script").addClass("noDIdHandle");
@@ -96,19 +101,14 @@
 				cat += "\n&nbsp; -- " + $subSec.find("h3:first-child .head-txt").text();
 				let $subSubSec = $listI.parents(".subsubsec");
 				if ($subSubSec.length) {
-					cat +=
-						"\n&nbsp; &nbsp; -- " +
-						$subSubSec.find("h4:first-child .head-txt").text();
+					cat += "\n&nbsp; &nbsp; -- " + $subSubSec.find("h4:first-child .head-txt").text();
 				}
 			}
 			txt = cat.replace(/\n&nbsp; &nbsp;/g, "").replace(/\n&nbsp;/g, "") + "\n";
 			html = '<div class="cat">' + cat.replace(/\n/g, "<br>") + "</div>";
 		}
 		txt += "* " + $listI.text();
-		html += `<div class="li">* ${$listI
-			.html()
-			.trim()
-			.replace(/\sid=/g, " squasi-id=")}</div>`;
+		html += `<div class="li">* ${$listI.html().trim().replace(/\sid=/g, " squasi-id=")}</div>`;
 		m.fsGo.fullList[$list.length - 1 - i] = {
 			i: $list.length - 1 - i,
 			txt: m.splitHangul(txt),
@@ -139,18 +139,10 @@
 			window.disqus_config.apply(m.disqusVars);
 			let url = (m.canonicalURI = m.disqusVars.page.url);
 			$('link[rel="canonical"]').remove();
-			($("head") || $("#docuK-style")).append(
-				`<link rel="canonical" href="${url}" />`,
-			);
+			($("head") || $("#docuK-style")).append(`<link rel="canonical" href="${url}" />`);
 			let hrefAnalyzed = new URL(window.location.href);
 			let urlAnalyzed = new URL(url);
-			if (
-				hrefAnalyzed.hostname === "kipid.tistory.com" &&
-				hrefAnalyzed.protocol.toLowerCase() ===
-					urlAnalyzed.protocol.toLowerCase() &&
-				decodeURIComponent(hrefAnalyzed.pathname) !==
-					decodeURIComponent(urlAnalyzed.pathname)
-			) {
+			if (hrefAnalyzed.hostname === "kipid.tistory.com" && hrefAnalyzed.protocol.toLowerCase() === urlAnalyzed.protocol.toLowerCase() && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
 				window.location.pathname = urlAnalyzed.pathname;
 			}
 		}
@@ -158,16 +150,8 @@
 		setTimeout(function () {
 			let parsedHref = new URL(window.location.href);
 			let origin = parsedHref.origin.toLowerCase();
-			if (
-				origin === "https://kipid.tistory.com" ||
-				origin === "http://localhost:8080" ||
-				origin === "http://127.0.0.1:8080" ||
-				origin === "https://recoeve.net" ||
-				origin === "https://www.recoeve.net"
-			) {
-				let blogStat = `URI\treferer\tREACTION_GUEST\n${
-					window.location.href
-				}\t${document.referrer}\t${m.docCookies.getItem("REACTION_GUEST")}`;
+			if (origin === "https://kipid.tistory.com" || origin === "http://localhost:8080" || origin === "http://127.0.0.1:8080" || origin === "https://recoeve.net" || origin === "https://www.recoeve.net") {
+				let blogStat = `URI\treferer\tREACTION_GUEST\n${window.location.href}\t${document.referrer}\t${m.docCookies.getItem("REACTION_GUEST")}`;
 				$.ajax({
 					type: "POST",
 					url: "https://recoeve.net/BlogStat",
@@ -175,17 +159,11 @@
 					dataType: "text",
 				})
 					.fail(async function (resp) {
-						m.logPrint(
-							"<br><br>BlogStat failed. " +
-								(await m.uriRendering(resp.toString(), true, false)),
-						);
+						m.logPrint("<br><br>BlogStat failed. " + (await m.uriRendering(resp.toString(), true, false)));
 						console.log("BlogStat failed. ", resp);
 					})
 					.done(async function (resp) {
-						m.logPrint(
-							"<br><br>BlogStat is logged. " +
-								(await m.uriRendering(resp.toString(), true, false)),
-						);
+						m.logPrint("<br><br>BlogStat is logged. " + (await m.uriRendering(resp.toString(), true, false)));
 						console.log("BlogStat is logged. ", resp);
 					});
 			}
@@ -253,17 +231,11 @@ Log <span class="bold underline">o</span>ut
 		let $codeprints: JQuery<HTMLElement> = $("codeprint");
 		for (let i = 0; i < $codeprints.length; i++) {
 			let codeId = $codeprints.eq(i).attr("id");
-			if (
-				codeId !== null &&
-				codeId !== undefined &&
-				codeId.startsWith("code-")
-			) {
+			if (codeId !== null && codeId !== undefined && codeId.startsWith("code-")) {
 				m.printCode(codeId);
 			}
 		}
-		m.logPrint(
-			`<br/><br/>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`,
-		);
+		m.logPrint(`<br/><br/>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`);
 
 		// Hiding hiden sections.
 		m.$docuK.find(".sec.hiden").find(">.sec-contents").css({ display: "none" });
@@ -290,48 +262,32 @@ Log <span class="bold underline">o</span>ut
 			m.CfontFamily(cookieItem as string);
 			m.logPrint(`<br>Font ${cookieItem} is set from cookie.`);
 			for (let i = 1; i < m.$docuK.length; i++) {
-				($(`#input${i}-font-family`)[0] as HTMLInputElement).value =
-					m.fontFamily;
+				($(`#input${i}-font-family`)[0] as HTMLInputElement).value = m.fontFamily;
 			}
 		}
 
 		cookieItem = m.docCookies.getItem("m.fontSize");
 		if (cookieItem !== null) {
 			m.CfontSize(Number(cookieItem) - m.defaultStyles.fontSize);
-			m.logPrint(
-				`<br>Font-size ${(Number(cookieItem) * 1.8).toFixed(
-					1,
-				)} is set from cookie.`,
-			);
+			m.logPrint(`<br>Font-size ${(Number(cookieItem) * 1.8).toFixed(1)} is set from cookie.`);
 		}
 
 		cookieItem = m.docCookies.getItem("m.lineHeight10");
 		if (cookieItem !== null) {
 			m.ClineHeight(Number(cookieItem) - m.defaultStyles.lineHeight10);
-			m.logPrint(
-				`<br>Line-height ${(Number(cookieItem) / 10).toFixed(
-					1,
-				)} is set from cookie.`,
-			);
+			m.logPrint(`<br>Line-height ${(Number(cookieItem) / 10).toFixed(1)} is set from cookie.`);
 		}
 
 		m.plink = $('meta[property="dg:plink"]').attr("content");
-		m.logPrint(
-			`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`,
-		);
+		m.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
 		m.printDeviceInfo();
 
 		window.$disqus_thread = $("#disqus_thread");
 		if (!window.$disqus_thread.length) {
-			($("#docuK-script") || $("body")).append(
-				`<div id="disqus_thread"></div>`,
-			);
+			($("#docuK-script") || $("body")).append(`<div id="disqus_thread"></div>`);
 			window.$disqus_thread = $("#disqus_thread");
 		}
-		let $disqus_js: JQuery<HTMLScriptElement> = $(
-			`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` +
-				`script>`,
-		); // Avoid closing script
+		let $disqus_js: JQuery<HTMLScriptElement> = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
 		m.$headOrBody.append($disqus_js);
 		m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
@@ -419,14 +375,10 @@ Log <span class="bold underline">o</span>ut
 			let bottomPadding = 20.0;
 			let bottomLine = 100.0 - bottomPadding;
 			let maxHeight = 100.0 - topPadding - bottomPadding;
-			let dx =
-				(100.0 - leftPadding - rightPadding) / m.daysToPlotPageViewsChart / 2.0;
+			let dx = (100.0 - leftPadding - rightPadding) / m.daysToPlotPageViewsChart / 2.0;
 			m.setIntervalBlogStatN = 0;
 			setTimeout(function self() {
-				if (
-					m.blogStatRes?.length < m.daysToPlotPageViewsChart &&
-					m.setIntervalBlogStatN++ <= 17
-				) {
+				if (m.blogStatRes?.length < m.daysToPlotPageViewsChart && m.setIntervalBlogStatN++ <= 17) {
 					setTimeout(self, 2048);
 					return;
 				}
@@ -440,10 +392,8 @@ Log <span class="bold underline">o</span>ut
 				let pageViewsOfADay = [];
 				for (let k = 0; k < m.daysToPlotPageViewsChart; k++) {
 					let blogStatResK = m.blogStatRes[k + 1];
-					let x =
-						leftPadding + (m.daysToPlotPageViewsChart - 1.0 - k) * dx * 2.0;
-					let tick =
-						leftPadding + (m.daysToPlotPageViewsChart - 0.5 - k) * dx * 2.0;
+					let x = leftPadding + (m.daysToPlotPageViewsChart - 1.0 - k) * dx * 2.0;
+					let tick = leftPadding + (m.daysToPlotPageViewsChart - 0.5 - k) * dx * 2.0;
 					let h = (maxHeight * blogStatResK.pageViews) / maxPageViews;
 					pageViewsOfADay[k] = {
 						pageViews: blogStatResK.pageViews,
@@ -456,45 +406,15 @@ Log <span class="bold underline">o</span>ut
 					};
 				}
 				for (let i = 0; i < pageViewsOfADay.length; i++) {
-					countChartHTML += `<rect class="column" x="${
-						pageViewsOfADay[i].x
-					}%" y="${bottomLine - pageViewsOfADay[i].h}%" width="${
-						2.0 * dx
-					}%" height="${
-						pageViewsOfADay[i].h
-					}%"></rect><text class="page-views" x="${
-						pageViewsOfADay[i].tick
-					}%" text-anchor="middle" y="${
-						bottomLine - pageViewsOfADay[i].h - 1.0
-					}%" dominant-baseline="text-bottom">${pageViewsOfADay[
-						i
-					].pageViews?.toFixed(0)}</text>`;
+					countChartHTML += `<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine - pageViewsOfADay[i].h}%" width="${2.0 * dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine - pageViewsOfADay[i].h - 1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews?.toFixed(0)}</text>`;
 				}
-				countChartHTML += `<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${
-					100.0 - rightPadding
-				}%" y2="${bottomLine}%"/>`;
+				countChartHTML += `<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0 - rightPadding}%" y2="${bottomLine}%"/>`;
 				for (let i = 0; i < pageViewsOfADay.length; i++) {
-					countChartHTML += `<line class="bar" x1="${
-						pageViewsOfADay[i].tick
-					}%" y1="${bottomLine - 1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${
-						bottomLine + 1.0
-					}%"/>
-<text class="tick${
-						pageViewsOfADay[i].weekday === "토"
-							? " saturday"
-							: pageViewsOfADay[i].weekday === "일"
-								? " sunday"
-								: ""
-					}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
-<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${
-						pageViewsOfADay[i].month
-					}</tspan>
-<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${
-						pageViewsOfADay[i].day
-					}</tspan>
-<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${
-						pageViewsOfADay[i].weekday
-					}</tspan>
+					countChartHTML += `<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine - 1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine + 1.0}%"/>
+<text class="tick${pageViewsOfADay[i].weekday === "토" ? " saturday" : pageViewsOfADay[i].weekday === "일" ? " sunday" : ""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
 </text>`;
 				}
 				countChartHTML += `<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
@@ -504,19 +424,14 @@ Log <span class="bold underline">o</span>ut
 		};
 		window.$page_views_chart = $("#page-views-chart");
 		if (!window.$page_views_chart.length) {
-			window.$disqus_thread.after(
-				`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat()">Get page views</div>`,
-			);
+			window.$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat()">Get page views</div>`);
 			window.$page_views_chart = $("#page-views-chart");
 		}
 
 		// Kakao js script (from kakao.com CDN) is added.
 		m.kakao_js_id = "kakao-js-sdk";
 		if (!$(`#${m.kakao_js_id}`)) {
-			let $kakao_js: JQuery<HTMLScriptElement> = $(
-				`<script id="${m.kakao_js_id}" src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></` +
-					`script>`,
-			); // Avoid closing script
+			let $kakao_js: JQuery<HTMLScriptElement> = $(`<script id="${m.kakao_js_id}" src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></` + `script>`); // Avoid closing script
 			m.$headOrBody.append($kakao_js);
 		}
 		m.logPrint(`<br><br>kakao.js with id="${m.kakao_js_id}" is loaded.`);
@@ -549,9 +464,7 @@ Log <span class="bold underline">o</span>ut
 		};
 
 		// ShortKeys (including default 'processShortcut(event)' of tistory.)
-		let $fdList: JQuery<HTMLElement> = $(
-			"#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer",
-		); // Ordered automatically by jQuery.
+		let $fdList: JQuery<HTMLElement> = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer"); // Ordered automatically by jQuery.
 		m.fdList = $fdList.get().sort((a, b) => {
 			return $(a).offset().top - $(b).offset().top;
 		});
@@ -560,8 +473,7 @@ Log <span class="bold underline">o</span>ut
 		m.goOn = false;
 		m.logOn = false;
 		m.processShortKey = function (event: any): void {
-			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
-				return;
+			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
 			switch (event.target && event.target.nodeName) {
 				case "INPUT":
 				case "SELECT":
@@ -688,21 +600,17 @@ Log <span class="bold underline">o</span>ut
 					}
 					break;
 				case "KeyZ":
-					if ($("div.comments").length)
-						m.$window.scrollTop($("div.comments").offset().top);
+					if ($("div.comments").length) m.$window.scrollTop($("div.comments").offset().top);
 					break;
 				case "KeyN":
 					m.handleComments();
 					break;
 				case "KeyX":
-					if ($("#disqus_thread").length)
-						m.$window.scrollTop($("#disqus_thread").offset().top);
+					if ($("#disqus_thread").length) m.$window.scrollTop($("#disqus_thread").offset().top);
 					break;
 				case "KeyI":
 					m.docCookies.removeItem("REACTION_GUEST", "/");
-					window.location.href = `https://www.tistory.com/auth/login?redirectUrl=${encodeURIComponent(
-						window.location.href,
-					)}&isPopup=true`;
+					window.location.href = `https://www.tistory.com/auth/login?redirectUrl=${encodeURIComponent(window.location.href)}&isPopup=true`;
 					break;
 				case "KeyO":
 					window.location.href = "https://www.tistory.com/auth/logout";
@@ -714,9 +622,7 @@ Log <span class="bold underline">o</span>ut
 			}
 		};
 		m.$window.on("keydown.shortkey", m.processShortKey);
-		m.logPrint(
-			`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`,
-		);
+		m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
 		m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
@@ -728,9 +634,7 @@ Log <span class="bold underline">o</span>ut
 				return await m.relatedRendering(str);
 			}
 
-			m.processElement = async function (
-				$elem: JQuery<HTMLElement>,
-			): Promise<void> {
+			m.processElement = async function ($elem: JQuery<HTMLElement>): Promise<void> {
 				let contents = $elem.contents();
 				let elemHTML = "";
 
@@ -749,10 +653,7 @@ Log <span class="bold underline">o</span>ut
 							while (i < contents.length) {
 								let nextContent = contents[i] as any;
 								let nextStr = nextContent?.wholeText;
-								codeEnded =
-									nextContent?.nodeType === Node.TEXT_NODE &&
-									typeof nextStr === "string" &&
-									/```\//.test(nextStr);
+								codeEnded = nextContent?.nodeType === Node.TEXT_NODE && typeof nextStr === "string" && /```\//.test(nextStr);
 								while (!codeEnded) {
 									if (nextContent?.nodeType === Node.TEXT_NODE) {
 										innerContents += await processTextNode(nextContent);
@@ -765,10 +666,7 @@ Log <span class="bold underline">o</span>ut
 									}
 									nextContent = contents[i];
 									nextStr = nextContent?.wholeText;
-									codeEnded =
-										nextContent?.nodeType === Node.TEXT_NODE &&
-										typeof nextStr === "string" &&
-										/```\//.test(nextStr);
+									codeEnded = nextContent?.nodeType === Node.TEXT_NODE && typeof nextStr === "string" && /```\//.test(nextStr);
 									if (codeEnded) {
 										innerContents += await processTextNode(nextContent);
 										break;
@@ -786,15 +684,7 @@ Log <span class="bold underline">o</span>ut
 							emmet = m.getEmmetFromHead(emmet);
 							let classes = m.getClassesFromEmmet(emmet);
 							let elemId = m.getIdFromEmmet(emmet);
-							elemHTML += `<pre${
-								elemId ? ` id="${elemId}"` : ``
-							} class="prettyprint${
-								classes ? ` ${classes}` : ``
-							}">${m.escapeOnlyTag(
-								innerContents
-									.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n")
-									.trim(),
-							)}</pre>`;
+							elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="prettyprint${classes ? ` ${classes}` : ``}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</pre>`;
 						} else {
 							elemHTML += await processTextNode(content);
 						}
@@ -813,17 +703,18 @@ Log <span class="bold underline">o</span>ut
 			};
 
 			await m.processAllElements();
-			$("pre.prettyprint.scrollable").addClass("linenums");
+			$("pre.prettyprint").each((index: number, elem: HTMLElement) => {
+				const $elem = $(elem);
+				if (!$elem.hasClass("no-escape-HTML")) {
+					$elem.html(m.escapeOnlyTag($elem.html()));
+				}
+			});
 			// Scrollable switching of 'pre.prettyprint'.
+			$("pre.prettyprint").addClass("linenums");
 			m.$prePrettyScrollable = $("pre.prettyprint.scrollable");
 			for (let i = 0; i < m.$prePrettyScrollable.length; i++) {
 				if (!m.$prePrettyScrollable.eq(i).parents(".preC").length) {
-					m.$prePrettyScrollable
-						.eq(i)
-						.wrap("<div class='preC'></div>")
-						.before(
-							'<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="k.toggleHeight(this)"></div>',
-						);
+					m.$prePrettyScrollable.eq(i).wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="k.toggleHeight(this)"></div>');
 				}
 			}
 			if ($(".comments").length) {
@@ -838,16 +729,10 @@ Log <span class="bold underline">o</span>ut
 		});
 
 		m.reNewAndReOn = function () {
-			m.$delayedElems = $(
-				"[delayed-src], [delayed-bgimage], .to-be-executed, .MathJax_Preview",
-			);
-			m.$window
-				.off("scroll.delayedLoad")
-				.on("scroll.delayedLoad", m.delayedLoadByScroll);
+			m.$delayedElems = $("[delayed-src], [delayed-bgimage], .to-be-executed, .MathJax_Preview");
+			m.$window.off("scroll.delayedLoad").on("scroll.delayedLoad", m.delayedLoadByScroll);
 			m.$window.trigger("scroll.delayedLoad");
-			m.$fdList = $(
-				"#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer",
-			);
+			m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer");
 		};
 		m.handleComments();
 
@@ -882,19 +767,20 @@ fontCache: 'global'
 			let $mjx = document.createElement("script");
 			$mjx.id = "MathJax-script";
 			$mjx.defer = true;
-			$mjx.src =
-				"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js";
+			$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
 			m.$headOrBody.append($mjx);
-			m.logPrint(
-				`<br><br>MathJax.js (mathjax@3.2.2/es5/tex-mml-chtml.min.js) is loaded.`,
-			);
+			m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
 			// MathJax PreProcess after the above MathJax.js is loaded.
 			m.mathJaxPreProcessDo = function (): void {
-				if (
-					window.MathJax?.startup !== undefined &&
-					window.MathJax.typesetPromise
-				) {
-					// window.MathJax.typesetPromise([...m.$docuK, $(".comments")[0]]);
+				if (window.MathJax?.startup !== undefined && window.MathJax.typesetPromise) {
+					let mathElems: HTMLElement[] = [];
+					if (m.$docuK) {
+						mathElems = [...m.$docuK];
+					}
+					if ($(".comments").length) {
+						mathElems.push($(".comments")[0]);
+					}
+					window.MathJax.typesetPromise(mathElems);
 				} else {
 					setTimeout(m.mathJaxPreProcessDo, 2048);
 				}
@@ -902,13 +788,10 @@ fontCache: 'global'
 			m.mathJaxPreProcess = setTimeout(m.mathJaxPreProcessDo, 2048);
 
 			// google code prettify js script (from cdn.jsdelivr.net CDN) is added.
-			$("code").html(m.escapeOnlyTag($("code").html()));
-			$("code").addClass("prettyprint");
 			let $gcp = document.createElement("script");
 			$gcp.id = "prettyfy-js";
 			$gcp.defer = true;
-			$gcp.src =
-				"https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js";
+			$gcp.src = "https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js";
 			m.$headOrBody.append($gcp);
 			m.logPrint(`<br><br>Google code prettyfy.js is loaded.`);
 			m.doPrettyPrint = function (): void {
@@ -919,17 +802,11 @@ fontCache: 'global'
 				}
 			};
 			// Closing docuK Log.
-			m.logPrint(
-				`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`,
-			);
-			m.$window.scrollTop(
-				$(window.location.hash)?.offset()?.top ?? m.$window.scrollTop(),
-			);
+			m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
+			m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
 			setTimeout(function () {
 				m.$logAll.hide();
-				m.$window.scrollTop(
-					$(window.location.hash)?.offset()?.top ?? m.$window.scrollTop(),
-				);
+				m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
 			}, 2048);
 
 			m.reNewAndReOn();

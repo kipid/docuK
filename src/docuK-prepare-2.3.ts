@@ -2144,12 +2144,10 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		$fs: window.$fuzzy_search as JQuery<HTMLTextAreaElement>,
 		$fsl: window.$fuzzy_search_list,
 		$fsLis: window.$fuzzy_search_list.find(".list-item"),
-		shuffled: [],
+		shuffled: false,
 	};
 	m.quote = function (str: string): string {
-		return str
-			.replace(/[.?*+^$[\]\\{}()|-]/g, "\\$&")
-			.replace(/\s/g, "[\\s\\S]");
+		return str.replace(/[.?*+^$[\]\\{}()|-]/g, "\\$&").replace(/\s/g, "[\\s\\S]");
 	};
 	m.spaceRegExpStr = new RegExp(m.quote(" "), "ig").toString();
 	m.arrayRegExs = function (ptnSH: SplitHangul): RegExp[] {
@@ -2166,16 +2164,9 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		}
 		return res;
 	};
-	m.highlightStrFromIndices = function (
-		strSplitted: SplitHangul,
-		indices: { start: number; end: number }[],
-	): string {
+	m.highlightStrFromIndices = function (strSplitted: SplitHangul, indices: { start: number; end: number }[]): string {
 		let res = "";
-		for (
-			let i = 0, j = 1, k = 0, p1 = 0, p2 = 0;
-			j <= indices.length;
-			i = j, j++
-		) {
+		for (let i = 0, j = 1, k = 0, p1 = 0, p2 = 0; j <= indices.length; i = j, j++) {
 			while (j < indices.length && indices[j - 1].end === indices[j].start) {
 				j++;
 			}
@@ -2214,11 +2205,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		}
 		return res;
 	};
-	m.matchScoreFromIndices = function (
-		strSH: SplitHangul,
-		ptnSH: SplitHangul,
-		indices: { start: number; end: number }[],
-	): number {
+	m.matchScoreFromIndices = function (strSH: SplitHangul, ptnSH: SplitHangul, indices: { start: number; end: number }[]): number {
 		let res = 0;
 		for (let i = 0; i < indices.length; i++) {
 			if (strSH.pCho[indices[i].start]) res += 15;
@@ -2229,19 +2216,13 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		}
 		return res;
 	};
-	m.fuzzySearch = function (
-		ptnSH: SplitHangul,
-		fs: FuzzySearch,
-	): FuzzySearchResult {
+	m.fuzzySearch = function (ptnSH: SplitHangul, fs: FuzzySearch): FuzzySearchResult {
 		if (ptnSH.splitted === fs.array[0].ptnSH.splitted) {
 			return fs.array[0];
 		}
 		if (ptnSH.splitted.indexOf(fs.array[0].ptnSH.splitted) >= 0) {
 			fs.array[1] = fs.array[0];
-		} else if (
-			fs.array[1] &&
-			ptnSH.splitted.indexOf(fs.array[1].ptnSH.splitted) >= 0
-		) {
+		} else if (fs.array[1] && ptnSH.splitted.indexOf(fs.array[1].ptnSH.splitted) >= 0) {
 			if (ptnSH.splitted === fs.array[1].ptnSH.splitted) {
 				return fs.array[1];
 			}
@@ -2393,13 +2374,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		for (let i = 1; i < sorted.length; i++) {
 			let temp = sorted[i];
 			let j = i;
-			for (
-				;
-				j > 0 &&
-				fs.array[0].array[sorted[j - 1]].maxMatchScore <
-					fs.array[0].array[temp].maxMatchScore;
-				j--
-			) {
+			for (; j > 0 && fs.array[0].array[sorted[j - 1]].maxMatchScore < fs.array[0].array[temp].maxMatchScore; j--) {
 				sorted[j] = sorted[j - 1];
 			}
 			sorted[j] = temp;
@@ -2407,92 +2382,72 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		return fs.array[0];
 	};
 
-	(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).on(
-		"keydown.fs-move-exit",
-		function (e: any) {
-			e.stopPropagation();
-			switch (e.code) {
-				case "Escape": // ESC=27
-					e.preventDefault();
-					m.$window.trigger({ type: "keydown", code: "KeyG" } as any); // G=71
-					break;
-				case "ArrowUp": // up=38
-				case "ArrowDown": // down=40
-					e.preventDefault();
-					let $fsl = window.$fuzzy_search_list;
-					let $lis = $fsl.find(".list-item");
-					let $liSelected = $fsl.find(".list-item.selected").eq(0);
-					let $liTo = null;
-					if ($liSelected.length) {
-						if (e.code === "ArrowUp") {
-							$liTo = $liSelected.prev();
-						} else {
-							$liTo = $liSelected.next();
-						}
-						if ($liTo.length) {
-							$liTo.eq(0).trigger("click");
-							if ($liTo.offset().top < $fsl.offset().top + 2) {
-								// $liTo at upside of scroll.
-								$fsl.scrollTop(
-									$fsl.scrollTop() + $liTo.offset().top - $fsl.offset().top - 2,
-								);
-							} else if (
-								$liTo.offset().top + $liTo.outerHeight() >
-								$fsl.offset().top + $fsl.height() + 2
-							) {
-								// $liTo at downside of scroll.
-								$fsl.scrollTop(
-									$fsl.scrollTop() +
-										$liTo.offset().top +
-										$liTo.outerHeight() -
-										$fsl.offset().top -
-										$fsl.height() -
-										2,
-								);
-							}
-						}
+	(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).on("keydown.fs-move-exit", function (e: any) {
+		e.stopPropagation();
+		switch (e.code) {
+			case "Escape": // ESC=27
+				e.preventDefault();
+				m.$window.trigger({ type: "keydown", code: "KeyG" } as any); // G=71
+				break;
+			case "ArrowUp": // up=38
+			case "ArrowDown": // down=40
+				e.preventDefault();
+				let $fsl = window.$fuzzy_search_list;
+				let $lis = $fsl.find(".list-item");
+				let $liSelected = $fsl.find(".list-item.selected").eq(0);
+				let $liTo = null;
+				if ($liSelected.length) {
+					if (e.code === "ArrowUp") {
+						$liTo = $liSelected.prev();
 					} else {
-						if ($lis.length) {
-							if (e.code === "ArrowUp") {
-								$liTo = $lis.last();
-								$fsl.scrollTop($fsl[0].scrollHeight);
-							} else {
-								$liTo = $lis.first();
-								$fsl.scrollTop(0);
-							}
-							$liTo.eq(0).trigger("click");
+						$liTo = $liSelected.next();
+					}
+					if ($liTo.length) {
+						$liTo.eq(0).trigger("click");
+						if ($liTo.offset().top < $fsl.offset().top + 2) {
+							// $liTo at upside of scroll.
+							$fsl.scrollTop($fsl.scrollTop() + $liTo.offset().top - $fsl.offset().top - 2);
+						} else if ($liTo.offset().top + $liTo.outerHeight() > $fsl.offset().top + $fsl.height() + 2) {
+							// $liTo at downside of scroll.
+							$fsl.scrollTop($fsl.scrollTop() + $liTo.offset().top + $liTo.outerHeight() - $fsl.offset().top - $fsl.height() - 2);
 						}
 					}
-					break;
-			}
-		},
-	);
-	m.gotoLi = function (
-		e: any,
-		elem: HTMLElement,
-		k: number,
-		fs: FuzzySearch,
-	): void {
-		if (e && e.srcElement && e.srcElement.nodeName == "A") {
-		} else {
-			let $elem = $(elem);
-			$elem = $elem.closest(".list-item");
-			if ($elem.hasClass("selected")) {
-				(fs.$fs as JQuery<HTMLTextAreaElement>).trigger({
-					type: "keydown",
-					code: "Escape",
-				} as any); // 27=ESC
-			} else {
-				fs.$fsLis.removeClass("selected");
-				$elem.addClass("selected");
-			}
-			let $listI = fs.fullList[k].$listI;
-			if ($listI) {
-				if (!$listI.is(":visible")) {
-					$listI.parents("*").show();
+				} else {
+					if ($lis.length) {
+						if (e.code === "ArrowUp") {
+							$liTo = $lis.last();
+							$fsl.scrollTop($fsl[0].scrollHeight);
+						} else {
+							$liTo = $lis.first();
+							$fsl.scrollTop(0);
+						}
+						$liTo.eq(0).trigger("click");
+					}
 				}
-				m.$window.scrollTop($listI.offset().top);
+				break;
+		}
+	});
+	m.gotoLi = function (e: any, elem: HTMLElement, k: number, fs: FuzzySearch): void {
+		if (e && e.srcElement && e.srcElement.nodeName == "A") {
+			return;
+		}
+		let $elem = $(elem);
+		$elem = $elem.closest(".list-item");
+		if ($elem.hasClass("selected")) {
+			(fs.$fs as JQuery<HTMLTextAreaElement>).trigger({
+				type: "keydown",
+				code: "Escape",
+			} as any);
+		} else {
+			fs.$fsLis.removeClass("selected");
+			$elem.addClass("selected");
+		}
+		let $listI = fs.fullList[k].$listI;
+		if ($listI) {
+			if (!$listI.is(":visible")) {
+				$listI.parents("*").show();
 			}
+			m.$window.scrollTop($listI.offset().top);
 		}
 	};
 	m.doFSGo = function (fs: FuzzySearch): void {
@@ -2504,15 +2459,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			for (let i = 0; i < sorted.length; i++) {
 				let k = res.array[sorted[i]].i;
 				let fsFLk = fs.fullList[k];
-				str += `<div class="list-item" onclick="k.gotoLi(event,this,${k},m.fsGo)">${
-					fsFLk.html
-				}${
-					res.array[sorted[i]].highlight !== undefined
-						? `<div class="highlighted"><span class="maxMatchScore">${
-								res.array[sorted[i]].maxMatchScore
-							}</span> :: ${res.array[sorted[i]].highlight}</div>`
-						: ""
-				}</div>`;
+				str += `<div class="list-item" onclick="k.gotoLi(event,this,${k},m.fsGo)">${fsFLk.html}${res.array[sorted[i]].highlight !== undefined ? `<div class="highlighted"><span class="maxMatchScore">${res.array[sorted[i]].maxMatchScore}</span> :: ${res.array[sorted[i]].highlight}</div>` : ""}</div>`;
 			}
 			fs.$fsl.html(str);
 			fs.$fsLis = fs.$fsl.find(".list-item");
@@ -2525,15 +2472,10 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			m.previous = now;
 			m.doFSGo(m.fsGo);
 		} else {
-			(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).off(
-				"keyup.fs cut.fs paste.fs",
-			);
+			(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).off("keyup.fs cut.fs paste.fs");
 			setTimeout(
 				function () {
-					(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).on(
-						"keyup.fs cut.fs paste.fs",
-						m.fsGoOn,
-					);
+					(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).on("keyup.fs cut.fs paste.fs", m.fsGoOn);
 					m.previous = Date.now();
 					m.doFSGo(m.fsGo);
 				},
@@ -2541,10 +2483,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			);
 		}
 	};
-	(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).on(
-		"keyup.fs cut.fs paste.fs",
-		m.fsGoOn,
-	);
+	(window.$fuzzy_search as JQuery<HTMLTextAreaElement>).on("keyup.fs cut.fs paste.fs", m.fsGoOn);
 
 	// String to Array
 	m.encloseStr = function (str: string): string {
@@ -2557,11 +2496,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		return str;
 	};
 
-	m.strToJSON = function (
-		str: string,
-		colMap = true,
-		rowMap = false,
-	): Promise<StrToJSON> {
+	m.strToJSON = function (str: string, colMap = true, rowMap = false): Promise<StrToJSON> {
 		if (!str || typeof str !== "string") {
 			return Promise.reject(str);
 		}
@@ -2618,10 +2553,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		if (colMap) {
 			const firstColSize = ret[m.symArray][0].length;
 			for (let i = 0; i < ret[m.symArray].length; i++) {
-				let jMax =
-					ret[m.symArray][i].length > firstColSize
-						? firstColSize
-						: ret[m.symArray][i].length;
+				let jMax = ret[m.symArray][i].length > firstColSize ? firstColSize : ret[m.symArray][i].length;
 				for (let j = 0; j < firstColSize; j++) {
 					let key = ret[m.symArray][0][j];
 					if (j < jMax) {
@@ -2640,23 +2572,14 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		}
 		return Promise.resolve(ret);
 	};
-	m.csvToJSON = function (
-		str: string,
-		colMap = true,
-		rowMap = false,
-	): Promise<StrToJSON> {
+	m.csvToJSON = function (str: string, colMap = true, rowMap = false): Promise<StrToJSON> {
 		if (!str || typeof str !== "string") {
 			return Promise.reject(str);
 		}
 		let rows: any = str.split("\n");
 		for (let i = 0; i < rows.length; i++) {
-			if (
-				rows[i].substring(0, 1) === '"' &&
-				rows[i].substring(rows[i].length - 1) === '"'
-			) {
-				rows[m.symArray][i] = rows[i]
-					.substring(1, rows[i].length - 1)
-					.split('","');
+			if (rows[i].substring(0, 1) === '"' && rows[i].substring(rows[i].length - 1) === '"') {
+				rows[m.symArray][i] = rows[i].substring(1, rows[i].length - 1).split('","');
 			} else {
 				rows[m.symArray][i] = rows[i].split(",");
 			}
@@ -2664,10 +2587,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		if (colMap) {
 			const firstColSize = rows[m.symArray][0].length;
 			for (let i = 0; i < rows[m.symArray].length; i++) {
-				let jMax =
-					rows[m.symArray][i].length > firstColSize
-						? firstColSize
-						: rows[m.symArray][i].length;
+				let jMax = rows[m.symArray][i].length > firstColSize ? firstColSize : rows[m.symArray][i].length;
 				for (let j = 0; j < jMax; j++) {
 					let key = rows[m.symArray][0][j];
 					if (key !== undefined) {
@@ -2691,9 +2611,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		for (let row = 0; row < txtArray[m.symArray].length; row++) {
 			tableStr += "<tr>";
 			for (let col = 0; col < txtArray[m.symArray][row].length; col++) {
-				tableStr += `<td>${m
-					.escapeOnlyTag(txtArray[m.symArray][row][col])
-					.replace(/\n/g, "<br/>")}</td>`;
+				tableStr += `<td>${m.escapeOnlyTag(txtArray[m.symArray][row][col]).replace(/\n/g, "<br/>")}</td>`;
 			}
 			tableStr += "</tr>";
 		}
@@ -2941,9 +2859,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 							elemId = ` id="${elemId}"`;
 						}
 					}
-					str += `<pre class="prettyprint linenums${classes}"${elemId}>${m.escapeOnlyTag(
-						ps[i],
-					)}</pre>`;
+					str += `<pre class="prettyprint linenums${classes}"${elemId}>${m.escapeOnlyTag(ps[i])}</pre>`;
 				} else {
 					str += `<div class="p">${ps[i]}</div>`;
 				}
@@ -2978,10 +2894,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			indentRegExp;
 		if (firstIndent !== null) {
 			// if match (first indent) is found
-			indentRegExp = new RegExp(
-				"\\n\\t{1," + (firstIndent[0].length - 1) + "}",
-				"g",
-			); // /\n\t{1,n}/g: global greedy matching
+			indentRegExp = new RegExp("\\n\\t{1," + (firstIndent[0].length - 1) + "}", "g"); // /\n\t{1,n}/g: global greedy matching
 		} else {
 			indentRegExp = /^\n/; // just for minimum match
 		}
@@ -3024,10 +2937,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 				let tailHeight = nHeight - toBeScrolledBy;
 				next.addClass("scrollable");
 				nHeight = next.height();
-				window.scrollTo(
-					0,
-					nHeight > tailHeight ? nOffsetTop + nHeight - tailHeight : nOffsetTop,
-				);
+				window.scrollTo(0, nHeight > tailHeight ? nOffsetTop + nHeight - tailHeight : nOffsetTop);
 				next[0].scrollTop = toBeScrolledBy;
 			}
 		}
@@ -3082,32 +2992,12 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 	m.printDeviceInfo = function (): void {
 		if (m.$deviceInfo) {
 			let referrer = document.referrer;
-			let referrerHTML = referrer
-				? `<a target="_blank" href="${referrer}">${m.escapeOnlyTag(
-						decodeURIComponent(referrer),
-					)}</a>`
-				: `Empty`;
+			let referrerHTML = referrer ? `<a target="_blank" href="${referrer}">${m.escapeOnlyTag(decodeURIComponent(referrer))}</a>` : `Empty`;
 			m.$deviceInfo.html(
-				`Mode: ${m.mode}; Font: ${m.fontFamily}; font-size: ${(
-					m.fontSize * 1.8
-				).toFixed(1)}px (${m.fontSize.toFixed(1)}); line-height: ${(
-					m.lineHeight10 / 10
-				).toFixed(1)};<br/>
-width: ${m.browserWidth}, height: ${window.innerHeight}, version: ${
-					m.version0
-				}${m.version1}<br/>
-${
-	m.canonicalURI
-		? `Canonical URI: <a target="_blank" href="${
-				m.canonicalURI
-			}">${m.escapeOnlyTag(decodeURIComponent(m.canonicalURI))}</a><br/>`
-		: ""
-}
-${
-	m.plink
-		? `dg:plink (Document Global Permanent Link): <a target="_blank" href="${m.plink}">${m.plink}</a><br/>`
-		: ""
-}
+				`Mode: ${m.mode}; Font: ${m.fontFamily}; font-size: ${(m.fontSize * 1.8).toFixed(1)}px (${m.fontSize.toFixed(1)}); line-height: ${(m.lineHeight10 / 10).toFixed(1)};<br/>
+width: ${m.browserWidth}, height: ${window.innerHeight}, version: ${m.version0}${m.version1}<br/>
+${m.canonicalURI ? `Canonical URI: <a target="_blank" href="${m.canonicalURI}">${m.escapeOnlyTag(decodeURIComponent(m.canonicalURI))}</a><br/>` : ""}
+${m.plink ? `dg:plink (Document Global Permanent Link): <a target="_blank" href="${m.plink}">${m.plink}</a><br/>` : ""}
 document.referrer: ${referrerHTML}`,
 			);
 		}
@@ -3163,12 +3053,7 @@ document.referrer: ${referrerHTML}`,
 			if (m.fontSize === m.defaultStyles.fontSize) {
 				m.docCookies.removeItem("m.fontSize", "/");
 			} else {
-				m.docCookies.setItem(
-					"m.fontSize",
-					m.fontSize.toFixed(1),
-					m.expire,
-					"/",
-				);
+				m.docCookies.setItem("m.fontSize", m.fontSize.toFixed(1), m.expire, "/");
 			}
 			return true;
 		}
@@ -3184,20 +3069,12 @@ document.referrer: ${referrerHTML}`,
 				m.lineHeight10 = 25;
 				return false;
 			}
-			m.$docuK.attr(
-				"style",
-				`line-height:${(m.lineHeight10 / 10).toFixed(1)} !important`,
-			);
+			m.$docuK.attr("style", `line-height:${(m.lineHeight10 / 10).toFixed(1)} !important`);
 			m.printDeviceInfo();
 			if (m.lineHeight10 === m.defaultStyles.lineHeight10) {
 				m.docCookies.removeItem("m.lineHeight10", "/");
 			} else {
-				m.docCookies.setItem(
-					"m.lineHeight10",
-					m.lineHeight10.toString(),
-					m.expire,
-					"/",
-				);
+				m.docCookies.setItem("m.lineHeight10", m.lineHeight10.toString(), m.expire, "/");
 			}
 			return true;
 		}
@@ -3237,9 +3114,7 @@ document.referrer: ${referrerHTML}`,
 		let open = "";
 		switch (service) {
 			case "link":
-				let written = `${title}\n${url}${
-					url !== decodedURL ? `\n${decodedURL}` : ``
-				}`;
+				let written = `${title}\n${url}${url !== decodedURL ? `\n${decodedURL}` : ``}`;
 				navigator.clipboard.writeText(written).then(
 					function () {
 						m.$textarea_copied[0].value = written;
@@ -3265,31 +3140,19 @@ document.referrer: ${referrerHTML}`,
 				);
 				return false;
 			case "X":
-				open =
-					"https://X.com/intent/tweet?via=kipacti&text=" +
-					encodeURIComponent(title) +
-					"&url=" +
-					encodeURIComponent(url);
+				open = "https://X.com/intent/tweet?via=kipacti&text=" + encodeURIComponent(title) + "&url=" + encodeURIComponent(url);
 				break;
 			case "facebook":
-				open =
-					"https://www.facebook.com/sharer/sharer.php?u=" +
-					encodeURIComponent(url);
+				open = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
 				break;
 			case "recoeve":
-				open = `https://recoeve.net/reco?uri=${encodeURIComponent(
-					url,
-				)}&title=${encodeURIComponent(title)}${
-					m.recoCats ? `&cats=${encodeURIComponent(m.recoCats)}` : ""
-				}`;
+				open = `https://recoeve.net/reco?uri=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}${m.recoCats ? `&cats=${encodeURIComponent(m.recoCats)}` : ""}`;
 				break;
 			case "kakao":
 				m.popUpKakao();
 				return;
 			case "Whatsapp":
-				open = `https://wa.me/?text=${encodeURIComponent(
-					title,
-				)}%0A${encodeURIComponent(url)}`;
+				open = `https://wa.me/?text=${encodeURIComponent(title)}%0A${encodeURIComponent(url)}`;
 				break;
 			default:
 				return;
@@ -3323,10 +3186,7 @@ document.referrer: ${referrerHTML}`,
 			}
 			// divs with background-image
 			if (this.attr("delayed-bgimage")) {
-				this.css(
-					"background-image",
-					"url(" + this.attr("delayed-bgimage") + ")",
-				);
+				this.css("background-image", "url(" + this.attr("delayed-bgimage") + ")");
 				this.removeAttr("delayed-bgimage");
 				done = true;
 			}
@@ -3337,11 +3197,10 @@ document.referrer: ${referrerHTML}`,
 				done = true;
 			}
 			// MathJax Process
-			if (
-				typeof window.MathJax !== "undefined" &&
-				this.is(".MathJax_Preview")
-			) {
-				window.MathJax.typesetPromise([this.next()[0]]);
+			if (typeof window.MathJax !== "undefined" && this.is(".MathJax_Preview")) {
+				if (this.next()?.[0]) {
+					window.MathJax.typesetPromise([this.next()[0]]);
+				}
 				done = true;
 			}
 		}
