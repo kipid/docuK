@@ -1,71 +1,70 @@
-(function (m, $, undefined) {
+(function(m, $, undefined) {
 m.version1 = ".18";
-m.printMode=true;
-m.ripplesDisabled=true;
+m.printMode = true;
+m.ripplesDisabled = true;
 // SEE (Super Easy Edit)
 let $SEE = $("codeprint.SEE");
 m.SEEHTMLs = m.SEEHTMLs || [];
 for (let i = 0; i < $SEE.length; i++) {
-	let $SEEi = $SEE.eq(i);
-	let SEEHTMLi = "";
-	if (!!m.SEEHTMLs[i]) {
-		SEEHTMLi = m.SEEHTMLs[i].trim();
-	}
-	else {
-		SEEHTMLi = $SEEi.html().trim();
-	}
-	$SEEi.html("");
-	$SEEi.after(m.renderToDocuK(SEEHTMLi));
+		let $SEEi = $SEE.eq(i);
+		let SEEHTMLi = "";
+		if (!!m.SEEHTMLs[i]) {
+				SEEHTMLi = m.SEEHTMLs[i].trim();
+		} else {
+				SEEHTMLi = $SEEi.html().trim();
+		}
+		$SEEi.html("");
+		$SEEi.after(m.renderToDocuK(SEEHTMLi));
 }
 
 m.$docuK = $(".docuK");
 
 // Showing disableQ0 only in width>321.
 if (m.browserWidth > 321) {
-	m.$docuK.find(".disableQ0").html(function (ith, orgText) {
-		m.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100 * $(this).offset().top / m.$document.height()).toPrecision(3)}% of document.`);
-		return orgText.replace(/<!--/g, '').replace(/-->/g, '');
-	});
+		m.$docuK.find(".disableQ0").html(function(ith, orgText) {
+				m.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${(100 * $(this).offset().top / m.$document.height()).toPrecision(3)}% of document.`);
+				return orgText.replace(/<!--/g, '').replace(/-->/g, '');
+		});
 }
 
 // <eq> and <eqq> tags to MathJax format
 let $eqs = $("eq");
 for (let i = 0; i < $eqs.length; i++) {
-	$eqs.eq(i).html(function (ith, orgTxt) { return "\\( " + orgTxt.trim() + " \\)"; });
+		$eqs.eq(i).html(function(ith, orgTxt) { return "\\( " + orgTxt.trim() + " \\)"; });
 }
 let $eqqs = $("eqq");
 for (let i = 0; i < $eqqs.length; i++) {
-	$eqqs.eq(i).html(function (ith, orgTxt) { return "\\[ " + orgTxt.trim() + " \\]"; });
+		$eqqs.eq(i).html(function(ith, orgTxt) { return "\\[ " + orgTxt.trim() + " \\]"; });
 }
 m.logPrint(`<br><br>&lt;eq&gt; and &lt;eqq&gt; tags are rendered to MathJax format, being enclosed by \\ ( \\ ) and \\ [ \\ ].`);
 
 // docuK process.
 m.$docuK.has("script").addClass("noDIdHandle");
 if (m.$docuK.length <= 2) {
-	m.$docuK.addClass("noDIdHandle");
+		m.$docuK.addClass("noDIdHandle");
 }
 let k = m.$docuK.length;
 for (let i = 1; i < k; i++) {
-	m.docuKProcess(m, jQuery, i); // * (m, $, docuKI, undefined)
+		m.docuKProcess(m, jQuery, i); // * (m, $, docuKI, undefined)
 }
 
 m.bubbleRefs = m.$docuK.find(".bubbleRef"); // for function m.ShowBR
 
 let $inRefs = m.$docuK.find(".inRef");
 // Centering arrow.
-$inRefs.each(function () {
-	let $elem = $(this);
-	let width = $elem.width() - 2;
-	let $arrow = $elem.find(".arrow");
-	let borderWidth = parseFloat($arrow.css("borderWidth"));
-	let fontSize = parseFloat($arrow.css("fontSize"));
-	$arrow.css({ marginLeft: ((width / 2 - borderWidth) / fontSize).toFixed(2) + "em" });
+$inRefs.each(function() {
+		let $elem = $(this);
+		let width = $elem.width() - 2;
+		let $arrow = $elem.find(".arrow");
+		let borderWidth = parseFloat($arrow.css("borderWidth"));
+		let fontSize = parseFloat($arrow.css("fontSize"));
+		$arrow.css({ marginLeft: ((width / 2 - borderWidth) / fontSize).toFixed(2) + "em" });
 });
 // Delayed-Load in bubble ref.
-$inRefs.on("mouseenter.delayedLoad", function () {
-	m.logPrint(`<br>Do delayed-load in bubble ref.`);
-	m.$window.trigger("scroll.delayedLoad");
-	$(this).off("mouseenter.delayedLoad");
+$inRefs.on("mouseenter.delayedLoad", function() {
+		m.logPrint(`<br>Do delayed-load in bubble ref.`);
+		m.$window.trigger("scroll.delayedLoad");
+		$(this).off("mouseenter.delayedLoad");
 });
 
 //////////////////////////////////////////
@@ -73,73 +72,76 @@ $inRefs.on("mouseenter.delayedLoad", function () {
 //////////////////////////////////////////
 let $list = $(".docuK .p, .docuK .cmt, .docuK .bcf, .docuK li, .docuK pre");
 for (let i = 0; i < $list.length; i++) {
-	let $listI = $list.eq(i);
-	let $sec = $listI.parents(".docuK>.sec");
-	let txt = "";
-	let html = "";
-	if ($sec.length) {
-		let cat = $sec.find("h2:first-child .head-txt").text();
-		let $subSec = $listI.parents(".subsec");
-		if ($subSec.length) {
-			cat += "\n&nbsp; -- " + $subSec.find("h3:first-child .head-txt").text();
-			let $subSubSec = $listI.parents(".subsubsec");
-			if ($subSubSec.length) {
-				cat += "\n&nbsp; &nbsp; -- " + $subSubSec.find("h4:first-child .head-txt").text();
-			}
+		let $listI = $list.eq(i);
+		let $sec = $listI.parents(".docuK>.sec");
+		let txt = "";
+		let html = "";
+		if ($sec.length) {
+				let cat = $sec.find("h2:first-child .head-txt").text();
+				let $subSec = $listI.parents(".subsec");
+				if ($subSec.length) {
+						cat += "\n&nbsp; -- " + $subSec.find("h3:first-child .head-txt").text();
+						let $subSubSec = $listI.parents(".subsubsec");
+						if ($subSubSec.length) {
+								cat += "\n&nbsp; &nbsp; -- " + $subSubSec.find("h4:first-child .head-txt").text();
+						}
+				}
+				txt = cat.replace(/\n&nbsp; &nbsp;/g, "").replace(/\n&nbsp;/g, "") + "\n";
+				html = '<div class="cat">' + cat.replace(/\n/g, "<br>") + '</div>';
 		}
-		txt = cat.replace(/\n&nbsp; &nbsp;/g, "").replace(/\n&nbsp;/g, "") + "\n";
-		html = '<div class="cat">' + cat.replace(/\n/g, "<br>") + '</div>';
-	}
-	txt += "* " + $listI.text();
-	html += `<div class="li">* ${$listI.html().trim().replace(/\sid=/g, "\squasi-id=")}</div>`;
-	m.fsGo.fullList[$list.length - 1 - i] = { i: $list.length - 1 - i, txt: m.splitHangul(txt), html: html, $listI: $listI };
+		txt += "* " + $listI.text();
+		html += `<div class="li">* ${$listI.html().trim().replace(/\sid=/g, "\squasi-id=")}</div>`;
+		m.fsGo.fullList[$list.length - 1 - i] = { i: $list.length - 1 - i, txt: m.splitHangul(txt), html: html, $listI: $listI };
 }
 
 // Scripts will be appended on this.
 m.$headOrBody = $("head") || $("body") || $("#docuK-style");
 
-window.onpopstate = function (e) {
-	if (!!e.state) {
-		if (e.state?.goOn !== m.goOn) {
-			m.$window.trigger({ type: 'keydown', code: 'KeyG' });
+window.onpopstate = function(e) {
+		if (!!e.state) {
+				if (e.state ? .goOn !== m.goOn) {
+						m.$window.trigger({ type: 'keydown', code: 'KeyG' });
+				}
+				if (e.state ? .logOn !== m.logOn) {
+						m.$window.trigger({ type: 'keydown', code: 'KeyK' });
+				}
 		}
-		if (e.state?.logOn !== m.logOn) {
-			m.$window.trigger({ type: 'keydown', code: 'KeyK' });
-		}
-	}
 };
 
 // On ready.
-m.$document.ready(function () {
+m.$document.ready(function() {
 	// Disqus js script, and Redirect to the canonical URL.
 	if (window.disqus_config) {
-		m.disqusVars = { page: {} };
-		window.disqus_config.apply(m.disqusVars);
-		let url = m.canonicalURI = m.disqusVars.page.url;
-		$('link[rel="canonical"]').remove();
-		($("head") || $("#docuK-style")).append(`<link rel="canonical" href="${url}" />`);
-		let hrefAnalyzed = new URL(window.location.href);
-		let urlAnalyzed = new URL(url);
-		if (hrefAnalyzed.hostname === "kipid.tistory.com" && hrefAnalyzed.protocol.toLowerCase() === urlAnalyzed.protocol.toLowerCase() && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
-			window.location.pathname = urlAnalyzed.pathname;
-		}
+			m.disqusVars = { page: {} };
+			window.disqus_config.apply(m.disqusVars);
+			let url = m.canonicalURI = m.disqusVars.page.url;
+			$('link[rel="canonical"]').remove();
+			($("head") || $("#docuK-style")).append(`<link rel="canonical" href="${url}" />`);
+			let hrefAnalyzed = new URL(window.location.href);
+			let urlAnalyzed = new URL(url);
+			if (hrefAnalyzed.hostname === "kipid.tistory.com" && hrefAnalyzed.protocol.toLowerCase() === urlAnalyzed.protocol.toLowerCase() && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
+					window.location.pathname = urlAnalyzed.pathname;
+			}
 	}
 
-	setTimeout(function () {
-		let parsedHref = new URL(window.location.href);
-		let origin = parsedHref.origin.toLowerCase();
-		if (origin === "https://kipid.tistory.com" || origin === "https://localhost" || origin === "https://recoeve.net") {
-			let blogStat = `URI\treferer\tREACTION_GUEST\n${window.location.href}\t${document.referrer}\t${m.docCookies.getItem("REACTION_GUEST")}`;
-			$.ajax({
-				type: "POST", url: "https://recoeve.net/BlogStat", data: blogStat, dataType: "text"
-			}).fail(async function (resp) {
-				m.logPrint("<br><br>BlogStat failed. " + await m.uriRendering(resp));
-				console.log("BlogStat failed. ", resp)
-			}).done(async function (resp) {
-				m.logPrint("<br><br>BlogStat is logged. " + await m.uriRendering(resp));
-				console.log("BlogStat is logged. ", resp)
-			});
-		}
+	setTimeout(function() {
+			let parsedHref = new URL(window.location.href);
+			let origin = parsedHref.origin.toLowerCase();
+			if (origin === "https://kipid.tistory.com" || origin === "https://localhost" || origin === "https://recoeve.net") {
+					let blogStat = `URI\treferer\tREACTION_GUEST\n${window.location.href}\t${document.referrer}\t${m.docCookies.getItem("REACTION_GUEST")}`;
+					$.ajax({
+							type: "POST",
+							url: "https://recoeve.net/BlogStat",
+							data: blogStat,
+							dataType: "text"
+					}).fail(async function(resp) {
+							m.logPrint("<br><br>BlogStat failed. " + await m.uriRendering(resp));
+							console.log("BlogStat failed. ", resp)
+					}).done(async function(resp) {
+							m.logPrint("<br><br>BlogStat is logged. " + await m.uriRendering(resp));
+							console.log("BlogStat is logged. ", resp)
+					});
+			}
 	}, 8 * m.wait);
 
 	m.$title.html(m.$title.html() + ` at ${window.location.host}`);
@@ -183,564 +185,564 @@ Log <span class="bold underline">i</span>n
 Log <span class="bold underline">o</span>ut
 </div>`}
 <div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">▲</div>`);
-	m.$floating_key = $("#floating-key");
-	if (m.docCookies.getItem("hideFK") === "y") {
-		m.$floating_key.hide();
-	}
-	if (!m.printMode) {
-		for (let i = 1; i < m.$docuK.length; i++) {
-			m.$docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
-			m.$docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
-		}
-	}
-	$fuzzy_search.trigger("keyup.fs");
-	$button_Go = $(".button-Go");
-	$button_log = $(".button-log");
-	// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
-	let $codeprints = $("codeprint");
-	for (let i = 0; i < $codeprints.length; i++) {
-		let codeId = $codeprints.eq(i).attr('id');
-		if (codeId !== null && codeId !== undefined && codeId.startsWith("code-")) {
-			m.printCode(codeId);
-		}
-	}
-	m.logPrint(`<br/><br/>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`);
-
-	// Hiding hiden sections.
-	m.$docuK.find(".sec.hiden").find(">.sec-contents").css({ display: "none" });
-
-	// Setting and Printing Styles
-	m.$deviceInfo = m.$docuK.find(".deviceInfo");
-
-	let cookieItem;
-	m.logPrint(`<br>`);
-
-	cookieItem = m.docCookies.getItem("m.mode");
-	if (cookieItem !== null) {
-		m.Cmode(cookieItem);
-		m.logPrint(`<br>Mode ${cookieItem} is set from cookie.`);
-	}
-	else {
-		m.Cmode("Bright");
-	}
+m.$floating_key = $("#floating-key");
+if (m.docCookies.getItem("hideFK") === "y") {
+	m.$floating_key.hide();
+}
+if (!m.printMode) {
 	for (let i = 1; i < m.$docuK.length; i++) {
-		$(`#button${i}-${m.mode}`).prop('checked', true);
+		m.$docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
+		m.$docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
 	}
-
-	cookieItem = m.docCookies.getItem("m.fontFamily");
-	if (cookieItem !== null) {
-		m.CfontFamily(cookieItem);
-		m.logPrint(`<br>Font ${cookieItem} is set from cookie.`);
-		for (let i = 1; i < m.$docuK.length; i++) {
-			$(`#input${i}-font-family`)[0].value = m.fontFamily;
-		}
+}
+$fuzzy_search.trigger("keyup.fs");
+$button_Go = $(".button-Go");
+$button_log = $(".button-log");
+// Printing codes in <codeprint> with id (which starts with "code-") into <pre id="pre-code-...">.
+let $codeprints = $("codeprint");
+for (let i = 0; i < $codeprints.length; i++) {
+	let codeId = $codeprints.eq(i).attr('id');
+	if (codeId !== null && codeId !== undefined && codeId.startsWith("code-")) {
+		m.printCode(codeId);
 	}
+}
+m.logPrint(`<br/><br/>&lt;codeprint&gt; tags are printed to corresponding &lt;pre&gt; tags, only when the tags exist in the document.`);
 
-	cookieItem = m.docCookies.getItem("m.fontSize");
-	if (cookieItem !== null) {
-		m.CfontSize(Number(cookieItem) - m.defaultStyles.fontSize);
-		m.logPrint(`<br>Font-size ${(Number(cookieItem) * 1.8).toFixed(1)} is set from cookie.`);
+// Hiding hiden sections.
+m.$docuK.find(".sec.hiden").find(">.sec-contents").css({ display: "none" });
+
+// Setting and Printing Styles
+m.$deviceInfo = m.$docuK.find(".deviceInfo");
+
+let cookieItem;
+m.logPrint(`<br>`);
+
+cookieItem = m.docCookies.getItem("m.mode");
+if (cookieItem !== null) {
+	m.Cmode(cookieItem);
+	m.logPrint(`<br>Mode ${cookieItem} is set from cookie.`);
+}
+else {
+	m.Cmode("Bright");
+}
+for (let i = 1; i < m.$docuK.length; i++) {
+	$(`#button${i}-${m.mode}`).prop('checked', true);
+}
+
+cookieItem = m.docCookies.getItem("m.fontFamily");
+if (cookieItem !== null) {
+	m.CfontFamily(cookieItem);
+	m.logPrint(`<br>Font ${cookieItem} is set from cookie.`);
+	for (let i = 1; i < m.$docuK.length; i++) {
+		$(`#input${i}-font-family`)[0].value = m.fontFamily;
 	}
+}
 
-	cookieItem = m.docCookies.getItem("m.lineHeight10");
-	if (cookieItem !== null) {
-		m.ClineHeight(Number(cookieItem) - m.defaultStyles.lineHeight10);
-		m.logPrint(`<br>Line-height ${(Number(cookieItem) / 10).toFixed(1)} is set from cookie.`);
-	}
+cookieItem = m.docCookies.getItem("m.fontSize");
+if (cookieItem !== null) {
+	m.CfontSize(Number(cookieItem) - m.defaultStyles.fontSize);
+	m.logPrint(`<br>Font-size ${(Number(cookieItem) * 1.8).toFixed(1)} is set from cookie.`);
+}
 
-	m.plink = $('meta[property="dg:plink"]').attr('content');
-	m.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
-	m.printDeviceInfo();
+cookieItem = m.docCookies.getItem("m.lineHeight10");
+if (cookieItem !== null) {
+	m.ClineHeight(Number(cookieItem) - m.defaultStyles.lineHeight10);
+	m.logPrint(`<br>Line-height ${(Number(cookieItem) / 10).toFixed(1)} is set from cookie.`);
+}
 
+m.plink = $('meta[property="dg:plink"]').attr('content');
+m.logPrint(`<br><br>Current styles (dark/bright mode, font-family, font-size, line-height) are shown.`);
+m.printDeviceInfo();
+
+$disqus_thread = $("#disqus_thread");
+if (!($disqus_thread.length)) {
+	($("#docuK-script") || $("body")).append(`<div id="disqus_thread"></div>`);
 	$disqus_thread = $("#disqus_thread");
-	if (!($disqus_thread.length)) {
-		($("#docuK-script") || $("body")).append(`<div id="disqus_thread"></div>`);
-		$disqus_thread = $("#disqus_thread");
-	}
-	let $disqus_js = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
-	m.$headOrBody.append($disqus_js);
-	m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
+}
+let $disqus_js = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
+m.$headOrBody.append($disqus_js);
+m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
-	m.myIPs = ["14.38.247.30", "175.212.158.53"];
-	m.ignoreMe = true;
-	m.weekDays = ["일", "월", "화", "수", "목", "금", "토"];
-	m.daysToPlotPageViewsChart = 31;
-	m.to = [];
-	m.from = [];
-	let currentDate = new Date();
-	for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
-		let toDate = currentDate;
-		let year = toDate.getFullYear();
-		let month = String(toDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-based
-		let day = String(toDate.getDate()).padStart(2, '0');
-		// Format the date as YYYY-MM-DD (Locale date)
-		m.to.push({ date: `${year}-${month}-${day}`, month, day, weekday: m.weekDays[toDate.getDay()] });
+m.myIPs = ["14.38.247.30", "175.212.158.53"];
+m.ignoreMe = true;
+m.weekDays = ["일", "월", "화", "수", "목", "금", "토"];
+m.daysToPlotPageViewsChart = 31;
+m.to = [];
+m.from = [];
+let currentDate = new Date();
+for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
+	let toDate = currentDate;
+	let year = toDate.getFullYear();
+	let month = String(toDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-based
+	let day = String(toDate.getDate()).padStart(2, '0');
+	// Format the date as YYYY-MM-DD (Locale date)
+	m.to.push({ date: `${year}-${month}-${day}`, month, day, weekday: m.weekDays[toDate.getDay()] });
 
-		let fromDate = new Date(currentDate.setDate(currentDate.getDate() - 1));
-		year = fromDate.getFullYear();
-		month = String(fromDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-based
-		day = String(fromDate.getDate()).padStart(2, '0');
-		m.from.push({ date: `${year}-${month}-${day}` });
-	}
-	m.blogStatRes = [];
-	m.getBlogStat = function () {
-		return new Promise(function (resolve, reject) {
-			let reqTimes = `host\tfrom\tto`;
-			for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
-				reqTimes += `\nkipid.tistory.com\t${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
-			}
-			$.ajax({
-				type: "POST", url: "https://recoeve.net/BlogStat/Get", data: reqTimes, dataType: "text"
-			}).fail(function (resp) {
-				m.logPrint("<br><br>BlogStat is failed to be got.");
-				reject();
-			}).done(async function (resp) {
-				m.logPrint("<br><br>BlogStat is got.");
-				m.blogStatRes = await m.strToJSON(resp);
+	let fromDate = new Date(currentDate.setDate(currentDate.getDate() - 1));
+	year = fromDate.getFullYear();
+	month = String(fromDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-based
+	day = String(fromDate.getDate()).padStart(2, '0');
+	m.from.push({ date: `${year}-${month}-${day}` });
+}
+m.blogStatRes = [];
+m.getBlogStat = function () {
+	return new Promise(function (resolve, reject) {
+		let reqTimes = `host\tfrom\tto`;
+		for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
+			reqTimes += `\nkipid.tistory.com\t${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
+		}
+		$.ajax({
+			type: "POST", url: "https://recoeve.net/BlogStat/Get", data: reqTimes, dataType: "text"
+		}).fail(function (resp) {
+			m.logPrint("<br><br>BlogStat is failed to be got.");
+			reject();
+		}).done(async function (resp) {
+			m.logPrint("<br><br>BlogStat is got.");
+			m.blogStatRes = await m.strToJSON(resp);
 
-				for (let i = 1; i < m.blogStatRes.length; i++) {
-					let statI = m.blogStatRes[i];
-					statI.splice(2, 1);
-					let id = `${statI.from}\t${statI.to}`;
-					statI.id = id;
-					m.blogStatRes[id] = statI;
-					statI.stats = await m.strToJSON(statI.stats);
-
-					let pageViews = 0;
-					for (let k = 1; k < statI.stats.length; k++) {
-						let ip = statI.stats[k].ip.split(":")[0];
-						if (m.ignoreMe && (ip === m.myIPs[0] || ip === m.myIPs[1])) {
-							continue;
-						}
-						pageViews++;
-					}
-					statI.pageViews = pageViews;
-				}
-
-				resolve();
-			});
-		});
-	};
-	m.loadPageViewsStat = async function () {
-		$page_views_chart.removeClass("to-be-executed");
-		$page_views_chart.off("click");
-		$page_views_chart.on("click", function () {
-			$page_views_chart.off("click");
-		});
-		await m.getBlogStat();
-		let countChartHTML = `<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg width="100%" height="100%">`;
-		let leftPadding = 3.0;
-		let rightPadding = 3.0;
-		let topPadding = 7.0;
-		let bottomPadding = 20.0;
-		let bottomLine = 100.0 - bottomPadding;
-		let maxHeight = 100.0 - topPadding - bottomPadding;
-		let dx = (100.0 - leftPadding - rightPadding) / m.daysToPlotPageViewsChart / 2.0;
-		m.setIntervalBlogStatN = 0;
-		setTimeout(function self() {
-			if (m.blogStatRes?.length < m.daysToPlotPageViewsChart && m.setIntervalBlogStatN++ <= 17) {
-				setTimeout(self, 2048);
-				return;
-			}
-			let maxPageViews = 0;
 			for (let i = 1; i < m.blogStatRes.length; i++) {
-				let pageViews = m.blogStatRes[i].pageViews;
-				if (pageViews > maxPageViews) {
-					maxPageViews = pageViews;
+				let statI = m.blogStatRes[i];
+				statI.splice(2, 1);
+				let id = `${statI.from}\t${statI.to}`;
+				statI.id = id;
+				m.blogStatRes[id] = statI;
+				statI.stats = await m.strToJSON(statI.stats);
+
+				let pageViews = 0;
+				for (let k = 1; k < statI.stats.length; k++) {
+					let ip = statI.stats[k].ip.split(":")[0];
+					if (m.ignoreMe && (ip === m.myIPs[0] || ip === m.myIPs[1])) {
+						continue;
+					}
+					pageViews++;
 				}
+				statI.pageViews = pageViews;
 			}
-			let pageViewsOfADay = [];
-			for (let k = 0; k < m.daysToPlotPageViewsChart; k++) {
-				let blogStatResK = m.blogStatRes[k + 1];
-				let x = leftPadding + (m.daysToPlotPageViewsChart - 1.0 - k) * dx * 2.0;
-				let tick = leftPadding + (m.daysToPlotPageViewsChart - 0.5 - k) * dx * 2.0;
-				let h = maxHeight * blogStatResK.pageViews / maxPageViews;
-				pageViewsOfADay[k] = { pageViews: blogStatResK.pageViews, x, tick, month: m.to[k].month, day: m.to[k].day, weekday: m.to[k].weekday, h };
+
+			resolve();
+		});
+	});
+};
+m.loadPageViewsStat = async function () {
+	$page_views_chart.removeClass("to-be-executed");
+	$page_views_chart.off("click");
+	$page_views_chart.on("click", function () {
+		$page_views_chart.off("click");
+	});
+	await m.getBlogStat();
+	let countChartHTML = `<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg width="100%" height="100%">`;
+	let leftPadding = 3.0;
+	let rightPadding = 3.0;
+	let topPadding = 7.0;
+	let bottomPadding = 20.0;
+	let bottomLine = 100.0 - bottomPadding;
+	let maxHeight = 100.0 - topPadding - bottomPadding;
+	let dx = (100.0 - leftPadding - rightPadding) / m.daysToPlotPageViewsChart / 2.0;
+	m.setIntervalBlogStatN = 0;
+	setTimeout(function self() {
+		if (m.blogStatRes?.length < m.daysToPlotPageViewsChart && m.setIntervalBlogStatN++ <= 17) {
+			setTimeout(self, 2048);
+			return;
+		}
+		let maxPageViews = 0;
+		for (let i = 1; i < m.blogStatRes.length; i++) {
+			let pageViews = m.blogStatRes[i].pageViews;
+			if (pageViews > maxPageViews) {
+				maxPageViews = pageViews;
 			}
-			for (let i = 0; i < pageViewsOfADay.length; i++) {
-				countChartHTML += `<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine - pageViewsOfADay[i].h}%" width="${2.0 * dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine - pageViewsOfADay[i].h - 1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews?.toFixed(0)}</text>`;
-			}
-			countChartHTML += `<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0 - rightPadding}%" y2="${bottomLine}%"/>`;
-			for (let i = 0; i < pageViewsOfADay.length; i++) {
-				countChartHTML += `<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine - 1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine + 1.0}%"/>
+		}
+		let pageViewsOfADay = [];
+		for (let k = 0; k < m.daysToPlotPageViewsChart; k++) {
+			let blogStatResK = m.blogStatRes[k + 1];
+			let x = leftPadding + (m.daysToPlotPageViewsChart - 1.0 - k) * dx * 2.0;
+			let tick = leftPadding + (m.daysToPlotPageViewsChart - 0.5 - k) * dx * 2.0;
+			let h = maxHeight * blogStatResK.pageViews / maxPageViews;
+			pageViewsOfADay[k] = { pageViews: blogStatResK.pageViews, x, tick, month: m.to[k].month, day: m.to[k].day, weekday: m.to[k].weekday, h };
+		}
+		for (let i = 0; i < pageViewsOfADay.length; i++) {
+			countChartHTML += `<rect class="column" x="${pageViewsOfADay[i].x}%" y="${bottomLine - pageViewsOfADay[i].h}%" width="${2.0 * dx}%" height="${pageViewsOfADay[i].h}%"></rect><text class="page-views" x="${pageViewsOfADay[i].tick}%" text-anchor="middle" y="${bottomLine - pageViewsOfADay[i].h - 1.0}%" dominant-baseline="text-bottom">${pageViewsOfADay[i].pageViews?.toFixed(0)}</text>`;
+		}
+		countChartHTML += `<line class="bar" x1="${leftPadding}%" y1="${bottomLine}%" x2="${100.0 - rightPadding}%" y2="${bottomLine}%"/>`;
+		for (let i = 0; i < pageViewsOfADay.length; i++) {
+			countChartHTML += `<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine - 1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine + 1.0}%"/>
 <text class="tick${pageViewsOfADay[i].weekday === "토" ? " saturday" : pageViewsOfADay[i].weekday === "일" ? " sunday" : ""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
 <tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
 <tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
 <tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
 </text>`
-			}
-			countChartHTML += `<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
-			countChartHTML += `</svg></div></div></div>`;
-			$page_views_chart.html(countChartHTML);
-		}, 512);
-	};
+		}
+		countChartHTML += `<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
+		countChartHTML += `</svg></div></div></div>`;
+		$page_views_chart.html(countChartHTML);
+	}, 512);
+};
+$page_views_chart = $("#page-views-chart");
+if (!($page_views_chart.length)) {
+	$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat()">Get page views</div>`);
 	$page_views_chart = $("#page-views-chart");
-	if (!($page_views_chart.length)) {
-		$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat()">Get page views</div>`);
-		$page_views_chart = $("#page-views-chart");
-	}
+}
 
-	// Kakao js script (from kakao.com CDN) is added.
-	m.kakao_js_id = 'kakao-jssdk';
-	if (!$(`#${m.kakao_js_id}`)) {
-		let $kakao_js = $(`<script id="${m.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></` + `script>`); // Avoid closing script
-		m.$headOrBody.append($kakao_js);
-	}
-	m.logPrint(`<br><br>kakao.js with id="${m.kakao_js_id}" is loaded.`);
-	m.kakaoInitDo = function () {
-		if (typeof Kakao !== 'undefined') {
-			clearInterval(m.kakaoInit);
-			if (!Kakao.isInitialized()) {
-				Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
-			}
-			m.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
+// Kakao js script (from kakao.com CDN) is added.
+m.kakao_js_id = 'kakao-jssdk';
+if (!$(`#${m.kakao_js_id}`)) {
+	let $kakao_js = $(`<script id="${m.kakao_js_id}" src="https://developers.kakao.com/sdk/js/kakao.js"></` + `script>`); // Avoid closing script
+	m.$headOrBody.append($kakao_js);
+}
+m.logPrint(`<br><br>kakao.js with id="${m.kakao_js_id}" is loaded.`);
+m.kakaoInitDo = function () {
+	if (typeof Kakao !== 'undefined') {
+		clearInterval(m.kakaoInit);
+		if (!Kakao.isInitialized()) {
+			Kakao.init('c85c800b54a2a95faa5ca7a5e3d357ef');
 		}
-	};
-	m.kakaoInit = setInterval(m.kakaoInitDo, 2048);
+		m.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
+	}
+};
+m.kakaoInit = setInterval(m.kakaoInitDo, 2048);
 
-	m.popUpKakao = function () {
-		let $desc = $("meta[name='description']");
-		let href = window.location.href;
-		Kakao.Share.sendDefault({
-			objectType: 'feed',
-			content: {
-				title: $("title").html(),
-				description: $desc ? $desc[0].content : '',
-				imageUrl: '',
-				link: {
-					mobileWebUrl: href,
-					webUrl: href,
-				},
+m.popUpKakao = function () {
+	let $desc = $("meta[name='description']");
+	let href = window.location.href;
+	Kakao.Share.sendDefault({
+		objectType: 'feed',
+		content: {
+			title: $("title").html(),
+			description: $desc ? $desc[0].content : '',
+			imageUrl: '',
+			link: {
+				mobileWebUrl: href,
+				webUrl: href,
 			},
-		});
-	};
+		},
+	});
+};
 
-	// ShortKeys (including default 'processShortcut(event)' of tistory.)
-	m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer"); // Ordered automatically by jQuery.
-	m.tocs = $(".docuK>.sec").has(".toc");
-	m.rras = $(".docuK>.sec").has("ol.refs");
-	m.goOn = false;
-	m.logOn = false;
-	m.processShortKey = function (event) {
-		if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-		switch (event.target && event.target.nodeName) {
-			case "INPUT": case "SELECT": case "TEXTAREA": return;
-		}
-		let scrollTop = null;
-		let i, k;
-		switch (event.code) {
-			case 'KeyQ': // To manage
-				window.location.href = "/manage";
-				break;
-			case 'KeyA': // Toggle a mess
-				$(".toggle-a-mess.order").eq(0).trigger("click");
-				break;
-			case 'KeyE': // Expand/Hide floating keys
-				m.toggleFK();
-				break;
-			case 'KeyG':
-				event.preventDefault();
-				if ($fuzzy_search_container.is(":visible")) {
-					$fuzzy_search_container.hide();
-					$out_focus.focus();
-					$button_Go.removeClass("enabled");
-					m.goOn = false;
-					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
-				}
-				else {
-					$fuzzy_search_container.show();
-					$fuzzy_search.focus();
-					$button_Go.addClass("enabled");
-					m.goOn = true;
-					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
-				}
-				break;
-			case 'KeyK':
-				if (m.$log.is(":visible")) {
-					m.$logAll.hide();
-					$out_focus.focus();
-					$button_log.removeClass("enabled");
-					m.logOn = false;
-					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
-				}
-				else {
-					m.$logAll.show();
-					$button_log.addClass("enabled");
-					m.logOn = true;
-					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
-				}
-				break;
-			case 'KeyF':
-			case 'KeyD':
-				scrollTop = m.$window.scrollTop();
-				k = m.$fdList.length;
-				let $hI;
-
-				if (event.code === 'KeyF') {
-					scrollTop += 10;
-					for (i = 0; i < k; i++) {
-						$hI = m.$fdList.eq(i);
-						if ($hI.is(":visible") && scrollTop < $hI.offset().top) { break; }
-					}
-					if (i === k) {
-						return;
-					}
-				}
-				else {
-					scrollTop -= 10;
-					for (i = k - 1; i >= 0; i--) {
-						$hI = m.$fdList.eq(i);
-						if ($hI.is(":visible") && scrollTop > $hI.offset().top) { break; }
-					}
-					if (i === -1) {
-						return;
-					}
-				}
-				let hIID = $hI[0].id;
-				if (hIID) {
-					window.location.hash = `#${hIID}`;
-				}
-				m.$window.scrollTop($hI.offset().top);
-				break;
-			case 'KeyT':
-				scrollTop = m.$window.scrollTop();
-				k = m.tocs.length;
-				let tocI;
-				scrollTop -= 10;
-				for (i = k - 1; i >= 0; i--) {
-					tocI = m.tocs.eq(i);
-					if (tocI.is(":visible") && scrollTop > tocI.offset().top) { break; }
-				}
-				if (i === -1) {
-					tocI = m.tocs.eq(k - 1);
-				}
-				m.$window.scrollTop(tocI.offset().top);
-				break;
-			case 'KeyR':
-				scrollTop = m.$window.scrollTop();
-				k = m.rras.length;
-				let rraI;
-				scrollTop -= 10;
-				for (i = k - 1; i >= 0; i--) {
-					rraI = m.rras.eq(i);
-					if (rraI.is(":visible") && scrollTop > rraI.offset().top) { break; }
-				}
-				if (i === -1) {
-					rraI = m.rras.eq(k - 1);
-				}
-				m.$window.scrollTop(rraI.offset().top);
-				break;
-			case 'KeyL':
-				if (window.location.pathname === "/entry/Lists") {
-					window.location = "/category";
-				}
-				else {
-					window.location = "/entry/Lists";
-				}
-				break;
-			case 'KeyZ':
-				if ($("div.comments").length) m.$window.scrollTop($("div.comments").offset().top);
-				break;
-			case 'KeyN':
-				m.handleComments();
-				break;
-			case 'KeyX':
-				if ($("#disqus_thread").length) m.$window.scrollTop($("#disqus_thread").offset().top);
-				break;
-			case 'KeyI':
-				m.docCookies.removeItem("REACTION_GUEST", "/");
-				window.location.href = `https://www.tistory.com/auth/login?redirectUrl=${encodeURIComponent(window.location.href)}&isPopup=true`;
-				break;
-			case 'KeyO':
-				window.location.href = "https://www.tistory.com/auth/logout";
-				break;
-			default:
-				if (window.processShortcut !== undefined) {
-					window.processShortcut(event);
-				}
-		}
+// ShortKeys (including default 'processShortcut(event)' of tistory.)
+m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer"); // Ordered automatically by jQuery.
+m.tocs = $(".docuK>.sec").has(".toc");
+m.rras = $(".docuK>.sec").has("ol.refs");
+m.goOn = false;
+m.logOn = false;
+m.processShortKey = function (event) {
+	if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+	switch (event.target && event.target.nodeName) {
+		case "INPUT": case "SELECT": case "TEXTAREA": return;
 	}
-	m.$window.on("keydown.shortkey", m.processShortKey);
-	m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
+	let scrollTop = null;
+	let i, k;
+	switch (event.code) {
+		case 'KeyQ': // To manage
+			window.location.href = "/manage";
+			break;
+		case 'KeyA': // Toggle a mess
+			$(".toggle-a-mess.order").eq(0).trigger("click");
+			break;
+		case 'KeyE': // Expand/Hide floating keys
+			m.toggleFK();
+			break;
+		case 'KeyG':
+			event.preventDefault();
+			if ($fuzzy_search_container.is(":visible")) {
+				$fuzzy_search_container.hide();
+				$out_focus.focus();
+				$button_Go.removeClass("enabled");
+				m.goOn = false;
+				window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+			}
+			else {
+				$fuzzy_search_container.show();
+				$fuzzy_search.focus();
+				$button_Go.addClass("enabled");
+				m.goOn = true;
+				window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+			}
+			break;
+		case 'KeyK':
+			if (m.$log.is(":visible")) {
+				m.$logAll.hide();
+				$out_focus.focus();
+				$button_log.removeClass("enabled");
+				m.logOn = false;
+				window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+			}
+			else {
+				m.$logAll.show();
+				$button_log.addClass("enabled");
+				m.logOn = true;
+				window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+			}
+			break;
+		case 'KeyF':
+		case 'KeyD':
+			scrollTop = m.$window.scrollTop();
+			k = m.$fdList.length;
+			let $hI;
 
-	m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
+			if (event.code === 'KeyF') {
+				scrollTop += 10;
+				for (i = 0; i < k; i++) {
+					$hI = m.$fdList.eq(i);
+					if ($hI.is(":visible") && scrollTop < $hI.offset().top) { break; }
+				}
+				if (i === k) {
+					return;
+				}
+			}
+			else {
+				scrollTop -= 10;
+				for (i = k - 1; i >= 0; i--) {
+					$hI = m.$fdList.eq(i);
+					if ($hI.is(":visible") && scrollTop > $hI.offset().top) { break; }
+				}
+				if (i === -1) {
+					return;
+				}
+			}
+			let hIID = $hI[0].id;
+			if (hIID) {
+				window.location.hash = `#${hIID}`;
+			}
+			m.$window.scrollTop($hI.offset().top);
+			break;
+		case 'KeyT':
+			scrollTop = m.$window.scrollTop();
+			k = m.tocs.length;
+			let tocI;
+			scrollTop -= 10;
+			for (i = k - 1; i >= 0; i--) {
+				tocI = m.tocs.eq(i);
+				if (tocI.is(":visible") && scrollTop > tocI.offset().top) { break; }
+			}
+			if (i === -1) {
+				tocI = m.tocs.eq(k - 1);
+			}
+			m.$window.scrollTop(tocI.offset().top);
+			break;
+		case 'KeyR':
+			scrollTop = m.$window.scrollTop();
+			k = m.rras.length;
+			let rraI;
+			scrollTop -= 10;
+			for (i = k - 1; i >= 0; i--) {
+				rraI = m.rras.eq(i);
+				if (rraI.is(":visible") && scrollTop > rraI.offset().top) { break; }
+			}
+			if (i === -1) {
+				rraI = m.rras.eq(k - 1);
+			}
+			m.$window.scrollTop(rraI.offset().top);
+			break;
+		case 'KeyL':
+			if (window.location.pathname === "/entry/Lists") {
+				window.location = "/category";
+			}
+			else {
+				window.location = "/entry/Lists";
+			}
+			break;
+		case 'KeyZ':
+			if ($("div.comments").length) m.$window.scrollTop($("div.comments").offset().top);
+			break;
+		case 'KeyN':
+			m.handleComments();
+			break;
+		case 'KeyX':
+			if ($("#disqus_thread").length) m.$window.scrollTop($("#disqus_thread").offset().top);
+			break;
+		case 'KeyI':
+			m.docCookies.removeItem("REACTION_GUEST", "/");
+			window.location.href = `https://www.tistory.com/auth/login?redirectUrl=${encodeURIComponent(window.location.href)}&isPopup=true`;
+			break;
+		case 'KeyO':
+			window.location.href = "https://www.tistory.com/auth/logout";
+			break;
+		default:
+			if (window.processShortcut !== undefined) {
+				window.processShortcut(event);
+			}
+	}
+}
+m.$window.on("keydown.shortkey", m.processShortKey);
+m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
-	m.handleComments = async function () {
-		let $ps = $(".comments .comment-list li p");
+m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
-		async function processTextNode(textNode) {
-			let str = textNode.wholeText;
-			return await m.relatedRendering(str);
-		}
+m.handleComments = async function () {
+	let $ps = $(".comments .comment-list li p");
 
-		m.processElement = async function ($elem) {
-			let contents = $elem.contents();
-			let elemHTML = "";
+	async function processTextNode(textNode) {
+		let str = textNode.wholeText;
+		return await m.relatedRendering(str);
+	}
 
-			for (let i = 0; i < contents.length; i++) {
-				let content = contents[i];
-				if (content?.nodeType === Node.TEXT_NODE) {
-					let str = content.wholeText;
-					let codeStarted = false;
-					let innerContents = "";
-					let emmet = "";
-					if (/^```/.test(str)) {
-						codeStarted = true;
-						let codeEnded = false;
-						emmet = str.substring(3);
-						i++;
-						while (i < contents.length) {
-							let nextContent = contents[i];
-							let nextStr = nextContent?.wholeText;
-							codeEnded = (nextContent?.nodeType === Node.TEXT_NODE && typeof nextStr === "string" && /```\//.test(nextStr));
-							while (!codeEnded) {
-								if (nextContent?.nodeType === Node.TEXT_NODE) {
-									innerContents += await processTextNode(nextContent);
-								}
-								else {
-									innerContents += nextContent.outerHTML;
-								}
-								i++;
-								if (i === contents.length) {
-									break;
-								}
-								nextContent = contents[i];
-								nextStr = nextContent?.wholeText;
-								codeEnded = (nextContent?.nodeType === Node.TEXT_NODE && typeof nextStr === "string" && /```\//.test(nextStr));
-								if (codeEnded) {
-									innerContents += await processTextNode(nextContent);
-									break;
-								}
+	m.processElement = async function ($elem) {
+		let contents = $elem.contents();
+		let elemHTML = "";
+
+		for (let i = 0; i < contents.length; i++) {
+			let content = contents[i];
+			if (content?.nodeType === Node.TEXT_NODE) {
+				let str = content.wholeText;
+				let codeStarted = false;
+				let innerContents = "";
+				let emmet = "";
+				if (/^```/.test(str)) {
+					codeStarted = true;
+					let codeEnded = false;
+					emmet = str.substring(3);
+					i++;
+					while (i < contents.length) {
+						let nextContent = contents[i];
+						let nextStr = nextContent?.wholeText;
+						codeEnded = (nextContent?.nodeType === Node.TEXT_NODE && typeof nextStr === "string" && /```\//.test(nextStr));
+						while (!codeEnded) {
+							if (nextContent?.nodeType === Node.TEXT_NODE) {
+								innerContents += await processTextNode(nextContent);
 							}
-							if (codeEnded) {
-								innerContents = innerContents.replace(/```\//, "");
-								i++;
-								break;
+							else {
+								innerContents += nextContent.outerHTML;
 							}
 							i++;
+							if (i === contents.length) {
+								break;
+							}
+							nextContent = contents[i];
+							nextStr = nextContent?.wholeText;
+							codeEnded = (nextContent?.nodeType === Node.TEXT_NODE && typeof nextStr === "string" && /```\//.test(nextStr));
+							if (codeEnded) {
+								innerContents += await processTextNode(nextContent);
+								break;
+							}
 						}
+						if (codeEnded) {
+							innerContents = innerContents.replace(/```\//, "");
+							i++;
+							break;
+						}
+						i++;
 					}
-					if (codeStarted) {
-						emmet = m.getEmmetFromHead(emmet);
-						let classes = m.getClassesFromEmmet(emmet);
-						let elemId = m.getIdFromEmmet(emmet);
-						elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="prettyprint${classes ? ` ${classes}` : ``}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</pre>`;
-					}
-					else {
-						elemHTML += await processTextNode(content);
-					}
+				}
+				if (codeStarted) {
+					emmet = m.getEmmetFromHead(emmet);
+					let classes = m.getClassesFromEmmet(emmet);
+					let elemId = m.getIdFromEmmet(emmet);
+					elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="prettyprint${classes ? ` ${classes}` : ``}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</pre>`;
 				}
 				else {
-					elemHTML += content.outerHTML;
+					elemHTML += await processTextNode(content);
 				}
 			}
-
-			$elem.html(elemHTML.trim());
-		}
-
-		m.processAllElements = async function () {
-			for (let k = 0; k < $ps.length; k++) {
-				await m.processElement($ps.eq(k));
+			else {
+				elemHTML += content.outerHTML;
 			}
 		}
 
-		await m.processAllElements();
-		$("pre.prettyprint.scrollable").addClass("linenums");
-		// Scrollable switching of 'pre.prettyprint'.
-		m.$prePrettyScrollable = $("pre.prettyprint.scrollable");
-		for (let i = 0; i < m.$prePrettyScrollable.length; i++) {
-			if (!m.$prePrettyScrollable.eq(i).parents(".preC").length) {
-				m.$prePrettyScrollable.eq(i).wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="k.toggleHeight(this)"></div>');
-			}
+		$elem.html(elemHTML.trim());
+	}
+
+	m.processAllElements = async function () {
+		for (let k = 0; k < $ps.length; k++) {
+			await m.processElement($ps.eq(k));
 		}
-		if ($(".comments").length) {
-			window?.MathJax?.typeset?.([$(".comments")[0]]);
-			window?.PR?.prettyPrint?.();
+	}
+
+	await m.processAllElements();
+	$("pre.prettyprint.scrollable").addClass("linenums");
+	// Scrollable switching of 'pre.prettyprint'.
+	m.$prePrettyScrollable = $("pre.prettyprint.scrollable");
+	for (let i = 0; i < m.$prePrettyScrollable.length; i++) {
+		if (!m.$prePrettyScrollable.eq(i).parents(".preC").length) {
+			m.$prePrettyScrollable.eq(i).wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="k.toggleHeight(this)"></div>');
 		}
-		m.reNewAndReOn();
-	};
+	}
+	if ($(".comments").length) {
+		window?.MathJax?.typeset?.([$(".comments")[0]]);
+		window?.PR?.prettyPrint?.();
+	}
+	m.reNewAndReOn();
+};
 
 
 
-	m.$window.on("resize.menubar", function (e) {
-		$("#menubar_wrapper").parents().show();
-	});
+m.$window.on("resize.menubar", function (e) {
+	$("#menubar_wrapper").parents().show();
+});
 
-	m.reNewAndReOn = function () {
-		m.$delayedElems = $("[delayed-src], [delayed-bgimage], .to-be-executed");
-		m.$window.off("scroll.delayedLoad").on("scroll.delayedLoad", m.delayedLoadByScroll);
-		m.$window.trigger("scroll.delayedLoad");
-		m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer");
-	};
+m.reNewAndReOn = function () {
+	m.$delayedElems = $("[delayed-src], [delayed-bgimage], .to-be-executed");
+	m.$window.off("scroll.delayedLoad").on("scroll.delayedLoad", m.delayedLoadByScroll);
+	m.$window.trigger("scroll.delayedLoad");
+	m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer");
+};
+m.handleComments();
+
+setTimeout(function () {
 	m.handleComments();
 
-	setTimeout(function () {
-		m.handleComments();
-
-		// MathJax js script (from cdn.mathjax.org) is added.
-		let $mjxConfig = $(`<script>
+	// MathJax js script (from cdn.mathjax.org) is added.
+	let $mjxConfig = $(`<script>
 window.MathJax={
 startup: {
-	typeset: false, // Skip startup typeset.
-	ready: function () {
-		m.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
-		MathJax.startup.defaultReady();
-		m.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
-	}
+typeset: false, // Skip startup typeset.
+ready: function () {
+	m.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
+	MathJax.startup.defaultReady();
+	m.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
+}
 },
 tex: {
-	inlineMath: [['\\\\(','\\\\)']], // Using $ for inline math.
-	displayMath: [['\\\\[','\\\\]']], // Using $$ for outline math.
-	processEscapes: true, // Escape \\$
-	processEnvironments: false // Ignore \\begin{something} ... \\end{something}
+inlineMath: [['\\\\(','\\\\)']], // Using $ for inline math.
+displayMath: [['\\\\[','\\\\]']], // Using $$ for outline math.
+processEscapes: true, // Escape \\$
+processEnvironments: false // Ignore \\begin{something} ... \\end{something}
 },
 svg: {
-	fontCache: 'global'
+fontCache: 'global'
 }
 };
 </`+ `script>`); // Avoid closing script
-		m.$headOrBody.append($mjxConfig);
-		let $mjx = document.createElement("script");
-		$mjx.id = "MathJax-script";
-		$mjx.defer = true;
-		$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
-		m.$headOrBody.append($mjx);
-		m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded.`);
-		// MathJax PreProcess after the above MathJax.js is loaded.
-		m.mathJaxPreProcessDo = function () {
-			if (MathJax.startup !== undefined && MathJax.typeset) {
-				MathJax.typeset();
-			}
-			else {
-				setTimeout(m.mathJaxPreProcessDo, 2048);
-			}
-		};
-		m.mathJaxPreProcess = setTimeout(m.mathJaxPreProcessDo, 2048);
+	m.$headOrBody.append($mjxConfig);
+	let $mjx = document.createElement("script");
+	$mjx.id = "MathJax-script";
+	$mjx.defer = true;
+	$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+	m.$headOrBody.append($mjx);
+	m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-chtml.js) is loaded.`);
+	// MathJax PreProcess after the above MathJax.js is loaded.
+	m.mathJaxPreProcessDo = function () {
+		if (MathJax.startup !== undefined && MathJax.typeset) {
+			MathJax.typeset();
+		}
+		else {
+			setTimeout(m.mathJaxPreProcessDo, 2048);
+		}
+	};
+	m.mathJaxPreProcess = setTimeout(m.mathJaxPreProcessDo, 2048);
 
-		// google code prettify js script (from cdn.jsdelivr.net CDN) is added.
-		let $gcp = document.createElement("script");
-		$gcp.id = "prettyfy-js";
-		$gcp.defer = true;
-		$gcp.src = "https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js";
-		m.$headOrBody.append($gcp);
-		m.logPrint(`<br><br>Google code prettyfy.js is loaded.`);
-		m.doPrettyPrint = function () {
-			if (window?.PR?.prettyPrint) {
-				PR.prettyPrint();
-			}
-			else {
-				setTimeout(m.doPrettyPrint, 2048);
-			}
-		};
-		// Closing docuK Log.
-		m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
+	// google code prettify js script (from cdn.jsdelivr.net CDN) is added.
+	let $gcp = document.createElement("script");
+	$gcp.id = "prettyfy-js";
+	$gcp.defer = true;
+	$gcp.src = "https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js";
+	m.$headOrBody.append($gcp);
+	m.logPrint(`<br><br>Google code prettyfy.js is loaded.`);
+	m.doPrettyPrint = function () {
+		if (window?.PR?.prettyPrint) {
+			PR.prettyPrint();
+		}
+		else {
+			setTimeout(m.doPrettyPrint, 2048);
+		}
+	};
+	// Closing docuK Log.
+	m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
+	m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
+	setTimeout(function () {
+		m.$logAll.hide();
 		m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
-		setTimeout(function () {
-			m.$logAll.hide();
-			m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
-		}, 2048);
-
-		m.reNewAndReOn();
 	}, 2048);
+
+	m.reNewAndReOn();
+}, 2048);
 });
 })(window.k, jQuery);
