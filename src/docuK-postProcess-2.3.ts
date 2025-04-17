@@ -443,8 +443,8 @@ Log <span class="bold underline">o</span>ut
 		};
 
 		// ShortKeys (including default 'processShortcut(event)' of tistory.)
-		let $fdList: JQuery<HTMLElement> = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer"); // Ordered automatically by jQuery.
-		m.fdList = $fdList.get().sort((a, b) => {
+		m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer"); // Ordered automatically by jQuery.
+		m.fdList = m.$fdList.get().sort((a, b) => {
 			return $(a).offset().top - $(b).offset().top;
 		});
 		m.$tocs = $(".docuK>.sec").has(".toc");
@@ -712,6 +712,9 @@ Log <span class="bold underline">o</span>ut
 			m.$window.off("scroll.delayedLoad").on("scroll.delayedLoad", m.delayedLoadByScroll);
 			m.$window.trigger("scroll.delayedLoad");
 			m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer");
+			m.fdList = m.$fdList.get().sort((a, b) => {
+				return $(a).offset().top - $(b).offset().top;
+			});
 		};
 		m.handleComments();
 
