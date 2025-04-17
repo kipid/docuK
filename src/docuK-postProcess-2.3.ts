@@ -459,8 +459,8 @@ Log <span class="bold underline">o</span>ut
 				case "TEXTAREA":
 					return;
 			}
-			let scrollTop = null;
-			let i, k;
+			let scrollTop: number;
+			let i: number, k: number;
 			switch (event.code) {
 				case "KeyQ": // To manage
 					window.location.href = "/manage";
@@ -542,34 +542,48 @@ Log <span class="bold underline">o</span>ut
 				case "KeyT":
 					scrollTop = m.$window.scrollTop();
 					k = m.$tocs.length;
-					let tocI;
+					let $tocI: JQuery<HTMLElement>;
 					scrollTop -= 10;
 					for (i = k - 1; i >= 0; i--) {
-						tocI = m.$tocs.eq(i);
-						if (tocI.is(":visible") && scrollTop > tocI.offset().top) {
+						$tocI = m.$tocs.eq(i);
+						if ($tocI.is(":visible") && scrollTop > $tocI.offset().top) {
 							break;
 						}
 					}
 					if (i === -1) {
-						tocI = m.$tocs.eq(k - 1);
+						$tocI = m.$tocs.eq(k - 1);
 					}
-					m.$window.scrollTop(tocI.offset().top);
+					let $tocIWithId = $tocI.find("[id]").addBack("[id]");
+					let tocIID = $tocIWithId.eq(0).attr("id");
+					if (tocIID) {
+						window.location.hash = `#${tocIID}`;
+					} else {
+						window.location.hash = "";
+					}
+					m.$window.scrollTop($tocI.offset().top);
 					break;
 				case "KeyR":
 					scrollTop = m.$window.scrollTop();
 					k = m.$rras.length;
-					let rraI;
+					let $rraI: JQuery<HTMLElement>;
 					scrollTop -= 10;
 					for (i = k - 1; i >= 0; i--) {
-						rraI = m.$rras.eq(i);
-						if (rraI.is(":visible") && scrollTop > rraI.offset().top) {
+						$rraI = m.$rras.eq(i);
+						if ($rraI.is(":visible") && scrollTop > $rraI.offset().top) {
 							break;
 						}
 					}
 					if (i === -1) {
-						rraI = m.$rras.eq(k - 1);
+						$rraI = m.$rras.eq(k - 1);
 					}
-					m.$window.scrollTop(rraI.offset().top);
+					let $rraIWithId = $rraI.find("[id]").addBack("[id]");
+					let rraIID = $rraIWithId.eq(0).attr("id");
+					if (rraIID) {
+						window.location.hash = `#${rraIID}`;
+					} else {
+						window.location.hash = "";
+					}
+					m.$window.scrollTop($rraI.offset().top);
 					break;
 				case "KeyL":
 					if (window.location.pathname === "/entry/Lists") {
