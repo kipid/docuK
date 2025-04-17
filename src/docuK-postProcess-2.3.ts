@@ -1,5 +1,5 @@
 (function (m, $) {
-	m.version1 = ".0";
+	m.version1 = ".1";
 	m.printMode = true;
 	m.ripplesDisabled = true;
 	// SEE (Super Easy Edit)
@@ -18,14 +18,6 @@
 	}
 
 	m.$docuK = $(".docuK");
-
-	// Showing disableQ0 only in width>321.
-	if (m.browserWidth > 321) {
-		m.$docuK.find(".disableQ0").html(function (ith, orgText) {
-			m.logPrint(`<br><br>".disableQ0"s are enabled at vertical position of ${((100 * $(this).offset().top) / m.$document.height()).toPrecision(3)}% of document.`);
-			return orgText.replace(/<!--/g, "").replace(/-->/g, "");
-		});
-	}
 
 	$("code").each((index: number, elem: HTMLElement) => {
 		const $elem = $(elem);
@@ -51,12 +43,12 @@
 
 	// docuK process.
 	m.$docuK.has("script").addClass("noDIdHandle");
-	if (m.$docuK.length <= 2) {
+	if (m.$docuK.length <= 1) {
 		m.$docuK.addClass("noDIdHandle");
 	}
 	let k = m.$docuK.length;
 	for (let i = 1; i < k; i++) {
-		m.docuKProcess(m, i); // * (m, $, docuKI, undefined)
+		m.docuKProcess(i); // * (docuKI)
 	}
 
 	m.$bubbleRefs = m.$docuK.find(".bubbleRef"); // for function m.ShowBR
@@ -155,11 +147,9 @@
 				})
 					.fail(async function (resp) {
 						m.logPrint("<br><br>BlogStat failed. " + (await m.uriRendering(resp.toString(), true, false)));
-						console.log("BlogStat failed. ", resp);
 					})
 					.done(async function (resp) {
 						m.logPrint("<br><br>BlogStat is logged. " + (await m.uriRendering(resp.toString(), true, false)));
-						console.log("BlogStat is logged. ", resp);
 					});
 			}
 		}, 8 * m.wait);
@@ -314,7 +304,7 @@ Log <span class="bold underline">o</span>ut
 		}
 		m.blogStatRes = [];
 		m.getBlogStat = function (): Promise<void> {
-			return new Promise(function (resolve, reject) {
+			return new Promise(function (resolve, reject): void {
 				let reqTimes = `host\tfrom\tto`;
 				for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
 					reqTimes += `\nkipid.tistory.com\t${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
@@ -351,17 +341,11 @@ Log <span class="bold underline">o</span>ut
 							}
 							statI.pageViews = pageViews;
 						}
-
 						resolve();
 					});
 			});
 		};
 		m.loadPageViewsStat = async function (): Promise<void> {
-			window.$page_views_chart.removeClass("to-be-executed");
-			window.$page_views_chart.off("click");
-			window.$page_views_chart.on("click", function () {
-				window.$page_views_chart.off("click");
-			});
 			await m.getBlogStat();
 			let countChartHTML = `<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg width="100%" height="100%">`;
 			let leftPadding = 3.0;
