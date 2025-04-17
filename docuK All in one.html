@@ -6,10 +6,11 @@
 <codeprint id="docuK-style">
 <div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
 
-<!-- From kipid.tistory CDN -->
 <script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"></script>
-<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+
+<!-- From kipid.tistory CDN -->
+<!-- <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script> -->
 
 <!-- From recoeve.net CDN -->
 <!-- <script src="https://recoeve.net/CDN/jquery.js"></script>
@@ -17,8 +18,8 @@
 <script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<!-- <link rel="stylesheet" href="./docuK-2.3.css">
-<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+<link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-style -->
 
 <meta name="description" content="HTML docuK format ver. 2.3 (2023-09-24). This is an HTML document format named docuK which is rendered by JavaScript, jQuery, MathJax, and google code prettifier. Specific features are changable mode/font, resizable font-size/line-height, table of contents, numbering of sections/figures/equations, citing references, refering figures and equations, refering anything with id, delayed(lazy)-loading equations (MathJax) and figures (images, iframes), and code printing. Quite similar to LaTeX or Wiki document, but extended a little bit." />
@@ -210,13 +211,13 @@ jQuery의 addClass 이용해서 하긴 했는데... ".docuK.bright>.sec"로 제�
 
 <div class="sec hiden"><h2 id="sec-Math">Equation (Math)</h2>
 <div class="p">
-개인적으로는 문서 작성할 때 수식을 쓸 일이 많은데 <cite class="ref-math"></cite>, 수식이 길어지면 폰에서 짤리는 경우가 많음. 이걸 잘 처리해야 함. $\alpha \beta = \int \sum_{i=1}^{\infty} g$ 이런 수식은 대충 잘 처리 되겠고. $fg \frac{1}{\sqrt{2}}$
+개인적으로는 문서 작성할 때 수식을 쓸 일이 많은데 <cite class="ref-math"></cite>, 수식이 길어지면 폰에서 짤리는 경우가 많음. 이걸 잘 처리해야 함. <eq>\alpha \beta = \int \sum_{i=1}^{\infty} g</eq> 이런 수식은 대충 잘 처리 되겠고. <eq>fg \frac{1}{\sqrt{2}}</eq>
 </div>
 <div class="p" style="padding-bottom:0; margin-bottom:1em">
-.docuK .p {padding-bottom:1em; overflow:auto}로 css를 설정한 이유는 p tag가 다른 div를 품을수가 없어서 div.p tag로 paragraph tag를 대신했고, MathJax inline 수식이 막판에 들어가면 overflow가 나는 경우가 있어서 의도치 않게 scroll이 생기는 경우가 있음. 그래서 "padding-bottom:1em"을 줌. 여기서 예를 보이려고 in style로 "padding-bottom:0; margin-bottom:1em" 설정. 위 paragraph랑 비교. $fg \frac{1}{\sqrt{2}}$
+.docuK .p {padding-bottom:1em; overflow:auto}로 css를 설정한 이유는 p tag가 다른 div를 품을수가 없어서 div.p tag로 paragraph tag를 대신했고, MathJax inline 수식이 막판에 들어가면 overflow가 나는 경우가 있어서 의도치 않게 scroll이 생기는 경우가 있음. 그래서 "padding-bottom:1em"을 줌. 여기서 예를 보이려고 in style로 "padding-bottom:0; margin-bottom:1em" 설정. 위 paragraph랑 비교. <eq>fg \frac{1}{\sqrt{2}}</eq>
 </div>
 <div class="p">
-굉장히 긴 inline equation은 짤리는걸 어찌 막을수는 없을것도 같은데... 긴 inline equation은 그냥 manual 하게 글 작성자가 적당한 곳에서 잘라서 쓰게 하는게 나을듯. $\alpha ~ \beta ~$$\gamma ~ \omega ~$$\int \textrm{d}x ~ f(x) ~ g(x) ~$$\sum_{i=1}^{\infty} n_i ~$$\Gamma^{jk}_i ~ z ~ \zeta ~$$\hat{H}$$= \frac{1}{\sqrt{2}}$$\hat{\epsilon}$$\delta + V ~ $$\Phi ~ \phi ~$$\Psi ~ \psi$ 이런 식으로. 어차피 inline-block으로 처리돼서 이게 가장 좋은 방법 같음. 자동으로 처리해주면 작성자 마음에 안드는 곳에서 줄바꿈이 일어날수도 있음. &amp;ensp; 사용: $f(x)$&ensp;$= x^4$&ensp;$+ 3 x^3$&ensp;$- 8 x^2$&ensp;$+ x$&ensp;$- 5$, and &amp;thinsp; 사용: $f(x)$&thinsp;$= x^4$&thinsp;$+ 3 x^3$&thinsp;$- 8 x^2$&thinsp;$+ x$&thinsp;$- 5$, dollar 표시로만 구분: $f(x)$$= x^4$$+ 3 x^3$$- 8 x^2$$+ x$$- 5$, and 구분없이: $f(x)= x^4+ 3 x^3- 8 x^2+ x- 5$. 이것처럼 &amp;ensp; 혹은 &amp;thinsp; 써서 구분해줘야 하나? <cite class="ref-thinsp"></cite>
+굉장히 긴 inline equation은 짤리는걸 어찌 막을수는 없을것도 같은데... 긴 inline equation은 그냥 manual 하게 글 작성자가 적당한 곳에서 잘라서 쓰게 하는게 나을듯. <eq>\alpha ~ \beta ~</eq><eq>\gamma ~ \omega ~</eq><eq>\int \textrm{d}x ~ f(x) ~ g(x) ~</eq><eq>\sum_{i=1}^{\infty} n_i ~</eq><eq>\Gamma^{jk}_i ~ z ~ \zeta ~</eq><eq>\hat{H}</eq><eq>= \frac{1}{\sqrt{2}}</eq><eq>\hat{\epsilon}</eq><eq>\delta + V ~ <eq><eq>\Phi ~ \phi ~</eq><eq>\Psi ~ \psi</eq> 이런 식으로. 어차피 inline-block으로 처리돼서 이게 가장 좋은 방법 같음. 자동으로 처리해주면 작성자 마음에 안드는 곳에서 줄바꿈이 일어날수도 있음. &amp;ensp; 사용: <eq>f(x)</eq>&ensp;<eq>= x^4</eq>&ensp;<eq>+ 3 x^3</eq>&ensp;<eq>- 8 x^2</eq>&ensp;<eq>+ x</eq>&ensp;<eq>- 5</eq>, and &amp;thinsp; 사용: <eq>f(x)</eq>&thinsp;<eq>= x^4</eq>&thinsp;<eq>+ 3 x^3</eq>&thinsp;<eq>- 8 x^2</eq>&thinsp;<eq>+ x</eq>&thinsp;<eq>- 5</eq>, dollar 표시로만 구분: <eq>f(x)</eq><eq>= x^4</eq><eq>+ 3 x^3</eq><eq>- 8 x^2</eq><eq>+ x</eq><eq>- 5</eq>, and 구분없이: <eq>f(x)= x^4+ 3 x^3- 8 x^2+ x- 5</eq>. 이것처럼 &amp;ensp; 혹은 &amp;thinsp; 써서 구분해줘야 하나? <cite class="ref-thinsp"></cite>
 </div>
 <div class="p">
 Outline equation은 꽤나 긴 수식도 제대로 보여져야 하는데...
@@ -887,11 +888,11 @@ window.disqus_config=function () {
 </script>
 
 <!-- From kipid.tistory CDN -->
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+<!-- <script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 
 <!-- From recoeve.net CDN -->
 <!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
 
 <!-- From local -->
-<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+<script src="./docuK-postProcess-2.3.js" charset="utf-8"></script>
 </codeprint><!-- docuK-script -->
