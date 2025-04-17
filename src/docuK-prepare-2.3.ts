@@ -15,7 +15,7 @@ import type {
 
 window.m = window.k = window.k || {}; // window.m can be asigned another JSON or number/string and so on. But window.k must be kept.
 (function (m, $) {
-	m.version0 = "3.0";
+	m.version0 = "3.1";
 	m.$window = $(window);
 	m.$document = $(document);
 	m.$html = $("html");
@@ -51,11 +51,8 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		}
 		return len;
 	};
-	m.symArray = Symbol("array");
-	m.getSearchVars = function (
-		searchStr: string | null | undefined,
-	): SearchVars {
-		let vars: SearchVars = {};
+	m.getSearchVars = function (searchStr: string | null | undefined): SearchVars {
+		let vars: SearchVars = [];
 		if (searchStr !== null && searchStr !== undefined && searchStr.length) {
 			if (searchStr.startsWith("?")) {
 				searchStr = searchStr.substring(1);
@@ -65,7 +62,6 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				searchStr = searchStr.substring(0, j);
 			}
 			let splits = searchStr.replace(/&amp;/gi, "&").split("&");
-			vars[m.symArray as symbol] = [];
 			for (let i = 0; i < splits.length; i++) {
 				let key = splits[i];
 				let value = "";
@@ -75,7 +71,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					key = key.substring(0, k);
 				}
 				key = decodeURIComponent(key);
-				vars[m.symArray as symbol][i] = vars[key] = { key: key, val: value };
+				vars[i] = vars[key] = { key: key, val: value };
 			}
 		}
 		return vars;
@@ -84,13 +80,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	////////////////////////////////////////////////////
 	// Heap sort.
 	////////////////////////////////////////////////////
-	m.heapify = function (
-		arr: any[],
-		key: string,
-		sorted: number[],
-		n: number,
-		i: number,
-	): void {
+	m.heapify = function (arr: any[], key: string, sorted: number[], n: number, i: number): void {
 		let largest = i;
 		let l = 2 * i + 1;
 		let r = 2 * i + 2;
@@ -105,12 +95,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 			m.heapify(arr, key, sorted, n, largest);
 		}
 	};
-	m.heapsort = function (
-		arr: any[],
-		key: string,
-		sorted: number[],
-		upto: number,
-	): number {
+	m.heapsort = function (arr: any[], key: string, sorted: number[], upto: number): number {
 		let n = arr.length;
 		for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
 			m.heapify(arr, key, sorted, n, i);
@@ -127,13 +112,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		}
 		return until;
 	};
-	m.heapsortRest = function (
-		arr: any[],
-		key: string,
-		sorted: number[],
-		upto: number,
-		n: number,
-	): number {
+	m.heapsortRest = function (arr: any[], key: string, sorted: number[], upto: number, n: number): number {
 		upto = upto > n ? n : upto;
 		let until = n - upto;
 		for (let i = n - 1; i >= until; i--) {
@@ -150,10 +129,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		if (!str || typeof str !== "string") {
 			return "";
 		}
-		return str
-			.replace(/&/g, "&amp;")
-			.replace(/</g, "&lt;")
-			.replace(/>/g, "&gt;");
+		return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 	};
 	m.escapeOnlyTag = function (str: string): string {
 		if (!str || typeof str !== "string") {
@@ -165,10 +141,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		if (!str || typeof str !== "string") {
 			return "";
 		}
-		return str
-			.replace(/&gt;/g, ">")
-			.replace(/&lt;/g, "<")
-			.replace(/&amp;/g, "&");
+		return str.replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&amp;/g, "&");
 	};
 	m.escapeAMP = function (str: string): string {
 		if (!str || typeof str !== "string") {
@@ -204,15 +177,11 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		}
 		let exec = m.ptnURL.exec(uri);
 		if (exec !== null) {
-			return `<a target="_blank" href="${exec[0]}">${m.escapeOnlyTag(
-				decodeURIComponent(uri).replace(/[\n\s\t\r]/g, " "),
-			)}</a>`;
+			return `<a target="_blank" href="${exec[0]}">${m.escapeOnlyTag(decodeURIComponent(uri).replace(/[\n\s\t\r]/g, " "))}</a>`;
 		} else {
 			exec = m.ptnFILE.exec(uri);
 			if (exec !== null) {
-				return `<a target="_blank" href="${exec[0]}">${m.escapeOnlyTag(
-					decodeURIComponent(uri).replace(/[\n\s\t\r]/g, " "),
-				)}</a>`;
+				return `<a target="_blank" href="${exec[0]}">${m.escapeOnlyTag(decodeURIComponent(uri).replace(/[\n\s\t\r]/g, " "))}</a>`;
 			} else {
 				return m.escapeOnlyTag(uri);
 			}
@@ -244,40 +213,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 			m.fsToRs.fixed = true;
 		}
 	};
-	m.rC = function (
-		elemStr: string,
-		option?: string | null,
-		id?: string | null,
-		noPc?: boolean,
-	): string {
-		return `<div class="rC${option ? ` ${option}` : ""}"${
-			!!id ? ` id="${id}"` : ""
-		}><div class="rSC">${elemStr}</div>${
-			noPc
-				? ""
-				: `<div class="pc"><span onclick="k.togglePosition(this)">▲ [--stick to the left top--]</span></div>`
-		}</div>`;
+	m.rC = function (elemStr: string, option?: string | null, id?: string | null, noPc?: boolean): string {
+		return `<div class="rC${option ? ` ${option}` : ""}"${!!id ? ` id="${id}"` : ""}><div class="rSC">${elemStr}</div>${noPc ? "" : `<div class="pc"><span onclick="k.togglePosition(this)">▲ [--stick to the left top--]</span></div>`}</div>`;
 	};
-	m.YTiframe = function (
-		v: string,
-		inListPlay: boolean,
-		config: YTiframeConfig,
-		list?: string,
-	): string {
+	m.YTiframe = function (v: string, inListPlay: boolean, config: YTiframeConfig, list?: string): string {
 		if (list && list.constructor === String) {
-			return m.rC(
-				`<iframe delayed-src="https://www.youtube.com/embed/videoseries?list=${list}&origin=${window.location.origin}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
-				inListPlay && m.fsToRs.fixed ? "fixed" : null,
-			);
+			return m.rC(`<iframe delayed-src="https://www.youtube.com/embed/videoseries?list=${list}&origin=${window.location.origin}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null);
 		}
-		return m.rC(
-			`<iframe delayed-src="https://www.youtube.com/embed/${v}?origin=${
-				window.location.origin
-			}${config.start ? `&start=${config.start}` : ""}${
-				config.end ? `&end=${config.end}` : ""
-			}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
-			inListPlay && m.fsToRs.fixed ? "fixed" : null,
-		);
+		return m.rC(`<iframe delayed-src="https://www.youtube.com/embed/${v}?origin=${window.location.origin}${config.start ? `&start=${config.start}` : ""}${config.end ? `&end=${config.end}` : ""}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null);
 	};
 	m.timeToSeconds = function (time: string): number {
 		let secondToSeek = 0;
@@ -300,34 +243,19 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	};
 
 	let ptnURI;
-	ptnURI =
-		m.ptnURI["www.youtube.com"] =
-		m.ptnURI["youtube.com"] =
-		m.ptnURI["youtu.be"] =
-		m.ptnURI["m.youtube.com"] =
-			{} as PatternURI[string];
-	ptnURI.regEx =
-		/^(?:watch|embed|live|shorts|playlist)\/?([\w\-\_]+)?(\?[^\"\'\`\<\>\[\]\s\t\n\r]+)?/i;
+	ptnURI = m.ptnURI["www.youtube.com"] = m.ptnURI["youtube.com"] = m.ptnURI["youtu.be"] = m.ptnURI["m.youtube.com"] = [] as any;
+	ptnURI.regEx = /^(?:watch|embed|live|shorts|playlist)\/?([\w\-\_]+)?(\?[^\"\'\`\<\>\[\]\s\t\n\r]+)?/i;
 	ptnURI.regEx0 = /^([\w\-\_]+)\/?(\?[^\"\'\`\<\>\[\]\s\t\n\r]+)?/i;
 	ptnURI.regEx1 = /^(@?[^\"\'\`\<\>\[\]\s\t\n\r]+)?/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-		descR: DescR,
-	): Promise<YTiframeResult> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean, descR: DescR): Promise<YTiframeResult> {
 		return new Promise(function (resolve, reject): void {
 			let config: YTiframeConfig = {};
 			if (descR) {
 				if (descR["#start"]?.val) {
-					config.startSeconds = config.start = m.timeToSeconds(
-						descR["#start"].val.trim(),
-					);
+					config.startSeconds = config.start = m.timeToSeconds(descR["#start"].val.trim());
 				}
 				if (descR["#end"]?.val) {
-					config.endSeconds = config.end = m.timeToSeconds(
-						descR["#end"].val.trim(),
-					);
+					config.endSeconds = config.end = m.timeToSeconds(descR["#end"].val.trim());
 				}
 			}
 			let exec = m.ptnURI["www.youtube.com"].regEx.exec(uriRest);
@@ -349,10 +277,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				}
 				if (list) {
 					return resolve({
-						html:
-							(toA
-								? `<a target="_blank" href="https://www.youtube.com/watch?list=${list}">https://www.youtube.com/watch?list=${list}</a><br/>`
-								: "") + m.YTiframe(v, inListPlay, config, list),
+						html: (toA ? `<a target="_blank" href="https://www.youtube.com/watch?list=${list}">https://www.youtube.com/watch?list=${list}</a><br/>` : "") + m.YTiframe(v, inListPlay, config, list),
 						from: "youtube-list",
 						list,
 						config,
@@ -360,18 +285,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				}
 				if (v) {
 					return resolve({
-						html:
-							(toA
-								? `<a target="_blank" href="https://www.youtube.com/watch?v=${v}${
-										config.start ? `&start=${config.start}` : ""
-									}${config.end ? `&end=${config.end}` : ""}${
-										list ? `&list=${list}` : ""
-									}">https://www.youtube.com/watch?v=${v}${
-										config.start ? `&start=${config.start}` : ""
-									}${config.end ? `&end=${config.end}` : ""}${
-										list ? `&list=${list}` : ""
-									}</a><br/>`
-								: "") + m.YTiframe(v, inListPlay, config),
+						html: (toA ? `<a target="_blank" href="https://www.youtube.com/watch?v=${v}${config.start ? `&start=${config.start}` : ""}${config.end ? `&end=${config.end}` : ""}${list ? `&list=${list}` : ""}">https://www.youtube.com/watch?v=${v}${config.start ? `&start=${config.start}` : ""}${config.end ? `&end=${config.end}` : ""}${list ? `&list=${list}` : ""}</a><br/>` : "") + m.YTiframe(v, inListPlay, config),
 						from: "youtube",
 						videoId: v,
 						list,
@@ -398,28 +312,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					}
 					if (list) {
 						return resolve({
-							html:
-								(toA
-									? `<a target="_blank" href="https://www.youtube.com/watch?list=${list}">https://www.youtube.com/watch?list=${list}</a><br/>`
-									: "") + m.YTiframe(v, inListPlay, config, list),
+							html: (toA ? `<a target="_blank" href="https://www.youtube.com/watch?list=${list}">https://www.youtube.com/watch?list=${list}</a><br/>` : "") + m.YTiframe(v, inListPlay, config, list),
 							from: "youtube-list",
 							list,
 							config,
 						});
 					}
 					return resolve({
-						html:
-							(toA
-								? `<a target="_blank" href="https://www.youtube.com/watch?v=${v}${
-										config.start ? `&start=${config.start}` : ""
-									}${config.end ? `&end=${config.end}` : ""}${
-										list ? `&list=${list}` : ""
-									}">https://www.youtube.com/watch?v=${v}${
-										config.start ? `&start=${config.start}` : ""
-									}${config.end ? `&end=${config.end}` : ""}${
-										list ? `&list=${list}` : ""
-									}</a><br/>`
-								: "") + m.YTiframe(v, inListPlay, config),
+						html: (toA ? `<a target="_blank" href="https://www.youtube.com/watch?v=${v}${config.start ? `&start=${config.start}` : ""}${config.end ? `&end=${config.end}` : ""}${list ? `&list=${list}` : ""}">https://www.youtube.com/watch?v=${v}${config.start ? `&start=${config.start}` : ""}${config.end ? `&end=${config.end}` : ""}${list ? `&list=${list}` : ""}</a><br/>` : "") + m.YTiframe(v, inListPlay, config),
 						from: "youtube",
 						videoId: v,
 						list,
@@ -429,9 +329,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					exec = m.ptnURI["www.youtube.com"].regEx1.exec(uriRest);
 					if (exec !== null) {
 						return resolve({
-							html: toA
-								? `<a target="_blank" href="https://www.youtube.com/${exec[0]}">https://www.youtube.com/${exec[0]}</a>`
-								: ``,
+							html: toA ? `<a target="_blank" href="https://www.youtube.com/${exec[0]}">https://www.youtube.com/${exec[0]}</a>` : ``,
 							from: "-youtube-link",
 						});
 					}
@@ -441,25 +339,15 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["docs.google.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["docs.google.com"] = [] as any;
 	ptnURI.regEx = /^spreadsheets\/d\/e\/([\w\-\_]+)/i;
 	ptnURI.regEx1 = /^spreadsheets\/d\/([\w\-\_]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { docId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { docId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["docs.google.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				return resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://docs.google.com/spreadsheets/d/e/${exec[1]}/pubhtml">https://docs.google.com/spreadsheets/d/e/${exec[1]}/pubhtml</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://docs.google.com/spreadsheets/d/e/${exec[1]}/pubhtml?widget=true&headers=false"></iframe>`,
-						),
+					html: (toA ? `<a target="_blank" href="https://docs.google.com/spreadsheets/d/e/${exec[1]}/pubhtml">https://docs.google.com/spreadsheets/d/e/${exec[1]}/pubhtml</a><br/>` : "") + m.rC(`<iframe delayed-src="https://docs.google.com/spreadsheets/d/e/${exec[1]}/pubhtml?widget=true&headers=false"></iframe>`),
 					from: "docs-google",
 					docId: exec[1],
 				});
@@ -467,9 +355,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				let exec = m.ptnURI["docs.google.com"].regEx1.exec(uriRest);
 				if (exec !== null) {
 					return resolve({
-						html: toA
-							? `<a target="_blank" href="https://docs.google.com/${uriRest}">https://docs.google.com/${uriRest}</a>`
-							: ``,
+						html: toA ? `<a target="_blank" href="https://docs.google.com/${uriRest}">https://docs.google.com/${uriRest}</a>` : ``,
 						from: "-docs-google",
 						docId: exec[1],
 					});
@@ -479,30 +365,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI =
-		m.ptnURI["instagram.com"] =
-		m.ptnURI["www.instagram.com"] =
-			{} as PatternURI[string];
+	ptnURI = m.ptnURI["instagram.com"] = m.ptnURI["www.instagram.com"] = [] as any;
 	ptnURI.regEx = /^(?:p|tv|reel)\/([\w\-\_]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { imgId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { imgId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["instagram.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://www.instagram.com/p/${exec[1]}/">https://www.instagram.com/p/${exec[1]}/</a><br/>`
-							: "") +
-						m.rC(
-							`<div class="center"><iframe delayed-src="https://www.instagram.com/p/${exec[1]}/embed" allowtransparency="true"></iframe></div>`,
-							"instagram",
-							null,
-							true,
-						),
+					html: (toA ? `<a target="_blank" href="https://www.instagram.com/p/${exec[1]}/">https://www.instagram.com/p/${exec[1]}/</a><br/>` : "") + m.rC(`<div class="center"><iframe delayed-src="https://www.instagram.com/p/${exec[1]}/embed" allowtransparency="true"></iframe></div>`, "instagram", null, true),
 					from: "instagram",
 					imgId: exec[1],
 				});
@@ -512,30 +382,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI =
-		m.ptnURI["imgur.com"] =
-		m.ptnURI["www.imgur.com"] =
-			{} as PatternURI[string];
+	ptnURI = m.ptnURI["imgur.com"] = m.ptnURI["www.imgur.com"] = [] as any;
 	ptnURI.regEx = /^a\/([\w\-\_]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { imgId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { imgId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["imgur.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://imgur.com/a/${exec[1]}">https://imgur.com/a/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<div class="center"><iframe delayed-src="https://imgur.com/a/${exec[1]}/embed?pub=true&context=false" allowtransparency="true"></iframe></div>`,
-							"imgur",
-							null,
-							true,
-						),
+					html: (toA ? `<a target="_blank" href="https://imgur.com/a/${exec[1]}">https://imgur.com/a/${exec[1]}</a><br/>` : "") + m.rC(`<div class="center"><iframe delayed-src="https://imgur.com/a/${exec[1]}/embed?pub=true&context=false" allowtransparency="true"></iframe></div>`, "imgur", null, true),
 					from: "imgur",
 					imgId: exec[1],
 				});
@@ -545,31 +399,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["www.tiktok.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["www.tiktok.com"] = [] as any;
 	ptnURI.regEx = /^@(\S+)\/video\/([0-9]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { userId: string; videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { userId: string; videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["www.tiktok.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://www.tiktok.com/@${exec[1]}/video/${exec[2]}">https://www.tiktok.com/@${exec[1]}/video/${exec[2]}</a><br/>`
-							: "") +
-						m.rC(
-							`<div class="center"><iframe sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin" delayed-src="https://www.tiktok.com/embed/v2/${
-								exec[2]
-							}?referrer=${encodeURIComponent(
-								window.location.host,
-							)}"></iframe></div>`,
-							"tiktok",
-							null,
-							true,
-						),
+					html: (toA ? `<a target="_blank" href="https://www.tiktok.com/@${exec[1]}/video/${exec[2]}">https://www.tiktok.com/@${exec[1]}/video/${exec[2]}</a><br/>` : "") + m.rC(`<div class="center"><iframe sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin" delayed-src="https://www.tiktok.com/embed/v2/${exec[2]}?referrer=${encodeURIComponent(window.location.host)}"></iframe></div>`, "tiktok", null, true),
 					from: "tiktok",
 					userId: exec[1],
 					videoId: exec[2],
@@ -580,16 +417,9 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["vt.tiktok.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["vt.tiktok.com"] = [] as any;
 	ptnURI.regEx = /^(\w+)\//i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<
-		RenderResult &
-			DecomposedURI & { userId?: string; videoId?: string; newURI?: string }
-	> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & DecomposedURI & { userId?: string; videoId?: string; newURI?: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["vt.tiktok.com"].regEx.exec(uriRest);
 			if (exec !== null) {
@@ -606,16 +436,13 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					.done(async function (resp) {
 						let decomposedURI: DecomposedURI = m.decomposeURI(resp);
 						if (decomposedURI.uriHost === "www.tiktok.com") {
-							let uriRendered: RenderResult & { newURI?: string } =
-								await m.uriRendering(resp, toA, inListPlay);
+							let uriRendered: RenderResult & { newURI?: string } = await m.uriRendering(resp, toA, inListPlay);
 							// * (uri, toA, inListPlay, descR)
 							uriRendered.newURI = resp;
 							resolve({ ...uriRendered, ...decomposedURI });
 						} else {
 							resolve({
-								html: toA
-									? `<a target="_blank" href="${shortURI}">${shortURI}</a>`
-									: "",
+								html: toA ? `<a target="_blank" href="${shortURI}">${shortURI}</a>` : "",
 								from: "-tiktok-link",
 								...decomposedURI,
 							});
@@ -625,25 +452,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["serviceapi.rmcnmv.naver.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["serviceapi.rmcnmv.naver.com"] = [] as any;
 	ptnURI.regEx = /^\S+/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["serviceapi.rmcnmv.naver.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://serviceapi.rmcnmv.naver.com/${exec[0]}">https://serviceapi.rmcnmv.naver.com/${exec[0]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://serviceapi.rmcnmv.naver.com/${exec[0]}" marginwidth="0" marginheight="0" allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://serviceapi.rmcnmv.naver.com/${exec[0]}">https://serviceapi.rmcnmv.naver.com/${exec[0]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://serviceapi.rmcnmv.naver.com/${exec[0]}" marginwidth="0" marginheight="0" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "naver",
 					videoId: exec[0],
 				});
@@ -653,25 +469,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["tv.naver.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["tv.naver.com"] = [] as any;
 	ptnURI.regEx = /^(?:v|embed)\/([0-9]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["tv.naver.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://tv.naver.com/v/${exec[1]}">https://tv.naver.com/v/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://tv.naver.com/embed/${exec[1]}?autoPlay=false" marginwidth="0" marginheight="0" allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://tv.naver.com/v/${exec[1]}">https://tv.naver.com/v/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://tv.naver.com/embed/${exec[1]}?autoPlay=false" marginwidth="0" marginheight="0" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "naver",
 					videoId: exec[1],
 				});
@@ -681,25 +486,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["weverse.io"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["weverse.io"] = [] as any;
 	ptnURI.regEx = /^(\S+)\/artist\/([0-9\-]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { singer: string; videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { singer: string; videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["weverse.io"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://weverse.io/${exec[1]}/artist/${exec[2]}">https://weverse.io/${exec[1]}/artist/${exec[2]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe src="https://weverse.io/${exec[1]}/artist/${exec[2]}" marginwidth="0" marginheight="0" allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://weverse.io/${exec[1]}/artist/${exec[2]}">https://weverse.io/${exec[1]}/artist/${exec[2]}</a><br/>` : "") + m.rC(`<iframe src="https://weverse.io/${exec[1]}/artist/${exec[2]}" marginwidth="0" marginheight="0" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "weverse",
 					singer: exec[1],
 					videoId: exec[2],
@@ -710,29 +504,15 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI =
-		m.ptnURI["tv.kakao.com"] =
-		m.ptnURI["entertain.daum.net"] =
-			{} as PatternURI[string];
+	ptnURI = m.ptnURI["tv.kakao.com"] = m.ptnURI["entertain.daum.net"] = [] as any;
 	ptnURI.regEx = /(?:v|cliplink)\/([0-9]+)/i;
 	ptnURI.regEx1 = /video\/([0-9]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["tv.kakao.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				return resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://tv.kakao.com/v/${exec[1]}">https://tv.kakao.com/v/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://play-tv.kakao.com/embed/player/cliplink/${exec[1]}" allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://tv.kakao.com/v/${exec[1]}">https://tv.kakao.com/v/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://play-tv.kakao.com/embed/player/cliplink/${exec[1]}" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "kakao",
 					videoId: exec[1],
 				});
@@ -740,14 +520,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				exec = m.ptnURI["entertain.daum.net"].regEx1.exec(uriRest);
 				if (exec !== null) {
 					return resolve({
-						html:
-							(toA
-								? `<a target="_blank" href="https://tv.kakao.com/v/${exec[1]}">https://tv.kakao.com/v/${exec[1]}</a><br/>`
-								: "") +
-							m.rC(
-								`<iframe delayed-src="https://play-tv.kakao.com/embed/player/cliplink/${exec[1]}" allowfullscreen></iframe>`,
-								inListPlay && m.fsToRs.fixed ? "fixed" : null,
-							),
+						html: (toA ? `<a target="_blank" href="https://tv.kakao.com/v/${exec[1]}">https://tv.kakao.com/v/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://play-tv.kakao.com/embed/player/cliplink/${exec[1]}" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 						from: "kakao",
 						videoId: exec[1],
 					});
@@ -758,27 +531,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["tvpot.daum.net"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["tvpot.daum.net"] = [] as any;
 	ptnURI.regEx = /^v\/([\w\-\_]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["tvpot.daum.net"].regEx.exec(uriRest);
 			if (exec !== null) {
 				return resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://tvpot.daum.net/v/${exec[1]}">https://tvpot.daum.net/v/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://videofarm.daum.net/controller/video/viewer/Video.html?vid=${
-								exec[1]
-							}${exec[1].length < 15 ? "$" : ""}&play_loc=undefined"></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://tvpot.daum.net/v/${exec[1]}">https://tvpot.daum.net/v/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://videofarm.daum.net/controller/video/viewer/Video.html?vid=${exec[1]}${exec[1].length < 15 ? "$" : ""}&play_loc=undefined"></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "daum",
 					videoId: exec[1],
 				});
@@ -788,25 +548,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["vimeo.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["vimeo.com"] = [] as any;
 	ptnURI.regEx = /^([0-9]+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["vimeo.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://vimeo.com/${exec[1]}">https://vimeo.com/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://player.vimeo.com/video/${exec[1]}" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://vimeo.com/${exec[1]}">https://vimeo.com/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://player.vimeo.com/video/${exec[1]}" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "vimeo",
 					videoId: exec[1],
 				});
@@ -816,25 +565,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["www.dailymotion.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["www.dailymotion.com"] = [] as any;
 	ptnURI.regEx = /video\/(\w+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["www.dailymotion.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://www.dailymotion.com/video/${exec[1]}">https://www.dailymotion.com/video/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://www.dailymotion.com/embed/video/${exec[1]}" allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://www.dailymotion.com/video/${exec[1]}">https://www.dailymotion.com/video/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://www.dailymotion.com/embed/video/${exec[1]}" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "dailymotion",
 					videoId: exec[1],
 				});
@@ -844,21 +582,15 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["namu.wiki"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["namu.wiki"] = [] as any;
 	ptnURI.regEx = /w\/(.*)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { pathname: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { pathname: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["namu.wiki"].regEx.exec(uriRest);
 			if (exec !== null) {
 				let pathname = exec[1].replace(/\+/g, "%20").replace(/%2B/g, "%20");
 				resolve({
-					html: `<a target="_blank" href="https://namu.wiki/w/${pathname}">https://namu.wiki/w/${m.escapeOnlyTag(
-						decodeURIComponent(pathname),
-					)}</a>`,
+					html: `<a target="_blank" href="https://namu.wiki/w/${pathname}">https://namu.wiki/w/${m.escapeOnlyTag(decodeURIComponent(pathname))}</a>`,
 					from: "namu.wiki",
 					pathname,
 				});
@@ -868,16 +600,9 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI =
-		m.ptnURI["www.ted.com"] =
-		m.ptnURI["embed.ted.com"] =
-			{} as PatternURI[string];
+	ptnURI = m.ptnURI["www.ted.com"] = m.ptnURI["embed.ted.com"] = [] as any;
 	ptnURI.regEx = /^talks\/(\S+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["www.ted.com"].regEx.exec(uriRest);
 			if (exec !== null) {
@@ -893,14 +618,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					uriRest = "lang/" + vars.language.val + "/" + uriRest;
 				}
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://www.ted.com/${exec[1]}">https://www.ted.com/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://embed.ted.com/talks/${uriRest}" allowfullscreen></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="https://www.ted.com/${exec[1]}">https://www.ted.com/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://embed.ted.com/talks/${uriRest}" allowfullscreen></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "ted",
 					videoId: v,
 				});
@@ -910,38 +628,23 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["w.soundcloud.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["w.soundcloud.com"] = [] as any;
 	ptnURI.regEx = /^player\/(\?\S+)/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["w.soundcloud.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				let vars = m.getSearchVars(exec[1]);
 				let lastPath = "player/?";
-				for (let i = 0; i < vars[m.symArray].length; i++) {
-					if (vars[m.symArray][i].key === "auto_play") {
+				for (let i = 0; i < vars.length; i++) {
+					if (vars[i].key === "auto_play") {
 						lastPath += "auto_play=false&";
 					} else {
-						lastPath +=
-							vars[m.symArray][i].key + "=" + vars[m.symArray][i].val + "&";
+						lastPath += vars[i].key + "=" + vars[i].val + "&";
 					}
 				}
 				return resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="https://w.soundcloud.com/${exec[1]}">https://w.soundcloud.com/${exec[1]}</a><br/>`
-							: "") +
-						m.rC(
-							`<iframe delayed-src="https://w.soundcloud.com/${lastPath.substring(
-								0,
-								lastPath.length - 1,
-							)}"></iframe>`,
-							inListPlay && m.fsToRs.fixed ? "fixed soundcloud" : "soundcloud",
-						),
+					html: (toA ? `<a target="_blank" href="https://w.soundcloud.com/${exec[1]}">https://w.soundcloud.com/${exec[1]}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://w.soundcloud.com/${lastPath.substring(0, lastPath.length - 1)}"></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed soundcloud" : "soundcloud"),
 					from: "soundcloud",
 					videoId: vars?.url?.val,
 				});
@@ -951,15 +654,11 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["gall.dcinside.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["gall.dcinside.com"] = [] as any;
 	ptnURI.regEx = /\/movie\/share_movie(\?\S+)/i;
 	ptnURI.regEx1 = /\/poll\/vote(\?\S+)/i;
 	// https://gall.dcinside.com/board/poll/vote?no=710233
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId?: string; voteId?: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId?: string; voteId?: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["gall.dcinside.com"].regEx.exec(uriRest);
 			if (exec !== null) {
@@ -967,22 +666,13 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				let v = vars.no?.val;
 				if (v) {
 					return resolve({
-						html:
-							(toA
-								? `<a target="_blank" href="https://gall.dcinside.com/board/movie/share_movie?no=${v}">https://gall.dcinside.com/board/movie/share_movie?no=${v}</a><br/>`
-								: "") +
-							m.rC(
-								`<iframe delayed-src="https://gall.dcinside.com/board/movie/share_movie?no=${v}"></iframe>`,
-								inListPlay && m.fsToRs.fixed ? "fixed" : "",
-							),
+						html: (toA ? `<a target="_blank" href="https://gall.dcinside.com/board/movie/share_movie?no=${v}">https://gall.dcinside.com/board/movie/share_movie?no=${v}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://gall.dcinside.com/board/movie/share_movie?no=${v}"></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : ""),
 						from: "dcinside",
 						videoId: v,
 					});
 				} else {
 					return resolve({
-						html: `<a target="_blank" href="https://gall.dcinside.com/${uriRest}">https://gall.dcinside.com/${m.escapeOnlyTag(
-							decodeURIComponent(uriRest),
-						)}</a>`,
+						html: `<a target="_blank" href="https://gall.dcinside.com/${uriRest}">https://gall.dcinside.com/${m.escapeOnlyTag(decodeURIComponent(uriRest))}</a>`,
 						from: "dcinside",
 					});
 				}
@@ -993,13 +683,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					let no = vars.no?.val;
 					if (no) {
 						return resolve({
-							html:
-								(toA
-									? `<a target="_blank" href="https://gall.dcinside.com/board/poll/vote?no=${no}">https://gall.dcinside.com/board/poll/vote?no=${no}</a><br/>`
-									: "") +
-								m.rC(
-									`<iframe src="https://gall.dcinside.com/board/poll/vote?no=${no}"></iframe>`,
-								),
+							html: (toA ? `<a target="_blank" href="https://gall.dcinside.com/board/poll/vote?no=${no}">https://gall.dcinside.com/board/poll/vote?no=${no}</a><br/>` : "") + m.rC(`<iframe src="https://gall.dcinside.com/board/poll/vote?no=${no}"></iframe>`),
 							from: "dcinside",
 							voteId: no,
 						});
@@ -1010,27 +694,16 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI["v.qq.com"] = {} as PatternURI[string];
+	ptnURI = m.ptnURI["v.qq.com"] = [] as any;
 	ptnURI.regEx = /([\w\d]+)\/([\w\d]+).html$/i;
-	ptnURI.toIframe = function (
-		uriRest: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { videoId: string; newURI: string }> {
+	ptnURI.toIframe = function (uriRest: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { videoId: string; newURI: string }> {
 		return new Promise(function (resolve, reject): void {
 			let exec = m.ptnURI["v.qq.com"].regEx.exec(uriRest);
 			if (exec !== null) {
 				let v = exec[2];
 				if (v) {
 					return resolve({
-						html:
-							(toA
-								? `<a target="_blank" href="https://v.qq.com/${uriRest}">https://v.qq.com/${uriRest}</a><br/>`
-								: "") +
-							m.rC(
-								`<iframe delayed-src="https://v.qq.com/txp/iframe/player.html?vid=${v}"></iframe>`,
-								inListPlay && m.fsToRs.fixed ? "fixed" : "",
-							),
+						html: (toA ? `<a target="_blank" href="https://v.qq.com/${uriRest}">https://v.qq.com/${uriRest}</a><br/>` : "") + m.rC(`<iframe delayed-src="https://v.qq.com/txp/iframe/player.html?vid=${v}"></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : ""),
 						from: "qq",
 						videoId: v,
 						newURI: `https://v.qq.com/${uriRest}`,
@@ -1041,26 +714,15 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	m.ptnURI[m.symArray] = [];
-	ptnURI = m.ptnURI[m.symArray][0] = {} as PatternURI[string];
-	ptnURI.regEx =
-		/^(https?:\/\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:jpg|jpeg|bmp|gif|png|webp|svg|tif))(?=$|\?|\s)/i;
-	ptnURI.toIframe = function (
-		uri: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { src: string }> {
+	m.ptnURI = [];
+	ptnURI = m.ptnURI[0] = [] as any;
+	ptnURI.regEx = /^(https?:\/\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:jpg|jpeg|bmp|gif|png|webp|svg|tif))(?=$|\?|\s)/i;
+	ptnURI.toIframe = function (uri: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { src: string }> {
 		return new Promise(function (resolve, reject): void {
-			let exec = m.ptnURI[m.symArray][0].regEx.exec(uri);
+			let exec = m.ptnURI[0].regEx.exec(uri);
 			if (exec !== null) {
 				resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="${exec[1]}">${m.escapeOnlyTag(
-									decodeURIComponent(uri),
-								)}</a><br/>`
-							: "") +
-						`<div class="center"><img delayed-src="${exec[1]}"/></div>`,
+					html: (toA ? `<a target="_blank" href="${exec[1]}">${m.escapeOnlyTag(decodeURIComponent(uri))}</a><br/>` : "") + `<div class="center"><img delayed-src="${exec[1]}"/></div>`,
 					from: "image",
 					src: exec[1],
 				});
@@ -1070,15 +732,9 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI[m.symArray][1] = {} as PatternURI[string];
-	ptnURI.regEx =
-		/^https?:\/\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:mp4|ogg|webm|avif|avi)(?=$|\?|\s)/i;
-	ptnURI.toIframe = function (
-		uri: string,
-		inListPlay: boolean,
-		toA: boolean,
-		descR: DescR,
-	): Promise<RenderResult & { config: YTiframeConfig; src: string }> {
+	ptnURI = m.ptnURI[1] = [] as any;
+	ptnURI.regEx = /^https?:\/\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:mp4|ogg|webm|avif|avi)(?=$|\?|\s)/i;
+	ptnURI.toIframe = function (uri: string, inListPlay: boolean, toA: boolean, descR: DescR): Promise<RenderResult & { config: YTiframeConfig; src: string }> {
 		return new Promise(function (resolve, reject): void {
 			let config: YTiframeConfig = {};
 			if (descR) {
@@ -1089,28 +745,13 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					config.end = m.timeToSeconds(descR["#end"].val.trim());
 				}
 				if (config.start || config.end) {
-					config.hash = `${config.start ? `#t=${config.start}` : "#t=0"}${
-						config.end ? `,${config.end}` : ""
-					}`;
+					config.hash = `${config.start ? `#t=${config.start}` : "#t=0"}${config.end ? `,${config.end}` : ""}`;
 				}
 			}
-			let exec = m.ptnURI[m.symArray][1].regEx.exec(uri);
+			let exec = m.ptnURI[1].regEx.exec(uri);
 			if (exec !== null) {
 				return resolve({
-					html:
-						(toA
-							? `<a target="_blank" href="${exec[0]}${
-									config.hash ? config.hash : ""
-								}">${m.escapeOnlyTag(
-									decodeURIComponent(`${uri}${config.hash ? config.hash : ""}`),
-								)}</a><br/>`
-							: "") +
-						m.rC(
-							`<video controls preload="metadata" delayed-src="${exec[0]}${
-								config.hash ? config.hash : ""
-							}"></video>`,
-							inListPlay && m.fsToRs.fixed ? "fixed" : null,
-						),
+					html: (toA ? `<a target="_blank" href="${exec[0]}${config.hash ? config.hash : ""}">${m.escapeOnlyTag(decodeURIComponent(`${uri}${config.hash ? config.hash : ""}`))}</a><br/>` : "") + m.rC(`<video controls preload="metadata" delayed-src="${exec[0]}${config.hash ? config.hash : ""}"></video>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 					from: "video",
 					src: exec[0],
 					config,
@@ -1121,42 +762,24 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI[m.symArray][2] = {} as PatternURI[string];
-	ptnURI.regEx =
-		/^https?:\/\/kr[\d]+\.sogirl\.so(\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]*)?/i;
-	ptnURI.regEx1 =
-		/^https?:\/\/kr[\d]+\.sogirl\.co(\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]*)?/i;
-	ptnURI.toIframe = function (
-		uri: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { newURI: string; src: string }> {
+	ptnURI = m.ptnURI[2] = [] as any;
+	ptnURI.regEx = /^https?:\/\/kr[\d]+\.sogirl\.so(\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]*)?/i;
+	ptnURI.regEx1 = /^https?:\/\/kr[\d]+\.sogirl\.co(\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]*)?/i;
+	ptnURI.toIframe = function (uri: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { newURI: string; src: string }> {
 		return new Promise(function (resolve, reject): void {
-			let exec = m.ptnURI[m.symArray][2].regEx.exec(uri);
+			let exec = m.ptnURI[2].regEx.exec(uri);
 			if (exec !== null) {
 				return resolve({
-					html: `<a target="_blank" href="https://kr78.sogirl.so${
-						exec[1] ? exec[1] : ""
-					}">${m.escapeOnlyTag(
-						decodeURIComponent(
-							`https://kr78.sogirl.so${exec[1] ? exec[1] : ""}`,
-						),
-					)}</a>`,
+					html: `<a target="_blank" href="https://kr78.sogirl.so${exec[1] ? exec[1] : ""}">${m.escapeOnlyTag(decodeURIComponent(`https://kr78.sogirl.so${exec[1] ? exec[1] : ""}`))}</a>`,
 					newURI: `https://kr78.sogirl.so${exec[1] ? exec[1] : ""}`,
 					from: "sogirl",
 					src: exec[1],
 				});
 			} else {
-				exec = m.ptnURI[m.symArray][2].regEx1.exec(uri);
+				exec = m.ptnURI[2].regEx1.exec(uri);
 				if (exec !== null) {
 					return resolve({
-						html: `<a target="_blank" href="https://kr78.sogirl.so${
-							exec[1] ? exec[1] : ""
-						}">${m.escapeOnlyTag(
-							decodeURIComponent(
-								`https://kr78.sogirl.so${exec[1] ? exec[1] : ""}`,
-							),
-						)}</a>`,
+						html: `<a target="_blank" href="https://kr78.sogirl.so${exec[1] ? exec[1] : ""}">${m.escapeOnlyTag(decodeURIComponent(`https://kr78.sogirl.so${exec[1] ? exec[1] : ""}`))}</a>`,
 						newURI: `https://kr78.sogirl.so${exec[1] ? exec[1] : ""}`,
 						from: "sogirl",
 						src: exec[1],
@@ -1168,25 +791,14 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI[m.symArray][3] = {} as PatternURI[string];
-	ptnURI.regEx =
-		/^https?:\/\/kr[\d]+\.topgirl\.co(\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]*)?/i;
-	ptnURI.toIframe = function (
-		uri: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { newURI: string; src: string }> {
+	ptnURI = m.ptnURI[3] = [] as any;
+	ptnURI.regEx = /^https?:\/\/kr[\d]+\.topgirl\.co(\/[^\s\t\n\r\"\'\`\<\>\{\}\[\]]*)?/i;
+	ptnURI.toIframe = function (uri: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { newURI: string; src: string }> {
 		return new Promise(function (resolve, reject): void {
-			let exec = m.ptnURI[m.symArray][3].regEx.exec(uri);
+			let exec = m.ptnURI[3].regEx.exec(uri);
 			if (exec !== null) {
 				resolve({
-					html: `<a target="_blank" href="https://kr37.topgirl.co${
-						exec[1] ? exec[1] : ""
-					}">${m.escapeOnlyTag(
-						decodeURIComponent(
-							`https://kr37.topgirl.co${exec[1] ? exec[1] : ""}`,
-						),
-					)}</a>`,
+					html: `<a target="_blank" href="https://kr37.topgirl.co${exec[1] ? exec[1] : ""}">${m.escapeOnlyTag(decodeURIComponent(`https://kr37.topgirl.co${exec[1] ? exec[1] : ""}`))}</a>`,
 					newURI: `https://kr37.topgirl.co${exec[1] ? exec[1] : ""}`,
 					from: "topgirl",
 					src: exec[1],
@@ -1197,67 +809,39 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 
-	ptnURI = m.ptnURI[m.symArray][4] = {} as PatternURI[string];
-	ptnURI.regEx =
-		/^file:\/\/\/([^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:jpg|jpeg|bmp|gif|png|webp|svg|tif))(?=$|\?|\s)/i;
-	ptnURI.regEx1 =
-		/^file:\/\/\/([^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:mp4|ogg|webm|avi))(?=$|\?|\s)/i;
-	ptnURI.regEx2 =
-		/^file:\/\/\/([^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:pdf|html|htm))(?=$|\?|\s)/i;
-	ptnURI.toIframe = function (
-		uri: string,
-		inListPlay: boolean,
-		toA: boolean,
-	): Promise<RenderResult & { src: string }> {
+	ptnURI = m.ptnURI[4] = [] as any;
+	ptnURI.regEx = /^file:\/\/\/([^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:jpg|jpeg|bmp|gif|png|webp|svg|tif))(?=$|\?|\s)/i;
+	ptnURI.regEx1 = /^file:\/\/\/([^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:mp4|ogg|webm|avi))(?=$|\?|\s)/i;
+	ptnURI.regEx2 = /^file:\/\/\/([^\s\t\n\r\"\'\`\<\>\{\}\[\]]+\.(?:pdf|html|htm))(?=$|\?|\s)/i;
+	ptnURI.toIframe = function (uri: string, inListPlay: boolean, toA: boolean): Promise<RenderResult & { src: string }> {
 		return new Promise(function (resolve, reject): void {
-			let exec = m.ptnURI[m.symArray][4].regEx.exec(uri);
+			let exec = m.ptnURI[4].regEx.exec(uri);
 			let href = null;
 			if (exec !== null) {
 				href = exec[1].replace(/\+/g, "%20").replace(/%2B/g, "%20");
 				uri = uri.replace(/\+/g, "%20").replace(/%2B/g, "%20");
 				return resolve({
-					html:
-						`<a target="_blank" href="${href}">${m.escapeOnlyTag(
-							decodeURIComponent(uri),
-						)}</a>` +
-						m.rC(
-							`<div class="center"><img delayed-src="${href}"/></div>`,
-							inListPlay && m.fsToRs.fixed ? "fixed eveElse" : "eveElse",
-						),
+					html: `<a target="_blank" href="${href}">${m.escapeOnlyTag(decodeURIComponent(uri))}</a>` + m.rC(`<div class="center"><img delayed-src="${href}"/></div>`, inListPlay && m.fsToRs.fixed ? "fixed eveElse" : "eveElse"),
 					from: "file-image",
 					src: href,
 				});
 			} else {
-				exec = m.ptnURI[m.symArray][4].regEx1.exec(uri);
+				exec = m.ptnURI[4].regEx1.exec(uri);
 				if (exec !== null) {
 					href = exec[1].replace(/\+/g, "%20").replace(/%2B/g, "%20");
 					uri = uri.replace(/\+/g, "%20").replace(/%2B/g, "%20");
 					return resolve({
-						html:
-							`<a target="_blank" href="${href}">${m.escapeOnlyTag(
-								decodeURIComponent(uri),
-							)}</a><br/>` +
-							m.rC(
-								`<video controls preload="metadata" delayed-src="${href}"></video>`,
-								inListPlay && m.fsToRs.fixed ? "fixed" : null,
-							),
+						html: `<a target="_blank" href="${href}">${m.escapeOnlyTag(decodeURIComponent(uri))}</a><br/>` + m.rC(`<video controls preload="metadata" delayed-src="${href}"></video>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 						from: "file-video",
 						src: href,
 					});
 				} else {
-					exec = m.ptnURI[m.symArray][4].regEx2.exec(uri);
+					exec = m.ptnURI[4].regEx2.exec(uri);
 					if (exec !== null) {
 						href = exec[1].replace(/\+/g, "%20").replace(/%2B/g, "%20");
 						uri = uri.replace(/\+/g, "%20").replace(/%2B/g, "%20");
 						return resolve({
-							html:
-								`<a target="_blank" href="${href}">${m.escapeOnlyTag(
-									decodeURIComponent(uri),
-								)}</a><br/>` +
-								m.rC(
-									`<iframe delayed-src="${href}"></iframe>`,
-									inListPlay && m.fsToRs.fixed ? "fixed" : null,
-								),
+							html: `<a target="_blank" href="${href}">${m.escapeOnlyTag(decodeURIComponent(uri))}</a><br/>` + m.rC(`<iframe delayed-src="${href}"></iframe>`, inListPlay && m.fsToRs.fixed ? "fixed" : null),
 							from: "file-pdf",
 							src: href,
 						});
@@ -1285,10 +869,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		});
 	};
 	m.ptnPureNumber = /^\d+$/;
-	m.formatURI = async function (
-		uri: string,
-		keepOriginal: boolean,
-	): Promise<string> {
+	m.formatURI = async function (uri: string, keepOriginal: boolean): Promise<string> {
 		return new Promise(async function (resolve, reject): Promise<void> {
 			if (uri && uri.constructor === String) {
 				uri = uri.trim().replace(/[\s\t\n]+/g, " ");
@@ -1314,9 +895,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					uri = "Number: " + uri;
 				}
 				if (!keepOriginal && m.getUTF8Length(uri) > 255) {
-					return m
-						.getConciseURI(uri)
-						.then((conciseURI: string) => resolve(m.unescapeHTML(conciseURI)));
+					return m.getConciseURI(uri).then((conciseURI: string) => resolve(m.unescapeHTML(conciseURI)));
 				}
 				return resolve(m.unescapeHTML(uri).trim());
 			}
@@ -1397,33 +976,21 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		}
 		if (res.uriHost) {
 			res.uriHost = res.uriHost.toLowerCase();
-			res.uriWithoutHash =
-				res.protocol + "//" + res.uriHost + res.pathname + res.search;
+			res.uriWithoutHash = res.protocol + "//" + res.uriHost + res.pathname + res.search;
 		}
 		return res;
 	};
-	m.uriRendering = function (
-		uri: string,
-		toA: boolean,
-		inListPlay: boolean,
-		descR?: DescR,
-	): Promise<RenderResult & DecomposedURI & { uri: string }> {
+	m.uriRendering = function (uri: string, toA: boolean, inListPlay: boolean, descR?: DescR): Promise<RenderResult & DecomposedURI & { uri: string }> {
 		return new Promise(async function (resolve, reject): Promise<void> {
 			uri = uri.trim();
 			let decomposedURI: DecomposedURI;
 			let result: RenderResult;
-			const { uriHost, pathname, search, hash } = (decomposedURI =
-				m.decomposeURI(uri));
+			const { uriHost, pathname, search, hash } = (decomposedURI = m.decomposeURI(uri));
 			const uriRest = (pathname ? pathname.substring(1) : "") + search;
 			if (uriHost) {
 				if (m.ptnURI[uriHost]) {
 					try {
-						result = await m.ptnURI[uriHost]?.toIframe(
-							uriRest,
-							inListPlay,
-							toA,
-							descR,
-						);
+						result = await m.ptnURI[uriHost]?.toIframe(uriRest, inListPlay, toA, descR);
 						if (result) {
 							return resolve({
 								...result,
@@ -1433,14 +1000,9 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 						}
 					} catch (err) {}
 				}
-				for (let i = 0; i < m.ptnURI[m.symArray].length; i += 1) {
+				for (let i = 0; i < m.ptnURI.length; i += 1) {
 					try {
-						result = await m.ptnURI[m.symArray][i]?.toIframe(
-							uri,
-							inListPlay,
-							toA,
-							descR,
-						);
+						result = await m.ptnURI[i]?.toIframe(uri, inListPlay, toA, descR);
 						if (Boolean(result)) {
 							return resolve({ ...result, ...decomposedURI, uri });
 						}
@@ -1510,51 +1072,19 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	m.expire = 365 * 24 * 60 * 60; // max-age in seconds.
 	m.docCookies = {
 		hasItem: function (sKey: string): boolean {
-			return new RegExp(
-				"(?:^|;\\s*)" +
-					encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") +
-					"\\s*\\=",
-			).test(document.cookie);
+			return new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=").test(document.cookie);
 		},
 		getItem: function (sKey: string): string | null {
-			return (
-				decodeURIComponent(
-					document.cookie.replace(
-						new RegExp(
-							"(?:(?:^|.*;)\\s*" +
-								encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") +
-								"\\s*\\=\\s*([^;]*).*$)|^.*$",
-						),
-						"$1",
-					),
-				) || null
-			);
+			return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 		},
-		removeItem: function (
-			sKey: string,
-			sPath?: string | false,
-			sDomain?: string | false,
-			bSecure?: boolean,
-		): boolean {
+		removeItem: function (sKey: string, sPath?: string | false, sDomain?: string | false, bSecure?: boolean): boolean {
 			if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
 				return false;
 			}
-			document.cookie =
-				encodeURIComponent(sKey) +
-				"=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
-				(sDomain ? "; domain=" + sDomain : "") +
-				(sPath ? "; path=" + sPath : "") +
-				(bSecure ? "; secure" : "");
+			document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
 			return true;
 		},
-		setItem: function (
-			sKey: string,
-			sValue: string,
-			vEnd?: number | string | Date,
-			sPath?: string | false,
-			sDomain?: string | false,
-			bSecure?: boolean,
-		): boolean {
+		setItem: function (sKey: string, sValue: string, vEnd?: number | string | Date, sPath?: string | false, sDomain?: string | false, bSecure?: boolean): boolean {
 			if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
 				return false;
 			}
@@ -1562,10 +1092,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 			if (vEnd) {
 				switch (vEnd.constructor) {
 					case Number: {
-						sExpires =
-							vEnd === Infinity
-								? "; expires=Fri, 31 Dec 9999 23:59:59 GMT"
-								: "; max-age=" + vEnd;
+						sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
 						break;
 					}
 					case String: {
@@ -1578,20 +1105,11 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 					}
 				}
 			}
-			document.cookie =
-				encodeURIComponent(sKey) +
-				"=" +
-				encodeURIComponent(sValue) +
-				sExpires +
-				(sDomain ? "; domain=" + sDomain : "") +
-				(sPath ? "; path=" + sPath : "") +
-				(bSecure ? "; secure" : "");
+			document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
 			return true;
 		},
 		keys: function (): string[] {
-			let aKeys = document.cookie
-				.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
-				.split(/\s*(?:\=[^;]*)?;\s*/);
+			let aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
 			// for (let nIdx=0;nIdx<aKeys.length;nIdx++) { aKeys[nIdx]=decodeURIComponent(aKeys[nIdx]); }
 			return aKeys;
 		},
@@ -1664,19 +1182,9 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 </ul>
 </div>
 <div class="caption p cmt" style="margin:1em 0 0">Recoeve.net Manual collection | 사용방법 모음집: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BRecoeve%5D--Manual%2F%EC%84%A4%EB%AA%85%EC%84%9C#headPlay">[Recoeve]--Manual/설명서 of kipid's Recoeve.net</a></div>
-<div class="caption p cmt" style="margin:1em 0 0"><a target="_blank" href="https://recoeve.net/user/${
-			m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"
-		}/mode/multireco?cat=${encodeURIComponent(
-			m.recoCat,
-		)}&ToR=#numbers-of-recos">${m.escapeOnlyTag(m.recoCat)} of ${
-			m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"
-		}'s Recoeve.net (multireco mode)</a>
+<div class="caption p cmt" style="margin:1em 0 0"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}&ToR=#numbers-of-recos">${m.escapeOnlyTag(m.recoCat)} of ${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}'s Recoeve.net (multireco mode)</a>
 <div class="rC recoeve"><div class="rSC">
-<iframe delayed-src="https://recoeve.net/user/${
-			m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"
-		}/mode/multireco?cat=${encodeURIComponent(
-			m.recoCat,
-		)}&ToR=#numbers-of-recos" frameborder="0"></iframe>
+<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}&ToR=#numbers-of-recos" frameborder="0"></iframe>
 </div></div></div>
 </div>
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
@@ -1686,17 +1194,14 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 	// logPrint function.
 	m.$log = $("#docuK-log");
 	m.$log.addClass("fixed");
-	m.$log.before(
-		`<div class="docuK-log exit" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`,
-	);
+	m.$log.before(`<div class="docuK-log exit" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>`);
 	m.$logAll = $("#docuK-log, .docuK-log.exit");
 	m.logPrint = function (str: string): void {
 		m.$log.append(str);
 		m.$log.scrollTop(m.$log[0].scrollHeight);
 	};
 	m.logPrint(`m.logPrint() is working!`);
-	m.$log
-		.after(`<div class="fs-container" id="fuzzy-search-container" style="display:none">
+	m.$log.after(`<div class="fs-container" id="fuzzy-search-container" style="display:none">
 <div class="fs-name">Go: Fuzzy search</div>
 <div class="move" style="z-index:20000; position:absolute; display:inline-block; left:0; top:0; width:1.8em; height:1.8em; line-height:1.0; text-align:center; cursor:pointer; border:2px rgb(80, 80, 80) solid; background-color:rgb(30,30,30); color:white"><svg style="display:inline-block; width:100%; height:100%"><g style="stroke:white; stroke-width:10%; stroke-linecap:round">
 <line x1="10%" y1="50%" x2="90%" y2="50%"></line>
@@ -1729,37 +1234,24 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 	window.$fuzzy_search = $("#fuzzy-search");
 	window.$fuzzy_search_list = $("#fuzzy-search-list");
 
-	window.$fuzzy_search_container_move.on(
-		"mousedown.move touchstart.move",
-		function (e) {
-			let touch0 =
-				e.type === "touchstart" ? (e as any).originalEvent.touches[0] : e;
-			let relativeX =
-				touch0.clientX -
-				Math.round(window.$fuzzy_search_container_move.offset().left) +
-				m.$window.scrollLeft();
-			let relativeY =
-				touch0.clientY -
-				Math.round(window.$fuzzy_search_container_move.offset().top) +
-				m.$window.scrollTop();
-			m.$html.on("mousemove.move touchmove.move", function (e) {
-				window.getSelection().removeAllRanges();
-				e.preventDefault();
-				e.stopPropagation();
-				let touch0 =
-					e.type === "touchmove" ? (e as any).originalEvent.touches[0] : e;
-				window.$fuzzy_search_container.css({
-					left: touch0.clientX - relativeX,
-					top: touch0.clientY - relativeY,
-				});
-				m.$html.on("mouseup.move touchend.move", function () {
-					m.$html.off(
-						"mouseup.move touchend.move mousemove.move touchmove.move",
-					);
-				});
+	window.$fuzzy_search_container_move.on("mousedown.move touchstart.move", function (e) {
+		let touch0 = e.type === "touchstart" ? (e as any).originalEvent.touches[0] : e;
+		let relativeX = touch0.clientX - Math.round(window.$fuzzy_search_container_move.offset().left) + m.$window.scrollLeft();
+		let relativeY = touch0.clientY - Math.round(window.$fuzzy_search_container_move.offset().top) + m.$window.scrollTop();
+		m.$html.on("mousemove.move touchmove.move", function (e) {
+			window.getSelection().removeAllRanges();
+			e.preventDefault();
+			e.stopPropagation();
+			let touch0 = e.type === "touchmove" ? (e as any).originalEvent.touches[0] : e;
+			window.$fuzzy_search_container.css({
+				left: touch0.clientX - relativeX,
+				top: touch0.clientY - relativeY,
 			});
-		},
-	);
+			m.$html.on("mouseup.move touchend.move", function () {
+				m.$html.off("mouseup.move touchend.move mousemove.move touchmove.move");
+			});
+		});
+	});
 
 	$("#fuzzy-search-container>.reset").on("click.reset", function (e) {
 		(window.$fuzzy_search as JQuery<HTMLTextAreaElement>)[0].value = "";
@@ -1772,112 +1264,8 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 	// Hangul (Korean) split and map to English
 	// KE : Korean Expanded
 	////////////////////////////////////////////////////
-	m.jamoKE = [
-		"ㄱ",
-		"ㄱㄱ",
-		"ㄱㅅ",
-		"ㄴ",
-		"ㄴㅈ",
-		"ㄴㅎ",
-		"ㄷ",
-		"ㄷㄷ",
-		"ㄹ",
-		"ㄹㄱ",
-		"ㄹㅁ",
-		"ㄹㅂ",
-		"ㄹㅅ",
-		"ㄹㅌ",
-		"ㄹㅍ",
-		"ㄹㅎ",
-		"ㅁ",
-		"ㅂ",
-		"ㅂㅂ",
-		"ㅂㅅ",
-		"ㅅ",
-		"ㅅㅅ",
-		"ㅇ",
-		"ㅈ",
-		"ㅈㅈ",
-		"ㅊ",
-		"ㅋ",
-		"ㅌ",
-		"ㅍ",
-		"ㅎ",
-		"ㅏ",
-		"ㅐ",
-		"ㅑ",
-		"ㅒ",
-		"ㅓ",
-		"ㅔ",
-		"ㅕ",
-		"ㅖ",
-		"ㅗ",
-		"ㅗㅏ",
-		"ㅗㅐ",
-		"ㅗㅣ",
-		"ㅛ",
-		"ㅜ",
-		"ㅜㅓ",
-		"ㅜㅔ",
-		"ㅜㅣ",
-		"ㅠ",
-		"ㅡ",
-		"ㅡㅣ",
-		"ㅣ",
-	];
-	m.jamo = [
-		"ㄱ",
-		"ㄲ",
-		"ㄳ",
-		"ㄴ",
-		"ㄵ",
-		"ㄶ",
-		"ㄷ",
-		"ㄸ",
-		"ㄹ",
-		"ㄺ",
-		"ㄻ",
-		"ㄼ",
-		"ㄽ",
-		"ㄾ",
-		"ㄿ",
-		"ㅀ",
-		"ㅁ",
-		"ㅂ",
-		"ㅃ",
-		"ㅄ",
-		"ㅅ",
-		"ㅆ",
-		"ㅇ",
-		"ㅈ",
-		"ㅉ",
-		"ㅊ",
-		"ㅋ",
-		"ㅌ",
-		"ㅍ",
-		"ㅎ",
-		"ㅏ",
-		"ㅐ",
-		"ㅑ",
-		"ㅒ",
-		"ㅓ",
-		"ㅔ",
-		"ㅕ",
-		"ㅖ",
-		"ㅗ",
-		"ㅘ",
-		"ㅙ",
-		"ㅚ",
-		"ㅛ",
-		"ㅜ",
-		"ㅝ",
-		"ㅞ",
-		"ㅟ",
-		"ㅠ",
-		"ㅡ",
-		"ㅢ",
-		"ㅣ",
-	];
+	m.jamoKE = ["ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄷㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+	m.jamo = ["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅃ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 
 	m.mapKE = {
 		q: "ㅂ",
@@ -1937,156 +1325,14 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		m.mapKE[m.mapKE[p]] = p; // Add reversed mapping.
 	}
 
-	m.rChoKE = [
-		"ㄱ",
-		"ㄱㄱ",
-		"ㄴ",
-		"ㄷ",
-		"ㄷㄷ",
-		"ㄹ",
-		"ㅁ",
-		"ㅂ",
-		"ㅂㅂ",
-		"ㅅ",
-		"ㅅㅅ",
-		"ㅇ",
-		"ㅈ",
-		"ㅈㅈ",
-		"ㅊ",
-		"ㅋ",
-		"ㅌ",
-		"ㅍ",
-		"ㅎ",
-	];
-	m.rCho = [
-		"ㄱ",
-		"ㄲ",
-		"ㄴ",
-		"ㄷ",
-		"ㄸ",
-		"ㄹ",
-		"ㅁ",
-		"ㅂ",
-		"ㅃ",
-		"ㅅ",
-		"ㅆ",
-		"ㅇ",
-		"ㅈ",
-		"ㅉ",
-		"ㅊ",
-		"ㅋ",
-		"ㅌ",
-		"ㅍ",
-		"ㅎ",
-	];
+	m.rChoKE = ["ㄱ", "ㄱㄱ", "ㄴ", "ㄷ", "ㄷㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+	m.rCho = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 
-	m.rJungKE = [
-		"ㅏ",
-		"ㅐ",
-		"ㅑ",
-		"ㅒ",
-		"ㅓ",
-		"ㅔ",
-		"ㅕ",
-		"ㅖ",
-		"ㅗ",
-		"ㅗㅏ",
-		"ㅗㅐ",
-		"ㅗㅣ",
-		"ㅛ",
-		"ㅜ",
-		"ㅜㅓ",
-		"ㅜㅔ",
-		"ㅜㅣ",
-		"ㅠ",
-		"ㅡ",
-		"ㅡㅣ",
-		"ㅣ",
-	];
-	m.rJung = [
-		"ㅏ",
-		"ㅐ",
-		"ㅑ",
-		"ㅒ",
-		"ㅓ",
-		"ㅔ",
-		"ㅕ",
-		"ㅖ",
-		"ㅗ",
-		"ㅘ",
-		"ㅙ",
-		"ㅚ",
-		"ㅛ",
-		"ㅜ",
-		"ㅝ",
-		"ㅞ",
-		"ㅟ",
-		"ㅠ",
-		"ㅡ",
-		"ㅢ",
-		"ㅣ",
-	];
+	m.rJungKE = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
+	m.rJung = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 
-	m.rJongKE = [
-		"",
-		"ㄱ",
-		"ㄱㄱ",
-		"ㄱㅅ",
-		"ㄴ",
-		"ㄴㅈ",
-		"ㄴㅎ",
-		"ㄷ",
-		"ㄹ",
-		"ㄹㄱ",
-		"ㄹㅁ",
-		"ㄹㅂ",
-		"ㄹㅅ",
-		"ㄹㅌ",
-		"ㄹㅍ",
-		"ㄹㅎ",
-		"ㅁ",
-		"ㅂ",
-		"ㅂㅅ",
-		"ㅅ",
-		"ㅅㅅ",
-		"ㅇ",
-		"ㅈ",
-		"ㅊ",
-		"ㅋ",
-		"ㅌ",
-		"ㅍ",
-		"ㅎ",
-	];
-	m.rJong = [
-		"",
-		"ㄱ",
-		"ㄲ",
-		"ㄳ",
-		"ㄴ",
-		"ㄵ",
-		"ㄶ",
-		"ㄷ",
-		"ㄹ",
-		"ㄺ",
-		"ㄻ",
-		"ㄼ",
-		"ㄽ",
-		"ㄾ",
-		"ㄿ",
-		"ㅀ",
-		"ㅁ",
-		"ㅂ",
-		"ㅄ",
-		"ㅅ",
-		"ㅆ",
-		"ㅇ",
-		"ㅈ",
-		"ㅊ",
-		"ㅋ",
-		"ㅌ",
-		"ㅍ",
-		"ㅎ",
-	];
+	m.rJongKE = ["", "ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+	m.rJong = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 
 	m.splitHangul = function (str: string): SplitHangul {
 		let res: SplitHangul = {
@@ -2119,11 +1365,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 				res.pCho[p] = true;
 			} else {
 				res.array[i] = { char: c, splitted3: c, splitted: c };
-				if (
-					i > 0 &&
-					/[^a-zA-Z0-9]$/.test(res.array[i - 1].splitted) &&
-					/[a-zA-Z0-9]/.test(c)
-				) {
+				if (i > 0 && /[^a-zA-Z0-9]$/.test(res.array[i - 1].splitted) && /[a-zA-Z0-9]/.test(c)) {
 					res.pCho[p] = true;
 				}
 			}
@@ -2503,7 +1745,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		if (str.charAt(str.length - 1) !== "\n") {
 			str += "\n";
 		}
-		const ret: StrToJSON = {};
+		const ret: StrToJSON = [];
 		const delimiter = /([^\t\n]*)([\t\n])/g;
 		const lastQuote = /[^"](?:"")*"([\t\n])/g;
 		let exec: ReturnType<typeof RegExp.prototype.exec>;
@@ -2519,7 +1761,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			} else if (delim === "\n") {
 				row++;
 				col = 0;
-				ret[m.symArray].push([]);
+				ret.push([]);
 				return true;
 			}
 			return false;
@@ -2548,16 +1790,16 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 					start = str.length;
 				}
 			}
-			ret[m.symArray][row][col] = strElem;
+			ret[row][col] = strElem;
 		}
 		if (colMap) {
-			const firstColSize = ret[m.symArray][0].length;
-			for (let i = 0; i < ret[m.symArray].length; i++) {
-				let jMax = ret[m.symArray][i].length > firstColSize ? firstColSize : ret[m.symArray][i].length;
+			const firstColSize = ret[0].length;
+			for (let i = 0; i < ret.length; i++) {
+				let jMax = ret[i].length > firstColSize ? firstColSize : ret[i].length;
 				for (let j = 0; j < firstColSize; j++) {
-					let key = ret[m.symArray][0][j];
+					let key = ret[0][j];
 					if (j < jMax) {
-						ret[i][key] = ret[m.symArray][i][j];
+						ret[i][key] = ret[i][j];
 					} else {
 						ret[i][key] = "";
 					}
@@ -2565,9 +1807,9 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			}
 		}
 		if (rowMap) {
-			for (let i = 0; i < ret[m.symArray].length; i++) {
-				let key = ret[m.symArray][i][0];
-				ret[key] = ret[m.symArray][i];
+			for (let i = 0; i < ret.length; i++) {
+				let key = ret[i][0];
+				ret[key] = ret[i];
 			}
 		}
 		return Promise.resolve(ret);
@@ -2579,39 +1821,35 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		let rows: any = str.split("\n");
 		for (let i = 0; i < rows.length; i++) {
 			if (rows[i].substring(0, 1) === '"' && rows[i].substring(rows[i].length - 1) === '"') {
-				rows[m.symArray][i] = rows[i].substring(1, rows[i].length - 1).split('","');
+				rows[i] = rows[i].substring(1, rows[i].length - 1).split('","');
 			} else {
-				rows[m.symArray][i] = rows[i].split(",");
+				rows[i] = rows[i].split(",");
 			}
 		}
 		if (colMap) {
-			const firstColSize = rows[m.symArray][0].length;
-			for (let i = 0; i < rows[m.symArray].length; i++) {
-				let jMax = rows[m.symArray][i].length > firstColSize ? firstColSize : rows[m.symArray][i].length;
+			const firstColSize = rows[0].length;
+			for (let i = 0; i < rows.length; i++) {
+				let jMax = rows[i].length > firstColSize ? firstColSize : rows[i].length;
 				for (let j = 0; j < jMax; j++) {
-					let key = rows[m.symArray][0][j];
-					if (key !== undefined) {
-						rows[i][key] = rows[m.symArray][i][j];
-					}
+					let key = rows[0][j];
+					rows[i][key] = rows[i][j];
 				}
 			}
 		}
 		if (rowMap) {
-			for (let i = 0; i < rows[m.symArray].length; i++) {
-				let key = rows[m.symArray][i][0];
-				if (key !== undefined) {
-					rows[key] = rows[m.symArray][i];
-				}
+			for (let i = 0; i < rows.length; i++) {
+				let key = rows[i][0];
+				rows[key] = rows[i];
 			}
 		}
 		return Promise.resolve(rows);
 	};
 	m.arrayToTableHTML = function (txtArray: StrToJSON): string {
 		let tableStr = "<table>";
-		for (let row = 0; row < txtArray[m.symArray].length; row++) {
+		for (let row = 0; row < txtArray.length; row++) {
 			tableStr += "<tr>";
-			for (let col = 0; col < txtArray[m.symArray][row].length; col++) {
-				tableStr += `<td>${m.escapeOnlyTag(txtArray[m.symArray][row][col]).replace(/\n/g, "<br/>")}</td>`;
+			for (let col = 0; col < txtArray[row].length; col++) {
+				tableStr += `<td>${m.escapeOnlyTag(txtArray[row][col]).replace(/\n/g, "<br/>")}</td>`;
 			}
 			tableStr += "</tr>";
 		}
@@ -2710,7 +1948,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 		return "";
 	};
 
-	m.renderToDocuK = function (toBeRendered: string, docuKI: number): string {
+	m.renderToDocuK = function (toBeRendered: string, SEEi: number): string {
 		const ps = m.SEEToArray(toBeRendered);
 
 		const TOC = "Table of Contents";
@@ -2730,12 +1968,23 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 			subsubsecOn = false;
 		let str = "";
 
+		let countTOC = 1;
+		let countCOTD = 1;
+		let countPH = 1;
+		let countRRA = 1;
+		let h1Count = 1;
+		let h2Count = 1;
+		let h3Count = 1;
+		let h4Count = 1;
+		let hNCount = 1;
+
 		function closeSec(hN: number) {
 			switch (hN) {
 				case 1:
 					if (docuOn) {
 						str += "</div>";
 						docuOn = false;
+						h1Count++;
 					}
 				case 2:
 					if (secOn) {
@@ -2759,7 +2008,6 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 
 		for (let i = 0; i < ps.length; i++) {
 			ps[i] = ps[i].trim();
-
 			let hNExec: ReturnType<typeof RegExp.prototype.exec>;
 			if ((hNExec = /^#+(?![#\/])/.exec(ps[i]))) {
 				untilEnter.lastIndex = hN = hNExec[0].length;
@@ -2776,24 +2024,10 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 					if (classes) {
 						classes = ` ${classes}`;
 					}
-					if (elemId) {
-						elemId = ` id="${elemId}`;
-					} else {
-						elemId = ` id="docuK${docuKI}`;
-					}
 				}
-				let countTOC = 0;
-				let countCOTD = 0;
-				let countPH = 0;
-				let countRRA = 0;
-				let h1Count = 1;
-				let h2Count = 1;
-				let h3Count = 1;
-				let h4Count = 1;
-				let hNCount = 1;
 				switch (hN) {
 					case 1:
-						str += `<div class="docuK fromSEE" id="docuK${docuKI}"><div class="sec${classes}"><h1${elemId}-h1-${h1Count++}">${head}</h1>`;
+						str += `<div class="docuK fromSEE" id="SEEi${SEEi}"><div class="sec${classes}"><h1 id="${elemId ? elemId : `SEEi${SEEi}-${h1Count}`}">${head}</h1>`;
 						docuOn = secOn = true;
 						h2Count = 1;
 						h3Count = 1;
@@ -2804,29 +2038,29 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 							case "TOC":
 								str += `<div class="sec">`;
 								head = TOC;
-								str += `<h2 class="notSec" id="docuK${docuKI}-sec-TOC${countTOC++}">${head}</h2><div class="toc"></div></div>`; // self closing.
+								str += `<h2 class="notSec" id="SEEi${SEEi}-sec-TOC${countTOC++}">${head}</h2><div class="toc"></div></div>`; // self closing.
 								break;
 							case "COTD":
 								str += `<div class="sec hiden">`;
 								head = COTD;
-								str += `<h2 class="no-sec-N" id="docuK${docuKI}-sec-COTD${countCOTD++}">${head}</h2>`;
+								str += `<h2 class="no-sec-N" id="SEEi${SEEi}-sec-COTD${countCOTD++}">${head}</h2>`;
 								secOn = true;
 								break;
 							case "PH":
 								str += `<div class="sec hiden">`;
 								head = PH;
-								str += `<h2 class="no-sec-N" id="docuK${docuKI}-sec-PH${countPH++}">${head}</h2>`;
+								str += `<h2 class="no-sec-N" id="SEEi${SEEi}-sec-PH${countPH++}">${head}</h2>`;
 								secOn = true;
 								break;
 							case "RRA":
 								str += `<div class="sec">`;
 								head = RRA;
-								str += `<h2 class="no-sec-N" id="docuK${docuKI}-sec-RRA${countRRA++}">${head}</h2>`;
+								str += `<h2 class="no-sec-N" id="SEEi${SEEi}-sec-RRA${countRRA++}">${head}</h2>`;
 								secOn = true;
 								break;
 							default:
 								str += `<div class="sec${classes}">`;
-								str += `<h2${elemId}-h2-${h2Count++}">${head}</h2>`;
+								str += `<h2 id="${elemId ? elemId : `SEEi${SEEi}-${h1Count}-${h2Count++}`}">${head}</h2>`;
 								h3Count = 1;
 								h4Count = 1;
 								secOn = true;
@@ -2834,16 +2068,18 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 						}
 						break;
 					case 3:
-						str += `<div class="subsec${classes}"><h3${elemId}-h3-${h3Count++}">${head}</h3>`;
+						str += `<div class="subsec${classes}">`;
+						str += `<h3 id="${elemId ? elemId : `SEEi${SEEi}-${h1Count}-${h2Count}-${h3Count++}`}">${head}</h3>`;
 						h4Count = 1;
 						subsecOn = true;
 						break;
 					case 4:
-						str += `<div class="subsubsec${classes}"><h4${elemId}-h4-${h4Count++}">${head}</h4>`;
+						str += `<div class="subsubsec${classes}">`;
+						str += `<h4 id="${elemId ? elemId : `SEEi${SEEi}-${h1Count}-${h2Count}-${h3Count}-${h4Count++}`}">${head}</h4>`;
 						subsubsecOn = true;
 						break;
 					default:
-						str += `<h${hN}${elemId}-h${hN}-${hNCount++}">${head}</h${hN}>`;
+						str += `<h${hN} id="${elemId ? elemId : `SEEi${SEEi}-h${hN}-${hNCount++}`}">${head}</h${hN}>`;
 				}
 				ps[i] = ps[i].substring(untilEnter.lastIndex).trim();
 			} else if ((hNExec = /^#+(?=\/)/.exec(ps[i]))) {
@@ -2870,7 +2106,7 @@ Based on your points on URIs (musics), you will be connected to your neighbors (
 							elemId = ` id="${elemId}"`;
 						}
 					}
-					str += `<pre class="prettyprint linenums${classes}"${elemId}>${m.escapeOnlyTag(ps[i])}</pre>`;
+					str += `<pre class="prettyprint linenums${classes}"${elemId}>${ps[i]}</pre>`;
 				} else {
 					str += `<div class="p">${ps[i]}</div>`;
 				}
@@ -3224,14 +2460,7 @@ document.referrer: ${referrerHTML}`,
 				m.$delayedElems.each(function () {
 					if ($(this).delayedLoad()) {
 						m.$delayedElems = m.$delayedElems.not(this);
-						m.logPrint(
-							`<br/><span class="emph">${this} at vertical position of ${(
-								(100.0 * $(this).offset().top) /
-								m.$document.height()
-							).toPrecision(3)}% of document is delayed-loaded.</span><br/>${
-								m.$delayedElems.length
-							} of $delayedElems are remained.<br/>`,
-						);
+						m.logPrint(`<br/><span class="emph">${this} at vertical position of ${((100.0 * $(this).offset().top) / m.$document.height()).toPrecision(3)}% of document is delayed-loaded.</span><br/>${m.$delayedElems.length} of $delayedElems are remained.<br/>`);
 					}
 				});
 				m.$window.on("scroll.delayedLoad", m.delayedLoadByScroll);
@@ -3319,12 +2548,10 @@ document.referrer: ${referrerHTML}`,
 	};
 
 	// docuK Process
-	m.docuKProcess = function docuK(m: any, docuKI: number): void {
+	m.docuKProcess = function docuK(docuKI: number): void {
 		// Possible duplicate id is handled.
 		docuKI = isNaN(docuKI) ? 1 : parseInt(String(docuKI));
-		m.logPrint(
-			`<br/><br/>docuK${docuKI} scripts started!<br/><span class="emph">If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>`,
-		);
+		m.logPrint(`<br/><br/>docuK${docuKI} scripts started!<br/><span class="emph">If this log is not closed automatically, there must be an error somewhere in your document or scripts.</span>`);
 		const $docuKI: JQuery<HTMLElement> = m.$docuK.eq(docuKI);
 		if ($docuKI.is(".rendered")) {
 			m.logPrint(`<br/><br/>docuK${docuKI} is already rendered.`);
@@ -3336,8 +2563,8 @@ document.referrer: ${referrerHTML}`,
 		if ($docuKI.is(".noDIdHandle") || docuKI <= 1) {
 			postId = "";
 		} else {
-			$docuKI.find("[id]").each((index: number, element: HTMLElement) => {
-				const $this: JQuery<HTMLElement> = this as JQuery<HTMLElement>;
+			$docuKI.find("[id]").each((index: number, elem: HTMLElement) => {
+				const $this: JQuery<HTMLElement> = $(elem) as JQuery<HTMLElement>;
 				$this.attr("id", $this.attr("id") + postId);
 			});
 		}
@@ -3398,9 +2625,7 @@ Short Keys
 <div class="promoting-docuK">This document is rendered by <a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a href="https://kipid.tistory.com/entry/pure-SEE">pure SEE</a>).</div>
 </div>
 <div class="SNS-top"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div>`);
-		$docuKI.append(
-			`<div class="SNS-bottom"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div>`,
-		);
+		$docuKI.append(`<div class="SNS-bottom"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div>`);
 
 		// Numbering section, making table of contents, and numbering eqq (formatting to MathJax also) and figure tags
 		let $secs: JQuery<HTMLElement> = $docuKI.find(">.sec");
@@ -3456,6 +2681,7 @@ Short Keys
 							$secIH2.is("[id]")
 								? $secIH2
 										.attr("id")
+										?.replace(/^SEEi\d+\-/, "")
 										?.replace(/^sec\-/i, "")
 										.replace(postIdRegEx, "")
 								: `secPreTxt${docuKI}-${i}`;
@@ -3469,16 +2695,9 @@ Short Keys
 				}
 
 				secContentsId = `sec${docuKI}-${secITxt}-contents`;
-				$secI.append(
-					`<div class="cBoth"></div><div class="Hide" onclick="k.Hide(this)">▲ Hide</div><div class="cBoth"></div>`,
-				);
-				$secI
-					.contents()
-					.slice(1)
-					.wrapAll(`<div class="sec-contents" id="${secContentsId}"></div>`);
-				$secIH2.after(
-					`<div class="ShowHide" onclick="k.ShowHide(this)">▼ Show/Hide</div>`,
-				);
+				$secI.append(`<div class="cBoth"></div><div class="Hide" onclick="k.Hide(this)">▲ Hide</div><div class="cBoth"></div>`);
+				$secI.contents().slice(1).wrapAll(`<div class="sec-contents" id="${secContentsId}"></div>`);
+				$secIH2.after(`<div class="ShowHide" onclick="k.ShowHide(this)">▼ Show/Hide</div>`);
 				$secI.append(`<div class="cBoth"></div>`);
 
 				$subSecs = $secI.find(".subsec");
@@ -3527,13 +2746,11 @@ Short Keys
 			}
 		}
 		$secs.find(".toc").html(tocHtml);
-		m.logPrint(
-			`<br/><br/>Table of Contents is filled out.<br/><br/>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.`,
-		);
+		m.logPrint(`<br/><br/>Table of Contents is filled out.<br/><br/>Auto numberings of sections (div.sec>h2, div.subsec>h3, div.subsubsec>h4), &lt;eqq&gt; tags, and &lt;figure&gt; tags are done.`);
 
 		// Make 'cite' tags bubble-refer references in ".docuK ol.refs>li".
 		// Make 'refer' tags bubble-refer equations (eqq tag) or figures (figure tag). Any tag with id can be bubble-refered with refer tag.
-		function pad(str: string, max: number) {
+		function pad(str: string | number, max: number) {
 			str = str.toString();
 			return str.padStart(max, "0");
 		}
@@ -3551,14 +2768,7 @@ Short Keys
 		let refsN = $refs.length;
 		for (let i = 0; i < refsN; i++) {
 			// ref [i+1] with id
-			$refs
-				.eq(i)
-				.prepend(
-					`<span class="refN">Ref. <span class="number">[${pad(
-						(i + 1).toString(),
-						2,
-					)}]</span> </span>`,
-				);
+			$refs.eq(i).prepend(`<span class="refN">Ref. <span class="number">[${pad((i + 1).toString(), 2)}]</span> </span>`);
 		}
 		let $cites: JQuery<HTMLElement> = $docuKI.find("cite"),
 			$citeI: JQuery<HTMLElement>,
@@ -3570,19 +2780,10 @@ Short Keys
 					$refered = $docuKI.find("#" + $citeI.attr("class") + postId);
 					if ($refered.length) {
 						let refNHtml = $refered.find(".refN").html();
-						$refered.html(
-							`<span class="refN">${refNHtml}</span>${$citeI.html()}`,
-						);
+						$refered.html(`<span class="refN">${refNHtml}</span>${$citeI.html()}`);
 					} else {
 						refsN += 1;
-						$olRefs.append(
-							`<li id="${$citeI.attr(
-								"class",
-							)}${postId}"><span class="refN">Ref. <span class="number">[${pad(
-								refsN.toString(),
-								2,
-							)}]</span> </span>${$citeI.html()}</li>`,
-						);
+						$olRefs.append(`<li id="${$citeI.attr("class")}${postId}"><span class="refN">Ref. <span class="number">[${pad(refsN.toString(), 2)}]</span> </span>${$citeI.html()}</li>`);
 					}
 				}
 				$refered = $docuKI.find("#" + $citeI.attr("class") + postId);
@@ -3617,9 +2818,7 @@ Short Keys
 				}
 			}
 		}
-		m.logPrint(
-			`<br/><br/>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.`,
-		);
+		m.logPrint(`<br/><br/>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.`);
 
 		$docuKI.addClass("rendered");
 	};

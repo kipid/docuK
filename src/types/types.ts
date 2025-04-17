@@ -63,7 +63,6 @@ interface K {
 	browserWidth?: number;
 	$docuK?: JQuery<HTMLElement>;
 	getUTF8Length?: (s: string) => number;
-	symArray?: symbol;
 	getSearchVars?: (searchStr: string | null | undefined) => SearchVars;
 	heapify?: (arr: any[], key: string, sorted: number[], n: number, i: number) => void;
 	heapsort?: (arr: any[], key: string, sorted: number[], upto: number) => number;
@@ -183,7 +182,7 @@ interface K {
 	delayedLoadByScroll?: () => Promise<void>;
 	setTimeoutDelayedLoad?: ReturnType<typeof setTimeout>;
 	toggleAMess?: (elem: HTMLElement) => void;
-	docuKProcess?: (m: any, docuKI: number) => void;
+	docuKProcess?: (docuKI: number) => void;
 	printMode?: boolean;
 	ripplesDisabled?: boolean;
 	SEEHTMLs?: string[];
@@ -205,7 +204,7 @@ interface K {
 		weekday: "일" | "월" | "화" | "수" | "목" | "금" | "토";
 	}[];
 	from?: { date: string }[];
-	blogStatRes?: any;
+	blogStatRes?: StrToJSON;
 	getBlogStat?: () => Promise<void>;
 	loadPageViewsStat?: () => Promise<void>;
 	setIntervalBlogStatN?: number;
@@ -228,22 +227,14 @@ interface K {
 	doPrettyPrint?: () => void;
 }
 
-export interface PatternURI {
-	[key: string]: {
-		regEx?: RegExp;
-		regEx0?: RegExp;
-		regEx1?: RegExp;
-		regEx2?: RegExp;
-		toIframe?: (uriRest: string, inListPlay: boolean, toA: boolean, descR: DescR) => Promise<RenderResult>;
-	};
-	[array: symbol]: {
-		regEx?: RegExp;
-		regEx0?: RegExp;
-		regEx1?: RegExp;
-		regEx2?: RegExp;
-		toIframe?: (uriRest: string, inListPlay: boolean, toA: boolean, descR: DescR) => Promise<RenderResult>;
-	}[];
-}
+export type PatternURI = {
+	regEx?: RegExp;
+	regEx0?: RegExp;
+	regEx1?: RegExp;
+	regEx2?: RegExp;
+	toIframe?: (uriRest: string, inListPlay: boolean, toA: boolean, descR: DescR) => Promise<RenderResult>;
+}[] &
+	any;
 
 export type DescR = {
 	"#start"?: {
@@ -290,15 +281,10 @@ export type DecomposedURI = {
 };
 
 export type SearchVars = {
-	[array: symbol]: {
-		key: string;
-		val: string;
-	}[];
-	[key: string]: {
-		key: string;
-		val: string;
-	};
-};
+	key: string;
+	val: string;
+}[] &
+	any;
 
 export type SplitHangul = {
 	array: {
@@ -345,10 +331,6 @@ export type FSToRs = {
 	fixed: boolean;
 };
 
-export type StrToJSON = {
-	[row: symbol]: string[][];
-	[row: number]: { [col: string]: string };
-	[row: string]: string[] | { [col: string]: string };
-};
+export type StrToJSON = string[][] & any;
 
 export type WeekDays = ["일", "월", "화", "수", "목", "금", "토"];
