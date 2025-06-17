@@ -1,7 +1,5 @@
 (function (m, $) {
-	m.version1 = ".1";
-	m.printMode = true;
-	m.ripplesDisabled = true;
+	m.version1 = ".2";
 	// SEE (Super Easy Edit)
 	let $SEE: JQuery<HTMLElement> = $("codeprint.SEE");
 	m.SEEHTMLs = m.SEEHTMLs || [];
@@ -204,10 +202,7 @@ Log <span class="bold underline">o</span>ut
 			m.$floating_key.hide();
 		}
 		if (!m.printMode) {
-			for (let i = 1; i < m.$docuK.length; i++) {
-				m.$docuK.eq(i).before(m.promoting(`promoting-${i}-0`));
-				m.$docuK.eq(i).after(m.promoting(`promoting-${i}-1`));
-			}
+			m.$docuK.eq(m.$docuK.length - 1).after(m.promoting(`promoting-recoeve`));
 		}
 		window.$fuzzy_search.trigger("keyup.fs");
 		window.$button_Go = $(".button-Go");
@@ -810,7 +805,7 @@ fontCache: 'global'
 	});
 
 	// Ads
-	const adsHTML = `<div class="docuK-ads">이 글이 도움이 되셨다면, 광고 클릭 한번씩만 부탁드립니다 =ㅂ=ㅋ. (If this article was helpful, please click the ad once. Thank you. ;)</div>`;
+	const adsHTML = `<div class="docuK-con"><div class="docuK-ads">이 글이 도움이 되셨다면, 광고 클릭 한번씩만 부탁드립니다 =ㅂ=ㅋ.<br>(If this article was helpful, please click the ad once. Thank you. ;)</div></div>`;
 	for (let i = 1; i < m.$docuK.length; i++) {
 		const $docuKI = m.$docuK.eq(i);
 		$docuKI.before(adsHTML);
