@@ -15,7 +15,7 @@ import type {
 
 window.m = window.k = window.k || {}; // window.m can be asigned another JSON or number/string and so on. But window.k must be kept.
 (function (m, $) {
-	m.version0 = "3.1";
+	m.version0 = "3.2";
 	m.$window = $(window);
 	m.$document = $(document);
 	m.$html = $("html");
@@ -1151,44 +1151,32 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		} else {
 			m.recoCat = "[Music/Break]--K-Pop";
 		}
-		return `<div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
+		let res = `<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
-<div class="promoting order"${id ? ` id="${id}"` : ""}>
-<div class="p">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
-<div class="bcf">
-<a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">유튜브 음악 MV 들을 광고없이 목록재생</a> 해보세요.<br/>
-접속하셔서 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br/>
-그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.<br/>
-<br/>
-Come <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop#headPlay">here ([Music/Break]--Pop of kipid's Recoeve.net)</a> and just drag stars/points.<br/>
-Based on your points on URIs (musics), you will be connected to your neighbors (See neighbors: shortkey 'B') of your kind. And you will get recoms (recommendations: shortkey 'R') from them, and also give recoms to them.
-</div>
-<div class="bcf">
-<span class="bold">평가와 기록</span>: 웹사이트에서 본 기사, 뉴스, 영상, 음악 등을 기록하고 평가하세요. 이 정보는 추천 알고리즘을 통해 사용자에게 맞춤형 추천을 제공하는 데 사용됩니다. 즉, 당신이 좋아하는 유형의 콘텐츠를 더 많이 발견할 수 있습니다.<br/>
-<br/>
-<span class="bold">Evaluate and Rate Content</span>: As you explore content on the platform, you can evaluate and rate it based on your preferences and interests. This could involve liking, rating, or commenting on articles, posts, or other types of content.<br/>
-<br/>
-<span class="bold">Connect with Like-Minded Users</span>: The platform likely has features for connecting with other users who share your interests. You might follow or connect with these users to build your network.
-</div>
-<div class="caption p cmt" style="margin:1em 0 0">
-* For the usage examples, visit my page (예제를 보시려면 제 페이지를 방문해 주세요.)
-<ul>
-<li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">[Music/Break]--K-Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pop#headPlay">[Music/Break]--Pop of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--%EB%82%A8%EA%B7%9C%EB%A6%AC#headPlay">[Music/Break]--남규리 | Nam Gyuri (Actor of Korea) of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pet#headPlay">[Music/Break]--Pet of kipid's Recoeve.net (Multireco mode)</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BPhysics%2FMath%2FScience%5D--Physics&PRL=0.80&PRR=1.00#headPlay">[Physics/Math/Science]--Physics of kipid's Recoeve.net</a></li>
-<li><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5B%EC%9D%8C%EC%8B%9D%2F%EC%9A%94%EB%A6%AC%2F%EA%B1%B4%EA%B0%95%5D--%EA%B1%B4%EA%B0%95&PRL=0.80&PRR=1.00#headPlay">[음식/요리/건강]--건강 of kipid's Recoeve.net</a></li>
-</ul>
-</div>
-<div class="caption p cmt" style="margin:1em 0 0">Recoeve.net Manual collection | 사용방법 모음집: <a class="wheat" target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BRecoeve%5D--Manual%2F%EC%84%A4%EB%AA%85%EC%84%9C#headPlay">[Recoeve]--Manual/설명서 of kipid's Recoeve.net</a></div>
-<div class="caption p cmt" style="margin:1em 0 0"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}&ToR=#numbers-of-recos">${m.escapeOnlyTag(m.recoCat)} of ${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}'s Recoeve.net (multireco mode)</a>
+<div class="promoting order"${id ? ` id="${id}"` : ""}>`;
+		if (m.recoCats) {
+			res += `<div class="p">* 게시글 관련 링크들 in <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>`;
+			const catsSplit = m.recoCats.split(";");
+			for (const cat of catsSplit) {
+				res += `<div class="p"><div class="center"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? decodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(cat)}#numbers-of-recos">Cat=${m.escapeOnlyTag(decodeURIComponent(cat))} of ${m.recoeveUserId ? m.escapeOnlyTag(decodeURIComponent(m.recoeveUserId)) : "kipid"}'s <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
-<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}&ToR=#numbers-of-recos" frameborder="0"></iframe>
-</div></div></div>
-</div>
+	<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}#numbers-of-recos" frameborder="0"></iframe>
+</div></div>
+</div>`;
+			}
+		}
+		res += `<div class="docuK-con" style="margin-top:5em">
+<div class="center">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
+<div class="bcf"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">유튜브 음악, K-Pop MV 들을 광고없이 목록재생</a> 해서 보세요.<br/>
+접속하셔서 가입 후 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br/>
+그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.</div>
+<div class="center" style="margin-top:1em"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">Cat=[Music/Break]--K-Pop of kipid's <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
+<div class="rC recoeve"><div class="rSC">
+	<iframe delayed-src="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay" frameborder="0"></iframe>
+</div></div>
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
-<div class="cBoth"></div>`;
+<div class="cBoth"></div></div>`;
+		return res;
 	};
 
 	// logPrint function.
@@ -2571,56 +2559,26 @@ document.referrer: ${referrerHTML}`,
 
 		if (!m.printMode) {
 			// Copyright and Short Keys announcement.
-			$docuKI.before(`<div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
-<div class="cBoth"></div>
-<div class="copyright order"><ul>
+			$docuKI.before(`<div class="docuK-con"><div class="copyright order"><ul>
 <li class="license cc"><span class="bold">Creative Commons</span></li>
 <li class="license by"><span class="bold">저작자표시</span> - 적절한 출처와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지해야 합니다. 합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 됩니다.</li>
 <li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
 <li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
-</ul></div>
-<div id="shortkey" class="shortkey bcf order">
-Short Keys
-<ul class="ul-short-key">
-<li class="toggle-a-mess" style="color:#717171 !important"><span onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> mess</span></li>
-<li class="button-Go"><span onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>: <span class="bold underline">G</span>o (Fuzzy Search).</span></li>
-<li class="button-ToR"><span onclick="k.$window.trigger({type:'keydown', code:'KeyT'})"><span class="bold underline">T</span>: <span class="bold underline">T</span>able of Contents.</span></li>
-<li><span onclick="k.$window.trigger({type:'keydown', code:'KeyK'})"><span class="bold underline">K</span>: Docu<span class="bold underline">K</span> Log.</span></li>
-<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyF'})"><span class="bold underline">F</span>: <span class="bold underline">F</span>orward Section.</span></li>
-<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyD'})"><span class="bold underline">D</span>: Backwar<span class="bold underline">d</span> Section.</span></li>
-<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyR'})"><span class="bold underline">R</span>: <span class="bold underline">R</span>eferences.</span></li>
-</ul>
-<ul class="ul-short-key">
-<li class="button-list"><span onclick="k.$window.trigger({type:'keydown', code:'KeyL'})"><span class="bold underline">L</span>: To 전체목록/[<span class="bold underline">L</span>ists].</span></li>
-<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})"><span class="bold underline">Z</span>: Tistory comments.</span></li>
-<li class="darkgoldenrod"><span onclick="k.$window.trigger({type:'keydown', code:'KeyX'})"><span class="bold underline">X</span>: DISQUS comments.</span></li>
-<li class="button-cmt-handle"><span onclick="k.$window.trigger({type:'keydown', code:'KeyN'})"><span class="bold underline">N</span>: Ha<span class="bold underline">n</span>dle URI links in Tistory comments.</span></li>
-</ul>
-<ul class="ul-short-key">
-<li class="darkred"><span onclick="k.$window.trigger({type:'keydown', code:'KeyI'})"><span class="bold underline">I</span>: Log <span class="bold underline">i</span>n to Tistory.</span></li>
-<li class="darkred"><span onclick="k.$window.trigger({type:'keydown', code:'KeyO'})"><span class="bold underline">O</span>: Log <span class="bold underline">o</span>ut from Tistory.</span></li>
-</ul>
-</div>`);
-			$docuKI.after(`<div class="copyright order"><ul>
-<li class="license cc"><span class="bold">Creative Commons</span></li>
-<li class="license by"><span class="bold">저작자표시</span> - 적절한 출처와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지해야 합니다. 합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 됩니다.</li>
-<li class="license nc"><span class="bold">비영리</span> - 이 저작물은 영리 목적으로 이용할 수 없습니다.</li>
-<li class="license nd"><span class="bold">변경금지</span> - 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하였을 경우 그 결과물을 공유할 수 없습니다.</li>
-</ul></div>
-<div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
-<div class="cBoth"></div>`);
+</ul></div></div>`);
 		}
 
 		// Style change widget, and SNS widget.
-		$docuKI.prepend(`<div class="change-docuK-style" id="change-docuK-style${docuKI}">
-<form><button type="button" onclick="k.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
-<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
-</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
-<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="font-size:1.2em; width:8em; height:1.8em; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
-<form><button type="button" onclick="k.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="k.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
-<form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:1.6em">=</button></form>
-<form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
-<form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
+		$docuKI.prepend(`<div class="docuK-info">
+<div class="change-docuK-style" id="change-docuK-style${docuKI}">
+	<form><button type="button" onclick="k.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
+	<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
+	</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
+	<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="font-size:1.2em; width:8em; height:1.8em; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
+	<form><button type="button" onclick="k.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="k.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
+	<form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:1.6em">=</button></form>
+	<form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
+	<form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
+</div>
 <div class="deviceInfo"></div>
 <div class="promoting-docuK">This document is rendered by <a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a href="https://kipid.tistory.com/entry/pure-SEE">pure SEE</a>).</div>
 </div>
