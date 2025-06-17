@@ -26,19 +26,23 @@ codeprint.SEE {
 	padding:0 !important
 }
 
-.docuK-ads {
-	font-size:18px;
+.docuK-con>* {
+	font-size:1.6em
+}
+
+.docuK-con .docuK-ads {
+	font-size:1.8em;
 	text-align:center;
 	margin:.5em 0;
 	padding:.5em;
 	background-color:black;
 	color:antiquewhite;
 	border:1px solid antiquewhite;
-	border-radius:.5em;
+	border-radius:.5em
 }
 
 .promoting {
-	font-size:1em;
+	font-size:1.6em;
 	color:white;
 	background-color:black;
 	max-width:1000px;
@@ -52,7 +56,7 @@ codeprint.SEE {
 }
 
 .promoting li {
-	margin:.2em 0 .3em 2em;
+	margin:.2em 0 .3em 2em
 }
 
 .promoting a,
@@ -71,7 +75,6 @@ codeprint.SEE {
 }
 
 .copyright {
-	font-size:.8em;
 	color:rgb(100, 255, 100);
 	background-color:rgb(0, 0, 0);
 	max-width:1000px;
@@ -256,7 +259,7 @@ codeprint.SEE {
 	z-index:19000;
 	position:fixed;
 	text-align:center;
-	right:.2em;
+	right:.2em
 }
 
 #toggle-floating-key {
@@ -273,6 +276,7 @@ codeprint.SEE {
 	color:white
 }
 
+.docuK-con,
 .docuK {
 	font-size:10px;
 	line-height:1.6;
@@ -285,12 +289,17 @@ codeprint.SEE {
 	word-break:break-word
 }
 
+.docuK-con div,
 .docuK div,
+.docuK form,
+.docuK input,
+.docuK textarea,
 textarea {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
 	box-sizing:border-box;
 	max-width:100%
 }
-
 
 /* MathJax must be handled. */
 
@@ -457,7 +466,7 @@ textarea {
 	position:fixed;
 	z-index:30000;
 	inset:0;
-	background-color:rgba(0, 0, 0, .5);
+	background-color:rgba(0, 0, 0, .5)
 }
 
 .block-touch>div {
@@ -495,6 +504,22 @@ textarea.multi-line {
 
 .docuK button {
 	cursor:pointer
+}
+
+.docuK>.docuK-info>* {
+	padding:.5em 1em
+}
+
+.docuK>.docuK-info {
+	width:100%;
+	text-align:right;
+	color:white;
+	background-color:black
+}
+
+.docuK.bright>.docuK-info {
+	color:black;
+	background-color:white
 }
 
 .docuK .SNS-top {
@@ -808,16 +833,6 @@ textarea.multi-line {
 
 .docuK.bright a.tJump {
 	text-decoration:none
-}
-
-.docuK div,
-.docuK form,
-.docuK input,
-.docuK textarea {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-	max-width:100%
 }
 
 .docuK .p {
@@ -1652,7 +1667,7 @@ div.comments form div.comment-form textarea {
 }
 
 .comments .comment-list pre.prettyprint li {
-	padding:0;
+	padding:0
 }
 
 #disqus_thread {
