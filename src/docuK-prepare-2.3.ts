@@ -1146,11 +1146,6 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	};
 
 	m.promoting = function (id: string): string {
-		if (m.recoCats) {
-			m.recoCat = m.recoCats.split(";")[0];
-		} else {
-			m.recoCat = "[Music/Break]--K-Pop";
-		}
 		let res = `<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="promoting order"${id ? ` id="${id}"` : ""}>`;
@@ -1160,7 +1155,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 			for (const cat of catsSplit) {
 				res += `<div class="p"><div class="center"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? decodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(cat)}#numbers-of-recos">Cat=${m.escapeOnlyTag(decodeURIComponent(cat))} of ${m.recoeveUserId ? m.escapeOnlyTag(decodeURIComponent(m.recoeveUserId)) : "kipid"}'s <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
-	<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(m.recoCat)}#numbers-of-recos" frameborder="0"></iframe>
+	<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(cat)}#numbers-of-recos" frameborder="0"></iframe>
 </div></div>
 </div>`;
 			}
