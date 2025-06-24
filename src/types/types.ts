@@ -109,7 +109,6 @@ interface K {
 	$floating_key?: JQuery<HTMLElement>;
 	promoting?: (id: string) => string;
 	recoCats?: string;
-	recoCat?: string;
 	recoeveUserId?: string;
 	$log?: JQuery<HTMLElement>;
 	$logAll?: JQuery<HTMLElement>;
