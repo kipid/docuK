@@ -1084,7 +1084,13 @@ The first two are converted to <span class="emph">inline maths like $\alpha \bet
 
 ## Codes
 
-Codes can be pretty-printed. <code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> will be prettyprinted.
+Codes can be pretty-printed. <code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> will be prettyprinted. Without class="no-escape-HTML", all brackets (&lt; &gt;) will be escaped by default. If you want to use, for example, HTML <code>&lt;a&gt;</code> tag inside texts to be pretty-printed, add class <code>no-escape-HTML</code>. (For example, <code>&lt;code class="no-escape-HTML"&gt;&lt;a target="_blank" href="https://recoeve.net/"&gt;https://recoeve.net/&lt;/a&gt;&lt;/code&gt;</code> will be printed like <code class="no-escape-HTML"><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code>.)
+
+Another example with <code>```[.no-escape-HTML] ```/</code> is the below.
+
+```[.no-escape-HTML]
+<a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
+```/
 
 Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
 
