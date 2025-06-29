@@ -35,10 +35,7 @@ The docuK rendered from the current text is being represented.
 // Hack to avoid duplicate id handling of docuK process.
 </script>
 
-I recommend you to <a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html">Download pure-SEE-copiable.html</a>, and copy and paste to new html file, and edit it with referencing and learning the SEE document.
-
-<div style="padding:1em; margin:1em auto; background-color:white; color:black">[##_File|kage@FPdXo/btsJj3GsOsA/ER9ql9RTCPXdFukowQ9ERk/tfile.html|filename="pure SEE copiable.html" size="0.04MB" data-ke-align="alignCenter"|_##]</div>
-
+I recommend you to <a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30">Open pure-SEE-copiable.html</a> and <a href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30" download="pure-SEE-copiable.html">Download pure-SEE-copiable.html (마우스 오른 클릭 -&gt; 다른 이름으로 링크 저장)</a>, and copy and paste to new html file, and edit it with referencing and learning the SEE document.
 
 
 
@@ -476,7 +473,13 @@ The first two are converted to <span class="emph">inline maths like $\alpha \bet
 
 ## Codes
 
-Codes can be pretty-printed.
+Codes can be pretty-printed. <code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> will be prettyprinted. Without class="no-escape-HTML", all brackets (&lt; &gt;) will be escaped by default. If you want to use, for example, HTML <code>&lt;a&gt;</code> tag inside texts to be pretty-printed, add class <code>no-escape-HTML</code>. (For example, <code>&lt;code class="no-escape-HTML"&gt;&lt;a target="_blank" href="https://recoeve.net/"&gt;https://recoeve.net/&lt;/a&gt;&lt;/code&gt;</code> will be printed like <code class="no-escape-HTML"><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code>.)
+
+Another example with <code>```[.no-escape-HTML] ```/</code> is the below.
+
+```[.no-escape-HTML]
+<a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
+```/
 
 Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
 
@@ -613,7 +616,7 @@ ${k.SEEHTMLs[0]}
 
 <codeprint id="docuK-script">
 <script>
-(function(m, $, undefined) {
+(function(k, $, undefined) {
 
 // Some codes used only in this document. i.e. Filling the pre#pre0-SEE and textarea#textarea-full-SEE
 
