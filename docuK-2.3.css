@@ -11,7 +11,8 @@ body {
 }
 
 * {
-	box-sizing:border-box
+	box-sizing:border-box;
+	tab-size:2
 }
 
 img {
