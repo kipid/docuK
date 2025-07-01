@@ -2723,12 +2723,11 @@ document.referrer: ${referrerHTML}`,
 			// ref [i+1] with id
 			$refs.eq(i).prepend(`<span class="refN">Ref. <span class="number">[${pad((i + 1).toString(), 2)}]</span> </span>`);
 		}
-		let $cites: JQuery<HTMLElement> = $docuKI.find("cite"),
-			$citeI: JQuery<HTMLElement>,
-			$refered: JQuery<HTMLElement>;
+		let $cites: JQuery<HTMLElement> = $docuKI.find("cite");
 		for (let i = 0; i < $cites.length; i++) {
-			$citeI = $cites.eq(i);
+			let $citeI: JQuery<HTMLElement> = $cites.eq(i);
 			if ($citeI.is("[class]")) {
+				let $refered: JQuery<HTMLElement>;
 				if ($citeI.html() !== "") {
 					$refered = $docuKI.find("#" + $citeI.attr("class") + postId);
 					if ($refered.length) {
@@ -2753,11 +2752,10 @@ document.referrer: ${referrerHTML}`,
 				}
 			}
 		}
-		let $refers: JQuery<HTMLElement> = $docuKI.find("refer"),
-			$referI: JQuery<HTMLElement>;
+		let $refers: JQuery<HTMLElement> = $docuKI.find("refer");
 		$refers.html(`<span class="emph">( No refer. )</span>`);
 		for (let i = 0; i < $refers.length; i++) {
-			$referI = $refers.eq(i);
+			let $referI: JQuery<HTMLElement> = $refers.eq(i);
 			if ($referI.is("[class]")) {
 				$refered = $docuKI.find(`#${$referI.attr("class")}${postId}`);
 				if ($refered.length) {
@@ -2765,7 +2763,7 @@ document.referrer: ${referrerHTML}`,
 					refHtml = $refered
 						.html()
 						.trim()
-						.replace(/\bid\s*=/gi, "psudoId=");
+						.replace(/\bid\s*=/gi, " psudoId=");
 					refN = $refered.find(".number").html();
 					$referI.html(fCiteHtml());
 				}
