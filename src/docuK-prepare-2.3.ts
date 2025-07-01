@@ -2757,7 +2757,7 @@ document.referrer: ${referrerHTML}`,
 		for (let i = 0; i < $refers.length; i++) {
 			let $referI: JQuery<HTMLElement> = $refers.eq(i);
 			if ($referI.is("[class]")) {
-				$refered = $docuKI.find(`#${$referI.attr("class")}${postId}`);
+				let $refered: JQuery<HTMLElement> = $docuKI.find(`#${$referI.attr("class")}${postId}`);
 				if ($refered.length) {
 					citeN = (i + 1).toString() + "-" + $referI.attr("class") + postId;
 					refHtml = $refered
