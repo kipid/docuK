@@ -687,7 +687,7 @@ Log <span class="bold underline">o</span>ut
 			};
 
 			await m.processAllElements();
-			$("pre").each((index: number, elem: HTMLElement) => {
+			$("pre>code").each((index: number, elem: HTMLElement) => {
 				const $elem = $(elem);
 				if (!$elem.hasClass("no-escape-HTML")) {
 					$elem.html(m.escapeOnlyTag($elem.html()));
