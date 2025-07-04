@@ -2142,7 +2142,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 			if (!$code.is(".no-escape-HTML")) {
 				html = m.escapeOnlyTag(html);
 			}
-			$pre.html(html);
+			$pre.html(`<code class="${Array.from($pre[0].classList).join(" ")}">${html}</code>`);
 		}
 	};
 
