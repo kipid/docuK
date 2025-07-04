@@ -20,6 +20,12 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	m.$document = $(document);
 	m.$html = $("html");
 	m.$title = $("title");
+	// Scripts will be appended on this.
+	m.$headOrBody = $("head") || $("body") || $("#docuK-style");
+	m.$headOrBody.append(`<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">`);
+
 	const fsToRs: FSToRs = (m.fsToRs = {
 		fixed: false,
 	});
@@ -2082,14 +2088,11 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 						ps[i] = ps[i].substring(emmet.length + 2).trim();
 						classes = m.getClassesFromEmmet(emmet);
 						elemId = m.getIdFromEmmet(emmet);
-						if (classes) {
-							classes = ` ${classes}`;
-						}
 						if (elemId) {
 							elemId = ` id="${elemId}"`;
 						}
 					}
-					str += `<pre class="prettyprint linenums${classes}"${elemId}>${ps[i]}</pre>`;
+					str += `<pre class="line-numbers ${classes}"${elemId}><code class="${classes}">${ps[i]}</code></pre>`;
 				} else {
 					str += `<div class="p">${ps[i]}</div>`;
 				}
@@ -2118,7 +2121,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		return strArray.join("\n");
 	};
 
-	// Functions for printing codes into 'pre.prettyprint'.
+	// Functions for printing codes into 'pre'.
 	m.indentsRemove = function (str: string): string {
 		let firstIndent = str.match(/^\n\t+/),
 			indentRegExp;
@@ -2136,7 +2139,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		const $code = $("#" + codeId);
 		if ($pre.length) {
 			let html = m.indentsRemove($code.html()).trim();
-			if (!$code.is(".noEscapeHTML")) {
+			if (!$code.is(".no-escape-HTML")) {
 				html = m.escapeOnlyTag(html);
 			}
 			$pre.html(html);
