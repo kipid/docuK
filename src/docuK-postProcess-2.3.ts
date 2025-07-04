@@ -775,9 +775,7 @@ fontCache: 'global'
 			m.mathJaxPreProcess = setTimeout(m.mathJaxPreProcessDo, 2048);
 
 			// Prism.js js script (from cdn.jsdelivr.net CDN) is added.
-			m.$headOrBody.append(`<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />`);
+			m.$headOrBody.append(`<link href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prism.css" rel="stylesheet" />`);
 
 			let $prism = document.createElement("script");
 			$prism.id = "prism-js";
