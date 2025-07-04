@@ -23,6 +23,7 @@ declare global {
 			typeset?: (elements: HTMLElement[]) => void;
 			typesetPromise?: (elements: HTMLElement[]) => Promise<void>;
 		};
+		Prism?: Prism;
 		Kakao?: Kakao;
 		disqus_config?: () => void;
 		processShortcut?: (event: any) => void;
@@ -49,6 +50,9 @@ declare global {
 				};
 			}) => void;
 		};
+	}
+	interface Prism {
+		highlightAll: () => void;
 	}
 }
 
