@@ -949,7 +949,7 @@ img {
 	word-wrap:break-word;
 	white-space:pre-wrap;
 	word-break:break-all;
-	font-family:monospace;
+	font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
 	font-size:.9em;
 	padding:.2em;
 	display:inline;
@@ -960,6 +960,13 @@ img {
 
 .docuK.bright code {
 	background-color:rgb(230, 230, 230)
+}
+
+.docuK pre>code {
+	border:none;
+	background-color:transparent;
+	padding:0;
+	font-size:inherit
 }
 
 
