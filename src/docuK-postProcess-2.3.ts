@@ -23,7 +23,6 @@
 			$elem.html(m.escapeOnlyTag($elem.html()));
 		}
 	});
-	$("code").addClass("prettyprint");
 	// <eq> and <eqq> tags to MathJax format
 	let $eqs: JQuery<HTMLElement> = $("eq");
 	for (let i = 0; i < $eqs.length; i++) {
@@ -102,9 +101,6 @@
 		};
 	}
 
-	// Scripts will be appended on this.
-	m.$headOrBody = $("head") || $("body") || $("#docuK-style");
-
 	window.onpopstate = function (e) {
 		if (!!e.state) {
 			if (e.state?.goOn !== m.goOn) {
@@ -124,7 +120,7 @@
 			window.disqus_config.apply(m.disqusVars);
 			let url = (m.canonicalURI = m.disqusVars.page.url);
 			$('link[rel="canonical"]').remove();
-			($("head") || $("#docuK-style")).append(`<link rel="canonical" href="${url}" />`);
+			m.$headOrBody.append(`<link rel="canonical" href="${url}" />`);
 			let hrefAnalyzed = new URL(window.location.href);
 			let urlAnalyzed = new URL(url);
 			if (hrefAnalyzed.hostname === "kipid.tistory.com" && hrefAnalyzed.protocol.toLowerCase() === urlAnalyzed.protocol.toLowerCase() && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
@@ -672,7 +668,7 @@ Log <span class="bold underline">o</span>ut
 							emmet = m.getEmmetFromHead(emmet);
 							let classes = m.getClassesFromEmmet(emmet);
 							let elemId = m.getIdFromEmmet(emmet);
-							elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="prettyprint${classes ? ` ${classes}` : ``}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</pre>`;
+							elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="line-numbers"><code class="${classes}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</code></pre>`;
 						} else {
 							elemHTML += await processTextNode(content);
 						}
@@ -691,15 +687,15 @@ Log <span class="bold underline">o</span>ut
 			};
 
 			await m.processAllElements();
-			$("pre.prettyprint").each((index: number, elem: HTMLElement) => {
+			$("pre").each((index: number, elem: HTMLElement) => {
 				const $elem = $(elem);
 				if (!$elem.hasClass("no-escape-HTML")) {
 					$elem.html(m.escapeOnlyTag($elem.html()));
 				}
 			});
-			// Scrollable switching of 'pre.prettyprint'.
-			$("pre.prettyprint").addClass("linenums");
-			m.$prePrettyScrollable = $("pre.prettyprint.scrollable");
+			// Scrollable switching of 'pre'.
+			$("pre").addClass("line-numbers");
+			m.$prePrettyScrollable = $("pre.scrollable");
 			for (let i = 0; i < m.$prePrettyScrollable.length; i++) {
 				if (!m.$prePrettyScrollable.eq(i).parents(".preC").length) {
 					m.$prePrettyScrollable.eq(i).wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="k.toggleHeight(this)"></div>');
@@ -707,7 +703,7 @@ Log <span class="bold underline">o</span>ut
 			}
 			if ($(".comments").length) {
 				window?.MathJax?.typesetPromise?.([$(".comments")[0]]);
-				window?.PR?.prettyPrint?.();
+				window?.Prism?.highlightAll?.();
 			}
 			m.reNewAndReOn();
 		};
@@ -778,20 +774,65 @@ fontCache: 'global'
 			};
 			m.mathJaxPreProcess = setTimeout(m.mathJaxPreProcessDo, 2048);
 
-			// google code prettify js script (from cdn.jsdelivr.net CDN) is added.
-			let $gcp = document.createElement("script");
-			$gcp.id = "prettyfy-js";
-			$gcp.defer = true;
-			$gcp.src = "https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js";
-			m.$headOrBody.append($gcp);
-			m.logPrint(`<br><br>Google code prettyfy.js is loaded.`);
-			m.doPrettyPrint = function (): void {
-				if (window?.PR?.prettyPrint) {
-					window.PR.prettyPrint();
-				} else {
-					setTimeout(m.doPrettyPrint, 2048);
-				}
+			// Prism.js js script (from cdn.jsdelivr.net CDN) is added.
+			m.$headOrBody.append(`<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />`);
+
+			let $prism = document.createElement("script");
+			$prism.id = "prism-js";
+			$prism.defer = true;
+			$prism.src = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js";
+			m.$headOrBody.append($prism);
+			m.logPrint(`<br><br>Prism.js (code prettifier) is loaded.`);
+
+			let $prism_line_numbers = document.createElement("script");
+			$prism_line_numbers.id = "prism-js";
+			$prism_line_numbers.defer = true;
+			$prism_line_numbers.src = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js";
+			m.$headOrBody.append($prism_line_numbers);
+			m.logPrint(`<br>Prism-line-numbers.js is loaded.`);
+
+			const codeLangMap: { [key: string]: string } = {
+				"lang-js": "prism-javascript",
+				"lang-ts": "prism-typescript",
+				"lang-html": "prism-markup",
+				"lang-css": "prism-css",
+				"lang-json": "prism-json",
+				"lang-xml": "prism-markup",
+				"lang-sql": "prism-sql",
+				"lang-sh": "prism-bash",
+				"lang-py": "prism-python",
+				"lang-java": "prism-java",
+				"lang-c": "prism-c",
+				"lang-cpp": "prism-cpp",
+				"lang-cs": "prism-csharp",
+				"lang-php": "prism-php",
+				"lang-bat": "prism-batch",
+				"lang-git": "prism-git",
+				"lang-md": "prism-markdown",
+				"lang-env": "prism-env",
 			};
+			const $preAndCode = $("pre, code");
+			const langToBeLoaded: any = [];
+			$preAndCode.each((index: number, elem: HTMLElement) => {
+				let classes = elem.classList;
+				for (let className of classes) {
+					if (codeLangMap[className] && !langToBeLoaded[className]) {
+						langToBeLoaded[className] = codeLangMap[className];
+						langToBeLoaded.push(langToBeLoaded[className]);
+					}
+				}
+			});
+			for (let lang of langToBeLoaded) {
+				let $script = document.createElement("script");
+				$script.id = lang;
+				$script.defer = true;
+				$script.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/${lang}.min.js`;
+				m.$headOrBody.append($script);
+				m.logPrint(`<br>${lang}.min.js of prism.js is loaded.`);
+			}
+
 			// Closing docuK Log.
 			m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
 			m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
