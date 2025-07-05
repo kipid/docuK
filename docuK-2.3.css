@@ -1472,15 +1472,16 @@ code.prettyprint {
 
 .preC .preSSE {
 	font-size:.75em;
-	border-left:2.5em rgb(80, 0, 0) solid
+	border-left:3.2em rgb(80, 0, 0) solid
 }
 
 .preC .preSS {
 	position:absolute;
+	z-index:10;
 	left:0;
 	top:0;
 	bottom:0;
-	width:1.9em;
+	width:2.5em;
 	cursor:pointer
 }
 
