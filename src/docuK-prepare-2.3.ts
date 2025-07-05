@@ -2148,30 +2148,35 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 
 	// Function for toggling height, i.e. switching scrollability with conserving view.
 	m.toggleHeight = function (obj: HTMLElement): void {
-		let next = $(obj).next();
+		let $obj = $(obj);
+		let $next0 = $obj.next();
+		let $next = $next0.children();
 		let toBeScrolledBy = 0;
 		let windowScrollTop = m.$window.scrollTop();
-		let nOffsetTop = next.offset().top;
-		let nHeight = next.height();
+		let nOffsetTop = $next.offset().top;
+		let nHeight = $next.height();
 
-		if (next.is(".scrollable")) {
+		if ($next.is(".scrollable")) {
 			// becomes expanded.
-			toBeScrolledBy = next.scrollTop();
-			next.removeClass("scrollable");
+			toBeScrolledBy = $next.scrollTop();
+			$next0.removeClass("scrollable");
+			$next.removeClass("scrollable");
 			window.scrollTo(0, windowScrollTop + toBeScrolledBy);
 		} else {
 			// becomes scrollable.
 			if (windowScrollTop < nOffsetTop) {
 				// case0: no scroll
-				next.addClass("scrollable");
+				$next0.addClass("scrollable");
+				$next.addClass("scrollable");
 			} else {
 				// case1: scroll both
 				toBeScrolledBy = windowScrollTop - nOffsetTop;
 				let tailHeight = nHeight - toBeScrolledBy;
-				next.addClass("scrollable");
-				nHeight = next.height();
+				$next0.addClass("scrollable");
+				$next.addClass("scrollable");
+				nHeight = $next.height();
 				window.scrollTo(0, nHeight > tailHeight ? nOffsetTop + nHeight - tailHeight : nOffsetTop);
-				next[0].scrollTop = toBeScrolledBy;
+				$next[0].scrollTop = toBeScrolledBy;
 			}
 		}
 	};
