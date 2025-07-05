@@ -13,7 +13,7 @@ pre[class*="language-"] {
 	color:white;
 	background:none;
 	font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
-	font-size:.9em;
+	font-size:1em;
 	text-align:left;
 	text-shadow:0 -.1em .2em black;
 	white-space:pre-wrap;
@@ -222,7 +222,7 @@ pre[class*="language-"].line-numbers>code {
 	position:absolute;
 	pointer-events:none;
 	top:0;
-	font-size:90%;
+	font-size:100%;
 	left:-3.8em;
 	width:3em;
 	color:gray;
@@ -251,7 +251,7 @@ pre[class*="language-"].line-numbers>code {
 		color:black;
 		background:none;
 		font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
-		font-size:.9em;
+		font-size:1em;
 		text-align:left;
 		white-space:pre-wrap;
 		word-spacing:normal;
@@ -457,7 +457,7 @@ pre[class*="language-"].line-numbers>code {
 		position:absolute;
 		pointer-events:none;
 		top:0;
-		font-size:90%;
+		font-size:100%;
 		left:-3.8em;
 		width:3em;
 		color:gray;
