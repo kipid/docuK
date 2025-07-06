@@ -31,10 +31,6 @@
 
 The docuK rendered from the current text is being represented.
 
-<script>
-// Hack to avoid duplicate id handling of docuK process.
-</script>
-
 I recommend you to <a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30">Open pure-SEE-copiable.html</a> and <a href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30" download="pure-SEE-copiable.html">Download pure-SEE-copiable.html (마우스 오른 클릭 -&gt; 다른 이름으로 링크 저장)</a>, and copy and paste to new html file, and edit it with referencing and learning the SEE document.
 
 
@@ -53,7 +49,7 @@ Specific features are
 <li>Refering anything with id and element with class="number".</li>
 <li>Delayed(lazy)-loading of figures (images, iframes).</li>
 <li>Delayed(lazy)-rendering of maths (MathJax). From 2023-06-01, MathJax is updated to render all equations in docuK or SEE (Super Easy Edit) in the beginning.</li>
-<li>Auto code printing from `<code class="prettyprint">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="prettyprint">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>`. (For non-duplicate id handling, put empty <code class="prettyprint">&lt;script&gt;&lt;/script&gt;</code> in the beginning right after h1 '#'.)</li>
+<li>Auto code printing from `<code class="lang-html">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` to `<code class="lang-html">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>` or `<code class="lang-html">```[#pre-code-id]```/</code>`. (For non-duplicate id handling, put empty <code class="lang-html">&lt;script&gt;&lt;/script&gt;</code> in the beginning right after h1 '#'.)</li>
 </ul>
 
 Quite similar to LaTeX or Wiki document, but extended a little bit.
@@ -62,7 +58,7 @@ Quite similar to LaTeX or Wiki document, but extended a little bit.
 
 ## SEE (Super Easy Edit) code only
 
-<pre class="printSEE prettyprint scrollable lang-html" id="pre0-SEE"></pre>
+```[.printSEE.scrollable.lang-html#pre0-SEE]```/
 
 
 
@@ -146,7 +142,7 @@ Or just <span class="emph">end of something which are not yet opened</span> is O
 
 ##[.class0#sec-Test] Section with class and id
 
-Section can have class and id attributes. Using the id, you can refer it like <code class="prettyprint">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
+Section can have class and id attributes. Using the id, you can refer it like <code class="lang-html">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
 
 <div class="p">Class and Id are asigned with [emmet style] like <code>##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
 
@@ -358,7 +354,7 @@ Table will be automatically filled up.
 		// Code prettyfier.</li>
 <div class="subsec"><h3>API documentation</h3></div>
 	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: Get array of immediate children of element, including text nodes.</li>
-	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="prettyprint">element:nth-of-type(an + b) { style properties }</code> <code class="prettyprint">element:nth-child(an + b) { style properties }</code></li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS full reference</a>; and especially <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> is useful. Ex: <code class="lang-css">element:nth-of-type(an + b) { style properties }</code> <code class="lang-css">element:nth-child(an + b) { style properties }</code></li>
 <div class="subsec"><h3>Other markdown/markup languages</h3></div>
 	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
 		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
@@ -414,11 +410,11 @@ Since learning and remembering something new takes time, this is designed to be 
 Raw HTML can be added like this. A paragraph starting with '&lt;' will be appended without any change.
 </div>
 
-Raw text is appended as a paragraph, enclosed by <code class="prettyprint">&lt;div class="p"&gt;&lt;/div&gt;</code>.
+Raw text is appended as a paragraph, enclosed by <code class="lang-html">&lt;div class="p"&gt;&lt;/div&gt;</code>.
 
 <div class="cmt">
 
-This is default comment box: <code class="prettyprint">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+This is default comment box: <code class="lang-html">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
 
 You can put multiple paragraphs and nested htmls.
 
@@ -437,7 +433,7 @@ This is it.
 
 <div class="bcf">
 
-This is default 'be careful' box: <code class="prettyprint">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+This is default 'be careful' box: <code class="lang-html">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
 
 </div>
 
@@ -464,7 +460,7 @@ How Language Seems To Shape One's View Of The World
 
 ## Maths or Equations
 
-Maths or Equations can be put by using \$TeX math\$, <code class="prettyprint">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="prettyprint">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
+Maths or Equations can be put by using \$TeX math\$, <code class="lang-html">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, and <code class="lang-html">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
 
 The first two are converted to <span class="emph">inline maths like $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. The last one</span> is converted to outline math like
 
@@ -492,9 +488,9 @@ Another example with <code>```[.no-escape-HTML] ```/</code> is the below.
 <a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
 ```/
 
-Using <code class="prettyprint">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
+Using <code class="lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
 
-<pre class="prettyprint scrollable lang-java">
+```[.scrollable.lang-java]
 import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
 
 import org.vertx.java.core.http.HttpServerRequest;
@@ -526,11 +522,11 @@ public class HelloWorldServer extends Verticle {
 		// do something.
 	}
 }
-</pre>
+```/
 
 <div class="p"></div>
 
-Using <code>```Codes to be pretty-printed.```/</code>, or <code>```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+Using <code class="lang-html">```Codes to be pretty-printed.```/</code>, or <code class="lang-html">```[Emmet style class and id attr like ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
 
 <div id="code-1"><span class="number">Java vertx server code example</span>
 
@@ -582,9 +578,9 @@ You can easily fuzzy-search contents of the SEE document with FS (<span class="b
 
 In header and footer, there are promotions of <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
 
-You can set the recoeve page of yours with <code>k.recoeveUserId="your-recoeve-id";</code>, and <code>k.recoCats="Current pages categories, ; separated multiple categories"</code>.
+You can set the recoeve page of yours with <code class="lang-js">k.recoeveUserId="your-recoeve-id";</code>, and <code class="lang-js">k.recoCats="Current pages categories, ; separated multiple categories"</code>.
 
-You can disable these promotions with <code>k.printMode=true</code> setting.
+You can disable these promotions with <code class="lang-js">k.printMode=true</code> setting.
 
 In this page, I set the recoeve-related variables like the below.
 
@@ -604,8 +600,38 @@ The default value of <code>k.recoeveUserId="kipid"</code> and <code>k.recoCats="
 (function(k, $, undefined) {
 k.SEEHTMLs=[];
 k.SEEHTMLs[0]=$("#SEE0").html().trim();
-$("#pre0-SEE").html(k.escapeHTML(k.SEEHTMLs[0]));
-$("#textarea-full-SEE").html(k.escapeHTML(`<!DOCTYPE html>
+
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.k, jQuery);
+</script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-script -->
+
+<script>
+(function(k, $, undefined) {
+$("#pre0-SEE").children().html(k.escapeOnlyTag(k.SEEHTMLs[0]));
+$("#textarea-full-SEE").html(k.escapeOnlyTag(`<!DOCTYPE html>
 
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
@@ -616,7 +642,7 @@ $("#textarea-full-SEE").html(k.escapeHTML(`<!DOCTYPE html>
 <!-- From kipid.tistory CDN -->
 <script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"><`+`/script>
 <link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-style -->
 
 <meta charset="utf-8" name="description" content="Description of this document. This is good for search engine."/>
@@ -649,33 +675,8 @@ window.disqus_config=function () {
 <`+`/script>
 
 <!-- From kipid.tistory CDN -->
-<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
 </codeprint><!-- docuK-script -->`));
-k.SEEHTMLs[0]=$("#SEE0").html().trim();
-
-k.printMode=false;
-k.recoeveUserId="kipid";
-k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
-k.wait=1024;
-k.delayPad=0;
-
-/**
- *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
- *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-**/
-window.disqus_config=function () {
-	this.page.identifier="pure-SEE"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
-};
-})(window.m, jQuery)
+k.SEEHTMLs[0]=$("#SEE0").html().trim(); // Emptified.
+})(window.k, jQuery);
 </script>
-
-<!-- From kipid.tistory CDN -->
-<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
-
-<!-- From recoeve.net CDN -->
-<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
-
-<!-- From local -->
-<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
-</codeprint><!-- docuK-script -->
