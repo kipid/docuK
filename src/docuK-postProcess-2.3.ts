@@ -423,7 +423,7 @@ Log <span class="bold underline">o</span>ut
 				objectType: "feed",
 				content: {
 					title: $("title").html(),
-					description: $desc ? ($desc[0] as HTMLTextAreaElement).value : "",
+					description: $desc ? $desc.attr("content") : "",
 					imageUrl: "",
 					link: {
 						mobileWebUrl: href,
