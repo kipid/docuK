@@ -568,6 +568,89 @@ public class HelloWorldServer extends Verticle {
 
 
 
+### For no linenums, add class [.no-linenums]
+
+By default, there are linenums in codes pretty-printed. To remove linenums, add a class [.no-linenums] like the below: <code class="lang-html">```[.no-linenums]Codes```/</code>.
+
+```[.no-linenums.lang-js.scrollable]
+const fs = require('fs');
+const path = require('path');
+
+// ETag 패턴을 찾기 위한 정규식
+const ETAG_PATTERN = /ETag=(\d{4}-\d{2}-\d{2})/g;
+
+// 파일을 읽고 ETag를 업데이트하는 함수
+function updateETagInFile(filePath) {
+    try {
+        // 파일 읽기
+        const content = fs.readFileSync(filePath, 'utf8');
+
+        // 현재 날짜로 ETag 업데이트
+        const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
+        const updatedContent = content.replace(ETAG_PATTERN, `ETag=${currentDate}`);
+
+        // 변경사항이 있는 경우에만 파일에 쓰기
+        if (content !== updatedContent) {
+            fs.writeFileSync(filePath, updatedContent, 'utf8');
+            console.log(`Updated ETag in: ${filePath}`);
+        } else {
+            console.log(`No ETag found in: ${filePath}`);
+        }
+    } catch (error) {
+        console.error(`Error processing file ${filePath}:`, error.message);
+    }
+}
+
+// 디렉토리를 재귀적으로 탐색하여 파일들을 처리하는 함수
+function processDirectory(dirPath) {
+    try {
+        const items = fs.readdirSync(dirPath);
+
+        for (const item of items) {
+            const fullPath = path.join(dirPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                // 디렉토리인 경우 재귀적으로 처리
+                // processDirectory(fullPath);
+            } else if (stat.isFile()) {
+                // 파일인 경우 ETag 업데이트
+                updateETagInFile(fullPath);
+            }
+        }
+    } catch (error) {
+        console.error(`Error processing directory ${dirPath}:`, error.message);
+    }
+}
+
+// 메인 실행 함수
+function main() {
+    const targetDirectory = process.argv[2] || '.'; // 명령행 인수로 디렉토리 지정, 기본값은 현재 디렉토리
+
+    if (!fs.existsSync(targetDirectory)) {
+        console.error(`Directory not found: ${targetDirectory}`);
+        process.exit(1);
+    }
+
+    console.log(`Processing directory: ${targetDirectory}`);
+    processDirectory(targetDirectory);
+    console.log('ETag update completed!');
+}
+
+// 스크립트가 직접 실행될 때만 main 함수 호출
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    updateETagInFile,
+    processDirectory,
+    ETAG_PATTERN
+};
+```/
+
+
+
 ## Fuzzy Search of Contents of the SEE document
 
 You can easily fuzzy-search contents of the SEE document with FS (<span class="bold">G</span>o: shortkey <span class="bold">G</span>).
