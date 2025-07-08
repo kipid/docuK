@@ -668,7 +668,7 @@ Log <span class="bold underline">o</span>ut
 							emmet = m.getEmmetFromHead(emmet);
 							let classes = m.getClassesFromEmmet(emmet);
 							let elemId = m.getIdFromEmmet(emmet);
-							elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="line-numbers"><code class="${classes}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</code></pre>`;
+							elemHTML += `<pre${elemId ? ` id="${elemId}"` : ``} class="${classes.split(" ").some((str) => str === "no-linenums") ? "" : "line-numbers "}${classes}"><code class="${classes}">${m.escapeOnlyTag(innerContents.replace(/\n{0,1}\<br\s*\/?\>\n{0,1}/gi, "\n").trim())}</code></pre>`;
 						} else {
 							elemHTML += await processTextNode(content);
 						}
@@ -694,7 +694,10 @@ Log <span class="bold underline">o</span>ut
 				}
 			});
 			// Scrollable switching of 'pre'.
-			$("pre").addClass("line-numbers");
+			let $pre = $("pre");
+			if (!$pre.hasClass("no-linenums")) {
+				$("pre").addClass("line-numbers");
+			}
 			m.$prePrettyScrollable = $("pre.scrollable");
 			for (let i = 0; i < m.$prePrettyScrollable.length; i++) {
 				if (!m.$prePrettyScrollable.eq(i).parents(".preC").length) {

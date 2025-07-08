@@ -2092,7 +2092,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 							elemId = ` id="${elemId}"`;
 						}
 					}
-					str += `<pre class="line-numbers ${classes}"${elemId}><code class="${classes}">${ps[i]}</code></pre>`;
+					str += `<pre class="${classes.split(" ").some((str) => str === "no-linenums") ? "" : "line-numbers "}${classes}"${elemId}><code class="${classes}">${ps[i]}</code></pre>`;
 				} else {
 					str += `<div class="p">${ps[i]}</div>`;
 				}
