@@ -400,7 +400,7 @@ Log <span class="bold underline">o</span>ut
 
 		// Kakao js script (from kakao.com CDN) is added.
 		m.kakao_js_id = "kakao-js-sdk";
-		if (!$(`#${m.kakao_js_id}`)) {
+		if (!$(`#${m.kakao_js_id}`).length) {
 			let $kakao_js = $(`<script id="${m.kakao_js_id}" src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></` + `script>`); // Avoid closing script
 			m.$headOrBody.append($kakao_js);
 		}
