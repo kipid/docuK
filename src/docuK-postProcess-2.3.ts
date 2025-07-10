@@ -263,7 +263,7 @@ Log <span class="bold underline">o</span>ut
 			($("#docuK-script") || $("body")).append(`<div id="disqus_thread"></div>`);
 			window.$disqus_thread = $("#disqus_thread");
 		}
-		let $disqus_js: JQuery<HTMLScriptElement> = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
+		let $disqus_js = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
 		m.$headOrBody.append($disqus_js);
 		m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
@@ -295,7 +295,7 @@ Log <span class="bold underline">o</span>ut
 		}
 		m.blogStatRes = [];
 		m.getBlogStat = function (): Promise<void> {
-			return new Promise(function (resolve, reject): void {
+			return new Promise(function (resolve, reject) {
 				let reqTimes = `host\tfrom\tto`;
 				for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
 					reqTimes += `\nkipid.tistory.com\t${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
@@ -401,12 +401,12 @@ Log <span class="bold underline">o</span>ut
 		// Kakao js script (from kakao.com CDN) is added.
 		m.kakao_js_id = "kakao-js-sdk";
 		if (!$(`#${m.kakao_js_id}`)) {
-			let $kakao_js: JQuery<HTMLScriptElement> = $(`<script id="${m.kakao_js_id}" src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></` + `script>`); // Avoid closing script
+			let $kakao_js = $(`<script id="${m.kakao_js_id}" src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></` + `script>`); // Avoid closing script
 			m.$headOrBody.append($kakao_js);
 		}
 		m.logPrint(`<br><br>kakao.js with id="${m.kakao_js_id}" is loaded.`);
-		m.kakaoInitDo = function (): void {
-			if (typeof Kakao !== "undefined") {
+		m.kakaoInitDo = function () {
+			if (Kakao && Kakao?.isInitialized) {
 				clearInterval(m.kakaoInit);
 				if (!Kakao.isInitialized()) {
 					Kakao.init("c85c800b54a2a95faa5ca7a5e3d357ef");
@@ -416,13 +416,13 @@ Log <span class="bold underline">o</span>ut
 		};
 		m.kakaoInit = setInterval(m.kakaoInitDo, 2048);
 
-		m.popUpKakao = function (): void {
+		m.popUpKakao = function () {
 			let $desc = $("meta[name='description']");
 			let href = window.location.href;
 			window.Kakao.Share.sendDefault({
 				objectType: "feed",
 				content: {
-					title: $("title").html(),
+					title: $("title").html() || $("h1").html() || "제목 없음",
 					description: $desc ? $desc.attr("content") : "",
 					imageUrl: "",
 					link: {
@@ -442,7 +442,7 @@ Log <span class="bold underline">o</span>ut
 		m.$rras = $(".docuK>.sec").has("ol.refs");
 		m.goOn = false;
 		m.logOn = false;
-		m.processShortKey = function (event: any): void {
+		m.processShortKey = function (event: any) {
 			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
 			switch (event.target && event.target.nodeName) {
 				case "INPUT":
@@ -761,7 +761,7 @@ fontCache: 'global'
 			m.$headOrBody.append($mjx);
 			m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
 			// MathJax PreProcess after the above MathJax.js is loaded.
-			m.mathJaxPreProcessDo = function (): void {
+			m.mathJaxPreProcessDo = function () {
 				if (window.MathJax?.startup !== undefined && window.MathJax.typesetPromise) {
 					let mathElems: HTMLElement[] = [];
 					if (m.$docuK) {
