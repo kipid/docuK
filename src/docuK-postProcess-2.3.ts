@@ -406,12 +406,12 @@ Log <span class="bold underline">o</span>ut
 		}
 		m.logPrint(`<br><br>kakao.js with id="${m.kakao_js_id}" is loaded.`);
 		m.kakaoInitDo = function () {
-			if (Kakao && Kakao?.isInitialized) {
+			if (window.Kakao && window.Kakao?.isInitialized) {
 				clearInterval(m.kakaoInit);
-				if (!Kakao.isInitialized()) {
-					Kakao.init("c85c800b54a2a95faa5ca7a5e3d357ef");
+				if (!window.Kakao.isInitialized()) {
+					window.Kakao.init("c85c800b54a2a95faa5ca7a5e3d357ef");
 				}
-				m.logPrint(`<br>Kakao.isInitialized()=${Kakao.isInitialized()};`);
+				m.logPrint(`<br>window.Kakao.isInitialized()=${window.Kakao.isInitialized()};`);
 			}
 		};
 		m.kakaoInit = setInterval(m.kakaoInitDo, 2048);
