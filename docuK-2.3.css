@@ -23,6 +23,17 @@ codeprint.SEE {
 	display:none
 }
 
+#force-recoeve {
+	background-color:black;
+	color:wheat;
+	padding:1em;
+	margin:0 auto;
+	width:30em;
+	max-width:100%;
+	min-width:100vh;
+	font-size:2em
+}
+
 #content .inner {
 	padding:0 !important
 }
@@ -836,7 +847,8 @@ textarea.multi-line {
 	text-decoration:none
 }
 
-.docuK .p {
+.docuK .p,
+.p {
 	overflow-x:visible;
 	overflow-y:visible;
 	padding:.2em .2em 1em .2em;
