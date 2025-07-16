@@ -584,7 +584,7 @@ Log <span class="bold underline">o</span>ut
 					}
 					break;
 				case "KeyZ":
-					if ($("div.comments").length) m.$window.scrollTop($("div.comments").offset().top);
+					if ($('div[data-tistory-react-app="Comment"]').length) m.$window.scrollTop($('div[data-tistory-react-app="Comment"]').offset().top);
 					break;
 				case "KeyN":
 					m.handleComments();
