@@ -449,6 +449,10 @@ Log <span class="bold underline">o</span>ut
 				case "SELECT":
 				case "TEXTAREA":
 					return;
+				case "DIV":
+					if ($(event.target).hasClass("tt-cmt")) {
+						return;
+					}
 			}
 			let scrollTop: number;
 			let i: number, k: number;
