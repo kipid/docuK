@@ -263,9 +263,9 @@ Log <span class="bold underline">o</span>ut
 			($("#docuK-script") || $("body")).append(`<div id="disqus_thread"></div>`);
 			window.$disqus_thread = $("#disqus_thread");
 		}
-		let $disqus_js = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
-		m.$headOrBody.append($disqus_js);
-		m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
+		// let $disqus_js = $(`<script id="disqus-js" defer src="https://kipid.disqus.com/embed.js" data-timestamp="${new Date()}"></` + `script>`); // Avoid closing script
+		// m.$headOrBody.append($disqus_js);
+		// m.logPrint(`<br><br>disqus.js with id="disqus-js" is loaded.`);
 
 		m.myIPs = ["14.38.247.30", "175.212.158.53"];
 		m.ignoreMe = true;
