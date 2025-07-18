@@ -16,7 +16,7 @@ body {
 }
 
 img {
-	box-sizing:content-box
+	box-sizing:border-box
 }
 
 codeprint.SEE {
@@ -69,6 +69,10 @@ codeprint.SEE {
 
 .promoting li {
 	margin:.2em 0 .3em 2em
+}
+
+.wheat {
+	color:wheat !important
 }
 
 .promoting a,
@@ -1197,6 +1201,10 @@ img {
 
 
 /* References and links */
+.docuK.bright .inRef {
+	background-color:black;
+	color:wheat
+}
 
 .docuK .inRef {
 	display:inline-block;
@@ -1219,7 +1227,7 @@ img {
 }
 
 .docuK.bright .bubbleRef>.content {
-	background-color:rgb(200, 200, 200)
+	background-color:black
 }
 
 .docuK .bubbleRef>.arrow {
