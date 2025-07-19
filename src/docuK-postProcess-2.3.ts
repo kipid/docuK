@@ -615,7 +615,7 @@ Log <span class="bold underline">o</span>ut
 		m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
 		m.handleComments = async function () {
-			let $ps = $(".article-reply");
+			let $ps = $(".article-reply li.tt-item-reply .tt_desc");
 
 			async function processTextNode(textNode: Text): Promise<string> {
 				let str = textNode.wholeText;
