@@ -787,7 +787,8 @@ textarea.multi-line {
 	color:rgb(200, 255, 150)
 }
 
-.docuK span.nolink {
+.docuK span.nolink,
+.docuK span.no-link {
 	color:rgb(150, 150, 100)
 }
 
@@ -823,7 +824,8 @@ textarea.multi-line {
 	color:rgb(50, 105, 0)
 }
 
-.docuK.bright span.nolink {
+.docuK.bright span.nolink,
+.docuK.bright span.no-link {
 	color:rgb(150, 150, 0)
 }
 
