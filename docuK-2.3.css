@@ -28,8 +28,7 @@ codeprint.SEE {
 	color:wheat;
 	padding:1em;
 	margin:0 auto;
-	width:30em;
-	max-width:100%;
+	width:100%;
 	min-width:100vh;
 	font-size:2em
 }
