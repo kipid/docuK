@@ -847,6 +847,7 @@ fontCache: 'global'
 			}, 2048);
 
 			m.reNewAndReOn();
+			m.$window.scrollTop($(".docuK-con").eq(0).offset().top);
 		}, 2048);
 	});
 
