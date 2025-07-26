@@ -1,5 +1,5 @@
 (function (m, $) {
-	m.version1 = ".2";
+	m.version1 = ".3";
 	// SEE (Super Easy Edit)
 	let $SEE: JQuery<HTMLElement> = $("codeprint.SEE");
 	m.SEEHTMLs = m.SEEHTMLs || [];
@@ -850,6 +850,7 @@ window.MathJax={
 
 			// Closing docuK Log.
 			m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
+			m.$window.scrollTop($(".docuK-con").eq(0).offset().top);
 			m.$window.scrollTop($(window.location.hash)?.offset()?.top ?? m.$window.scrollTop());
 			setTimeout(function () {
 				m.$logAll.hide();
@@ -857,7 +858,6 @@ window.MathJax={
 			}, 2048);
 
 			m.reNewAndReOn();
-			m.$window.scrollTop($(".docuK-con").eq(0).offset().top);
 		}, 2048);
 	});
 
