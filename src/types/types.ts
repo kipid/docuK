@@ -228,6 +228,7 @@ interface K {
 	mathJaxPreProcessDo?: () => void;
 	mathJaxPreProcess?: ReturnType<typeof setTimeout>;
 	doPrettyPrint?: () => void;
+	$button_menu?: JQuery<HTMLElement>;
 }
 
 export type PatternURI = {
