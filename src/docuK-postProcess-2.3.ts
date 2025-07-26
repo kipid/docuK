@@ -615,6 +615,7 @@ Log <span class="bold underline">o</span>ut
 		m.logPrint(`<br><br>m.delayPad=${m.delayPad};<br>m.wait=${m.wait};`);
 
 		m.handleComments = async function () {
+			window?.MathJax?.typesetPromise?.([$(".article-reply")[0]]);
 			let $ps = $(".article-reply li.tt-item-reply .tt_desc");
 
 			async function processTextNode(textNode: Text): Promise<string> {
@@ -737,23 +738,23 @@ Log <span class="bold underline">o</span>ut
 			let $mjxConfig = $(
 				`<script>
 window.MathJax={
-startup: {
-typeset: false, // Skip startup typeset.
-ready: function () {
-m.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
-MathJax.startup.defaultReady();
-m.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
-}
-},
-tex: {
-inlineMath: [['\\\\(','\\\\)']], // Using $ for inline math.
-displayMath: [['\\\\[','\\\\]']], // Using $$ for outline math.
-processEscapes: true, // Escape \\$
-processEnvironments: false // Ignore \\begin{something} ... \\end{something}
-},
-svg: {
-fontCache: 'global'
-}
+	startup: {
+		typeset: false, // Skip startup typeset.
+		ready: function () {
+			m.logPrint('<br><br>MathJax is loaded, but not yet initialized.');
+			MathJax.startup.defaultReady();
+			m.logPrint('<br><br>MathJax is initialized, and the initial typeset is queued.');
+		}
+	},
+	tex: {
+		inlineMath: [['\\\\(','\\\\)']], // Using $ for inline math.
+		displayMath: [['\\\\[','\\\\]']], // Using $$ for outline math.
+		processEscapes: true, // Escape \\$
+		processEnvironments: false // Ignore \\begin{something} ... \\end{something}
+	},
+	svg: {
+		fontCache: 'global'
+	}
 };
 </` + `script>`,
 			); // Avoid closing script
@@ -761,6 +762,10 @@ fontCache: 'global'
 			let $mjx = document.createElement("script");
 			$mjx.id = "MathJax-script";
 			$mjx.defer = true;
+			$mjx.onload = function () {
+				m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
+				window?.MathJax?.typesetPromise?.([$("html")[0]]);
+			};
 			$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
 			m.$headOrBody.append($mjx);
 			m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
