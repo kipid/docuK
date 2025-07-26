@@ -15,7 +15,7 @@ import type {
 
 window.m = window.k = window.k || {}; // window.m can be asigned another JSON or number/string and so on. But window.k must be kept.
 (function (m, $) {
-	m.version0 = "3.2";
+	m.version0 = "3.3";
 	m.$window = $(window);
 	m.$document = $(document);
 	m.$html = $("html");
