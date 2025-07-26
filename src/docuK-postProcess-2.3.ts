@@ -114,6 +114,8 @@ window.onpopstate = function (e) {
 
 // On ready.
 m.$document.ready(function () {
+	$("body").bind("click", function (e) {});
+
 	// Disqus js script, and Redirect to the canonical URL.
 	if (window.disqus_config) {
 		m.disqusVars = { page: {} };
@@ -449,6 +451,7 @@ Log <span class="bold underline">o</span>ut
 			m.$window.scrollTop(m.$area_aside.offset().top);
 		}
 	});
+
 	// ShortKeys (including default 'processShortcut(event)' of tistory.)
 	m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer"); // Ordered automatically by jQuery.
 	m.fdList = m.$fdList.get().sort((a, b) => {
