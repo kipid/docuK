@@ -709,8 +709,8 @@ Log <span class="bold underline">o</span>ut
 					m.$prePrettyScrollable.eq(i).wrap("<div class='preC'></div>").before('<div class="preSSE">On the left side of codes is there a hiden button to toggle/switch scrollability ({max-height:some} or {max-height:none}).</div><div class="preSS" onclick="k.toggleHeight(this)"></div>');
 				}
 			}
-			if ($(".comments").length) {
-				window?.MathJax?.typesetPromise?.([$(".comments")[0]]);
+			if ($(".article-reply").length) {
+				window?.MathJax?.typesetPromise?.([$(".article-reply")[0]]);
 				window?.Prism?.highlightAll?.();
 			}
 			m.reNewAndReOn();
@@ -765,21 +765,26 @@ window.MathJax={
 			$mjx.onload = function () {
 				m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
 				window?.MathJax?.typesetPromise?.([$("html")[0]]);
+				window?.MathJax?.typesetPromise?.([...$(".docuK")]);
+				window?.MathJax?.typesetPromise?.([$(".article-reply")[0]]);
 			};
 			$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
 			m.$headOrBody.append($mjx);
 			m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
 			// MathJax PreProcess after the above MathJax.js is loaded.
 			m.mathJaxPreProcessDo = function () {
-				if (window.MathJax?.startup !== undefined && window.MathJax.typesetPromise) {
+				if (window.MathJax?.startup && window.MathJax.typesetPromise) {
 					let mathElems: HTMLElement[] = [];
 					if (m.$docuK) {
 						mathElems = [...m.$docuK];
 					}
-					if ($(".comments").length) {
-						mathElems.push($(".comments")[0]);
+					if ($(".article-reply").length) {
+						mathElems.push($(".article-reply")[0]);
 					}
 					window.MathJax.typesetPromise(mathElems);
+					window?.MathJax?.typesetPromise?.([$("html")[0]]);
+					window?.MathJax?.typesetPromise?.([...$(".docuK")]);
+					window?.MathJax?.typesetPromise?.([$(".article-reply")[0]]);
 				} else {
 					setTimeout(m.mathJaxPreProcessDo, 2048);
 				}
