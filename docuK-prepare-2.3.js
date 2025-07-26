@@ -4,7 +4,7 @@
 <div class="cBoth"></div>
 <div class="promoting order"${t?` id="${t}"`:""}>`;if(e.recoCats){n+='<div class="p">* \uAC8C\uC2DC\uAE00 \uAD00\uB828 \uB9C1\uD06C\uB4E4 in <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>';const r=e.recoCats.split(";");for(const i of r)n+=`<div class="p"><div class="center"><a target="_blank" href="https://recoeve.net/user/${e.recoeveUserId?decodeURIComponent(e.recoeveUserId):"kipid"}/mode/multireco?cat=${encodeURIComponent(i)}#numbers-of-recos">Cat=${e.escapeOnlyTag(decodeURIComponent(i))} of ${e.recoeveUserId?e.escapeOnlyTag(decodeURIComponent(e.recoeveUserId)):"kipid"}'s <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
-	<iframe delayed-src="https://recoeve.net/user/${e.recoeveUserId?encodeURIComponent(e.recoeveUserId):"kipid"}/mode/multireco?cat=${encodeURIComponent(i)}#numbers-of-recos" frameborder="0"></iframe>
+<iframe delayed-src="https://recoeve.net/user/${e.recoeveUserId?encodeURIComponent(e.recoeveUserId):"kipid"}/mode/multireco?cat=${encodeURIComponent(i)}#numbers-of-recos" frameborder="0"></iframe>
 </div></div>
 </div>`}return n+=`<div class="docuK-con" style="margin-top:5em">
 <div class="center">* \uD64D\uBCF4/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
@@ -13,7 +13,7 @@
 \uADF8\uB9AC\uACE0 \uC790\uC2E0\uC758 \uD398\uC774\uC9C0\uB85C \uC774\uB3D9\uD55C \uB4A4 \uCD94\uCC9C \uBC1B\uAE30 (\uB2E8\uCD95\uD0A4 R) \uB97C \uB204\uB974\uC2DC\uBA74 \uC790\uC2E0\uC774 \uC810\uC218 \uBA54\uAE34\uAC83\uB4E4\uB85C \uC774\uC6C3 (\uC774\uC6C3\uBCF4\uAE30 \uB2E8\uCD95\uD0A4 B) \uC744 \uC790\uB3D9\uC73C\uB85C \uCC3E\uC544\uC8FC\uACE0 \uADF8 \uC774\uC6C3\uB4E4\uB85C\uBD80\uD130 \uCD94\uCC9C\uC744 \uBC1B\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4.</div>
 <div class="center" style="margin-top:1em"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">Cat=[Music/Break]--K-Pop of kipid's <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
-	<iframe delayed-src="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay" frameborder="0"></iframe>
+<iframe delayed-src="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay" frameborder="0"></iframe>
 </div></div>
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div></div>`,n},e.$log=g("#docuK-log"),e.$log.addClass("fixed"),e.$log.before(`<div class="docuK-log exit" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>\u2716</svg></div>`),e.$logAll=g("#docuK-log, .docuK-log.exit"),e.logPrint=function(t){e.$log.append(t),e.$log.scrollTop(e.$log[0].scrollHeight)},e.logPrint("m.logPrint() is working!"),e.$log.after(`<div class="fs-container" id="fuzzy-search-container" style="display:none">
@@ -76,14 +76,14 @@ ${i}`:""}`;return navigator.clipboard.writeText(o).then(function(){e.$textarea_c
 <li class="license nd"><span class="bold">\uBCC0\uACBD\uAE08\uC9C0</span> - \uC774 \uC800\uC791\uBB3C\uC744 \uB9AC\uBBF9\uC2A4, \uBCC0\uD615\uD558\uAC70\uB098 2\uCC28\uC801 \uC800\uC791\uBB3C\uC744 \uC791\uC131\uD558\uC600\uC744 \uACBD\uC6B0 \uADF8 \uACB0\uACFC\uBB3C\uC744 \uACF5\uC720\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4.</li>
 </ul></div></div>`),r.prepend(`<div class="docuK-info">
 <div class="change-docuK-style" id="change-docuK-style${n}">
-	<form><button type="button" onclick="k.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
-	<form><input id="button${n}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${n}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
-	</input><input id="button${n}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${n}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
-	<form><input id="input${n}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="font-size:1.2em; width:8em; height:1.8em; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
-	<form><button type="button" onclick="k.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="k.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
-	<form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:1.6em">=</button></form>
-	<form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
-	<form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
+<form><button type="button" onclick="k.resetStyle()" style="width:auto; padding:0 .5em">Reset docuK style</button></form>
+<form><input id="button${n}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${n}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
+</input><input id="button${n}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${n}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
+<form><input id="input${n}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="font-size:1.2em; width:8em; height:1.8em; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
+<form><button type="button" onclick="k.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="k.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
+<form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:1.6em">=</button></form>
+<form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
+<form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
 </div>
 <div class="deviceInfo"></div>
 <div class="promoting-docuK">This document is rendered by <a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a href="https://kipid.tistory.com/entry/pure-SEE">pure SEE</a>).</div>
