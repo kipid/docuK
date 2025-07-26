@@ -20,7 +20,6 @@ pre[class*="language-"] {
 	word-spacing:normal;
 	word-break:normal;
 	word-wrap:break-word;
-	line-height:1.5;
 	-moz-tab-size:2;
 	-o-tab-size:2;
 	tab-size:2;
@@ -257,7 +256,6 @@ pre[class*="language-"].line-numbers>code {
 		word-spacing:normal;
 		word-break:normal;
 		word-wrap:break-word;
-		line-height:1.5;
 		text-shadow:none;
 		-moz-tab-size:2;
 		-o-tab-size:2;
