@@ -114,7 +114,9 @@ window.onpopstate = function (e) {
 
 // On ready.
 m.$document.ready(function () {
-	$("body").bind("click", function (e) {});
+	$("body").bind("click", function (e) {
+		$("body").css("overflow", "visible");
+	});
 
 	// Disqus js script, and Redirect to the canonical URL.
 	if (window.disqus_config) {
