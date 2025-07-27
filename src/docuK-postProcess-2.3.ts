@@ -396,7 +396,7 @@ Log <span class="bold underline">o</span>ut
 	};
 	window.$page_views_chart = $("#page-views-chart");
 	if (!window.$page_views_chart.length) {
-		window.$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat(e)">Get page views</div>`);
+		window.$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat(event)">Get page views</div>`);
 		window.$page_views_chart = $("#page-views-chart");
 	}
 
@@ -718,7 +718,7 @@ Log <span class="bold underline">o</span>ut
 		m.reNewAndReOn();
 	};
 
-	m.$window.on("resize.menubar", function (e) {
+	m.$window.on("resize.menubar", function () {
 		$("#menubar_wrapper").parents().show();
 	});
 
