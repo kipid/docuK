@@ -336,7 +336,9 @@ Log <span class="bold underline">o</span>ut
 				});
 		});
 	};
-	m.loadPageViewsStat = async function (): Promise<void> {
+	m.loadPageViewsStat = async function (e: JQuery.Event): Promise<void> {
+		e?.preventDefault();
+		e?.stopPropagation();
 		await m.getBlogStat();
 		let countChartHTML = `<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg width="100%" height="100%">`;
 		let leftPadding = 3.0;
@@ -394,7 +396,7 @@ Log <span class="bold underline">o</span>ut
 	};
 	window.$page_views_chart = $("#page-views-chart");
 	if (!window.$page_views_chart.length) {
-		window.$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat()">Get page views</div>`);
+		window.$disqus_thread.after(`<div id="page-views-chart" class="to-be-executed" onclick="k.loadPageViewsStat(e)">Get page views</div>`);
 		window.$page_views_chart = $("#page-views-chart");
 	}
 

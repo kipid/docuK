@@ -209,7 +209,7 @@ interface K {
 	from?: { date: string }[];
 	blogStatRes?: StrToJSON;
 	getBlogStat?: () => Promise<void>;
-	loadPageViewsStat?: () => Promise<void>;
+	loadPageViewsStat?: (e: JQuery.Event) => Promise<void>;
 	setIntervalBlogStatN?: number;
 	kakao_js_id?: string;
 	kakaoInitDo?: () => void;
