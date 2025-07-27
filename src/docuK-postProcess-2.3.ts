@@ -726,7 +726,7 @@ Log <span class="bold underline">o</span>ut
 		m.$delayedElems = $("[delayed-src], [delayed-bgimage], .to-be-executed, .MathJax_Preview");
 		m.$window.off("scroll.delayedLoad").on("scroll.delayedLoad", m.delayedLoadByScroll);
 		m.$window.trigger("scroll.delayedLoad");
-		m.$fdList = $("#header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .comments, .comments>.comment-list>ul>li, #disqus_thread, #aside, #page-views-chart, #chartdiv, #recentComments, #tistorySidebarProfileLayer");
+		m.$fdList = $("#wrap, #header, #shortkey, .promoting, .change-docuK-style, #content, #container, #wrapContent, .docuK .sec>h1, .docuK .sec>h2, .docuK .subsec>h3, .docuK .subsubsec>h4, .docuK-con, .article-reply, .article-reply ul.tt-list-reply>li.tt-item-reply, #disqus_thread, #page-views-chart, .area-aside, .box-profile, .box-category, .box-recent, .box-reply, .box-notice, .box-plugins, .box-archive, .box-calendar, .box-visit, .box-tag, #footer, .adsbygoogle");
 		m.fdList = [...m.$fdList].sort((a, b) => {
 			return $(a).offset().top - $(b).offset().top;
 		});
