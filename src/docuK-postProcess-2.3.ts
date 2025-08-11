@@ -113,7 +113,7 @@ window.onpopstate = function (e) {
 };
 
 // On ready.
-m.$document.ready(function () {
+$(document).ready(function () {
 	// Disqus js script, and Redirect to the canonical URL.
 	if (window.disqus_config) {
 		m.disqusVars = { page: {} };
