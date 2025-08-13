@@ -1336,6 +1336,16 @@ img {
 	color:rgb(40, 40, 40) !important
 }
 
+.docuK ol.refs li,
+.docuK ol li {
+	color:white
+}
+
+.docuK.bright ol.refs li,
+.docuK.bright ol li {
+	color:black
+}
+
 .docuK ol.refs {
 	counter-reset:item;
 	list-style-type:none
