@@ -2567,14 +2567,14 @@ m.docuKProcess = function docuK(docuKI: number): void {
 	// Style change widget, and SNS widget.
 	$docuKI.prepend(`<div class="docuK-info">
 <div class="change-docuK-style" id="change-docuK-style${docuKI}">
-<form><button type="button" onclick="k.resetStyle()" style="width:auto; padding:0 .5rem">Reset docuK style</button></form>
-<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1rem 0.2rem">Dark</label>
-</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1rem 0.2rem">Bright</label></input></form>
-<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="font-size:1.2rem; width:8rem; height:1.8rem; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
-<form><button type="button" onclick="k.CfontSize(-1)" style="font-size:1rem">A</button><button type="button" onclick="k.CfontSize(1)" style="font-size:1.4rem">A</button></form>
-<form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:1rem">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:1.6rem">=</button></form>
-<form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:auto; padding:0 .5rem">DocuK Log</button></form>
-<form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="font:inherit; width:auto; padding:0 .5rem">Fuzzy search</button></form>
+<form><button type="button" onclick="k.resetStyle()">Reset Styles</button></form>
+<form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:2px; line-height:1.3">Dark</label>
+</input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:2px; line-height:1.3">Bright</label></input></form>
+<form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="width:120px; height:auto; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
+<form><button type="button" onclick="k.CfontSize(-1)" style="font-size:12px; display:flex align-items:center; justify-content:center; width:30px; height:30px">A</button><button type="button" onclick="k.CfontSize(1)" style="font-size:18px; display:flex align-items:center; justify-content:center; width:30px; height:30px">A</button></form>
+<form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:12px; display:flex align-items:center; justify-content:center; width:30px; height:30px">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:18px; display:flex align-items:center; justify-content:center; width:30px; height:30px">=</button></form>
+<form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:fit-content">DocuK Log</button></form>
+<form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="width:fit-content">Fuzzy search</button></form>
 </div>
 <div class="deviceInfo"></div>
 <div class="promoting-docuK">This document is rendered by <a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a href="https://kipid.tistory.com/entry/pure-SEE">pure SEE</a>).</div>
