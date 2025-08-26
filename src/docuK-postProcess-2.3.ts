@@ -472,13 +472,13 @@ Log <span class="bold underline">o</span>ut
 				event.preventDefault();
 				if (window.$fuzzy_search_container.is(":visible")) {
 					window.$fuzzy_search_container.hide();
-					window.$out_focus.focus();
+					window.$out_focus.trigger("focus");
 					window.$button_Go.removeClass("enabled");
 					m.goOn = false;
 					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
 				} else {
 					window.$fuzzy_search_container.show();
-					window.$fuzzy_search.focus();
+					window.$fuzzy_search.trigger("focus");
 					window.$button_Go.addClass("enabled");
 					m.goOn = true;
 					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
@@ -487,7 +487,7 @@ Log <span class="bold underline">o</span>ut
 			case "KeyK":
 				if (m.$log.is(":visible")) {
 					m.$logAll.hide();
-					window.$out_focus.focus();
+					window.$out_focus.trigger("focus");
 					window.$button_log.removeClass("enabled");
 					m.logOn = false;
 					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
