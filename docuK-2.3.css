@@ -2,9 +2,11 @@
 html,
 body {
 	font-family:'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif;
+	font-size:16px;
+	line-height:1.5;
 	margin:0;
 	padding:0;
-	tab-size:4;
+	tab-size:2;
 	overflow-wrap:break-word;
 	word-wrap:break-word;
 	word-break:break-word
@@ -26,49 +28,45 @@ codeprint.SEE {
 #force-recoeve {
 	background-color:black;
 	color:wheat;
-	padding:1em;
+	padding:1rem;
 	margin:0 auto;
 	width:100%;
 	min-height:100vh;
 	text-align:justify;
-	font-size:2em
+	font-size:2rem
 }
 
 #content .inner {
 	padding:0 !important
 }
 
-.docuK-con>* {
-	font-size:1.6em
-}
-
 .docuK-con .docuK-ads {
-	font-size:1.8em;
+	font-size:1.2rem;
 	text-align:center;
-	margin:.5em 0;
-	padding:.5em;
+	margin:.5rem 0;
+	padding:.5rem;
 	background-color:black;
 	color:antiquewhite;
 	border:1px solid antiquewhite;
-	border-radius:.5em
+	border-radius:.5rem
 }
 
 .promoting {
-	font-size:1.6em;
+	font-size:1.1rem;
 	color:white;
 	background-color:black;
 	max-width:1000px;
-	margin:1em auto;
-	padding:.5em .8em
+	margin:1rem auto;
+	padding:.5rem .8rem
 }
 
 .promoting .p {
-	margin:.7em 0;
-	padding-bottom:.5em
+	margin:.7rem 0;
+	padding-bottom:.5rem
 }
 
 .promoting li {
-	margin:.2em 0 .3em 2em
+	margin:.2rem 0 .3rem 2rem
 }
 
 .wheat {
@@ -94,12 +92,12 @@ codeprint.SEE {
 	color:rgb(100, 255, 100);
 	background-color:rgb(0, 0, 0);
 	max-width:1000px;
-	margin:1em auto
+	margin:1rem auto
 }
 
 .copyright ul {
 	line-height:1.4;
-	padding:.1em .5em
+	padding:.1rem .5rem
 }
 
 .copyright li.cc::before {
@@ -145,7 +143,7 @@ codeprint.SEE {
 }
 
 #shortkey.shortkey {
-	font-size:1em;
+	font-size:1rem;
 	color:white;
 	background-color:black;
 	max-width:1000px;
@@ -153,22 +151,22 @@ codeprint.SEE {
 }
 
 #shortkey.shortkey ul.ul-short-key {
-	font-size:1em;
+	font-size:1rem;
 	line-height:1.4;
-	padding:0 1.5em;
-	margin:.7em 0
+	padding:0 1.5rem;
+	margin:.7rem 0
 }
 
 #shortkey.shortkey li {
-	font-size:1em;
+	font-size:1rem;
 	color:white !important
 }
 
 #floating-key {
 	display:flex;
 	flex-wrap:wrap;
-	bottom:2.6em;
-	width:9em;
+	bottom:2.6rem;
+	width:9rem;
 	height:auto
 }
 
@@ -176,7 +174,7 @@ codeprint.SEE {
 	display:inline-block;
 	cursor:pointer;
 	margin:0;
-	padding:.2em .5em;
+	padding:.2rem .5rem;
 	border:2px solid rgb(50, 50, 50);
 	background-color:rgb(110, 110, 110)
 }
@@ -201,11 +199,11 @@ codeprint.SEE {
 #floating-key div.button {
 	cursor:pointer;
 	border-top:none;
-	border-radius:.3em;
+	border-radius:.3rem;
 	text-align:center;
 	margin:0;
 	padding:1px;
-	width:9em;
+	width:9rem;
 	height:auto
 }
 
@@ -258,8 +256,8 @@ codeprint.SEE {
 
 #SNS-floating .SNS-img {
 	box-sizing:border-box;
-	width:1.285714286em;
-	height:1.285714286em;
+	width:1.285714286rem;
+	height:1.285714286rem;
 	border:1px gray solid;
 	border-left:0;
 	cursor:pointer
@@ -271,20 +269,21 @@ codeprint.SEE {
 
 .docuK #floating-key,
 .docuK #toggle-floating-key {
-	font-size:1.4em;
+	font-size:0.9rem;
 	color:wheat;
 	z-index:19000;
 	position:fixed;
 	text-align:center;
-	right:.2em
+	right:.2rem
 }
 
 #toggle-floating-key {
-	bottom:.2em;
-	width:2.2em;
-	height:2.3em;
+	bottom:.2rem;
+	width:2.2rem;
+	height:2.3rem;
 	margin:0;
-	padding:.1em
+	text-align:center;
+	padding:.1rem
 }
 
 .docuK ::selection,
@@ -295,12 +294,10 @@ codeprint.SEE {
 
 .docuK-con,
 .docuK {
-	font-size:10px;
-	line-height:1.6;
 	font-family:'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 나눔고딕, NanumGothic, Tahoma, Sans-serif;
 	text-align:justify;
 	max-width:1000px;
-	margin:.5em auto;
+	margin:.5rem auto;
 	overflow-wrap:break-word;
 	word-wrap:break-word;
 	word-break:break-word
@@ -350,12 +347,12 @@ textarea {
 
 .fs-container {
 	position:fixed;
-	font-size:2em;
+	font-size:1.2rem;
 	left:0;
 	top:0;
 	z-index:10010;
 	background-color:black;
-	width:25em;
+	width:25rem;
 	max-width:100%;
 	height:auto;
 	text-align:left
@@ -371,61 +368,50 @@ textarea {
 
 #multireco-cat-fs-container {
 	position:relative;
-	width:25em;
+	width:25rem;
 	max-width:100%;
 	height:auto;
 	text-align:left
 }
 
 .fs-name {
-	padding:.1em 3em
+	padding:.1rem 3rem
 }
 
 .fs-input {
-	height:2em;
-	max-height:5em;
+	height:3rem;
+	max-height:6rem;
+	overflow-x:hidden;
 	overflow-y:auto;
+	resize:vertical;
 	font:inherit;
-	font-size:1.3em;
-	color:black;
+	font-size:1.1rem;
+	font-weight:bold;
 	width:100%;
-	padding:.1em;
-	border:.15em gray solid;
+	padding:.2rem .3rem;
+	border:2px gray solid;
+	color:black;
 	background-color:white
 }
 
-.fs-container textarea {
-	display:block;
-	max-width:100%;
-	width:100%;
-	resize:vertical;
-	font:inherit;
-	font-weight:bold;
-	overflow-x:hidden;
-	overflow-y:auto;
-	padding:0.2em 0.3em;
-	background-color:white;
-	color:rgb(50, 50, 50)
-}
-
 #goto-cats {
-	height:4em;
-	margin-bottom:-0.4em
+	height:4rem;
+	margin-bottom:-0.4rem
 }
 
 .fs-list {
 	height:auto;
-	min-height:2em;
-	max-height:15em;
+	min-height:2rem;
+	max-height:15rem;
 	overflow-y:auto;
-	border:.15em gray solid;
+	border:.15rem gray solid;
 	background-color:rgb(20, 20, 20)
 }
 
 .fs-list .list-item {
 	background-color:black;
 	color:white;
-	padding:.2em .5em .4em
+	padding:.2rem .5rem .4rem
 }
 
 .bright .fs-list .list-item {
@@ -451,7 +437,7 @@ textarea {
 }
 
 .fs-list .list-item.selected {
-	border:.15em solid rgb(210, 150, 150)
+	border:.15rem solid rgb(210, 150, 150)
 }
 
 .fs-list .list-item.deleted {
@@ -466,11 +452,11 @@ textarea {
 }
 
 .fs-list .list-item .cat {
-	font-size:.9em
+	font-size:.9rem
 }
 
 .fs-list .list-item .highlighted {
-	font-size:.5em;
+	font-size:.5rem;
 	color:rgb(150, 150, 150)
 }
 
@@ -490,33 +476,33 @@ textarea {
 	display:inline-block;
 	margin:auto;
 	border:5px solid wheat;
-	width:30em;
+	width:30rem;
 	max-width:100%
 }
 
 .block-touch>div>div {
-	padding:.5em 1em;
+	padding:.5rem 1rem;
 	width:100%;
 	background-color:black;
 	color:white
 }
 
 .block-touch>div>textarea {
-	padding:.5em 1em;
+	padding:.5rem 1rem;
 	width:100%;
-	height:20em;
+	height:20rem;
 	background-color:white;
 	color:black
 }
 
 textarea.single-line {
-	min-height:2.2em;
-	height:3.8em
+	min-height:2.2rem;
+	height:3.8rem
 }
 
 textarea.multi-line {
-	font-size:.9em;
-	min-height:10em
+	font-size:.9rem;
+	min-height:10rem
 }
 
 .docuK button {
@@ -524,7 +510,7 @@ textarea.multi-line {
 }
 
 .docuK>.docuK-info>* {
-	padding:.5em 1em
+	padding:.5rem 1rem
 }
 
 .docuK>.docuK-info {
@@ -574,9 +560,9 @@ textarea.multi-line {
 	color:white;
 	border-bottom:2px rgb(25, 60, 25) solid;
 	border-top:5px rgb(25, 60, 25) solid;
-	padding:.5em;
-	margin:.3em 0;
-	font-size:1.8em
+	padding:.5rem;
+	margin:.3rem 0;
+	font-size:1rem
 }
 
 .docuK.bright>.sec {
@@ -594,13 +580,13 @@ textarea.multi-line {
 
 .docuK .ShowHide {
 	float:right;
-	padding:.3em 0;
+	padding:.3rem 0;
 	cursor:pointer
 }
 
 .docuK .Hide {
 	float:right;
-	padding:0 0 .3em;
+	padding:0 0 .3rem;
 	clear:both;
 	cursor:pointer
 }
@@ -608,8 +594,8 @@ textarea.multi-line {
 .docuK .sec-contents,
 .docuK>.sec.noToggleUI>h2+* {
 	clear:both;
-	margin-top:.6em;
-	padding:0 .35em 0 0
+	margin-top:.6rem;
+	padding:0 .35rem 0 0
 }
 
 
@@ -617,11 +603,11 @@ textarea.multi-line {
 
 .docuK .subsec,
 .docuK .subsubsec {
-	margin:2em 0 .3em
+	margin:2rem 0 .3rem
 }
 
 .docuK .secN {
-	margin-right:.5em
+	margin-right:.5rem
 }
 
 .docuK h1,
@@ -632,47 +618,47 @@ textarea.multi-line {
 }
 
 .docuK h3 {
-	margin-left:.5em
+	margin-left:.5rem
 }
 
 .docuK h4 {
-	margin-left:1em
+	margin-left:1rem
 }
 
 .docuK>.sec>.toc {
-	font-size:.8em;
-	padding:0.2em 0.2em 1em 0.2em;
-	text-indent:0.5em
+	font-size:.8rem;
+	padding:0.2rem 0.2rem 1rem 0.2rem;
+	text-indent:0.5rem
 }
 
 .docuK>.sec>.toc>h2 {
 	margin-left:0;
-	margin-top:.5em
+	margin-top:.5rem
 }
 
 .docuK>.sec>.toc>h3 {
-	margin-left:1em
+	margin-left:1rem
 }
 
 .docuK>.sec>.toc>h4 {
-	margin-left:2em
+	margin-left:2rem
 }
 
 .docuK>.sec>.toc h2,
 .docuK>.sec>.toc h3,
 .docuK>.sec>.toc h4 {
-	padding:.2em 0
+	padding:.2rem 0
 }
 
 .docuK h1 {
 	font-weight:bold;
-	font-size:1.4em;
-	padding:.3em .3em .6em
+	font-size:1.4rem;
+	padding:.3rem .3rem .6rem
 }
 
 .docuK h2 {
 	font-weight:bold;
-	font-size:1.3em
+	font-size:1.3rem
 }
 
 .docuK .sec>h2 {
@@ -681,18 +667,18 @@ textarea.multi-line {
 
 .docuK h3 {
 	font-weight:bold;
-	font-size:1.2em
+	font-size:1.2rem
 }
 
 .docuK h4 {
 	font-weight:bold;
-	font-size:1.2em
+	font-size:1.2rem
 }
 
 .docuK h2,
 .docuK h3,
 .docuK h4 {
-	padding:.4em .3em .6em
+	padding:.4rem .3rem .6rem
 }
 
 .docuK h1,
@@ -842,10 +828,10 @@ textarea.multi-line {
 
 .docuK a.tJump {
 	display:inline-block;
-	font-size:.6em;
-	margin:0 1em 0 -.5em;
+	font-size:.6rem;
+	margin:0 1rem 0 -.5rem;
 	vertical-align:middle;
-	padding:0 .26em;
+	padding:0 .26rem;
 	border:2px solid rgb(50, 50, 122);
 	font-weight:bold
 }
@@ -858,8 +844,8 @@ textarea.multi-line {
 .p {
 	overflow-x:visible;
 	overflow-y:visible;
-	padding:.2em .2em 1em .2em;
-	text-indent:.5em
+	padding:.2rem .2rem 1rem .2rem;
+	text-indent:.5rem
 }
 
 .docuK .borderByBackground {
@@ -869,15 +855,15 @@ textarea.multi-line {
 }
 
 .docuK .ex {
-	border:.2em solid gray;
-	padding:0 .5em .5em;
-	margin:.5em auto
+	border:.2rem solid gray;
+	padding:0 .5rem .5rem;
+	margin:.5rem auto
 }
 
 .docuK cite,
 .docuK refer {
 	font:inherit;
-	font-size:1em;
+	font-size:1rem;
 	text-indent:0
 }
 
@@ -946,8 +932,8 @@ textarea.multi-line {
 
 .docuK img,
 img {
-	min-width:1em;
-	min-height:1em;
+	min-width:1rem;
+	min-height:1rem;
 	max-width:100%;
 	max-height:100%
 }
@@ -960,7 +946,7 @@ img {
 
 .docuK li,
 .docuK dd {
-	margin:.3em 0 .5em 2em
+	margin:.3rem 0 .5rem 2rem
 }
 
 .docuK code {
@@ -969,11 +955,11 @@ img {
 	white-space:pre-wrap;
 	word-break:break-all;
 	font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
-	font-size:.9em;
-	padding:.2em;
+	font-size:.9rem;
+	padding:.2rem;
 	display:inline;
 	border:2px solid rgb(200, 150, 150);
-	border-radius:.2em;
+	border-radius:.2rem;
 	background-color:rgb(30, 30, 30)
 }
 
@@ -985,14 +971,13 @@ img {
 	border:none;
 	background-color:transparent;
 	padding:0;
-	font-size:inherit
 }
 
 
 /* r(S)C:Ratio (Sub)Container */
 
 .rC {
-	margin:.5em auto
+	margin:.5rem auto
 }
 
 .docuK .rC.facebook {
@@ -1001,7 +986,7 @@ img {
 
 .rC.recoeve {
 	border:1px solid white;
-	border-right:1em solid rgb(30, 30, 60)
+	border-right:1rem solid rgb(30, 30, 60)
 }
 
 .rC.fixed {
@@ -1014,7 +999,7 @@ img {
 	margin:0;
 	padding:1px;
 	background-color:black;
-	border-bottom:.15em solid white
+	border-bottom:.15rem solid white
 }
 
 .bright .rC.fixed {
@@ -1104,7 +1089,7 @@ img {
 
 .rC.instagram,
 .rC.imgur {
-	max-width:37em
+	max-width:37rem
 }
 
 
@@ -1112,7 +1097,7 @@ img {
 
 .rC>.pc {
 	text-align:center;
-	font-size:10px
+	font-size:.7rem
 }
 
 .docuK eqq {
@@ -1128,14 +1113,14 @@ img {
 	overflow-x:auto;
 	overflow-y:hidden;
 	text-align:center;
-	padding:1.5em .2em;
-	margin:.5em 0;
+	padding:1.5rem .2rem;
+	margin:.5rem 0;
 	background:inherit
 }
 
 .docuK .eqN {
 	float:right;
-	padding-top:1em
+	padding-top:1rem
 }
 
 .docuK eqq.no-N .eqN {
@@ -1151,7 +1136,7 @@ img {
 
 .docuK figure {
 	display:block;
-	margin:1em 0 2em;
+	margin:1rem 0 2rem;
 	padding:0;
 	text-indent:0
 }
@@ -1161,8 +1146,8 @@ img {
 }
 
 .docuK .fig {
-	margin:1em 0;
-	padding:1em;
+	margin:1rem 0;
+	padding:1rem;
 	border:1px solid gray;
 	text-align:center;
 	text-indent:0;
@@ -1188,18 +1173,18 @@ img {
 
 .docuK .fig>.caption {
 	display:inline-block;
-	padding:0 .5em;
+	padding:0 .5rem;
 	text-align:justify;
 	margin:0 auto;
 	text-indent:0
 }
 
 .docuK .fig>.caption:first-child {
-	padding-bottom:.6em
+	padding-bottom:.6rem
 }
 
 .docuK .fig>.caption:last-child {
-	padding-top:.5em
+	padding-top:.5rem
 }
 
 
@@ -1221,11 +1206,11 @@ img {
 .docuK .bubbleRef>.content {
 	z-index:100;
 	position:absolute;
-	font-size:1em;
-	margin-top:.9em;
-	left:.3em;
-	right:.3em;
-	padding:1em;
+	font-size:1rem;
+	margin-top:.9rem;
+	left:.3rem;
+	right:.3rem;
+	padding:1rem;
 	background-color:rgb(30, 30, 30)
 }
 
@@ -1240,8 +1225,8 @@ img {
 	height:0;
 	border-color:transparent transparent rgb(30, 30, 30);
 	border-style:solid;
-	border-width:.9em;
-	margin-top:-.6em
+	border-width:.9rem;
+	margin-top:-.6rem
 }
 
 .docuK.bright .bubbleRef>.arrow {
@@ -1252,11 +1237,11 @@ img {
 	z-index:20000;
 	position:absolute;
 	display:inline-block;
-	left:.3em;
-	width:1.8em;
-	height:1.8em;
+	left:.3rem;
+	width:1.8rem;
+	height:1.8rem;
 	text-align:center;
-	margin-top:-1.1em;
+	margin-top:-1.1rem;
 	cursor:pointer;
 	border:2px rgb(80, 80, 80) solid;
 	background-color:rgb(30, 30, 30);
@@ -1266,7 +1251,7 @@ img {
 .docuK .bubbleRef .exit>svg {
 	width:100%;
 	height:100%;
-	font-size:1.8em;
+	font-size:1rem;
 	line-height:1.0
 }
 
@@ -1291,8 +1276,8 @@ img {
 	display:inline-block;
 	top:0;
 	right:0;
-	width:3em;
-	height:3em;
+	width:3rem;
+	height:3rem;
 	line-height:1.0;
 	text-align:center;
 	cursor:pointer;
@@ -1302,15 +1287,15 @@ img {
 }
 
 .fs-container .exit {
-	width:1.8em;
-	height:1.8em
+	width:1.8rem;
+	height:1.8rem
 }
 
 .docuK-log.exit {
 	position:fixed;
-	font-size:2em;
-	width:2em;
-	height:2em;
+	font-size:2rem;
+	width:2rem;
+	height:2rem;
 	top:auto;
 	bottom:250px
 }
@@ -1318,7 +1303,7 @@ img {
 .exit>svg {
 	width:100%;
 	height:100%;
-	font-size:3em;
+	font-size:3rem;
 	line-height:1.0
 }
 
@@ -1353,14 +1338,14 @@ img {
 }
 
 .docuK ol.refs>li {
-	margin:.3em 0 .5em 2em
+	margin:.3rem 0 .5rem 2rem
 }
 
 .docuK ol.refs>li:before {
 	content:'[' counter(item, decimal-leading-zero) ']';
 	counter-increment:item;
-	margin-left:-2em;
-	margin-right:.5em
+	margin-left:-2rem;
+	margin-right:.5rem
 }
 
 .docuK ol.refs>li>.refN {
@@ -1368,14 +1353,14 @@ img {
 }
 
 .docuK ol.refs>.subsec {
-	margin:1.5em 0 0 0
+	margin:1.5rem 0 0 0
 }
 
 .cmt,
 .bcf,
 .access {
-	padding:.5em;
-	margin:0 0 1.3em;
+	padding:.5rem;
+	margin:0 0 1.3rem;
 	background-color:rgb(15, 15, 15);
 	color:white
 }
@@ -1388,20 +1373,20 @@ img {
 }
 
 .cmt {
-	border-left:.5em solid rgb(70, 0, 70)
+	border-left:.5rem solid rgb(70, 0, 70)
 }
 
 .bcf {
-	border-left:.5em solid rgb(0, 70, 70)
+	border-left:.5rem solid rgb(0, 70, 70)
 }
 
 .access {
-	border-left:.5em solid rgb(70, 70, 0)
+	border-left:.5rem solid rgb(70, 70, 0)
 }
 
 .cmt>.p:last-child,
 .docuK .bcf>.p:last-child {
-	padding-bottom:.2em
+	padding-bottom:.2rem
 }
 
 
@@ -1421,11 +1406,11 @@ code {
 
 pre {
 	font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
-	font-size:.8em;
+	font-size:.9rem;
 	line-height:1.5;
 	display:block;
-	margin:.6em 0 2em;
-	padding:.5em;
+	margin:.6rem 0 2rem;
+	padding:.5rem;
 	border:1px solid white;
 	max-height:none;
 	overflow-y:scroll
@@ -1436,12 +1421,12 @@ pre.scrollable {
 }
 
 code {
-	font-family:monospace;
-	font-size:.9em;
-	padding:.2em;
+	font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
+	font-size:.9rem;
+	padding:.2rem;
 	display:inline;
 	border:2px solid rgb(200, 150, 150);
-	border-radius:.2em;
+	border-radius:.2rem;
 	background-color:rgb(30, 30, 30)
 }
 
@@ -1450,7 +1435,7 @@ code {
 }
 
 pre code {
-	font-size:1em;
+	font-size:.9rem;
 	padding:0;
 	border-width:0;
 	background:inherit
@@ -1471,7 +1456,7 @@ code.prettyprint {
 
 .preC {
 	position:relative;
-	margin:.5em 0 2em
+	margin:.5rem 0 2rem
 }
 
 .preC pre {
@@ -1480,8 +1465,8 @@ code.prettyprint {
 }
 
 .preC .preSSE {
-	font-size:.75em;
-	border-left:3.2em rgb(80, 0, 0) solid
+	font-size:.75rem;
+	border-left:3.2rem rgb(80, 0, 0) solid
 }
 
 .preC .preSS {
@@ -1490,7 +1475,7 @@ code.prettyprint {
 	left:0;
 	top:0;
 	bottom:0;
-	width:2.5em;
+	width:2.5rem;
 	cursor:pointer
 }
 
@@ -1500,13 +1485,13 @@ code.prettyprint {
 pre ol.linenums {
 	margin:0;
 	color:#AEBEAE;
-	padding-left:3em
+	padding-left:3rem
 }
 
 pre.prettyprint li {
 	margin:0;
 	padding:0;
-	min-height:1.5em
+	min-height:1.5rem
 }
 
 li.L0,
@@ -1634,11 +1619,9 @@ code .dec {
 /* decimal - blue */
 
 .docuK .change-docuK-style {
-	font-size:12px;
-	line-height:1.6;
 	text-align:right;
-	margin-top:1.5em;
-	padding:.5em;
+	margin-top:1.5rem;
+	padding:.5rem;
 	color:white;
 	background-color:black
 }
@@ -1681,7 +1664,7 @@ div.comments form div.comment-form textarea {
 }
 
 .comments .comment-list pre.prettyprint {
-	font-size:.9em
+	font-size:.9rem
 }
 
 .comments .comment-list pre.prettyprint li {
@@ -1691,12 +1674,12 @@ div.comments form div.comment-form textarea {
 #disqus_thread {
 	background-color:black;
 	max-width:1000px;
-	margin:2em auto;
-	padding:.2em .5em
+	margin:2rem auto;
+	padding:.2rem .5rem
 }
 
 #page-views-chart {
-	font-size:9px
+	font-size:.7rem
 }
 
 rect.column {
@@ -1712,7 +1695,7 @@ line.bar {
 
 text.tick {
 	fill:#c8c8c8;
-	font-size:.8em
+	font-size:.8rem
 }
 
 text.tick.saturday {
@@ -1725,12 +1708,12 @@ text.tick.sunday {
 
 text.page-views {
 	fill:#6495ed;
-	font-size:.7em
+	font-size:.7rem
 }
 
 text.now-local {
 	fill:#98fb98;
-	font-size:1.1em
+	font-size:1.1rem
 }
 
 @media all and (min-width:400px) {
@@ -1742,7 +1725,7 @@ text.now-local {
 		padding-bottom:209%;
 	}
 	#page-views-chart {
-		font-size:9.5px
+		font-size:.7rem
 	}
 }
 
@@ -1763,10 +1746,10 @@ text.now-local {
 	}
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
-		font-size:1.5em
+		font-size:1rem
 	}
 	#page-views-chart {
-		font-size:10px
+		font-size:.8rem
 	}
 }
 
@@ -1779,21 +1762,21 @@ text.now-local {
 	}
 	.docuK .deviceInfo,
 	.docuK .promoting-docuK {
-		margin-left:20em
+		margin-left:20rem
 	}
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
-		font-size:1.6em
+		font-size:1rem
 	}
 	#page-views-chart {
-		font-size:11px
+		font-size:.8rem
 	}
 }
 
 @media all and (min-width:700px) {
 	.rC.fixed {
 		width:50%;
-		border-right:.15em solid white
+		border-right:.15rem solid white
 	}
 	.rC.instagram.fixed,
 	.rC.eveElse.fixed,
@@ -1807,20 +1790,20 @@ text.now-local {
 	}
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
-		font-size:1.7em
+		font-size:1.1rem
 	}
 	#page-views-chart {
-		font-size:12px
+		font-size:.9rem
 	}
 }
 
 @media all and (min-width:800px) {
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
-		font-size:1.8em
+		font-size:1.2rem
 	}
 	#page-views-chart {
-		font-size:13px
+		font-size:1rem
 	}
 }
 
@@ -1830,10 +1813,10 @@ text.now-local {
 	}
 	.docuK #floating-key,
 	.docuK #toggle-floating-key {
-		font-size:1.9em
+		font-size:1.3rem
 	}
 	#page-views-chart {
-		font-size:15px
+		font-size:1.1rem
 	}
 	.rC.imgur>.rSC {
 		padding-bottom:150%
