@@ -2222,8 +2222,8 @@ m.HideBR = function (elem: HTMLElement): void {
 // Changing Styles of docuK
 m.mode = "Bright";
 m.fontFamily = "Noto Sans KR";
-m.fontSize = 10;
-m.lineHeight10 = 16;
+m.fontSize = 16;
+m.lineHeight10 = 15;
 m.defaultStyles = {
 	mode: m.mode,
 	fontFamily: m.fontFamily,
@@ -2236,7 +2236,7 @@ m.printDeviceInfo = function (): void {
 		let referrer = document.referrer;
 		let referrerHTML = referrer ? `<a target="_blank" href="${referrer}">${m.escapeOnlyTag(decodeURIComponent(referrer))}</a>` : `Empty`;
 		m.$deviceInfo.html(
-			`Mode: ${m.mode}; Font: ${m.fontFamily}; font-size: ${(m.fontSize * 1.8).toFixed(1)}px (${m.fontSize.toFixed(1)}); line-height: ${(m.lineHeight10 / 10).toFixed(1)};<br/>
+			`Mode: ${m.mode}; Font: ${m.fontFamily}; font-size: ${m.fontSize}px; line-height: ${(m.lineHeight10 / 10).toFixed(1)};<br/>
 width: ${m.browserWidth}, height: ${window.innerHeight}, version: ${m.version0}${m.version1}<br/>
 ${m.canonicalURI ? `Canonical URI: <a target="_blank" href="${m.canonicalURI}">${m.escapeOnlyTag(decodeURIComponent(m.canonicalURI))}</a><br/>` : ""}
 ${m.plink ? `dg:plink (Document Global Permanent Link): <a target="_blank" href="${m.plink}">${m.plink}</a><br/>` : ""}
@@ -2256,9 +2256,13 @@ m.resetStyle = function (): void {
 };
 m.Cmode = function (modeI: string): boolean {
 	if (modeI === "Dark") {
+		m.$html.removeClass("bright");
+		m.$html.addClass("dark");
 		m.$docuK.removeClass("bright");
 		m.$docuK.addClass("dark");
 	} else if (modeI === "Bright") {
+		m.$html.removeClass("dark");
+		m.$html.addClass("bright");
 		m.$docuK.removeClass("dark");
 		m.$docuK.addClass("bright");
 	} else {
@@ -2274,6 +2278,7 @@ m.Cmode = function (modeI: string): boolean {
 	return true;
 };
 m.CfontFamily = function (font: string): boolean {
+	m.$html.css({ fontFamily: font });
 	m.$docuK.css({ fontFamily: font });
 	m.fontFamily = font;
 	m.printDeviceInfo();
@@ -2287,12 +2292,12 @@ m.CfontFamily = function (font: string): boolean {
 m.CfontSize = function (increment: number): boolean {
 	if (increment.constructor === Number && !isNaN(Number(increment))) {
 		m.fontSize += increment;
-		if (m.fontSize < 5) {
-			m.fontSize = 5;
-		} else if (m.fontSize > 33) {
-			m.fontSize = 33;
+		if (m.fontSize < 10) {
+			m.fontSize = 10;
+		} else if (m.fontSize > 25) {
+			m.fontSize = 25;
 		}
-		m.$docuK.css({ "font-size": m.fontSize.toFixed(1) + "px" });
+		m.$html.css({ "font-size": m.fontSize + "px" });
 		m.printDeviceInfo();
 		if (m.fontSize === m.defaultStyles.fontSize) {
 			m.docCookies.removeItem("m.fontSize", "/");
@@ -2313,7 +2318,9 @@ m.ClineHeight = function (increment: number): boolean {
 			m.lineHeight10 = 25;
 			return false;
 		}
-		m.$docuK.attr("style", `line-height:${(m.lineHeight10 / 10).toFixed(1)} !important`);
+		const nLineHeight = Number((m.lineHeight10 / 10).toFixed(1));
+		m.$html.css("line-height", nLineHeight);
+		m.$docuK.css("line-height", nLineHeight);
 		m.printDeviceInfo();
 		if (m.lineHeight10 === m.defaultStyles.lineHeight10) {
 			m.docCookies.removeItem("m.lineHeight10", "/");
@@ -2327,7 +2334,7 @@ m.ClineHeight = function (increment: number): boolean {
 m.$window.on("resize.deviceInfo", function () {
 	if (window.innerWidth !== m.browserWidth) {
 		m.browserWidth = window.innerWidth;
-		m.fontSize = parseInt(m.$docuK.css("font-size")); // font-size in px. (Default: 10px)
+		m.fontSize = parseInt(m.$docuK.css("font-size")); // font-size in px.
 		m.printDeviceInfo();
 	}
 });
@@ -2564,7 +2571,7 @@ m.docuKProcess = function docuK(docuKI: number): void {
 <form><input id="button${docuKI}-Dark" type="radio" name="mode" value="Dark" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Dark" style="display:inline-block; background:black; color:white; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Dark</label>
 </input><input id="button${docuKI}-Bright" type="radio" name="mode" value="Bright" onclick="k.Cmode(this.value)"><label for="button${docuKI}-Bright" style="display:inline-block; background:white; color:black; border:2px solid rgb(150,150,150); padding:0.1em 0.2em">Bright</label></input></form>
 <form><input id="input${docuKI}-font-family" class="bold" type="text" name="font" value="Noto Sans KR" style="font-size:1.2em; width:8em; height:1.8em; text-align:center" onchange="m.CfontFamily(this.value)"></input></form>
-<form><button type="button" onclick="k.CfontSize(-0.1)" style="font-size:1em">A</button><button type="button" onclick="k.CfontSize(0.1)" style="font-size:1.4em">A</button></form>
+<form><button type="button" onclick="k.CfontSize(-1)" style="font-size:1em">A</button><button type="button" onclick="k.CfontSize(1)" style="font-size:1.4em">A</button></form>
 <form><button type="button" onclick="k.ClineHeight(-1)" style="font-size:1em">=</button><button type="button" onclick="k.ClineHeight(1)" style="font-size:1.6em">=</button></form>
 <form><button class="button-log" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})" style="width:auto; padding:0 .5em">DocuK Log</button></form>
 <form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="font:inherit; width:auto; padding:0 .5em">Fuzzy search</button></form>
