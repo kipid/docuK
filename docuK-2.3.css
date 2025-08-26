@@ -630,28 +630,43 @@ textarea.multi-line {
 	margin-left:1rem
 }
 
-.docuK>.sec>.toc {
-	font-size:.8rem;
+.docuK .toc {
 	padding:0.2rem 0.2rem 1rem 0.2rem;
 	text-indent:0.5rem
 }
 
-.docuK>.sec>.toc>h2 {
+.docuK .toc>h2 {
+	font-size:1.1em;
 	margin-left:0;
 	margin-top:.5rem
 }
 
-.docuK>.sec>.toc>h3 {
+.docuK .toc>h3 {
+	font-size:1em;
 	margin-left:1rem
 }
 
-.docuK>.sec>.toc>h4 {
+.docuK .toc>h4 {
 	margin-left:2rem
 }
 
-.docuK>.sec>.toc h2,
-.docuK>.sec>.toc h3,
-.docuK>.sec>.toc h4 {
+.docuK .toc>h5 {
+	margin-left:3rem;
+}
+
+.docuK .toc>h6 {
+	margin-left:4rem;
+}
+
+.docuK .toc>h4,
+.docuK .toc>h5,
+.docuK .toc>h6 {
+	font-size:.9em;
+}
+
+.docuK .toc h2,
+.docuK .toc h3,
+.docuK .toc h4 {
 	padding:.2rem 0
 }
 
