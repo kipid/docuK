@@ -2498,21 +2498,17 @@ m.toggleAMess = function (elem: HTMLElement): void {
 	let orderElem = $elem.index(".order");
 	let orderLastElem = $(".order").last().index(".order");
 	let $collection = $(".order");
-	if ($collection.is(":visible")) {
+	if ($collection.not(".button").is(":visible")) {
 		if (orderElem === orderLastElem) {
 			let sHBefore = document.documentElement.scrollHeight;
-			$collection.hide();
+			$collection.not(".button").hide();
 			let sHAfter = document.documentElement.scrollHeight;
 			m.$window.scrollTop(wSTBefore - sHBefore + sHAfter);
 		} else {
-			let outerHeightBefore = 0;
-			$collection.each(function () {
-				if ($(this).index(".order") < orderElem) {
-					outerHeightBefore += $(this).outerHeight(true);
-				}
-			});
-			$collection.hide();
-			m.$window.scrollTop(wSTBefore - outerHeightBefore);
+			let elemTop = $elem.offset().top;
+			$collection.not(".button").hide();
+			let elemTopAfter = $elem.offset().top;
+			m.$window.scrollTop(wSTBefore + elemTopAfter - elemTop);
 		}
 	} else {
 		if (orderElem === orderLastElem) {
@@ -2521,14 +2517,10 @@ m.toggleAMess = function (elem: HTMLElement): void {
 			let sHAfter = document.documentElement.scrollHeight;
 			m.$window.scrollTop(wSTBefore - sHBefore + sHAfter);
 		} else {
-			let outerHeightBefore = 0;
-			$collection.each(function () {
-				if ($(this).index(".order") < orderElem) {
-					outerHeightBefore += $(this).outerHeight(true);
-				}
-			});
+			let elemTop = $elem.offset().top;
 			$collection.show();
-			m.$window.scrollTop(wSTBefore + outerHeightBefore);
+			let elemTopAfter = $elem.offset().top;
+			m.$window.scrollTop(wSTBefore + elemTopAfter - elemTop);
 		}
 	}
 };
