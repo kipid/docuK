@@ -611,7 +611,6 @@ Log <span class="bold underline">o</span>ut
 				}
 		}
 	};
-	m.$window.off("keydown.shortkey");
 	m.$window.on("keydown.shortkey", m.processShortKey);
 	m.logPrint(`<br><br>New ShortKeys (T: Table of Contents, F: Forward Section, D: Previous Section, L: To 전체목록/[Lists]) are set.`);
 
