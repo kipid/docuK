@@ -352,7 +352,7 @@ textarea {
 
 .fs-container {
 	position:fixed;
-	font-size:1.2rem;
+	font-size:1rem;
 	left:0;
 	top:0;
 	z-index:10010;
@@ -409,7 +409,7 @@ textarea {
 	min-height:2rem;
 	max-height:15rem;
 	overflow-y:auto;
-	border:.15rem gray solid;
+	border:2px gray solid;
 	background-color:rgb(20, 20, 20)
 }
 
@@ -442,7 +442,7 @@ textarea {
 }
 
 .fs-list .list-item.selected {
-	border:.15rem solid rgb(210, 150, 150)
+	border:2px solid rgb(210, 150, 150)
 }
 
 .fs-list .list-item.deleted {
@@ -836,16 +836,6 @@ textarea.multi-line {
 	color:rgb(150, 150, 0)
 }
 
-.docuK .change-docuK-style form button.enabled {
-	background-color:rgb(50, 140, 80);
-	border:2px solid #a37070
-}
-
-.docuK.bright .change-docuK-style form button.enabled {
-	background-color:rgb(120, 210, 150);
-	border:2px solid #f3a0a0
-}
-
 .docuK a.tJump {
 	display:inline-block;
 	font-size:.6rem;
@@ -1019,7 +1009,7 @@ img {
 	margin:0;
 	padding:1px;
 	background-color:black;
-	border-bottom:.15rem solid white
+	border-bottom:2px solid white
 }
 
 .bright .rC.fixed {
@@ -1638,10 +1628,23 @@ code .dec {
 
 /* decimal - blue */
 
+.docuK .change-docuK-style form button.enabled {
+	background-color:rgb(50, 140, 80);
+	border:2px solid #a37070
+}
+
+.docuK.bright .change-docuK-style form button.enabled {
+	background-color:rgb(120, 210, 150);
+	border:2px solid #f3a0a0
+}
+
 .docuK .change-docuK-style {
-	text-align:right;
-	margin-top:1.5rem;
-	padding:.5rem;
+	display:flex;
+	flex-wrap:wrap;
+	align-items:center;
+	justify-content:end;
+	margin-top:25px;
+	padding:0;
 	color:white;
 	background-color:black
 }
@@ -1652,12 +1655,13 @@ code .dec {
 }
 
 .docuK .change-docuK-style form {
-	vertical-align:middle;
-	text-indent:0;
-	display:inline-block;
+	font-size:16px;
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
 	border:2px gray solid;
 	padding:2px;
-	margin:0
+	margin-left:5px
 }
 
 .docuK .change-docuK-style form * {
@@ -1668,9 +1672,9 @@ code .dec {
 }
 
 .docuK .change-docuK-style form button {
-	width:29px;
-	height:25px;
-	padding:0
+	width:fit-content;
+	height:auto;
+	padding:2px
 }
 
 .docuK img[delayed-src] {
@@ -1796,7 +1800,7 @@ text.now-local {
 @media all and (min-width:700px) {
 	.rC.fixed {
 		width:50%;
-		border-right:.15rem solid white
+		border-right:2px solid white
 	}
 	.rC.instagram.fixed,
 	.rC.eveElse.fixed,
