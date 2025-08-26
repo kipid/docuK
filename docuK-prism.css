@@ -13,9 +13,9 @@ pre[class*="language-"] {
 	color:white;
 	background:none;
 	font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
-	font-size:1em;
+	font-size:1rem;
 	text-align:left;
-	text-shadow:0 -.1em .2em black;
+	text-shadow:0 -.1rem .2rem black;
 	white-space:pre-wrap;
 	word-spacing:normal;
 	word-break:normal;
@@ -39,13 +39,13 @@ pre[class*="language-"],
 /* Code blocks */
 
 pre[class*="language-"] {
-	border-radius:.5em;
-	border:.3em solid hsl(0, 0%, 33%);
+	border-radius:.5rem;
+	border:.3rem solid hsl(0, 0%, 33%);
 	/* #282A2B */
-	box-shadow:1px 1px .5em black inset;
-	margin:.5em 0;
+	box-shadow:1px 1px .5rem black inset;
+	margin:.5rem 0;
 	overflow:auto;
-	padding:1em
+	padding:1rem
 }
 
 pre[class*="language-"]::-moz-selection {
@@ -85,11 +85,11 @@ code[class*="language-"] ::selection {
 /* Inline code */
 
 :not(pre)>code[class*="language-"] {
-	border-radius:.3em;
-	border:.13em solid hsl(0, 0%, 33%);
+	border-radius:.3rem;
+	border:.13rem solid hsl(0, 0%, 33%);
 	/* #545454 */
-	box-shadow:1px 1px .3em -.1em black inset;
-	padding:.15em .2em .05em;
+	box-shadow:1px 1px .3rem -.1rem black inset;
+	padding:.15rem .2rem .05rem;
 	white-space:normal
 }
 
@@ -193,7 +193,7 @@ code[class*="language-"] ::selection {
 	/* #545454 */
 	border-top:1px dashed hsl(0, 0%, 33%);
 	/* #545454 */
-	margin-top:0.75em;
+	margin-top:0.75rem;
 	/* Same as .prism's padding-top */
 	z-index:0
 }
@@ -208,7 +208,7 @@ code[class*="language-"] ::selection {
 
 pre[class*="language-"].line-numbers {
 	position:relative;
-	padding-left:3.8em;
+	padding-left:3.8rem;
 	counter-reset:linenumber
 }
 
@@ -221,9 +221,9 @@ pre[class*="language-"].line-numbers>code {
 	position:absolute;
 	pointer-events:none;
 	top:0;
-	font-size:100%;
-	left:-3.8em;
-	width:3em;
+	font-size:1rem;
+	left:-3.8rem;
+	width:3rem;
 	color:gray;
 	/* works for line-numbers below 1000 lines */
 	letter-spacing:-1px;
@@ -240,7 +240,7 @@ pre[class*="language-"].line-numbers>code {
 	color:#999;
 	background-color:black;
 	display:block;
-	padding-right:0.8em;
+	padding-right:0.8rem;
 	text-align:right
 }
 
@@ -250,7 +250,7 @@ pre[class*="language-"].line-numbers>code {
 		color:black;
 		background:none;
 		font-family:"Nanum Gothic Coding", "D2 Coding", Consolas, monospace;
-		font-size:1em;
+		font-size:1rem;
 		text-align:left;
 		white-space:pre-wrap;
 		word-spacing:normal;
@@ -268,7 +268,7 @@ pre[class*="language-"].line-numbers>code {
 	/* Code blocks */
 	pre[class*="language-"] {
 		position:relative;
-		margin:.5em 0;
+		margin:.5rem 0;
 		overflow:visible;
 		padding:1px
 	}
@@ -279,7 +279,7 @@ pre[class*="language-"].line-numbers>code {
 		box-shadow:-1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
 		background-color:#fdfdfd;
 		background-image:linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
-		background-size:3em 3em;
+		background-size:3rem 3rem;
 		background-origin:content-box;
 		background-attachment:local;
 		user-select:text;
@@ -291,7 +291,7 @@ pre[class*="language-"].line-numbers>code {
 	code[class*="language-"] {
 		max-height:inherit;
 		height:inherit;
-		padding:0 1em;
+		padding:0 1rem;
 		display:block;
 		overflow:auto;
 		user-select:text;
@@ -307,13 +307,13 @@ pre[class*="language-"].line-numbers>code {
 		-webkit-box-sizing:border-box;
 		-moz-box-sizing:border-box;
 		box-sizing:border-box;
-		margin-bottom:1em
+		margin-bottom:1rem
 	}
 	/* Inline code */
 	 :not(pre)>code[class*="language-"] {
 		position:relative;
-		padding:.2em;
-		border-radius:0.3em;
+		padding:.2rem;
+		border-radius:0.3rem;
 		color:#c92c2c;
 		border:1px solid rgba(0, 0, 0, 0.1);
 		display:inline;
@@ -324,11 +324,11 @@ pre[class*="language-"].line-numbers>code {
 		content:'';
 		display:block;
 		position:absolute;
-		bottom:0.75em;
-		left:0.18em;
+		bottom:0.75rem;
+		left:0.18rem;
 		width:40%;
 		height:20%;
-		max-height:13em;
+		max-height:13rem;
 		box-shadow:0px 13px 8px #979797;
 		-webkit-transform:rotate(-2deg);
 		-moz-transform:rotate(-2deg);
@@ -338,7 +338,7 @@ pre[class*="language-"].line-numbers>code {
 		pointer-events:none
 	}
 	pre[class*="language-"]:after {
-		right:0.75em;
+		right:0.75rem;
 		left:auto;
 		-webkit-transform:rotate(2deg);
 		-moz-transform:rotate(2deg);
@@ -424,7 +424,7 @@ pre[class*="language-"].line-numbers>code {
 		padding-left:0
 	}
 	pre[class*="language-"].line-numbers.line-numbers code {
-		padding-left:3.8em
+		padding-left:3.8rem
 	}
 	pre[class*="language-"].line-numbers.line-numbers .line-numbers-rows {
 		left:0
@@ -437,14 +437,14 @@ pre[class*="language-"].line-numbers>code {
 	}
 	pre[data-line] code {
 		position:relative;
-		padding-left:4em
+		padding-left:4rem
 	}
 	pre .line-highlight {
 		margin-top:0
 	}
 	pre[class*="language-"].line-numbers {
 		position:relative;
-		padding-left:3.8em;
+		padding-left:3.8rem;
 		counter-reset:linenumber
 	}
 	pre[class*="language-"].line-numbers>code {
@@ -455,9 +455,9 @@ pre[class*="language-"].line-numbers>code {
 		position:absolute;
 		pointer-events:none;
 		top:0;
-		font-size:100%;
-		left:-3.8em;
-		width:3em;
+		font-size:1rem;
+		left:-3.8rem;
+		width:3rem;
 		color:gray;
 		/* works for line-numbers below 1000 lines */
 		letter-spacing:-1px;
@@ -472,7 +472,7 @@ pre[class*="language-"].line-numbers>code {
 		color:#999;
 		background-color:white;
 		display:block;
-		padding-right:0.8em;
+		padding-right:0.8rem;
 		text-align:right
 	}
 }
