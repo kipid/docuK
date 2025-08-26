@@ -2777,5 +2777,175 @@ m.docuKProcess = function docuK(docuKI: number): void {
 	m.logPrint(`<br/><br/>&lt;cite&gt; and &lt;refer&gt; tags are rendered to show bubble reference.`);
 
 	$docuKI.addClass("rendered");
+
+	m.processShortKey = function (event: any) {
+		if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+		switch (event.target && event.target.nodeName) {
+			case "INPUT":
+			case "SELECT":
+			case "TEXTAREA":
+				return;
+			case "DIV":
+				if ($(event.target).hasClass("tt-cmt")) {
+					return;
+				}
+		}
+		let scrollTop: number;
+		let i: number, k: number;
+		switch (event.code) {
+			case "KeyQ": // To manage
+				window.location.href = "/manage";
+				break;
+			case "KeyA": // Toggle a mess
+				$(".toggle-a-mess.order").eq(0).trigger("click");
+				break;
+			case "KeyE": // Expand/Hide floating keys
+				m.toggleFK();
+				break;
+			case "KeyG":
+				event.preventDefault();
+				if (window.$fuzzy_search_container.is(":visible")) {
+					window.$fuzzy_search_container.hide();
+					window.$out_focus.trigger("focus");
+					window.$button_Go.removeClass("enabled");
+					m.goOn = false;
+					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+				} else {
+					window.$fuzzy_search_container.show();
+					window.$fuzzy_search.trigger("focus");
+					window.$button_Go.addClass("enabled");
+					m.goOn = true;
+					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+				}
+				break;
+			case "KeyK":
+				if (m.$log.is(":visible")) {
+					m.$logAll.hide();
+					window.$out_focus.trigger("focus");
+					window.$button_log.removeClass("enabled");
+					m.logOn = false;
+					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+				} else {
+					m.$logAll.show();
+					window.$button_log.addClass("enabled");
+					m.logOn = true;
+					window.history.pushState({ goOn: m.goOn, logOn: m.logOn }, "");
+				}
+				break;
+			case "KeyF":
+			case "KeyD":
+				scrollTop = m.$window.scrollTop();
+				k = m.fdList.length;
+				let $hI;
+
+				if (event.code === "KeyF") {
+					scrollTop += 15;
+					for (i = 0; i < k; i++) {
+						$hI = $(m.fdList[i]);
+						if ($hI.is(":visible") && scrollTop < $hI.offset().top) {
+							break;
+						}
+					}
+					if (i === k) {
+						return;
+					}
+				} else {
+					scrollTop -= 15;
+					for (i = k - 1; i >= 0; i--) {
+						$hI = $(m.fdList[i]);
+						if ($hI.is(":visible") && scrollTop > $hI.offset().top) {
+							break;
+						}
+					}
+					if (i === -1) {
+						return;
+					}
+				}
+				let $hIWithId = $hI.find("[id]").addBack("[id]");
+				let hIID = $hIWithId.eq(0).attr("id");
+				if (hIID) {
+					window.location.hash = `#${hIID}`;
+				} else {
+					window.location.hash = "";
+				}
+				m.$window.scrollTop($hI.offset().top);
+				break;
+			case "KeyT":
+				scrollTop = m.$window.scrollTop();
+				k = m.$tocs.length;
+				let $tocI: JQuery<HTMLElement>;
+				scrollTop -= 10;
+				for (i = k - 1; i >= 0; i--) {
+					$tocI = m.$tocs.eq(i);
+					if ($tocI.is(":visible") && scrollTop > $tocI.offset().top) {
+						break;
+					}
+				}
+				if (i === -1) {
+					$tocI = m.$tocs.eq(k - 1);
+				}
+				let $tocIWithId = $tocI.find("[id]").addBack("[id]");
+				let tocIID = $tocIWithId.eq(0).attr("id");
+				if (tocIID) {
+					window.location.hash = `#${tocIID}`;
+				} else {
+					window.location.hash = "";
+				}
+				m.$window.scrollTop($tocI.offset().top);
+				break;
+			case "KeyR":
+				scrollTop = m.$window.scrollTop();
+				k = m.$rras.length;
+				let $rraI: JQuery<HTMLElement>;
+				scrollTop -= 10;
+				for (i = k - 1; i >= 0; i--) {
+					$rraI = m.$rras.eq(i);
+					if ($rraI.is(":visible") && scrollTop > $rraI.offset().top) {
+						break;
+					}
+				}
+				if (i === -1) {
+					$rraI = m.$rras.eq(k - 1);
+				}
+				let $rraIWithId = $rraI.find("[id]").addBack("[id]");
+				let rraIID = $rraIWithId.eq(0).attr("id");
+				if (rraIID) {
+					window.location.hash = `#${rraIID}`;
+				} else {
+					window.location.hash = "";
+				}
+				m.$window.scrollTop($rraI.offset().top);
+				break;
+			case "KeyL":
+				if (window.location.pathname === "/entry/Lists") {
+					window.location.pathname = "/category";
+				} else {
+					window.location.pathname = "/entry/Lists";
+				}
+				break;
+			case "KeyZ":
+				if ($('div[data-tistory-react-app="Comment"]').length) m.$window.scrollTop($('div[data-tistory-react-app="Comment"]').offset().top);
+				break;
+			case "KeyN":
+				m.handleComments();
+				break;
+			case "KeyX":
+				if ($("#disqus_thread").length) m.$window.scrollTop($("#disqus_thread").offset().top);
+				break;
+			case "KeyI":
+				m.docCookies.removeItem("REACTION_GUEST", "/");
+				window.location.href = `https://www.tistory.com/auth/login?redirectUrl=${encodeURIComponent(window.location.href)}&isPopup=true`;
+				break;
+			case "KeyO":
+				window.location.href = "https://www.tistory.com/auth/logout";
+				break;
+			default:
+				if (window.processShortcut !== undefined) {
+					window.processShortcut(event);
+				}
+		}
+	};
+	m.$window.on("keydown.shortkey", m.processShortKey);
+	m.$window.trigger({ type: "keydown", code: "KeyK" } as any);
 };
 })(window.k, jQuery);
