@@ -153,10 +153,10 @@ m.$document.ready(function () {
 	m.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
 <div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> mess</div>
-<div class="button button-Go" style="width:4.5em; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})">
+<div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})">
 <span class="bold underline">G</span>o (FS)
 </div>
-<div class="button button-ToR" style="width:4.5em" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})">
+<div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})">
 <span class="bold underline">T</span>ofC
 </div>
 <div class="button button-log" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})">
@@ -168,16 +168,16 @@ Backwar<span class="bold underline">d</span>
 <div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyF'})">
 <span class="bold underline">F</span>orward
 </div>
-<div class="button darkgoldenrod" style="width:4.5em; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})">
+<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})">
 <span class="bold underline">R</span>RA
 </div>
-<div class="button button-list" style="width:4.5em" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">
+<div class="button button-list" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">
 <span class="bold underline">L</span>ists
 </div>
-<div class="button darkgoldenrod" style="width:4.5em; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">
+<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">
 Cmt<span class="bold underline">Z</span>
 </div>
-<div class="button darkgoldenrod" style="width:4.5em" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">
+<div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">
 Cmt<span class="bold underline">X</span>
 </div>
 <div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">
@@ -340,7 +340,7 @@ Log <span class="bold underline">o</span>ut
 		e?.preventDefault();
 		e?.stopPropagation();
 		await m.getBlogStat();
-		let countChartHTML = `<div class="rC" style="margin:1em 0"><div class="rSC"><div><svg width="100%" height="100%">`;
+		let countChartHTML = `<div class="rC" style="margin:1rem 0"><div class="rSC"><div><svg width="100%" height="100%">`;
 		let leftPadding = 3.0;
 		let rightPadding = 3.0;
 		let topPadding = 7.0;
@@ -384,9 +384,9 @@ Log <span class="bold underline">o</span>ut
 			for (let i = 0; i < pageViewsOfADay.length; i++) {
 				countChartHTML += `<line class="bar" x1="${pageViewsOfADay[i].tick}%" y1="${bottomLine - 1.5}%" x2="${pageViewsOfADay[i].tick}%" y2="${bottomLine + 1.0}%"/>
 <text class="tick${pageViewsOfADay[i].weekday === "토" ? " saturday" : pageViewsOfADay[i].weekday === "일" ? " sunday" : ""}" x="${pageViewsOfADay[i].tick}%" y="${bottomLine}%">
-<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0em">${pageViewsOfADay[i].month}</tspan>
-<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1em">/${pageViewsOfADay[i].day}</tspan>
-<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6em">${pageViewsOfADay[i].weekday}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="2.0rem">${pageViewsOfADay[i].month}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.1rem">/${pageViewsOfADay[i].day}</tspan>
+<tspan x="${pageViewsOfADay[i].tick}%" text-anchor="middle" dy="1.6rem">${pageViewsOfADay[i].weekday}</tspan>
 </text>`;
 			}
 			countChartHTML += `<text class="now-local" x="100%" y="100%"><tspan x="100%" text-anchor="end" y="99%" dominant-baseline="text-bottom">${new Date().toLocaleString()}</tspan></text>`;
