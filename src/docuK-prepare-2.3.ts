@@ -2497,7 +2497,7 @@ m.toggleAMess = function (elem: HTMLElement): void {
 	let wSTBefore = m.$window.scrollTop();
 	let orderElem = $elem.index(".order");
 	let orderLastElem = $(".order").last().index(".order");
-	let $collection = $(".copyright, .promoting");
+	let $collection = $(".order");
 	if ($collection.is(":visible")) {
 		if (orderElem === orderLastElem) {
 			let sHBefore = document.documentElement.scrollHeight;
@@ -2509,8 +2509,6 @@ m.toggleAMess = function (elem: HTMLElement): void {
 			$collection.each(function () {
 				if ($(this).index(".order") < orderElem) {
 					outerHeightBefore += $(this).outerHeight(true);
-				} else {
-					return false;
 				}
 			});
 			$collection.hide();
@@ -2527,8 +2525,6 @@ m.toggleAMess = function (elem: HTMLElement): void {
 			$collection.each(function () {
 				if ($(this).index(".order") < orderElem) {
 					outerHeightBefore += $(this).outerHeight(true);
-				} else {
-					return false;
 				}
 			});
 			$collection.show();
