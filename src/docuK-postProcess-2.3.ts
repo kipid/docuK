@@ -811,33 +811,42 @@ svg: {
 		m.logPrint(`<br>Prism-line-numbers.js is loaded.`);
 
 		const codeLangMap: { [key: string]: string } = {
-			"lang-js": "prism-javascript",
-			"lang-ts": "prism-typescript",
-			"lang-html": "prism-markup",
-			"lang-css": "prism-css",
-			"lang-json": "prism-json",
-			"lang-xml": "prism-markup",
-			"lang-sql": "prism-sql",
-			"lang-sh": "prism-bash",
-			"lang-py": "prism-python",
-			"lang-java": "prism-java",
-			"lang-c": "prism-c",
-			"lang-cpp": "prism-cpp",
-			"lang-cs": "prism-csharp",
-			"lang-php": "prism-php",
-			"lang-bat": "prism-batch",
-			"lang-git": "prism-git",
-			"lang-md": "prism-markdown",
-			"lang-env": "prism-env",
+			"lang-js": "javascript",
+			"lang-ts": "typescript",
+			"lang-html": "markup",
+			"lang-css": "css",
+			"lang-json": "json",
+			"lang-xml": "markup",
+			"lang-sql": "sql",
+			"lang-sh": "bash",
+			"lang-py": "python",
+			"lang-java": "java",
+			"lang-c": "c",
+			"lang-cpp": "cpp",
+			"lang-cs": "csharp",
+			"lang-php": "php",
+			"lang-bat": "batch",
+			"lang-git": "git",
+			"lang-md": "markdown",
+			"lang-env": "env",
 		};
 		const $preAndCode = $("pre, code");
 		const langToBeLoaded: any = [];
 		$preAndCode.each((index: number, elem: HTMLElement) => {
 			let classes = elem.classList;
+			let beingLoaded: boolean = false;
 			for (let className of classes) {
 				if (codeLangMap[className] && !langToBeLoaded[className]) {
 					langToBeLoaded[className] = codeLangMap[className];
 					langToBeLoaded.push(langToBeLoaded[className]);
+					beingLoaded = true;
+				}
+			}
+			if (!beingLoaded) {
+				$(elem).addClass("lang-html");
+				if (!langToBeLoaded["lang-html"]) {
+					langToBeLoaded["lang-html"] = "html";
+					langToBeLoaded.push("html");
 				}
 			}
 		});
@@ -845,7 +854,7 @@ svg: {
 			let $script = document.createElement("script");
 			$script.id = lang;
 			$script.defer = true;
-			$script.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/${lang}.min.js`;
+			$script.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-${lang}.min.js`;
 			m.$headOrBody.append($script);
 			m.logPrint(`<br>${lang}.min.js of prism.js is loaded.`);
 		}
