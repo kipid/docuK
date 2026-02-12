@@ -808,6 +808,9 @@ svg: {
 		$prism.id = "prism-js";
 		$prism.defer = true;
 		$prism.src = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js";
+		$prism.onload = () => {
+			window?.Prism?.highlightAll?.();
+		};
 		m.$headOrBody.append($prism);
 		m.logPrint(`<br><br>Prism.js (code prettifier) is loaded.`);
 
