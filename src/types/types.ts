@@ -66,6 +66,7 @@ interface K {
 	fsToRs?: FSToRs;
 	browserWidth?: number;
 	$docuK?: JQuery<HTMLElement>;
+	$docuK_con?: JQuery<HTMLElement>;
 	getUTF8Length?: (s: string) => number;
 	getSearchVars?: (searchStr: string | null | undefined) => SearchVars;
 	heapify?: (arr: any[], key: string, sorted: number[], n: number, i: number) => void;
