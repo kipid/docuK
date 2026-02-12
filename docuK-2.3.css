@@ -308,6 +308,18 @@ codeprint.SEE {
 	word-break:break-word
 }
 
+.docuK.dark,
+.docuK-con.dark {
+	background-color:black;
+	color:white
+}
+
+.docuK.bright,
+.docuK-con.bright {
+	background-color:white;
+	color:black
+}
+
 .docuK-con div,
 .docuK div,
 .docuK form,
@@ -1200,8 +1212,8 @@ img {
 
 /* References and links */
 .docuK.bright .inRef {
-	background-color:black;
-	color:wheat
+	background-color:#fff6f6;
+	color:#b3b4f5
 }
 
 .docuK .inRef {
@@ -1225,7 +1237,7 @@ img {
 }
 
 .docuK.bright .bubbleRef>.content {
-	background-color:black
+	background-color:#fff6f6
 }
 
 .docuK .bubbleRef>.arrow {
@@ -1370,14 +1382,25 @@ img {
 .bcf,
 .access {
 	padding:.5rem;
-	margin:0 0 1.3rem;
+	margin:0 0 1.3rem
+}
+
+.docuK.dark .cmt,
+.docuK.dark .bcf,
+.docuK.dark .access,
+.docuK-con.dark .cmt,
+.docuK-con.dark .bcf,
+.docuK-con.dark .access {
 	background-color:rgb(15, 15, 15);
 	color:white
 }
 
 .docuK.bright .cmt,
 .docuK.bright .bcf,
-.docuK.bright .access {
+.docuK.bright .access,
+.docuK-con.bright .cmt,
+.docuK-con.bright .bcf,
+.docuK-con.bright .access {
 	background-color:rgb(200, 200, 200);
 	color:black
 }
