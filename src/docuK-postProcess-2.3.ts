@@ -793,6 +793,16 @@ svg: {
 		};
 		m.mathJaxPreProcess = setTimeout(m.mathJaxPreProcessDo, 2048);
 
+		$("pre")
+			.filter(function () {
+				return $(this).children("code").length === 0;
+			})
+			.each((i: number, elem: HTMLElement) => {
+				const $elem: JQuery<HTMLElement> = $(elem);
+				let classes = $elem.attr("class") ?? "";
+				$elem.html(`<code class="${classes}">${$elem.html().trim()}</code>`);
+			});
+
 		// Prism.js js script (from cdn.jsdelivr.net CDN) is added.
 		m.$headOrBody.append(`<link href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prism.css" rel="stylesheet" />`);
 
