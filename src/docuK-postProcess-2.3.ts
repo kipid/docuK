@@ -146,7 +146,7 @@ m.$document.ready(function () {
 					m.logPrint("<br><br>BlogStat is logged. " + (await m.uriRendering(resp.toString(), true, false)));
 				});
 		}
-	}, 8 * m.wait);
+	}, m.wait);
 
 	m.$title.html(m.$title.html() + ` at ${window.location.host}`);
 
