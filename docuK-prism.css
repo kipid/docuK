@@ -88,7 +88,7 @@ code[class*="language-"] ::selection {
 	border-radius:.3rem;
 	border:.13rem solid hsl(0, 0%, 33%);
 	/* #545454 */
-	box-shadow:1px 1px .3rem -.1rem black inset;
+	box-shadow:1px 1px .5rem 0px rgba(0, 0, 0, 0.3);
 	padding:.15rem .2rem .05rem;
 	white-space:normal
 }
