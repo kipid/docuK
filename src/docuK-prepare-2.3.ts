@@ -22,6 +22,7 @@ $.fn.exists = function (): boolean {
 };
 m.browserWidth = window.innerWidth;
 m.$docuK = $(".docuK");
+m.$docuK_con = $(".docuK-con");
 
 m.getUTF8Length = function (s: string): number {
 	let len = 0;
@@ -2260,11 +2261,15 @@ m.Cmode = function (modeI: string): boolean {
 		m.$html.addClass("dark");
 		m.$docuK.removeClass("bright");
 		m.$docuK.addClass("dark");
+		m.$docuK_con.removeClass("bright");
+		m.$docuK_con.addClass("dark");
 	} else if (modeI === "Bright") {
 		m.$html.removeClass("dark");
 		m.$html.addClass("bright");
 		m.$docuK.removeClass("dark");
 		m.$docuK.addClass("bright");
+		m.$docuK_con.removeClass("dark");
+		m.$docuK_con.addClass("bright");
 	} else {
 		return false;
 	}
