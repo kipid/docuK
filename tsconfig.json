@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
-		"target": "ES2022", // 출력할 JavaScript 버전
+		"target": "es2024", // 출력할 JavaScript 버전
 		"module": "ESNext", // 모듈 시스템 (브라우저에서 사용할 수 있도록 ESNext로 설정)
-		"moduleResolution": "classic", // 모듈 해석 방식
+		"moduleResolution": "bundler", // 모듈 해석 방식
 		"strict": true, // 엄격한 타입 검사
 		"noImplicitAny": true,
 		"strictNullChecks": false,
