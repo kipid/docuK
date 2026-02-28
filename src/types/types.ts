@@ -35,6 +35,7 @@ declare global {
 		delayedLoad: () => boolean;
 	}
 	interface Kakao {
+		init: (appKey: string) => void;
 		isInitialized: () => boolean;
 		Share: {
 			sendDefault: (data: {
