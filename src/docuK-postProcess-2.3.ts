@@ -870,6 +870,38 @@ svg: {
 			m.logPrint(`<br>${lang}.min.js of prism.js is loaded.`);
 		}
 
+		// Code block copy button (MutationObserver waits for Prism to finish)
+		(function () {
+			function addCopyButtons(): void {
+				$("pre.line-numbers").each(function (this: HTMLElement) {
+					const $pre = $(this);
+					if ($pre.find(".copy-btn").length) return;
+					const $btn = $('<button class="copy-btn">Copy</button>');
+					$btn.on("click", function () {
+						const text = $pre.find("code").text();
+						navigator.clipboard.writeText(text).then(function () {
+							$btn.text("Copied!").addClass("copied");
+							setTimeout(function () {
+								$btn.text("Copy").removeClass("copied");
+							}, 2000);
+						});
+					});
+					$pre.append($btn);
+				});
+			}
+			let timer: ReturnType<typeof setTimeout>;
+			const observer = new MutationObserver(function () {
+				clearTimeout(timer);
+				timer = setTimeout(function () {
+					if ($("pre.line-numbers").length) {
+						addCopyButtons();
+						observer.disconnect();
+					}
+				}, 200);
+			});
+			observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+		})();
+
 		// Closing docuK Log.
 		m.logPrint(`<br><br><span class='emph'>docuK scripts are all done. Then this log is closing in 1.0 sec.</span>`);
 		m.$window.scrollTop($(".docuK-con").eq(0).offset().top);
