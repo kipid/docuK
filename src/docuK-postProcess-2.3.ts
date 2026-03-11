@@ -878,11 +878,18 @@ svg: {
 					if ($pre.find(".copy-btn").length) return;
 					const $btn = $('<button class="copy-btn">Copy</button>');
 					$btn.on("click", function () {
-						const text = $pre.find("code").text();
+						const $code = $pre.find("code").clone();
+						$code.find(".line-numbers-rows").remove();
+						const text = $code.text();
 						navigator.clipboard.writeText(text).then(function () {
 							$btn.text("Copied!").addClass("copied");
 							setTimeout(function () {
 								$btn.text("Copy").removeClass("copied");
+							}, 2000);
+						}).catch(function () {
+							$btn.text("Failed");
+							setTimeout(function () {
+								$btn.text("Copy");
 							}, 2000);
 						});
 					});
@@ -890,11 +897,15 @@ svg: {
 				});
 			}
 			let timer: ReturnType<typeof setTimeout>;
+			const maxTimer = setTimeout(function () {
+				observer.disconnect();
+			}, 5000);
 			const observer = new MutationObserver(function () {
 				clearTimeout(timer);
 				timer = setTimeout(function () {
+					addCopyButtons();
 					if ($("pre.line-numbers").length) {
-						addCopyButtons();
+						clearTimeout(maxTimer);
 						observer.disconnect();
 					}
 				}, 200);
