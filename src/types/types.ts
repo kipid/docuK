@@ -60,6 +60,7 @@ declare global {
 interface K {
 	version0?: string;
 	version1?: string;
+	lang?: string;
 	$window?: JQuery<Window>;
 	$document?: JQuery<Document>;
 	$html?: JQuery<HTMLHtmlElement>;
