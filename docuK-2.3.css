@@ -1565,11 +1565,11 @@ pre li:nth-child(2n) {
 
 /* Code block copy button */
 
-pre.line-numbers {
+pre:has(code) {
 	position:relative
 }
 
-pre.line-numbers .copy-btn {
+pre:has(code) .copy-btn {
 	position:absolute;
 	top:4px;
 	right:4px;
@@ -1584,11 +1584,11 @@ pre.line-numbers .copy-btn {
 	transition:opacity 0.2s
 }
 
-pre.line-numbers .copy-btn:hover {
+pre:has(code) .copy-btn:hover {
 	opacity:1
 }
 
-pre.line-numbers .copy-btn.copied {
+pre:has(code) .copy-btn.copied {
 	background:#d4edda;
 	border-color:#a3d9b1
 }

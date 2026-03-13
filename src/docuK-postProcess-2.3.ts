@@ -873,7 +873,7 @@ svg: {
 		// Code block copy button (MutationObserver waits for Prism to finish)
 		(function () {
 			function addCopyButtons(): void {
-				$("pre.line-numbers").each(function (this: HTMLElement) {
+				$("pre:has(code)").each(function (this: HTMLElement) {
 					const $pre = $(this);
 					if ($pre.find(".copy-btn").length) return;
 					const $btn = $('<button class="copy-btn">Copy</button>');
@@ -904,7 +904,7 @@ svg: {
 				clearTimeout(timer);
 				timer = setTimeout(function () {
 					addCopyButtons();
-					if ($("pre.line-numbers").length) {
+					if ($("pre:has(code)").length) {
 						clearTimeout(maxTimer);
 						observer.disconnect();
 					}
