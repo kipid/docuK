@@ -16,6 +16,11 @@ for (let i = 0; i < $SEE.length; i++) {
 }
 
 m.$docuK = $(".docuK");
+m.$toTable = $("data.to-table");
+for (let i = 0; i < m.$toTable.length; i++) {
+	const $toTableI = m.$toTable.eq(i);
+	$toTableI.after(m.arrayToTableHTML(m.strToJSON($toTableI.html().trim()), $toTableI.attr("data-ratio")));
+}
 
 $("code").each((index: number, elem: HTMLElement) => {
 	const $elem = $(elem);
