@@ -5,13 +5,13 @@
 ${window.location.href}	${document.referrer}	${e.docCookies.getItem("REACTION_GUEST")}`;t.ajax({type:"POST",url:"https://recoeve.net/BlogStat",data:s,dataType:"text"}).fail(async function(n){e.logPrint("<br><br>BlogStat failed. "+await e.uriRendering(n.toString(),!0,!1))}).done(async function(n){e.logPrint("<br><br>BlogStat is logged. "+await e.uriRendering(n.toString(),!0,!1))})}},e.wait),e.$title.html(e.$title.html()+` at ${window.location.host}`),e.lang=navigator.language?.substring(0,2),e.docCookies.hasItem("lang")&&(e.lang=e.docCookies.getItem("lang")),e.docCookies.setItem("lang",e.lang,1/0,"/",!1),e.docCookies.setItem("lang",e.lang,1/0,"/","kipid.tistory.com"),e.lang==="ko"?e.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">\u25BC \uC228\uAE30\uAE30(<span class="bold underline">E</span>)</div>
 <div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> \uAD11\uACE0</div>
-<div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>)o \uAC80\uC0C9</div>
+<div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>o \uAC80\uC0C9</div>
 <div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})">\uBAA9\uCC28(<span class="bold underline">T</span>)</div>
 <div class="button button-log" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})">\uB3C4\uD050<span class="bold underline">K</span> \uB85C\uADF8</div>
 <div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyD'})">\uC704\uB85C(<span class="bold underline">D</span>)</div>
 <div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyF'})">\uC544\uB798\uB85C(<span class="bold underline">F</span>)</div>
-<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})">\uCC38\uACE0\uBB38\uD5CC(<span class="bold underline">R</span>)</div>
-<div class="button button-list" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">\uB9AC\uC2A4\uD2B8(<span class="bold underline">L</span>)</div>
+<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})">\uCC38\uACE0\uBB38\uD5CC(<span class="bold underline">R</span>)</div>
+<div class="button button-list" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">\uB9AC\uC2A4\uD2B8(<span class="bold underline">L</span>)</div>
 <div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">\uB313\uAE001(<span class="bold underline">Z</span>)</div>
 <div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">\uB313\uAE002(<span class="bold underline">X</span>)</div>
 <div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">\uB313\uAE00\uCC98\uB9AC(<span class="bold underline">N</span>)</div>
