@@ -576,12 +576,12 @@ textarea.multi-line {
 	margin-bottom:-6px
 }
 
-.docuK .SNS-bottom {
+.SNS-bottom {
 	margin:36px 0;
 	text-align:center
 }
 
-.docuK .SNS-img {
+.SNS-img {
 	display:inline-block;
 	vertical-align:middle;
 	position:relative;
@@ -595,7 +595,7 @@ textarea.multi-line {
 	cursor:pointer
 }
 
-.docuK .SNS-img:first-child {
+.SNS-img:first-child {
 	border-left:2px gray solid
 }
 
