@@ -1139,6 +1139,41 @@ m.toggleFK = function (): void {
 	m.$floating_key.toggle();
 };
 
+m.promotingKotetsuHTML = `<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
+<div class="p promoting promoting-kotetsu">
+광고 (Promoting) : <a target="_blank" href="https://dedc.imweb.me/">https://dedc.imweb.me/ :: 서울 덕은 치과</a><br/>
+서울대 치의과 대학원 우등 졸업생이고, 매우 젠틀 (Gentle) 하고 치료도 부드럽고 설명도 어린아이가 들어도 이해할 정도로 쉽게 가르쳐 주는 내 인생 최고의 치과의사 선생님. 원장님 이름은 최영섭. 내 고등학교/대학교 동창이고 별명은 코테츠. 매우 밝은 성격에 유머러스하고 착하기도 함.<br/>
+<br/>
+<div class="slider">
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-1.jpg" alt="이미지1"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-2.jpg" alt="이미지2"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-3.jpg" alt="이미지3"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-4.jpg" alt="이미지4"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-5.jpg" alt="이미지5"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-6.jpg" alt="이미지6"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-7.jpg" alt="이미지7"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-8.jpg" alt="이미지8"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-9.jpg" alt="이미지9"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-10.jpg" alt="이미지10"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-11.jpg" alt="이미지11"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-12.jpg" alt="이미지12"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-13.jpg" alt="이미지13"></div>
+<div class="item"><img src="https://kipid.s3.ap-northeast-2.amazonaws.com/%EC%B9%9C%EA%B5%AC%EB%93%A4/%EC%B5%9C%EC%98%81%EC%84%AD/%EC%B5%9C%EC%98%81%EC%84%AD-%EC%B9%98%EA%B3%BC-14.jpg" alt="이미지14"></div>
+</div>
+<br/>
+주소 : 경기도 고양시 덕양구 으뜸로 130, 위프라임 트윈타워 3층 서울덕은치과의원 (지하 1~4층 주차장 모두 이용 가능합니다. 지하주차장 이용시 A동 엘레베이터에서 가깝습니다. 3층 A동, B동 연결되어있습니다.)<br/>
+<br/>
+<div class="rC"><div class="rSC">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.957717831179!2d126.86785607640617!3d37.57961332337723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c99b4f4fb1849%3A0x65dd81cd15853b85!2z7ISc7Jq4642V7J2A7LmY6rO87J2Y7JuQ!5e0!3m2!1sko!2skr!4v1772799536717!5m2!1sko!2skr" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div></div>
+<br/>
+예약 및 상담문의 : <a target="_blank" href="tel:0231582882">02-3158-2882</a><br/>
+이용시간 : 평일 10:00 ~ 18:30 (점심시간 13:00 ~ 14:00)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 토요일 09:30 ~ 14:00 (점심시간 없이 진료)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 일요일/공휴일 휴무
+</div>
+</div>`;
+
 m.promoting = function (id: string): string {
 	let res = `<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
