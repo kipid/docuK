@@ -1873,8 +1873,18 @@ m.csvToJSON = function (str: string, colMap = true, rowMap = false): Promise<Str
 	}
 	return Promise.resolve(rows);
 };
-m.arrayToTableHTML = function (txtArray: StrToJSON): string {
+m.arrayToTableHTML = function (txtArray: StrToJSON, ratioStr: string): string {
 	let tableStr = "<table>";
+	if (ratioStr) {
+		let ratios = ratioStr.split("-");
+		let fullRatio = ratios.reduce((a, b) => a + parseFloat(b), 0);
+		ratios = ratios.map((r) => ((parseFloat(r) / fullRatio) * 100).toString());
+		tableStr += "<colgroup>";
+		for (let i = 0; i < ratios.length; i++) {
+			tableStr += `<col style="width:${ratios[i]}%"/>`;
+		}
+		tableStr += "</colgroup>";
+	}
 	for (let row = 0; row < txtArray.length; row++) {
 		tableStr += "<tr>";
 		for (let col = 0; col < txtArray[row].length; col++) {
