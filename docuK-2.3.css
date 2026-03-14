@@ -25,6 +25,22 @@ codeprint.SEE {
 	display:none
 }
 
+table {
+	border:1px solid white;
+	border-collapse:collapse
+}
+.bright table {
+	border-color:black
+}
+
+.bright table td {
+	border-color:black;
+	text-align:center
+}
+table td {
+	border:1px solid white
+}
+
 #force-recoeve {
 	background-color:black;
 	color:wheat;
