@@ -60,10 +60,13 @@ declare global {
 interface K {
 	version0?: string;
 	version1?: string;
+	lang?: string;
+	promotingKotetsuHTML?: string;
 	$window?: JQuery<Window>;
 	$document?: JQuery<Document>;
 	$html?: JQuery<HTMLHtmlElement>;
 	$title?: JQuery<HTMLTitleElement>;
+	$toTable?: JQuery<HTMLElement>;
 	fsToRs?: FSToRs;
 	browserWidth?: number;
 	$docuK?: JQuery<HTMLElement>;
@@ -147,7 +150,7 @@ interface K {
 	encloseStr?: (str: string) => string;
 	strToJSON?: (str: string, colMap?: boolean, rowMap?: boolean) => Promise<StrToJSON>;
 	csvToJSON?: (str: string, colMap?: boolean, rowMap?: boolean) => Promise<StrToJSON>;
-	arrayToTableHTML?: (txtArray: StrToJSON) => string;
+	arrayToTableHTML?: (txtArray: StrToJSON, ratioStr: string) => string;
 	SEEToArray?: (SEE: string) => string[];
 	getEmmetFromHead?: (head: string) => string;
 	getClassesFromEmmet?: (emmet: string) => string;

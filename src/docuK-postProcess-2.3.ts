@@ -16,6 +16,13 @@ for (let i = 0; i < $SEE.length; i++) {
 }
 
 m.$docuK = $(".docuK");
+(async function () {
+	m.$toTable = $("data.to-table");
+	for (let i = 0; i < m.$toTable.length; i++) {
+		const $toTableI = m.$toTable.eq(i);
+		$toTableI.after(m.arrayToTableHTML(await m.strToJSON($toTableI.html().trim()), $toTableI.attr("data-ratio")));
+	}
+})();
 
 $("code").each((index: number, elem: HTMLElement) => {
 	const $elem = $(elem);
@@ -150,55 +157,52 @@ m.$document.ready(function () {
 
 	m.$title.html(m.$title.html() + ` at ${window.location.host}`);
 
-	m.$log.after(`<div id="floating-key">
+	m.lang = navigator.language?.substring(0, 2);
+	if (m.docCookies.hasItem("lang")) {
+		m.lang = m.docCookies.getItem("lang");
+	}
+	m.docCookies.setItem("lang", m.lang, Infinity, "/", false);
+	m.docCookies.setItem("lang", m.lang, Infinity, "/", "kipid.tistory.com");
+	if (m.lang === "ko") {
+		m.$log.after(`<div id="floating-key">
+<div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ 숨기기(<span class="bold underline">E</span>)</div>
+<div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> 광고</div>
+<div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>o 검색</div>
+<div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})">목차(<span class="bold underline">T</span>)</div>
+<div class="button button-log" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})">도큐<span class="bold underline">K</span> 로그</div>
+<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyD'})">위로(<span class="bold underline">D</span>)</div>
+<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyF'})">아래로(<span class="bold underline">F</span>)</div>
+<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})">참고문헌(<span class="bold underline">R</span>)</div>
+<div class="button button-list" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">리스트(<span class="bold underline">L</span>)</div>
+<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">댓글1(<span class="bold underline">Z</span>)</div>
+<div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">댓글2(<span class="bold underline">X</span>)</div>
+<div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">댓글처리(<span class="bold underline">N</span>)</div>
+${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyI'})">로그인(<span class="bold underline">I</span>)</div>` : `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyO'})">로그아웃(<span class="bold underline">O</span>)</div>`}
+<div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">▲</div>`);
+	} else {
+		m.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
 <div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> mess</div>
-<div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})">
-<span class="bold underline">G</span>o (FS)
-</div>
-<div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})">
-<span class="bold underline">T</span>ofC
-</div>
-<div class="button button-log" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})">
-Docu<span class="bold underline">K</span> Log
-</div>
-<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyD'})">
-Backwar<span class="bold underline">d</span>
-</div>
-<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyF'})">
-<span class="bold underline">F</span>orward
-</div>
-<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})">
-<span class="bold underline">R</span>RA
-</div>
-<div class="button button-list" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">
-<span class="bold underline">L</span>ists
-</div>
-<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">
-Cmt<span class="bold underline">Z</span>
-</div>
-<div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">
-Cmt<span class="bold underline">X</span>
-</div>
-<div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">
-Ha<span class="bold underline">n</span>dle CmtZ
-</div>
-${
-	m.docCookies.hasItem("REACTION_GUEST")
-		? `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyI'})">
-Log <span class="bold underline">i</span>n
-</div>`
-		: `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyO'})">
-Log <span class="bold underline">o</span>ut
-</div>`
-}
+<div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>o (FS)</div>
+<div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})"><span class="bold underline">T</span>ofC</div>
+<div class="button button-log" onclick="k.$window.trigger({type:'keydown', code:'KeyK'})">Docu<span class="bold underline">K</span> Log</div>
+<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyD'})">Backwar<span class="bold underline">d</span></div>
+<div class="button darkgoldenrod" onclick="k.$window.trigger({type:'keydown', code:'KeyF'})"><span class="bold underline">F</span>orward</div>
+<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyR'})"><span class="bold underline">R</span>RA</div>
+<div class="button button-list" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})"><span class="bold underline">L</span>ists</div>
+<div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">Cmt<span class="bold underline">Z</span></div>
+<div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">Cmt<span class="bold underline">X</span></div>
+<div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">Ha<span class="bold underline">n</span>dle CmtZ</div>
+${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyI'})">Log <span class="bold underline">i</span>n</div>` : `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyO'})">Log <span class="bold underline">o</span>ut</div>`}
 <div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">▲</div>`);
+	}
 	m.$floating_key = $("#floating-key");
 	if (m.docCookies.getItem("hideFK") === "y") {
 		m.$floating_key.hide();
 	}
 	if (!m.printMode) {
-		m.$docuK.eq(m.$docuK.length - 1).after(m.promoting(`promoting-recoeve`));
+		m.$docuK.eq(1).before(m.promotingKotetsuHTML);
+		m.$docuK.eq(m.$docuK.length - 1).after(m.promoting(`promoting-recoeve`) + `<div class="SNS-bottom"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div>` + m.promotingKotetsuHTML);
 	}
 	window.$fuzzy_search.trigger("keyup.fs");
 	window.$button_Go = $(".button-Go");

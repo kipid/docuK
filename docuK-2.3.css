@@ -25,6 +25,22 @@ codeprint.SEE {
 	display:none
 }
 
+table {
+	border:1px solid white;
+	border-collapse:collapse
+}
+.bright table {
+	border-color:black
+}
+
+.bright table td {
+	border-color:black;
+	text-align:center
+}
+table td {
+	border:1px solid white
+}
+
 #force-recoeve {
 	background-color:black;
 	color:wheat;
@@ -38,6 +54,34 @@ codeprint.SEE {
 
 #content .inner {
 	padding:0 !important
+}
+
+.promoting-kotetsu {
+	padding:.5em;
+	border:1px solid gray
+}
+
+.promoting-kotetsu .slider {
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	overflow-x:auto;
+	scroll-snap-type:x mandatory;
+	-webkit-overflow-scrolling:touch;
+	gap:10px;
+	padding:0px
+}
+.promoting-kotetsu .slider .item {
+	flex:0 0 80%;
+	scroll-snap-align:center;
+}
+.promoting-kotetsu .slider .item img {
+	width:auto;
+	height:auto;
+	max-width:100%;
+	max-height:360px;
+	border-radius:0px;
+	display:block
 }
 
 .docuK .deviceInfo,
@@ -88,9 +132,7 @@ codeprint.SEE {
 }
 
 .promoting img {
-	max-width:100%;
-	min-width:70%;
-	width:auto
+	max-width:100%
 }
 
 .copyright {
@@ -548,12 +590,12 @@ textarea.multi-line {
 	margin-bottom:-6px
 }
 
-.docuK .SNS-bottom {
+.SNS-bottom {
 	margin:36px 0;
 	text-align:center
 }
 
-.docuK .SNS-img {
+.SNS-img {
 	display:inline-block;
 	vertical-align:middle;
 	position:relative;
@@ -567,7 +609,7 @@ textarea.multi-line {
 	cursor:pointer
 }
 
-.docuK .SNS-img:first-child {
+.SNS-img:first-child {
 	border-left:2px gray solid
 }
 
@@ -1182,9 +1224,6 @@ img {
 
 .docuK img {
 	max-width:100%;
-	border:none;
-	width:auto;
-	height:auto;
 	vertical-align:middle
 }
 
