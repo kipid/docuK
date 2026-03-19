@@ -176,6 +176,7 @@ m.$document.ready(function () {
 <div class="button button-list" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})">리스트(<span class="bold underline">L</span>)</div>
 <div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">댓글1(<span class="bold underline">Z</span>)</div>
 <div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">댓글2(<span class="bold underline">X</span>)</div>
+<div class="button button-cmt" onclick="k.$window.trigger({type:'keydown', code:'KeyC'})">댓글달기(<span class="bold underline">C</span>)</div>
 <div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">댓글처리(<span class="bold underline">N</span>)</div>
 ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyI'})">로그인(<span class="bold underline">I</span>)</div>` : `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyO'})">로그아웃(<span class="bold underline">O</span>)</div>`}
 <div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">▲</div>`);
@@ -192,6 +193,7 @@ ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" o
 <div class="button button-list" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyL'})"><span class="bold underline">L</span>ists</div>
 <div class="button darkgoldenrod" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyZ'})">Cmt<span class="bold underline">Z</span></div>
 <div class="button darkgoldenrod" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyX'})">Cmt<span class="bold underline">X</span></div>
+<div class="button button-cmt" onclick="k.$window.trigger({type:'keydown', code:'KeyC'})">To <span class="bold underline">C</span>omment</div>
 <div class="button button-cmt-handle" onclick="k.$window.trigger({type:'keydown', code:'KeyN'})">Ha<span class="bold underline">n</span>dle CmtZ</div>
 ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyI'})">Log <span class="bold underline">i</span>n</div>` : `<div class="button darkred" onclick="k.$window.trigger({type:'keydown', code:'KeyO'})">Log <span class="bold underline">o</span>ut</div>`}
 <div id="SNS-floating"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div></div><div class="button" id="toggle-floating-key" onclick="k.toggleFK()">▲</div>`);
@@ -596,11 +598,14 @@ ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" o
 			case "KeyZ":
 				if ($('div[data-tistory-react-app="Comment"]').length) m.$window.scrollTop($('div[data-tistory-react-app="Comment"]').offset().top);
 				break;
-			case "KeyN":
-				m.handleComments();
-				break;
 			case "KeyX":
 				if ($("#disqus_thread").length) m.$window.scrollTop($("#disqus_thread").offset().top);
+				break;
+			case "KeyC":
+				if ($(".tt-area-write").length) m.$window.scrollTop($(".tt-area-write").offset().top);
+				break;
+			case "KeyN":
+				m.handleComments();
 				break;
 			case "KeyI":
 				m.docCookies.removeItem("REACTION_GUEST", "/");
