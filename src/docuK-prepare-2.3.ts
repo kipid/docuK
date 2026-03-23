@@ -1140,7 +1140,7 @@ m.toggleFK = function (): void {
 };
 
 m.promotingKotetsuHTML = `<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
-<div class="p promoting promoting-kotetsu">
+<div class="p order promoting promoting-kotetsu">
 광고 (Promoting) : <a target="_blank" href="https://dedc.imweb.me/">https://dedc.imweb.me/ :: 서울 덕은 치과</a><br/>
 서울대 치의과 대학원 우등 졸업생이고, 매우 젠틀 (Gentle) 하고 치료도 부드럽고 설명도 어린아이가 들어도 이해할 정도로 쉽게 가르쳐 주는 내 인생 최고의 치과의사 선생님. 원장님 이름은 최영섭. 내 고등학교/대학교 동창이고 별명은 코테츠. 매우 밝은 성격에 유머러스하고 착하기도 함.<br/>
 <br/>
