@@ -1139,7 +1139,9 @@ m.toggleFK = function (): void {
 	m.$floating_key.toggle();
 };
 
-m.promotingKotetsuHTML = `<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
+m.promotingKotetsuHTML = `<div class="docuK-con">
+<div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
+<div class="cBoth"></div>
 <div class="p order promoting promoting-kotetsu">
 광고 (Promoting) : <a target="_blank" href="https://dedc.imweb.me/">https://dedc.imweb.me/ :: 서울 덕은 치과</a><br/>
 서울대 치의과 대학원 우등 졸업생이고, 매우 젠틀 (Gentle) 하고 치료도 부드럽고 설명도 어린아이가 들어도 이해할 정도로 쉽게 가르쳐 주는 내 인생 최고의 치과의사 선생님. 원장님 이름은 최영섭. 내 고등학교/대학교 동창이고 별명은 코테츠. 매우 밝은 성격에 유머러스하고 착하기도 함.<br/>
@@ -1180,12 +1182,12 @@ m.promoting = function (id: string): string {
 <div class="promoting"${id ? ` id="${id}"` : ""}>`;
 	if (m.recoCats) {
 		res += `<div class="order">
-<div class="p">* 게시글 관련 링크들 in <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>`;
+<div class="p">* 게시글 관련 링크들 in <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>`;
 		const catsSplit = m.recoCats.split(";");
 		for (const cat of catsSplit) {
-			res += `<div class="p center"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? decodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(cat)}#numbers-of-recos">Cat=${m.escapeOnlyTag(decodeURIComponent(cat))} of ${m.recoeveUserId ? m.escapeOnlyTag(decodeURIComponent(m.recoeveUserId)) : "kipid"}'s <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
+			res += `<div class="p center order"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? decodeURIComponent(m.recoeveUserId) : "kipid"}?cat=${encodeURIComponent(cat)}#headPlay">Cat=${m.escapeOnlyTag(decodeURIComponent(cat))} of ${m.recoeveUserId ? m.escapeOnlyTag(decodeURIComponent(m.recoeveUserId)) : "kipid"}'s <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
-<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}/mode/multireco?cat=${encodeURIComponent(cat)}#numbers-of-recos" frameborder="0"></iframe>
+<iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}?cat=${encodeURIComponent(cat)}#headPlay" frameborder="0"></iframe>
 </div></div>
 </div>
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
@@ -1194,11 +1196,11 @@ m.promoting = function (id: string): string {
 	}
 	res += `<div class="docuK-con">
 <div class="order">
-	<div class="center" style="margin-top:5rem">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
+	<div class="center" style="margin-top:5rem">* 홍보/Promoting <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
 	<div class="bcf"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">유튜브 음악, K-Pop MV 들을 광고없이 목록재생</a> 해서 보세요.<br/>
 		접속하셔서 가입 후 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br/>
 		그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.</div>
-	<div class="center" style="margin-top:1rem"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">Cat=[Music/Break]--K-Pop of kipid's <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
+	<div class="center" style="margin-top:1rem"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay">Cat=[Music/Break]--K-Pop of kipid's <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
 	<div class="rC recoeve"><div class="rSC">
 	<iframe delayed-src="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--K-Pop#headPlay" frameborder="0"></iframe>
 	</div></div>
@@ -1206,17 +1208,18 @@ m.promoting = function (id: string): string {
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="order">
-	<div class="center" style="margin-top:5rem">* 홍보/Promoting <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
-	<div class="bcf"><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pet#numbers-of-recos">츄츄와 루루 (포메라니안 6세/3.5kg, 3개월/1.2kg) 의 사진/동영상들을 모아</a> 보세요.<br/>
+	<div class="center" style="margin-top:5rem">* 홍보/Promoting <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>
+	<div class="bcf"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet#headPlay">츄츄와 루루 (포메라니안 7세/3.15kg, 10개월/3.15kg) 의 사진/동영상들을 모아</a> 보세요.<br/>
 	접속하셔서 가입 후 별점만 드레그 하시면 자신의 페이지에 저장 됩니다.<br/>
 	그리고 자신의 페이지로 이동한 뒤 추천 받기 (단축키 R) 를 누르시면 자신이 점수 메긴것들로 이웃 (이웃보기 단축키 B) 을 자동으로 찾아주고 그 이웃들로부터 추천을 받을 수 있습니다.</div>
-	<div class="center" style="margin-top:1rem"><a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pet#numbers-of-recos">Cat=[Music/Break]--Pet of kipid's <span style="color:rgb(255,180,180)">Reco</span><span style="color:rgb(100,100,255)">eve</span>.net</a></div>
+	<div class="center" style="margin-top:1rem"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet#headPlay">Cat=[Music/Break]--Pet of kipid's <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
 	<div class="rC recoeve"><div class="rSC">
-	<iframe delayed-src="https://recoeve.net/user/kipid/mode/multireco?cat=%5BMusic%2FBreak%5D--Pet#numbers-of-recos" frameborder="0"></iframe>
+	<iframe delayed-src="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet#headPlay" frameborder="0"></iframe>
 	</div></div>
 </div>
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
-<div class="cBoth"></div></div>`;
+<div class="cBoth"></div>
+</div>`;
 	return res;
 };
 
