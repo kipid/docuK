@@ -1181,11 +1181,13 @@ m.promoting = function (id: string): string {
 <div class="cBoth"></div>
 <div class="promoting"${id ? ` id="${id}"` : ""}>`;
 	if (m.recoCats) {
-		res += `<div class="order">
-<div class="p">* 게시글 관련 링크들 in <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>`;
+		res += `<div class="p order">
+* 게시글 관련 링크들 in <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)
+</div>`;
 		const catsSplit = m.recoCats.split(";");
 		for (const cat of catsSplit) {
-			res += `<div class="p center order"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? decodeURIComponent(m.recoeveUserId) : "kipid"}?cat=${encodeURIComponent(cat)}#headPlay">Cat=${m.escapeOnlyTag(decodeURIComponent(cat))} of ${m.recoeveUserId ? m.escapeOnlyTag(decodeURIComponent(m.recoeveUserId)) : "kipid"}'s <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
+			res += `<div class="order">
+<div class="p center"><a target="_blank" href="https://recoeve.net/user/${m.recoeveUserId ? decodeURIComponent(m.recoeveUserId) : "kipid"}?cat=${encodeURIComponent(cat)}#headPlay">Cat=${m.escapeOnlyTag(decodeURIComponent(cat))} of ${m.recoeveUserId ? m.escapeOnlyTag(decodeURIComponent(m.recoeveUserId)) : "kipid"}'s <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
 <iframe delayed-src="https://recoeve.net/user/${m.recoeveUserId ? encodeURIComponent(m.recoeveUserId) : "kipid"}?cat=${encodeURIComponent(cat)}#headPlay" frameborder="0"></iframe>
 </div></div>
