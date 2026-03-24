@@ -189,6 +189,13 @@ table td {
 	padding-left:38px
 }
 
+.text-reco {
+	color:rgb(255,180,180)
+}
+.text-eve {
+	color:rgb(100,100,255)
+}
+
 #shortkey.shortkey {
 	font-size:1rem;
 	color:white;
