@@ -37,8 +37,10 @@
 </div>
 </div>`,e.promoting=function(t){let n=`<div class="docuK-con"><div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
-<div class="promoting"${t?` id="${t}"`:""}>`;if(e.recoCats){n+=`<div class="order">
-<div class="p">* \uAC8C\uC2DC\uAE00 \uAD00\uB828 \uB9C1\uD06C\uB4E4 in <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)</div>`;const o=e.recoCats.split(";");for(const i of o)n+=`<div class="p center order"><a target="_blank" href="https://recoeve.net/user/${e.recoeveUserId?decodeURIComponent(e.recoeveUserId):"kipid"}?cat=${encodeURIComponent(i)}#headPlay">Cat=${e.escapeOnlyTag(decodeURIComponent(i))} of ${e.recoeveUserId?e.escapeOnlyTag(decodeURIComponent(e.recoeveUserId)):"kipid"}'s <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
+<div class="promoting"${t?` id="${t}"`:""}>`;if(e.recoCats){n+=`<div class="p order">
+* \uAC8C\uC2DC\uAE00 \uAD00\uB828 \uB9C1\uD06C\uB4E4 in <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net (3S | Slow/Sexy/Sincere SNS)
+</div>`;const o=e.recoCats.split(";");for(const i of o)n+=`<div class="order">
+<div class="p center"><a target="_blank" href="https://recoeve.net/user/${e.recoeveUserId?decodeURIComponent(e.recoeveUserId):"kipid"}?cat=${encodeURIComponent(i)}#headPlay">Cat=${e.escapeOnlyTag(decodeURIComponent(i))} of ${e.recoeveUserId?e.escapeOnlyTag(decodeURIComponent(e.recoeveUserId)):"kipid"}'s <span class="text-reco">Reco</span><span class="text-eve">eve</span>.net</a></div>
 <div class="rC recoeve"><div class="rSC">
 <iframe delayed-src="https://recoeve.net/user/${e.recoeveUserId?encodeURIComponent(e.recoeveUserId):"kipid"}?cat=${encodeURIComponent(i)}#headPlay" frameborder="0"></iframe>
 </div></div>
