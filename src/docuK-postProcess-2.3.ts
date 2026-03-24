@@ -893,7 +893,7 @@ svg: {
 });
 
 // Ads
-const adsHTML = `<div class="docuK-con"><div class="docuK-ads">이 글이 도움이 되셨다면, 광고 클릭 한번씩만 부탁드립니다 =ㅂ=ㅋ.<br>(If this article was helpful, please click the ad once. Thank you. ;)</div></div>`;
+const adsHTML = `<div class="docuK-con"><div class="docuK-ads order">이 글이 도움이 되셨다면, 광고 클릭 한번씩만 부탁드립니다 =ㅂ=ㅋ.<br>(If this article was helpful, please click the ad once. Thank you. ;)</div></div>`;
 for (let i = 1; i < m.$docuK.length; i++) {
 	const $docuKI = m.$docuK.eq(i);
 	$docuKI.before(adsHTML);
