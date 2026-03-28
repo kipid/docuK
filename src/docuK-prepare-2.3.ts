@@ -1878,7 +1878,7 @@ m.csvToJSON = function (str: string, colMap = true, rowMap = false): Promise<Str
 	}
 	return Promise.resolve(rows);
 };
-m.arrayToTableHTML = function (txtArray: StrToJSON, ratioStr: string): string {
+m.arrayToTableHTML = function (txtArray: StrToJSON, ratioStr: string, noEscapeHTML: boolean = true): string {
 	let tableStr = "<table>";
 	if (ratioStr) {
 		let ratios = ratioStr.split("-");
@@ -1893,7 +1893,7 @@ m.arrayToTableHTML = function (txtArray: StrToJSON, ratioStr: string): string {
 	for (let row = 0; row < txtArray.length; row++) {
 		tableStr += "<tr>";
 		for (let col = 0; col < txtArray[row].length; col++) {
-			tableStr += `<td>${m.escapeOnlyTag(txtArray[row][col]).replace(/\n/g, "<br/>")}</td>`;
+			tableStr += `<td>${(noEscapeHTML ? txtArray[row][col] : m.escapeOnlyTag(txtArray[row][col])).replace(/\n/g, "<br/>")}</td>`;
 		}
 		tableStr += "</tr>";
 	}
