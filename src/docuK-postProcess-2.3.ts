@@ -20,7 +20,7 @@ m.$docuK = $(".docuK");
 	m.$toTable = $("data.to-table");
 	for (let i = 0; i < m.$toTable.length; i++) {
 		const $toTableI = m.$toTable.eq(i);
-		$toTableI.after(m.arrayToTableHTML(await m.strToJSON($toTableI.html().trim()), $toTableI.attr("data-ratio")));
+		$toTableI.after(m.arrayToTableHTML(await m.strToJSON($toTableI.html().trim()), $toTableI.attr("data-ratio"), $toTableI.hasClass("no-escape-HTML")));
 	}
 })();
 
