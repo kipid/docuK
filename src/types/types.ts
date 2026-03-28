@@ -150,7 +150,7 @@ interface K {
 	encloseStr?: (str: string) => string;
 	strToJSON?: (str: string, colMap?: boolean, rowMap?: boolean) => Promise<StrToJSON>;
 	csvToJSON?: (str: string, colMap?: boolean, rowMap?: boolean) => Promise<StrToJSON>;
-	arrayToTableHTML?: (txtArray: StrToJSON, ratioStr: string) => string;
+	arrayToTableHTML?: (txtArray: StrToJSON, ratioStr: string, noEscapeHTML: boolean) => string;
 	SEEToArray?: (SEE: string) => string[];
 	getEmmetFromHead?: (head: string) => string;
 	getClassesFromEmmet?: (emmet: string) => string;
