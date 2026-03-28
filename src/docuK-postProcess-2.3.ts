@@ -130,29 +130,25 @@ m.$document.ready(function () {
 		m.$headOrBody.append(`<link rel="canonical" href="${url}" />`);
 		let hrefAnalyzed = new URL(window.location.href);
 		let urlAnalyzed = new URL(url);
-		if (hrefAnalyzed.hostname === "kipid.tistory.com" && hrefAnalyzed.protocol.toLowerCase() === urlAnalyzed.protocol.toLowerCase() && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
+		if (hrefAnalyzed.protocol.toLowerCase() === "https:" && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
 			window.location.pathname = urlAnalyzed.pathname;
 		}
 	}
 
 	setTimeout(function () {
-		let parsedHref = new URL(window.location.href);
-		let origin = parsedHref.origin.toLowerCase();
-		if (origin === "https://kipid.tistory.com" || origin === "http://localhost:8080" || origin === "http://127.0.0.1:8080" || origin === "https://recoeve.net" || origin === "https://www.recoeve.net") {
-			let blogStat = `URI\treferer\tREACTION_GUEST\n${window.location.href}\t${document.referrer}\t${m.docCookies.getItem("REACTION_GUEST")}`;
-			$.ajax({
-				type: "POST",
-				url: "https://recoeve.net/BlogStat",
-				data: blogStat,
-				dataType: "text",
+		let blogStat = `URI\treferer\tREACTION_GUEST\n${window.location.href}\t${document.referrer}\t${m.docCookies.getItem("REACTION_GUEST")}`;
+		$.ajax({
+			type: "POST",
+			url: "https://recoeve.net/BlogStat",
+			data: blogStat,
+			dataType: "text",
+		})
+			.fail(async function (resp) {
+				m.logPrint("<br><br>BlogStat failed. " + (await m.uriRendering(resp.toString(), true, false)));
 			})
-				.fail(async function (resp) {
-					m.logPrint("<br><br>BlogStat failed. " + (await m.uriRendering(resp.toString(), true, false)));
-				})
-				.done(async function (resp) {
-					m.logPrint("<br><br>BlogStat is logged. " + (await m.uriRendering(resp.toString(), true, false)));
-				});
-		}
+			.done(async function (resp) {
+				m.logPrint("<br><br>BlogStat is logged. " + (await m.uriRendering(resp.toString(), true, false)));
+			});
 	}, m.wait);
 
 	m.$title.html(m.$title.html() + ` at ${window.location.host}`);
@@ -162,7 +158,7 @@ m.$document.ready(function () {
 		m.lang = m.docCookies.getItem("lang");
 	}
 	m.docCookies.setItem("lang", m.lang, Infinity, "/", false);
-	m.docCookies.setItem("lang", m.lang, Infinity, "/", "kipid.tistory.com");
+	m.docCookies.setItem("lang", m.lang, Infinity, "/", `${window.location.host}`);
 	if (m.lang === "ko") {
 		m.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ 숨기기(<span class="bold underline">E</span>)</div>
@@ -302,14 +298,14 @@ ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" o
 	m.blogStatRes = [];
 	m.getBlogStat = function (): Promise<void> {
 		return new Promise(function (resolve, reject) {
-			let reqTimes = `host\tfrom\tto`;
+			let numberOfReqs = `host\tfrom\tto`;
 			for (let i = 0; i < m.daysToPlotPageViewsChart; i++) {
-				reqTimes += `\nkipid.tistory.com\t${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
+				numberOfReqs += `\n${window.location.host}\t${m.from[i].date} 15:00:00\t${m.to[i].date} 15:00:00`; // until 24:00:00 of today. UTC+09:00.
 			}
 			$.ajax({
 				type: "POST",
 				url: "https://recoeve.net/BlogStat/Get",
-				data: reqTimes,
+				data: numberOfReqs,
 				dataType: "text",
 			})
 				.fail(function (resp) {
