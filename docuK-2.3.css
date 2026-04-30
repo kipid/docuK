@@ -56,7 +56,8 @@ table td {
 	padding:0 !important
 }
 
-.promoting-kotetsu {
+.promoting-kotetsu,
+.promoting-ok24 {
 	padding:.5em;
 	border:1px solid gray
 }
