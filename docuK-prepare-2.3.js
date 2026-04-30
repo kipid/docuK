@@ -4,11 +4,8 @@
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="p order promoting promoting-ok24">
-\uD3EC\uC7A5\uC774\uC0AC \uC804\uBB38\uC5C5\uCCB4 (\uC77C\uBC18\uC774\uC0AC, \uBCF4\uAD00\uC774\uC0AC)<br/>
-\uC624\uCF00\uC774 \uC774\uC0AC\uBB3C\uB958 (OK 24)<br/>
-<a href="tel:01026832655">010-2683-2655</a>,<br/>
-<a href="tel:0314100424">031-410-0424</a>,<br/>
-<a href="tel:0314080424">031-408-0424</a>
+\uD3EC\uC7A5\uC774\uC0AC \uC804\uBB38\uC5C5\uCCB4 (\uC77C\uBC18\uC774\uC0AC, \uBCF4\uAD00\uC774\uC0AC) :: \uC624\uCF00\uC774 \uC774\uC0AC\uBB3C\uB958 (OK 24)<br/>
+<a href="tel:01026832655">010-2683-2655</a>, <a href="tel:0314100424">031-410-0424</a>, <a href="tel:0314080424">031-408-0424</a>
 </div>
 </div>`,e.promotingKotetsuHTML=`<div class="docuK-con">
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>

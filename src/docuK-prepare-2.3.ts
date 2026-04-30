@@ -1143,11 +1143,8 @@ m.promotingOK24HTML = `<div class="docuK-con">
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="p order promoting promoting-ok24">
-포장이사 전문업체 (일반이사, 보관이사)<br/>
-오케이 이사물류 (OK 24)<br/>
-<a href="tel:01026832655">010-2683-2655</a>,<br/>
-<a href="tel:0314100424">031-410-0424</a>,<br/>
-<a href="tel:0314080424">031-408-0424</a>
+포장이사 전문업체 (일반이사, 보관이사) :: 오케이 이사물류 (OK 24)<br/>
+<a href="tel:01026832655">010-2683-2655</a>, <a href="tel:0314100424">031-410-0424</a>, <a href="tel:0314080424">031-408-0424</a>
 </div>
 </div>`;
 m.promotingKotetsuHTML = `<div class="docuK-con">
