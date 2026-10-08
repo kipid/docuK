@@ -2176,7 +2176,7 @@ m.renderToDocuK = function (toBeRendered: string, SEEi: number): string {
 					}
 				}
 				m.ps[i] = ps[i];
-				str += `<pre class="${classes.split(" ").some((str) => str === "no-linenums") ? "" : "line-numbers "}${classes}"${elemId}><code class="${classes}"><button class="button-code-copy" onclick="k.copyCode(this, m.ps[${i}])">Copy</button>${ps[i]}</code></pre>`;
+				str += `<pre class="${classes.split(" ").some((str) => str === "no-linenums") ? "" : "line-numbers "}${classes}"${elemId}><button class="button-code-copy" onclick="k.copyCode(this, m.ps[${i}])">Copy</button><code class="${classes}">${ps[i]}</code></pre>`;
 			} else {
 				str += `<div class="p">${ps[i]}</div>`;
 			}
