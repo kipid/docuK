@@ -225,6 +225,11 @@ table td {
 	height:auto
 }
 
+.docuK ul li,
+.docuK.dark ul li {
+	color:white
+}
+
 .button-code-copy {
 	z-index:100;
 	font-size:.7rem;
