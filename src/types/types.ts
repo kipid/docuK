@@ -67,6 +67,8 @@ interface K {
 	$document?: JQuery<Document>;
 	$html?: JQuery<HTMLHtmlElement>;
 	$title?: JQuery<HTMLTitleElement>;
+	ps?: string[];
+	copyCode?: (elem: HTMLElement, code: string) => void;
 	$toTable?: JQuery<HTMLElement>;
 	fsToRs?: FSToRs;
 	browserWidth?: number;
