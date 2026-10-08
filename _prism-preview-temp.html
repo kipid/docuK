@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docuK-prism.css preview (default Dark vs .bright)</title>
+<link rel="stylesheet" href="./docuK-prism.css">
+<style>
+	html { background:#444; }
+	body { margin:0; padding:0; font-family:sans-serif; font-size:16px; }
+	.preview-note { color:#fff; padding:1rem 1.5rem .5rem; font-size:1.4rem; }
+	.docuK { padding:.5rem 1.5rem 1.5rem; }
+	.docuK.dark { background-color:black; color:white; }
+	.docuK.bright { background-color:white; color:black; }
+	h1 { font-size:2rem; margin:1rem 0 .5rem; }
+</style>
+</head>
+<body>
+
+<div class="preview-note">아래 코드가 다크(기본) / 브라이트 두 모드에서 어떻게 보이는지 비교용 (temp file).</div>
+
+<!-- ===== Dark (default, no mode class) ===== -->
+<div class="docuK dark">
+	<h1>Dark mode (default)</h1>
+
+	<h1>JavaScript</h1>
+<pre class="language-js line-numbers"><code class="language-js">// Function to add two numbers
+const add = (a, b) =&gt; a + b; /* inline comment */
+class Calculator {
+	constructor(name = "docuK") { this.name = name; }
+	sum(...nums) { return nums.reduce(add, 0); }
+}
+let total = add(1, 2.5);
+console.log(`Total = ${total}`, true, null, undefined, /ab+c/gi);</code></pre>
+
+	<h1>Markup (HTML)</h1>
+<pre class="language-markup line-numbers"><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+	&lt;body class="docuK"&gt;
+		&lt;div id="main" data-value='42'&gt;Hello &amp;amp; Welcome&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+	<h1>CSS</h1>
+<pre class="language-css line-numbers"><code class="language-css">.docuK {
+	background-color: black;
+	color: white;
+	font-size: 1rem;
+}
+.docuK:hover { opacity: .7; }
+@media screen and (max-width: 767px) { .docuK { display: none; } }</code></pre>
+
+	<h1>Inline code</h1>
+	<p>This is <code class="language-js">const x = "inline";</code> and <code class="language-markup">&lt;cite class="ref-x"&gt;</code>.</p>
+</div>
+
+<!-- ===== Bright ===== -->
+<div class="docuK bright">
+	<h1>Bright mode</h1>
+
+	<h1>JavaScript</h1>
+<pre class="language-js line-numbers"><code class="language-js">// Function to add two numbers
+const add = (a, b) =&gt; a + b; /* inline comment */
+class Calculator {
+	constructor(name = "docuK") { this.name = name; }
+	sum(...nums) { return nums.reduce(add, 0); }
+}
+let total = add(1, 2.5);
+console.log(`Total = ${total}`, true, null, undefined, /ab+c/gi);</code></pre>
+
+	<h1>Markup (HTML)</h1>
+<pre class="language-markup line-numbers"><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+	&lt;body class="docuK"&gt;
+		&lt;div id="main" data-value='42'&gt;Hello &amp;amp; Welcome&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+	<h1>CSS</h1>
+<pre class="language-css line-numbers"><code class="language-css">.docuK {
+	background-color: black;
+	color: white;
+	font-size: 1rem;
+}
+.docuK:hover { opacity: .7; }
+@media screen and (max-width: 767px) { .docuK { display: none; } }</code></pre>
+
+	<h1>Inline code</h1>
+	<p>This is <code class="language-js">const x = "inline";</code> and <code class="language-markup">&lt;cite class="ref-x"&gt;</code>.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+</body>
+</html>
