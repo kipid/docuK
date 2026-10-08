@@ -12,6 +12,26 @@ m.$headOrBody = $("head") || $("body") || $("#docuK-style");
 m.$headOrBody.append(`<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">`);
+m.ps = [];
+m.copyCode = function (elem: HTMLElement, code: string): void {
+	const $elem = $(elem);
+	const decodedCode = m.unescapeHTML(code);
+	$elem.addClass("copied");
+	$elem.html("Copied!");
+	navigator.clipboard.writeText(decodedCode).then(
+		function () {
+			m.$textarea_copied[0].value = decodedCode;
+		},
+		function (err) {
+			m.$textarea_copied[0].value = `Could not copy text: ${err}`;
+			$("#notify-copied, #notify-copied-exit").show();
+		},
+	);
+	setTimeout(function () {
+		$elem.removeClass("copied");
+		$elem.html("Copy");
+	}, 1024);
+};
 
 const fsToRs: FSToRs = (m.fsToRs = {
 	fixed: false,
@@ -2155,7 +2175,8 @@ m.renderToDocuK = function (toBeRendered: string, SEEi: number): string {
 						elemId = ` id="${elemId}"`;
 					}
 				}
-				str += `<pre class="${classes.split(" ").some((str) => str === "no-linenums") ? "" : "line-numbers "}${classes}"${elemId}><code class="${classes}">${ps[i]}</code></pre>`;
+				m.ps[i] = ps[i];
+				str += `<pre class="${classes.split(" ").some((str) => str === "no-linenums") ? "" : "line-numbers "}${classes}"${elemId}><code class="${classes}"><button class="button-code-copy" onclick="k.copyCode(this, m.ps[${i}])">Copy</button>${ps[i]}</code></pre>`;
 			} else {
 				str += `<div class="p">${ps[i]}</div>`;
 			}
