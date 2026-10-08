@@ -237,6 +237,10 @@ table td {
 	background-color:rgb(110, 110, 110)
 }
 
+.button-code-copy.copied {
+	background-color:rgb(110, 190, 110)
+}
+
 .button {
 	display:inline-block;
 	cursor:pointer;
