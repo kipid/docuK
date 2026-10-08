@@ -226,6 +226,8 @@ table td {
 }
 
 .button-code-copy {
+	z-index:100;
+	font-size:.7rem;
 	position:absolute;
 	top:0;
 	right:0;
