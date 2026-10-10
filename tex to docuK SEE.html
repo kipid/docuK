@@ -1,0 +1,1467 @@
+<style>
+:root {
+  --bg:#0b1020;
+  --panel:#141c30;
+  --field:#0b1325;
+  --border:#2b3855;
+  --text:#e9eefb;
+  --muted:#a5b2cc;
+  --accent:#8eaaff;
+  --green:#89e2bd;
+}
+* { box-sizing:border-box }
+main { max-width:1440px; margin:auto; padding:32px 22px 50px }
+header { margin-bottom:24px }
+h1 { margin:8px 0; font-size:clamp(26px,4vw,40px); letter-spacing:-1px }
+h2 { margin:0; font-size:18px }
+.article-view h2 {
+	color:white !important
+}
+p { margin:8px 0; color:var(--muted) }
+.badge {
+  display:inline-block;
+  border:1px solid #405889;
+  color:#b9caff;
+  padding:3px 11px;
+  border-radius:999px;
+  font-size:12px;
+}
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:18px }
+.card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 15px 40px #0002;
+}
+.cardhead {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:12px;
+}
+.filelabel,button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  background:#233452;
+  color:var(--text);
+  border:1px solid #405477;
+  border-radius:9px;
+  padding:9px 14px;
+  cursor:pointer;
+  font:inherit;
+  font-size:13px;
+}
+button:hover,.filelabel:hover { filter:brightness(1.18) }
+button:disabled { opacity:.45; cursor:not-allowed }
+button.primary {
+  background:var(--accent);
+  color:#101a32;
+  border-color:var(--accent);
+  font-weight:750;
+}
+input[type=file] { display:none }
+textarea,input[type=text] {
+  width:100%;
+  background:var(--field);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:13px;
+}
+textarea {
+  min-height:330px;
+  resize:vertical;
+  line-height:1.55;
+  font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;
+  tab-size:2;
+}
+textarea:focus,input:focus { outline:2px solid #7698ed }
+input[type=text] { font:inherit }
+.hint { font-size:12px; color:var(--muted); margin-top:8px }
+.toolbar {
+  margin:18px 0;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.options {
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  gap:18px;
+}
+.check { display:flex; gap:8px; align-items:center; margin:10px 0 }
+#status { font-size:13px; color:var(--green) }
+#output { min-height:460px }
+.stats { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 }
+.stat { background:#20304b; padding:4px 10px; border-radius:7px; font-size:12px }
+details { margin-top:18px }
+summary { cursor:pointer; font-weight:650 }
+#warnings {
+  max-height:300px;
+  overflow:auto;
+  white-space:pre-wrap;
+  font:13px/1.7 ui-monospace,Consolas,monospace;
+  color:#ffd69b;
+}
+.note {
+  padding:12px 15px;
+  border-left:3px solid var(--accent);
+  background:#1d2b47;
+  color:var(--muted);
+  margin:16px 0;
+}
+footer { margin-top:22px; color:var(--muted); font-size:12px }
+@media(max-width:850px) {
+  .grid,.options { grid-template-columns:1fr }
+  main { padding:22px 12px }
+  .card { padding:15px }
+}
+</style>
+
+<main>
+<header>
+  <span class="badge">LOCAL · NO UPLOAD · SINGLE FILE</span>
+  <h1>LaTeX → docuK pure SEE</h1>
+  <p>본문, 수식, 인용, 교차참조, 각주와 참고문헌을 복사 가능한 HTML로 변환합니다.</p>
+</header>
+
+<section class="grid">
+  <div class="card">
+    <div class="cardhead">
+      <h2>1. 본문 LaTeX</h2>
+      <label class="filelabel">
+        본문 파일 열기
+        <input id="mainFile" type="file" accept=".tex,.txt,text/plain">
+      </label>
+    </div>
+    <textarea id="mainInput" spellcheck="false"
+      placeholder="rmp_arxiv.tex 내용을 붙여 넣거나 파일을 선택하세요."></textarea>
+    <div class="hint" id="mainInfo">.tex / .txt · UTF-8 기준</div>
+  </div>
+  <div class="card">
+    <div class="cardhead">
+      <h2>2. 참고문헌 LaTeX</h2>
+      <label class="filelabel">
+        참고문헌 파일 열기
+        <input id="bibFile" type="file" accept=".tex,.bbl,.txt,text/plain">
+      </label>
+    </div>
+    <textarea id="bibInput" spellcheck="false"
+      placeholder="rmp_arxiv-bbl.tex 또는 \begin{thebibliography}...\end{thebibliography}를 넣으세요."></textarea>
+    <div class="hint" id="bibInfo">BibTeX .bib가 아니라, \bibitem을 포함한 .bbl 형식을 사용하세요.</div>
+  </div>
+</section>
+
+<section class="card" style="margin-top:18px">
+  <div class="options">
+    <div>
+      <label for="titleInput">문서 제목 — 비우면 LaTeX의 \title 사용</label>
+      <input id="titleInput" type="text"
+        placeholder="자동 추출">
+    </div>
+    <div>
+      <label class="check">
+        <input id="fullHTML" type="checkbox" checked>
+        CDN과 설정을 포함한 전체 HTML
+      </label>
+      <label class="check">
+        <input id="keepLabels" type="checkbox" checked>
+        원래 LaTeX label을 HTML 주석으로 보존
+      </label>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="primary" id="convertBtn">전체 변환</button>
+    <button id="sampleBtn">테스트 예제</button>
+    <button id="clearBtn">입력 지우기</button>
+    <span id="status" role="status" aria-live="polite">준비됨</span>
+  </div>
+
+  <div class="hint">
+    결과 문서는 docuK CDN을 사용하므로 실제 렌더링에는 인터넷 연결이 필요합니다.
+    변환기 자체는 오프라인에서도 작동합니다.
+  </div>
+</section>
+
+<section class="card" style="margin-top:18px">
+  <div class="cardhead">
+    <h2>3. 변환 결과</h2>
+    <div class="toolbar" style="margin:0">
+      <button id="copyBtn" disabled>전체 복사</button>
+      <button id="downloadBtn" disabled>HTML 다운로드</button>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <textarea id="output" readonly spellcheck="false"
+    placeholder="변환된 전체 문서가 여기에 표시됩니다."></textarea>
+
+  <details id="warningDetails">
+    <summary id="warningTitle">변환 로그</summary>
+    <pre id="warnings">아직 변환하지 않았습니다.</pre>
+  </details>
+</section>
+
+<div class="note">
+  <strong>변환 범위</strong><br>
+  section/subsection/subsubsection, equation/eqnarray/align,
+  인라인 수식, 사용자 정의 단순 매크로, cite/citet/citep/citeyear,
+  ref/eqref, footnote, quote, 목록, bibliography를 처리합니다.<br>
+  조건부 TeX 실행, 패키지 전체 구현, 그림의 실제 파일 임베딩,
+  BibTeX 데이터베이스 컴파일은 지원하지 않습니다.
+  알려지지 않은 명령은 숨기지 않고 결과와 경고에 남깁니다.
+</div>
+
+<footer>
+  브라우저 안에서만 변환합니다. 입력 저장이나 서버 전송은 하지 않습니다.
+  다운로드 전에 변환 로그와 원문 수식을 확인하세요.
+</footer>
+</main>
+
+<script>
+window.k = window.m = {};
+(function(m, $, undefined) {
+m.printMode=false;
+m.ripplesDisabled=true;
+m.recoeveUserId="kipid";
+m.recoCats="";
+m.wait=1024;
+m.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="LaTeX→docuK-pure-SEE-Markdown-변환기-Transformer"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`${window.location.origin}/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+
+if (window.disqus_config) {
+	m.disqusVars = { page: {} };
+	window.disqus_config.apply(m.disqusVars);
+	let url = (m.canonicalURI = m.disqusVars.page.url);
+	$('link[rel="canonical"]').remove();
+	m.$headOrBody = $("head") || $("body") || $("#docuK-style");
+	m.$headOrBody.append(`<link rel="canonical" href="${url}" />`);
+	let hrefAnalyzed = new URL(window.location.href);
+	let urlAnalyzed = new URL(url);
+	if (hrefAnalyzed.protocol.toLowerCase() === "https:" && decodeURIComponent(hrefAnalyzed.pathname) !== decodeURIComponent(urlAnalyzed.pathname)) {
+		window.location.pathname = urlAnalyzed.pathname;
+	}
+}
+})(window.k, jQuery);
+</script>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({
+  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;"
+}[c]));
+const safeComment = s => String(s).replace(/--/g, "—").replace(/>/g, "&gt;");
+const safeId = s => String(s).normalize("NFKD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "") || "item";
+
+/*
+  Tag-like sequences are assembled from pieces on purpose.
+  This page is meant to be pasted into a blog post, and some blog platforms
+  (Tistory does) rewrite a post body, injecting their own script tags where
+  they find a literal closing body or html tag in the source. When that
+  happens inside this script element, the injected closing script tag ends
+  this script early and the rest of the code is shown on the page as visible
+  text. Building the sequences from pieces keeps this source free of them, so
+  nothing can be injected into this script.
+*/
+const htmlTag = name => "<" + name + ">";
+const htmlEndTag = name => "<" + "/" + name + ">";
+const htmlTagStart = name => "<" + name;
+const htmlComment = text => "<" + "!-- " + text + " --" + ">";
+const DOCTYPE_HTML = htmlTag("!DOCTYPE html");
+
+function escapedAt(s, i) {
+  let n = 0;
+  for (let j = i - 1; j >= 0 && s[j] === "\\"; j--) n++;
+  return n % 2 === 1;
+}
+
+/* TeX comments: an escaped percent sign is not a comment. */
+function stripComments(s) {
+  let out = "";
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "%" && !escapedAt(s, i)) {
+      while (i < s.length && s[i] !== "\n") i++;
+      // A TeX end-of-line comment consumes the line break.
+    } else out += s[i];
+  }
+  return out;
+}
+
+function skipSpace(s, i) {
+  while (i < s.length && /\s/.test(s[i])) i++;
+  return i;
+}
+
+/* Balanced groups; optional arguments may themselves contain braces. */
+function group(s, i, open = "{", close = "}") {
+  i = skipSpace(s, i);
+  if (s[i] !== open) return null;
+  const start = i;
+  let depth = 1, braceDepth = 0;
+  for (i++; i < s.length; i++) {
+    if (escapedAt(s, i)) continue;
+    if (open === "[") {
+      if (s[i] === "{") braceDepth++;
+      if (s[i] === "}") braceDepth--;
+      if (braceDepth > 0) continue;
+    }
+    if (s[i] === open) depth++;
+    if (s[i] === close && --IfClose()) {
+      return { text:s.slice(start + 1, i), end:i + 1 };
+    }
+    function IfClose() {
+      // Only called when the current character is the closing delimiter.
+      return depth;
+    }
+  }
+  throw new Error("닫히지 않은 그룹: " + s.slice(start, start + 80));
+}
+
+/* Explicit implementation replaces the helper above for clarity and safety. */
+function readGroup(s, i, open = "{", close = "}") {
+  i = skipSpace(s, i);
+  if (s[i] !== open) return null;
+  const start = i;
+  let depth = 1, braces = 0;
+  for (i++; i < s.length; i++) {
+    if (escapedAt(s, i)) continue;
+    const c = s[i];
+    if (open === "[") {
+      if (c === "{") { braces++; continue; }
+      if (c === "}") { braces--; continue; }
+      if (braces > 0) continue;
+    }
+    if (c === open) depth++;
+    else if (c === close) {
+      depth--;
+      if (!depth) return { text:s.slice(start + 1, i), end:i + 1 };
+    }
+  }
+  throw new Error("닫히지 않은 그룹: " + s.slice(start, start + 80));
+}
+
+function commandAt(s, i) {
+  if (s[i] !== "\\") return null;
+  const m = /^\\([A-Za-z@]+\*?|.)/s.exec(s.slice(i));
+  return m ? { name:m[1], end:i + m[0].length } : null;
+}
+
+function getEnvironment(s, i, name) {
+  let pos = i, depth = 1;
+  const re = /\\(begin|end)\s*\{([^}]+)\}/g;
+  re.lastIndex = i;
+  let m;
+  while ((m = re.exec(s))) {
+    if (m[2] !== name) continue;
+    depth += m[1] === "begin" ? 1 : -1;
+    if (depth === 0) return {
+      text:s.slice(pos, m.index), end:re.lastIndex
+    };
+  }
+  throw new Error("닫히지 않은 환경: " + name);
+}
+
+function roman(n) {
+  if (!n) return "0";
+  const pairs = [
+    [1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],
+    [100,"C"],[90,"XC"],[50,"L"],[40,"XL"],
+    [10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]
+  ];
+  let out = "";
+  for (const [v,r] of pairs) while (n >= v) { out += r; n -= v; }
+  return out;
+}
+
+class Converter {
+  constructor(main, bib, options) {
+    this.rawMain = main;
+    this.main = stripComments(main);
+    this.bibSource = stripComments(bib);
+    this.options = options;
+    this.warnings = new Set();
+    this.labels = new Map();
+    this.refs = [];
+    this.bibs = [];
+    this.bibMap = new Map();
+    this.usedIds = new Set();
+    this.macros = new Map();
+    this.section = 0;
+    this.subsection = 0;
+    this.subsubsection = 0;
+    this.equation = 0;
+    this.footnote = 0;
+    this.sectionCount = 0;
+    this.mathCount = 0;
+    this.citeCount = 0;
+    this.current = null;
+    this.noNumberSection = 0;
+    this.readMacros();
+    this.readBibliography();
+  }
+
+  warn(s) { this.warnings.add(s); }
+
+  uniqueId(id) {
+    const base = safeId(id);
+    let result = base, n = 2;
+    while (this.usedIds.has(result)) result = base + "-" + n++;
+    this.usedIds.add(result);
+    return result;
+  }
+
+  addLabel(key, target) {
+    key = key.trim();
+    if (!target) {
+      this.warn("대상을 찾지 못한 label: " + key);
+      return;
+    }
+    if (this.labels.has(key))
+      this.warn("중복 label: " + key);
+    this.labels.set(key, { ...target });
+  }
+
+  readMacros() {
+    const re = /\\(?:newcommand|renewcommand|providecommand)\*?/g;
+    let m;
+    while ((m = re.exec(this.main))) {
+      let i = skipSpace(this.main, re.lastIndex);
+      let name;
+      const ng = readGroup(this.main, i);
+      if (ng) {
+        name = ng.text.trim().replace(/^\\/, "");
+        i = ng.end;
+      } else {
+        const cmd = commandAt(this.main, i);
+        if (!cmd) continue;
+        name = cmd.name;
+        i = cmd.end;
+      }
+      const argc = readGroup(this.main, i, "[", "]");
+      let count = 0;
+      if (argc) {
+        count = Number(argc.text);
+        i = argc.end;
+      }
+      const defaultArg = readGroup(this.main, i, "[", "]");
+      if (defaultArg) {
+        i = defaultArg.end;
+        this.warn("기본 인수가 있는 매크로는 자동 확장하지 않음: \\" + name);
+      }
+      const body = readGroup(this.main, i);
+      if (!body) continue;
+      re.lastIndex = body.end;
+      if (!defaultArg && /^[A-Za-z]+$/.test(name) &&
+          Number.isInteger(count) && count >= 0 && count <= 9) {
+        this.macros.set(name, { count, body:body.text });
+      }
+    }
+  }
+
+  expand(s, depth = 0) {
+    if (depth > 20) {
+      this.warn("매크로 확장 깊이 제한에 도달했습니다.");
+      return s;
+    }
+    let out = "";
+    for (let i = 0; i < s.length;) {
+      const cmd = commandAt(s, i);
+      if (!cmd || !this.macros.has(cmd.name)) {
+        if (cmd) { out += s.slice(i, cmd.end); i = cmd.end; }
+        else out += s[i++];
+        continue;
+      }
+      const def = this.macros.get(cmd.name);
+      let p = cmd.end, args = [], ok = true;
+      for (let a = 0; a < def.count; a++) {
+        const g = readGroup(s, p);
+        if (!g) { ok = false; break; }
+        args.push(g.text);
+        p = g.end;
+      }
+      if (!ok) {
+        out += s.slice(i, cmd.end);
+        i = cmd.end;
+        continue;
+      }
+      const replaced = def.body.replace(/#([1-9])/g,
+        (_, n) => args[Number(n)-1] ?? "");
+      out += this.expand(replaced, depth + 1);
+      i = p;
+    }
+    return out;
+  }
+
+  /* Small text-only TeX decoder used for metadata and bibliography. */
+  plain(s) {
+    s = String(s);
+    const accents = {
+      "'":"\u0301", "`":"\u0300", '"':"\u0308",
+      "^":"\u0302", "~":"\u0303", "=":"\u0304",
+      "v":"\u030c", "c":"\u0327", "u":"\u0306",
+      ".":"\u0307", "H":"\u030b"
+    };
+    /* \i and \j are single characters, so resolve them before reading accents. */
+    s = s.replace(/\\(?:i|j)\b/g, m => m === "\\i" ? "i" : "j");
+    /*
+      An accent consumes its argument as one unit: either \'{x} or \'x.
+      A bare \{?([A-Za-z])\}? pattern used to eat the closing brace of
+      "D{\"u}rr" while keeping its opening brace, which left the whole
+      group unbalanced and stopped the conversion. Control-word accents
+      (\v \c \u \H) only apply when no letter follows, so commands such as
+      \citenamefont are no longer read as a cedilla accent.
+    */
+    const accentRe =
+      /\\(["'`^~=.])\s*(?:\{([A-Za-z])\}|([A-Za-z]))|\\([vcu.H])(?![A-Za-z])\s*(?:\{([A-Za-z])\}|([A-Za-z]))/g;
+    for (let pass = 0; pass < 4; pass++) {
+      s = s.replace(accentRe, (m, a1, b1, c1, a2, b2, c2) => {
+        const a = a1 || a2;
+        const c = b1 || c1 || b2 || c2;
+        return c ? (c + accents[a]).normalize("NFC") : m;
+      });
+    }
+    s = s.replace(/\\&/g, "&").replace(/\\%/g, "%")
+      .replace(/\\_/g, "_").replace(/\\#/g, "#")
+      .replace(/\\(?:ldots|dots)\b/g, "…")
+      .replace(/\\(?:textendash)\b/g, "–")
+      .replace(/\\(?:textemdash)\b/g, "—")
+      .replace(/\\(?:LaTeX|TeX)\b/g, m => m.slice(1))
+      .replace(/\\(?:em|it|small|bf|rm)\b/g, "");
+    let out = "";
+    for (let i = 0; i < s.length;) {
+      const cmd = commandAt(s, i);
+      if (cmd) {
+        i = cmd.end;
+        if (cmd.name === "bibinfo") {
+          const a = readGroup(s, i);
+          const b = a && readGroup(s, a.end);
+          if (b) { out += this.plain(b.text); i = b.end; continue; }
+        }
+        const g = readGroup(s, i);
+        if (g) { out += this.plain(g.text); i = g.end; }
+        else if (cmd.name === " ") out += " ";
+        else if (cmd.name === "sim") out += "~";
+        continue;
+      }
+      const g = readGroup(s, i);
+      if (s[i] === "{" && g) {
+        out += this.plain(g.text);
+        i = g.end;
+      } else out += s[i++];
+    }
+    return out.replace(/~/g, " ").replace(/\$/g, "")
+      .replace(/---/g, "—").replace(/--/g, "–")
+      .replace(/``|''/g, '"').replace(/\s+/g, " ").trim();
+  }
+
+  metadata(name) {
+    const re = new RegExp("\\\\" + name + "\\b", "g");
+    const result = [];
+    let m;
+    while ((m = re.exec(this.main))) {
+      const opt = readGroup(this.main, re.lastIndex, "[", "]");
+      const g = readGroup(this.main, opt ? opt.end : re.lastIndex);
+      if (g) { result.push(g.text); re.lastIndex = g.end; }
+    }
+    return result;
+  }
+
+  readBibliography() {
+    let source = this.bibSource;
+    if (!source.trim()) {
+      const m = /\\begin\s*\{thebibliography\}/.exec(this.main);
+      if (m) source = this.main.slice(m.index);
+    }
+    if (/\\(?:article|book)\b/.test(source) || /^\s*@\w+\s*\{/m.test(source)) {
+      this.warn("참고문헌 입력이 .bib 형식으로 보입니다. \\bibitem을 포함한 .bbl을 넣으세요.");
+    }
+    const starts = [];
+    const re = /\\bibitem\b/g;
+    let m;
+    while ((m = re.exec(source))) {
+      let p = re.lastIndex;
+      const opt = readGroup(source, p, "[", "]");
+      if (opt) p = opt.end;
+      const key = readGroup(source, p);
+      if (!key) continue;
+      starts.push({
+        start:m.index, end:key.end,
+        key:key.text.trim(), label:opt ? this.plain(opt.text) : ""
+      });
+      re.lastIndex = key.end;
+    }
+    for (let i = 0; i < starts.length; i++) {
+      const item = starts[i];
+      let body = source.slice(item.end,
+        i + 1 < starts.length ? starts[i+1].start : source.length);
+      body = body.replace(/\\end\s*\{thebibliography\}[\s\S]*$/, "").trim();
+      const labelMatch = /^(.*?)\s*\((\d{4}[a-z]?)\)/.exec(item.label);
+      const entry = {
+        key:item.key,
+        id:this.uniqueId("ref-" + item.key),
+        body,
+        authors:labelMatch ? labelMatch[1].trim() : "",
+        year:labelMatch ? labelMatch[2] : "",
+        number:i + 1
+      };
+      if (this.bibMap.has(entry.key)) this.warn("중복 bibitem: " + entry.key);
+      this.bibs.push(entry);
+      this.bibMap.set(entry.key, entry);
+    }
+  }
+
+  bibHTML(s) {
+    let out = "";
+    for (let i = 0; i < s.length;) {
+      const cmd = commandAt(s, i);
+      if (!cmd) {
+        if (s[i] === "{") {
+          const g = readGroup(s, i);
+          out += this.bibHTML(g.text); i = g.end;
+        } else if (s[i] === "$") {
+          const end = s.indexOf("$", i + 1);
+          if (end !== -1) {
+            out += esc(this.plain(s.slice(i + 1, end))); i = end + 1;
+          } else out += esc(s[i++]);
+        } else {
+          let end = i + 1;
+          while (end < s.length && !/[\\{$]/.test(s[end])) end++;
+          const chunk = s.slice(i, end);
+          out += esc(this.plain(chunk));
+          /*
+            Preserve word separation at chunk boundaries. plain() trims, and a
+            lone "~" separator (as in "\\bibfnamefont{D.}~\\bibnamefont{X}")
+            would otherwise vanish and join the words: "D.X".
+          */
+          if (/[\s~]$/.test(chunk)) out += " ";
+          i = end;
+        }
+        continue;
+      }
+      i = cmd.end;
+      if (cmd.name === "bibinfo") {
+        const field = readGroup(s, i);
+        const value = field && readGroup(s, field.end);
+        if (value) { out += this.bibHTML(value.text); i = value.end; }
+        continue;
+      }
+      if (["url","eprint"].includes(cmd.name)) {
+        const opt = readGroup(s, i, "[", "]");
+        if (opt) i = opt.end;
+        const g = readGroup(s, i);
+        if (!g) continue;
+        i = g.end;
+        const value = g.text.replace(/\\_/g, "_").trim();
+        const href = cmd.name === "eprint"
+          ? "https://arxiv.org/abs/" + value
+          : value;
+        if (/^https?:\/\//i.test(href)) {
+          out += '<a href="' + esc(href) + '">' +
+            esc(cmd.name === "eprint" ? "arXiv:" + value : value) + "</a>";
+        } else out += esc(value);
+        continue;
+      }
+      if (["em","it","small","rm"].includes(cmd.name)) continue;
+      if (cmd.name === "urlprefix") { out += "URL "; continue; }
+      const g = readGroup(s, i);
+      if (g) {
+        let text = this.bibHTML(g.text);
+        if (["emph","textit"].includes(cmd.name)) text = "<em>" + text + "</em>";
+        if (cmd.name === "textbf") text = "<strong>" + text + "</strong>";
+        if (["'","`",'"',"^","~","v","c","u","=","."].includes(cmd.name))
+          text = esc(this.plain("\\" + cmd.name + "{" + g.text + "}"));
+        out += text;
+        i = g.end;
+      } else if (["&","%","_","#"].includes(cmd.name)) {
+        out += esc(cmd.name);
+      } else if (cmd.name === " ") out += " ";
+      else if (cmd.name === "sim") out += "~";
+      else if (["'","`",'"',"^","~"].includes(cmd.name) && i < s.length) {
+        out += esc(this.plain("\\" + cmd.name + s[i++]));
+      }
+    }
+    return out;
+  }
+
+  reference(key, kind = "ref") {
+    const n = this.refs.length;
+    this.refs.push({ key:key.trim(), kind });
+    return "@@DOCUKREF" + n + "@@";
+  }
+
+  cite(name, keys, notes) {
+    this.citeCount++;
+    const items = keys.split(",").map(k => k.trim()).filter(Boolean);
+    const core = items.map(key => {
+      const entry = this.bibMap.get(key);
+      if (!entry) {
+        this.warn("참고문헌에 없는 인용 키: " + key);
+        return '<span class="bcf">[Missing citation: ' + esc(key) + "]</span>";
+      }
+      const tag = '<cite class="' + entry.id + '"></cite>';
+      if (/citeyear/.test(name)) return esc(entry.year || key) + " " + tag;
+      if (/citeauthor/.test(name)) return esc(entry.authors || key) + " " + tag;
+      if (/^citet\*?$/.test(name)) {
+        const author = esc(entry.authors || key);
+        const year = entry.year ? esc(entry.year) + " " : "";
+        return author + " (" + year + tag + ")";
+      }
+      if (/^citealp\*?$/.test(name))
+        return esc([entry.authors,entry.year].filter(Boolean).join(", ")) + " " + tag;
+      return tag;
+    }).join("; ");
+    const before = notes.length > 1 ? this.render(notes[0], true) : "";
+    const after = notes.length ? this.render(notes[notes.length - 1], true) : "";
+    let result = (before ? before + " " : "") + core + (after ? ", " + after : "");
+    if (/^(citep|citeyearpar)/.test(name)) result = "(" + result + ")";
+    return result;
+  }
+
+  math(raw, environment = null) {
+    this.mathCount++;
+    let s = this.expand(raw);
+    const labels = [];
+    s = s.replace(/\\label\s*\{([^}]+)\}/g, (_, key) => {
+      labels.push(key); return "";
+    });
+
+    /* Keep cross-reference widgets outside the MathJax expression. */
+    const links = [];
+    s = s.replace(/\\(eqref|ref)\s*\{([^}]+)\}/g, (_, kind, key) => {
+      const index = links.length + 1;
+      links.push("[" + index + "] " + this.reference(key, kind));
+      return "\\text{[" + index + "]}";
+    });
+
+    s = s.replace(/\\ensuremath\s*/g, "")
+      .replace(/\\hdots\b/g, "\\cdots")
+      .replace(/\\nonumber\b|\\notag\b/g, "")
+      .trim();
+
+    if (environment === null) {
+      if (labels.length) this.warn("인라인 수식 안의 label은 별도 번호를 부여하지 않습니다.");
+      return "<eq>" + esc(s) + "</eq>" +
+        (links.length ? " (" + links.join("; ") + ")" : "");
+    }
+
+    const numbered = !environment.endsWith("*") &&
+      !["displaymath","bracket","dollars"].includes(environment);
+
+    let id;
+    if (numbered) {
+      this.equation++;
+      id = this.uniqueId("eq-" + this.section + "-" + this.equation);
+    } else {
+      id = this.uniqueId("eq-display-" + this.mathCount);
+      this.warn("번호 없는 독립 수식도 <eqq>로 출력됩니다. docuK의 표시 번호 정책은 별도 확인하세요.");
+    }
+
+    const number = numbered ? this.section + "." + this.equation : "";
+    const target = { id, number };
+    for (const key of labels) this.addLabel(key, target);
+    this.current = target;
+
+    if (/^(eqnarray|align|alignat|gather|multline)/.test(environment)) {
+      const originalRows = raw.split(/\\\\/).filter(x => x.trim());
+      const numberedRows = originalRows.filter(x => !/\\(?:nonumber|notag)\b/.test(x));
+      if (numbered && numberedRows.length > 1) {
+        this.warn("여러 번호를 가질 수 있는 " + environment +
+          " 블록을 하나의 <eqq>로 묶었습니다: " + id +
+          ". 이 블록의 원문 수식 번호를 검토하세요.");
+      }
+      if (/^eqnarray/.test(environment)) s = s.replace(/&([^&]*?)&/g, "&$1");
+      const inner = /^(gather|multline)/.test(environment) ? "gathered" : "aligned";
+      s = "\\begin{" + inner + "}\n" + s + "\n\\end{" + inner + "}";
+    }
+
+    const comment = this.options.keepLabels && labels.length
+      ? htmlComment("LaTeX labels: " + safeComment(labels.join(", "))) + "\n\n" : "";
+    let out = comment + '<eqq id="' + id + '">\n' + esc(s) + "\n</eqq>";
+    if (links.length) out += '\n\n<div class="cmt">Equation references: ' +
+      links.join("; ") + "</div>";
+    return "\n\n" + out + "\n\n";
+  }
+
+  heading(level, raw, starred) {
+    const embedded = [];
+    raw = raw.replace(/\\label\s*\{([^}]+)\}/g, (_, k) => {
+      embedded.push(k); return "";
+    });
+    let id, number;
+    if (starred) {
+      id = this.uniqueId("sec-unnumbered-" + (++this.noNumberSection));
+      number = this.plain(raw);
+    } else if (level === 1) {
+      this.section++;
+      this.subsection = 0; this.subsubsection = 0; this.equation = 0;
+      number = roman(this.section);
+      id = this.uniqueId("sec-" + number);
+    } else if (level === 2) {
+      this.subsection++; this.subsubsection = 0;
+      number = roman(this.section) + "-" + String.fromCharCode(64 + this.subsection);
+      id = this.uniqueId("sec-" + number);
+    } else {
+      this.subsubsection++;
+      number = roman(this.section) + "-" +
+        String.fromCharCode(64 + this.subsection) + "-" + this.subsubsection;
+      id = this.uniqueId("sec-" + number);
+    }
+    this.current = { id, number };
+    for (const key of embedded) this.addLabel(key, this.current);
+    this.sectionCount++;
+    const marker = "#".repeat(level + 1);
+    return "\n\n" + marker + "[" + (starred ? ".no-sec-N" : "") +
+      "#" + id + "] " + this.render(raw, true).trim() + "\n\n";
+  }
+
+  renderList(raw, ordered) {
+    const parts = raw.split(/\\item\b/);
+    const leading = parts.shift();
+    if (leading.trim()) this.warn("목록 시작 앞의 텍스트를 확인하세요.");
+    const custom = parts.some(p => /^\s*\[/.test(p));
+    const tag = ordered && !custom ? "ol" : "ul";
+    let out = "<" + tag + (custom ? ' style="list-style-type:none"' : "") + ">\n";
+    for (let p of parts) {
+      const label = readGroup(p, 0, "[", "]");
+      let prefix = "";
+      if (label) {
+        prefix = this.render(label.text, true) + " ";
+        p = p.slice(label.end);
+      }
+      out += "<li>" + prefix + this.paragraphs(this.render(p), true) + "</li>\n";
+    }
+    return "\n\n" + out + "</" + tag + ">\n\n";
+  }
+
+  render(s, inline = false) {
+    let out = "";
+    for (let i = 0; i < s.length;) {
+      if (s[i] === "$" && !escapedAt(s, i)) {
+        const display = s[i + 1] === "$";
+        const delimiter = display ? "$$" : "$";
+        const start = i + delimiter.length;
+        let end = start;
+        while (end < s.length) {
+          if (s.startsWith(delimiter, end) && !escapedAt(s, end)) break;
+          end++;
+        }
+        if (end >= s.length) throw new Error("닫히지 않은 $ 수식");
+        out += this.math(s.slice(start, end), display ? "dollars" : null);
+        i = end + delimiter.length;
+        continue;
+      }
+      if (s[i] === "{") {
+        const g = readGroup(s, i);
+        const old = /^\s*\\(em|it|bf|rm)\b/.exec(g.text);
+        let content = g.text;
+        if (old) content = content.slice(old[0].length);
+        let rendered = this.render(content, inline);
+        if (old && ["em","it"].includes(old[1])) rendered = "<em>" + rendered + "</em>";
+        if (old && old[1] === "bf") rendered = "<strong>" + rendered + "</strong>";
+        out += rendered; i = g.end; continue;
+      }
+      const cmd = commandAt(s, i);
+      if (!cmd) {
+        if (s.startsWith("---", i)) { out += "—"; i += 3; }
+        else if (s.startsWith("--", i)) { out += "–"; i += 2; }
+        else if (s.startsWith("``", i)) { out += "“"; i += 2; }
+        else if (s.startsWith("''", i)) { out += "”"; i += 2; }
+        else if (s[i] === "~") { out += " "; i++; }
+        else out += esc(s[i++]);
+        continue;
+      }
+
+      i = cmd.end;
+      const name = cmd.name;
+      const base = name.replace(/\*$/, "");
+
+      if (name === "[" || name === "(") {
+        const close = name === "[" ? "\\]" : "\\)";
+        const end = s.indexOf(close, i);
+        if (end < 0) throw new Error("닫히지 않은 수식: \\" + name);
+        out += this.math(s.slice(i, end), name === "[" ? "bracket" : null);
+        i = end + close.length;
+        continue;
+      }
+
+      if (this.macros.has(name)) {
+        const def = this.macros.get(name);
+        let args = [], ok = true, end = i;
+        for (let a = 0; a < def.count; a++) {
+          const g = readGroup(s, end);
+          if (!g) { ok = false; break; }
+          args.push(g.text); end = g.end;
+        }
+        if (ok) {
+          const replacement = def.body.replace(/#([1-9])/g,
+            (_, n) => args[Number(n)-1] ?? "");
+          out += this.render(this.expand(replacement), inline);
+          i = end;
+          continue;
+        }
+      }
+
+      if (name === "begin") {
+        const g = readGroup(s, i);
+        if (!g) throw new Error("\\begin 뒤에 환경 이름이 없습니다.");
+        const env = g.text;
+        const block = getEnvironment(s, g.end, env);
+        i = block.end;
+        if (/^(equation|eqnarray|align|alignat|gather|multline|displaymath)\*?$/.test(env)) {
+          out += this.math(block.text, env);
+        } else if (env === "abstract") {
+          out += "\n\n##[.no-sec-N#sec-abstract] Abstract\n\n" + this.render(block.text) + "\n\n";
+        } else if (env === "acknowledgments" || env === "acknowledgements") {
+          out += "\n\n##[.no-sec-N#sec-acknowledgments] Acknowledgments\n\n" +
+            this.render(block.text) + "\n\n";
+        } else if (["quote","quotation"].includes(env)) {
+          out += '\n\n<div class="quote">\n' +
+            this.paragraphs(this.render(block.text), true) + "\n</div>\n\n";
+        } else if (["enumerate","itemize"].includes(env)) {
+          out += this.renderList(block.text, env === "enumerate");
+        } else if (["widetext","center","flushleft","flushright"].includes(env)) {
+          out += this.render(block.text);
+        } else if (env === "thebibliography") {
+          // A single normalized bibliography is appended after body conversion.
+        } else if (env === "verbatim") {
+          out += '\n\n<pre class="prettyprint">' + esc(block.text) + "</pre>\n\n";
+        } else {
+          this.warn("완전 지원하지 않는 환경: " + env);
+          out += '\n\n<div class="bcf">Unconverted environment: ' +
+            esc(env) + "</div>\n\n<pre>" +
+            esc("\\begin{" + env + "}" + block.text + "\\end{" + env + "}") +
+            "</pre>\n\n";
+        }
+        continue;
+      }
+
+      if (["section","subsection","subsubsection"].includes(base)) {
+        const opt = readGroup(s, i, "[", "]");
+        if (opt) i = opt.end;
+        const g = readGroup(s, i);
+        if (!g) throw new Error("제목 인수가 없는 \\" + name);
+        out += this.heading(
+          ["section","subsection","subsubsection"].indexOf(base) + 1,
+          g.text, name.endsWith("*")
+        );
+        i = g.end; continue;
+      }
+
+      if (name === "label") {
+        const g = readGroup(s, i);
+        if (g) { this.addLabel(g.text, this.current); i = g.end; }
+        continue;
+      }
+
+      if (["ref","eqref","pageref","autoref"].includes(name)) {
+        const g = readGroup(s, i);
+        if (g) {
+          if (name === "pageref")
+            this.warn("웹 문서에는 원문 페이지가 없으므로 pageref를 대상 링크로 바꿨습니다.");
+          out += this.reference(g.text, name);
+          i = g.end;
+        }
+        continue;
+      }
+
+      if (/^cite(?:t|p|alp|alt|author|year|yearpar)?\*?$/.test(name)) {
+        const notes = [];
+        let g;
+        while ((g = readGroup(s, i, "[", "]"))) {
+          notes.push(g.text); i = g.end;
+        }
+        g = readGroup(s, i);
+        if (g) { out += this.cite(name, g.text, notes); i = g.end; }
+        continue;
+      }
+
+      if (name === "footnote") {
+        const opt = readGroup(s, i, "[", "]");
+        if (opt) { i = opt.end; this.warn("각주 지정 번호 대신 순차 번호를 사용했습니다."); }
+        const g = readGroup(s, i);
+        if (!g) continue;
+        i = g.end;
+        const n = ++this.footnote;
+        const id = this.uniqueId("footnote-" + n);
+        const old = this.current;
+        this.current = { id, number:String(n) };
+        const content = this.paragraphs(this.render(g.text), true);
+        this.current = old;
+        const token = "@@DOCUKFOOT" + n + "@@";
+        this.footBlocks ||= new Map();
+        this.footBlocks.set(token,
+          '<div class="footnote" id="' + id + '"><span class="number">' +
+          n + "</span> " + content + "</div>");
+        out += '<refer class="' + id + '"></refer>' + token;
+        continue;
+      }
+
+      if (name === "href") {
+        const url = readGroup(s, i);
+        const text = url && readGroup(s, url.end);
+        if (text) {
+          const href = this.plain(url.text);
+          out += /^https?:\/\/|^mailto:/i.test(href)
+            ? '<a href="' + esc(href) + '">' + this.render(text.text, true) + "</a>"
+            : this.render(text.text, true);
+          i = text.end;
+        }
+        continue;
+      }
+
+      if (name === "url") {
+        const g = readGroup(s, i);
+        if (g) {
+          const href = g.text.replace(/\\_/g, "_").trim();
+          out += /^https?:\/\//i.test(href)
+            ? '<a href="' + esc(href) + '">' + esc(href) + "</a>" : esc(href);
+          i = g.end;
+        }
+        continue;
+      }
+
+      if (name === "ensuremath") {
+        const g = readGroup(s, i);
+        if (g) { out += this.math(g.text); i = g.end; }
+        continue;
+      }
+
+      if (["emph","textit","textbf","texttt","textrm","textnormal","mbox",
+           "citetext","underline"].includes(name)) {
+        const g = readGroup(s, i);
+        if (g) {
+          let text = this.render(g.text, true);
+          if (["emph","textit"].includes(name)) text = "<em>" + text + "</em>";
+          if (name === "textbf") text = "<strong>" + text + "</strong>";
+          if (name === "texttt") text = "<code>" + esc(this.plain(g.text)) + "</code>";
+          if (name === "underline") text = "<u>" + text + "</u>";
+          if (name === "citetext") text = "(" + text + ")";
+          out += text; i = g.end;
+        }
+        continue;
+      }
+
+      if (["title","author","affiliation","email","keywords","pacs",
+           "bibliographystyle","bibliography"].includes(name)) {
+        const g = readGroup(s, i);
+        if (g) i = g.end;
+        continue;
+      }
+      if (["newcommand","renewcommand","providecommand"].includes(base)) {
+        const g = readGroup(s, i);
+        if (g) i = g.end;
+        else {
+          const c = commandAt(s, skipSpace(s, i));
+          if (c) i = c.end;
+        }
+        let opt;
+        while ((opt = readGroup(s, i, "[", "]"))) i = opt.end;
+        const body = readGroup(s, i);
+        if (body) i = body.end;
+        continue;
+      }
+
+      if (name === "maketitle") {
+        const authors = this.metadata("author").map(x => esc(this.plain(x))).join(", ");
+        const aff = this.metadata("affiliation").map(x => esc(this.plain(x))).join("<br>");
+        out += "\n\n" + (authors ? "<div class=\"p\"><strong>" + authors +
+          "</strong>" + (aff ? "<br>" + aff : "") + "</div>" : "") + "\n\n";
+        continue;
+      }
+      if (name === "tableofcontents") { out += "\n\n## TOC\n\n"; continue; }
+      if (["noindent","small","normalsize","footnotesize","em","it","rm",
+           "makeatletter","makeatother"].includes(name)) continue;
+      if (name === "@addtoreset") {
+        for (let a = 0; a < 2; a++) {
+          const g = readGroup(s, i); if (g) i = g.end;
+        }
+        continue;
+      }
+      if (name === "\\" || name === "newline") { out += "<br>\n"; continue; }
+      if (["ldots","dots"].includes(name)) { out += "…"; continue; }
+      if (["TeX","LaTeX"].includes(name)) { out += name; continue; }
+      if (["&","%","_","#","$","{","}"].includes(name)) { out += esc(name); continue; }
+      if ([" ",",",";",":","!"].includes(name)) { out += " "; continue; }
+
+      if (["'","`",'"',"^","~","v","c","u","=",".","H"].includes(name)) {
+        const g = readGroup(s, i);
+        if (g) {
+          out += esc(this.plain("\\" + name + "{" + g.text + "}"));
+          i = g.end;
+        } else if (i < s.length) out += esc(this.plain("\\" + name + s[i++]));
+        continue;
+      }
+
+      this.warn("지원하지 않는 명령을 결과에 남겼습니다: \\" + name);
+      out += "<code>" + esc("\\" + name) + "</code>";
+    }
+    return out;
+  }
+
+  paragraphs(s, nested = false) {
+    const blocks = s.trim().split(/\n\s*\n+/);
+    return blocks.map(p => {
+      p = p.trim();
+      if (!p) return "";
+      if (/^(#{1,6}(?:\[|\s)|\x3C!--|<(?:div|ul|ol|li|eqq|pre|figure|table)\b)/.test(p))
+        return p;
+      return '<div class="p">' + p.replace(/\s*\n\s*/g, " ") + "</div>";
+    }).filter(Boolean).join("\n\n");
+  }
+
+  resolve(s) {
+    return s.replace(/@@DOCUKREF(\d+)@@/g, (_, n) => {
+      const ref = this.refs[Number(n)];
+      const target = this.labels.get(ref.key);
+      if (!target) {
+        this.warn("해결되지 않은 교차참조: " + ref.key);
+        return '<span class="bcf">[Unresolved: ' + esc(ref.key) + "]</span>";
+      }
+      return '<refer class="' + target.id + '"></refer>';
+    });
+  }
+
+  convert() {
+    const begin = /\\begin\s*\{document\}/.exec(this.main);
+    let body = begin ? this.main.slice(begin.index + begin[0].length) : this.main;
+    body = body.replace(/\\end\s*\{document\}[\s\S]*$/, "");
+
+    let rendered = this.render(body);
+    rendered = this.paragraphs(rendered);
+
+    /*
+      Footnotes are moved to paragraph boundaries so they do not split
+      sentences or create invalid nested paragraph markup.
+    */
+    if (this.footBlocks) {
+      const pending = [];
+      const blocks = rendered.split(/\n\n+/).map(block => {
+        const notes = [];
+        block = block.replace(/@@DOCUKFOOT\d+@@/g, token => {
+          notes.push(this.footBlocks.get(token) || "");
+          return "";
+        });
+        return block + (notes.length ? "\n\n" + notes.join("\n\n") : "");
+      });
+      rendered = blocks.join("\n\n");
+      // Nested footnotes are unusual; retain rather than discard them.
+      for (let pass = 0; pass < 8 && /@@DOCUKFOOT\d+@@/.test(rendered); pass++)
+        rendered = rendered.replace(/@@DOCUKFOOT\d+@@/g,
+          token => this.footBlocks.get(token) || "");
+    }
+
+    rendered = this.resolve(rendered);
+
+    let bib = "\n\n## RRA\n\n<ol class=\"refs\">\n";
+    for (const entry of this.bibs) {
+      bib += '<li id="' + entry.id + '">' + this.bibHTML(entry.body) + "</li>\n";
+    }
+    bib += "</ol>\n\n##/ References and Related Articles\n";
+    if (!this.bibs.length) this.warn("변환할 참고문헌 항목을 찾지 못했습니다.");
+
+    const title = this.options.title.trim() ||
+      this.plain(this.metadata("title")[0] || "Converted LaTeX document");
+
+    let see = "# " + esc(title) + "\n\n" +
+      htmlComment("Converted from user-provided LaTeX. Scientific content is not automatically corrected.") +
+      "\n\n" + rendered + bib;
+
+    this.warn("식별자 eq-절-번호는 원문 대응용입니다. docuK 화면의 자동 번호 형식이 원문과 같은지는 렌더링 후 확인하세요.");
+    this.warn("변환기는 과학적 오류나 원문의 잘못된 참조를 자동 교정하지 않습니다.");
+
+    const result = this.options.fullHTML ? makeDocument(title, see) : see;
+
+    // Check generated targets without interpreting any input as executable HTML.
+    const ids = new Set([...result.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
+    /*
+      docuK headings declare their target inside the heading marker, either
+      "##[#id] Title" or "##[.no-sec-N#id] Title", so those ids are valid
+      refer/cite targets even though they carry no id attribute.
+    */
+    for (const m of result.matchAll(/^#+\[[^\]]*#([A-Za-z0-9_-]+)\]/gm)) ids.add(m[1]);
+    for (const m of result.matchAll(/<(?:cite|refer)\s+class="([^"]+)"/g)) {
+      if (!ids.has(m[1])) this.warn("결과에서 대상 ID를 찾지 못함: " + m[1]);
+    }
+
+    return {
+      result, title,
+      warnings:[...this.warnings],
+      counts:{
+        sections:this.sectionCount,
+        equations:this.mathCount,
+        footnotes:this.footnote,
+        bibliography:this.bibs.length,
+        citations:this.citeCount,
+        references:this.refs.length
+      }
+    };
+  }
+}
+
+function makeDocument(title, see) {
+  /*
+    Every structural tag is emitted through the helpers above, so this source
+    holds no literal head/body/html/script/style tag for a blog platform to
+    inject its own script tags into (see the note on the helpers).
+  */
+  const cdn = "https://tistory1.daumcdn.net/tistory/1468360/skin/images/";
+  return `${DOCTYPE_HTML}
+${htmlTag('html lang="en"')}
+${htmlTag("head")}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(title)}">
+${htmlTag("style")}
+.docuK .quote, .docuK .footnote {
+  padding:.7em 1em; margin:0 0 1.3em;
+  background:rgb(20,24,32); color:white;
+}
+.docuK.bright .quote, .docuK.bright .footnote {
+  background:rgb(232,235,240); color:black;
+}
+.docuK .quote { border-left:.4em solid #667fc1; }
+.docuK .footnote { font-size:.9em; border-left:.4em solid #777; }
+.docuK .quote>.p:last-child, .docuK .footnote>.p:last-child {
+  padding-bottom:0;
+}
+.docuK eqq { overflow-x:auto; }
+${htmlEndTag("style")}
+${htmlEndTag("head")}
+${htmlTag("body")}
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+${htmlTagStart("script")} src="${cdn}jquery.js">${htmlEndTag("script")}
+<link rel="stylesheet" href="${cdn}docuK-2.3.css">
+${htmlTagStart("script")} src="${cdn}docuK-prepare-2.3.js" charset="utf-8">${htmlEndTag("script")}
+</codeprint>
+
+<codeprint class="SEE">
+${see}
+</codeprint>
+
+<codeprint id="docuK-script">
+${htmlTag("script")}
+(function (m) {
+  if (!m) {
+    console.error("docuK did not load. Check the network and CDN URLs.");
+    return;
+  }
+  m.printMode = true;
+  m.ripplesDisabled = true;
+  m.recoCats = "[Physics/Math/Science]--Physics--Quantum Mechanics";
+  m.wait = 1024;
+  m.delayPad = 512;
+})(window.k);
+${htmlEndTag("script")}
+${htmlTagStart("script")} src="${cdn}docuK-postProcess-2.3.js" charset="utf-8">${htmlEndTag("script")}
+</codeprint>
+${htmlEndTag("body")}
+${htmlEndTag("html")}`;
+}
+
+/* UI */
+let lastResult = null;
+
+async function loadFile(file, inputId, infoId) {
+  if (!file) return;
+  try {
+    const text = await file.text();
+    $(inputId).value = text;
+    $(infoId).textContent = file.name + " · " +
+      text.length.toLocaleString() + " characters";
+    $("status").textContent = "파일을 읽었습니다.";
+  } catch (e) {
+    $("status").textContent = "파일 읽기 실패: " + e.message;
+  }
+}
+
+$("mainFile").addEventListener("change", e =>
+  loadFile(e.target.files[0], "mainInput", "mainInfo"));
+$("bibFile").addEventListener("change", e =>
+  loadFile(e.target.files[0], "bibInput", "bibInfo"));
+
+for (const [area, info] of [["mainInput","mainInfo"],["bibInput","bibInfo"]]) {
+  $(area).addEventListener("dragover", e => e.preventDefault());
+  $(area).addEventListener("drop", e => {
+    if (!e.dataTransfer.files.length) return;
+    e.preventDefault();
+    loadFile(e.dataTransfer.files[0], area, info);
+  });
+}
+
+$("convertBtn").addEventListener("click", async () => {
+  if (!$("mainInput").value.trim()) {
+    $("status").textContent = "먼저 본문 LaTeX를 넣어 주세요.";
+    $("mainInput").focus();
+    return;
+  }
+  $("convertBtn").disabled = true;
+  $("status").textContent = "변환 중…";
+  $("copyBtn").disabled = true;
+  $("downloadBtn").disabled = true;
+  await new Promise(resolve => setTimeout(resolve, 30));
+  try {
+    const converter = new Converter(
+      $("mainInput").value,
+      $("bibInput").value,
+      {
+        title:$("titleInput").value,
+        fullHTML:$("fullHTML").checked,
+        keepLabels:$("keepLabels").checked
+      }
+    );
+    lastResult = converter.convert();
+    $("output").value = lastResult.result;
+    const c = lastResult.counts;
+    $("stats").replaceChildren();
+    for (const text of [
+      "절 " + c.sections,
+      "수식 블록 " + c.equations,
+      "각주 " + c.footnotes,
+      "참고문헌 " + c.bibliography,
+      "인용 명령 " + c.citations,
+      "교차참조 " + c.references,
+      lastResult.result.length.toLocaleString() + " characters"
+    ]) {
+      const span = document.createElement("span");
+      span.className = "stat";
+      span.textContent = text;
+      $("stats").append(span);
+    }
+    $("warnings").textContent = lastResult.warnings.length
+      ? lastResult.warnings.map((w, i) => (i + 1) + ". " + w).join("\n")
+      : "경고 없음";
+    $("warningTitle").textContent =
+      "변환 로그 · 검토 사항 " + lastResult.warnings.length + "개";
+    $("status").textContent = "완료 — 복사 또는 다운로드할 수 있습니다.";
+    $("copyBtn").disabled = false;
+    $("downloadBtn").disabled = false;
+  } catch (e) {
+    console.error(e);
+    $("status").textContent = "변환 실패: " + e.message;
+    $("warnings").textContent = e.stack || String(e);
+    $("warningDetails").open = true;
+    lastResult = null;
+  } finally {
+    $("convertBtn").disabled = false;
+  }
+});
+
+$("copyBtn").addEventListener("click", async () => {
+  const text = $("output").value;
+  try {
+    if (!navigator.clipboard) throw new Error("Clipboard API unavailable");
+    await navigator.clipboard.writeText(text);
+    $("status").textContent = "전체 결과를 복사했습니다.";
+  } catch (_) {
+    $("output").focus();
+    $("output").select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (_) {}
+    $("status").textContent = ok
+      ? "전체 결과를 복사했습니다."
+      : "결과를 전체 선택했습니다. Ctrl+C 또는 ⌘C를 눌러 주세요.";
+  }
+});
+
+$("downloadBtn").addEventListener("click", () => {
+  if (!lastResult) return;
+  const full = $("output").value.startsWith(DOCTYPE_HTML);
+  const blob = new Blob([$ ("output").value], {
+    type:full ? "text/html;charset=utf-8" : "text/plain;charset=utf-8"
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = (safeId(lastResult.title).slice(0, 100) || "docuk") +
+    (full ? ".html" : ".txt");
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  $("status").textContent = "다운로드를 시작했습니다.";
+});
+
+$("clearBtn").addEventListener("click", () => {
+  if (!confirm("입력과 변환 결과를 지울까요? 다운로드한 파일은 삭제되지 않습니다.")) return;
+  for (const id of ["mainInput","bibInput","titleInput","output"]) $(id).value = "";
+  $("stats").replaceChildren();
+  $("warnings").textContent = "아직 변환하지 않았습니다.";
+  $("warningTitle").textContent = "변환 로그";
+  $("copyBtn").disabled = $("downloadBtn").disabled = true;
+  $("status").textContent = "초기화했습니다.";
+  lastResult = null;
+});
+
+$("sampleBtn").addEventListener("click", () => {
+  if ($("mainInput").value.trim() &&
+      !confirm("현재 입력을 테스트 예제로 바꿀까요?")) return;
+
+  $("mainInput").value = String.raw`\documentclass{article}
+\newcommand{\ket}[1]{\ensuremath{|#1\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\langle #1|}}
+\title{Decoherence: conversion test}
+\author{Example Author}
+\begin{document}
+\maketitle
+\begin{abstract}
+This is a local conversion test.
+\end{abstract}
+\tableofcontents
+\section{Introduction}
+\label{sec:intro}
+See \citet{Zurek:1981:dd} and Eq.~\eqref{eq:state}.
+An inline state is $\ket{\psi}$.
+\section{Measurement}
+\label{sec:measurement}
+\subsection{Entanglement}
+\begin{equation}
+\label{eq:state}
+\ket{\psi}=\sum_n c_n\ket{s_n}\ket{e_n}.
+\end{equation}
+The environment suppresses local interference.\footnote{This is not by itself a selection of a single outcome.}
+\begin{quote}
+A quotation with $\rho_{\mathcal S}$ and \citep[p.~1519]{Zurek:1981:dd}.
+\end{quote}
+\begin{enumerate}
+\item First observation.
+\item[(A2)] A custom item with $\alpha+\beta$.
+\end{enumerate}
+Return to Sec.~\ref{sec:intro}.
+\begin{acknowledgments}
+Thanks to the reader.
+\end{acknowledgments}
+\bibliography{references}
+\end{document}`;
+
+  $("bibInput").value = String.raw`\begin{thebibliography}{1}
+\bibitem[{\citenamefont{Zurek}(1981)}]{Zurek:1981:dd}
+\bibinfo{author}{\bibnamefont{Zurek}, \bibfnamefont{W.~H.}},
+\bibinfo{year}{1981},
+\bibinfo{journal}{Phys. Rev. D}
+\textbf{\bibinfo{volume}{24}}, \bibinfo{pages}{1516}.
+\end{thebibliography}`;
+  $("titleInput").value = "";
+  $("status").textContent = "테스트 예제를 넣었습니다. 전체 변환을 눌러 주세요.";
+});
+</script>
