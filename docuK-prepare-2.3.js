@@ -7,6 +7,10 @@
 GolfMOA (\uACE8\uD504\uBAA8\uC544) : \uD074\uB798\uC2DD\uCF54\uC2A4 \uCC54\uD504 (\uC544\uB9C8\uCD94\uC5B4 \uB300\uD68C 1\uB4F1) \uCD9C\uC2E0 \uBB38\uC0C1\uACBD\uC528\uAC00 \uC6B4\uC601\uD558\uB294 \uACE8\uD504\uC804\uBB38 \uBAA8\uC544\uC0FE. \uB808\uC2A8\uB3C4 \uD558\uACE0 \uACE8\uD504\uCC44 \uCEE4\uC2A4\uD140/\uC218\uB9AC/\uAC01\uC885 \uC18C\uBAA8\uD488 \uAD50\uCCB4 \uB4F1 \uACE8\uD504 \uAD00\uB828 \uAC70\uC758 \uBAA8\uB4E0\uAC78 \uB2E4\uB8E8\uB294 \uACF3. \uAE08\uBA54\uB2EC\uB9AC\uC2A4\uD2B8\uC5D0\uAC8C \uB808\uC2A8 \uBC1B\uC544\uBCF4\uC138\uC694. \uCC28\uC6D0\uC774 \uB2E4\uB985\uB2C8\uB2E4 ^^.<br/>
 \uBB38\uC0C1\uACBD: <a href="tel:01066344944">010-6634-4944</a>, \uBCF4\uC870 kipid (\uC774\uAC15\uC218): <a href="tel:01041771343">010-4177-1343</a><br/>
 <img src="https://kipid.s3.ap-northeast-2.amazonaws.com/GolfMOA/GolfMOA.png" alt="GolfMOA (\uACE8\uD504\uBAA8\uC544)" style="max-width:100%;height:auto"/><br/>
+\uC704\uCE58: \uACBD\uAE30\uB3C4 \uC548\uC0B0\uC2DC \uB2E8\uC6D0\uAD6C \uACE0\uC794\uB3D9 \uC548\uC0B0\uCC9C\uB0A8\uB85C 265, 1\uCE35 \uACE8\uD504\uBAA8\uC544 (GolfMOA)<br/>
+<div class="rC"><div class="rSC">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x357b6f1e7ea316cf%3A0x7dac1a3d04992b91!2z6rK96riw64-EIOyViOyCsOyLnCDri6jsm5Dqtawg7JWI7IKw7LKc64Ko66GcIDI2NQ!5e0!3m2!1sko!2skr!4v1793622252268!5m2!1sko!2skr" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div></div>
 </div>
 </div>
 <div class="docuK-con">

@@ -1166,6 +1166,10 @@ m.promotingOK24HTML = `<div class="docuK-con">
 GolfMOA (골프모아) : 클래식코스 챔프 (아마추어 대회 1등) 출신 문상경씨가 운영하는 골프전문 모아샾. 레슨도 하고 골프채 커스텀/수리/각종 소모품 교체 등 골프 관련 거의 모든걸 다루는 곳. 금메달리스트에게 레슨 받아보세요. 차원이 다릅니다 ^^.<br/>
 문상경: <a href="tel:01066344944">010-6634-4944</a>, 보조 kipid (이강수): <a href="tel:01041771343">010-4177-1343</a><br/>
 <img src="https://kipid.s3.ap-northeast-2.amazonaws.com/GolfMOA/GolfMOA.png" alt="GolfMOA (골프모아)" style="max-width:100%;height:auto"/><br/>
+위치: 경기도 안산시 단원구 고잔동 안산천남로 265, 1층 골프모아 (GolfMOA)<br/>
+<div class="rC"><div class="rSC">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x357b6f1e7ea316cf%3A0x7dac1a3d04992b91!2z6rK96riw64-EIOyViOyCsOyLnCDri6jsm5Dqtawg7JWI7IKw7LKc64Ko66GcIDI2NQ!5e0!3m2!1sko!2skr!4v1793622252268!5m2!1sko!2skr" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div></div>
 </div>
 </div>
 <div class="docuK-con">
