@@ -1162,12 +1162,13 @@ m.toggleFK = function (): void {
 m.promotingOK24HTML = `<div class="docuK-con">
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
-<div class="p order promoting promoting-ok24">
-포장이사 전문업체 (일반이사, 보관이사) :: 오케이 이사물류 (OK 24)<br/>
-<a href="tel:01026832655">010-2683-2655</a>, <a href="tel:0314100424">031-410-0424</a>, <a href="tel:0314080424">031-408-0424</a>
+<div class="p order promoting">
+GolfMOA (골프모아) : 클래식코스 챔프 (아마추어 대회 1등) 출신 문상경씨가 운영하는 골프전문 모아샾. 레슨도 하고 골프채 커스텀/수리/각종 소모품 교체 등 골프 관련 거의 모든걸 다루는 곳. 금메달리스트에게 레슨 받아보세요. 차원이 다릅니다 ^^.<br/>
+문상경: <a href="tel:01066344944">010-6634-4944</a>, 보조 kipid (이강수): <a href="tel:01041771343">010-4177-1343</a><br/>
+<img src="https://kipid.s3.ap-northeast-2.amazonaws.com/GolfMOA/GolfMOA.png" alt="GolfMOA (골프모아)" style="max-width:100%;height:auto"/><br/>
 </div>
-</div>`;
-m.promotingKotetsuHTML = `<div class="docuK-con">
+</div>
+<div class="docuK-con">
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="p order promoting promoting-kotetsu">
@@ -1201,6 +1202,15 @@ m.promotingKotetsuHTML = `<div class="docuK-con">
 이용시간 : 평일 10:00 ~ 18:30 (점심시간 13:00 ~ 14:00)<br/>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 토요일 09:30 ~ 14:00 (점심시간 없이 진료)<br/>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 일요일/공휴일 휴무
+</div>
+</div>
+<div class="docuK-con">
+<div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
+<div class="cBoth"></div>
+<div class="p order promoting promoting-ok24">
+포장이사 전문업체 (일반이사, 보관이사) :: 오케이 이사물류 (OK 24)<br/>
+<a href="tel:01026832655">010-2683-2655</a>, <a href="tel:0314100424">031-410-0424</a>, <a href="tel:0314080424">031-408-0424</a><br/>
+<img src="https://kipid.s3.ap-northeast-2.amazonaws.com/kipid/%EC%9D%B4%EB%8F%99%EC%A7%91/OK24.png" alt="오케이 이사물류 (OK 24)" style="max-width:100%;height:auto"/><br/>
 </div>
 </div>`;
 
