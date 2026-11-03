@@ -1780,6 +1780,7 @@ m.doFSGo = function (fs: FuzzySearch): void {
 			str += `<div class="list-item" onclick="k.gotoLi(event,this,${k},m.fsGo)">${fsFLk.html}${res.array[sorted[i]].highlight !== undefined ? `<div class="highlighted"><span class="maxMatchScore">${res.array[sorted[i]].maxMatchScore}</span> :: ${res.array[sorted[i]].highlight}</div>` : ""}</div>`;
 		}
 		fs.$fsl.html(str);
+		fs.$fsl.scrollTop(0);
 		fs.$fsLis = fs.$fsl.find(".list-item");
 	}
 };
