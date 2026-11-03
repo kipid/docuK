@@ -147,6 +147,7 @@ interface K {
 	fuzzySearch?: (ptnSH: SplitHangul, fs: FuzzySearch) => FuzzySearchResult;
 	gotoLi?: (e: any, elem: HTMLElement, k: number, fs: FuzzySearch) => void;
 	doFSGo?: (fs: FuzzySearch) => void;
+	fsScrollTopOnSearchChange?: (fs: FuzzySearch, searchTxt: string) => boolean;
 	fsGoOn?: () => void;
 	previous?: number;
 	wait?: number;
@@ -326,6 +327,7 @@ export type FuzzySearchResult = {
 } | null;
 
 export type FuzzySearch = {
+	lastSearchTxt: string;
 	array: FuzzySearchResult[];
 	fullList: FuzzySearchFullListItem[];
 	shuffled: { i: number }[] | undefined | null | false;

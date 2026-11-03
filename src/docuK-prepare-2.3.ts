@@ -1457,6 +1457,7 @@ m.splitHangul = function (str: string): SplitHangul {
 ////////////////////////////////////////////////////
 m.fsLength = 300;
 m.fsGo = {
+	lastSearchTxt: "",
 	array: [{ ptnSH: m.splitHangul("$!@#") }, { ptnSH: m.splitHangul("$!@#") }],
 	fullList: [],
 	$fs: window.$fuzzy_search as JQuery<HTMLTextAreaElement>,
@@ -1768,6 +1769,15 @@ m.gotoLi = function (e: any, elem: HTMLElement, k: number, fs: FuzzySearch): voi
 		m.$window.scrollTop($listI.offset().top);
 	}
 };
+m.fsScrollTopOnSearchChange = function (fs, searchTxt) {
+	// * The fuzzy search list should be shown from the top whenever the search text changes.
+	if (!fs?.$fsl || fs.lastSearchTxt === searchTxt) {
+		return false;
+	}
+	fs.lastSearchTxt = searchTxt;
+	fs.$fsl.scrollTop(0);
+	return true;
+};
 m.doFSGo = function (fs: FuzzySearch): void {
 	let fsPtnSH = m.splitHangul(fs.$fs[0].value);
 	if (fs.array[0].ptnSH.splitted !== fsPtnSH.splitted) {
@@ -1780,8 +1790,8 @@ m.doFSGo = function (fs: FuzzySearch): void {
 			str += `<div class="list-item" onclick="k.gotoLi(event,this,${k},m.fsGo)">${fsFLk.html}${res.array[sorted[i]].highlight !== undefined ? `<div class="highlighted"><span class="maxMatchScore">${res.array[sorted[i]].maxMatchScore}</span> :: ${res.array[sorted[i]].highlight}</div>` : ""}</div>`;
 		}
 		fs.$fsl.html(str);
-		fs.$fsl.scrollTop(0);
 		fs.$fsLis = fs.$fsl.find(".list-item");
+		m.fsScrollTopOnSearchChange(fs, fsPtnSH.splitted);
 	}
 };
 m.fsGoOn = function (): void {
