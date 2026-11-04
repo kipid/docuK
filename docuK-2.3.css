@@ -21,6 +21,11 @@ img {
 	box-sizing:border-box
 }
 
+video[poster]{
+	height:100%;
+	width:100%
+}
+
 codeprint.SEE {
 	display:none
 }
