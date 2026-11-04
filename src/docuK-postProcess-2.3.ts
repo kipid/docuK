@@ -162,7 +162,7 @@ m.$document.ready(function () {
 	if (m.lang === "ko") {
 		m.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ 숨기기(<span class="bold underline">E</span>)</div>
-<div class="button" onclick="k.$window.trigger({type:'keydown', code:'KeyM'})">메뉴얼(<span class="bold underline">M</span>)</div>
+<div class="button" onclick="k.$window.trigger({type:'keydown', code:'KeyJ'})">메뉴얼(<span class="bold underline">J</span>)</div>
 <div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> 광고</div>
 <div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>o 검색</div>
 <div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})">목차(<span class="bold underline">T</span>)</div>
@@ -180,7 +180,7 @@ ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" o
 	} else {
 		m.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ Hid<span class="bold underline">e</span></div>
-<div class="button" onclick="k.$window.trigger({type:'keydown', code:'KeyM'})"><span class="bold underline">M</span>anual</div>
+<div class="button" onclick="k.$window.trigger({type:'keydown', code:'KeyJ'})">Manual(<span class="bold underline">J</span>)</div>
 <div class="button toggle-a-mess" onclick="k.$window.trigger({type:'keydown', code:'KeyA'})">Toggle <span class="bold underline">a</span> mess</div>
 <div class="button button-Go" style="width:4.5rem; border-right:none" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})"><span class="bold underline">G</span>o (FS)</div>
 <div class="button button-ToR" style="width:4.5rem" onclick="k.$window.trigger({type:'keydown', code:'KeyT'})"><span class="bold underline">T</span>ofC</div>
@@ -472,7 +472,7 @@ ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" o
 			case "KeyE": // Expand/Hide floating keys
 				m.toggleFK();
 				break;
-			case "KeyM": // Manual
+			case "KeyJ": // Manual
 				if (m.docuKManual.is(":visible")) {
 					m.docuKManual.hide();
 					m.docuKManualVideo[0].pause();

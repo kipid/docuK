@@ -2338,8 +2338,8 @@ m.defaultStyles = {
 m.visitCount = m.docCookies.hasItem("visitCount") ? Number(m.docCookies.getItem("visitCount")) : 0;
 m.visitCount++;
 if (m.visitCount < 3) {
-	$("body").append(`<div id="docuK-manual" style="position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(255,255,255,0.9); z-index:13000; display:flex; align-items:center; justify-content:center; font-size:2rem; color:#000;"><video controls preload="auto" crossorigin="anonymous" poster="" style="width:100%; height:100%"><source src="" type="video/mp4"/><track label="subtitles" kind="subtitles" srclang="${m.lang}" src="_${m.lang}.vtt" default/></video>
-<div class="exit" onclick="k.$window.trigger({type:'keydown', code:'KeyM'})">
+	$("body").append(`<div id="docuK-manual" style="position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(255,255,255,0.9); z-index:13000; display:flex; align-items:center; justify-content:center; font-size:2rem; color:#000;"><video controls preload="auto" crossorigin="anonymous" poster="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.png" style="width:100%; height:100%"><source src="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.mp4" type="video/mp4"/><track label="subtitles" kind="subtitles" srclang="${m.lang}" src="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.${m.lang}.vtt" default/></video>
+<div class="exit" onclick="k.$window.trigger({type:'keydown', code:'KeyJ'})">
 	<svg>
 		<g style="stroke:white;stroke-width:23%">
 		<line x1="20%" y1="20%" x2="80%" y2="80%"></line>
