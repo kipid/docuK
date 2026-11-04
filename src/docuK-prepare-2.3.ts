@@ -1163,7 +1163,7 @@ m.promotingOK24HTML = `<div class="docuK-con">
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="p order promoting">
-GolfMOA (골프모아) : 클래식코스 챔프 (아마추어 대회 1등) 출신 문상경씨가 운영하는 골프전문 모아샾. 레슨도 하고 골프채 커스텀/수리/각종 소모품 교체 등 골프 관련 거의 모든걸 다루는 곳. 금메달리스트에게 레슨 받아보세요. 차원이 다릅니다 ^^.<br/>
+<a target="_blank" href="https://kipid.tistory.com/entry/Lists">GolfMOA (골프모아) :: https://kipid.tistory.com/entry/Lists</a> : 클래식코스 챔프 (아마추어 대회 1등) 출신 문상경씨가 운영하는 골프전문 모아샾. 레슨도 하고 골프채 커스텀/수리/각종 소모품 교체 등 골프 관련 거의 모든걸 다루는 곳. 금메달리스트에게 레슨 받아보세요. 차원이 다릅니다 ^^.<br/>
 문상경: <a href="tel:01066344944">010-6634-4944</a>, 보조 kipid (이강수): <a href="tel:01041771343">010-4177-1343</a><br/>
 <img src="https://kipid.s3.ap-northeast-2.amazonaws.com/GolfMOA/GolfMOA.png" alt="GolfMOA (골프모아)" style="max-width:100%;height:auto"/><br/>
 위치: 경기도 안산시 단원구 고잔동 안산천남로 265, 1층 골프모아 (GolfMOA)<br/>
@@ -1176,7 +1176,7 @@ GolfMOA (골프모아) : 클래식코스 챔프 (아마추어 대회 1등) 출�
 <div class="button toggle-a-mess fRight cBoth order" onclick="k.toggleAMess(this)">Toggle <span class="bold underline">a</span> mess</div>
 <div class="cBoth"></div>
 <div class="p order promoting promoting-kotetsu">
-광고 (Promoting) : <a target="_blank" href="https://dedc.imweb.me/">https://dedc.imweb.me/ :: 서울 덕은 치과</a><br/>
+<a target="_blank" href="https://dedc.imweb.me/">서울 덕은 치과 :: https://dedc.imweb.me/</a><br/>
 서울대 치의과 대학원 우등 졸업생이고, 매우 젠틀 (Gentle) 하고 치료도 부드럽고 설명도 어린아이가 들어도 이해할 정도로 쉽게 가르쳐 주는 내 인생 최고의 치과의사 선생님. 원장님 이름은 최영섭. 내 고등학교/대학교 동창이고 별명은 코테츠. 매우 밝은 성격에 유머러스하고 착하기도 함.<br/>
 <br/>
 <div class="slider">
@@ -2335,7 +2335,24 @@ m.defaultStyles = {
 	fontSize: m.fontSize,
 	lineHeight10: m.lineHeight10,
 };
-
+m.visitCount = m.docCookies.hasItem("visitCount") ? Number(m.docCookies.getItem("visitCount")) : 0;
+m.visitCount++;
+if (m.visitCount < 3) {
+	$("body").append(`<div id="docuK-manual" style="position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(255,255,255,0.9); z-index:13000; display:flex; align-items:center; justify-content:center; font-size:2rem; color:#000;"><video controls preload="auto" crossorigin="anonymous" poster="" style="width:100%; height:100%"><source src="" type="video/mp4"/><track label="subtitles" kind="subtitles" srclang="${m.lang}" src="_${m.lang}.vtt" default/></video>
+<div class="exit" onclick="k.$window.trigger({type:'keydown', code:'KeyM'})">
+	<svg>
+		<g style="stroke:white;stroke-width:23%">
+		<line x1="20%" y1="20%" x2="80%" y2="80%"></line>
+		<line x1="80%" y1="20%" x2="20%" y2="80%"></line>
+		</g>✖
+	</svg>
+</div>
+</div>`);
+}
+m.docuKManual = $("#docuK-manual");
+m.docuKManualVideo = $("#docuK-manual>video");
+m.docCookies.setItem("visitCount", m.visitCount.toString(), m.expire, "/", false);
+m.docCookies.setItem("visitCount", m.visitCount.toString(), m.expire, "/", `${window.location.host}`);
 m.printDeviceInfo = function (): void {
 	if (m.$deviceInfo) {
 		let referrer = document.referrer;
@@ -2345,7 +2362,8 @@ m.printDeviceInfo = function (): void {
 width: ${m.browserWidth}, height: ${window.innerHeight}, version: ${m.version0}${m.version1}<br/>
 ${m.canonicalURI ? `Canonical URI: <a target="_blank" href="${m.canonicalURI}">${m.escapeOnlyTag(decodeURIComponent(m.canonicalURI))}</a><br/>` : ""}
 ${m.plink ? `dg:plink (Document Global Permanent Link): <a target="_blank" href="${m.plink}">${m.plink}</a><br/>` : ""}
-document.referrer: ${referrerHTML}`,
+document.referrer: ${referrerHTML}<br/>
+Welcome! This is your ${m.visitCount}-th visit.`,
 		);
 	}
 };
