@@ -199,11 +199,14 @@ interface K {
 	ripplesDisabled?: boolean;
 	SEEHTMLs?: string[];
 	canonicalURI?: string;
+	docuKManual?: JQuery<HTMLElement>;
+	docuKManualVideo?: JQuery<HTMLVideoElement>;
 	$bubbleRefs?: JQuery<HTMLElement>;
 	$headOrBody?: JQuery<HTMLElement>;
 	goOn?: boolean;
 	logOn?: boolean;
 	disqusVars?: { page: { url?: string; identifier?: string } };
+	visitCount?: number;
 	$deviceInfo?: JQuery<HTMLElement>;
 	myIPs?: string[];
 	ignoreMe?: boolean;
