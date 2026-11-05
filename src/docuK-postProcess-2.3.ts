@@ -467,7 +467,7 @@ ${!document.querySelector(".tistory-bar-login") ? `<div class="button darkred" o
 				m.toggleFK();
 				break;
 			case "KeyJ": // Manual
-				if (m.docuKManual.is(":visible") && m.manualOn) {
+				if (m.manualOn && m.docuKManual.is(":visible")) {
 					m.docuKManual.hide();
 					m.docuKManualVideo[0].pause();
 				} else if (m.manualOn) {
