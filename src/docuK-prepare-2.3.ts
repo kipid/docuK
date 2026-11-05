@@ -2344,6 +2344,12 @@ m.defaultStyles = {
 	fontSize: m.fontSize,
 	lineHeight10: m.lineHeight10,
 };
+m.lang = navigator.language?.substring(0, 2);
+if (m.docCookies.hasItem("lang")) {
+	m.lang = m.docCookies.getItem("lang");
+}
+m.docCookies.setItem("lang", m.lang, Infinity, "/", false);
+m.docCookies.setItem("lang", m.lang, Infinity, "/", `${window.location.host}`);
 m.visitCount = m.docCookies.hasItem("visitCount") ? Number(m.docCookies.getItem("visitCount")) : 0;
 m.visitCount++;
 if (m.visitCount < 3) {

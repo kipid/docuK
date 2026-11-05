@@ -153,12 +153,6 @@ m.$document.ready(function () {
 
 	m.$title.html(m.$title.html() + ` at ${window.location.host}`);
 
-	m.lang = navigator.language?.substring(0, 2);
-	if (m.docCookies.hasItem("lang")) {
-		m.lang = m.docCookies.getItem("lang");
-	}
-	m.docCookies.setItem("lang", m.lang, Infinity, "/", false);
-	m.docCookies.setItem("lang", m.lang, Infinity, "/", `${window.location.host}`);
 	if (m.lang === "ko") {
 		m.$log.after(`<div id="floating-key">
 <div id="button-hideFK" class="button" onclick="k.toggleFK()">▼ 숨기기(<span class="bold underline">E</span>)</div>
