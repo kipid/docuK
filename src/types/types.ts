@@ -201,6 +201,7 @@ interface K {
 	canonicalURI?: string;
 	docuKManual?: JQuery<HTMLElement>;
 	docuKManualVideo?: JQuery<HTMLVideoElement>;
+	wST?: number;
 	$bubbleRefs?: JQuery<HTMLElement>;
 	$headOrBody?: JQuery<HTMLElement>;
 	goOn?: boolean;

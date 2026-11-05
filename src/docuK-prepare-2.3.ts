@@ -1311,6 +1311,15 @@ window.$fuzzy_search = $("#fuzzy-search");
 window.$fuzzy_search_list = $("#fuzzy-search-list");
 
 window.$fuzzy_search_container_move.on("mousedown.move touchstart.move", function (e) {
+	e.preventDefault();
+	e.stopPropagation();
+	m.wST = m.$window.scrollTop();
+	m.$window.off("scroll.stop");
+	m.$window.on("scroll.stop", function (e: JQuery.Event) {
+		e.preventDefault();
+		e.stopPropagation();
+		m.$window.scrollTop(m.wST);
+	});
 	let touch0 = e.type === "touchstart" ? (e as any).originalEvent.touches[0] : e;
 	let relativeX = touch0.clientX - Math.round(window.$fuzzy_search_container_move.offset().left) + m.$window.scrollLeft();
 	let relativeY = touch0.clientY - Math.round(window.$fuzzy_search_container_move.offset().top) + m.$window.scrollTop();
