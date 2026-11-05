@@ -312,6 +312,10 @@ table td {
 	background-color:darkgoldenrod
 }
 
+.button-manual {
+	background-color:indigo
+}
+
 .button-Go,
 .button-ToR {
 	background-color:cornflowerblue

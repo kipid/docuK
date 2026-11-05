@@ -199,6 +199,8 @@ interface K {
 	ripplesDisabled?: boolean;
 	SEEHTMLs?: string[];
 	canonicalURI?: string;
+	manualDiv?: string;
+	manualOn?: boolean;
 	docuKManual?: JQuery<HTMLElement>;
 	docuKManualVideo?: JQuery<HTMLVideoElement>;
 	wST?: number;

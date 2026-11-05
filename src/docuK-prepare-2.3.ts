@@ -2350,10 +2350,7 @@ if (m.docCookies.hasItem("lang")) {
 }
 m.docCookies.setItem("lang", m.lang, Infinity, "/", false);
 m.docCookies.setItem("lang", m.lang, Infinity, "/", `${window.location.host}`);
-m.visitCount = m.docCookies.hasItem("visitCount") ? Number(m.docCookies.getItem("visitCount")) : 0;
-m.visitCount++;
-if (m.visitCount < 3) {
-	$("body").append(`<div id="docuK-manual" style="position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(255,255,255,0.9); z-index:13000; display:flex; align-items:center; justify-content:center; font-size:2rem; color:#000;"><video controls preload="auto" crossorigin="anonymous" poster="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.png" style="width:100%; height:100%"><source src="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.mp4" type="video/mp4"/><track label="subtitles" kind="subtitles" srclang="${m.lang}" src="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.${m.lang}.vtt" default/></video>
+m.manualDiv = `<div id="docuK-manual" style="position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(255,255,255,0.9); z-index:13000; display:flex; align-items:center; justify-content:center; font-size:2rem; color:#000;"><video controls preload="auto" crossorigin="anonymous" poster="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.png" style="width:100%; height:100%"><source src="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.mp4" type="video/mp4"/><track label="subtitles" kind="subtitles" srclang="${m.lang}" src="https://kipid.s3.ap-northeast-2.amazonaws.com/docuK/docuK-manual.${m.lang}.vtt" default/></video>
 <div class="exit" onclick="k.$window.trigger({type:'keydown', code:'KeyJ'})">
 	<svg>
 		<g style="stroke:white;stroke-width:23%">
@@ -2362,10 +2359,17 @@ if (m.visitCount < 3) {
 		</g>✖
 	</svg>
 </div>
-</div>`);
+</div>`;
+m.visitCount = m.docCookies.hasItem("visitCount") ? Number(m.docCookies.getItem("visitCount")) : 0;
+m.visitCount++;
+if (m.visitCount < 3) {
+	$("body").append(m.manualDiv);
+	m.manualOn = true;
+	m.docuKManual = $("#docuK-manual");
+	m.docuKManualVideo = $("#docuK-manual>video");
+} else {
+	m.manualOn = false;
 }
-m.docuKManual = $("#docuK-manual");
-m.docuKManualVideo = $("#docuK-manual>video");
 m.docCookies.setItem("visitCount", m.visitCount.toString(), m.expire, "/", false);
 m.docCookies.setItem("visitCount", m.visitCount.toString(), m.expire, "/", `${window.location.host}`);
 m.printDeviceInfo = function (): void {
