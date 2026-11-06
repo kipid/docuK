@@ -144,10 +144,14 @@ m.$document.ready(function () {
 			dataType: "text",
 		})
 			.fail(async function (resp) {
-				m.logPrint("<br><br>BlogStat failed. " + (await m.uriRendering(resp.toString(), true, false)));
+				const blogStatRes = await m.uriRendering(resp.toString(), true, false);
+				const toBeLogged = blogStatRes.html + `<br/>from: ${blogStatRes.from}`;
+				m.logPrint("<br><br>BlogStat failed. " + toBeLogged);
 			})
 			.done(async function (resp) {
-				m.logPrint("<br><br>BlogStat is logged. " + (await m.uriRendering(resp.toString(), true, false)));
+				const blogStatRes = await m.uriRendering(resp.toString(), true, false);
+				const toBeLogged = blogStatRes.html + `<br/>from: ${blogStatRes.from}`;
+				m.logPrint("<br><br>BlogStat is logged. " + toBeLogged);
 			});
 	}, m.wait);
 
