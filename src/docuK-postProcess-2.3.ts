@@ -145,12 +145,12 @@ m.$document.ready(function () {
 		})
 			.fail(async function (resp) {
 				const blogStatRes = await m.uriRendering(resp.toString(), true, false);
-				const toBeLogged = blogStatRes.html + `<br/>from: ${blogStatRes.from}`;
+				const toBeLogged = blogStatRes.html + `<br/>from: ${blogStatRes.from}<br/>`;
 				m.logPrint("<br><br>BlogStat failed. " + toBeLogged);
 			})
 			.done(async function (resp) {
 				const blogStatRes = await m.uriRendering(resp.toString(), true, false);
-				const toBeLogged = blogStatRes.html + `<br/>from: ${blogStatRes.from}`;
+				const toBeLogged = blogStatRes.html + `<br/>from: ${blogStatRes.from}<br/>`;
 				m.logPrint("<br><br>BlogStat is logged. " + toBeLogged);
 			});
 	}, m.wait);
