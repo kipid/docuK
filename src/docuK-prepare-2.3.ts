@@ -2362,13 +2362,12 @@ m.manualDiv = `<div id="docuK-manual" style="position:fixed; top:0; left:0; widt
 </div>`;
 m.visitCount = m.docCookies.hasItem("visitCount") ? Number(m.docCookies.getItem("visitCount")) : 0;
 m.visitCount++;
+m.manualOn = false;
 if (m.visitCount < 3) {
 	$("body").append(m.manualDiv);
 	m.manualOn = true;
 	m.docuKManual = $("#docuK-manual");
 	m.docuKManualVideo = $("#docuK-manual>video");
-} else {
-	m.manualOn = false;
 }
 m.docCookies.setItem("visitCount", m.visitCount.toString(), m.expire, "/", false);
 m.docCookies.setItem("visitCount", m.visitCount.toString(), m.expire, "/", `${window.location.host}`);
