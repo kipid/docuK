@@ -245,6 +245,7 @@ table td {
 	cursor:pointer;
 	margin:0;
 	padding:0;
+	color:khaki;
 	border:1px solid rgb(50, 50, 50);
 	background-color:rgb(110, 110, 110)
 }
