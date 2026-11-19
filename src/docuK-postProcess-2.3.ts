@@ -99,8 +99,8 @@ for (let i = 0; i < $list.length; i++) {
 		html = '<div class="cat">' + cat.replace(/\n/g, "<br>") + "</div>";
 	}
 	txt += "* " + $listI.text();
-	html += `<div class="li">* ${$listI.html().trim().replace(/\sid=/g, " squasi-id=")}</div>`;
-	m.fsGo.fullListSorted[$list.length - 1 - i] = i;
+	html += `<div class="li">* ${$listI.html().trim().replace(/\sid=/g, " quasi-id=")}</div>`;
+	m.fsGo.fullListSorted[$list.length - 1 - i] = $list.length - 1 - i;
 	m.fsGo.fullList[$list.length - 1 - i] = {
 		i: $list.length - 1 - i,
 		txt: m.splitHangul(txt),
