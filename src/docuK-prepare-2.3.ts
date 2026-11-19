@@ -1471,6 +1471,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		lastSearchTxt: "",
 		array: [{ ptnSH: m.splitHangul("$!@#") }, { ptnSH: m.splitHangul("$!@#") }],
 		fullList: [],
+		fullListSorted: [],
 		$fs: window.$fuzzy_search as JQuery<HTMLTextAreaElement>,
 		$fsl: window.$fuzzy_search_list,
 		$fsLis: window.$fuzzy_search_list.find(".list-item"),
@@ -1548,7 +1549,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	};
 	m.fuzzySearch = function (ptnSH: SplitHangul, fs: FuzzySearch): FuzzySearchResult {
 		if (ptnSH.splitted.length === 0) {
-			fs.array[0] = { ptnSH, array: fs.fullList };
+			fs.array[0] = { ptnSH, array: fs.fullList, sorted: fs.fullListSorted };
 			fs.array[1] = null;
 			return fs.array[0];
 		}

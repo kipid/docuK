@@ -336,6 +336,7 @@ export type FuzzySearch = {
 	lastSearchTxt: string;
 	array: FuzzySearchResult[];
 	fullList: FuzzySearchFullListItem[];
+	fullListSorted: number[];
 	shuffled: { i: number }[] | undefined | null | false;
 	$fsLis: JQuery<HTMLElement>;
 	$fs: JQuery<HTMLTextAreaElement>;
