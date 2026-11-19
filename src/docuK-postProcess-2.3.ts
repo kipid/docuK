@@ -784,14 +784,14 @@ svg: {
 		$mjx.id = "MathJax-script";
 		$mjx.defer = true;
 		$mjx.onload = function () {
-			m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
+			m.logPrint(`<br><br>MathJax.js (mathjax@4/tex-mml-chtml.js) is loaded.`);
 			window?.MathJax?.typesetPromise?.([$("html")[0]]);
 			window?.MathJax?.typesetPromise?.([...$(".docuK")]);
 			window?.MathJax?.typesetPromise?.([$(".article-reply")[0]]);
 		};
-		$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+		$mjx.src = "https://tistory1.daumcdn.net/tistory/1468360/skin/images/tex-mml-chtml.js";
 		m.$headOrBody.append($mjx);
-		m.logPrint(`<br><br>MathJax.js (mathjax@3/es5/tex-mml-chtml.min.js) is loaded.`);
+		m.logPrint(`<br><br>MathJax.js (mathjax@4/tex-mml-chtml.js) is loaded.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
 		m.mathJaxPreProcessDo = function () {
 			if (window.MathJax?.startup && window.MathJax.typesetPromise) {
