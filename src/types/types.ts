@@ -326,8 +326,8 @@ export type FuzzySearchResult = {
 	sorted?: number[];
 	shuffled?: number[];
 	array?: {
-		i: number;
-		maxMatchScore: number;
+		i?: number;
+		maxMatchScore?: number;
 		highlight?: string;
 	}[];
 } | null;

@@ -1547,6 +1547,11 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		return res;
 	};
 	m.fuzzySearch = function (ptnSH: SplitHangul, fs: FuzzySearch): FuzzySearchResult {
+		if (ptnSH.splitted.length === 0) {
+			fs.array[0] = { ptnSH, array: fs.fullList };
+			fs.array[1] = null;
+			return fs.array[0];
+		}
 		if (ptnSH.splitted === fs.array[0].ptnSH.splitted) {
 			return fs.array[0];
 		}
