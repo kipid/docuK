@@ -100,7 +100,7 @@ for (let i = 0; i < $list.length; i++) {
 	}
 	txt += "* " + $listI.text();
 	html += `<div class="li">* ${$listI.html().trim().replace(/\sid=/g, " squasi-id=")}</div>`;
-	m.fsGo.fullListSorted[$list.length - 1 - i] = $list.length - 1 - i;
+	m.fsGo.fullListSorted[$list.length - 1 - i] = i;
 	m.fsGo.fullList[$list.length - 1 - i] = {
 		i: $list.length - 1 - i,
 		txt: m.splitHangul(txt),
