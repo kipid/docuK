@@ -789,7 +789,7 @@ svg: {
 			window?.MathJax?.typesetPromise?.([...$(".docuK")]);
 			window?.MathJax?.typesetPromise?.([$(".article-reply")[0]]);
 		};
-		$mjx.src = "https://tistory1.daumcdn.net/tistory/1468360/skin/images/tex-mml-chtml.js?ETag=2026-11-19-05-58-06";
+		$mjx.src = "https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js";
 		m.$headOrBody.append($mjx);
 		m.logPrint(`<br><br>MathJax.js (mathjax@4/tex-mml-chtml.js) is loaded.`);
 		// MathJax PreProcess after the above MathJax.js is loaded.
