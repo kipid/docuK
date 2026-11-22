@@ -1466,7 +1466,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 	////////////////////////////////////////////////////
 	// Fuzzy search prepare
 	////////////////////////////////////////////////////
-	m.fsLength = 300;
+	m.fsLength = 75;
 	m.fsGo = {
 		lastSearchTxt: "",
 		array: [{ ptnSH: m.splitHangul("$!@#") }, { ptnSH: m.splitHangul("$!@#") }],
