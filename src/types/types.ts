@@ -61,8 +61,7 @@ interface K {
 	version0?: string;
 	version1?: string;
 	lang?: string;
-	promotingOK24HTML?: string;
-	promotingKotetsuHTML?: string;
+	promotingHTML?: string;
 	$window?: JQuery<Window>;
 	$document?: JQuery<Document>;
 	$html?: JQuery<HTMLHtmlElement>;
