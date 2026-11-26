@@ -1316,12 +1316,6 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 		e.preventDefault();
 		e.stopPropagation();
 		m.wST = m.$window.scrollTop();
-		m.$window.off("scroll.stop");
-		m.$window.on("scroll.stop", function (e: JQuery.Event) {
-			e.preventDefault();
-			e.stopPropagation();
-			m.$window.scrollTop(m.wST);
-		});
 		let touch0 = e.type === "touchstart" ? (e as any).originalEvent.touches[0] : e;
 		let relativeX = touch0.clientX - Math.round(window.$fuzzy_search_container_move.offset().left) + m.$window.scrollLeft();
 		let relativeY = touch0.clientY - Math.round(window.$fuzzy_search_container_move.offset().top) + m.$window.scrollTop();
@@ -1329,6 +1323,12 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 			window.getSelection().removeAllRanges();
 			e.preventDefault();
 			e.stopPropagation();
+			m.$window.off("scroll.stop");
+			m.$window.on("scroll.stop", function (e: JQuery.Event) {
+				e.preventDefault();
+				e.stopPropagation();
+				m.$window.scrollTop(m.wST);
+			});
 			let touch0 = e.type === "touchmove" ? (e as any).originalEvent.touches[0] : e;
 			window.$fuzzy_search_container.css({
 				left: touch0.clientX - relativeX,
