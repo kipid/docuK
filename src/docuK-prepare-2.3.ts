@@ -1335,6 +1335,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 				top: touch0.clientY - relativeY,
 			});
 			m.$html.on("mouseup.move touchend.move", function () {
+				m.$window.off("scroll.stop");
 				m.$html.off("mouseup.move touchend.move mousemove.move touchmove.move");
 			});
 		});
