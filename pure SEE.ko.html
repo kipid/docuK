@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"></script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/jquery.js"></script>
+<link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
+<script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-style -->
+
+<style>
+.docuK pre.printSEE {font-size:.75em}
+</style>
+<meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit) of docuK (Markdown): 사용 설명서 (Manual | Documentation | Tutorial). docuK 는 JavaScript, jQuery, MathJax, Google code prettifier 로 렌더링 되는 HTML 문서 형식입니다. 주요 기능은 * 밝은/어두운 모드, 글꼴 선택. * 글씨 크기와 줄 간격 조절. * 목차. * 섹션/그림/수식 번호 자동 매기기. * 참고 문헌을 말풍선 팝업으로 인용. * 그림과 수식 참조. * id 가 있는 모든 원소와 class='number' 원소 참조. * 그림(이미지, iframe) 지연 로딩. * 수식(MathJax) 지연 렌더링. 2023-06-01 부터 MathJax 는 docuK 또는 SEE (Super Easy Edit) 의 모든 수식을 처음에 렌더링하도록 업데이트 되었습니다. * 코드 자동 출력. LaTeX 나 Wiki 문서와 상당히 비슷하지만 조금 더 확장되었습니다."/>
+
+<codeprint id="SEE0" class="SEE">
+# pure SEE.ko
+
+현재 이 글의 문자들로부터 렌더링 된 docuK 가 보여지고 있습니다.
+
+<a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30">pure-SEE-copiable.html 열기</a> 를 추천합니다. 그리고 <a href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30" download="pure-SEE-copiable.html">pure-SEE-copiable.html 내려받기 (마우스 오른쪽 클릭 -&gt; 다른 이름으로 링크 저장)</a> 를 한 뒤 새 html 파일에 복사-붙여넣기 하고, SEE 문서를 참고하고 익히면서 편집해 보세요.
+
+
+
+## PH
+
+###/ Posting History
+
+포스팅 역사가 여기에 기록됩니다. 이 섹션은 자동으로 숨겨집니다.
+
+<ul>
+<li>2026-10-08 : docuK-prism.css 수정. Dark mode 일때도 다채롭게 표현되도록.</li>
+<li>2026-03-05 : 곧 새로운 업데이트가 있습니다.</li>
+<li>2026-02-12 : Codes to be pretty-printed 가 lang 종류 입력 안받아도 예쁘게 기본으로 default lang-html 로 출력되도록 만들기.<br/>
++ Citing/Refering 들이 Bright mode 일 때 예쁘게 보이도록.<br/>
++ <code class="prettyprint lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;&lt;/pre&gt;</code> 도 제대로 prettyprint 되도록 만들자. 중간에 code prettifier 를 바꿔서 bug 생겼음.</li>
+<li>2023-09-24 : SEE (Super Easy Edit) docuK 전체 코드.</li>
+<li>2023-05-18 : 업데이트.</li>
+<li>2014-06-18 : 첫 포스팅.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## 초록 | docuK 와 SEE 의 설명
+
+주요 기능은 다음과 같습니다.
+
+<ul>
+<li>모드와 글꼴 (font-family) 변경.</li>
+<li>글씨 크기, 줄 간격 조절.</li>
+<li>목차.</li>
+<li>섹션/그림/수식 번호 자동 매기기.</li>
+<li>참고 문헌을 말풍선 모양 팝업으로 인용.</li>
+<li>그림과 수식 참조.</li>
+<li>id 가 있는 모든 원소와 class="number" 를 가진 원소 참조.</li>
+<li>그림 (이미지, iframe) 지연 (lazy) 로딩.</li>
+<li>수식 (MathJax) 지연 (lazy) 렌더링. 2023-06-01 부터 MathJax 는 docuK 또는 SEE (Super Easy Edit) 의 모든 수식을 처음에 렌더링하도록 업데이트 되었습니다.</li>
+<li>코드 자동 출력: `<code class="lang-html">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` 를 `<code class="lang-html">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>` 또는 `<code class="lang-html">```[#pre-code-id]```/</code>` 로. (중복되지 않는 id 처리를 위해 h1 '#' 바로 뒤 처음 부분에 빈 <code class="lang-html">&lt;script&gt;&lt;/script&gt;</code> 를 넣으세요.)</li>
+</ul>
+
+LaTeX 나 Wiki 문서와 상당히 비슷하지만, 조금 더 확장되었습니다.
+
+
+
+## SEE (Super Easy Edit) 코드만
+
+```[.printSEE.scrollable.lang-html#pre0-SEE]```/
+
+
+
+## docuK 의 전체 SEE 코드 (자바스크립트와 CSS 링크 포함. 독립된 문서|html 파일.)
+
+<textarea id="textarea-full-SEE" style="width:100%; font-size:.8em; font-family:monospace" rows="25"></textarea>
+
+
+
+## COTD
+
+###/ Categories of this document
+
+이 문서의 카테고리가 <a target="_blank" href="https://kipid.tistory.com/entry/Lists">kipid's blog 의 목록</a> 링크와 함께 여기에 기록됩니다. 이 섹션은 자동으로 숨겨집니다.
+
+<ul>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest">Recent interests</a></li>
+</ul>
+
+##/ Categories of this document
+
+
+
+## 경고
+
+이 라이브 데모에서는 몇 가지 제한이 있습니다. 지연 로딩, 브라우저 정보, 코드 예쁘게 출력하기, 수식, 그리고 처음에 한 번만 호출되는 (<code>docuK-prepare.js</code>) 자바스크립트 코드나 이미 할당된 <code>k.variables</code> 를 사용하는 코드들은 이후의 렌더링에서 동작하지 않을 수 있습니다.
+
+이 데모 예제에서는 오직 <code>k.docuKProcess()</code> 만 호출됩니다. 하지만 "docuK HTML 부분"을 html 파일에 넣거나 (스크립트가 허용되는) 블로그에 올리면 docuK 의 모든 기능이 로드되고 모든 기능이 동작합니다.
+
+
+
+## TOC
+
+##/ Table of Contents.
+목차는 자동으로 채워집니다. 자세한 내용은 이어지는 섹션들에서 설명합니다.
+
+
+
+## 명령문 (statement)
+
+각각의 명령문 (statement) 이나 문단은 두 번 이상의 엔터, 예를 들면 /\n\n+/ 로 나뉘어집니다.
+
+명령문의 처음에 '#' 이나 '&lt;' 가 오면 그 문단은 특별하게 처리됩니다.
+
+
+
+## docuK 와 섹션들
+
+'#' 은 docuK 를 의미하고, '##' | '###' | '####' 는 각각 섹션 (sec) | 하위섹션 (subsec) | 하하위섹션 (subsubsec) 을 의미합니다.
+
+docuK 의 끝은 '#/', 그리고 섹션 | 하위섹션 | 하하위섹션의 끝은 '##/' | '###/' | '####/' 로 표현되는데 <span class="emph">생략 가능</span>합니다. 렌더러가 계층 구조에 따라 각각의 끝을 자동으로 감지합니다.
+
+무언가의 끝은 주석처럼 사용할 수 있습니다.
+'#/' 뒤의 글자는 무시됩니다. 그러므로 아주 구체적인 주석에는 '#####/' 을 사용하세요.
+아니면 그냥 <span class="emph">아직 열리지 않은 무언가의 끝</span> 이라고 적어도 됩니다.
+
+아래 내용은 렌더링 된 docuK 에서 보시는 것처럼 무시됩니다.
+
+###/ 무언가의 끝은 주석처럼 사용할 수 있습니다.
+'#/' 뒤의 글자는 무시됩니다. 그러므로 아주 구체적인 주석에는 '#####/' 을 사용하세요.
+아니면 그냥 <span class="emph">아직 열리지 않은 무언가의 끝</span> 이라고 적어도 됩니다.
+
+
+
+##[.class0#sec-Test] 클래스와 id 가 있는 섹션
+
+섹션은 class 와 id 속성을 가질 수 있습니다. id 를 이용하면 <code class="lang-html">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer> 처럼 참조할 수 있습니다.
+
+<div class="p">클래스와 id 는 <code>##[.class0.class1.hiden#sec-Test] Section head</code> 처럼 [emmet 스타일] 로 지정합니다.</div>
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```/
+
+
+
+## 미리 정의된 섹션: "PH", "TOC", "RRA", "COTD"
+
+미리 정의된 섹션이 네 가지 있습니다. "PH": 포스팅 역사 (Posting History), "TOC": 목차 (Table of Contents), "RRA": 참고 문헌 및 관련 글 (References and Related Articles), "COTD": 이 문서의 카테고리 (Categories of this document). 자주 쓸 수 있는 미리 정의된 섹션을 더 추가할 수도 있습니다.
+
+아래에 구현된 미리 정의된 섹션들을 보시면 어떻게 사용하는지 쉽게 아실 수 있습니다.
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] 섹션 번호 없애기 (class="no-sec-N")
+
+섹션 번호를 없애려면 이렇게 하세요.
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```/
+
+
+
+###[#subsec-No-sec-numbering] [.no-sec-N#sec-No-sec-numbering] 의 하위섹션
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+####[#subsubsec-No-sec-numbering] [.no-sec-N#sec-No-sec-numbering] 의 하하위섹션
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+## RRA 인용하기 와 id 가 있는 HTML 원소 참조하기.
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+Ref. <cite class="ref-docuK"></cite>, Ref. <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+Eq. <refer class="eqq-1"></refer>, Eq. <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+Fig. <refer class="fig-1"></refer>
+</div>
+
+<div class="p">
+Code: <refer class="code-1"></refer>
+</div>
+
+<div class="p">
+Sec. <refer class="sec-Test"></refer>, Sec. <refer class="sec-No-sec-numbering"></refer>, SubSec. <refer class="subsec-No-sec-numbering"></refer>, SubSubSec. <refer class="subsubsec-No-sec-numbering"></refer>
+</div>
+
+이 <code>docuK.SEE</code> 문서에는 아래와 같은 HTML 원소들이 있습니다.
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
+
+
+
+### 내부에 HTML 을 넣어 인용하기 (class-to-id 가 일치하는 대상이 없을 때).
+
+```[.lang-html]
+&lt;cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.&lt;/cite>, &lt;cite class="ref-works">&lt;a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do&lt;/a>&lt;/cite>, &lt;cite class="ref-chuchu">&lt;a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net&lt;/a>&lt;/cite>.
+```/
+
+<cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.</cite>, <cite class="ref-works"><a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do</a></cite>, <cite class="ref-chuchu"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net</a></cite>.
+
+
+
+## PH
+
+###/ Posting History
+
+포스팅 역사가 여기에 기록됩니다. 이 섹션은 자동으로 숨겨집니다.
+
+<ul>
+	<li>포스팅 역사가 여기에 기록됩니다.</li>
+	<li>2014-06-18: 첫 포스팅.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## TOC
+
+TOC 는 스스로 닫히는 섹션이라서, 다른 글자들을 안에 넣을 수 없습니다.
+다음 글자는 TOC 바깥에 위치하게 됩니다.
+
+##/ Table of Contents.
+목차는 자동으로 채워집니다.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>주요 문헌</h3></div>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// 정기적으로 업데이트 됨</li>
+	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<div class="subsec"><h3>지원</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// 자바스크립트 보조 도구</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// 수식 렌더러.</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// 코드 예쁘게 출력기.</li>
+<div class="subsec"><h3>API 문서</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: 텍스트 노드를 포함한 원소의 바로 아래 자식들의 배열을 가져옵니다.</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS 전체 레퍼런스</a>; 특히 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> 가 유용합니다. 예: <code class="lang-css">element:nth-of-type(an + b) { style properties }</code> <code class="lang-css">element:nth-child(an + b) { style properties }</code></li>
+<div class="subsec"><h3>다른 마크다운/마크업 언어</h3></div>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX(라텍스, 레이텍) 소개 및 설명서(Guide)들</a>, 2014-03-24<br>
+		// 다른 이런류의 편집기가 많긴 하지만, 그 기원(?)이라고 할 수 있는게 TeX/LaTeX 일듯. 그런데 이건 책이나 논문을 만드는데 목적을 두고 만들어진 것이라서 pdf 같은걸로 결과물을 주기 때문에 인터넷, IT 기기에서 사용하기에는 부적합해 보이기도.<br>
+		// 그래도 문법은 차용해서 쓰기 좋음.</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// 위키피디아는 자체 마크다운 문법을 사용합니다.</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// 스택 오버플로우는 자체 마크다운 문법을 사용합니다.</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// GitHub 위키에서 사용될 수 있습니다.</li>
+<div class="subsec"><h3>내부에 HTML 을 넣어 인용하기 (class-to-id 가 일치하는 대상이 없을 때) 는 아래에 덧붙여집니다.</h3></div>
+</ol>
+
+##/ References and Related Articles
+
+
+
+## 섹션의 제목 (h2)
+
+섹션 내용
+
+
+
+### 하위섹션의 제목 (h3)
+
+하위섹션 내용
+
+
+
+#### 하하위섹션의 제목 (h4)
+
+하하위섹션 내용
+
+####/ 하하위섹션의 선택적인 끝
+
+###/ 하위섹션의 선택적인 끝
+
+##/ 섹션의 선택적인 끝
+
+
+
+##[.hiden#sec-HidenSec] 처음에 숨겨지는 섹션
+
+hiden 클래스를 주면 그 섹션은 처음에 숨겨집니다.
+
+
+
+## 직접 쓴 HTML (raw HTML)
+
+새로운 것을 배우고 기억하는 데는 시간이 걸리기 때문에, 이 문서는 가능한 한 단순하게 설계했습니다. 그리고 이 문서가 실제로 하는 일은 글자를 HTML 형식으로 렌더링/변환하는 것뿐이므로, 직접 쓴 HTML (raw HTML) 문법을 채택해 새로운 문법을 최소화했습니다.
+
+<div class="p">
+직접 쓴 HTML 은 이렇게 추가합니다. '&lt;' 로 시작하는 문단은 아무런 변경 없이 그대로 추가됩니다.
+</div>
+
+직접 쓴 글자는 <code class="lang-html">&lt;div class="p"&gt;&lt;/div&gt;</code> 로 감싸진 문단으로 추가됩니다.
+
+<div class="cmt">
+
+이것은 기본 주석 상자입니다: <code class="lang-html">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+
+여러 문단과 중첩된 HTML 을 넣을 수 있습니다.
+
+<ul>
+	<li>순서 없는 목록 1.</li>
+	<li>순서 없는 목록 2.</li>
+</ul>
+<ol>
+	<li>순서 있는 목록 1.</li>
+	<li>순서 있는 목록 2.</li>
+</ol>
+
+이게 전부입니다.
+
+</div>
+
+<div class="bcf">
+
+이것은 기본 '주의' 상자입니다: <code class="lang-html">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+
+</div>
+
+
+
+## 링크 | 적절한 html 로 향하는 URL
+
+구현할 계획입니다.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## 그림
+
+<figure id="fig-1"><div class="fig">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
+	<div class="caption">Caption.</div>
+</div></figure>
+
+
+
+## &lt;data class="to-table"&gt; 를 (CSV | Comma-Separated Values 가 아닌, TSV | TESV | Tab-Enter-Separated Values) HTML 표로 바꾸기
+
+```[.lang-html.linenums]
+&lt;data class="to-table" data-ratio="30-40-30"&gt;
+제품	오프라인 매장 (삼성스토어) 가격	할부
+갤럭시 Watch 8 40mm LTE	385,000원	삼성카드 36개월 무이자 할부
+갤럭시 Watch 8 Classic 44mm Bluetooth	469,000원	삼성카드 36개월 무이자 할부
+갤럭시 Watch 8 2025 47mm	669,000원	삼성카드 36개월 무이자 할부
+&lt;/data&gt;
+```/
+
+를
+
+<data class="to-table" data-ratio="30-40-30">
+제품	오프라인 매장 (삼성스토어) 가격	할부
+갤럭시 Watch 8 40mm LTE	385,000원	삼성카드 36개월 무이자 할부
+갤럭시 Watch 8 Classic 44mm Bluetooth	469,000원	삼성카드 36개월 무이자 할부
+갤럭시 Watch 8 2025 47mm	669,000원	삼성카드 36개월 무이자 할부
+</data>
+
+
+
+## 수식
+
+수식은 \$TeX math\$, <code class="lang-html">&lt;eq&gt;TeX math&lt;/eq&gt;</code>, <code class="lang-html">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code> 를 이용해 넣을 수 있습니다.
+
+앞의 두 가지는 <span class="emph">$\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$ 처럼 인라인 수식으로 변환됩니다. 마지막 하나</span>는 아래처럼 별도 줄 수식으로 변환됩니다.
+
+<span class="emph"><eqq id="eqq-1">
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq></span>
+
+<eqq id="eqq-2">
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+
+
+
+## 코드
+
+코드를 예쁘게 출력할 수 있습니다. <code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> 는 예쁘게 출력됩니다. class="no-escape-HTML" 이 없으면 모든 꺾쇠 (&lt; &gt;) 는 기본적으로 이스케이프 됩니다. 예를 들어 글 안의 HTML <code>&lt;a&gt;</code> 태그를 예쁘게 출력하고 싶으면 <code>no-escape-HTML</code> 클래스를 추가하세요. (예: <code>&lt;code class="no-escape-HTML"&gt;&lt;a target="_blank" href="https://recoeve.net/"&gt;https://recoeve.net/&lt;/a&gt;&lt;/code&gt;</code> 는 <code class="no-escape-HTML"><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> 처럼 출력됩니다.)
+
+다른 예로 <code>```[.no-escape-HTML] ```/</code> 를 쓰면 아래와 같습니다.
+
+```[.no-escape-HTML]
+<a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
+```/
+
+<code class="lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code> 를 사용하면,
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+<div class="p"></div>
+
+<code class="lang-html">```Codes to be pretty-printed.```/</code> 를 사용하거나, <code class="lang-html">```[".class-0.class-1#element-id" 처럼 emmet 스타일의 class 와 id 속성]Codes to be pretty-printed.```/</code> 를 사용하면,
+
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+</div>
+
+
+
+### 줄 번호를 없애려면 [.no-linenums] 클래스 추가
+
+기본적으로 예쁘게 출력된 코드에는 줄 번호가 있습니다. 줄 번호를 없애려면 아래처럼 [.no-linenums] 클래스를 추가하세요: <code class="lang-html">```[.no-linenums]Codes```/</code>.
+
+```[.no-linenums.lang-js.scrollable]
+const fs = require('fs');
+const path = require('path');
+
+// ETag 패턴을 찾기 위한 정규식
+const ETAG_PATTERN = /ETag=(\d{4}-\d{2}-\d{2})/g;
+
+// 파일을 읽고 ETag를 업데이트하는 함수
+function updateETagInFile(filePath) {
+    try {
+        // 파일 읽기
+        const content = fs.readFileSync(filePath, 'utf8');
+
+        // 현재 날짜로 ETag 업데이트
+        const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
+        const updatedContent = content.replace(ETAG_PATTERN, `ETag=${currentDate}`);
+
+        // 변경사항이 있는 경우에만 파일에 쓰기
+        if (content !== updatedContent) {
+            fs.writeFileSync(filePath, updatedContent, 'utf8');
+            console.log(`Updated ETag in: ${filePath}`);
+        } else {
+            console.log(`No ETag found in: ${filePath}`);
+        }
+    } catch (error) {
+        console.error(`Error processing file ${filePath}:`, error.message);
+    }
+}
+
+// 디렉토리를 재귀적으로 탐색하여 파일들을 처리하는 함수
+function processDirectory(dirPath) {
+    try {
+        const items = fs.readdirSync(dirPath);
+
+        for (const item of items) {
+            const fullPath = path.join(dirPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                // 디렉토리인 경우 재귀적으로 처리
+                // processDirectory(fullPath);
+            } else if (stat.isFile()) {
+                // 파일인 경우 ETag 업데이트
+                updateETagInFile(fullPath);
+            }
+        }
+    } catch (error) {
+        console.error(`Error processing directory ${dirPath}:`, error.message);
+    }
+}
+
+// 메인 실행 함수
+function main() {
+    const targetDirectory = process.argv[2] || '.'; // 명령행 인수로 디렉토리 지정, 기본값은 현재 디렉토리
+
+    if (!fs.existsSync(targetDirectory)) {
+        console.error(`Directory not found: ${targetDirectory}`);
+        process.exit(1);
+    }
+
+    console.log(`Processing directory: ${targetDirectory}`);
+    processDirectory(targetDirectory);
+    console.log('ETag update completed!');
+}
+
+// 스크립트가 직접 실행될 때만 main 함수 호출
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    updateETagInFile,
+    processDirectory,
+    ETAG_PATTERN
+};
+```/
+
+
+
+## SEE 문서 내용 퍼지 검색 (fuzzy search)
+
+FS (<span class="bold">G</span>o: 단축키 <span class="bold">G</span>) 로 SEE 문서의 내용을 쉽게 퍼지 검색할 수 있습니다.
+
+
+
+## 머리말, 꼬리말 (recoeve.net 홍보)
+
+머리말과 꼬리말에 <a target="_blank" href="https://recoeve.net/">recoeve.net</a> 홍보가 있습니다.
+
+<code class="lang-js">k.recoeveUserId="your-recoeve-id";</code> 와 <code class="lang-js">k.recoCats="현재 페이지의 카테고리, ; 로 구분된 여러 카테고리"</code> 로 당신의 recoeve 페이지를 설정할 수 있습니다.
+
+<code class="lang-js">k.printMode=true</code> 로 설정하면 이 홍보들을 끌 수 있습니다.
+
+이 페이지에서는 recoeve 관련 변수를 아래처럼 설정했습니다.
+
+```
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+```/
+
+그래서 머리말과 꼬리말의 iframe 페이지는 <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (multireco 모드)</a> 가 됩니다.
+
+<code>k.recoeveUserId="kipid"</code> 와 <code>k.recoCats="[Music/Break]--K-Pop"</code> 은 설정되지 않았거나 비어 있으면 기본값입니다.
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+k.SEEHTMLs=[];
+k.SEEHTMLs[0]=$("#SEE0").html().trim();
+
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.ko"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.k, jQuery);
+</script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-script -->
+
+<script>
+(function(k, $, undefined) {
+$("#pre0-SEE").children().html(k.escapeOnlyTag(k.SEEHTMLs[0]));
+$("#textarea-full-SEE").html(k.escapeOnlyTag(`<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"><`+`/script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-style -->
+
+이 문서의 설명. 검색 엔진에 좋습니다.
+
+<codeprint class="SEE">
+${k.SEEHTMLs[0]}
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+
+// 이 문서에서만 사용되는 코드. 즉 pre#pre0-SEE 와 textarea#textarea-full-SEE 를 채우는 코드
+
+k.printMode=false;
+k.recoeveUserId="";
+k.recoCats="";
+k.wait=1024;
+k.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.ko"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=\`https://kipid.tistory.com/entry/\${this.page.identifier}\`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery);
+<`+`/script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-script -->`));
+k.SEEHTMLs[0]=$("#SEE0").html().trim(); // Emptified.
+})(window.k, jQuery);
+</script>

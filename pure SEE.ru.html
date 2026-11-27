@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"></script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/jquery.js"></script>
+<link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
+<script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-style -->
+
+<style>
+.docuK pre.printSEE {font-size:.75em}
+</style>
+<meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit) для docuK (Markdown): руководство (Manual | Documentation | Tutorial). docuK — это формат HTML-документа, отображаемого с помощью JavaScript, jQuery, MathJax и Google code prettifier. Основные возможности: * переключение режима и шрифта. * настройка размера текста и межстрочного интервала. * оглавление. * автоматическая нумерация разделов/рисунков/уравнений. * цитирование источников во всплывающей подсказке. * ссылки на рисунки и уравнения. * ссылки на любой элемент с id и на элементы с class='number'. * отложенная загрузка рисунков (изображения, iframe). * отложенный рендеринг уравнений (MathJax). С 2023-06-01 MathJax отображает все уравнения docuK или SEE (Super Easy Edit) сразу в начале. * автоматическая печать кода. Очень похоже на документы LaTeX или Wiki, но немного расширено."/>
+
+<codeprint id="SEE0" class="SEE">
+# pure SEE.ru
+
+Здесь отображается docuK, полученный из текущего текста.
+
+<a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30">Открыть pure-SEE-copiable.html</a> — рекомендуемый вариант. Затем <a href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30" download="pure-SEE-copiable.html">скачайте pure-SEE-copiable.html (правая кнопка -&gt; Сохранить ссылку как)</a>, скопируйте и вставьте в новый html-файл и редактируйте его, изучая документ SEE как справочник.
+
+
+
+## PH
+
+###/ Posting History
+
+Здесь ведётся история публикаций. Этот раздел скрывается автоматически.
+
+<ul>
+<li>2026-10-08 : изменение docuK-prism.css. Чтобы он ярко выглядел и в тёмном режиме.</li>
+<li>2026-03-05 : скоро выйдет новое обновление.</li>
+<li>2026-02-12 : теперь codes to be pretty-printed красиво печатаются с default lang-html, даже без указания типа lang.<br/>
++ теперь Citing/Refering также красиво отображается в светлом режиме.<br/>
++ теперь <code class="prettyprint lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;&lt;/pre&gt;</code> также корректно форматируется. Поскольку code prettifier был заменён посередине, возник баг.</li>
+<li>2023-09-24 : полный код SEE (Super Easy Edit) docuK.</li>
+<li>2023-05-18 : обновление.</li>
+<li>2014-06-18 : первая публикация.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## Краткое описание | описание docuK и SEE
+
+Основные возможности следующие.
+
+<ul>
+<li>Переключение режима и шрифта (font-family).</li>
+<li>Настройка размера текста и межстрочного интервала.</li>
+<li>Оглавление.</li>
+<li>Автоматическая нумерация разделов/рисунков/уравнений.</li>
+<li>Цитирование источников во всплывающей подсказке (popup).</li>
+<li>Ссылки на рисунки и уравнения.</li>
+<li>Ссылки на любой элемент с id и на элементы с class="number".</li>
+<li>Отложенная загрузка (lazy) рисунков (изображения, iframe).</li>
+<li>Отложенный рендеринг (lazy) уравнений (MathJax). С 2023-06-01 MathJax отображает все уравнения docuK или SEE (Super Easy Edit) сразу в начале.</li>
+<li>Автоматическая печать кода: из `<code class="lang-html">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` в `<code class="lang-html">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>` или `<code class="lang-html">```[#pre-code-id]```/</code>`. (Чтобы избежать дублирования id, поставьте пустой <code class="lang-html">&lt;script&gt;&lt;/script&gt;</code> в самом начале, сразу после '#' в h1.)</li>
+</ul>
+
+Очень похоже на документы LaTeX или Wiki, но немного расширено.
+
+
+
+## Только код SEE (Super Easy Edit)
+
+```[.printSEE.scrollable.lang-html#pre0-SEE]```/
+
+
+
+## Полный код SEE для docuK (включая ссылки на javascript и CSS. Отдельный файл документ|html.)
+
+<textarea id="textarea-full-SEE" style="width:100%; font-size:.8em; font-family:monospace" rows="25"></textarea>
+
+
+
+## COTD
+
+###/ Categories of this document
+
+Категории этого документа записываются здесь вместе со ссылкой на <a target="_blank" href="https://kipid.tistory.com/entry/Lists">список в kipid's blog</a>. Этот раздел скрывается автоматически.
+
+<ul>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest">Recent interests</a></li>
+</ul>
+
+##/ Categories of this document
+
+
+
+## Предупреждение
+
+У этой живой демонстрации есть некоторые ограничения. Отложенная загрузка, информация о браузере, красивая печать кода, уравнения и javascript-код, вызываемый только один раз в начале (<code>docuK-prepare.js</code>), или код, использующий уже присвоенные <code>k.variables</code>, не работают при последующих отображениях.
+
+В этом живом примере вызывается только <code>k.docuKProcess()</code>. Но если вы поместите "HTML-часть docuK" в html-файл или опубликуете в блоге (который разрешает скрипты), загрузится вся функциональность docuK и будут работать все возможности docuK.
+
+
+
+## TOC
+
+##/ Table of Contents.
+Оглавление заполняется автоматически. Подробности описаны в следующих разделах.
+
+
+
+## Операторы (statements)
+
+Каждый оператор (statement) или абзац разделяется двумя (или более) переводами строки, например /\n\n+/.
+
+Если абзац начинается с '#' или '&lt;', он обрабатывается особым образом.
+
+
+
+## docuK и разделы
+
+'#' означает docuK, а '##' | '###' | '####' означают соответственно раздел (sec) | подраздел (subsec) | подподраздел (subsubsec).
+
+Конец docuK — '#/', а концы раздела | подраздела | подподраздела '##/' | '###/' | '####/' <span class="emph">необязательны</span>. Рендерер автоматически определяет конец чего-либо по иерархии.
+
+Конец чего-либо можно использовать как комментарий.
+Текст после '#/' игнорируется. Поэтому используйте '#####/' для очень специфичных комментариев.
+Или просто напишите <span class="emph">конец того, что ещё не было открыто</span>.
+
+Как показано ниже, они игнорируются в отображаемом docuK.
+
+###/ Конец чего-либо можно использовать как комментарий.
+Текст после '#/' игнорируется. Поэтому используйте '#####/' для очень специфичных комментариев.
+Или просто напишите <span class="emph">конец того, что ещё не было открыто</span>.
+
+
+
+##[.class0#sec-Test] Раздел с class и id
+
+Разделы могут иметь атрибуты class и id. С помощью id вы можете ссылаться на него как <code class="lang-html">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
+
+<div class="p">Class и id задаются в [стиле emmet], например <code>##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```/
+
+
+
+## Предопределённые разделы: "PH", "TOC", "RRA", "COTD"
+
+Есть четыре предопределённых раздела. "PH": история публикаций (Posting History), "TOC": оглавление (Table of Contents), "RRA": источники и связанные статьи (References and Related Articles), "COTD": категории этого документа (Categories of this document). Позже могут быть добавлены другие полезные предопределённые разделы.
+
+Глядя на предопределённые разделы, применённые ниже, вы легко поймёте, как ими пользоваться.
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] Без нумерации разделов (class="no-sec-N")
+
+Если вы не хотите нумерации разделов, сделайте так.
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```/
+
+
+
+###[#subsec-No-sec-numbering] Подраздел [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+####[#subsubsec-No-sec-numbering] Подподраздел [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+## Цитирование RRA и ссылки на HTML-элементы с id.
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+Ref. <cite class="ref-docuK"></cite>, Ref. <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+Eq. <refer class="eqq-1"></refer>, Eq. <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+Fig. <refer class="fig-1"></refer>
+</div>
+
+<div class="p">
+Code: <refer class="code-1"></refer>
+</div>
+
+<div class="p">
+Sec. <refer class="sec-Test"></refer>, Sec. <refer class="sec-No-sec-numbering"></refer>, SubSec. <refer class="subsec-No-sec-numbering"></refer>, SubSubSec. <refer class="subsubsec-No-sec-numbering"></refer>
+</div>
+
+В этом <code>docuK.SEE</code> есть следующие HTML-элементы.
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
+
+
+
+### Цитирование с HTML внутри (если нет соответствующего class-to-id).
+
+```[.lang-html]
+&lt;cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.&lt;/cite>, &lt;cite class="ref-works">&lt;a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do&lt;/a>&lt;/cite>, &lt;cite class="ref-chuchu">&lt;a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net&lt;/a>&lt;/cite>.
+```/
+
+<cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.</cite>, <cite class="ref-works"><a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do</a></cite>, <cite class="ref-chuchu"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net</a></cite>.
+
+
+
+## PH
+
+###/ Posting History
+
+Здесь ведётся история публикаций. Этот раздел скрывается автоматически.
+
+<ul>
+	<li>Здесь ведётся история публикаций.</li>
+	<li>2014-06-18: первая публикация.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## TOC
+
+TOC — самодостаточный раздел, то есть внутрь него нельзя поместить другой текст.
+Следующий текст размещается вне TOC.
+
+##/ Table of Contents.
+Оглавление заполняется автоматически.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>Основное</h3></div>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// Обновляется регулярно</li>
+	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<div class="subsec"><h3>При поддержке</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// Вспомогательный инструмент JavaScript</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// Рендерер уравнений.</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// Инструмент красивой печати кода.</li>
+<div class="subsec"><h3>Документация API</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: получает массив непосредственных дочерних элементов элемента, включая текстовые узлы.</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - полный справочник по CSS</a>; особенно полезны <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a>. Пример: <code class="lang-css">element:nth-of-type(an + b) { style properties }</code> <code class="lang-css">element:nth-child(an + b) { style properties }</code></li>
+<div class="subsec"><h3>Другие языки markdown/markup</h3></div>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">Введение в LaTeX и руководства (Guide)</a>, 2014-03-24<br>
+		// Таких редакторов много, но их истоки (?), вероятно, TeX/LaTeX. Но он создавался для книг или статей и даёт результат вроде pdf, поэтому, похоже, не подходит для интернета и ИТ-устройств.<br>
+		// Тем не менее его синтаксис очень хорош, чтобы заимствовать и использовать.</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// Википедия использует свой собственный язык markdown.</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// Stack Overflow использует свой собственный язык markdown.</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// Может использоваться в GitHub wiki.</li>
+<div class="subsec"><h3>Цитирование с HTML внутри (если нет соответствующего class-to-id) добавляется ниже.</h3></div>
+</ol>
+
+##/ References and Related Articles
+
+
+
+## Заголовок раздела (h2)
+
+Содержимое раздела
+
+
+
+### Заголовок подраздела (h3)
+
+Содержимое подраздела
+
+
+
+#### Заголовок подподраздела (h4)
+
+Содержимое подподраздела
+
+####/ Необязательный конец подподраздела
+
+###/ Необязательный конец подраздела
+
+##/ Необязательный конец раздела
+
+
+
+##[.hiden#sec-HidenSec] Изначально скрытый раздел
+
+С class hiden этот раздел изначально скрыт.
+
+
+
+## Необработанный HTML
+
+Изучение и запоминание нового требует времени, поэтому этот инструмент спроектирован максимально просто. И на самом деле он делает только одно: отображает/преобразует текст в формат HTML. Поэтому, приняв синтаксис необработанного HTML, новый синтаксис сводится к минимуму.
+
+<div class="p">
+Необработанный HTML добавляется так. Абзац, начинающийся с '&lt;', добавляется без изменений.
+</div>
+
+Необработанный текст добавляется как абзац и окружается <code class="lang-html">&lt;div class="p"&gt;&lt;/div&gt;</code>.
+
+<div class="cmt">
+
+Это поле комментария по умолчанию: <code class="lang-html">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+
+Можно разместить несколько абзацев и вложенный HTML.
+
+<ul>
+	<li>Неупорядоченный список 1.</li>
+	<li>Неупорядоченный список 2.</li>
+</ul>
+<ol>
+	<li>Упорядоченный список 1.</li>
+	<li>Упорядоченный список 2.</li>
+</ol>
+
+Вот и всё.
+
+</div>
+
+<div class="bcf">
+
+Это поле "warning" по умолчанию: <code class="lang-html">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+
+</div>
+
+
+
+## Ссылки | URL на подходящий html
+
+Запланировано на будущее.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## Рисунок
+
+<figure id="fig-1"><div class="fig">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
+	<div class="caption">Caption.</div>
+</div></figure>
+
+
+
+## Преобразование &lt;data class="to-table"&gt; (не CSV | Comma-Separated Values, а TSV | TESV | Tab-Enter-Separated Values) в HTML-таблицу
+
+```[.lang-html.linenums]
+&lt;data class="to-table" data-ratio="30-40-30"&gt;
+Товар	Цена в обычном магазине (Samsung Store)	Рассрочка
+Galaxy Watch 8 40mm LTE	385 000 вон	Карта Samsung, 36 месяцев без процентов
+Galaxy Watch 8 Classic 44mm Bluetooth	469 000 вон	Карта Samsung, 36 месяцев без процентов
+Galaxy Watch 8 2025 47mm	669 000 вон	Карта Samsung, 36 месяцев без процентов
+&lt;/data&gt;
+```/
+
+становится
+
+<data class="to-table" data-ratio="30-40-30">
+Товар	Цена в обычном магазине (Samsung Store)	Рассрочка
+Galaxy Watch 8 40mm LTE	385 000 вон	Карта Samsung, 36 месяцев без процентов
+Galaxy Watch 8 Classic 44mm Bluetooth	469 000 вон	Карта Samsung, 36 месяцев без процентов
+Galaxy Watch 8 2025 47mm	669 000 вон	Карта Samsung, 36 месяцев без процентов
+</data>
+
+
+
+## Математика
+
+Уравнения можно вставлять с помощью \$TeX math\$, <code class="lang-html">&lt;eq&gt;TeX math&lt;/eq&gt;</code> и <code class="lang-html">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
+
+Первые два преобразуются во <span class="emph">встроенные уравнения вида $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. Последний</span> преобразуется в уравнение на отдельной строке, как показано ниже.
+
+<span class="emph"><eqq id="eqq-1">
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq></span>
+
+<eqq id="eqq-2">
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+
+
+
+## Код
+
+Код можно печатать красиво. <code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> будет напечатан красиво. Без class="no-escape-HTML" все угловые скобки (&lt; &gt;) по умолчанию экранируются. Если вы хотите, чтобы HTML-тег <code>&lt;a&gt;</code> в тексте печатался красиво, добавьте class <code>no-escape-HTML</code>. (Например, <code>&lt;code class="no-escape-HTML"&gt;&lt;a target="_blank" href="https://recoeve.net/"&gt;https://recoeve.net/&lt;/a&gt;&lt;/code&gt;</code> печатается так: <code class="no-escape-HTML"><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code>.)
+
+Другой пример с <code>```[.no-escape-HTML] ```/</code> — следующий.
+
+```[.no-escape-HTML]
+<a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
+```/
+
+С помощью <code class="lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+<div class="p"></div>
+
+С помощью <code class="lang-html">```Codes to be pretty-printed.```/</code>, или <code class="lang-html">```[атрибуты class и id в стиле emmet, например ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+</div>
+
+
+
+### Если не нужны номера строк, добавьте class [.no-linenums]
+
+По умолчанию у красиво напечатанного кода есть номера строк. Чтобы их убрать, добавьте class [.no-linenums] так: <code class="lang-html">```[.no-linenums]Codes```/</code>.
+
+```[.no-linenums.lang-js.scrollable]
+const fs = require('fs');
+const path = require('path');
+
+// Регулярное выражение для поиска шаблона ETag
+const ETAG_PATTERN = /ETag=(\d{4}-\d{2}-\d{2})/g;
+
+// Функция, читающая файл и обновляющая его ETag
+function updateETagInFile(filePath) {
+    try {
+        // Чтение файла
+        const content = fs.readFileSync(filePath, 'utf8');
+
+        // Обновление ETag текущей датой
+        const currentDate = new Date().toISOString().split('T')[0]; // формат YYYY-MM-DD
+        const updatedContent = content.replace(ETAG_PATTERN, `ETag=${currentDate}`);
+
+        // Запись в файл только при наличии изменений
+        if (content !== updatedContent) {
+            fs.writeFileSync(filePath, updatedContent, 'utf8');
+            console.log(`Updated ETag in: ${filePath}`);
+        } else {
+            console.log(`No ETag found in: ${filePath}`);
+        }
+    } catch (error) {
+        console.error(`Error processing file ${filePath}:`, error.message);
+    }
+}
+
+// Функция, рекурсивно обходящая каталог и обрабатывающая его файлы
+function processDirectory(dirPath) {
+    try {
+        const items = fs.readdirSync(dirPath);
+
+        for (const item of items) {
+            const fullPath = path.join(dirPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                // Если каталог, обрабатывать рекурсивно
+                // processDirectory(fullPath);
+            } else if (stat.isFile()) {
+                // Если файл, обновить ETag
+                updateETagInFile(fullPath);
+            }
+        }
+    } catch (error) {
+        console.error(`Error processing directory ${dirPath}:`, error.message);
+    }
+}
+
+// Главная функция
+function main() {
+    const targetDirectory = process.argv[2] || '.'; // Каталог задаётся аргументом командной строки, по умолчанию текущий каталог
+
+    if (!fs.existsSync(targetDirectory)) {
+        console.error(`Directory not found: ${targetDirectory}`);
+        process.exit(1);
+    }
+
+    console.log(`Processing directory: ${targetDirectory}`);
+    processDirectory(targetDirectory);
+    console.log('ETag update completed!');
+}
+
+// Вызывать main только при прямом запуске скрипта
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    updateETagInFile,
+    processDirectory,
+    ETAG_PATTERN
+};
+```/
+
+
+
+## Нечёткий поиск (fuzzy search) по содержимому документа SEE
+
+С помощью FS (<span class="bold">G</span>o: горячая клавиша <span class="bold">G</span>) можно легко выполнять нечёткий поиск по содержимому документа SEE.
+
+
+
+## Верхний и нижний колонтитулы (реклама recoeve.net)
+
+В верхнем и нижнем колонтитулах есть реклама <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
+
+С помощью <code class="lang-js">k.recoeveUserId="your-recoeve-id";</code> и <code class="lang-js">k.recoCats="категории текущей страницы, несколько категорий через ;"</code> можно указать свою страницу recoeve.
+
+С помощью <code class="lang-js">k.printMode=true</code> можно отключить эту рекламу.
+
+На этой странице я задал переменные, связанные с recoeve, следующим образом.
+
+```
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+```/
+
+Поэтому iframe-страница в верхнем и нижнем колонтитулах — это <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (режим multireco)</a>.
+
+Если они не заданы или пусты, значениями по умолчанию являются <code>k.recoeveUserId="kipid"</code> и <code>k.recoCats="[Music/Break]--K-Pop"</code>.
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+k.SEEHTMLs=[];
+k.SEEHTMLs[0]=$("#SEE0").html().trim();
+
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.ru"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.k, jQuery);
+</script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-script -->
+
+<script>
+(function(k, $, undefined) {
+$("#pre0-SEE").children().html(k.escapeOnlyTag(k.SEEHTMLs[0]));
+$("#textarea-full-SEE").html(k.escapeOnlyTag(`<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"><`+`/script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-style -->
+
+Описание этого документа. Полезно для поисковых систем.
+
+<codeprint class="SEE">
+${k.SEEHTMLs[0]}
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+
+// Код, используемый только в этом документе. То есть код, который заполняет pre#pre0-SEE и textarea#textarea-full-SEE
+
+k.printMode=false;
+k.recoeveUserId="";
+k.recoCats="";
+k.wait=1024;
+k.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.ru"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=\`https://kipid.tistory.com/entry/\${this.page.identifier}\`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery);
+<`+`/script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-script -->`));
+k.SEEHTMLs[0]=$("#SEE0").html().trim(); // Emptified.
+})(window.k, jQuery);
+</script>

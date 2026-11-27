@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"></script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/jquery.js"></script>
+<link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
+<script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-style -->
+
+<style>
+.docuK pre.printSEE {font-size:.75em}
+</style>
+<meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit) of docuK (Markdown)：使用说明（Manual | Documentation | Tutorial）。docuK 是一种 HTML 文档格式，由 JavaScript、jQuery、MathJax 和 Google code prettifier 渲染。主要特性有 * 可切换模式、字体。 * 可调整字号、行距。 * 目录。 * 章节/图/公式自动编号。 * 以气泡弹窗形式引用参考文献。 * 引用图和公式。 * 引用任何带 id 的元素以及 class='number' 的元素。 * 图（图片、iframe）延迟加载。 * 数学公式（MathJax）延迟渲染。从 2023-06-01 起，MathJax 已更新为在开始时渲染 docuK 或 SEE（Super Easy Edit）中的所有公式。 * 代码自动输出。与 LaTeX 或 Wiki 文档很像，但有所扩展。"/>
+
+<codeprint id="SEE0" class="SEE">
+# pure SEE.zh
+
+当前文字所渲染出的 docuK 正在被显示。
+
+<a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30">打开 pure-SEE-copiable.html</a> 是推荐的做法，然后 <a href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30" download="pure-SEE-copiable.html">下载 pure-SEE-copiable.html（鼠标右键 -&gt; 链接另存为）</a>，再复制粘贴到新的 html 文件中，并参考和学习 SEE 文档来编辑它。
+
+
+
+## PH
+
+###/ Posting History
+
+发布历史记录在这里。本节会自动隐藏。
+
+<ul>
+<li>2026-10-08 : 修改 docuK-prism.css。让暗色模式下也能多彩地呈现。</li>
+<li>2026-03-05 : 新的更新即将到来。</li>
+<li>2026-02-12 : 让 codes to be pretty-printed 在不输入 lang 种类时也能漂亮地以默认 default lang-html 输出。<br/>
++ 让 Citing/Refering 在亮色模式下也漂亮显示。<br/>
++ 让 <code class="prettyprint lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;&lt;/pre&gt;</code> 也能正确 prettyprint。中途更换了 code prettifier，所以产生了 bug。</li>
+<li>2023-09-24 : 完整的 SEE (Super Easy Edit) docuK 代码。</li>
+<li>2023-05-18 : 更新。</li>
+<li>2014-06-18 : 首次发布。</li>
+</ul>
+
+##/ Posting History
+
+
+
+## 摘要 | docuK 与 SEE 的说明
+
+主要特性如下。
+
+<ul>
+<li>可切换模式、字体（font-family）。</li>
+<li>可调整字号、行距。</li>
+<li>目录。</li>
+<li>章节/图/公式自动编号。</li>
+<li>以气泡弹窗形式引用参考文献。</li>
+<li>引用图和公式。</li>
+<li>引用任何带 id 的元素以及带 class="number" 的元素。</li>
+<li>图（图片、iframe）延迟（lazy）加载。</li>
+<li>数学公式（MathJax）延迟（lazy）渲染。从 2023-06-01 起，MathJax 已更新为在开始时渲染 docuK 或 SEE (Super Easy Edit) 中的所有公式。</li>
+<li>代码自动输出：从 `<code class="lang-html">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` 到 `<code class="lang-html">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>` 或 `<code class="lang-html">```[#pre-code-id]```/</code>`。（为避免 id 重复，在 h1 '#' 之后的最前面放一个空的 <code class="lang-html">&lt;script&gt;&lt;/script&gt;</code>。）</li>
+</ul>
+
+与 LaTeX 或 Wiki 文档很像，但有所扩展。
+
+
+
+## 仅 SEE (Super Easy Edit) 代码
+
+```[.printSEE.scrollable.lang-html#pre0-SEE]```/
+
+
+
+## docuK 的完整 SEE 代码（包含 javascript 和 CSS 链接。独立的文档|html 文件。）
+
+<textarea id="textarea-full-SEE" style="width:100%; font-size:.8em; font-family:monospace" rows="25"></textarea>
+
+
+
+## COTD
+
+###/ Categories of this document
+
+本文档的分类会连同 <a target="_blank" href="https://kipid.tistory.com/entry/Lists">kipid's blog 的列表</a> 链接一起记录在这里。本节会自动隐藏。
+
+<ul>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest">Recent interests</a></li>
+</ul>
+
+##/ Categories of this document
+
+
+
+## 警告
+
+在这个在线演示中有一些限制。延迟加载、浏览器信息、代码美化输出、数学公式，以及只在开始时调用一次的 javascript 代码（<code>docuK-prepare.js</code>），或者使用之前已赋值的 <code>k.variables</code> 的代码，在之后的渲染中都不会工作。
+
+在这个演示示例中只会调用 <code>k.docuKProcess()</code>。但当你把“docuK HTML 部分”放进 html 文件或发布到（允许脚本的）博客时，docuK 的完整功能会被加载，docuK 的所有功能都会工作。
+
+
+
+## TOC
+
+##/ Table of Contents.
+目录会自动填充。详细内容会在后面的章节中说明。
+
+
+
+## 语句（statement）
+
+每个语句（statement）或段落由两个（或更多）换行分隔，例如 /\n\n+/。
+
+如果语句的开头是 '#' 或 '&lt;'，该段落会被特殊处理。
+
+
+
+## docuK 与章节
+
+'#' 表示 docuK，'##' | '###' | '####' 分别表示章（sec）| 节（subsec）| 小节（subsubsec）。
+
+docuK 的结束为 '#/'，而章 | 节 | 小节的结束 '##/' | '###/' | '####/' 是 <span class="emph">可选的</span>。渲染器会根据层级自动检测某事物的结束。
+
+某事物的结束可以用作注释。
+'#/' 之后的文字会被忽略。因此请用 '#####/' 来做非常具体的注释。
+或者直接写 <span class="emph">尚未打开的某事物的结束</span> 也可以。
+
+如下所示，在渲染后的 docuK 中这些内容会被忽略。
+
+###/ 某事物的结束可以用作注释。
+'#/' 之后的文字会被忽略。因此请用 '#####/' 来做非常具体的注释。
+或者直接写 <span class="emph">尚未打开的某事物的结束</span> 也可以。
+
+
+
+##[.class0#sec-Test] 带 class 和 id 的章节
+
+章节可以有 class 和 id 属性。使用 id，你可以像 <code class="lang-html">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer> 这样引用它。
+
+<div class="p">Class 和 Id 用 [emmet 风格] 指定，如 <code>##[.class0.class1.hiden#sec-Test] Section head</code>。</div>
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```/
+
+
+
+## 预定义章节："PH"、"TOC"、"RRA"、"COTD"
+
+有四个预定义章节。"PH"：发布历史（Posting History），"TOC"：目录（Table of Contents），"RRA"：参考文献及相关文章（References and Related Articles），"COTD"：本文档的分类（Categories of this document）。以后可能会增加更多常用的预定义章节。
+
+看看下面实现的预定义章节，你就能很容易明白如何使用它们。
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] 不显示章节编号 (class="no-sec-N")
+
+要不显示章节编号，可以这样做。
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```/
+
+
+
+###[#subsec-No-sec-numbering] [.no-sec-N#sec-No-sec-numbering] 的节
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+####[#subsubsec-No-sec-numbering] [.no-sec-N#sec-No-sec-numbering] 的小节
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+## 引用 RRA 以及引用带 id 的 HTML 元素。
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+Ref. <cite class="ref-docuK"></cite>, Ref. <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+Eq. <refer class="eqq-1"></refer>, Eq. <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+Fig. <refer class="fig-1"></refer>
+</div>
+
+<div class="p">
+Code: <refer class="code-1"></refer>
+</div>
+
+<div class="p">
+Sec. <refer class="sec-Test"></refer>, Sec. <refer class="sec-No-sec-numbering"></refer>, SubSec. <refer class="subsec-No-sec-numbering"></refer>, SubSubSec. <refer class="subsubsec-No-sec-numbering"></refer>
+</div>
+
+这个 <code>docuK.SEE</code> 中有以下这些 HTML 元素。
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
+
+
+
+### 内部带 HTML 的引用（没有匹配的 class-to-id 时）。
+
+```[.lang-html]
+&lt;cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.&lt;/cite>, &lt;cite class="ref-works">&lt;a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do&lt;/a>&lt;/cite>, &lt;cite class="ref-chuchu">&lt;a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net&lt;/a>&lt;/cite>.
+```/
+
+<cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.</cite>, <cite class="ref-works"><a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do</a></cite>, <cite class="ref-chuchu"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net</a></cite>.
+
+
+
+## PH
+
+###/ Posting History
+
+发布历史记录在这里。本节会自动隐藏。
+
+<ul>
+	<li>发布历史记录在这里。</li>
+	<li>2014-06-18: 首次发布。</li>
+</ul>
+
+##/ Posting History
+
+
+
+## TOC
+
+TOC 是自闭合章节，也就是说里面不能放其他文字。
+接下来的文字会位于 TOC 之外。
+
+##/ Table of Contents.
+目录会自动填充。
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>主要</h3></div>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// 定期更新</li>
+	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<div class="subsec"><h3>技术支持</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// JavaScript 增强工具</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// 数学公式渲染器。</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// 代码美化工具。</li>
+<div class="subsec"><h3>API 文档</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>：获取元素的直接子节点数组，包括文本节点。</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - CSS 完整参考</a>；尤其 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> 很有用。例如：<code class="lang-css">element:nth-of-type(an + b) { style properties }</code> <code class="lang-css">element:nth-child(an + b) { style properties }</code></li>
+<div class="subsec"><h3>其他 markdown/markup 语言</h3></div>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">LaTeX 简介及说明文档 (Guide)</a>, 2014-03-24<br>
+		// 这类编辑器有很多，但它们的起源（？）大概可以说是 TeX/LaTeX。不过它是为了制作书或论文而设计的，输出结果是 pdf 之类的东西，所以在互联网、IT 设备上使用看起来不太合适。<br>
+		// 不过它的语法还是很好借用和使用的。</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// 维基百科使用自己的 markdown 语言。</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// Stack Overflow 使用自己的 markdown 语言。</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// 可能会在 GitHub wiki 中使用。</li>
+<div class="subsec"><h3>内部带 HTML 的引用（没有匹配的 class-to-id）会附加在下面。</h3></div>
+</ol>
+
+##/ References and Related Articles
+
+
+
+## 章节标题 (h2)
+
+章节内容
+
+
+
+### 节标题 (h3)
+
+节的内容
+
+
+
+#### 小节标题 (h4)
+
+小节的内容
+
+####/ 小节的可选结束
+
+###/ 节的可选结束
+
+##/ 章节的可选结束
+
+
+
+##[.hiden#sec-HidenSec] 初始隐藏的章节
+
+加上 hiden class，该章节初始会被隐藏。
+
+
+
+## 原始 HTML
+
+学习并记住新东西需要时间，所以本工具被设计得尽可能简单。而且它实际做的事情只是把文字渲染/转换成 HTML 格式，因此通过采用原始 HTML 语法，把新语法最小化了。
+
+<div class="p">
+原始 HTML 可以这样添加。以 '&lt;' 开头的段落会原样附加。
+</div>
+
+原始文本会作为段落附加，并被 <code class="lang-html">&lt;div class="p"&gt;&lt;/div&gt;</code> 包围。
+
+<div class="cmt">
+
+这是默认注释框：<code class="lang-html">&lt;div class="cmt"&gt;&lt;/div&gt;</code>。
+
+你可以放多个段落和嵌套的 HTML。
+
+<ul>
+	<li>无序列表 1。</li>
+	<li>无序列表 2。</li>
+</ul>
+<ol>
+	<li>有序列表 1。</li>
+	<li>有序列表 2。</li>
+</ol>
+
+就是这样。
+
+</div>
+
+<div class="bcf">
+
+这是默认的“注意”框：<code class="lang-html">&lt;div class="bcf"&gt;&lt;/div&gt;</code>。
+
+</div>
+
+
+
+## 链接 | 指向合适 html 的 URL
+
+计划实现此功能。
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## 图
+
+<figure id="fig-1"><div class="fig">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
+	<div class="caption">Caption.</div>
+</div></figure>
+
+
+
+## 把 &lt;data class="to-table"&gt;（不是 CSV | Comma-Separated Values，而是 TSV | TESV | Tab-Enter-Separated Values）转换为 HTML 表格
+
+```[.lang-html.linenums]
+&lt;data class="to-table" data-ratio="30-40-30"&gt;
+产品	线下门店 (三星商店) 价格	分期
+Galaxy Watch 8 40mm LTE	385,000 韩元	三星卡 36 个月免息分期
+Galaxy Watch 8 Classic 44mm Bluetooth	469,000 韩元	三星卡 36 个月免息分期
+Galaxy Watch 8 2025 47mm	669,000 韩元	三星卡 36 个月免息分期
+&lt;/data&gt;
+```/
+
+变成
+
+<data class="to-table" data-ratio="30-40-30">
+产品	线下门店 (三星商店) 价格	分期
+Galaxy Watch 8 40mm LTE	385,000 韩元	三星卡 36 个月免息分期
+Galaxy Watch 8 Classic 44mm Bluetooth	469,000 韩元	三星卡 36 个月免息分期
+Galaxy Watch 8 2025 47mm	669,000 韩元	三星卡 36 个月免息分期
+</data>
+
+
+
+## 数学公式
+
+数学公式可以用 \$TeX math\$、<code class="lang-html">&lt;eq&gt;TeX math&lt;/eq&gt;</code> 和 <code class="lang-html">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code> 来放。
+
+前两种会转换成 <span class="emph">像 $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$ 这样的行内公式。最后一种</span>会转换成下面这样的独立行公式。
+
+<span class="emph"><eqq id="eqq-1">
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq></span>
+
+<eqq id="eqq-2">
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+
+
+
+## 代码
+
+代码可以被美化输出。<code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> 会被美化输出。没有 class="no-escape-HTML" 时，所有尖括号（&lt; &gt;）默认都会被转义。如果你想让文本中的 HTML <code>&lt;a&gt;</code> 标签被美化输出，请添加 <code>no-escape-HTML</code> class。（例如 <code>&lt;code class="no-escape-HTML"&gt;&lt;a target="_blank" href="https://recoeve.net/"&gt;https://recoeve.net/&lt;/a&gt;&lt;/code&gt;</code> 会像 <code class="no-escape-HTML"><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> 这样输出。）
+
+使用 <code>```[.no-escape-HTML] ```/</code> 的另一个例子如下。
+
+```[.no-escape-HTML]
+<a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
+```/
+
+使用 <code class="lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>，
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+<div class="p"></div>
+
+使用 <code class="lang-html">```Codes to be pretty-printed.```/</code>，或 <code class="lang-html">```[像 ".class-0.class-1#element-id" 这样的 emmet 风格 class 和 id 属性]Codes to be pretty-printed.```/</code>，
+
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+</div>
+
+
+
+### 不要行号就添加 class [.no-linenums]
+
+默认情况下，美化输出的代码会带行号。要去掉行号，像下面这样添加 [.no-linenums] class：<code class="lang-html">```[.no-linenums]Codes```/</code>。
+
+```[.no-linenums.lang-js.scrollable]
+const fs = require('fs');
+const path = require('path');
+
+// 用于查找 ETag 模式的正则表达式
+const ETAG_PATTERN = /ETag=(\d{4}-\d{2}-\d{2})/g;
+
+// 读取文件并更新其 ETag 的函数
+function updateETagInFile(filePath) {
+    try {
+        // 读取文件
+        const content = fs.readFileSync(filePath, 'utf8');
+
+        // 用当前日期更新 ETag
+        const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 格式
+        const updatedContent = content.replace(ETAG_PATTERN, `ETag=${currentDate}`);
+
+        // 仅在内容有变化时才写入文件
+        if (content !== updatedContent) {
+            fs.writeFileSync(filePath, updatedContent, 'utf8');
+            console.log(`Updated ETag in: ${filePath}`);
+        } else {
+            console.log(`No ETag found in: ${filePath}`);
+        }
+    } catch (error) {
+        console.error(`Error processing file ${filePath}:`, error.message);
+    }
+}
+
+// 递归遍历目录并处理其中各文件的函数
+function processDirectory(dirPath) {
+    try {
+        const items = fs.readdirSync(dirPath);
+
+        for (const item of items) {
+            const fullPath = path.join(dirPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                // 如果是目录，则递归处理
+                // processDirectory(fullPath);
+            } else if (stat.isFile()) {
+                // 如果是文件，则更新 ETag
+                updateETagInFile(fullPath);
+            }
+        }
+    } catch (error) {
+        console.error(`Error processing directory ${dirPath}:`, error.message);
+    }
+}
+
+// 主执行函数
+function main() {
+    const targetDirectory = process.argv[2] || '.'; // 以命令行参数指定目录，默认是当前目录
+
+    if (!fs.existsSync(targetDirectory)) {
+        console.error(`Directory not found: ${targetDirectory}`);
+        process.exit(1);
+    }
+
+    console.log(`Processing directory: ${targetDirectory}`);
+    processDirectory(targetDirectory);
+    console.log('ETag update completed!');
+}
+
+// 仅当脚本被直接执行时才调用 main 函数
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    updateETagInFile,
+    processDirectory,
+    ETAG_PATTERN
+};
+```/
+
+
+
+## SEE 文档内容的模糊搜索 (fuzzy search)
+
+你可以用 FS（<span class="bold">G</span>o：快捷键 <span class="bold">G</span>）轻松模糊搜索 SEE 文档的内容。
+
+
+
+## 页眉、页脚（宣传 recoeve.net）
+
+页眉和页脚中有 <a target="_blank" href="https://recoeve.net/">recoeve.net</a> 的宣传。
+
+<code class="lang-js">k.recoeveUserId="your-recoeve-id";</code> 和 <code class="lang-js">k.recoCats="当前页面的分类，用 ; 分隔多个分类"</code> 可以设置你自己的 recoeve 页面。
+
+用 <code class="lang-js">k.printMode=true</code> 设置可以关闭这些宣传。
+
+在这个页面中，我像下面这样设置了 recoeve 相关变量。
+
+```
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+```/
+
+所以页眉和页脚中的 iframe 页面会是 <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net（multireco 模式）</a>。
+
+当没有设置或为空时，<code>k.recoeveUserId="kipid"</code> 和 <code>k.recoCats="[Music/Break]--K-Pop"</code> 是默认值。
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+k.SEEHTMLs=[];
+k.SEEHTMLs[0]=$("#SEE0").html().trim();
+
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.zh"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.k, jQuery);
+</script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-script -->
+
+<script>
+(function(k, $, undefined) {
+$("#pre0-SEE").children().html(k.escapeOnlyTag(k.SEEHTMLs[0]));
+$("#textarea-full-SEE").html(k.escapeOnlyTag(`<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"><`+`/script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-style -->
+
+本文档的说明。对搜索引擎有好处。
+
+<codeprint class="SEE">
+${k.SEEHTMLs[0]}
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+
+// 只在这个文档中使用的代码。也就是填充 pre#pre0-SEE 和 textarea#textarea-full-SEE 的代码
+
+k.printMode=false;
+k.recoeveUserId="";
+k.recoCats="";
+k.wait=1024;
+k.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.zh"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=\`https://kipid.tistory.com/entry/\${this.page.identifier}\`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery);
+<`+`/script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-script -->`));
+k.SEEHTMLs[0]=$("#SEE0").html().trim(); // Emptified.
+})(window.k, jQuery);
+</script>

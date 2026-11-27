@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"></script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/jquery.js"></script>
+<link rel="stylesheet" href="https://recoeve.net/CDN/docuK-2.3.css">
+<script src="https://recoeve.net/CDN/docuK-prepare-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <link rel="stylesheet" href="./docuK-2.3.css">
+<script src="./docuK-prepare-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-style -->
+
+<style>
+.docuK pre.printSEE {font-size:.75em}
+</style>
+<meta charset="utf-8" name="description" content="pure SEE (Super Easy Edit) de docuK (Markdown): manual (Manual | Documentation | Tutorial). docuK es un formato de documento HTML que se renderiza con JavaScript, jQuery, MathJax y Google code prettifier. Las funciones principales son * modos y fuentes conmutables. * tamaño de letra e interlineado ajustables. * índice. * numeración automática de secciones/figuras/ecuaciones. * citas de referencias en burbuja emergente. * referencias a figuras y ecuaciones. * referencia a cualquier elemento con id y a elementos con class='number'. * carga diferida de figuras (imágenes, iframes). * renderizado diferido de ecuaciones (MathJax). Desde el 2023-06-01, MathJax renderiza todas las ecuaciones de docuK o SEE (Super Easy Edit) al principio. * impresión automática de código. Muy similar a los documentos LaTeX o Wiki, pero algo extendido."/>
+
+<codeprint id="SEE0" class="SEE">
+# pure SEE.es
+
+Aquí se muestra el docuK renderizado a partir del texto actual.
+
+<a download target="_blank" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30">Abrir pure-SEE-copiable.html</a> es lo recomendado. Luego <a href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/pure%20SEE%20copiable.html?ETag=2025-06-30" download="pure-SEE-copiable.html">descarga pure-SEE-copiable.html (clic derecho -&gt; Guardar enlace como)</a>, cópialo y pégalo en un nuevo archivo html y edítalo estudiando el documento SEE como referencia.
+
+
+
+## PH
+
+###/ Posting History
+
+El historial de publicaciones se registra aquí. Esta sección se oculta automáticamente.
+
+<ul>
+<li>2026-10-08 : se modificó docuK-prism.css. Para que se muestre de forma colorida también en modo oscuro.</li>
+<li>2026-03-05 : pronto habrá una nueva actualización.</li>
+<li>2026-02-12 : Ahora los codes to be pretty-printed se imprimen bellamente con el default lang-html por defecto aunque no se indique el tipo lang.<br/>
++ Ahora Citing/Refering se ve bien también en modo claro.<br/>
++ Ahora <code class="prettyprint lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;&lt;/pre&gt;</code> se prettyprintea correctamente. Como se cambió el code prettifier en el proceso, apareció un bug.</li>
+<li>2023-09-24 : El código completo de SEE (Super Easy Edit) docuK.</li>
+<li>2023-05-18 : Actualización.</li>
+<li>2014-06-18 : Primera publicación.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## Resumen | descripción de docuK y SEE
+
+Las funciones principales son las siguientes.
+
+<ul>
+<li>Modos y fuentes (font-family) conmutables.</li>
+<li>Tamaño de letra e interlineado ajustables.</li>
+<li>Índice (tabla de contenidos).</li>
+<li>Numeración automática de secciones/figuras/ecuaciones.</li>
+<li>Cita de referencias en burbuja emergente (popup).</li>
+<li>Referencias a figuras y ecuaciones.</li>
+<li>Referencia a cualquier elemento con id y a elementos con class="number".</li>
+<li>Carga diferida (lazy) de figuras (imágenes, iframes).</li>
+<li>Renderizado diferido (lazy) de ecuaciones (MathJax). Desde el 2023-06-01, MathJax renderiza todas las ecuaciones de docuK o SEE (Super Easy Edit) al principio.</li>
+<li>Impresión automática de código: de `<code class="lang-html">&lt;codeprint id="code-id"&gt;&lt;/codeprint&gt;</code>` a `<code class="lang-html">&lt;pre id="pre-code-id"&gt;&lt;/pre&gt;</code>` o `<code class="lang-html">```[#pre-code-id]```/</code>`. (Para evitar id duplicados, coloca un <code class="lang-html">&lt;script&gt;&lt;/script&gt;</code> vacío justo al principio, tras el '#' del h1.)</li>
+</ul>
+
+Muy similar a los documentos LaTeX o Wiki, pero algo extendido.
+
+
+
+## Solo el código SEE (Super Easy Edit)
+
+```[.printSEE.scrollable.lang-html#pre0-SEE]```/
+
+
+
+## Código SEE completo de docuK (incluye enlaces a javascript y CSS. Archivo documento|html independiente.)
+
+<textarea id="textarea-full-SEE" style="width:100%; font-size:.8em; font-family:monospace" rows="25"></textarea>
+
+
+
+## COTD
+
+###/ Categories of this document
+
+Las categorías de este documento se registran aquí junto con un enlace a la <a target="_blank" href="https://kipid.tistory.com/entry/Lists">lista del blog de kipid</a>. Esta sección se oculta automáticamente.
+
+<ul>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#subsec-MarkDown-docuK">[IT/Programming] Category -- MarkDown: docuK SEE (Super Easy Edit)</a></li>
+<li><a target="_blank" href="https://kipid.tistory.com/entry/Lists#sec-interest">Recent interests</a></li>
+</ul>
+
+##/ Categories of this document
+
+
+
+## Advertencia
+
+Esta demostración en vivo tiene algunas limitaciones. La carga diferida, la información del navegador, la impresión bonita de código, las ecuaciones y el código javascript que se llama solo una vez al principio (<code>docuK-prepare.js</code>), o el código que usa <code>k.variables</code> ya asignadas, no funcionan en los renderizados posteriores.
+
+En este ejemplo de demostración solo se llama a <code>k.docuKProcess()</code>. Pero si colocas la "parte HTML de docuK" en un archivo html o la publicas en un blog (que permite scripts), se carga la funcionalidad completa de docuK y todas las funciones de docuK funcionan.
+
+
+
+## TOC
+
+##/ Table of Contents.
+El índice se rellena automáticamente. Los detalles se describen en las secciones siguientes.
+
+
+
+## Sentencias (statements)
+
+Cada sentencia (statement) o párrafo se separa por dos (o más) saltos de línea, por ejemplo /\n\n+/.
+
+Si un párrafo comienza con '#' o '&lt;', se trata de forma especial.
+
+
+
+## docuK y secciones
+
+'#' significa docuK, y '##' | '###' | '####' significan respectivamente sección (sec) | subsección (subsec) | subsubsección (subsubsec).
+
+El final de docuK es '#/', y los finales de sección | subsección | subsubsección '##/' | '###/' | '####/' son <span class="emph">opcionales</span>. El renderizador detecta automáticamente el final de algo según la jerarquía.
+
+El final de algo puede usarse como comentario.
+El texto después de '#/' se ignora. Por eso usa '#####/' para comentarios muy específicos.
+O simplemente escribe <span class="emph">el final de algo que aún no se ha abierto</span>.
+
+Como se muestra abajo, se ignoran en el docuK renderizado.
+
+###/ El final de algo puede usarse como comentario.
+El texto después de '#/' se ignora. Por eso usa '#####/' para comentarios muy específicos.
+O simplemente escribe <span class="emph">el final de algo que aún no se ha abierto</span>.
+
+
+
+##[.class0#sec-Test] Sección con class e id
+
+Las secciones pueden tener atributos class e id. Con el id puedes referenciarla como <code class="lang-html">&lt;refer class="sec-Test"&gt;&lt;/refer&gt;</code> <refer class="sec-Test"></refer>.
+
+<div class="p">Las class y los id se especifican al [estilo emmet], como <code>##[.class0.class1.hiden#sec-Test] Section head</code>.</div>
+
+```[.lang-html]
+##[.class0#sec-Test] Section with class and id
+```/
+
+
+
+## Secciones predefinidas: "PH", "TOC", "RRA", "COTD"
+
+Hay cuatro secciones predefinidas. "PH": historial de publicaciones (Posting History), "TOC": índice (Table of Contents), "RRA": referencias y artículos relacionados (References and Related Articles), "COTD": categorías de este documento (Categories of this document). Puede que se añadan más secciones predefinidas útiles en el futuro.
+
+Si miras las secciones predefinidas implementadas abajo, entenderás fácilmente cómo usarlas.
+
+
+
+##[.no-sec-N#sec-No-sec-numbering] Sin numeración de sección (class="no-sec-N")
+
+Si no quieres numeración de sección, hazlo así.
+
+```[.lang-html]
+##[.no-sec-N#sec-No-sec-numbering] No section numbering (class="no-sec-N")
+```/
+
+
+
+###[#subsec-No-sec-numbering] Subsección de [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+###[#subsec-No-sec-numbering] SubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+####[#subsubsec-No-sec-numbering] Subsubsección de [.no-sec-N#sec-No-sec-numbering]
+
+```[.lang-html]
+####[#subsubsec-No-sec-numbering] SubSubSection of [.no-sec-N#sec-No-sec-numbering]
+```/
+
+
+
+## Citar RRA y referenciar elementos HTML con id.
+
+```[.linenums.lang-html]
+&lt;div class="p"&gt;
+Ref. &lt;cite class="ref-docuK"&gt;&lt;/cite&gt;, Ref. &lt;cite class="ref-docuKShort"&gt;&lt;/cite&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Eq. &lt;refer class="eqq-1"&gt;&lt;/refer&gt;, Eq. &lt;refer class="eqq-2"&gt;&lt;/refer&gt;.
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Fig. &lt;refer class="fig-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Code: &lt;refer class="code-1"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+
+&lt;div class="p"&gt;
+Sec. &lt;refer class="sec-Test"&gt;&lt;/refer&gt;, Sec. &lt;refer class="sec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSec. &lt;refer class="subsec-No-sec-numbering"&gt;&lt;/refer&gt;, SubSubSec. &lt;refer class="subsubsec-No-sec-numbering"&gt;&lt;/refer&gt;
+&lt;/div&gt;
+```/
+
+<div class="p">
+Ref. <cite class="ref-docuK"></cite>, Ref. <cite class="ref-docuKShort"></cite>.
+</div>
+
+<div class="p">
+Eq. <refer class="eqq-1"></refer>, Eq. <refer class="eqq-2"></refer>.
+</div>
+
+<div class="p">
+Fig. <refer class="fig-1"></refer>
+</div>
+
+<div class="p">
+Code: <refer class="code-1"></refer>
+</div>
+
+<div class="p">
+Sec. <refer class="sec-Test"></refer>, Sec. <refer class="sec-No-sec-numbering"></refer>, SubSec. <refer class="subsec-No-sec-numbering"></refer>, SubSubSec. <refer class="subsubsec-No-sec-numbering"></refer>
+</div>
+
+En este <code>docuK.SEE</code> hay los siguientes elementos HTML.
+
+```[.linenums.lang-html]
+&lt;!-- ## RRA with ol.refs --&gt;
+&lt;ol class="refs"&gt;
+&lt;div class="subsec"&gt;&lt;h3&gt;Main&lt;/h3&gt;&lt;/div&gt;
+	&lt;li id="ref-docuK"&gt;&lt;a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20"&gt;kipid's blog - HTML docuK format ver. 2.1&lt;/a&gt;;&lt;br&gt;
+		// Updated regularly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- ## eqq tag (LaTeX equations) --&gt;
+&lt;span class="emph"&gt;&lt;eqq id="eqq-1"&gt;
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+&lt;/eqq&gt;&lt;/span&gt;
+
+&lt;eqq id="eqq-2"&gt;
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+&lt;/eqq&gt;
+
+&lt;!-- ## figure tag (img or iframe such as youtube video) --&gt;
+&lt;figure id="fig-1"&gt;&lt;div class="fig"&gt;
+	&lt;img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src"&gt;
+	&lt;div class="caption"&gt;Caption.&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;!-- ## div tag with span.number HTML element. (span.number is cited as a text.) --&gt;
+&lt;div id="code-1"&gt;&lt;span class="number"&gt;Java vertx server code example&lt;/span&gt;
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```\/ // Hack to avoid closing "```" code.
+
+&lt;/div&gt;
+```/
+
+
+
+### Citar con HTML dentro (sin class-to-id correspondiente).
+
+```[.lang-html]
+&lt;cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.&lt;/cite>, &lt;cite class="ref-works">&lt;a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do&lt;/a>&lt;/cite>, &lt;cite class="ref-chuchu">&lt;a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net&lt;/a>&lt;/cite>.
+```/
+
+<cite class="ref-with-inside-HTML">Citing with inside HTML, and no matching class-to-id.</cite>, <cite class="ref-works"><a target="_blank" href="https://kipid.tistory.com/entry/Works-to-do">kipid's blog :: Works to do</a></cite>, <cite class="ref-chuchu"><a target="_blank" href="https://recoeve.net/user/kipid?cat=%5BMusic%2FBreak%5D--Pet&PRL=0.80&PRR=1.00#https%3A%2F%2Fwww.instagram.com%2Fp%2FC_vG4UuPpEh%2F">[Music/Break]--Pet of kipid's Recoeve.net</a></cite>.
+
+
+
+## PH
+
+###/ Posting History
+
+El historial de publicaciones se registra aquí. Esta sección se oculta automáticamente.
+
+<ul>
+	<li>El historial de publicaciones se registra aquí.</li>
+	<li>2014-06-18: primera publicación.</li>
+</ul>
+
+##/ Posting History
+
+
+
+## TOC
+
+TOC es una sección autocontenida, es decir, no se puede poner otro texto dentro.
+El siguiente texto queda fuera del TOC.
+
+##/ Table of Contents.
+El índice se rellena automáticamente.
+
+
+
+## RRA
+
+###/ References and Related Articles
+
+<ol class="refs">
+<div class="subsec"><h3>Principales</h3></div>
+	<li id="ref-docuK"><a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.1</a>;<br>
+		// Actualizado periódicamente</li>
+	<li id="ref-docuKGithub"><a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a></li>
+<div class="subsec"><h3>Apoyo</h3></div>
+	<li id="ref-jQuery"><a href="http://jquery.com/">jQuery.com</a>; and <a href="http://jquery.com/download/">jQuery - download</a>;<br>
+		// Herramienta auxiliar de JavaScript</li>
+	<li id="ref-mathjax"><a href="http://www.mathjax.org/">MathJax.org</a>; and <a href="http://docs.mathjax.org/en/latest/index.html">MathJax Documentation - latest</a>; and <a href="http://docs.mathjax.org/en/latest/options/hub.html">The Core Configuration Options</a>; and <a href="http://docs.mathjax.org/en/latest/api/hub.html">The MathJax.Hub Object</a>;<br>
+		// Renderizador de ecuaciones.</li>
+	<li id="ref-googleCodePrettyfy"><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a> and <a href="https://code.google.com/p/google-code-prettify/wiki/GettingStarted">Getting Started</a>;<br>
+		// Herramienta de impresión bonita de código.</li>
+<div class="subsec"><h3>Documentación de la API</h3></div>
+	<li id="ref-jQuery-contents"><a href="http://api.jquery.com/contents/">jQuery - contents()</a>: obtiene un array de los hijos inmediatos de un elemento, incluidos los nodos de texto.</li>
+	<li id="ref-MDN-css-reference"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN - referencia completa de CSS</a>; especialmente <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> es útil. Ej.: <code class="lang-css">element:nth-of-type(an + b) { style properties }</code> <code class="lang-css">element:nth-child(an + b) { style properties }</code></li>
+<div class="subsec"><h3>Otros lenguajes markdown/markup</h3></div>
+	<li id="ref-latex"><a href="https://kipid.tistory.com/entry/introducing-LaTeX-and-Guides">Introducción a LaTeX y manuales (Guide)</a>, 2014-03-24<br>
+		// Hay muchos editores de este tipo, pero su origen (?) probablemente sea TeX/LaTeX. Sin embargo, se creó con el objetivo de hacer libros o artículos y entrega resultados como pdf, así que parece poco adecuado para usarlo en internet y en dispositivos informáticos.<br>
+		// Aun así, su sintaxis es muy buena para tomar prestada y usar.</li>
+	<li><a href="http://www.wikipedia.org/">wikipedia.org</a>;<br>
+		// Wikipedia usa su propio lenguaje markdown.</li>
+	<li><a href="https://stackoverflow.com/">stackoverflow.com</a>;<br>
+		// Stack Overflow usa su propio lenguaje markdown.</li>
+	<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">GitHub/adam-p - Markdown (GitHub)</a>; and <a href="http://markdown-here.com/livedemo.html">live demo page</a><br>
+		// Puede que se use en el wiki de GitHub.</li>
+<div class="subsec"><h3>Citar con HTML dentro (sin class-to-id correspondiente) se añade abajo.</h3></div>
+</ol>
+
+##/ References and Related Articles
+
+
+
+## Título de sección (h2)
+
+Contenido de la sección
+
+
+
+### Título de subsección (h3)
+
+Contenido de la subsección
+
+
+
+#### Título de subsubsección (h4)
+
+Contenido de la subsubsección
+
+####/ Final opcional de la subsubsección
+
+###/ Final opcional de la subsección
+
+##/ Final opcional de la sección
+
+
+
+##[.hiden#sec-HidenSec] Sección oculta inicialmente
+
+Con la class hiden, esta sección se oculta inicialmente.
+
+
+
+## HTML crudo
+
+Aprender y recordar cosas nuevas lleva tiempo, así que esta herramienta se diseñó de la forma más simple posible. Y en realidad solo hace una cosa: renderizar/convertir texto al formato HTML. Por eso, al adoptar la sintaxis HTML cruda, la nueva sintaxis se minimiza.
+
+<div class="p">
+El HTML crudo se añade así. Un párrafo que empieza con '&lt;' se añade tal cual.
+</div>
+
+El texto crudo se añade como párrafo, rodeado de <code class="lang-html">&lt;div class="p"&gt;&lt;/div&gt;</code>.
+
+<div class="cmt">
+
+Esta es la caja de comentarios por defecto: <code class="lang-html">&lt;div class="cmt"&gt;&lt;/div&gt;</code>.
+
+Puedes poner varios párrafos y HTML anidado.
+
+<ul>
+	<li>Lista no ordenada 1.</li>
+	<li>Lista no ordenada 2.</li>
+</ul>
+<ol>
+	<li>Lista ordenada 1.</li>
+	<li>Lista ordenada 2.</li>
+</ol>
+
+Eso es todo.
+
+</div>
+
+<div class="bcf">
+
+Esta es la caja "warning" por defecto: <code class="lang-html">&lt;div class="bcf"&gt;&lt;/div&gt;</code>.
+
+</div>
+
+
+
+## Enlaces | URL al html adecuado
+
+Planeado para el futuro.
+
+http://www.npr.org/blogs/health/2013/12/30/258376009/how-language-seems-to-shape-ones-view-of-the-world
+How Language Seems To Shape One's View Of The World
+, January 02, 2014, by ALAN YU.
+
+
+
+## Figura
+
+<figure id="fig-1"><div class="fig">
+	<img delayed-src="https://blog.kakaocdn.net/dn/bfXXOe/btr2D5LJWv8/8QVkGacKxfeA04512qPFk1/img.png" alt="img with delayed-src">
+	<div class="caption">Caption.</div>
+</div></figure>
+
+
+
+## Convertir &lt;data class="to-table"&gt; (no CSV | Comma-Separated Values, sino TSV | TESV | Tab-Enter-Separated Values) en tabla HTML
+
+```[.lang-html.linenums]
+&lt;data class="to-table" data-ratio="30-40-30"&gt;
+Producto	Precio en tienda física (Samsung Store)	Pago a plazos
+Galaxy Watch 8 40mm LTE	385.000 KRW	Tarjeta Samsung, 36 meses sin intereses
+Galaxy Watch 8 Classic 44mm Bluetooth	469.000 KRW	Tarjeta Samsung, 36 meses sin intereses
+Galaxy Watch 8 2025 47mm	669.000 KRW	Tarjeta Samsung, 36 meses sin intereses
+&lt;/data&gt;
+```/
+
+se convierte en
+
+<data class="to-table" data-ratio="30-40-30">
+Producto	Precio en tienda física (Samsung Store)	Pago a plazos
+Galaxy Watch 8 40mm LTE	385.000 KRW	Tarjeta Samsung, 36 meses sin intereses
+Galaxy Watch 8 Classic 44mm Bluetooth	469.000 KRW	Tarjeta Samsung, 36 meses sin intereses
+Galaxy Watch 8 2025 47mm	669.000 KRW	Tarjeta Samsung, 36 meses sin intereses
+</data>
+
+
+
+## Matemáticas
+
+Las ecuaciones se pueden insertar con \$TeX math\$, <code class="lang-html">&lt;eq&gt;TeX math&lt;/eq&gt;</code> y <code class="lang-html">&lt;eqq&gt;TeX math&lt;/eqq&gt;</code>.
+
+Las dos primeras se convierten en <span class="emph">ecuaciones en línea como $\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i$. La última</span> se convierte en una ecuación en una línea aparte, como abajo.
+
+<span class="emph"><eqq id="eqq-1">
+	\alpha \beta = \int f(\gamma) dx \sum_i \hat{H}_i
+</eqq></span>
+
+<eqq id="eqq-2">
+\begin{split}
+	\vec{x} &= x^{\bar{i}} \vec{e}_{\bar{i}} = x \vec{e}_x + y \vec{e}_y + z \vec{e}_z \\
+		&= x^{i} \vec{e}_{i} = r \vec{e}_r + \theta \vec{e}_{\theta} + \phi \vec{e}_{\phi} \\
+		&= x^{i'} \vec{e}_{i'} = u \vec{e}_u + v \vec{e}_v + w \vec{e}_w \\
+\end{split}
+</eqq>
+
+
+
+## Código
+
+El código se puede imprimir de forma bonita. <code><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code> se imprimirá de forma bonita. Sin class="no-escape-HTML", todos los ángulos (&lt; &gt;) se escapan por defecto. Si quieres que una etiqueta HTML <code>&lt;a&gt;</code> del texto se imprima de forma bonita, añade la class <code>no-escape-HTML</code>. (Por ejemplo, <code>&lt;code class="no-escape-HTML"&gt;&lt;a target="_blank" href="https://recoeve.net/"&gt;https://recoeve.net/&lt;/a&gt;&lt;/code&gt;</code> se imprime como <code class="no-escape-HTML"><a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a></code>.)
+
+Otro ejemplo con <code>```[.no-escape-HTML] ```/</code> es el siguiente.
+
+```[.no-escape-HTML]
+<a target="_blank" href="https://recoeve.net/">https://recoeve.net/</a>
+```/
+
+Con <code class="lang-html">&lt;pre class="prettyprint scrollable lang-java"&gt;Codes to be pretty-printed.&lt;/pre&gt;</code>,
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+<div class="p"></div>
+
+Con <code class="lang-html">```Codes to be pretty-printed.```/</code>, o <code class="lang-html">```[atributos class e id estilo emmet como ".class-0.class-1#element-id"]Codes to be pretty-printed.```/</code>,
+
+<div id="code-1"><span class="number">Java vertx server code example</span>
+
+```[.scrollable.lang-java]
+import org.vertx.java.platform.Verticle; // Every Java verticle must extend the class org.vertx.java.platform.Verticle. You must override the start method - this is called by Vert.x when the verticle is started.
+
+import org.vertx.java.core.http.HttpServerRequest;
+
+
+public class HelloWorldServer extends Verticle {
+	///////////////////////////////////////////////
+	// Called when the verticle is deployed.
+	///////////////////////////////////////////////
+	@Override
+	public void start() {
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			System.out.println("req.method(): "+req.method()); // GET, PUT, POST, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH
+
+			req.response().putHeader("Content-Type","text/html");
+			req.response().end("&lt;h1&gt;Hello World&lt;/h1&gt;");
+			req.response().close();
+		}).listen(1001);
+	}
+
+	///////////////////////////////////////////////
+	// Called when the verticle is undeployed.
+	///////////////////////////////////////////////
+	@Override
+	public void stop(){
+		// do something.
+	}
+}
+```/
+
+</div>
+
+
+
+### Si no quieres números de línea, añade la class [.no-linenums]
+
+Por defecto, los códigos con impresión bonita tienen números de línea. Para quitarlos, añade la class [.no-linenums] así: <code class="lang-html">```[.no-linenums]Codes```/</code>.
+
+```[.no-linenums.lang-js.scrollable]
+const fs = require('fs');
+const path = require('path');
+
+// Expresión regular para encontrar el patrón ETag
+const ETAG_PATTERN = /ETag=(\d{4}-\d{2}-\d{2})/g;
+
+// Función que lee un archivo y actualiza su ETag
+function updateETagInFile(filePath) {
+    try {
+        // Leer el archivo
+        const content = fs.readFileSync(filePath, 'utf8');
+
+        // Actualizar el ETag con la fecha actual
+        const currentDate = new Date().toISOString().split('T')[0]; // formato YYYY-MM-DD
+        const updatedContent = content.replace(ETAG_PATTERN, `ETag=${currentDate}`);
+
+        // Escribir en el archivo solo si hay cambios
+        if (content !== updatedContent) {
+            fs.writeFileSync(filePath, updatedContent, 'utf8');
+            console.log(`Updated ETag in: ${filePath}`);
+        } else {
+            console.log(`No ETag found in: ${filePath}`);
+        }
+    } catch (error) {
+        console.error(`Error processing file ${filePath}:`, error.message);
+    }
+}
+
+// Función que recorre un directorio de forma recursiva y procesa sus archivos
+function processDirectory(dirPath) {
+    try {
+        const items = fs.readdirSync(dirPath);
+
+        for (const item of items) {
+            const fullPath = path.join(dirPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                // Si es un directorio, procesarlo de forma recursiva
+                // processDirectory(fullPath);
+            } else if (stat.isFile()) {
+                // Si es un archivo, actualizar su ETag
+                updateETagInFile(fullPath);
+            }
+        }
+    } catch (error) {
+        console.error(`Error processing directory ${dirPath}:`, error.message);
+    }
+}
+
+// Función principal
+function main() {
+    const targetDirectory = process.argv[2] || '.'; // Directorio indicado como argumento de línea de comandos; por defecto, el directorio actual
+
+    if (!fs.existsSync(targetDirectory)) {
+        console.error(`Directory not found: ${targetDirectory}`);
+        process.exit(1);
+    }
+
+    console.log(`Processing directory: ${targetDirectory}`);
+    processDirectory(targetDirectory);
+    console.log('ETag update completed!');
+}
+
+// Llamar a main solo cuando el script se ejecuta directamente
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    updateETagInFile,
+    processDirectory,
+    ETAG_PATTERN
+};
+```/
+
+
+
+## Búsqueda difusa (fuzzy search) en el contenido del documento SEE
+
+Con FS (<span class="bold">G</span>o: atajo <span class="bold">G</span>) puedes buscar de forma difusa fácilmente en el contenido del documento SEE.
+
+
+
+## Cabecera y pie de página (publicidad de recoeve.net)
+
+En la cabecera y el pie de página hay publicidad de <a target="_blank" href="https://recoeve.net/">recoeve.net</a>.
+
+Con <code class="lang-js">k.recoeveUserId="your-recoeve-id";</code> y <code class="lang-js">k.recoCats="categorías de la página actual, varias categorías separadas por ;"</code> puedes configurar tu página de recoeve.
+
+Con <code class="lang-js">k.printMode=true</code> puedes desactivar esta publicidad.
+
+En esta página configuré las variables relacionadas con recoeve así.
+
+```
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+```/
+
+Por lo tanto, la página iframe de la cabecera y el pie de página es <a target="_blank" href="https://recoeve.net/user/kipid/mode/multireco?cat=%5BIT%2FProgramming%5D--MarkDown--docuK%20SEE%20(Super%20Easy%20Edit)&ToR=#numbers-of-recos">[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit) of kipid's Recoeve.net (modo multireco)</a>.
+
+Si no se configura o está vacío, <code>k.recoeveUserId="kipid"</code> y <code>k.recoCats="[Music/Break]--K-Pop"</code> son los valores por defecto.
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+k.SEEHTMLs=[];
+k.SEEHTMLs[0]=$("#SEE0").html().trim();
+
+k.printMode=false;
+k.recoeveUserId="kipid";
+k.recoCats="[IT/Programming]--MarkDown--docuK SEE (Super Easy Edit)";
+k.wait=1024;
+k.delayPad=0;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.es"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.k, jQuery);
+</script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+
+<!-- From recoeve.net CDN -->
+<!-- <script src="https://recoeve.net/CDN/docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+
+<!-- From local -->
+<!-- <script src="./docuK-postProcess-2.3.js" charset="utf-8"></script> -->
+</codeprint><!-- docuK-script -->
+
+<script>
+(function(k, $, undefined) {
+$("#pre0-SEE").children().html(k.escapeOnlyTag(k.SEEHTMLs[0]));
+$("#textarea-full-SEE").html(k.escapeOnlyTag(`<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/jquery.js"><`+`/script>
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-style -->
+
+Descripción de este documento. Bueno para los motores de búsqueda.
+
+<codeprint class="SEE">
+${k.SEEHTMLs[0]}
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+(function(k, $, undefined) {
+
+// Código usado solo en este documento. Es decir, el código que rellena pre#pre0-SEE y textarea#textarea-full-SEE
+
+k.printMode=false;
+k.recoeveUserId="";
+k.recoCats="";
+k.wait=1024;
+k.delayPad=512;
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+**/
+window.disqus_config=function () {
+	this.page.identifier="pure-SEE.es"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.url=\`https://kipid.tistory.com/entry/\${this.page.identifier}\`; // Replace PAGE_URL with your page's canonical URL variable
+};
+})(window.m, jQuery);
+<`+`/script>
+
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"><`+`/script>
+</codeprint><!-- docuK-script -->`));
+k.SEEHTMLs[0]=$("#SEE0").html().trim(); // Emptified.
+})(window.k, jQuery);
+</script>
