@@ -2733,7 +2733,7 @@ Welcome! This is your ${m.visitCount}-th visit.`,
 </div>
 <div class="deviceInfo"></div>
 <div class="promoting-docuK">This document is rendered by <a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a href="https://kipid.tistory.com/entry/pure-SEE">pure SEE.en</a> (` +
-				["ko", "zh", "ja", "de", "fr", "es", "hi", "ar", "pt", "nl", "ru"].map((lang) => `<a href="https://kipid.tistory.com/entry/pure-SEE.${lang}">${lang}</a>`).join(" ") +
+				["ko", "zh", "ja", "de", "fr", "es", "hi", "ar", "pt", "nl", "ru"].map((lang) => `<a href="https://kipid.tistory.com/entry/pure-SEE-${lang}">${lang}</a>`).join(" ") +
 				`)).</div>
 </div>
 <div class="SNS-top"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div>`,
