@@ -1164,7 +1164,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 <div class="cBoth"></div>
 <div class="p order promoting promoting-golfmoa">
 <a target="_blank" href="https://kipid.tistory.com/entry/Lists">GolfMOA (골프모아) :: https://kipid.tistory.com/entry/Lists</a> : 클래식코스 챔프 (골프대회 1등) 출신 문상경씨가 운영하는 골프전문 모아샾. 레슨도 하고 골프채 커스텀/수리/각종 소모품 교체 등 골프 관련 거의 모든걸 다루는 곳. 금메달리스트에게 레슨 받아보세요. 차원이 다릅니다 ^^.<br/>
-문상경: <a href="tel:01066344944">010-6634-4944</a>, 보조 kipid (이강수): <a href="tel:01041771343">010-4177-1343</a><br/>
+문상경: <a target="_blank" href="tel:01066344944">010-6634-4944</a>, 보조 kipid (이강수): <a target="_blank" href="tel:01041771343">010-4177-1343</a><br/>
 <img src="https://kipid.s3.ap-northeast-2.amazonaws.com/GolfMOA/GolfMOA.webp" alt="GolfMOA (골프모아)" style="max-width:100%;height:auto"/><br/>
 <br/>
 <img src="https://kipid.s3.ap-northeast-2.amazonaws.com/GolfMOA/GolfMOA.png" alt="GolfMOA (골프모아)" style="max-width:100%;height:auto"/><br/>
@@ -1215,7 +1215,7 @@ window.m = window.k = window.k || {}; // window.m can be asigned another JSON or
 <div class="cBoth"></div>
 <div class="p order promoting promoting-ok24">
 포장이사 전문업체 (일반이사, 보관이사) :: 오케이 이사물류 (OK 24)<br/>
-<a href="tel:01026832655">010-2683-2655</a>, <a href="tel:0314100424">031-410-0424</a>, <a href="tel:0314080424">031-408-0424</a><br/>
+<a target="_blank" href="tel:01026832655">010-2683-2655</a>, <a target="_blank" href="tel:0314100424">031-410-0424</a>, <a target="_blank" href="tel:0314080424">031-408-0424</a><br/>
 <img src="https://kipid.s3.ap-northeast-2.amazonaws.com/kipid/%EC%9D%B4%EB%8F%99%EC%A7%91/OK24.png" alt="오케이 이사물류 (OK 24)" style="max-width:100%;height:auto"/><br/>
 </div>
 </div>`;
@@ -2732,8 +2732,8 @@ Welcome! This is your ${m.visitCount}-th visit.`,
 <form><button class="button-Go" type="button" onclick="k.$window.trigger({type:'keydown', code:'KeyG'})" style="width:fit-content">Fuzzy search</button></form>
 </div>
 <div class="deviceInfo"></div>
-<div class="promoting-docuK">This document is rendered by <a href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a href="https://kipid.tistory.com/entry/pure-SEE">pure SEE.en</a> (` +
-				["ko", "zh", "ja", "de", "fr", "es", "hi", "ar", "pt", "nl", "ru"].map((lang) => `<a href="https://kipid.tistory.com/entry/pure-SEE-${lang}">${lang}</a>`).join(" ") +
+<div class="promoting-docuK">This document is rendered by <a target="_blank" href="https://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> (See also <a target="_blank" href="https://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE (Super Easy Edit) of docuK</a> and <a target="_blank" href="https://kipid.tistory.com/entry/pure-SEE">pure SEE.en</a> (` +
+				["ko", "zh", "ja", "de", "fr", "es", "hi", "ar", "pt", "nl", "ru"].map((lang) => `<a target="_blank" href="https://kipid.tistory.com/entry/pure-SEE-${lang}">${lang}</a>`).join(" ") +
 				`)).</div>
 </div>
 <div class="SNS-top"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Link.png" onclick="return m.shareSNS('link')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Tag.png" onclick="return m.shareSNS('tag')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Recoeve.png" onclick="k.shareSNS('recoeve')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-X.png" onclick="k.shareSNS('X')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Facebook.png" onclick="k.shareSNS('facebook')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Kakao.png" onclick="k.shareSNS('kakao')"><img class="SNS-img" src="https://tistory1.daumcdn.net/tistory/1468360/skin/images/icon-Whatsapp.png" onclick="k.shareSNS('Whatsapp')"></div>`,
